@@ -1,6 +1,6 @@
 <Type Name="Face" FullName="HarfBuzzSharp.Face">
   <TypeSignature Language="C#" Value="public class Face : HarfBuzzSharp.NativeObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Face extends HarfBuzzSharp.NativeObject" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi Face extends HarfBuzzSharp.NativeObject" />
   <TypeSignature Language="DocId" Value="T:HarfBuzzSharp.Face" />
   <AssemblyInfo>
     <AssemblyName>HarfBuzzSharp</AssemblyName>
@@ -16,6 +16,24 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Face (HarfBuzzSharp.GetTableDelegate getTable);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class HarfBuzzSharp.GetTableDelegate getTable) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.GetTableDelegate)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="getTable" Type="HarfBuzzSharp.GetTableDelegate" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+      </Parameters>
+      <Docs>
+        <param name="getTable">The delegate to retrieve the table data.</param>
+        <summary>Creates a new <see cref="T:HarfBuzzSharp.Face" /> instance, using the delegate to assemble the data.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Face (HarfBuzzSharp.Blob blob, int index);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class HarfBuzzSharp.Blob blob, int32 index) cil managed" />
       <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.Blob,System.Int32)" />
@@ -29,10 +47,10 @@
         <Parameter Name="index" Type="System.Int32" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
       </Parameters>
       <Docs>
-        <param name="blob">To be added.</param>
-        <param name="index">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="blob">The typeface data.</param>
+        <param name="index">The zero-based face index in a collection.</param>
+        <summary>Creates a new <see cref="T:HarfBuzzSharp.Face" /> instance, using the specified typeface blob.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -52,6 +70,48 @@
         <param name="blob">The typeface data.</param>
         <param name="index">The zero-based face index in a collection.</param>
         <summary>Creates a new <see cref="T:HarfBuzzSharp.Face" /> instance, using the specified typeface blob.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Face (HarfBuzzSharp.GetTableDelegate getTable, object context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class HarfBuzzSharp.GetTableDelegate getTable, object context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.GetTableDelegate,System.Object)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="getTable" Type="HarfBuzzSharp.GetTableDelegate" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="context" Type="System.Object" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+      </Parameters>
+      <Docs>
+        <param name="getTable">The delegate to retrieve the table data.</param>
+        <param name="context">The user data to use when invoking the delegate.</param>
+        <summary>Creates a new <see cref="T:HarfBuzzSharp.Face" /> instance, using the delegate to assemble the data.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Face (HarfBuzzSharp.GetTableDelegate getTable, object context, HarfBuzzSharp.ReleaseDelegate destroy);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class HarfBuzzSharp.GetTableDelegate getTable, object context, class HarfBuzzSharp.ReleaseDelegate destroy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.GetTableDelegate,System.Object,HarfBuzzSharp.ReleaseDelegate)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="getTable" Type="HarfBuzzSharp.GetTableDelegate" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="context" Type="System.Object" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="destroy" Type="HarfBuzzSharp.ReleaseDelegate" Index="2" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+      </Parameters>
+      <Docs>
+        <param name="getTable">The delegate to retrieve the table data.</param>
+        <param name="context">The user data to use when invoking the delegate.</param>
+        <param name="destroy">The delegate to invoke when the <see cref="T:HarfBuzzSharp.Face" /> instance is about to be disposed.</param>
+        <summary>Creates a new <see cref="T:HarfBuzzSharp.Face" /> instance, using the delegate to assemble the data.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -91,8 +151,26 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Releases the unmanaged resources used.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Empty">
+      <MemberSignature Language="C#" Value="public static HarfBuzzSharp.Face Empty { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class HarfBuzzSharp.Face Empty" />
+      <MemberSignature Language="DocId" Value="P:HarfBuzzSharp.Face.Empty" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>HarfBuzzSharp.Face</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a reference to the empty <see cref="T:HarfBuzzSharp.Face" /> instance.</summary>
+        <value></value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GlyphCount">

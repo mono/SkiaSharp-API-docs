@@ -920,6 +920,28 @@ using (var surface = SKSurface.Create(info)) {
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="GetTableSize">
+      <MemberSignature Language="C#" Value="public int GetTableSize (uint tag);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetTableSize(unsigned int32 tag) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.GetTableSize(System.UInt32)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tag" Type="System.UInt32" Index="0" FrameworkAlternate="skiasharp-1.68.1" />
+      </Parameters>
+      <Docs>
+        <param name="tag">The tag to retrieve.</param>
+        <summary>Returns the size of the data for the specified tag.</summary>
+        <returns>Returns the size of the data.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
     <Member MemberName="GetTableTags">
       <MemberSignature Language="C#" Value="public uint[] GetTableTags ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int32[] GetTableTags() cil managed" />
@@ -1019,10 +1041,28 @@ using (var surface = SKSurface.Create(info)) {
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="TableCount">
+      <MemberSignature Language="C#" Value="public int TableCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 TableCount" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKTypeface.TableCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of data tables in the typeface.</summary>
+        <value></value>
+        <remarks></remarks>
+      </Docs>
+    </Member>
     <Member MemberName="TryGetTableData">
-      <MemberSignature Language="C#" Value="public bool TryGetTableData (uint tag, out byte[] tableData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetTableData(unsigned int32 tag, [out] unsigned int8[]&amp; tableData) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.TryGetTableData(System.UInt32,System.Byte[]@)" />
+      <MemberSignature Language="C#" Value="public bool TryGetTableData (uint tag, out byte[] tableData);" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetTableData(unsigned int32 tag, [out] unsigned int8[]&amp; tableData) cil managed" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.TryGetTableData(System.UInt32,System.Byte[]@)" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -1044,6 +1084,56 @@ using (var surface = SKSurface.Create(info)) {
         <param name="tableData">The contents of the table data for the specified tag.</param>
         <summary>Returns the contents of the table data for the specified tag.</summary>
         <returns>Returns true if the content exists, otherwise false.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryGetTableData">
+      <MemberSignature Language="C#" Value="public bool TryGetTableData (uint tag, int offset, int length, IntPtr tableData);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetTableData(unsigned int32 tag, int32 offset, int32 length, native int tableData) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.TryGetTableData(System.UInt32,System.Int32,System.Int32,System.IntPtr)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tag" Type="System.UInt32" Index="0" FrameworkAlternate="skiasharp-1.68.1" />
+        <Parameter Name="offset" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68.1" />
+        <Parameter Name="length" Type="System.Int32" Index="2" FrameworkAlternate="skiasharp-1.68.1" />
+        <Parameter Name="tableData" Type="System.IntPtr" Index="3" FrameworkAlternate="skiasharp-1.68.1" />
+      </Parameters>
+      <Docs>
+        <param name="tag">The table tag to get the data for.</param>
+        <param name="offset">The offset of the data to fetch.</param>
+        <param name="length">The length of data to fetch.</param>
+        <param name="tableData">The contents of the table data for the specified tag.</param>
+        <summary>Returns the contents of the table data for the specified tag.</summary>
+        <returns>Returns true if the content exists, otherwise false.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryGetTableTags">
+      <MemberSignature Language="C#" Value="public bool TryGetTableTags (out uint[] tags);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetTableTags([out] unsigned int32[]&amp; tags) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.TryGetTableTags(System.UInt32[]@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tags" Type="System.UInt32[]" RefType="out" Index="0" FrameworkAlternate="skiasharp-1.68.1" />
+      </Parameters>
+      <Docs>
+        <param name="tags">The table tags.</param>
+        <summary>Returns the list of table tags in the font.</summary>
+        <returns>Returns true if the tags could be fetched, otherwise false.</returns>
         <remarks></remarks>
       </Docs>
     </Member>

@@ -13,6 +13,7 @@
       <Member Id="M:HarfBuzzSharp.Blob.FromFile(System.String)" />
       <Member Id="M:HarfBuzzSharp.Blob.FromStream(System.IO.Stream)" />
       <Member Id="M:HarfBuzzSharp.Blob.MakeImmutable" />
+      <Member Id="P:HarfBuzzSharp.Blob.Empty" />
       <Member Id="P:HarfBuzzSharp.Blob.FaceCount" />
       <Member Id="P:HarfBuzzSharp.Blob.IsImmutable" />
       <Member Id="P:HarfBuzzSharp.Blob.Length" />
@@ -109,9 +110,13 @@
     <Type Name="HarfBuzzSharp.Face" Id="T:HarfBuzzSharp.Face">
       <Member Id="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.Blob,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.Blob,System.UInt32)" />
+      <Member Id="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.GetTableDelegate)" />
+      <Member Id="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.GetTableDelegate,System.Object)" />
+      <Member Id="M:HarfBuzzSharp.Face.#ctor(HarfBuzzSharp.GetTableDelegate,System.Object,HarfBuzzSharp.ReleaseDelegate)" />
       <Member Id="M:HarfBuzzSharp.Face.DisposeHandler" />
       <Member Id="M:HarfBuzzSharp.Face.MakeImmutable" />
       <Member Id="M:HarfBuzzSharp.Face.ReferenceTable(HarfBuzzSharp.Tag)" />
+      <Member Id="P:HarfBuzzSharp.Face.Empty" />
       <Member Id="P:HarfBuzzSharp.Face.GlyphCount" />
       <Member Id="P:HarfBuzzSharp.Face.Index" />
       <Member Id="P:HarfBuzzSharp.Face.IsImmutable" />
@@ -120,11 +125,12 @@
     </Type>
     <Type Name="HarfBuzzSharp.Feature" Id="T:HarfBuzzSharp.Feature">
       <Member Id="M:HarfBuzzSharp.Feature.#ctor(HarfBuzzSharp.Tag)" />
-      <Member Id="M:HarfBuzzSharp.Feature.#ctor(HarfBuzzSharp.Tag,System.Boolean,System.UInt32,System.UInt32)" />
-      <Member Id="M:HarfBuzzSharp.Feature.FromString(System.String)" />
+      <Member Id="M:HarfBuzzSharp.Feature.#ctor(HarfBuzzSharp.Tag,System.UInt32)" />
+      <Member Id="M:HarfBuzzSharp.Feature.#ctor(HarfBuzzSharp.Tag,System.UInt32,System.UInt32,System.UInt32)" />
+      <Member Id="M:HarfBuzzSharp.Feature.Parse(System.String)" />
       <Member Id="M:HarfBuzzSharp.Feature.ToString" />
+      <Member Id="M:HarfBuzzSharp.Feature.TryParse(System.String,HarfBuzzSharp.Feature@)" />
       <Member Id="P:HarfBuzzSharp.Feature.End" />
-      <Member Id="P:HarfBuzzSharp.Feature.IsEnabled" />
       <Member Id="P:HarfBuzzSharp.Feature.Start" />
       <Member Id="P:HarfBuzzSharp.Feature.Tag" />
       <Member Id="P:HarfBuzzSharp.Feature.Value" />
@@ -177,6 +183,7 @@
       <Member Id="P:HarfBuzzSharp.FontExtents.Descender" />
       <Member Id="P:HarfBuzzSharp.FontExtents.LineGap" />
     </Type>
+    <Type Name="HarfBuzzSharp.GetTableDelegate" Id="T:HarfBuzzSharp.GetTableDelegate" />
     <Type Name="HarfBuzzSharp.GlyphExtents" Id="T:HarfBuzzSharp.GlyphExtents">
       <Member Id="P:HarfBuzzSharp.GlyphExtents.Height" />
       <Member Id="P:HarfBuzzSharp.GlyphExtents.Width" />
@@ -221,6 +228,7 @@
       <Member Id="M:HarfBuzzSharp.NativeObject.Finalize" />
       <Member Id="P:HarfBuzzSharp.NativeObject.Handle" />
     </Type>
+    <Type Name="HarfBuzzSharp.ReleaseDelegate" Id="T:HarfBuzzSharp.ReleaseDelegate" />
     <Type Name="HarfBuzzSharp.Script" Id="T:HarfBuzzSharp.Script">
       <Member Id="F:HarfBuzzSharp.Script.Adlam" />
       <Member Id="F:HarfBuzzSharp.Script.Ahom" />
@@ -376,11 +384,12 @@
       <Member Id="F:HarfBuzzSharp.Script.ZanabazarSquare" />
       <Member Id="M:HarfBuzzSharp.Script.Equals(HarfBuzzSharp.Script)" />
       <Member Id="M:HarfBuzzSharp.Script.Equals(System.Object)" />
-      <Member Id="M:HarfBuzzSharp.Script.FromString(System.String)" />
       <Member Id="M:HarfBuzzSharp.Script.GetHashCode" />
       <Member Id="M:HarfBuzzSharp.Script.op_Implicit(HarfBuzzSharp.Script)~System.UInt32" />
       <Member Id="M:HarfBuzzSharp.Script.op_Implicit(System.UInt32)~HarfBuzzSharp.Script" />
+      <Member Id="M:HarfBuzzSharp.Script.Parse(System.String)" />
       <Member Id="M:HarfBuzzSharp.Script.ToString" />
+      <Member Id="M:HarfBuzzSharp.Script.TryParse(System.String,HarfBuzzSharp.Script@)" />
       <Member Id="P:HarfBuzzSharp.Script.HorizontalDirection" />
     </Type>
     <Type Name="HarfBuzzSharp.SerializeFlag" Id="T:HarfBuzzSharp.SerializeFlag">

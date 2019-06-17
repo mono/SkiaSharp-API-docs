@@ -28,15 +28,15 @@
         <Parameter Name="tag" Type="HarfBuzzSharp.Tag" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="tag">The tag to use.</param>
+        <summary>Creates a new <see cref="T:HarfBuzzSharp.Feature" /> instance with the specified tag.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Feature (HarfBuzzSharp.Tag tag, bool isEnabled, uint start, uint end);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype HarfBuzzSharp.Tag tag, bool isEnabled, unsigned int32 start, unsigned int32 end) cil managed" />
-      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Feature.#ctor(HarfBuzzSharp.Tag,System.Boolean,System.UInt32,System.UInt32)" />
+      <MemberSignature Language="C#" Value="public Feature (HarfBuzzSharp.Tag tag, uint value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype HarfBuzzSharp.Tag tag, unsigned int32 value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Feature.#ctor(HarfBuzzSharp.Tag,System.UInt32)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>HarfBuzzSharp</AssemblyName>
@@ -44,17 +44,37 @@
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="tag" Type="HarfBuzzSharp.Tag" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
-        <Parameter Name="isEnabled" Type="System.Boolean" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="value" Type="System.UInt32" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+      </Parameters>
+      <Docs>
+        <param name="tag">The tag to use.</param>
+        <param name="value">The value to use.</param>
+        <summary>Creates a new <see cref="T:HarfBuzzSharp.Feature" /> instance with the specified tag.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public Feature (HarfBuzzSharp.Tag tag, uint value, uint start, uint end);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype HarfBuzzSharp.Tag tag, unsigned int32 value, unsigned int32 start, unsigned int32 end) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Feature.#ctor(HarfBuzzSharp.Tag,System.UInt32,System.UInt32,System.UInt32)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="tag" Type="HarfBuzzSharp.Tag" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="value" Type="System.UInt32" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
         <Parameter Name="start" Type="System.UInt32" Index="2" FrameworkAlternate="harfbuzzsharp-2.3.1" />
         <Parameter Name="end" Type="System.UInt32" Index="3" FrameworkAlternate="harfbuzzsharp-2.3.1" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <param name="isEnabled">To be added.</param>
-        <param name="start">To be added.</param>
-        <param name="end">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="tag">The tag to use.</param>
+        <param name="value">The value to use.</param>
+        <param name="start">The start value.</param>
+        <param name="end">The end value.</param>
+        <summary>Creates a new <see cref="T:HarfBuzzSharp.Feature" /> instance with the specified tag.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="End">
@@ -75,10 +95,10 @@
         <remarks></remarks>
       </Docs>
     </Member>
-    <Member MemberName="FromString">
-      <MemberSignature Language="C#" Value="public static HarfBuzzSharp.Feature FromString (string s);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype HarfBuzzSharp.Feature FromString(string s) cil managed" />
-      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Feature.FromString(System.String)" />
+    <Member MemberName="Parse">
+      <MemberSignature Language="C#" Value="public static HarfBuzzSharp.Feature Parse (string s);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype HarfBuzzSharp.Feature Parse(string s) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Feature.Parse(System.String)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>HarfBuzzSharp</AssemblyName>
@@ -91,28 +111,10 @@
         <Parameter Name="s" Type="System.String" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
       </Parameters>
       <Docs>
-        <param name="s">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="IsEnabled">
-      <MemberSignature Language="C#" Value="public bool IsEnabled { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool IsEnabled" />
-      <MemberSignature Language="DocId" Value="P:HarfBuzzSharp.Feature.IsEnabled" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>HarfBuzzSharp</AssemblyName>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <param name="s">The feature string to parse.</param>
+        <summary>Parses a feature string.</summary>
+        <returns>Returns the new feature.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Start">
@@ -165,9 +167,33 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the string representation of the feature.</summary>
+        <returns>Returns the string representation of the feature.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryParse">
+      <MemberSignature Language="C#" Value="public static bool TryParse (string s, out HarfBuzzSharp.Feature feature);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool TryParse(string s, [out] valuetype HarfBuzzSharp.Feature&amp; feature) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Feature.TryParse(System.String,HarfBuzzSharp.Feature@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="s" Type="System.String" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="feature" Type="HarfBuzzSharp.Feature" RefType="out" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+      </Parameters>
+      <Docs>
+        <param name="s">The feature string to parse.</param>
+        <param name="feature">The feature.</param>
+        <summary>Tries to parse the feature string.</summary>
+        <returns>Returns true on success, otherwise false.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -179,11 +205,6 @@
         <AssemblyName>HarfBuzzSharp</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="harfbuzzsharp-2.3.1">
-          <AttributeName>System.Obsolete("Use IsEnabled instead.")</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
