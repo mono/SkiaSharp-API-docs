@@ -25,9 +25,9 @@
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="data" Type="System.IntPtr" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
-        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
-        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" Index="2" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="data" Type="System.IntPtr" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1;harfbuzzsharp-2.5.2" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1;harfbuzzsharp-2.5.2" />
+        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" Index="2" FrameworkAlternate="harfbuzzsharp-2.3.1;harfbuzzsharp-2.5.2" />
       </Parameters>
       <Docs>
         <param name="data">The data to wrap.</param>
@@ -38,29 +38,27 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Blob (IntPtr data, int length, HarfBuzzSharp.MemoryMode mode, object userData, HarfBuzzSharp.BlobReleaseDelegate releaseDelegate);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(native int data, int32 length, valuetype HarfBuzzSharp.MemoryMode mode, object userData, class HarfBuzzSharp.BlobReleaseDelegate releaseDelegate) cil managed" />
-      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Blob.#ctor(System.IntPtr,System.Int32,HarfBuzzSharp.MemoryMode,System.Object,HarfBuzzSharp.BlobReleaseDelegate)" />
+      <MemberSignature Language="C#" Value="public Blob (IntPtr data, int length, HarfBuzzSharp.MemoryMode mode, HarfBuzzSharp.ReleaseDelegate releaseDelegate);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(native int data, int32 length, valuetype HarfBuzzSharp.MemoryMode mode, class HarfBuzzSharp.ReleaseDelegate releaseDelegate) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Blob.#ctor(System.IntPtr,System.Int32,HarfBuzzSharp.MemoryMode,HarfBuzzSharp.ReleaseDelegate)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>HarfBuzzSharp</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="data" Type="System.IntPtr" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
-        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="harfbuzzsharp-2.3.1" />
-        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" Index="2" FrameworkAlternate="harfbuzzsharp-2.3.1" />
-        <Parameter Name="userData" Type="System.Object" Index="3" FrameworkAlternate="harfbuzzsharp-2.3.1" />
-        <Parameter Name="releaseDelegate" Type="HarfBuzzSharp.BlobReleaseDelegate" Index="4" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="data" Type="System.IntPtr" Index="0" FrameworkAlternate="harfbuzzsharp-2.5.2" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="harfbuzzsharp-2.5.2" />
+        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" Index="2" FrameworkAlternate="harfbuzzsharp-2.5.2" />
+        <Parameter Name="releaseDelegate" Type="HarfBuzzSharp.ReleaseDelegate" Index="3" FrameworkAlternate="harfbuzzsharp-2.5.2" />
       </Parameters>
       <Docs>
-        <param name="data">The data to wrap.</param>
-        <param name="length">The length of the data being wrapped.</param>
-        <param name="mode">The memory mode to use.</param>
-        <param name="userData">The user data to pass to the release delegate.</param>
-        <param name="releaseDelegate">The delegate to invoke when the data is not needed anymore.</param>
-        <summary>Creates a new <see cref="T:HarfBuzzSharp.Blob" /> instance, wrapping the specified data.</summary>
-        <remarks>If there was a problem creating the blob, or if the data length was zero, then an empty blob will be created.</remarks>
+        <param name="data">To be added.</param>
+        <param name="length">To be added.</param>
+        <param name="mode">To be added.</param>
+        <param name="releaseDelegate">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -72,6 +70,11 @@
         <AssemblyName>HarfBuzzSharp</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="harfbuzzsharp-2.5.2">
+          <AttributeName>System.Obsolete("Use Blob(IntPtr, int, MemoryMode, ReleaseDelegate releaseDelegate) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <Parameters>
         <Parameter Name="data" Type="System.IntPtr" />
         <Parameter Name="length" Type="System.UInt32" />
@@ -216,7 +219,7 @@
         <ReturnType>HarfBuzzSharp.Blob</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="fileName" Type="System.String" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="fileName" Type="System.String" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1;harfbuzzsharp-2.5.2" />
       </Parameters>
       <Docs>
         <param name="fileName">The path to the file to load.</param>
@@ -238,7 +241,7 @@
         <ReturnType>HarfBuzzSharp.Blob</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="stream" Type="System.IO.Stream" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1" />
+        <Parameter Name="stream" Type="System.IO.Stream" Index="0" FrameworkAlternate="harfbuzzsharp-2.3.1;harfbuzzsharp-2.5.2" />
       </Parameters>
       <Docs>
         <param name="stream">The stream to use.</param>
