@@ -1,4 +1,4 @@
-<Framework Name="harfbuzzsharp-2.5.2">
+<Framework Name="harfbuzzsharp-2.5.3">
   <Assemblies>
     <Assembly Name="HarfBuzzSharp" Version="1.0.0.0" />
   </Assemblies>
@@ -22,35 +22,25 @@
     <Type Name="HarfBuzzSharp.Buffer" Id="T:HarfBuzzSharp.Buffer">
       <Member Id="F:HarfBuzzSharp.Buffer.DefaultReplacementCodepoint" />
       <Member Id="M:HarfBuzzSharp.Buffer.#ctor" />
-      <Member Id="M:HarfBuzzSharp.Buffer.Add(System.Int32,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.Add(System.UInt32,System.UInt32)" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.Int32[])" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.Int32[],System.Int32,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.IntPtr,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.IntPtr,System.Int32,System.Int32,System.Int32)" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.ReadOnlySpan{System.Int32})" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.ReadOnlySpan{System.Int32},System.Int32,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.ReadOnlySpan{System.UInt32})" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.ReadOnlySpan{System.UInt32},System.Int32,System.Int32)" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.UInt32[])" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddCodepoints(System.UInt32[],System.Int32,System.Int32)" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddUtf16(System.Byte[])" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf16(System.IntPtr,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf16(System.IntPtr,System.Int32,System.Int32,System.Int32)" />
+      <Member Id="M:HarfBuzzSharp.Buffer.AddUtf16(System.ReadOnlySpan{System.Byte})" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf16(System.ReadOnlySpan{System.Char})" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf16(System.ReadOnlySpan{System.Char},System.Int32,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf16(System.String)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf16(System.String,System.Int32,System.Int32)" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.Byte[])" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.IntPtr,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.IntPtr,System.Int32,System.Int32,System.Int32)" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.ReadOnlySpan{System.Int32})" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.ReadOnlySpan{System.Int32},System.Int32,System.Int32)" />
+      <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.ReadOnlySpan{System.Byte})" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.ReadOnlySpan{System.UInt32})" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.ReadOnlySpan{System.UInt32},System.Int32,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf32(System.String)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf8(System.Byte[])" />
-      <Member Id="M:HarfBuzzSharp.Buffer.AddUtf8(System.Byte[],System.Int32,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf8(System.IntPtr,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf8(System.IntPtr,System.Int32,System.Int32,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Buffer.AddUtf8(System.ReadOnlySpan{System.Byte})" />
@@ -89,17 +79,28 @@
       <Member Id="P:HarfBuzzSharp.Buffer.Script" />
       <Member Id="P:HarfBuzzSharp.Buffer.UnicodeFunctions" />
     </Type>
+    <Type Name="HarfBuzzSharp.BufferFlags" Id="T:HarfBuzzSharp.BufferFlags">
+      <Member Id="F:HarfBuzzSharp.BufferFlags.BeginningOfText" />
+      <Member Id="F:HarfBuzzSharp.BufferFlags.Default" />
+      <Member Id="F:HarfBuzzSharp.BufferFlags.DoNotInsertDottedCircle" />
+      <Member Id="F:HarfBuzzSharp.BufferFlags.EndOfText" />
+      <Member Id="F:HarfBuzzSharp.BufferFlags.PreserveDefaultIgnorables" />
+      <Member Id="F:HarfBuzzSharp.BufferFlags.RemoveDefaultIgnorables" />
+    </Type>
     <Type Name="HarfBuzzSharp.ClusterLevel" Id="T:HarfBuzzSharp.ClusterLevel">
       <Member Id="F:HarfBuzzSharp.ClusterLevel.Characters" />
       <Member Id="F:HarfBuzzSharp.ClusterLevel.Default" />
       <Member Id="F:HarfBuzzSharp.ClusterLevel.MonotoneCharacters" />
       <Member Id="F:HarfBuzzSharp.ClusterLevel.MonotoneGraphemes" />
     </Type>
+    <Type Name="HarfBuzzSharp.CombiningClassDelegate" Id="T:HarfBuzzSharp.CombiningClassDelegate" />
+    <Type Name="HarfBuzzSharp.ComposeDelegate" Id="T:HarfBuzzSharp.ComposeDelegate" />
     <Type Name="HarfBuzzSharp.ContentType" Id="T:HarfBuzzSharp.ContentType">
       <Member Id="F:HarfBuzzSharp.ContentType.Glyphs" />
       <Member Id="F:HarfBuzzSharp.ContentType.Invalid" />
       <Member Id="F:HarfBuzzSharp.ContentType.Unicode" />
     </Type>
+    <Type Name="HarfBuzzSharp.DecomposeDelegate" Id="T:HarfBuzzSharp.DecomposeDelegate" />
     <Type Name="HarfBuzzSharp.Direction" Id="T:HarfBuzzSharp.Direction">
       <Member Id="F:HarfBuzzSharp.Direction.BottomToTop" />
       <Member Id="F:HarfBuzzSharp.Direction.Invalid" />
@@ -134,14 +135,6 @@
       <Member Id="P:HarfBuzzSharp.Feature.Tag" />
       <Member Id="P:HarfBuzzSharp.Feature.Value" />
     </Type>
-    <Type Name="HarfBuzzSharp.BufferFlags" Id="T:HarfBuzzSharp.BufferFlags">
-      <Member Id="F:HarfBuzzSharp.BufferFlags.BeginningOfText" />
-      <Member Id="F:HarfBuzzSharp.BufferFlags.Default" />
-      <Member Id="F:HarfBuzzSharp.BufferFlags.DoNotInsertDottedCircle" />
-      <Member Id="F:HarfBuzzSharp.BufferFlags.EndOfText" />
-      <Member Id="F:HarfBuzzSharp.BufferFlags.PreserveDefaultIgnorables" />
-      <Member Id="F:HarfBuzzSharp.BufferFlags.RemoveDefaultIgnorables" />
-    </Type>
     <Type Name="HarfBuzzSharp.Font" Id="T:HarfBuzzSharp.Font">
       <Member Id="M:HarfBuzzSharp.Font.#ctor(HarfBuzzSharp.Face)" />
       <Member Id="M:HarfBuzzSharp.Font.#ctor(HarfBuzzSharp.Font)" />
@@ -166,8 +159,6 @@
       <Member Id="M:HarfBuzzSharp.Font.SetScale(System.Int32,System.Int32)" />
       <Member Id="M:HarfBuzzSharp.Font.Shape(HarfBuzzSharp.Buffer,HarfBuzzSharp.Feature[])" />
       <Member Id="M:HarfBuzzSharp.Font.Shape(HarfBuzzSharp.Buffer,System.Collections.Generic.IReadOnlyList{HarfBuzzSharp.Feature},System.Collections.Generic.IReadOnlyList{System.String})" />
-      <Member Id="M:HarfBuzzSharp.Font.TryGetGlyph(System.Int32,System.UInt32,System.UInt32@)" />
-      <Member Id="M:HarfBuzzSharp.Font.TryGetGlyph(System.Int32,System.UInt32@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetGlyph(System.UInt32,System.UInt32,System.UInt32@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetGlyph(System.UInt32,System.UInt32@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetGlyphContourPoint(System.UInt32,System.UInt32,System.Int32@,System.Int32@)" />
@@ -178,10 +169,7 @@
       <Member Id="M:HarfBuzzSharp.Font.TryGetGlyphName(System.UInt32,System.String@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetHorizontalFontExtents(HarfBuzzSharp.FontExtents@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetHorizontalGlyphOrigin(System.UInt32,System.Int32@,System.Int32@)" />
-      <Member Id="M:HarfBuzzSharp.Font.TryGetNominalGlyph(System.Int32,System.UInt32@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetNominalGlyph(System.UInt32,System.UInt32@)" />
-      <Member Id="M:HarfBuzzSharp.Font.TryGetVariationGlyph(System.Int32,System.UInt32,System.UInt32@)" />
-      <Member Id="M:HarfBuzzSharp.Font.TryGetVariationGlyph(System.Int32,System.UInt32@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetVariationGlyph(System.UInt32,System.UInt32,System.UInt32@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetVariationGlyph(System.UInt32,System.UInt32@)" />
       <Member Id="M:HarfBuzzSharp.Font.TryGetVerticalFontExtents(HarfBuzzSharp.FontExtents@)" />
@@ -199,41 +187,26 @@
       <Member Id="M:HarfBuzzSharp.FontFunctions.#ctor" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.DisposeHandler" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.MakeImmutable" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetGlyphContourPointDelegate(HarfBuzzSharp.GlyphContourPointDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetGlyphContourPointDelegate(HarfBuzzSharp.GlyphContourPointDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetGlyphExtentsDelegate(HarfBuzzSharp.GlyphExtentsDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetGlyphExtentsDelegate(HarfBuzzSharp.GlyphExtentsDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetGlyphFromNameDelegate(HarfBuzzSharp.GlyphFromNameDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetGlyphFromNameDelegate(HarfBuzzSharp.GlyphFromNameDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetGlyphNameDelegate(HarfBuzzSharp.GlyphNameDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetGlyphNameDelegate(HarfBuzzSharp.GlyphNameDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalFontExtentsDelegate(HarfBuzzSharp.FontExtentsDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalFontExtentsDelegate(HarfBuzzSharp.FontExtentsDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalGlyphAdvanceDelegate(HarfBuzzSharp.GlyphAdvanceDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalGlyphAdvanceDelegate(HarfBuzzSharp.GlyphAdvanceDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalGlyphAdvancesDelegate(HarfBuzzSharp.GlyphAdvancesDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalGlyphAdvancesDelegate(HarfBuzzSharp.GlyphAdvancesDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalGlyphKerningDelegate(HarfBuzzSharp.GlyphKerningDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalGlyphKerningDelegate(HarfBuzzSharp.GlyphKerningDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalGlyphOriginDelegate(HarfBuzzSharp.GlyphOriginDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetHorizontalGlyphOriginDelegate(HarfBuzzSharp.GlyphOriginDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetNominalGlyphDelegate(HarfBuzzSharp.NominalGlyphDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetNominalGlyphDelegate(HarfBuzzSharp.NominalGlyphDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetNominalGlyphsDelegate(HarfBuzzSharp.NominalGlyphsDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetNominalGlyphsDelegate(HarfBuzzSharp.NominalGlyphsDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetVariationGlyphDelegate(HarfBuzzSharp.VariationGlyphDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetVariationGlyphDelegate(HarfBuzzSharp.VariationGlyphDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetVerticalFontExtentsDelegate(HarfBuzzSharp.FontExtentsDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetVerticalFontExtentsDelegate(HarfBuzzSharp.FontExtentsDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetVerticalGlyphAdvanceDelegate(HarfBuzzSharp.GlyphAdvanceDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetVerticalGlyphAdvanceDelegate(HarfBuzzSharp.GlyphAdvanceDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetVerticalGlyphAdvancesDelegate(HarfBuzzSharp.GlyphAdvancesDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetVerticalGlyphAdvancesDelegate(HarfBuzzSharp.GlyphAdvancesDelegate,HarfBuzzSharp.ReleaseDelegate)" />
-      <Member Id="M:HarfBuzzSharp.FontFunctions.SetVerticalGlyphOriginDelegate(HarfBuzzSharp.GlyphOriginDelegate)" />
       <Member Id="M:HarfBuzzSharp.FontFunctions.SetVerticalGlyphOriginDelegate(HarfBuzzSharp.GlyphOriginDelegate,HarfBuzzSharp.ReleaseDelegate)" />
       <Member Id="P:HarfBuzzSharp.FontFunctions.Empty" />
       <Member Id="P:HarfBuzzSharp.FontFunctions.IsImmutable" />
     </Type>
+    <Type Name="HarfBuzzSharp.GeneralCategoryDelegate" Id="T:HarfBuzzSharp.GeneralCategoryDelegate" />
     <Type Name="HarfBuzzSharp.GetTableDelegate" Id="T:HarfBuzzSharp.GetTableDelegate" />
     <Type Name="HarfBuzzSharp.GlyphAdvanceDelegate" Id="T:HarfBuzzSharp.GlyphAdvanceDelegate" />
     <Type Name="HarfBuzzSharp.GlyphAdvancesDelegate" Id="T:HarfBuzzSharp.GlyphAdvancesDelegate" />
@@ -268,7 +241,7 @@
     <Type Name="HarfBuzzSharp.Language" Id="T:HarfBuzzSharp.Language">
       <Member Id="M:HarfBuzzSharp.Language.#ctor(System.Globalization.CultureInfo)" />
       <Member Id="M:HarfBuzzSharp.Language.#ctor(System.String)" />
-      <Member Id="M:HarfBuzzSharp.Language.Equals(HarfBuzzSharp.Language)" />
+      <Member Id="M:HarfBuzzSharp.Language.Equals(System.Object)" />
       <Member Id="M:HarfBuzzSharp.Language.GetHashCode" />
       <Member Id="M:HarfBuzzSharp.Language.ToString" />
       <Member Id="P:HarfBuzzSharp.Language.Default" />
@@ -280,6 +253,7 @@
       <Member Id="F:HarfBuzzSharp.MemoryMode.ReadOnlyMayMakeWriteable" />
       <Member Id="F:HarfBuzzSharp.MemoryMode.Writeable" />
     </Type>
+    <Type Name="HarfBuzzSharp.MirroringDelegate" Id="T:HarfBuzzSharp.MirroringDelegate" />
     <Type Name="HarfBuzzSharp.NativeObject" Id="T:HarfBuzzSharp.NativeObject">
       <Member Id="M:HarfBuzzSharp.NativeObject.Dispose" />
       <Member Id="M:HarfBuzzSharp.NativeObject.Dispose(System.Boolean)" />
@@ -452,6 +426,7 @@
       <Member Id="M:HarfBuzzSharp.Script.ToString" />
       <Member Id="P:HarfBuzzSharp.Script.HorizontalDirection" />
     </Type>
+    <Type Name="HarfBuzzSharp.ScriptDelegate" Id="T:HarfBuzzSharp.ScriptDelegate" />
     <Type Name="HarfBuzzSharp.SerializeFlag" Id="T:HarfBuzzSharp.SerializeFlag">
       <Member Id="F:HarfBuzzSharp.SerializeFlag.Default" />
       <Member Id="F:HarfBuzzSharp.SerializeFlag.GlyphExtents" />
@@ -539,17 +514,25 @@
       <Member Id="F:HarfBuzzSharp.UnicodeCombiningClass.Virama" />
     </Type>
     <Type Name="HarfBuzzSharp.UnicodeFunctions" Id="T:HarfBuzzSharp.UnicodeFunctions">
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.#ctor(HarfBuzzSharp.UnicodeFunctions)" />
       <Member Id="M:HarfBuzzSharp.UnicodeFunctions.DisposeHandler" />
-      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.GetCombiningClass(System.Int32)" />
       <Member Id="M:HarfBuzzSharp.UnicodeFunctions.GetCombiningClass(System.UInt32)" />
-      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.GetGeneralCategory(System.Int32)" />
       <Member Id="M:HarfBuzzSharp.UnicodeFunctions.GetGeneralCategory(System.UInt32)" />
-      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.GetScript(System.Int32)" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.GetMirroring(System.UInt32)" />
       <Member Id="M:HarfBuzzSharp.UnicodeFunctions.GetScript(System.UInt32)" />
       <Member Id="M:HarfBuzzSharp.UnicodeFunctions.MakeImmutable" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.SetCombiningClassDelegate(HarfBuzzSharp.CombiningClassDelegate,HarfBuzzSharp.ReleaseDelegate)" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.SetComposeDelegate(HarfBuzzSharp.ComposeDelegate,HarfBuzzSharp.ReleaseDelegate)" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.SetDecomposeDelegate(HarfBuzzSharp.DecomposeDelegate,HarfBuzzSharp.ReleaseDelegate)" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.SetGeneralCategoryDelegate(HarfBuzzSharp.GeneralCategoryDelegate,HarfBuzzSharp.ReleaseDelegate)" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.SetMirroringDelegate(HarfBuzzSharp.MirroringDelegate,HarfBuzzSharp.ReleaseDelegate)" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.SetScriptDelegate(HarfBuzzSharp.ScriptDelegate,HarfBuzzSharp.ReleaseDelegate)" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.TryCompose(System.UInt32,System.UInt32,System.UInt32@)" />
+      <Member Id="M:HarfBuzzSharp.UnicodeFunctions.TryDecompose(System.UInt32,System.UInt32@,System.UInt32@)" />
       <Member Id="P:HarfBuzzSharp.UnicodeFunctions.Default" />
       <Member Id="P:HarfBuzzSharp.UnicodeFunctions.Empty" />
       <Member Id="P:HarfBuzzSharp.UnicodeFunctions.IsImmutable" />
+      <Member Id="P:HarfBuzzSharp.UnicodeFunctions.Parent" />
     </Type>
     <Type Name="HarfBuzzSharp.UnicodeGeneralCategory" Id="T:HarfBuzzSharp.UnicodeGeneralCategory">
       <Member Id="F:HarfBuzzSharp.UnicodeGeneralCategory.ClosePunctuation" />
