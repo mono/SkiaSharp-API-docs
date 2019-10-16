@@ -169,11 +169,11 @@ Typeface objects are immutable, and so they can be shared between threads.
         <Parameter Name="encoding" Type="SkiaSharp.SKEncoding" Index="1" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="str">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="str">The buffer containing character codes.</param>
+        <param name="encoding">How the character are encoded.</param>
+        <summary>Returns the number of glyphs in the buffer.</summary>
+        <returns>The number of number of continuous non-zero glyph IDs computed from the beginning of the buffer.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
@@ -783,11 +783,11 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="encoding" Type="SkiaSharp.SKEncoding" Index="1" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The buffer of character codes.</param>
+        <param name="encoding">How the character codes are encoded.</param>
+        <summary>Retrieve the corresponding glyph IDs of a buffer containing character codes, of the specified encoding.</summary>
+        <returns>Returns the corresponding glyph IDs for each character.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -908,12 +908,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="glyphs" Type="System.UInt16[]" RefType="out" Index="2" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The buffer of character codes.</param>
+        <param name="encoding">How the character codes are encoded.</param>
+        <param name="glyphs">Destination for the corresponding glyph IDs for each character.</param>
+        <summary>Retrieve the corresponding glyph IDs of a buffer containing character codes, of the specified encoding.</summary>
+        <returns>The number of number of continuous non-zero glyph IDs computed from the beginning of the character codes.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
