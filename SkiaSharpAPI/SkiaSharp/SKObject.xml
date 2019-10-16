@@ -1,6 +1,6 @@
 <Type Name="SKObject" FullName="SkiaSharp.SKObject">
   <TypeSignature Language="C#" Value="public abstract class SKObject : SkiaSharp.SKNativeObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SKObject extends SkiaSharp.SKNativeObject" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract SKObject extends SkiaSharp.SKNativeObject" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKObject" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -43,6 +43,42 @@
           <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
         <summary>Releases the unmanaged resources used by the <see cref="T:SkiaSharp.SKObject" /> and optionally releases the managed resources.</summary>
         <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKObject" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeManaged">
+      <MemberSignature Language="C#" Value="protected override void DisposeManaged ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeManaged() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKObject.DisposeManaged" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to destroy any managed objects.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeNative">
+      <MemberSignature Language="C#" Value="protected override void DisposeNative ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeNative() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKObject.DisposeNative" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to destroy any native objects.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Handle">

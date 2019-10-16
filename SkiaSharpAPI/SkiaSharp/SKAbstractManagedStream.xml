@@ -74,6 +74,24 @@
         <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKAbstractManagedStream" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="DisposeNative">
+      <MemberSignature Language="C#" Value="protected override void DisposeNative ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeNative() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKAbstractManagedStream.DisposeNative" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to destroy any native objects.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
     <Member MemberName="OnCreateNew">
       <MemberSignature Language="C#" Value="protected abstract IntPtr OnCreateNew ();" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance native int OnCreateNew() cil managed" />
@@ -92,6 +110,44 @@
         <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to copy the current stream.</summary>
         <returns>Returns a pointer to the new <see cref="T:SkiaSharp.SKStreamAsset" /> instance.</returns>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnDuplicate">
+      <MemberSignature Language="C#" Value="protected virtual IntPtr OnDuplicate ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance native int OnDuplicate() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKAbstractManagedStream.OnDuplicate" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IntPtr</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to duplicate the current stream.</summary>
+        <returns>Returns a pointer to the new <see cref="T:SkiaSharp.SKStreamAsset" /> instance.</returns>
+        <remarks>After the stream has been duplicated, the new stream must set it's position to the start.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnFork">
+      <MemberSignature Language="C#" Value="protected virtual IntPtr OnFork ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance native int OnFork() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKAbstractManagedStream.OnFork" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IntPtr</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to fork the current stream.</summary>
+        <returns>Returns a pointer to the new <see cref="T:SkiaSharp.SKStreamAsset" /> instance.</returns>
+        <remarks>After the stream has been duplicated, the new stream must set it's position to the same as this stream.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnGetLength">
