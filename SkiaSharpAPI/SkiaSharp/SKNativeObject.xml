@@ -1,6 +1,6 @@
 <Type Name="SKNativeObject" FullName="SkiaSharp.SKNativeObject">
-  <TypeSignature Language="C#" Value="public class SKNativeObject : IDisposable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKNativeObject extends System.Object implements class System.IDisposable" />
+  <TypeSignature Language="C#" Value="public abstract class SKNativeObject : IDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SKNativeObject extends System.Object implements class System.IDisposable" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKNativeObject" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -74,6 +74,60 @@
         <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKNativeObject" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="DisposeInternal">
+      <MemberSignature Language="C#" Value="protected void DisposeInternal ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void DisposeInternal() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKNativeObject.DisposeInternal" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeManaged">
+      <MemberSignature Language="C#" Value="protected virtual void DisposeManaged ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void DisposeManaged() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKNativeObject.DisposeManaged" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeNative">
+      <MemberSignature Language="C#" Value="protected virtual void DisposeNative ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void DisposeNative() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKNativeObject.DisposeNative" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Finalize">
       <MemberSignature Language="C#" Value="~SKNativeObject ();" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Finalize() cil managed" />
@@ -116,6 +170,60 @@
         <summary>Gets or sets the handle to the underlying native object.</summary>
         <value></value>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IgnorePublicDispose">
+      <MemberSignature Language="C#" Value="public bool IgnorePublicDispose { protected internal get; protected set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IgnorePublicDispose" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKNativeObject.IgnorePublicDispose" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsDisposed">
+      <MemberSignature Language="C#" Value="protected internal bool IsDisposed { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsDisposed" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKNativeObject.IsDisposed" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OwnsHandle">
+      <MemberSignature Language="C#" Value="public virtual bool OwnsHandle { protected internal get; protected set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool OwnsHandle" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKNativeObject.OwnsHandle" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
   </Members>
