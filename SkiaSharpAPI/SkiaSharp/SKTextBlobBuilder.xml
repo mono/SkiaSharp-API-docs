@@ -49,12 +49,12 @@
         <Parameter Name="positions" Type="System.ReadOnlySpan&lt;System.Single&gt;" Index="3" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="y">The vertical offset within the blob.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="positions">The horizontal positions of each glyph.</param>
+        <summary>Adds a new horizontally-positioned run to the builder.</summary>
+        <remarks>The number of positions must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddHorizontalRun">
@@ -104,13 +104,13 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="y">The vertical offset within the blob.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="positions">The horizontal positions of each glyph.</param>
+        <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
+        <summary>Adds a new horizontally-positioned run to the builder.</summary>
+        <remarks>The number of positions must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddHorizontalRun">
@@ -163,14 +163,14 @@
         <Parameter Name="clusters" Type="System.ReadOnlySpan&lt;System.UInt32&gt;" Index="5" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="text">To be added.</param>
-        <param name="clusters">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="y">The vertical offset within the blob.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="positions">The horizontal positions of each glyph.</param>
+        <param name="text">The chacracter information for this run.</param>
+        <param name="clusters">The glyph's cluster information.</param>
+        <summary>Adds a new horizontally-positioned run to the builder.</summary>
+        <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddHorizontalRun">
@@ -226,15 +226,15 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="6" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="text">To be added.</param>
-        <param name="clusters">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="y">The vertical offset within the blob.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="positions">The horizontal positions of each glyph.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
+        <param name="clusters">The glyph's cluster information.</param>
+        <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
+        <summary>Adds a new horizontally-positioned run to the builder.</summary>
+        <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddHorizontalRun">
@@ -266,7 +266,7 @@
         <param name="glyphs">The glyphs for this run.</param>
         <param name="positions">The horizontal positions of each glyph.</param>
         <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-        <param name="text">To be added.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
         <param name="clusters">The glyph's cluster information.</param>
         <summary>Adds a new horizontally-positioned run to the builder.</summary>
         <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
@@ -335,7 +335,7 @@
         <param name="glyphs">The glyphs for this run.</param>
         <param name="positions">The horizontal positions of each glyph.</param>
         <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-        <param name="text">To be added.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
         <param name="clusters">The glyph's cluster information.</param>
         <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
         <summary>Adds a new horizontally-positioned run to the builder.</summary>
@@ -360,11 +360,11 @@
         <Parameter Name="positions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="2" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="positions">The positions of each glyph.</param>
+        <summary>Adds a new fully-positioned run to the builder.</summary>
+        <remarks>The number of positions must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddPositionedRun">
@@ -411,12 +411,12 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="positions">The positions of each glyph.</param>
+        <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
+        <summary>Adds a new fully-positioned run to the builder.</summary>
+        <remarks>The number of positions must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddPositionedRun">
@@ -466,13 +466,13 @@
         <Parameter Name="clusters" Type="System.ReadOnlySpan&lt;System.UInt32&gt;" Index="4" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="text">To be added.</param>
-        <param name="clusters">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="positions">The positions of each glyph.</param>
+        <param name="text">The chacracter information for this run.</param>
+        <param name="clusters">The glyph's cluster information.</param>
+        <summary>Adds a new fully-positioned run to the builder.</summary>
+        <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddPositionedRun">
@@ -525,14 +525,14 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="5" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="text">To be added.</param>
-        <param name="clusters">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="positions">The positions of each glyph.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
+        <param name="clusters">The glyph's cluster information.</param>
+        <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
+        <summary>Adds a new fully-positioned run to the builder.</summary>
+        <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddPositionedRun">
@@ -562,7 +562,7 @@
         <param name="glyphs">The glyphs for this run.</param>
         <param name="positions">The positions of each glyph.</param>
         <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-        <param name="text">To be added.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
         <param name="clusters">The glyph's cluster information.</param>
         <summary>Adds a new fully-positioned run to the builder.</summary>
         <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
@@ -627,7 +627,7 @@
         <param name="glyphs">The glyphs for this run.</param>
         <param name="positions">The positions of each glyph.</param>
         <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-        <param name="text">To be added.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
         <param name="clusters">The glyph's cluster information.</param>
         <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
         <summary>Adds a new fully-positioned run to the builder.</summary>
@@ -653,12 +653,12 @@
         <Parameter Name="glyphs" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" Index="3" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="x">The x-position of the origin of this run.</param>
+        <param name="y">The y-position of the origin of this run.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <summary>Adds a new deafult-positioned run to the builder.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="AddRun">
@@ -708,13 +708,13 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="x">The x-position of the origin of this run.</param>
+        <param name="y">The y-position of the origin of this run.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
+        <summary>Adds a new deafult-positioned run to the builder.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="AddRun">
@@ -767,14 +767,14 @@
         <Parameter Name="clusters" Type="System.ReadOnlySpan&lt;System.UInt32&gt;" Index="5" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="text">To be added.</param>
-        <param name="clusters">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="x">The x-position of the origin of this run.</param>
+        <param name="y">The y-position of the origin of this run.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
+        <param name="clusters">The glyph's cluster information.</param>
+        <summary>Adds a new deafult-positioned run to the builder.</summary>
+        <remarks>The number of characters and clusters must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddRun">
@@ -830,15 +830,15 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="6" FrameworkAlternate="skiasharp-1.68.1" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <param name="text">To be added.</param>
-        <param name="clusters">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The font to be used for this run.</param>
+        <param name="x">The x-position of the origin of this run.</param>
+        <param name="y">The y-position of the origin of this run.</param>
+        <param name="glyphs">The glyphs for this run.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
+        <param name="clusters">The glyph's cluster information.</param>
+        <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
+        <summary>Adds a new deafult-positioned run to the builder.</summary>
+        <remarks>The number of characters and clusters must be the same as the number of glyphs.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AddRun">
@@ -870,7 +870,7 @@
         <param name="y">The y-position of the origin of this run.</param>
         <param name="glyphs">The glyphs for this run.</param>
         <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-        <param name="text">To be added.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
         <param name="clusters">The glyph's cluster information.</param>
         <summary>Adds a new deafult-positioned run to the builder.</summary>
         <remarks>The number of characters and clusters must be the same as the number of glyphs.</remarks>
@@ -939,7 +939,7 @@
         <param name="y">The y-position of the origin of this run.</param>
         <param name="glyphs">The glyphs for this run.</param>
         <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-        <param name="text">To be added.</param>
+        <param name="text">The UTF-8 chacracter information for this run.</param>
         <param name="clusters">The glyph's cluster information.</param>
         <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
         <summary>Adds a new deafult-positioned run to the builder.</summary>

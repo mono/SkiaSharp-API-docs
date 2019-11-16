@@ -627,6 +627,36 @@ using (var surface = SKSurface.Create(info)) {
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="Discard">
+      <MemberSignature Language="C#" Value="public void Discard ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Discard() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Discard" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Makes the canvas contents undefined.</summary>
+        <remarks>
+          <format type="text/markdown"><![CDATA[
+## Remarks
+
+Subsequent calls that read the canvas pixels, such as drawing with <xref:SkiaSharp.SKBlendMode>, return undefined
+results. Calling this method does not change clip or matrix and may do nothing, depending on the implementation
+of the underlying <xref:SkiaSharp.SKSurface>.
+
+<xref:SkiaSharp.SKCanvas.Discard> allows optimized performance on subsequent draws by removing cached data associated
+with the underlying <xref:SkiaSharp.SKSurface>. It is not necessary to call <xref:SkiaSharp.SKCanvas.Discard> once
+done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning <xref:SkiaSharp.SKSurface> is deleted.
+]]></format>
+        </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />

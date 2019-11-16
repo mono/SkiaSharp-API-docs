@@ -394,6 +394,7 @@
       <Member Id="M:SkiaSharp.SKCanvas.ClipRegion(SkiaSharp.SKRegion,SkiaSharp.SKClipOperation)" />
       <Member Id="M:SkiaSharp.SKCanvas.ClipRoundRect(SkiaSharp.SKRoundRect,SkiaSharp.SKClipOperation,System.Boolean)" />
       <Member Id="M:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix@)" />
+      <Member Id="M:SkiaSharp.SKCanvas.Discard" />
       <Member Id="M:SkiaSharp.SKCanvas.Dispose(System.Boolean)" />
       <Member Id="M:SkiaSharp.SKCanvas.DisposeNative" />
       <Member Id="M:SkiaSharp.SKCanvas.DrawAnnotation(SkiaSharp.SKRect,System.String,SkiaSharp.SKData)" />
@@ -1021,6 +1022,7 @@
       <Member Id="F:SkiaSharp.SKEncodedImageFormat.Bmp" />
       <Member Id="F:SkiaSharp.SKEncodedImageFormat.Dng" />
       <Member Id="F:SkiaSharp.SKEncodedImageFormat.Gif" />
+      <Member Id="F:SkiaSharp.SKEncodedImageFormat.Heif" />
       <Member Id="F:SkiaSharp.SKEncodedImageFormat.Ico" />
       <Member Id="F:SkiaSharp.SKEncodedImageFormat.Jpeg" />
       <Member Id="F:SkiaSharp.SKEncodedImageFormat.Ktx" />
@@ -1232,6 +1234,7 @@
     </Type>
     <Type Name="SkiaSharp.SKImage" Id="T:SkiaSharp.SKImage">
       <Member Id="M:SkiaSharp.SKImage.ApplyImageFilter(SkiaSharp.SKImageFilter,SkiaSharp.SKRectI,SkiaSharp.SKRectI,SkiaSharp.SKRectI@,SkiaSharp.SKPoint@)" />
+      <Member Id="M:SkiaSharp.SKImage.ApplyImageFilter(SkiaSharp.SKImageFilter,SkiaSharp.SKRectI,SkiaSharp.SKRectI,SkiaSharp.SKRectI@,SkiaSharp.SKPointI@)" />
       <Member Id="M:SkiaSharp.SKImage.Create(SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.SKImage.Dispose(System.Boolean)" />
       <Member Id="M:SkiaSharp.SKImage.Encode" />
@@ -2325,6 +2328,7 @@
       <Member Id="M:SkiaSharp.SKRoundRect.SetRect(SkiaSharp.SKRect,System.Single,System.Single)" />
       <Member Id="M:SkiaSharp.SKRoundRect.SetRectRadii(SkiaSharp.SKRect,SkiaSharp.SKPoint[])" />
       <Member Id="M:SkiaSharp.SKRoundRect.Transform(SkiaSharp.SKMatrix)" />
+      <Member Id="M:SkiaSharp.SKRoundRect.TryTransform(SkiaSharp.SKMatrix,SkiaSharp.SKRoundRect@)" />
       <Member Id="P:SkiaSharp.SKRoundRect.AllCornersCircular" />
       <Member Id="P:SkiaSharp.SKRoundRect.Height" />
       <Member Id="P:SkiaSharp.SKRoundRect.IsValid" />
@@ -2365,6 +2369,7 @@
       <Member Id="M:SkiaSharp.SKShader.CreateCompose(SkiaSharp.SKShader,SkiaSharp.SKShader)" />
       <Member Id="M:SkiaSharp.SKShader.CreateCompose(SkiaSharp.SKShader,SkiaSharp.SKShader,SkiaSharp.SKBlendMode)" />
       <Member Id="M:SkiaSharp.SKShader.CreateEmpty" />
+      <Member Id="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColor[],SkiaSharp.SKShaderTileMode)" />
       <Member Id="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode)" />
       <Member Id="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <Member Id="M:SkiaSharp.SKShader.CreateLocalMatrix(SkiaSharp.SKShader,SkiaSharp.SKMatrix)" />
@@ -2372,12 +2377,19 @@
       <Member Id="M:SkiaSharp.SKShader.CreatePerlinNoiseFractalNoise(System.Single,System.Single,System.Int32,System.Single,SkiaSharp.SKPointI)" />
       <Member Id="M:SkiaSharp.SKShader.CreatePerlinNoiseTurbulence(System.Single,System.Single,System.Int32,System.Single)" />
       <Member Id="M:SkiaSharp.SKShader.CreatePerlinNoiseTurbulence(System.Single,System.Single,System.Int32,System.Single,SkiaSharp.SKPointI)" />
+      <Member Id="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode)" />
+      <Member Id="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKRect)" />
+      <Member Id="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix,SkiaSharp.SKRect)" />
+      <Member Id="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],SkiaSharp.SKShaderTileMode)" />
       <Member Id="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode)" />
       <Member Id="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
+      <Member Id="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[])" />
+      <Member Id="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],SkiaSharp.SKShaderTileMode,System.Single,System.Single)" />
       <Member Id="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[])" />
       <Member Id="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKMatrix)" />
       <Member Id="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,System.Single,System.Single)" />
       <Member Id="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,System.Single,System.Single,SkiaSharp.SKMatrix)" />
+      <Member Id="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],SkiaSharp.SKShaderTileMode)" />
       <Member Id="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode)" />
       <Member Id="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <Member Id="M:SkiaSharp.SKShader.Dispose(System.Boolean)" />
@@ -2429,6 +2441,7 @@
     </Type>
     <Type Name="SkiaSharp.SKStream" Id="T:SkiaSharp.SKStream">
       <Member Id="M:SkiaSharp.SKStream.GetMemoryBase" />
+      <Member Id="M:SkiaSharp.SKStream.Move(System.Int32)" />
       <Member Id="M:SkiaSharp.SKStream.Move(System.Int64)" />
       <Member Id="M:SkiaSharp.SKStream.Peek(System.IntPtr,System.Int32)" />
       <Member Id="M:SkiaSharp.SKStream.Read(System.Byte[],System.Int32)" />
