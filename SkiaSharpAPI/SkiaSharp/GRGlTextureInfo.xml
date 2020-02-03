@@ -1,6 +1,6 @@
 <Type Name="GRGlTextureInfo" FullName="SkiaSharp.GRGlTextureInfo">
-  <TypeSignature Language="C#" Value="public struct GRGlTextureInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit GRGlTextureInfo extends System.ValueType" />
+  <TypeSignature Language="C#" Value="public struct GRGlTextureInfo : IEquatable&lt;SkiaSharp.GRGlTextureInfo&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit GRGlTextureInfo extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.GRGlTextureInfo&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.GRGlTextureInfo" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -10,12 +10,36 @@
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.GRGlTextureInfo&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>Represents a handle to an existing OpenGL texture.</summary>
     <remarks></remarks>
   </Docs>
   <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public GRGlTextureInfo (uint target, uint id);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int32 target, unsigned int32 id) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRGlTextureInfo.#ctor(System.UInt32,System.UInt32)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="target" Type="System.UInt32" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="id" Type="System.UInt32" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="target">To be added.</param>
+        <param name="id">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public GRGlTextureInfo (uint target, uint id, uint format);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int32 target, unsigned int32 id, unsigned int32 format) cil managed" />
@@ -26,9 +50,9 @@
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="target" Type="System.UInt32" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
-        <Parameter Name="id" Type="System.UInt32" Index="1" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
-        <Parameter Name="format" Type="System.UInt32" Index="2" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="target" Type="System.UInt32" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="id" Type="System.UInt32" Index="1" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="format" Type="System.UInt32" Index="2" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="target">The OpenGL texture target.</param>
@@ -36,6 +60,50 @@
         <param name="format">The sized, internal format of the OpenGL texture.</param>
         <summary>Creates a new <see cref="T:SkiaSharp.GRGlTextureInfo" /> with the specified parameters.</summary>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.GRGlTextureInfo obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.GRGlTextureInfo obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRGlTextureInfo.Equals(SkiaSharp.GRGlTextureInfo)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="SkiaSharp.GRGlTextureInfo" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRGlTextureInfo.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Format">
@@ -56,6 +124,25 @@
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRGlTextureInfo.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Id">
       <MemberSignature Language="C#" Value="public uint Id { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 Id" />
@@ -73,6 +160,54 @@
         <summary>Gets or sets the OpenGL texture ID.</summary>
         <value></value>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.GRGlTextureInfo left, SkiaSharp.GRGlTextureInfo right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.GRGlTextureInfo left, valuetype SkiaSharp.GRGlTextureInfo right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRGlTextureInfo.op_Equality(SkiaSharp.GRGlTextureInfo,SkiaSharp.GRGlTextureInfo)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.GRGlTextureInfo" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.GRGlTextureInfo" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.GRGlTextureInfo left, SkiaSharp.GRGlTextureInfo right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.GRGlTextureInfo left, valuetype SkiaSharp.GRGlTextureInfo right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRGlTextureInfo.op_Inequality(SkiaSharp.GRGlTextureInfo,SkiaSharp.GRGlTextureInfo)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.GRGlTextureInfo" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.GRGlTextureInfo" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Target">

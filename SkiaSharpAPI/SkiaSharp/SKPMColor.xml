@@ -1,6 +1,6 @@
 <Type Name="SKPMColor" FullName="SkiaSharp.SKPMColor">
-  <TypeSignature Language="C#" Value="public struct SKPMColor" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKPMColor extends System.ValueType" />
+  <TypeSignature Language="C#" Value="public struct SKPMColor : IEquatable&lt;SkiaSharp.SKPMColor&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKPMColor extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.SKPMColor&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKPMColor" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -13,7 +13,11 @@
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.SKPMColor&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>32-bit ARGB premultiplied color value.</summary>
     <remarks>The byte order for this value is configuration dependent. This is different from <see cref="T:SkiaSharp.SKColor" />, which is unpremultiplied, and is always in the same byte order.</remarks>
@@ -86,9 +90,33 @@
       </Docs>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public override bool Equals (object other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object other) cil managed" />
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.SKPMColor obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.SKPMColor obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPMColor.Equals(SkiaSharp.SKPMColor)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="SkiaSharp.SKPMColor" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object other);" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object other) cil managed" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPMColor.Equals(System.Object)" />
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" FrameworkAlternate="skiasharp-1.68.2" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" FrameworkAlternate="skiasharp-1.68.2" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -102,10 +130,12 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="other" Type="System.Object" />
+        <Parameter Name="other" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="other">The object to compare with the current object.</param>
+        <param name="obj">To be added.</param>
         <summary>Determines whether the specified object is equal to the current object.</summary>
         <returns>Returns <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>

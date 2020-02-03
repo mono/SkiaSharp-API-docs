@@ -1,6 +1,6 @@
 <Type Name="SKSize" FullName="SkiaSharp.SKSize">
-  <TypeSignature Language="C#" Value="public struct SKSize" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKSize extends System.ValueType" />
+  <TypeSignature Language="C#" Value="public struct SKSize : IEquatable&lt;SkiaSharp.SKSize&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKSize extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.SKSize&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKSize" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -13,7 +13,11 @@
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.SKSize&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>Stores an ordered pair of floating-point numbers describing the width and height of a rectangle.</summary>
     <remarks></remarks>
@@ -112,6 +116,28 @@
       <Docs>
         <summary>Represents a new instance of the <see cref="T:SkiaSharp.SKSize" /> class with member data left uninitialized.</summary>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.SKSize obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.SKSize obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSize.Equals(SkiaSharp.SKSize)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="SkiaSharp.SKSize" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -236,9 +262,11 @@
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKSize sz1, SkiaSharp.SKSize sz2);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKSize sz1, valuetype SkiaSharp.SKSize sz2) cil managed" />
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKSize sz1, SkiaSharp.SKSize sz2);" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKSize sz1, valuetype SkiaSharp.SKSize sz2) cil managed" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSize.op_Equality(SkiaSharp.SKSize,SkiaSharp.SKSize)" />
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKSize left, SkiaSharp.SKSize right);" FrameworkAlternate="skiasharp-1.68.2" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKSize left, valuetype SkiaSharp.SKSize right) cil managed" FrameworkAlternate="skiasharp-1.68.2" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -252,12 +280,16 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sz1" Type="SkiaSharp.SKSize" />
-        <Parameter Name="sz2" Type="SkiaSharp.SKSize" />
+        <Parameter Name="sz1" Type="SkiaSharp.SKSize" Index="0" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="left" Type="SkiaSharp.SKSize" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="sz2" Type="SkiaSharp.SKSize" Index="1" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="right" Type="SkiaSharp.SKSize" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="sz1">The <see cref="T:SkiaSharp.SKSize" /> structure on the left side of the equality operator.</param>
+        <param name="left">To be added.</param>
         <param name="sz2">The <see cref="T:SkiaSharp.SKSize" /> structure on the right of the equality operator.</param>
+        <param name="right">To be added.</param>
         <summary>Tests whether two <see cref="T:SkiaSharp.SKSize" /> structures are equal.</summary>
         <returns>This operator returns true if both <see cref="T:SkiaSharp.SKSize" /> structures have equal <see cref="P:SkiaSharp.SKSize.Width" /> and <see cref="P:SkiaSharp.SKSize.Height" />; otherwise, false.</returns>
         <remarks></remarks>
@@ -316,9 +348,11 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKSize sz1, SkiaSharp.SKSize sz2);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKSize sz1, valuetype SkiaSharp.SKSize sz2) cil managed" />
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKSize sz1, SkiaSharp.SKSize sz2);" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKSize sz1, valuetype SkiaSharp.SKSize sz2) cil managed" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSize.op_Inequality(SkiaSharp.SKSize,SkiaSharp.SKSize)" />
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKSize left, SkiaSharp.SKSize right);" FrameworkAlternate="skiasharp-1.68.2" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKSize left, valuetype SkiaSharp.SKSize right) cil managed" FrameworkAlternate="skiasharp-1.68.2" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -332,12 +366,16 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sz1" Type="SkiaSharp.SKSize" />
-        <Parameter Name="sz2" Type="SkiaSharp.SKSize" />
+        <Parameter Name="sz1" Type="SkiaSharp.SKSize" Index="0" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="left" Type="SkiaSharp.SKSize" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="sz2" Type="SkiaSharp.SKSize" Index="1" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="right" Type="SkiaSharp.SKSize" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="sz1">The <see cref="T:SkiaSharp.SKSize" /> structure that is to the left of the inequality operator.</param>
+        <param name="left">To be added.</param>
         <param name="sz2">The <see cref="T:SkiaSharp.SKSize" /> structure that is to the right of the inequality operator.</param>
+        <param name="right">To be added.</param>
         <summary>Tests whether two <see cref="T:SkiaSharp.SKSize" /> structures are different.</summary>
         <returns>This operator returns true if either of the <see cref="P:SkiaSharp.SKSize.Width" /> and <see cref="P:SkiaSharp.SKSize.Height" /> properties of the two <see cref="T:SkiaSharp.SKSize" /> structures are unequal; otherwise false.</returns>
         <remarks></remarks>

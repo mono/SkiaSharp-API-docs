@@ -1,6 +1,6 @@
 <Type Name="SKCodecOptions" FullName="SkiaSharp.SKCodecOptions">
-  <TypeSignature Language="C#" Value="public struct SKCodecOptions" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed SKCodecOptions extends System.ValueType" />
+  <TypeSignature Language="C#" Value="public struct SKCodecOptions : IEquatable&lt;SkiaSharp.SKCodecOptions&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed SKCodecOptions extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.SKCodecOptions&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKCodecOptions" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -13,7 +13,11 @@
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.SKCodecOptions&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>Additional options to pass to <see cref="M:SkiaSharp.SKCodec.GetPixels(SkiaSharp.SKImageInfo,System.IntPtr,SkiaSharp.SKCodecOptions)" /> or one of the overloads that accepts a <see cref="T:SkiaSharp.SKCodecOptions" />.</summary>
     <remarks></remarks>
@@ -73,7 +77,7 @@
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="frameIndex" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="frameIndex" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="frameIndex">The frame to decode.</param>
@@ -138,8 +142,8 @@
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="frameIndex" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
-        <Parameter Name="priorFrame" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="frameIndex" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="priorFrame" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="frameIndex">The frame to decode.</param>
@@ -169,6 +173,50 @@
         <remarks>The default value is not zero-initialized and without a subset rectangle.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.SKCodecOptions obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.SKCodecOptions obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCodecOptions.Equals(SkiaSharp.SKCodecOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="SkiaSharp.SKCodecOptions" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCodecOptions.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="FrameIndex">
       <MemberSignature Language="C#" Value="public int FrameIndex { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance int32 FrameIndex" />
@@ -189,6 +237,25 @@
         <summary>Gets or sets the frame to decode.</summary>
         <value></value>
         <remarks>Only meaningful for multi-frame images.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCodecOptions.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="HasPriorFrame">
@@ -232,6 +299,54 @@
         <summary>Gets a value indicating whether the options has a subset rectangle.</summary>
         <value></value>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKCodecOptions left, SkiaSharp.SKCodecOptions right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKCodecOptions left, valuetype SkiaSharp.SKCodecOptions right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCodecOptions.op_Equality(SkiaSharp.SKCodecOptions,SkiaSharp.SKCodecOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKCodecOptions" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKCodecOptions" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKCodecOptions left, SkiaSharp.SKCodecOptions right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKCodecOptions left, valuetype SkiaSharp.SKCodecOptions right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCodecOptions.op_Inequality(SkiaSharp.SKCodecOptions,SkiaSharp.SKCodecOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKCodecOptions" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKCodecOptions" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PremulBehavior">

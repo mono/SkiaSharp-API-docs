@@ -1,6 +1,6 @@
 <Type Name="SKMask" FullName="SkiaSharp.SKMask">
-  <TypeSignature Language="C#" Value="public struct SKMask" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKMask extends System.ValueType" />
+  <TypeSignature Language="C#" Value="public struct SKMask : IEquatable&lt;SkiaSharp.SKMask&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKMask extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.SKMask&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKMask" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -13,7 +13,11 @@
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.SKMask&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>A mask is used to describe alpha bitmaps, either 1-bit, 8-bit, or the 3-channel 3D format.</summary>
     <remarks></remarks>
@@ -126,7 +130,7 @@
       <MemberSignature Language="C#" Value="public SkiaSharp.SKRectI Bounds { get; }" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKRectI Bounds" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKMask.Bounds" />
-      <MemberSignature Language="C#" Value="public SkiaSharp.SKRectI Bounds { get; set; }" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKRectI Bounds { get; set; }" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -233,11 +237,55 @@ If there is an overflow of 32bits, then returns 0.
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.SKMask obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.SKMask obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMask.Equals(SkiaSharp.SKMask)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="SkiaSharp.SKMask" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMask.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Format">
       <MemberSignature Language="C#" Value="public SkiaSharp.SKMaskFormat Format { get; }" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKMaskFormat Format" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKMask.Format" />
-      <MemberSignature Language="C#" Value="public SkiaSharp.SKMaskFormat Format { get; set; }" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKMaskFormat Format { get; set; }" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -454,11 +502,30 @@ give unspecified results.
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMask.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Image">
       <MemberSignature Language="C#" Value="public IntPtr Image { get; }" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3" />
       <MemberSignature Language="ILAsm" Value=".property instance native int Image" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKMask.Image" />
-      <MemberSignature Language="C#" Value="public IntPtr Image { get; set; }" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="C#" Value="public IntPtr Image { get; set; }" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -499,11 +566,59 @@ give unspecified results.
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKMask left, SkiaSharp.SKMask right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKMask left, valuetype SkiaSharp.SKMask right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMask.op_Equality(SkiaSharp.SKMask,SkiaSharp.SKMask)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKMask" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKMask" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKMask left, SkiaSharp.SKMask right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKMask left, valuetype SkiaSharp.SKMask right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMask.op_Inequality(SkiaSharp.SKMask,SkiaSharp.SKMask)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKMask" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKMask" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="RowBytes">
       <MemberSignature Language="C#" Value="public uint RowBytes { get; }" FrameworkAlternate="skiasharp-1.57.0;skiasharp-1.57.1;skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 RowBytes" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKMask.RowBytes" />
-      <MemberSignature Language="C#" Value="public uint RowBytes { get; set; }" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
+      <MemberSignature Language="C#" Value="public uint RowBytes { get; set; }" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>

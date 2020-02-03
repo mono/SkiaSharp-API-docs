@@ -1,6 +1,6 @@
 <Type Name="SKMatrix" FullName="SkiaSharp.SKMatrix">
-  <TypeSignature Language="C#" Value="public struct SKMatrix" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKMatrix extends System.ValueType" />
+  <TypeSignature Language="C#" Value="public struct SKMatrix : IEquatable&lt;SkiaSharp.SKMatrix&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKMatrix extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.SKMatrix&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKMatrix" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -13,7 +13,11 @@
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.SKMatrix&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>A 3x3 transformation matrix with perspective.</summary>
     <remarks>It extends the traditional 2D affine transformation matrix with three perspective components that allow simple 3D effects to be created with it. Those components must be manually set by using the <see cref="P:SkiaSharp.SKMatrix.Persp0" />, <see cref="P:SkiaSharp.SKMatrix.Persp1" />, <see cref="P:SkiaSharp.SKMatrix.Persp2" /> fields of the matrix.</remarks>
@@ -29,15 +33,15 @@
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="scaleX" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.1" />
-        <Parameter Name="skewX" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.1" />
-        <Parameter Name="transX" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-1.68.1" />
-        <Parameter Name="skewY" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-1.68.1" />
-        <Parameter Name="scaleY" Type="System.Single" Index="4" FrameworkAlternate="skiasharp-1.68.1" />
-        <Parameter Name="transY" Type="System.Single" Index="5" FrameworkAlternate="skiasharp-1.68.1" />
-        <Parameter Name="persp0" Type="System.Single" Index="6" FrameworkAlternate="skiasharp-1.68.1" />
-        <Parameter Name="persp1" Type="System.Single" Index="7" FrameworkAlternate="skiasharp-1.68.1" />
-        <Parameter Name="persp2" Type="System.Single" Index="8" FrameworkAlternate="skiasharp-1.68.1" />
+        <Parameter Name="scaleX" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="skewX" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="transX" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="skewY" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="scaleY" Type="System.Single" Index="4" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="transY" Type="System.Single" Index="5" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="persp0" Type="System.Single" Index="6" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="persp1" Type="System.Single" Index="7" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="persp2" Type="System.Single" Index="8" FrameworkAlternate="skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="scaleX">The scaling in the x-direction.</param>
@@ -51,6 +55,30 @@
         <param name="persp2">The z-perspective.</param>
         <summary>Creates a new instance of <see cref="T:SkiaSharp.SKMatrix" /> using the specified values.</summary>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Concat">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix Concat (SkiaSharp.SKMatrix first, SkiaSharp.SKMatrix second);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix Concat(valuetype SkiaSharp.SKMatrix first, valuetype SkiaSharp.SKMatrix second) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.Concat(SkiaSharp.SKMatrix,SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="first" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="second" Type="SkiaSharp.SKMatrix" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="first">To be added.</param>
+        <param name="second">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Concat">
@@ -111,6 +139,301 @@
         <remarks>Either source matrices can also be the target matrix.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="CreateIdentity">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateIdentity ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateIdentity() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateIdentity" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateRotation">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateRotation (float radians);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateRotation(float32 radians) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateRotation(System.Single)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="radians" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="radians">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateRotation">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateRotation (float radians, float pivotX, float pivotY);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateRotation(float32 radians, float32 pivotX, float32 pivotY) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateRotation(System.Single,System.Single,System.Single)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="radians" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="pivotX" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="pivotY" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="radians">To be added.</param>
+        <param name="pivotX">To be added.</param>
+        <param name="pivotY">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateRotationDegrees">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateRotationDegrees (float degrees);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateRotationDegrees(float32 degrees) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateRotationDegrees(System.Single)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="degrees" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="degrees">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateRotationDegrees">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateRotationDegrees (float degrees, float pivotX, float pivotY);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateRotationDegrees(float32 degrees, float32 pivotX, float32 pivotY) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateRotationDegrees(System.Single,System.Single,System.Single)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="degrees" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="pivotX" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="pivotY" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="degrees">To be added.</param>
+        <param name="pivotX">To be added.</param>
+        <param name="pivotY">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateScale">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateScale (float x, float y);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateScale(float32 x, float32 y) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateScale(System.Single,System.Single)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="x" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="y" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="x">To be added.</param>
+        <param name="y">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateScale">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateScale (float x, float y, float pivotX, float pivotY);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateScale(float32 x, float32 y, float32 pivotX, float32 pivotY) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateScale(System.Single,System.Single,System.Single,System.Single)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="x" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="y" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="pivotX" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="pivotY" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="x">To be added.</param>
+        <param name="y">To be added.</param>
+        <param name="pivotX">To be added.</param>
+        <param name="pivotY">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateSkew">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateSkew (float x, float y);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateSkew(float32 x, float32 y) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateSkew(System.Single,System.Single)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="x" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="y" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="x">To be added.</param>
+        <param name="y">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTranslation">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix CreateTranslation (float x, float y);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix CreateTranslation(float32 x, float32 y) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.CreateTranslation(System.Single,System.Single)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="x" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="y" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="x">To be added.</param>
+        <param name="y">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Empty">
+      <MemberSignature Language="C#" Value="public static readonly SkiaSharp.SKMatrix Empty;" />
+      <MemberSignature Language="ILAsm" Value=".field public static initonly valuetype SkiaSharp.SKMatrix Empty" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.SKMatrix.Empty" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.SKMatrix obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.SKMatrix obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.Equals(SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="GetValues">
       <MemberSignature Language="C#" Value="public void GetValues (float[] values);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetValues(float32[] values) cil managed" />
@@ -136,6 +459,60 @@
         <remarks>The result will be the same as <see cref="P:SkiaSharp.SKMatrix.Values" />.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Identity">
+      <MemberSignature Language="C#" Value="public static readonly SkiaSharp.SKMatrix Identity;" />
+      <MemberSignature Language="ILAsm" Value=".field public static initonly valuetype SkiaSharp.SKMatrix Identity" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.SKMatrix.Identity" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Invert">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKMatrix Invert ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKMatrix Invert() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.Invert" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsInvertible">
+      <MemberSignature Language="C#" Value="public bool IsInvertible { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsInvertible" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKMatrix.IsInvertible" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="MakeIdentity">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKMatrix MakeIdentity ();" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKMatrix MakeIdentity() cil managed" />
@@ -149,6 +526,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -172,6 +554,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -198,6 +585,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -228,6 +620,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -254,6 +651,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -284,6 +686,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -312,6 +719,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -344,6 +756,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -372,6 +789,11 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
@@ -559,6 +981,14 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use MapRect(SKRect) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -687,6 +1117,54 @@
         <remarks>Mapping uses all components in the matrix. Use <see cref="M:SkiaSharp.SKMatrix.MapVector(System.Single,System.Single)" /> to ignore the translation.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKMatrix left, SkiaSharp.SKMatrix right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKMatrix left, valuetype SkiaSharp.SKMatrix right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.op_Equality(SkiaSharp.SKMatrix,SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKMatrix" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKMatrix left, SkiaSharp.SKMatrix right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKMatrix left, valuetype SkiaSharp.SKMatrix right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.op_Inequality(SkiaSharp.SKMatrix,SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKMatrix" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Persp0">
       <MemberSignature Language="C#" Value="public float Persp0 { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance float32 Persp0" />
@@ -754,6 +1232,28 @@
       </Docs>
     </Member>
     <Member MemberName="PostConcat">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKMatrix PostConcat (SkiaSharp.SKMatrix matrix);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKMatrix PostConcat(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.PostConcat(SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="matrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PostConcat">
       <MemberSignature Language="C#" Value="public static void PostConcat (ref SkiaSharp.SKMatrix target, SkiaSharp.SKMatrix matrix);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig void PostConcat(valuetype SkiaSharp.SKMatrix&amp; target, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.PostConcat(SkiaSharp.SKMatrix@,SkiaSharp.SKMatrix)" />
@@ -766,6 +1266,14 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use PostConcat(SKMatrix) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -793,6 +1301,14 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use PostConcat(SKMatrix) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -808,30 +1324,25 @@
       </Docs>
     </Member>
     <Member MemberName="PreConcat">
-      <MemberSignature Language="C#" Value="public static void PreConcat (ref SkiaSharp.SKMatrix target, SkiaSharp.SKMatrix matrix);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void PreConcat(valuetype SkiaSharp.SKMatrix&amp; target, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.PreConcat(SkiaSharp.SKMatrix@,SkiaSharp.SKMatrix)" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKMatrix PreConcat (SkiaSharp.SKMatrix matrix);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKMatrix PreConcat(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.PreConcat(SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.57.0.0</AssemblyVersion>
-        <AssemblyVersion>1.58.0.0</AssemblyVersion>
-        <AssemblyVersion>1.59.0.0</AssemblyVersion>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
+        <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="target" Type="SkiaSharp.SKMatrix" RefType="ref" />
-        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
+        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
       </Parameters>
       <Docs>
-        <param name="target">The target matrix.</param>
-        <param name="matrix">The matrix to be post-concatenated.</param>
-        <summary>Pre-concatenates the matrix to the target matrix.</summary>
-        <remarks>This represents: result = target * matrix</remarks>
+        <param name="matrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PreConcat">
@@ -847,12 +1358,55 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use PreConcat(SKMatrix) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="target" Type="SkiaSharp.SKMatrix" RefType="ref" />
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" RefType="ref" />
+      </Parameters>
+      <Docs>
+        <param name="target">The target matrix.</param>
+        <param name="matrix">The matrix to be post-concatenated.</param>
+        <summary>Pre-concatenates the matrix to the target matrix.</summary>
+        <remarks>This represents: result = target * matrix</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PreConcat">
+      <MemberSignature Language="C#" Value="public static void PreConcat (ref SkiaSharp.SKMatrix target, SkiaSharp.SKMatrix matrix);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void PreConcat(valuetype SkiaSharp.SKMatrix&amp; target, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMatrix.PreConcat(SkiaSharp.SKMatrix@,SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.57.0.0</AssemblyVersion>
+        <AssemblyVersion>1.58.0.0</AssemblyVersion>
+        <AssemblyVersion>1.59.0.0</AssemblyVersion>
+        <AssemblyVersion>1.60.0.0</AssemblyVersion>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use PreConcat(SKMatrix) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="target" Type="SkiaSharp.SKMatrix" RefType="ref" />
+        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
         <param name="target">The target matrix.</param>
@@ -874,6 +1428,14 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use CreateRotation(float) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -901,6 +1463,14 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use CreateRotation(float, float, float) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -932,6 +1502,14 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use CreateRotationDegrees(float) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -959,6 +1537,14 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use CreateRotationDegrees(float, float, float) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -1034,6 +1620,14 @@
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>

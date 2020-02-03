@@ -1,6 +1,6 @@
 <Type Name="SKPngEncoderOptions" FullName="SkiaSharp.SKPngEncoderOptions">
-  <TypeSignature Language="C#" Value="public struct SKPngEncoderOptions" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed SKPngEncoderOptions extends System.ValueType" />
+  <TypeSignature Language="C#" Value="public struct SKPngEncoderOptions : IEquatable&lt;SkiaSharp.SKPngEncoderOptions&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed SKPngEncoderOptions extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.SKPngEncoderOptions&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKPngEncoderOptions" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -10,7 +10,11 @@
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.SKPngEncoderOptions&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>Options to control the PNG encoding.</summary>
     <remarks></remarks>
@@ -78,6 +82,50 @@
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.SKPngEncoderOptions obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.SKPngEncoderOptions obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPngEncoderOptions.Equals(SkiaSharp.SKPngEncoderOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="SkiaSharp.SKPngEncoderOptions" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPngEncoderOptions.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="FilterFlags">
       <MemberSignature Language="C#" Value="public SkiaSharp.SKPngEncoderFilterFlags FilterFlags { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKPngEncoderFilterFlags FilterFlags" />
@@ -99,6 +147,73 @@
           <para>If multiple filters are chosen, then a heuristic will be used to guess which filter will encode smallest, then apply that filter. This happens on a per row basis, different rows can use different filters.</para>
           <para>Using a single filter (or less filters) is typically faster. Trying all of the filters may help minimize the output file size.</para>
         </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPngEncoderOptions.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKPngEncoderOptions left, SkiaSharp.SKPngEncoderOptions right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKPngEncoderOptions left, valuetype SkiaSharp.SKPngEncoderOptions right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPngEncoderOptions.op_Equality(SkiaSharp.SKPngEncoderOptions,SkiaSharp.SKPngEncoderOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKPngEncoderOptions" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKPngEncoderOptions" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKPngEncoderOptions left, SkiaSharp.SKPngEncoderOptions right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKPngEncoderOptions left, valuetype SkiaSharp.SKPngEncoderOptions right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPngEncoderOptions.op_Inequality(SkiaSharp.SKPngEncoderOptions,SkiaSharp.SKPngEncoderOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKPngEncoderOptions" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKPngEncoderOptions" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="UnpremulBehavior">

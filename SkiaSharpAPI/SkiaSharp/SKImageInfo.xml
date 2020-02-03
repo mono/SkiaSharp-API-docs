@@ -1,6 +1,6 @@
 <Type Name="SKImageInfo" FullName="SkiaSharp.SKImageInfo">
-  <TypeSignature Language="C#" Value="public struct SKImageInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed SKImageInfo extends System.ValueType" />
+  <TypeSignature Language="C#" Value="public struct SKImageInfo : IEquatable&lt;SkiaSharp.SKImageInfo&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed SKImageInfo extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.SKImageInfo&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKImageInfo" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
@@ -13,7 +13,11 @@
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.SKImageInfo&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
     <summary>Describe an image's dimensions and pixel type.</summary>
     <remarks></remarks>
@@ -110,11 +114,11 @@
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="width" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
-        <Parameter Name="height" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
-        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="2" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
-        <Parameter Name="alphaType" Type="SkiaSharp.SKAlphaType" Index="3" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
-        <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="4" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="width" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="height" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="2" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="alphaType" Type="SkiaSharp.SKAlphaType" Index="3" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="4" FrameworkAlternate="skiasharp-1.58.0;skiasharp-1.58.1;skiasharp-1.59.0;skiasharp-1.59.1;skiasharp-1.59.2;skiasharp-1.59.3;skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="width">The width.</param>
@@ -300,6 +304,69 @@
         <remarks></remarks>
       </Docs>
     </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.SKImageInfo obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.SKImageInfo obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageInfo.Equals(SkiaSharp.SKImageInfo)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="SkiaSharp.SKImageInfo" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageInfo.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageInfo.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Height">
       <MemberSignature Language="C#" Value="public int Height { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance int32 Height" />
@@ -364,6 +431,54 @@
         <summary>Gets a value indicating whether the configured alpha type is opaque.</summary>
         <value></value>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKImageInfo left, SkiaSharp.SKImageInfo right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKImageInfo left, valuetype SkiaSharp.SKImageInfo right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageInfo.op_Equality(SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKImageInfo" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKImageInfo" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKImageInfo left, SkiaSharp.SKImageInfo right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKImageInfo left, valuetype SkiaSharp.SKImageInfo right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageInfo.op_Inequality(SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKImageInfo" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="right" Type="SkiaSharp.SKImageInfo" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PlatformColorAlphaShift">
@@ -595,7 +710,7 @@
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="newAlphaType" Type="SkiaSharp.SKAlphaType" Index="0" FrameworkAlternate="skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="newAlphaType" Type="SkiaSharp.SKAlphaType" Index="0" FrameworkAlternate="skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="newAlphaType">The alpha/transparency type.</param>
@@ -618,7 +733,7 @@
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="newColorSpace" Type="SkiaSharp.SKColorSpace" Index="0" FrameworkAlternate="skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="newColorSpace" Type="SkiaSharp.SKColorSpace" Index="0" FrameworkAlternate="skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="newColorSpace">The color space.</param>
@@ -641,7 +756,7 @@
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="newColorType" Type="SkiaSharp.SKColorType" Index="0" FrameworkAlternate="skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="newColorType" Type="SkiaSharp.SKColorType" Index="0" FrameworkAlternate="skiasharp-1.60.0;skiasharp-1.60.1;skiasharp-1.60.2;skiasharp-1.60.3;skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="newColorType">The color type.</param>
@@ -663,8 +778,8 @@
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="width" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
-        <Parameter Name="height" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1" />
+        <Parameter Name="width" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
+        <Parameter Name="height" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2" />
       </Parameters>
       <Docs>
         <param name="width">The width.</param>
