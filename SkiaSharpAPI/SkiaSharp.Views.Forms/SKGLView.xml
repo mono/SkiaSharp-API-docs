@@ -1,6 +1,6 @@
 <Type Name="SKGLView" FullName="SkiaSharp.Views.Forms.SKGLView">
-  <TypeSignature Language="C#" Value="public class SKGLView : Xamarin.Forms.View" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLView extends Xamarin.Forms.View implements class Xamarin.Forms.IElementController, class Xamarin.Forms.IViewController, class Xamarin.Forms.IVisualElementController" />
+  <TypeSignature Language="C#" Value="public class SKGLView : Xamarin.Forms.View, SkiaSharp.Views.Forms.ISKGLViewController" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLView extends Xamarin.Forms.View implements class SkiaSharp.Views.Forms.ISKGLViewController, class Xamarin.Forms.IElementController, class Xamarin.Forms.IViewController, class Xamarin.Forms.IVisualElementController" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Forms.SKGLView" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
@@ -14,6 +14,9 @@
     <BaseTypeName>Xamarin.Forms.View</BaseTypeName>
   </Base>
   <Interfaces>
+    <Interface>
+      <InterfaceName>SkiaSharp.Views.Forms.ISKGLViewController</InterfaceName>
+    </Interface>
     <Interface>
       <InterfaceName>Xamarin.Forms.IElementController</InterfaceName>
     </Interface>
@@ -365,6 +368,114 @@ myView.PaintSurface += (sender, e) => {
 ```
 ]]></format>
         </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Forms.ISKGLViewController.GetCanvasSize">
+      <MemberSignature Language="C#" Value="event EventHandler&lt;SkiaSharp.Views.Forms.GetPropertyValueEventArgs&lt;SkiaSharp.SKSize&gt;&gt; SkiaSharp.Views.Forms.ISKGLViewController.GetCanvasSize;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class SkiaSharp.Views.Forms.GetPropertyValueEventArgs`1&lt;valuetype SkiaSharp.SKSize&gt;&gt; SkiaSharp.Views.Forms.ISKGLViewController.GetCanvasSize" />
+      <MemberSignature Language="DocId" Value="E:SkiaSharp.Views.Forms.SKGLView.SkiaSharp#Views#Forms#ISKGLViewController#GetCanvasSize" />
+      <MemberType>Event</MemberType>
+      <Implements>
+        <InterfaceMember>E:SkiaSharp.Views.Forms.ISKGLViewController.GetCanvasSize</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Forms.GetPropertyValueEventArgs&lt;SkiaSharp.SKSize&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Forms.ISKGLViewController.GetGRContext">
+      <MemberSignature Language="C#" Value="event EventHandler&lt;SkiaSharp.Views.Forms.GetPropertyValueEventArgs&lt;SkiaSharp.GRContext&gt;&gt; SkiaSharp.Views.Forms.ISKGLViewController.GetGRContext;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class SkiaSharp.Views.Forms.GetPropertyValueEventArgs`1&lt;class SkiaSharp.GRContext&gt;&gt; SkiaSharp.Views.Forms.ISKGLViewController.GetGRContext" />
+      <MemberSignature Language="DocId" Value="E:SkiaSharp.Views.Forms.SKGLView.SkiaSharp#Views#Forms#ISKGLViewController#GetGRContext" />
+      <MemberType>Event</MemberType>
+      <Implements>
+        <InterfaceMember>E:SkiaSharp.Views.Forms.ISKGLViewController.GetGRContext</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Forms.GetPropertyValueEventArgs&lt;SkiaSharp.GRContext&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Forms.ISKGLViewController.OnPaintSurface">
+      <MemberSignature Language="C#" Value="void ISKGLViewController.OnPaintSurface (SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs e);" FrameworkAlternate="skiasharp-views-forms-1.68.2" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void SkiaSharp.Views.Forms.ISKGLViewController.OnPaintSurface(class SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs e) cil managed" FrameworkAlternate="skiasharp-views-forms-1.68.2" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Forms.SKGLView.SkiaSharp#Views#Forms#ISKGLViewController#OnPaintSurface(SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs)" FrameworkAlternate="skiasharp-views-forms-1.68.2" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:SkiaSharp.Views.Forms.ISKGLViewController.OnPaintSurface(SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs" Index="0" FrameworkAlternate="skiasharp-views-forms-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Forms.ISKGLViewController.OnTouch">
+      <MemberSignature Language="C#" Value="void ISKGLViewController.OnTouch (SkiaSharp.Views.Forms.SKTouchEventArgs e);" FrameworkAlternate="skiasharp-views-forms-1.68.2" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void SkiaSharp.Views.Forms.ISKGLViewController.OnTouch(class SkiaSharp.Views.Forms.SKTouchEventArgs e) cil managed" FrameworkAlternate="skiasharp-views-forms-1.68.2" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Forms.SKGLView.SkiaSharp#Views#Forms#ISKGLViewController#OnTouch(SkiaSharp.Views.Forms.SKTouchEventArgs)" FrameworkAlternate="skiasharp-views-forms-1.68.2" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:SkiaSharp.Views.Forms.ISKGLViewController.OnTouch(SkiaSharp.Views.Forms.SKTouchEventArgs)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="SkiaSharp.Views.Forms.SKTouchEventArgs" Index="0" FrameworkAlternate="skiasharp-views-forms-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="e">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Forms.ISKGLViewController.SurfaceInvalidated">
+      <MemberSignature Language="C#" Value="event EventHandler SkiaSharp.Views.Forms.ISKGLViewController.SurfaceInvalidated;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler SkiaSharp.Views.Forms.ISKGLViewController.SurfaceInvalidated" />
+      <MemberSignature Language="DocId" Value="E:SkiaSharp.Views.Forms.SKGLView.SkiaSharp#Views#Forms#ISKGLViewController#SurfaceInvalidated" />
+      <MemberType>Event</MemberType>
+      <Implements>
+        <InterfaceMember>E:SkiaSharp.Views.Forms.ISKGLViewController.SurfaceInvalidated</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Touch">
