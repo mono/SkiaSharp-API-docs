@@ -82,11 +82,14 @@ Typeface objects are immutable, and so they can be shared between threads.
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2">
+        <Attribute FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1">
           <AttributeName>System.Obsolete("Use GetGlyphs(IntPtr, int, SKEncoding, out ushort[]) instead.")</AttributeName>
         </Attribute>
         <Attribute FrameworkAlternate="skiasharp-1.68.2">
           <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(IntPtr, int, SKTextEncoding, out ushort[]) instead.")</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -106,6 +109,122 @@ Typeface objects are immutable, and so they can be shared between threads.
         <summary>Retrieve the corresponding glyph IDs of a buffer containing character codes, of the specified encoding.</summary>
         <returns>The number of number of continuous non-zero glyph IDs computed from the beginning of the character codes.</returns>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContainsGlyphs">
+      <MemberSignature Language="C#" Value="public bool ContainsGlyphs (ReadOnlySpan&lt;char&gt; text);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ContainsGlyphs(valuetype System.ReadOnlySpan`1&lt;char&gt; text) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.ContainsGlyphs(System.ReadOnlySpan{System.Char})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="text">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContainsGlyphs">
+      <MemberSignature Language="C#" Value="public bool ContainsGlyphs (string text);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ContainsGlyphs(string text) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.ContainsGlyphs(System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="text">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContainsGlyphs">
+      <MemberSignature Language="C#" Value="public bool ContainsGlyphs (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ContainsGlyphs(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.ContainsGlyphs(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="text">To be added.</param>
+        <param name="encoding">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ContainsGlyphs">
+      <MemberSignature Language="C#" Value="public bool ContainsGlyphs (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ContainsGlyphs(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.ContainsGlyphs(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="text">To be added.</param>
+        <param name="length">To be added.</param>
+        <param name="encoding">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CountGlyphs">
+      <MemberSignature Language="C#" Value="public int CountGlyphs (ReadOnlySpan&lt;char&gt; str);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 CountGlyphs(valuetype System.ReadOnlySpan`1&lt;char&gt; str) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.CountGlyphs(System.ReadOnlySpan{System.Char})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="str" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="str">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
@@ -143,6 +262,14 @@ Typeface objects are immutable, and so they can be shared between threads.
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use CountGlyphs(byte[], SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -159,6 +286,30 @@ Typeface objects are immutable, and so they can be shared between threads.
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
+      <MemberSignature Language="C#" Value="public int CountGlyphs (byte[] str, SkiaSharp.SKTextEncoding encoding);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 CountGlyphs(unsigned int8[] str, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.CountGlyphs(System.Byte[],SkiaSharp.SKTextEncoding)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="str" Type="System.Byte[]" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="str">To be added.</param>
+        <param name="encoding">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CountGlyphs">
       <MemberSignature Language="C#" Value="public int CountGlyphs (ReadOnlySpan&lt;byte&gt; str, SkiaSharp.SKEncoding encoding);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 CountGlyphs(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; str, valuetype SkiaSharp.SKEncoding encoding) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.CountGlyphs(System.ReadOnlySpan{System.Byte},SkiaSharp.SKEncoding)" />
@@ -167,6 +318,14 @@ Typeface objects are immutable, and so they can be shared between threads.
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use CountGlyphs(ReadOnlySpan&lt;byte&gt;, SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -183,6 +342,30 @@ Typeface objects are immutable, and so they can be shared between threads.
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
+      <MemberSignature Language="C#" Value="public int CountGlyphs (ReadOnlySpan&lt;byte&gt; str, SkiaSharp.SKTextEncoding encoding);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 CountGlyphs(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; str, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.CountGlyphs(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="str" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="str">To be added.</param>
+        <param name="encoding">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CountGlyphs">
       <MemberSignature Language="C#" Value="public int CountGlyphs (string str, SkiaSharp.SKEncoding encoding);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 CountGlyphs(string str, valuetype SkiaSharp.SKEncoding encoding) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.CountGlyphs(System.String,SkiaSharp.SKEncoding)" />
@@ -191,6 +374,14 @@ Typeface objects are immutable, and so they can be shared between threads.
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use CountGlyphs(string) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -219,6 +410,14 @@ Typeface objects are immutable, and so they can be shared between threads.
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use CountGlyphs(ReadOnlySpan&lt;byte&gt;, SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -234,6 +433,32 @@ Typeface objects are immutable, and so they can be shared between threads.
         <summary>Returns the number of glyphs on the specified buffer with the specified length and encoding.</summary>
         <returns>The number of number of continuous non-zero glyph IDs computed from the beginning of chars.</returns>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CountGlyphs">
+      <MemberSignature Language="C#" Value="public int CountGlyphs (IntPtr str, int strLen, SkiaSharp.SKTextEncoding encoding);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 CountGlyphs(native int str, int32 strLen, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.CountGlyphs(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="str" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="strLen" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="str">To be added.</param>
+        <param name="strLen">To be added.</param>
+        <param name="encoding">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateDefault">
@@ -733,6 +958,28 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
+      <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (ReadOnlySpan&lt;char&gt; text);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(valuetype System.ReadOnlySpan`1&lt;char&gt; text) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.GetGlyphs(System.ReadOnlySpan{System.Char})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt16[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="text">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphs">
       <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (string text);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(string text) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.GetGlyphs(System.String)" />
@@ -763,6 +1010,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(ReadOnlySpan&lt;byte&gt;, SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.UInt16[]</ReturnType>
       </ReturnValue>
@@ -787,6 +1042,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(ReadOnlySpan&lt;byte&gt;, SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.UInt16[]</ReturnType>
       </ReturnValue>
@@ -803,6 +1066,30 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
+      <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.GetGlyphs(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt16[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="text">To be added.</param>
+        <param name="encoding">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphs">
       <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (string text, SkiaSharp.SKEncoding encoding);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(string text, valuetype SkiaSharp.SKEncoding encoding) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.GetGlyphs(System.String,SkiaSharp.SKEncoding)" />
@@ -811,6 +1098,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(string) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.UInt16[]</ReturnType>
       </ReturnValue>
@@ -835,6 +1130,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(string) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -859,6 +1162,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(byte[], SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -885,6 +1196,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(IntPtr, int, SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.UInt16[]</ReturnType>
       </ReturnValue>
@@ -903,6 +1222,32 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
+      <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.GetGlyphs(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt16[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="text">To be added.</param>
+        <param name="length">To be added.</param>
+        <param name="encoding">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphs">
       <MemberSignature Language="C#" Value="public int GetGlyphs (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKEncoding encoding, out ushort[] glyphs);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetGlyphs(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKEncoding encoding, [out] unsigned int16[]&amp; glyphs) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.GetGlyphs(System.ReadOnlySpan{System.Byte},SkiaSharp.SKEncoding,System.UInt16[]@)" />
@@ -911,6 +1256,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(ReadOnlySpan&lt;byte&gt;, SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -937,6 +1290,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(string) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -963,6 +1324,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-1.68.2">
+          <AttributeName>System.Obsolete("Use GetGlyphs(IntPtr, int, SKTextEncoding) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -980,6 +1349,28 @@ using (var surface = SKSurface.Create(info)) {
         <summary>Retrieve the corresponding glyph IDs of a buffer containing character codes, of the specified encoding.</summary>
         <returns>The number of number of continuous non-zero glyph IDs computed from the beginning of the character codes.</returns>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetKerningPairAdjustments">
+      <MemberSignature Language="C#" Value="public int[] GetKerningPairAdjustments (ReadOnlySpan&lt;ushort&gt; glyphs);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32[] GetKerningPairAdjustments(valuetype System.ReadOnlySpan`1&lt;unsigned int16&gt; glyphs) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTypeface.GetKerningPairAdjustments(System.ReadOnlySpan{System.UInt16})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="glyphs" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
+      </Parameters>
+      <Docs>
+        <param name="glyphs">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetTableData">
@@ -1051,6 +1442,24 @@ using (var surface = SKSurface.Create(info)) {
         <summary>Returns the list of table tags in the font.</summary>
         <returns></returns>
         <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GlyphCount">
+      <MemberSignature Language="C#" Value="public int GlyphCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 GlyphCount" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKTypeface.GlyphCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsBold">
