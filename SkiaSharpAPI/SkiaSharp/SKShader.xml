@@ -269,10 +269,19 @@ The example above produces the following:
         <Parameter Name="src" Type="SkiaSharp.SKBitmap" Index="0" FrameworkAlternate="skiasharp-1.68.2" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The bitmap to use inside the shader.</param>
+        <summary>Creates a new shader that will draw with the specified bitmap.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. This function never returns null.</returns>
+        <remarks>
+          <format type="text/markdown"><![CDATA[
+## Remarks
+
+If the bitmap cannot be used (has no pixels, or its dimensions exceed
+implementation limits) then an empty shader may be returned. If the source
+bitmap's color type is <xref:SkiaSharp.SKColorType.Alpha8> then that mask will
+be colorized using the color on the paint.
+]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateBitmap">
@@ -398,11 +407,11 @@ be colorized using the color on the paint.
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="1" FrameworkAlternate="skiasharp-1.68.2" />
       </Parameters>
       <Docs>
-        <param name="color">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="color">The color to paint.</param>
+        <param name="colorspace">The colorspace to use.</param>
+        <summary>Creates a new shader that just draws the specified color.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. This function never returns null.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateColorFilter">
