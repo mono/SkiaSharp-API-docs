@@ -282,6 +282,24 @@
         <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKPixmap" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="DisposeManaged">
+      <MemberSignature Language="C#" Value="protected override void DisposeManaged ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeManaged() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPixmap.DisposeManaged" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="DisposeNative">
       <MemberSignature Language="C#" Value="protected override void DisposeNative ();" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeNative() cil managed" />
@@ -1008,6 +1026,35 @@
         <summary>Returns a span that wraps the pixel data.</summary>
         <returns>Returns the span.</returns>
         <remarks>This span is only valid as long as the pixmap is valid</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPixelSpan&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public Span&lt;T&gt; GetPixelSpan&lt;T&gt; () where T : struct;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Span`1&lt;!!T&gt; GetPixelSpan&lt;struct .ctor (class System.ValueType) T&gt;() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPixmap.GetPixelSpan``1" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>1.68.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Span&lt;T&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T">
+          <Constraints>
+            <ParameterAttribute>DefaultConstructorConstraint</ParameterAttribute>
+            <ParameterAttribute>NotNullableValueTypeConstraint</ParameterAttribute>
+            <BaseTypeName>System.ValueType</BaseTypeName>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters />
+      <Docs>
+        <typeparam name="T">To be added.</typeparam>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Height">
