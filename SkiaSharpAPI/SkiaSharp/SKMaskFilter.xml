@@ -9,6 +9,7 @@
     <AssemblyVersion>1.59.0.0</AssemblyVersion>
     <AssemblyVersion>1.60.0.0</AssemblyVersion>
     <AssemblyVersion>1.68.0.0</AssemblyVersion>
+    <AssemblyVersion>2.80.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
@@ -31,6 +32,7 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
@@ -57,6 +59,7 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
@@ -83,6 +86,7 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMaskFilter</ReturnType>
@@ -111,12 +115,13 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3">
+        <Attribute FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3;skiasharp-2.80.0">
           <AttributeName>System.Obsolete("Use CreateBlur(SKBlurStyle, float) instead.")</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-1.68.2;skiasharp-1.68.3">
+        <Attribute FrameworkAlternate="skiasharp-1.68.2;skiasharp-1.68.3;skiasharp-2.80.0">
           <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
         </Attribute>
       </Attributes>
@@ -149,7 +154,16 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-2.80.0">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-2.80.0">
+          <AttributeName>System.Obsolete("Use CreateBlur(SKBlurStyle, float) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMaskFilter</ReturnType>
       </ReturnValue>
@@ -168,6 +182,32 @@
       </Docs>
     </Member>
     <Member MemberName="CreateBlur">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKMaskFilter CreateBlur (SkiaSharp.SKBlurStyle blurStyle, float sigma, bool respectCTM);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKMaskFilter CreateBlur(valuetype SkiaSharp.SKBlurStyle blurStyle, float32 sigma, bool respectCTM) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMaskFilter.CreateBlur(SkiaSharp.SKBlurStyle,System.Single,System.Boolean)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKMaskFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="blurStyle" Type="SkiaSharp.SKBlurStyle" Index="0" FrameworkAlternate="skiasharp-2.80.0" />
+        <Parameter Name="sigma" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80.0" />
+        <Parameter Name="respectCTM" Type="System.Boolean" Index="2" FrameworkAlternate="skiasharp-2.80.0" />
+      </Parameters>
+      <Docs>
+        <param name="blurStyle">To be added.</param>
+        <param name="sigma">To be added.</param>
+        <param name="respectCTM">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateBlur">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKMaskFilter CreateBlur (SkiaSharp.SKBlurStyle blurStyle, float sigma, SkiaSharp.SKRect occluder, SkiaSharp.SKBlurMaskFilterFlags flags);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKMaskFilter CreateBlur(valuetype SkiaSharp.SKBlurStyle blurStyle, float32 sigma, valuetype SkiaSharp.SKRect occluder, valuetype SkiaSharp.SKBlurMaskFilterFlags flags) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKMaskFilter.CreateBlur(SkiaSharp.SKBlurStyle,System.Single,SkiaSharp.SKRect,SkiaSharp.SKBlurMaskFilterFlags)" />
@@ -179,13 +219,17 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3">
           <AttributeName>System.Obsolete("Use CreateBlur(SKBlurStyle, float, SKRect) instead.")</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-1.68.2;skiasharp-1.68.3">
+        <Attribute FrameworkAlternate="skiasharp-1.68.2;skiasharp-1.68.3;skiasharp-2.80.0">
           <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-2.80.0">
+          <AttributeName>System.Obsolete("Use CreateBlur(SKBlurStyle, float) instead.")</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -215,15 +259,24 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-2.80.0">
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-2.80.0">
+          <AttributeName>System.Obsolete("Use CreateBlur(SKBlurStyle, float, bool) instead.")</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMaskFilter</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="blurStyle" Type="SkiaSharp.SKBlurStyle" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3" />
-        <Parameter Name="sigma" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3" />
-        <Parameter Name="occluder" Type="SkiaSharp.SKRect" Index="2" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3" />
-        <Parameter Name="respectCTM" Type="System.Boolean" Index="3" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3" />
+        <Parameter Name="blurStyle" Type="SkiaSharp.SKBlurStyle" Index="0" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3;skiasharp-2.80.0" />
+        <Parameter Name="sigma" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3;skiasharp-2.80.0" />
+        <Parameter Name="occluder" Type="SkiaSharp.SKRect" Index="2" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3;skiasharp-2.80.0" />
+        <Parameter Name="respectCTM" Type="System.Boolean" Index="3" FrameworkAlternate="skiasharp-1.68.0;skiasharp-1.68.1;skiasharp-1.68.2;skiasharp-1.68.3;skiasharp-2.80.0" />
       </Parameters>
       <Docs>
         <param name="blurStyle">The style of blurring.</param>
@@ -247,6 +300,7 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMaskFilter</ReturnType>
@@ -275,6 +329,7 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMaskFilter</ReturnType>
@@ -301,6 +356,7 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMaskFilter</ReturnType>
@@ -327,6 +383,7 @@
         <AssemblyVersion>1.59.0.0</AssemblyVersion>
         <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -349,6 +406,7 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>1.68.0.0</AssemblyVersion>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
