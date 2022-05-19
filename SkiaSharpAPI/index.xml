@@ -8,6 +8,10 @@
       <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 79 15 99 77 d2 d0 3a 8e 6b ea 7a 2e 74 e8 d1 af cc 93 e8 85 19 74 95 2b b4 80 a1 2c 91 34 47 4d 04 06 24 47 c3 7e 0e 68 c0 80 53 6f cf 3c 3f be 2f f9 c9 79 ce 99 84 75 e5 06 e8 ce 82 dd 5b 0f 35 0d c1 0e 93 bf 2e ee cf 87 4b 24 77 0c 50 81 db ea 74 47 fd da fa 27 7b 22 de 47 d6 ff ea 44 96 74 a4 f9 fc cf 84 d1 50 69 08 93 80 28 4d bd d3 5f 46 cd ff 12 a1 bd 78 e4 ef 00 65 d0 16 df ]</AssemblyPublicKey>
       <Attributes />
     </Assembly>
+    <Assembly Name="SkiaSharp.Views.Blazor" Version="2.88.0.0">
+      <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 79 15 99 77 d2 d0 3a 8e 6b ea 7a 2e 74 e8 d1 af cc 93 e8 85 19 74 95 2b b4 80 a1 2c 91 34 47 4d 04 06 24 47 c3 7e 0e 68 c0 80 53 6f cf 3c 3f be 2f f9 c9 79 ce 99 84 75 e5 06 e8 ce 82 dd 5b 0f 35 0d c1 0e 93 bf 2e ee cf 87 4b 24 77 0c 50 81 db ea 74 47 fd da fa 27 7b 22 de 47 d6 ff ea 44 96 74 a4 f9 fc cf 84 d1 50 69 08 93 80 28 4d bd d3 5f 46 cd ff 12 a1 bd 78 e4 ef 00 65 d0 16 df ]</AssemblyPublicKey>
+      <Attributes />
+    </Assembly>
     <Assembly Name="SkiaSharp.Views.Desktop.Common" Version="2.88.0.0">
       <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 79 15 99 77 d2 d0 3a 8e 6b ea 7a 2e 74 e8 d1 af cc 93 e8 85 19 74 95 2b b4 80 a1 2c 91 34 47 4d 04 06 24 47 c3 7e 0e 68 c0 80 53 6f cf 3c 3f be 2f f9 c9 79 ce 99 84 75 e5 06 e8 ce 82 dd 5b 0f 35 0d c1 0e 93 bf 2e ee cf 87 4b 24 77 0c 50 81 db ea 74 47 fd da fa 27 7b 22 de 47 d6 ff ea 44 96 74 a4 f9 fc cf 84 d1 50 69 08 93 80 28 4d bd d3 5f 46 cd ff 12 a1 bd 78 e4 ef 00 65 d0 16 df ]</AssemblyPublicKey>
       <Attributes />
@@ -173,6 +177,7 @@
       <Type Name="GRGlInterface" Kind="Class" />
       <Type Name="GRGlTextureInfo" Kind="Structure" />
       <Type Name="GRPixelConfig" Kind="Enumeration" />
+      <Type Name="GRRecordingContext" Kind="Class" />
       <Type Name="GRSharpVkBackendContext" Kind="Class" />
       <Type Name="GRSharpVkGetProcedureAddressDelegate" Kind="Delegate" />
       <Type Name="GRSurfaceOrigin" Kind="Enumeration" />
@@ -390,6 +395,10 @@
       <Type Name="SKShaper" Kind="Class" />
       <Type Name="SKShaper+Result" Kind="Class" />
     </Namespace>
+    <Namespace Name="SkiaSharp.Internals">
+      <Type Name="IPlatformLock" Kind="Interface" />
+      <Type Name="PlatformLock" Kind="Class" />
+    </Namespace>
     <Namespace Name="SkiaSharp.Views.Android">
       <Type Name="AndroidExtensions" Kind="Class" />
       <Type Name="Extensions" Kind="Class" />
@@ -410,6 +419,16 @@
       <Type Name="SKPaintGLSurfaceEventArgs" Kind="Class" />
       <Type Name="SKPaintSurfaceEventArgs" Kind="Class" />
       <Type Name="SKSurfaceView" Kind="Class" />
+    </Namespace>
+    <Namespace Name="SkiaSharp.Views.Blazor">
+      <Type Name="SKCanvasView" Kind="Class" />
+      <Type Name="SKGLView" Kind="Class" />
+      <Type Name="SKPaintGLSurfaceEventArgs" Kind="Class" />
+      <Type Name="SKPaintSurfaceEventArgs" Kind="Class" />
+    </Namespace>
+    <Namespace Name="SkiaSharp.Views.Blazor.Internal">
+      <Type Name="ActionHelper" Kind="Class" />
+      <Type Name="FloatFloatActionHelper" Kind="Class" />
     </Namespace>
     <Namespace Name="SkiaSharp.Views.Desktop">
       <Type Name="Extensions" Kind="Class" />
@@ -499,17 +518,15 @@
     </Namespace>
     <Namespace Name="SkiaSharp.Views.Maui.Controls.Compatibility">
       <Type Name="AppHostBuilderExtensions" Kind="Class" />
-      <Type Name="SKCanvasViewRenderer" Kind="Class" />
-      <Type Name="SKCanvasViewRendererBase`2" DisplayName="SKCanvasViewRendererBase&lt;TFormsView,TNativeView&gt;" Kind="Class" />
-      <Type Name="SKImageSourceHandler" Kind="Class" />
+    </Namespace>
+    <Namespace Name="SkiaSharp.Views.Maui.Controls.Hosting">
+      <Type Name="AppHostBuilderExtensions" Kind="Class" />
     </Namespace>
     <Namespace Name="SkiaSharp.Views.Maui.Handlers">
       <Type Name="SKCanvasViewHandler" Kind="Class" />
       <Type Name="SKImageSourceService" Kind="Class" />
     </Namespace>
-    <Namespace Name="SkiaSharp.Views.Maui.Platform">
-      <Type Name="SKCanvasViewExtensions" Kind="Class" />
-    </Namespace>
+    <Namespace Name="SkiaSharp.Views.Maui.Platform"></Namespace>
     <Namespace Name="SkiaSharp.Views.Tizen">
       <Type Name="CustomRenderingView" Kind="Class" />
       <Type Name="Extensions" Kind="Class" />
@@ -665,11 +682,11 @@
           <ReturnType FrameworkAlternate="skiasharp-harfbuzz-2.80.0">System.Void</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="canvas" Type="SkiaSharp.SKCanvas" RefType="this" Index="0" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="shaper" Type="SkiaSharp.HarfBuzz.SKShaper" Index="1" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="text" Type="System.String" Index="2" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="p" Type="SkiaSharp.SKPoint" Index="3" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
+          <Parameter Name="canvas" Type="SkiaSharp.SKCanvas" RefType="this" Index="0" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="shaper" Type="SkiaSharp.HarfBuzz.SKShaper" Index="1" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="text" Type="System.String" Index="2" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="p" Type="SkiaSharp.SKPoint" Index="3" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
         </Parameters>
         <Docs>
           <param name="canvas">To be added.</param>
@@ -727,10 +744,10 @@
           <ReturnType FrameworkAlternate="skiasharp-harfbuzz-2.80.0">System.Void</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="canvas" Type="SkiaSharp.SKCanvas" RefType="this" Index="0" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="text" Type="System.String" Index="1" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="p" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
+          <Parameter Name="canvas" Type="SkiaSharp.SKCanvas" RefType="this" Index="0" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="text" Type="System.String" Index="1" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="p" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
         </Parameters>
         <Docs>
           <param name="canvas">To be added.</param>
@@ -755,11 +772,11 @@
           <ReturnType FrameworkAlternate="skiasharp-harfbuzz-2.80.0">System.Void</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="canvas" Type="SkiaSharp.SKCanvas" RefType="this" Index="0" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="text" Type="System.String" Index="1" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="x" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="y" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
-          <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3" />
+          <Parameter Name="canvas" Type="SkiaSharp.SKCanvas" RefType="this" Index="0" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="text" Type="System.String" Index="1" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="x" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="y" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
+          <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-harfbuzz-2.80.0;skiasharp-harfbuzz-2.80.1;skiasharp-harfbuzz-2.80.2;skiasharp-harfbuzz-2.80.3;skiasharp-harfbuzz-2.88.0" />
         </Parameters>
         <Docs>
           <param name="canvas">To be added.</param>
@@ -2447,7 +2464,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-forms-2.80.2">Xamarin.Forms.Color</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-forms-2.80.2;skiasharp-views-forms-2.80.3" />
+          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-forms-2.80.2;skiasharp-views-forms-2.80.3;skiasharp-views-forms-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -2623,7 +2640,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-forms-2.80.2">SkiaSharp.SKColorF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="Xamarin.Forms.Color" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-forms-2.80.2;skiasharp-views-forms-2.80.3" />
+          <Parameter Name="color" Type="Xamarin.Forms.Color" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-forms-2.80.2;skiasharp-views-forms-2.80.3;skiasharp-views-forms-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -5470,46 +5487,92 @@
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
-        <Target Type="T:Microsoft.Maui.Hosting.IAppHostBuilder" />
+        <Target Type="T:Microsoft.Maui.Hosting.MauiAppBuilder" />
       </Targets>
       <Member MemberName="UseSkiaSharpHandlers">
-        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Hosting.IAppHostBuilder UseSkiaSharpHandlers (this Microsoft.Maui.Hosting.IAppHostBuilder builder);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Maui.Hosting.IAppHostBuilder UseSkiaSharpHandlers(class Microsoft.Maui.Hosting.IAppHostBuilder builder) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions.UseSkiaSharpHandlers(Microsoft.Maui.Hosting.IAppHostBuilder)" />
+        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Hosting.MauiAppBuilder UseSkiaSharpHandlers (this Microsoft.Maui.Hosting.MauiAppBuilder builder);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Maui.Hosting.MauiAppBuilder UseSkiaSharpHandlers(class Microsoft.Maui.Hosting.MauiAppBuilder builder) cil managed" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions.UseSkiaSharpHandlers(Microsoft.Maui.Hosting.MauiAppBuilder)" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.Maui.Hosting.IAppHostBuilder</ReturnType>
+          <ReturnType>Microsoft.Maui.Hosting.MauiAppBuilder</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="builder" Type="Microsoft.Maui.Hosting.IAppHostBuilder" RefType="this" />
+          <Parameter Name="builder" Type="Microsoft.Maui.Hosting.MauiAppBuilder" RefType="this" />
         </Parameters>
         <Docs>
           <param name="builder">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions" Member="M:SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions.UseSkiaSharpHandlers(Microsoft.Maui.Hosting.IAppHostBuilder)" />
+        <Link Type="SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions" Member="M:SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions.UseSkiaSharpHandlers(Microsoft.Maui.Hosting.MauiAppBuilder)" />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
-        <Target Type="T:Microsoft.Maui.Hosting.IAppHostBuilder" />
+        <Target Type="T:Microsoft.Maui.Hosting.MauiAppBuilder" />
       </Targets>
       <Member MemberName="UseSkiaSharpCompatibilityRenderers">
-        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Hosting.IAppHostBuilder UseSkiaSharpCompatibilityRenderers (this Microsoft.Maui.Hosting.IAppHostBuilder builder);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Maui.Hosting.IAppHostBuilder UseSkiaSharpCompatibilityRenderers(class Microsoft.Maui.Hosting.IAppHostBuilder builder) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions.UseSkiaSharpCompatibilityRenderers(Microsoft.Maui.Hosting.IAppHostBuilder)" />
+        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Hosting.MauiAppBuilder UseSkiaSharpCompatibilityRenderers (this Microsoft.Maui.Hosting.MauiAppBuilder builder);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Maui.Hosting.MauiAppBuilder UseSkiaSharpCompatibilityRenderers(class Microsoft.Maui.Hosting.MauiAppBuilder builder) cil managed" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions.UseSkiaSharpCompatibilityRenderers(Microsoft.Maui.Hosting.MauiAppBuilder)" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.Maui.Hosting.IAppHostBuilder</ReturnType>
+          <ReturnType>Microsoft.Maui.Hosting.MauiAppBuilder</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="builder" Type="Microsoft.Maui.Hosting.IAppHostBuilder" RefType="this" />
+          <Parameter Name="builder" Type="Microsoft.Maui.Hosting.MauiAppBuilder" RefType="this" />
         </Parameters>
         <Docs>
           <param name="builder">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions" Member="M:SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions.UseSkiaSharpCompatibilityRenderers(Microsoft.Maui.Hosting.IAppHostBuilder)" />
+        <Link Type="SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions" Member="M:SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions.UseSkiaSharpCompatibilityRenderers(Microsoft.Maui.Hosting.MauiAppBuilder)" />
+      </Member>
+    </ExtensionMethod>
+    <ExtensionMethod>
+      <Targets>
+        <Target Type="T:Microsoft.Maui.Hosting.MauiAppBuilder" />
+      </Targets>
+      <Member MemberName="UseSkiaSharp">
+        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Hosting.MauiAppBuilder UseSkiaSharp (this Microsoft.Maui.Hosting.MauiAppBuilder builder);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Maui.Hosting.MauiAppBuilder UseSkiaSharp(class Microsoft.Maui.Hosting.MauiAppBuilder builder) cil managed" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions.UseSkiaSharp(Microsoft.Maui.Hosting.MauiAppBuilder)" />
+        <MemberType>ExtensionMethod</MemberType>
+        <ReturnValue />
+        <Parameters>
+          <Parameter Name="builder" Type="Microsoft.Maui.Hosting.MauiAppBuilder" RefType="this" />
+        </Parameters>
+        <Docs>
+          <param name="builder">To be added.</param>
+          <summary>To be added.</summary>
+        </Docs>
+        <Link Type="SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions" Member="M:SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions.UseSkiaSharp(Microsoft.Maui.Hosting.MauiAppBuilder)" />
+      </Member>
+    </ExtensionMethod>
+    <ExtensionMethod>
+      <Targets>
+        <Target Type="T:Microsoft.Maui.Hosting.MauiAppBuilder" />
+      </Targets>
+      <Member MemberName="UseSkiaSharp">
+        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Hosting.MauiAppBuilder UseSkiaSharp (this Microsoft.Maui.Hosting.MauiAppBuilder builder, bool registerRenderers, bool replaceHandlers = false);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.Maui.Hosting.MauiAppBuilder UseSkiaSharp(class Microsoft.Maui.Hosting.MauiAppBuilder builder, bool registerRenderers, bool replaceHandlers) cil managed" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions.UseSkiaSharp(Microsoft.Maui.Hosting.MauiAppBuilder,System.Boolean,System.Boolean)" />
+        <MemberType>ExtensionMethod</MemberType>
+        <ReturnValue>
+          <ReturnType>Microsoft.Maui.Hosting.MauiAppBuilder</ReturnType>
+        </ReturnValue>
+        <Parameters>
+          <Parameter Name="builder" Type="Microsoft.Maui.Hosting.MauiAppBuilder" RefType="this" />
+          <Parameter Name="registerRenderers" Type="System.Boolean" />
+          <Parameter Name="replaceHandlers" Type="System.Boolean" />
+        </Parameters>
+        <Docs>
+          <param name="builder">To be added.</param>
+          <param name="registerRenderers">To be added.</param>
+          <param name="replaceHandlers">To be added.</param>
+          <summary>To be added.</summary>
+        </Docs>
+        <Link Type="SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions" Member="M:SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions.UseSkiaSharp(Microsoft.Maui.Hosting.MauiAppBuilder,System.Boolean,System.Boolean)" />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -5649,12 +5712,12 @@
         <Target Type="T:SkiaSharp.SKRect" />
       </Targets>
       <Member MemberName="ToMauiRectangle">
-        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Graphics.Rectangle ToMauiRectangle (this SkiaSharp.SKRect rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Microsoft.Maui.Graphics.Rectangle ToMauiRectangle(valuetype SkiaSharp.SKRect rect) cil managed" />
+        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Graphics.Rect ToMauiRectangle (this SkiaSharp.SKRect rect);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Microsoft.Maui.Graphics.Rect ToMauiRectangle(valuetype SkiaSharp.SKRect rect) cil managed" />
         <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Extensions.ToMauiRectangle(SkiaSharp.SKRect)" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.Maui.Graphics.Rectangle</ReturnType>
+          <ReturnType>Microsoft.Maui.Graphics.Rect</ReturnType>
         </ReturnValue>
         <Parameters>
           <Parameter Name="rect" Type="SkiaSharp.SKRect" RefType="this" />
@@ -5671,12 +5734,12 @@
         <Target Type="T:SkiaSharp.SKRectI" />
       </Targets>
       <Member MemberName="ToMauiRectangle">
-        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Graphics.Rectangle ToMauiRectangle (this SkiaSharp.SKRectI rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Microsoft.Maui.Graphics.Rectangle ToMauiRectangle(valuetype SkiaSharp.SKRectI rect) cil managed" />
+        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Graphics.Rect ToMauiRectangle (this SkiaSharp.SKRectI rect);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Microsoft.Maui.Graphics.Rect ToMauiRectangle(valuetype SkiaSharp.SKRectI rect) cil managed" />
         <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Extensions.ToMauiRectangle(SkiaSharp.SKRectI)" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.Maui.Graphics.Rectangle</ReturnType>
+          <ReturnType>Microsoft.Maui.Graphics.Rect</ReturnType>
         </ReturnValue>
         <Parameters>
           <Parameter Name="rect" Type="SkiaSharp.SKRectI" RefType="this" />
@@ -5693,12 +5756,12 @@
         <Target Type="T:SkiaSharp.SKRect" />
       </Targets>
       <Member MemberName="ToMauiRectangleF">
-        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Graphics.RectangleF ToMauiRectangleF (this SkiaSharp.SKRect rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Microsoft.Maui.Graphics.RectangleF ToMauiRectangleF(valuetype SkiaSharp.SKRect rect) cil managed" />
+        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Graphics.RectF ToMauiRectangleF (this SkiaSharp.SKRect rect);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Microsoft.Maui.Graphics.RectF ToMauiRectangleF(valuetype SkiaSharp.SKRect rect) cil managed" />
         <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Extensions.ToMauiRectangleF(SkiaSharp.SKRect)" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.Maui.Graphics.RectangleF</ReturnType>
+          <ReturnType>Microsoft.Maui.Graphics.RectF</ReturnType>
         </ReturnValue>
         <Parameters>
           <Parameter Name="rect" Type="SkiaSharp.SKRect" RefType="this" />
@@ -5715,12 +5778,12 @@
         <Target Type="T:SkiaSharp.SKRectI" />
       </Targets>
       <Member MemberName="ToMauiRectangleF">
-        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Graphics.RectangleF ToMauiRectangleF (this SkiaSharp.SKRectI rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Microsoft.Maui.Graphics.RectangleF ToMauiRectangleF(valuetype SkiaSharp.SKRectI rect) cil managed" />
+        <MemberSignature Language="C#" Value="public static Microsoft.Maui.Graphics.RectF ToMauiRectangleF (this SkiaSharp.SKRectI rect);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Microsoft.Maui.Graphics.RectF ToMauiRectangleF(valuetype SkiaSharp.SKRectI rect) cil managed" />
         <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Extensions.ToMauiRectangleF(SkiaSharp.SKRectI)" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.Maui.Graphics.RectangleF</ReturnType>
+          <ReturnType>Microsoft.Maui.Graphics.RectF</ReturnType>
         </ReturnValue>
         <Parameters>
           <Parameter Name="rect" Type="SkiaSharp.SKRectI" RefType="this" />
@@ -5910,46 +5973,46 @@
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
-        <Target Type="T:Microsoft.Maui.Graphics.Rectangle" />
+        <Target Type="T:Microsoft.Maui.Graphics.Rect" />
       </Targets>
       <Member MemberName="ToSKRect">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRect ToSKRect (this Microsoft.Maui.Graphics.Rectangle rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRect ToSKRect(valuetype Microsoft.Maui.Graphics.Rectangle rect) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.Rectangle)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRect ToSKRect (this Microsoft.Maui.Graphics.Rect rect);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRect ToSKRect(valuetype Microsoft.Maui.Graphics.Rect rect) cil managed" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.Rect)" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>SkiaSharp.SKRect</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="rect" Type="Microsoft.Maui.Graphics.Rectangle" RefType="this" />
+          <Parameter Name="rect" Type="Microsoft.Maui.Graphics.Rect" RefType="this" />
         </Parameters>
         <Docs>
           <param name="rect">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="SkiaSharp.Views.Maui.Extensions" Member="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.Rectangle)" />
+        <Link Type="SkiaSharp.Views.Maui.Extensions" Member="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.Rect)" />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
-        <Target Type="T:Microsoft.Maui.Graphics.RectangleF" />
+        <Target Type="T:Microsoft.Maui.Graphics.RectF" />
       </Targets>
       <Member MemberName="ToSKRect">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRect ToSKRect (this Microsoft.Maui.Graphics.RectangleF rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRect ToSKRect(valuetype Microsoft.Maui.Graphics.RectangleF rect) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.RectangleF)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRect ToSKRect (this Microsoft.Maui.Graphics.RectF rect);" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRect ToSKRect(valuetype Microsoft.Maui.Graphics.RectF rect) cil managed" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.RectF)" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>SkiaSharp.SKRect</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="rect" Type="Microsoft.Maui.Graphics.RectangleF" RefType="this" />
+          <Parameter Name="rect" Type="Microsoft.Maui.Graphics.RectF" RefType="this" />
         </Parameters>
         <Docs>
           <param name="rect">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="SkiaSharp.Views.Maui.Extensions" Member="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.RectangleF)" />
+        <Link Type="SkiaSharp.Views.Maui.Extensions" Member="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.RectF)" />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -5994,30 +6057,6 @@
           <summary>To be added.</summary>
         </Docs>
         <Link Type="SkiaSharp.Views.Maui.Extensions" Member="M:SkiaSharp.Views.Maui.Extensions.ToSKSize(Microsoft.Maui.Graphics.SizeF)" />
-      </Member>
-    </ExtensionMethod>
-    <ExtensionMethod>
-      <Targets>
-        <Target Type="T:SkiaSharp.Views.Windows.SKXamlCanvas" />
-      </Targets>
-      <Member MemberName="UpdateIgnorePixelScaling">
-        <MemberSignature Language="C#" Value="public static void UpdateIgnorePixelScaling (this SkiaSharp.Views.Windows.SKXamlCanvas nativeView, SkiaSharp.Views.Maui.ISKCanvasView canvasView);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig void UpdateIgnorePixelScaling(class SkiaSharp.Views.Windows.SKXamlCanvas nativeView, class SkiaSharp.Views.Maui.ISKCanvasView canvasView) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Platform.SKCanvasViewExtensions.UpdateIgnorePixelScaling(SkiaSharp.Views.Windows.SKXamlCanvas,SkiaSharp.Views.Maui.ISKCanvasView)" />
-        <MemberType>ExtensionMethod</MemberType>
-        <ReturnValue>
-          <ReturnType>System.Void</ReturnType>
-        </ReturnValue>
-        <Parameters>
-          <Parameter Name="nativeView" Type="SkiaSharp.Views.Windows.SKXamlCanvas" RefType="this" />
-          <Parameter Name="canvasView" Type="SkiaSharp.Views.Maui.ISKCanvasView" />
-        </Parameters>
-        <Docs>
-          <param name="nativeView">To be added.</param>
-          <param name="canvasView">To be added.</param>
-          <summary>To be added.</summary>
-        </Docs>
-        <Link Type="SkiaSharp.Views.Maui.Platform.SKCanvasViewExtensions" Member="M:SkiaSharp.Views.Maui.Platform.SKCanvasViewExtensions.UpdateIgnorePixelScaling(SkiaSharp.Views.Windows.SKXamlCanvas,SkiaSharp.Views.Maui.ISKCanvasView)" />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -6143,7 +6182,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-1.68.0">ElmSharp.Size</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="SkiaSharp.SKSize" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="size" Type="SkiaSharp.SKSize" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="size">The SkiaSharp size.</param>
@@ -6165,7 +6204,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-1.68.0">ElmSharp.Size</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="SkiaSharp.SKSizeI" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="size" Type="SkiaSharp.SKSizeI" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="size">The SkiaSharp size.</param>
@@ -6297,7 +6336,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-1.68.0">SkiaSharp.SKSize</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="ElmSharp.Size" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="size" Type="ElmSharp.Size" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="size">The Tizen size.</param>
@@ -6319,7 +6358,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-1.68.0">SkiaSharp.SKSizeI</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="ElmSharp.Size" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="size" Type="ElmSharp.Size" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="size">The Tizen size.</param>
@@ -6363,7 +6402,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">CoreGraphics.CGColor</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -6497,7 +6536,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">CoreImage.CIColor</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -6785,7 +6824,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">SkiaSharp.SKColorF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="CoreGraphics.CGColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="CoreGraphics.CGColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -6807,7 +6846,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">SkiaSharp.SKColorF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="CoreImage.CIColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="CoreImage.CIColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -7317,7 +7356,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">SkiaSharp.SKColorF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="UIKit.UIColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="UIKit.UIColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -7407,7 +7446,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">UIKit.UIColor</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -7451,9 +7490,9 @@
           <ReturnType FrameworkAlternate="skiasharp-views-1.60.0">UIKit.UIImage</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="skiaBitmap" Type="SkiaSharp.SKBitmap" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
-          <Parameter Name="scale" Type="System.nfloat" Index="1" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
-          <Parameter Name="orientation" Type="UIKit.UIImageOrientation" Index="2" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="skiaBitmap" Type="SkiaSharp.SKBitmap" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
+          <Parameter Name="scale" Type="System.nfloat" Index="1" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
+          <Parameter Name="orientation" Type="UIKit.UIImageOrientation" Index="2" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="skiaBitmap">The SkiaSharp bitmap.</param>
@@ -7523,10 +7562,10 @@
           <ReturnType FrameworkAlternate="skiasharp-views-1.60.0">UIKit.UIImage</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="skiaPicture" Type="SkiaSharp.SKPicture" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
-          <Parameter Name="dimensions" Type="SkiaSharp.SKSizeI" Index="1" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
-          <Parameter Name="scale" Type="System.nfloat" Index="2" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
-          <Parameter Name="orientation" Type="UIKit.UIImageOrientation" Index="3" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="skiaPicture" Type="SkiaSharp.SKPicture" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
+          <Parameter Name="dimensions" Type="SkiaSharp.SKSizeI" Index="1" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
+          <Parameter Name="scale" Type="System.nfloat" Index="2" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
+          <Parameter Name="orientation" Type="UIKit.UIImageOrientation" Index="3" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="skiaPicture">The SkiaSharp picture.</param>
@@ -7573,9 +7612,9 @@
           <ReturnType FrameworkAlternate="skiasharp-views-1.60.0">UIKit.UIImage</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="skiaPixmap" Type="SkiaSharp.SKPixmap" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
-          <Parameter Name="scale" Type="System.nfloat" Index="1" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
-          <Parameter Name="orientation" Type="UIKit.UIImageOrientation" Index="2" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="skiaPixmap" Type="SkiaSharp.SKPixmap" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
+          <Parameter Name="scale" Type="System.nfloat" Index="1" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
+          <Parameter Name="orientation" Type="UIKit.UIImageOrientation" Index="2" FrameworkAlternate="skiasharp-views-1.60.0;skiasharp-views-1.60.1;skiasharp-views-1.60.2;skiasharp-views-1.60.3;skiasharp-views-1.68.0;skiasharp-views-1.68.1;skiasharp-views-1.68.2;skiasharp-views-1.68.3;skiasharp-views-2.80.0;skiasharp-views-2.80.1;skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="skiaPixmap">The SkiaSharp pixmap.</param>
@@ -7955,7 +7994,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">CoreGraphics.CGColor</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -8199,7 +8238,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">SkiaSharp.SKColorF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="CoreGraphics.CGColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="CoreGraphics.CGColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -8663,7 +8702,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">SkiaSharp.SKColorF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="UIKit.UIColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="UIKit.UIColor" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -8753,7 +8792,7 @@
           <ReturnType FrameworkAlternate="skiasharp-views-2.80.2">UIKit.UIColor</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3" />
+          <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" Index="0" FrameworkAlternate="skiasharp-views-2.80.2;skiasharp-views-2.80.3;skiasharp-views-2.88.0" />
         </Parameters>
         <Docs>
           <param name="color">To be added.</param>
@@ -8937,15 +8976,15 @@
         <Target Type="T:SkiaSharp.SKPoint" />
       </Targets>
       <Member MemberName="ToDrawingPoint">
-        <MemberSignature Language="C#" Value="public static System.Drawing.PointF ToDrawingPoint (this SkiaSharp.SKPoint point);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.PointF ToDrawingPoint(valuetype SkiaSharp.SKPoint point) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingPoint(SkiaSharp.SKPoint)" />
+        <MemberSignature Language="C#" Value="public static System.Drawing.PointF ToDrawingPoint (this SkiaSharp.SKPoint point);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.PointF ToDrawingPoint(valuetype SkiaSharp.SKPoint point) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingPoint(SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Drawing.PointF</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">System.Drawing.PointF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="point" Type="SkiaSharp.SKPoint" RefType="this" />
+          <Parameter Name="point" Type="SkiaSharp.SKPoint" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="point">The SkiaSharp point.</param>
@@ -8959,15 +8998,15 @@
         <Target Type="T:SkiaSharp.SKPointI" />
       </Targets>
       <Member MemberName="ToDrawingPoint">
-        <MemberSignature Language="C#" Value="public static System.Drawing.Point ToDrawingPoint (this SkiaSharp.SKPointI point);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.Point ToDrawingPoint(valuetype SkiaSharp.SKPointI point) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingPoint(SkiaSharp.SKPointI)" />
+        <MemberSignature Language="C#" Value="public static System.Drawing.Point ToDrawingPoint (this SkiaSharp.SKPointI point);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.Point ToDrawingPoint(valuetype SkiaSharp.SKPointI point) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingPoint(SkiaSharp.SKPointI)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Drawing.Point</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">System.Drawing.Point</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="point" Type="SkiaSharp.SKPointI" RefType="this" />
+          <Parameter Name="point" Type="SkiaSharp.SKPointI" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="point">The SkiaSharp point.</param>
@@ -8981,15 +9020,15 @@
         <Target Type="T:SkiaSharp.SKRect" />
       </Targets>
       <Member MemberName="ToDrawingRect">
-        <MemberSignature Language="C#" Value="public static System.Drawing.RectangleF ToDrawingRect (this SkiaSharp.SKRect rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.RectangleF ToDrawingRect(valuetype SkiaSharp.SKRect rect) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingRect(SkiaSharp.SKRect)" />
+        <MemberSignature Language="C#" Value="public static System.Drawing.RectangleF ToDrawingRect (this SkiaSharp.SKRect rect);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.RectangleF ToDrawingRect(valuetype SkiaSharp.SKRect rect) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingRect(SkiaSharp.SKRect)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Drawing.RectangleF</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">System.Drawing.RectangleF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="rect" Type="SkiaSharp.SKRect" RefType="this" />
+          <Parameter Name="rect" Type="SkiaSharp.SKRect" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="rect">The SkiaSharp rectangle.</param>
@@ -9003,15 +9042,15 @@
         <Target Type="T:SkiaSharp.SKRectI" />
       </Targets>
       <Member MemberName="ToDrawingRect">
-        <MemberSignature Language="C#" Value="public static System.Drawing.Rectangle ToDrawingRect (this SkiaSharp.SKRectI rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.Rectangle ToDrawingRect(valuetype SkiaSharp.SKRectI rect) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingRect(SkiaSharp.SKRectI)" />
+        <MemberSignature Language="C#" Value="public static System.Drawing.Rectangle ToDrawingRect (this SkiaSharp.SKRectI rect);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.Rectangle ToDrawingRect(valuetype SkiaSharp.SKRectI rect) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingRect(SkiaSharp.SKRectI)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Drawing.Rectangle</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">System.Drawing.Rectangle</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="rect" Type="SkiaSharp.SKRectI" RefType="this" />
+          <Parameter Name="rect" Type="SkiaSharp.SKRectI" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="rect">The SkiaSharp rectangle.</param>
@@ -9025,15 +9064,15 @@
         <Target Type="T:SkiaSharp.SKSize" />
       </Targets>
       <Member MemberName="ToDrawingSize">
-        <MemberSignature Language="C#" Value="public static System.Drawing.SizeF ToDrawingSize (this SkiaSharp.SKSize size);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.SizeF ToDrawingSize(valuetype SkiaSharp.SKSize size) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingSize(SkiaSharp.SKSize)" />
+        <MemberSignature Language="C#" Value="public static System.Drawing.SizeF ToDrawingSize (this SkiaSharp.SKSize size);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.SizeF ToDrawingSize(valuetype SkiaSharp.SKSize size) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingSize(SkiaSharp.SKSize)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Drawing.SizeF</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">System.Drawing.SizeF</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="SkiaSharp.SKSize" RefType="this" />
+          <Parameter Name="size" Type="SkiaSharp.SKSize" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="size">The SkiaSharp size.</param>
@@ -9047,15 +9086,15 @@
         <Target Type="T:SkiaSharp.SKSizeI" />
       </Targets>
       <Member MemberName="ToDrawingSize">
-        <MemberSignature Language="C#" Value="public static System.Drawing.Size ToDrawingSize (this SkiaSharp.SKSizeI size);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.Size ToDrawingSize(valuetype SkiaSharp.SKSizeI size) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingSize(SkiaSharp.SKSizeI)" />
+        <MemberSignature Language="C#" Value="public static System.Drawing.Size ToDrawingSize (this SkiaSharp.SKSizeI size);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype System.Drawing.Size ToDrawingSize(valuetype SkiaSharp.SKSizeI size) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToDrawingSize(SkiaSharp.SKSizeI)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Drawing.Size</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">System.Drawing.Size</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="SkiaSharp.SKSizeI" RefType="this" />
+          <Parameter Name="size" Type="SkiaSharp.SKSizeI" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="size">The SkiaSharp size.</param>
@@ -9069,15 +9108,15 @@
         <Target Type="T:System.Drawing.Point" />
       </Targets>
       <Member MemberName="ToSKPoint">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKPointI ToSKPoint (this System.Drawing.Point point);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKPointI ToSKPoint(valuetype System.Drawing.Point point) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKPoint(System.Drawing.Point)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKPointI ToSKPoint (this System.Drawing.Point point);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKPointI ToSKPoint(valuetype System.Drawing.Point point) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKPoint(System.Drawing.Point)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKPointI</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKPointI</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="point" Type="System.Drawing.Point" RefType="this" />
+          <Parameter Name="point" Type="System.Drawing.Point" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="point">The System.Drawing point.</param>
@@ -9091,15 +9130,15 @@
         <Target Type="T:System.Drawing.PointF" />
       </Targets>
       <Member MemberName="ToSKPoint">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKPoint ToSKPoint (this System.Drawing.PointF point);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKPoint ToSKPoint(valuetype System.Drawing.PointF point) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKPoint(System.Drawing.PointF)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKPoint ToSKPoint (this System.Drawing.PointF point);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKPoint ToSKPoint(valuetype System.Drawing.PointF point) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKPoint(System.Drawing.PointF)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKPoint</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKPoint</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="point" Type="System.Drawing.PointF" RefType="this" />
+          <Parameter Name="point" Type="System.Drawing.PointF" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="point">The System.Drawing point.</param>
@@ -9113,15 +9152,15 @@
         <Target Type="T:System.Drawing.Rectangle" />
       </Targets>
       <Member MemberName="ToSKRect">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRectI ToSKRect (this System.Drawing.Rectangle rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRectI ToSKRect(valuetype System.Drawing.Rectangle rect) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKRect(System.Drawing.Rectangle)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRectI ToSKRect (this System.Drawing.Rectangle rect);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRectI ToSKRect(valuetype System.Drawing.Rectangle rect) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKRect(System.Drawing.Rectangle)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKRectI</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKRectI</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="rect" Type="System.Drawing.Rectangle" RefType="this" />
+          <Parameter Name="rect" Type="System.Drawing.Rectangle" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="rect">The System.Drawing rectangle.</param>
@@ -9135,15 +9174,15 @@
         <Target Type="T:System.Drawing.RectangleF" />
       </Targets>
       <Member MemberName="ToSKRect">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRect ToSKRect (this System.Drawing.RectangleF rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRect ToSKRect(valuetype System.Drawing.RectangleF rect) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKRect(System.Drawing.RectangleF)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRect ToSKRect (this System.Drawing.RectangleF rect);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRect ToSKRect(valuetype System.Drawing.RectangleF rect) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKRect(System.Drawing.RectangleF)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKRect</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKRect</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="rect" Type="System.Drawing.RectangleF" RefType="this" />
+          <Parameter Name="rect" Type="System.Drawing.RectangleF" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="rect">The System.Drawing rectangle.</param>
@@ -9157,15 +9196,15 @@
         <Target Type="T:System.Drawing.Size" />
       </Targets>
       <Member MemberName="ToSKSize">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKSizeI ToSKSize (this System.Drawing.Size size);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKSizeI ToSKSize(valuetype System.Drawing.Size size) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKSize(System.Drawing.Size)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKSizeI ToSKSize (this System.Drawing.Size size);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKSizeI ToSKSize(valuetype System.Drawing.Size size) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKSize(System.Drawing.Size)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKSizeI</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKSizeI</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="System.Drawing.Size" RefType="this" />
+          <Parameter Name="size" Type="System.Drawing.Size" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="size">The System.Drawing size.</param>
@@ -9179,15 +9218,15 @@
         <Target Type="T:System.Drawing.SizeF" />
       </Targets>
       <Member MemberName="ToSKSize">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKSize ToSKSize (this System.Drawing.SizeF size);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKSize ToSKSize(valuetype System.Drawing.SizeF size) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKSize(System.Drawing.SizeF)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKSize ToSKSize (this System.Drawing.SizeF size);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKSize ToSKSize(valuetype System.Drawing.SizeF size) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.Extensions.ToSKSize(System.Drawing.SizeF)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKSize</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKSize</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="System.Drawing.SizeF" RefType="this" />
+          <Parameter Name="size" Type="System.Drawing.SizeF" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="size">The System.Drawing size.</param>
@@ -9201,15 +9240,15 @@
         <Target Type="T:SkiaSharp.SKColor" />
       </Targets>
       <Member MemberName="ToColor">
-        <MemberSignature Language="C#" Value="public static Windows.UI.Color ToColor (this SkiaSharp.SKColor color);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Windows.UI.Color ToColor(valuetype SkiaSharp.SKColor color) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToColor(SkiaSharp.SKColor)" />
+        <MemberSignature Language="C#" Value="public static Windows.UI.Color ToColor (this SkiaSharp.SKColor color);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Windows.UI.Color ToColor(valuetype SkiaSharp.SKColor color) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToColor(SkiaSharp.SKColor)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Windows.UI.Color</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">Windows.UI.Color</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="SkiaSharp.SKColor" RefType="this" />
+          <Parameter Name="color" Type="SkiaSharp.SKColor" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="color">The SkiaSharp color.</param>
@@ -9223,15 +9262,15 @@
         <Target Type="T:SkiaSharp.SKPoint" />
       </Targets>
       <Member MemberName="ToPoint">
-        <MemberSignature Language="C#" Value="public static Windows.Foundation.Point ToPoint (this SkiaSharp.SKPoint point);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Windows.Foundation.Point ToPoint(valuetype SkiaSharp.SKPoint point) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToPoint(SkiaSharp.SKPoint)" />
+        <MemberSignature Language="C#" Value="public static Windows.Foundation.Point ToPoint (this SkiaSharp.SKPoint point);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Windows.Foundation.Point ToPoint(valuetype SkiaSharp.SKPoint point) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToPoint(SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Windows.Foundation.Point</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">Windows.Foundation.Point</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="point" Type="SkiaSharp.SKPoint" RefType="this" />
+          <Parameter Name="point" Type="SkiaSharp.SKPoint" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="point">The SkiaSharp point.</param>
@@ -9245,15 +9284,15 @@
         <Target Type="T:SkiaSharp.SKRect" />
       </Targets>
       <Member MemberName="ToRect">
-        <MemberSignature Language="C#" Value="public static Windows.Foundation.Rect ToRect (this SkiaSharp.SKRect rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Windows.Foundation.Rect ToRect(valuetype SkiaSharp.SKRect rect) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToRect(SkiaSharp.SKRect)" />
+        <MemberSignature Language="C#" Value="public static Windows.Foundation.Rect ToRect (this SkiaSharp.SKRect rect);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Windows.Foundation.Rect ToRect(valuetype SkiaSharp.SKRect rect) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToRect(SkiaSharp.SKRect)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Windows.Foundation.Rect</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">Windows.Foundation.Rect</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="rect" Type="SkiaSharp.SKRect" RefType="this" />
+          <Parameter Name="rect" Type="SkiaSharp.SKRect" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="rect">The SkiaSharp rectangle.</param>
@@ -9267,15 +9306,15 @@
         <Target Type="T:SkiaSharp.SKSize" />
       </Targets>
       <Member MemberName="ToSize">
-        <MemberSignature Language="C#" Value="public static Windows.Foundation.Size ToSize (this SkiaSharp.SKSize size);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Windows.Foundation.Size ToSize(valuetype SkiaSharp.SKSize size) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSize(SkiaSharp.SKSize)" />
+        <MemberSignature Language="C#" Value="public static Windows.Foundation.Size ToSize (this SkiaSharp.SKSize size);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype Windows.Foundation.Size ToSize(valuetype SkiaSharp.SKSize size) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSize(SkiaSharp.SKSize)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Windows.Foundation.Size</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">Windows.Foundation.Size</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="SkiaSharp.SKSize" RefType="this" />
+          <Parameter Name="size" Type="SkiaSharp.SKSize" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="size">The SkiaSharp size.</param>
@@ -9289,15 +9328,15 @@
         <Target Type="T:Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" />
       </Targets>
       <Member MemberName="ToSKBitmap">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKBitmap ToSKBitmap (this Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKBitmap ToSKBitmap(class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKBitmap(Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKBitmap ToSKBitmap (this Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKBitmap ToSKBitmap(class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKBitmap(Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKBitmap</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKBitmap</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="bitmap" Type="Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" RefType="this" />
+          <Parameter Name="bitmap" Type="Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="bitmap">To be added.</param>
@@ -9311,15 +9350,15 @@
         <Target Type="T:Windows.UI.Color" />
       </Targets>
       <Member MemberName="ToSKColor">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKColor ToSKColor (this Windows.UI.Color color);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKColor ToSKColor(valuetype Windows.UI.Color color) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKColor(Windows.UI.Color)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKColor ToSKColor (this Windows.UI.Color color);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKColor ToSKColor(valuetype Windows.UI.Color color) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKColor(Windows.UI.Color)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKColor</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKColor</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="color" Type="Windows.UI.Color" RefType="this" />
+          <Parameter Name="color" Type="Windows.UI.Color" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="color">The Windows color.</param>
@@ -9333,15 +9372,15 @@
         <Target Type="T:Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" />
       </Targets>
       <Member MemberName="ToSKImage">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKImage ToSKImage (this Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImage ToSKImage(class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKImage(Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKImage ToSKImage (this Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImage ToSKImage(class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKImage(Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKImage</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKImage</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="bitmap" Type="Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" RefType="this" />
+          <Parameter Name="bitmap" Type="Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="bitmap">To be added.</param>
@@ -9355,16 +9394,16 @@
         <Target Type="T:Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" />
       </Targets>
       <Member MemberName="ToSKPixmap">
-        <MemberSignature Language="C#" Value="public static bool ToSKPixmap (this Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap, SkiaSharp.SKPixmap pixmap);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ToSKPixmap(class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap, class SkiaSharp.SKPixmap pixmap) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKPixmap(Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap,SkiaSharp.SKPixmap)" />
+        <MemberSignature Language="C#" Value="public static bool ToSKPixmap (this Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap, SkiaSharp.SKPixmap pixmap);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ToSKPixmap(class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap bitmap, class SkiaSharp.SKPixmap pixmap) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKPixmap(Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap,SkiaSharp.SKPixmap)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>System.Boolean</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">System.Boolean</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="bitmap" Type="Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" RefType="this" />
-          <Parameter Name="pixmap" Type="SkiaSharp.SKPixmap" />
+          <Parameter Name="bitmap" Type="Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
+          <Parameter Name="pixmap" Type="SkiaSharp.SKPixmap" Index="1" FrameworkAlternate="skiasharp-views-2.80.3" />
         </Parameters>
         <Docs>
           <param name="bitmap">To be added.</param>
@@ -9379,15 +9418,15 @@
         <Target Type="T:Windows.Foundation.Point" />
       </Targets>
       <Member MemberName="ToSKPoint">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKPoint ToSKPoint (this Windows.Foundation.Point point);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKPoint ToSKPoint(valuetype Windows.Foundation.Point point) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKPoint(Windows.Foundation.Point)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKPoint ToSKPoint (this Windows.Foundation.Point point);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKPoint ToSKPoint(valuetype Windows.Foundation.Point point) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKPoint(Windows.Foundation.Point)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKPoint</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKPoint</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="point" Type="Windows.Foundation.Point" RefType="this" />
+          <Parameter Name="point" Type="Windows.Foundation.Point" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="point">The Windows point.</param>
@@ -9401,15 +9440,15 @@
         <Target Type="T:Windows.Foundation.Rect" />
       </Targets>
       <Member MemberName="ToSKRect">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRect ToSKRect (this Windows.Foundation.Rect rect);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRect ToSKRect(valuetype Windows.Foundation.Rect rect) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKRect(Windows.Foundation.Rect)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKRect ToSKRect (this Windows.Foundation.Rect rect);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKRect ToSKRect(valuetype Windows.Foundation.Rect rect) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKRect(Windows.Foundation.Rect)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKRect</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKRect</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="rect" Type="Windows.Foundation.Rect" RefType="this" />
+          <Parameter Name="rect" Type="Windows.Foundation.Rect" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="rect">The Windows rectangle</param>
@@ -9423,15 +9462,15 @@
         <Target Type="T:Windows.Foundation.Size" />
       </Targets>
       <Member MemberName="ToSKSize">
-        <MemberSignature Language="C#" Value="public static SkiaSharp.SKSize ToSKSize (this Windows.Foundation.Size size);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKSize ToSKSize(valuetype Windows.Foundation.Size size) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKSize(Windows.Foundation.Size)" />
+        <MemberSignature Language="C#" Value="public static SkiaSharp.SKSize ToSKSize (this Windows.Foundation.Size size);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKSize ToSKSize(valuetype Windows.Foundation.Size size) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToSKSize(Windows.Foundation.Size)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>SkiaSharp.SKSize</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">SkiaSharp.SKSize</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="size" Type="Windows.Foundation.Size" RefType="this" />
+          <Parameter Name="size" Type="Windows.Foundation.Size" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="size">The Windows size.</param>
@@ -9445,15 +9484,15 @@
         <Target Type="T:SkiaSharp.SKBitmap" />
       </Targets>
       <Member MemberName="ToWriteableBitmap">
-        <MemberSignature Language="C#" Value="public static Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap (this SkiaSharp.SKBitmap skiaBitmap);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap(class SkiaSharp.SKBitmap skiaBitmap) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToWriteableBitmap(SkiaSharp.SKBitmap)" />
+        <MemberSignature Language="C#" Value="public static Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap (this SkiaSharp.SKBitmap skiaBitmap);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap(class SkiaSharp.SKBitmap skiaBitmap) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToWriteableBitmap(SkiaSharp.SKBitmap)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="skiaBitmap" Type="SkiaSharp.SKBitmap" RefType="this" />
+          <Parameter Name="skiaBitmap" Type="SkiaSharp.SKBitmap" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="skiaBitmap">The SkiaSharp bitmap.</param>
@@ -9467,15 +9506,15 @@
         <Target Type="T:SkiaSharp.SKImage" />
       </Targets>
       <Member MemberName="ToWriteableBitmap">
-        <MemberSignature Language="C#" Value="public static Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap (this SkiaSharp.SKImage skiaImage);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap(class SkiaSharp.SKImage skiaImage) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToWriteableBitmap(SkiaSharp.SKImage)" />
+        <MemberSignature Language="C#" Value="public static Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap (this SkiaSharp.SKImage skiaImage);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap(class SkiaSharp.SKImage skiaImage) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToWriteableBitmap(SkiaSharp.SKImage)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="skiaImage" Type="SkiaSharp.SKImage" RefType="this" />
+          <Parameter Name="skiaImage" Type="SkiaSharp.SKImage" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="skiaImage">The SkiaSharp image.</param>
@@ -9489,16 +9528,16 @@
         <Target Type="T:SkiaSharp.SKPicture" />
       </Targets>
       <Member MemberName="ToWriteableBitmap">
-        <MemberSignature Language="C#" Value="public static Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap (this SkiaSharp.SKPicture picture, SkiaSharp.SKSizeI dimensions);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap(class SkiaSharp.SKPicture picture, valuetype SkiaSharp.SKSizeI dimensions) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToWriteableBitmap(SkiaSharp.SKPicture,SkiaSharp.SKSizeI)" />
+        <MemberSignature Language="C#" Value="public static Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap (this SkiaSharp.SKPicture picture, SkiaSharp.SKSizeI dimensions);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap(class SkiaSharp.SKPicture picture, valuetype SkiaSharp.SKSizeI dimensions) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToWriteableBitmap(SkiaSharp.SKPicture,SkiaSharp.SKSizeI)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="picture" Type="SkiaSharp.SKPicture" RefType="this" />
-          <Parameter Name="dimensions" Type="SkiaSharp.SKSizeI" />
+          <Parameter Name="picture" Type="SkiaSharp.SKPicture" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
+          <Parameter Name="dimensions" Type="SkiaSharp.SKSizeI" Index="1" FrameworkAlternate="skiasharp-views-2.80.3" />
         </Parameters>
         <Docs>
           <param name="picture">The SkiaSharp picture.</param>
@@ -9513,15 +9552,15 @@
         <Target Type="T:SkiaSharp.SKPixmap" />
       </Targets>
       <Member MemberName="ToWriteableBitmap">
-        <MemberSignature Language="C#" Value="public static Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap (this SkiaSharp.SKPixmap pixmap);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap(class SkiaSharp.SKPixmap pixmap) cil managed" />
-        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToWriteableBitmap(SkiaSharp.SKPixmap)" />
+        <MemberSignature Language="C#" Value="public static Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap (this SkiaSharp.SKPixmap pixmap);" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap ToWriteableBitmap(class SkiaSharp.SKPixmap pixmap) cil managed" FrameworkAlternate="skiasharp-views-2.80.3" />
+        <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Windows.WindowsExtensions.ToWriteableBitmap(SkiaSharp.SKPixmap)" FrameworkAlternate="skiasharp-views-2.80.3" />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
-          <ReturnType>Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap</ReturnType>
+          <ReturnType FrameworkAlternate="skiasharp-views-2.80.3">Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap</ReturnType>
         </ReturnValue>
         <Parameters>
-          <Parameter Name="pixmap" Type="SkiaSharp.SKPixmap" RefType="this" />
+          <Parameter Name="pixmap" Type="SkiaSharp.SKPixmap" Index="0" FrameworkAlternate="skiasharp-views-2.80.3" RefType="this" />
         </Parameters>
         <Docs>
           <param name="pixmap">The SkiaSharp pixmap.</param>

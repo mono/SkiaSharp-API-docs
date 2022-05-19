@@ -1,6 +1,7 @@
 <Framework Name="skiasharp-views-2.88.0">
   <Assemblies>
     <Assembly Name="SkiaSharp.Views.Android" Version="2.88.0.0" />
+    <Assembly Name="SkiaSharp.Views.Blazor" Version="2.88.0.0" />
     <Assembly Name="SkiaSharp.Views.Desktop.Common" Version="2.88.0.0" />
     <Assembly Name="SkiaSharp.Views.Desktop" Version="2.88.0.0" />
     <Assembly Name="SkiaSharp.Views.Gtk" Version="2.88.0.0" />
@@ -176,16 +177,22 @@
       <Member Id="M:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
       <Member Id="M:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.GRGlFramebufferInfo)" />
+      <Member Id="M:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
       <Member Id="P:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
       <Member Id="P:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.RenderTarget" />
       <Member Id="P:SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.Android.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.Android.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.Android.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Android.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.Android.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.Android.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Android.SKPaintSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.Android.SKSurfaceView" Id="T:SkiaSharp.Views.Android.SKSurfaceView">
@@ -199,6 +206,59 @@
       <Member Id="M:SkiaSharp.Views.Android.SKSurfaceView.SurfaceDestroyed(Android.Views.ISurfaceHolder)" />
       <Member Id="M:SkiaSharp.Views.Android.SKSurfaceView.UnlockSurfaceAndPost(SkiaSharp.Views.Android.SKLockedSurface)" />
       <Member Id="P:SkiaSharp.Views.Android.SKSurfaceView.CanvasSize" />
+    </Type>
+  </Namespace>
+  <Namespace Name="SkiaSharp.Views.Blazor.Internal">
+    <Type Name="SkiaSharp.Views.Blazor.Internal.ActionHelper" Id="T:SkiaSharp.Views.Blazor.Internal.ActionHelper">
+      <Member Id="M:SkiaSharp.Views.Blazor.Internal.ActionHelper.#ctor(System.Action)" />
+      <Member Id="M:SkiaSharp.Views.Blazor.Internal.ActionHelper.Invoke" />
+    </Type>
+    <Type Name="SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper" Id="T:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper">
+      <Member Id="M:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper.#ctor(System.Action{System.Single,System.Single})" />
+      <Member Id="M:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper.Invoke(System.Single,System.Single)" />
+    </Type>
+  </Namespace>
+  <Namespace Name="SkiaSharp.Views.Blazor">
+    <Type Name="SkiaSharp.Views.Blazor.SKCanvasView" Id="T:SkiaSharp.Views.Blazor.SKCanvasView">
+      <Member Id="M:SkiaSharp.Views.Blazor.SKCanvasView.#ctor" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKCanvasView.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKCanvasView.Dispose" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKCanvasView.Invalidate" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKCanvasView.OnAfterRenderAsync(System.Boolean)" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKCanvasView.AdditionalAttributes" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKCanvasView.EnableRenderLoop" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKCanvasView.IgnorePixelScaling" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKCanvasView.OnPaintSurface" />
+    </Type>
+    <Type Name="SkiaSharp.Views.Blazor.SKGLView" Id="T:SkiaSharp.Views.Blazor.SKGLView">
+      <Member Id="M:SkiaSharp.Views.Blazor.SKGLView.#ctor" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKGLView.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKGLView.Dispose" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKGLView.Invalidate" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKGLView.OnAfterRenderAsync(System.Boolean)" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKGLView.AdditionalAttributes" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKGLView.EnableRenderLoop" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKGLView.IgnorePixelScaling" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKGLView.OnPaintSurface" />
+    </Type>
+    <Type Name="SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs" Id="T:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs">
+      <Member Id="M:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.RawInfo" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.Surface" />
+    </Type>
+    <Type Name="SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs">
+      <Member Id="M:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.RawInfo" />
+      <Member Id="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.Surface" />
     </Type>
   </Namespace>
   <Namespace Name="SkiaSharp.Views.Desktop">
@@ -248,16 +308,22 @@
       <Member Id="M:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
       <Member Id="M:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.GRGlFramebufferInfo)" />
+      <Member Id="M:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
       <Member Id="P:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
       <Member Id="P:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.RenderTarget" />
       <Member Id="P:SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs.Surface" />
     </Type>
   </Namespace>
@@ -391,6 +457,7 @@
       <Member Id="M:SkiaSharp.Views.iOS.SKCanvasView.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.iOS.SKCanvasView.LayoutSubviews" />
       <Member Id="M:SkiaSharp.Views.iOS.SKCanvasView.OnPaintSurface(SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs)" />
+      <Member Id="M:SkiaSharp.Views.iOS.SKCanvasView.WillMoveToWindow(UIKit.UIWindow)" />
       <Member Id="P:SkiaSharp.Views.iOS.SKCanvasView.CanvasSize" />
       <Member Id="P:SkiaSharp.Views.iOS.SKCanvasView.IgnorePixelScaling" />
       <Member Id="P:SkiaSharp.Views.iOS.SKCanvasView.System#ComponentModel#IComponent#Site" />
@@ -441,10 +508,14 @@
       <Member Id="M:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
       <Member Id="M:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.GRGlFramebufferInfo)" />
+      <Member Id="M:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
       <Member Id="P:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
       <Member Id="P:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.RenderTarget" />
       <Member Id="P:SkiaSharp.Views.iOS.SKPaintGLSurfaceEventArgs.Surface" />
     </Type>
@@ -458,7 +529,9 @@
     </Type>
     <Type Name="SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs.Surface" />
     </Type>
   </Namespace>
@@ -596,10 +669,14 @@
       <Member Id="M:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
       <Member Id="M:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.GRGlFramebufferInfo)" />
+      <Member Id="M:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
       <Member Id="P:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
       <Member Id="P:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.RenderTarget" />
       <Member Id="P:SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs.Surface" />
     </Type>
@@ -613,13 +690,15 @@
     </Type>
     <Type Name="SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs.Surface" />
     </Type>
   </Namespace>
   <Namespace Name="SkiaSharp.Views.Maui.Controls">
     <Type Name="SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions" Id="T:SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions">
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions.UseSkiaSharpHandlers(Microsoft.Maui.Hosting.IAppHostBuilder)" />
+      <Member Id="M:SkiaSharp.Views.Maui.Controls.AppHostBuilderExtensions.UseSkiaSharpHandlers(Microsoft.Maui.Hosting.MauiAppBuilder)" />
     </Type>
     <Type Name="SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs`1" Id="T:SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs`1">
       <Member Id="M:SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs`1.#ctor" />
@@ -719,22 +798,13 @@
   </Namespace>
   <Namespace Name="SkiaSharp.Views.Maui.Controls.Compatibility">
     <Type Name="SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions" Id="T:SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions">
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions.UseSkiaSharpCompatibilityRenderers(Microsoft.Maui.Hosting.IAppHostBuilder)" />
+      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.AppHostBuilderExtensions.UseSkiaSharpCompatibilityRenderers(Microsoft.Maui.Hosting.MauiAppBuilder)" />
     </Type>
-    <Type Name="SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRenderer" Id="T:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRenderer">
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRenderer.#ctor" />
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRenderer.CreateNativeControl" />
-    </Type>
-    <Type Name="SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRendererBase`2" Id="T:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRendererBase`2">
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRendererBase`2.#ctor" />
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRendererBase`2.CreateNativeControl" />
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRendererBase`2.Dispose(System.Boolean)" />
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRendererBase`2.OnElementChanged(Microsoft.Maui.Controls.Platform.ElementChangedEventArgs{`0})" />
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKCanvasViewRendererBase`2.OnElementPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)" />
-    </Type>
-    <Type Name="SkiaSharp.Views.Maui.Controls.Compatibility.SKImageSourceHandler" Id="T:SkiaSharp.Views.Maui.Controls.Compatibility.SKImageSourceHandler">
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKImageSourceHandler.#ctor" />
-      <Member Id="M:SkiaSharp.Views.Maui.Controls.Compatibility.SKImageSourceHandler.LoadImageAsync(Microsoft.Maui.Controls.ImageSource,System.Threading.CancellationToken)" />
+  </Namespace>
+  <Namespace Name="SkiaSharp.Views.Maui.Controls.Hosting">
+    <Type Name="SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions" Id="T:SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions">
+      <Member Id="M:SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions.UseSkiaSharp(Microsoft.Maui.Hosting.MauiAppBuilder)" />
+      <Member Id="M:SkiaSharp.Views.Maui.Controls.Hosting.AppHostBuilderExtensions.UseSkiaSharp(Microsoft.Maui.Hosting.MauiAppBuilder,System.Boolean,System.Boolean)" />
     </Type>
   </Namespace>
   <Namespace Name="SkiaSharp.Views.Maui">
@@ -757,8 +827,8 @@
       <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKColorF(Microsoft.Maui.Graphics.Color)" />
       <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKPoint(Microsoft.Maui.Graphics.Point)" />
       <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKPoint(Microsoft.Maui.Graphics.PointF)" />
-      <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.Rectangle)" />
-      <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.RectangleF)" />
+      <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.Rect)" />
+      <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKRect(Microsoft.Maui.Graphics.RectF)" />
       <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKSize(Microsoft.Maui.Graphics.Size)" />
       <Member Id="M:SkiaSharp.Views.Maui.Extensions.ToSKSize(Microsoft.Maui.Graphics.SizeF)" />
     </Type>
@@ -800,7 +870,9 @@
     </Type>
     <Type Name="SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.Maui.SKTouchAction" Id="T:SkiaSharp.Views.Maui.SKTouchAction">
@@ -836,25 +908,18 @@
   </Namespace>
   <Namespace Name="SkiaSharp.Views.Maui.Handlers">
     <Type Name="SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler" Id="T:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler">
+      <Member Id="F:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.SKCanvasViewCommandMapper" />
       <Member Id="F:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.SKCanvasViewMapper" />
       <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.#ctor" />
-      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.#ctor(Microsoft.Maui.PropertyMapper)" />
-      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.ConnectHandler(SkiaSharp.Views.Windows.SKXamlCanvas)" />
-      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.CreateNativeView" />
-      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.DisconnectHandler(SkiaSharp.Views.Windows.SKXamlCanvas)" />
+      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.#ctor(Microsoft.Maui.PropertyMapper,Microsoft.Maui.CommandMapper)" />
+      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.CreatePlatformView" />
       <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.MapEnableTouchEvents(SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler,SkiaSharp.Views.Maui.ISKCanvasView)" />
       <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.MapIgnorePixelScaling(SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler,SkiaSharp.Views.Maui.ISKCanvasView)" />
-      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.OnInvalidateSurface(SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler,SkiaSharp.Views.Maui.ISKCanvasView)" />
+      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.OnInvalidateSurface(SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler,SkiaSharp.Views.Maui.ISKCanvasView,System.Object)" />
     </Type>
     <Type Name="SkiaSharp.Views.Maui.Handlers.SKImageSourceService" Id="T:SkiaSharp.Views.Maui.Handlers.SKImageSourceService">
       <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKImageSourceService.#ctor" />
       <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKImageSourceService.#ctor(Microsoft.Extensions.Logging.ILogger)" />
-      <Member Id="M:SkiaSharp.Views.Maui.Handlers.SKImageSourceService.GetImageSourceAsync(Microsoft.Maui.IImageSource,System.Single,System.Threading.CancellationToken)" />
-    </Type>
-  </Namespace>
-  <Namespace Name="SkiaSharp.Views.Maui.Platform">
-    <Type Name="SkiaSharp.Views.Maui.Platform.SKCanvasViewExtensions" Id="T:SkiaSharp.Views.Maui.Platform.SKCanvasViewExtensions">
-      <Member Id="M:SkiaSharp.Views.Maui.Platform.SKCanvasViewExtensions.UpdateIgnorePixelScaling(SkiaSharp.Views.Windows.SKXamlCanvas,SkiaSharp.Views.Maui.ISKCanvasView)" />
     </Type>
   </Namespace>
   <Namespace Name="SkiaSharp.Views.Tizen">
@@ -866,6 +931,7 @@
       <Member Id="M:SkiaSharp.Views.Tizen.CustomRenderingView.CreateNativeResources(ElmSharp.EvasObject)" />
       <Member Id="M:SkiaSharp.Views.Tizen.CustomRenderingView.DestroyDrawingSurface" />
       <Member Id="M:SkiaSharp.Views.Tizen.CustomRenderingView.DestroyNativeResources" />
+      <Member Id="M:SkiaSharp.Views.Tizen.CustomRenderingView.GetRawSurfaceSize" />
       <Member Id="M:SkiaSharp.Views.Tizen.CustomRenderingView.GetSurfaceSize" />
       <Member Id="M:SkiaSharp.Views.Tizen.CustomRenderingView.Invalidate" />
       <Member Id="M:SkiaSharp.Views.Tizen.CustomRenderingView.OnDrawFrame" />
@@ -882,6 +948,7 @@
     </Type>
     <Type Name="SkiaSharp.Views.Tizen.ScalingInfo" Id="T:SkiaSharp.Views.Tizen.ScalingInfo">
       <Member Id="M:SkiaSharp.Views.Tizen.ScalingInfo.FromPixel(System.Double)" />
+      <Member Id="M:SkiaSharp.Views.Tizen.ScalingInfo.SetScalingFactor(System.Nullable{System.Double})" />
       <Member Id="M:SkiaSharp.Views.Tizen.ScalingInfo.ToPixel(System.Double)" />
       <Member Id="P:SkiaSharp.Views.Tizen.ScalingInfo.Dpi" />
       <Member Id="P:SkiaSharp.Views.Tizen.ScalingInfo.Profile" />
@@ -890,6 +957,7 @@
     <Type Name="SkiaSharp.Views.Tizen.SKCanvasView" Id="T:SkiaSharp.Views.Tizen.SKCanvasView">
       <Member Id="E:SkiaSharp.Views.Tizen.SKCanvasView.PaintSurface" />
       <Member Id="M:SkiaSharp.Views.Tizen.SKCanvasView.#ctor(ElmSharp.EvasObject)" />
+      <Member Id="M:SkiaSharp.Views.Tizen.SKCanvasView.GetRawSurfaceSize" />
       <Member Id="M:SkiaSharp.Views.Tizen.SKCanvasView.GetSurfaceSize" />
       <Member Id="M:SkiaSharp.Views.Tizen.SKCanvasView.OnDrawFrame" />
       <Member Id="M:SkiaSharp.Views.Tizen.SKCanvasView.OnDrawFrame(SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs)" />
@@ -913,16 +981,22 @@
       <Member Id="M:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
       <Member Id="M:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.GRGlFramebufferInfo)" />
+      <Member Id="M:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
       <Member Id="P:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
       <Member Id="P:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.RenderTarget" />
       <Member Id="P:SkiaSharp.Views.Tizen.SKPaintGLSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.Tizen.TizenExtensions" Id="T:SkiaSharp.Views.Tizen.TizenExtensions">
@@ -1034,6 +1108,7 @@
       <Member Id="M:SkiaSharp.Views.tvOS.SKCanvasView.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.tvOS.SKCanvasView.LayoutSubviews" />
       <Member Id="M:SkiaSharp.Views.tvOS.SKCanvasView.OnPaintSurface(SkiaSharp.Views.tvOS.SKPaintSurfaceEventArgs)" />
+      <Member Id="M:SkiaSharp.Views.tvOS.SKCanvasView.WillMoveToWindow(UIKit.UIWindow)" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKCanvasView.CanvasSize" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKCanvasView.IgnorePixelScaling" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKCanvasView.System#ComponentModel#IComponent#Site" />
@@ -1069,16 +1144,22 @@
       <Member Id="M:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
       <Member Id="M:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.GRGlFramebufferInfo)" />
+      <Member Id="M:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.RenderTarget" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.tvOS.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.tvOS.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.tvOS.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.tvOS.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.tvOS.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.tvOS.SKPaintSurfaceEventArgs.Surface" />
     </Type>
   </Namespace>
@@ -1097,16 +1178,22 @@
       <Member Id="M:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
       <Member Id="M:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.GRGlFramebufferInfo)" />
+      <Member Id="M:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
       <Member Id="P:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
       <Member Id="P:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.RenderTarget" />
       <Member Id="P:SkiaSharp.Views.UWP.SKPaintGLSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.UWP.SKSwapChainPanel" Id="T:SkiaSharp.Views.UWP.SKSwapChainPanel">
@@ -1202,7 +1289,9 @@
     </Type>
     <Type Name="SkiaSharp.Views.watchOS.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.watchOS.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.watchOS.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.watchOS.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.watchOS.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.watchOS.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.watchOS.SKPaintSurfaceEventArgs.Surface" />
     </Type>
   </Namespace>
@@ -1225,16 +1314,22 @@
       <Member Id="M:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget)" />
       <Member Id="M:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.GRGlFramebufferInfo)" />
+      <Member Id="M:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="M:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
       <Member Id="P:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.BackendRenderTarget" />
       <Member Id="P:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.ColorType" />
+      <Member Id="P:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.Origin" />
+      <Member Id="P:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.RenderTarget" />
       <Member Id="P:SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs" Id="T:SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs">
       <Member Id="M:SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
+      <Member Id="M:SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
       <Member Id="P:SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs.Info" />
+      <Member Id="P:SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Windows.SKPaintSurfaceEventArgs.Surface" />
     </Type>
     <Type Name="SkiaSharp.Views.Windows.SKXamlCanvas" Id="T:SkiaSharp.Views.Windows.SKXamlCanvas">
