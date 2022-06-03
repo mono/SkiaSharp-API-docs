@@ -1,6 +1,6 @@
 # SkiaSharp and HarfBuzzSharp API Docs
 
-This repository contains the XML-based API Documentation for [SkiaSharp and HarfBuzzSharp](https://github.com/mono/SkiaSharp).
+This repository contains the XML-based API documentation for [SkiaSharp and HarfBuzzSharp](https://github.com/mono/SkiaSharp).
 
 The docs are available online for both [SkiaSharp](https://docs.microsoft.com/dotnet/api/skiasharp) and [HarfBuzzSharp](https://docs.microsoft.com/dotnet/api/harfbuzzsharp).
 
