@@ -2,7 +2,10 @@
 
 This repository contains the XML-based API documentation for [SkiaSharp and HarfBuzzSharp](https://github.com/mono/SkiaSharp).
 
-The docs are available online for both [SkiaSharp](https://docs.microsoft.com/dotnet/api/skiasharp) and [HarfBuzzSharp](https://docs.microsoft.com/dotnet/api/harfbuzzsharp).
+The docs are available online for:
+ - [SkiaSharp](https://docs.microsoft.com/dotnet/api/skiasharp)
+ - [HarfBuzzSharp](https://docs.microsoft.com/dotnet/api/harfbuzzsharp)
+ - [Skottie (SkiaSharp + Lottie)](https://docs.microsoft.com/dotnet/api/skiasharp.skottie)
 
 ## Microsoft Open Source Code of Conduct
 
