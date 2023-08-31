@@ -1,16 +1,16 @@
 <Type Name="SKCanvasViewHandler" FullName="SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler">
-  <TypeSignature Language="C#" Value="public class SKCanvasViewHandler : Microsoft.Maui.Handlers.ViewHandler&lt;SkiaSharp.Views.Maui.ISKCanvasView,SkiaSharp.Views.Windows.SKXamlCanvas&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKCanvasViewHandler extends Microsoft.Maui.Handlers.ViewHandler`2&lt;class SkiaSharp.Views.Maui.ISKCanvasView, class SkiaSharp.Views.Windows.SKXamlCanvas&gt;" />
+  <TypeSignature Language="C#" Value="public class SKCanvasViewHandler : Microsoft.Maui.Handlers.ViewHandler&lt;SkiaSharp.Views.Maui.ISKCanvasView,object&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKCanvasViewHandler extends Microsoft.Maui.Handlers.ViewHandler`2&lt;class SkiaSharp.Views.Maui.ISKCanvasView, object&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
-    <BaseTypeName>Microsoft.Maui.Handlers.ViewHandler&lt;SkiaSharp.Views.Maui.ISKCanvasView,SkiaSharp.Views.Windows.SKXamlCanvas&gt;</BaseTypeName>
+    <BaseTypeName>Microsoft.Maui.Handlers.ViewHandler&lt;SkiaSharp.Views.Maui.ISKCanvasView,System.Object&gt;</BaseTypeName>
     <BaseTypeArguments>
       <BaseTypeArgument TypeParamName="!0">SkiaSharp.Views.Maui.ISKCanvasView</BaseTypeArgument>
-      <BaseTypeArgument TypeParamName="!1">SkiaSharp.Views.Windows.SKXamlCanvas</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="!1">System.Object</BaseTypeArgument>
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -35,9 +35,9 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SKCanvasViewHandler (Microsoft.Maui.PropertyMapper? mapper);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Maui.PropertyMapper mapper) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.#ctor(Microsoft.Maui.PropertyMapper)" />
+      <MemberSignature Language="C#" Value="public SKCanvasViewHandler (Microsoft.Maui.PropertyMapper? mapper, Microsoft.Maui.CommandMapper? commands);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Maui.PropertyMapper mapper, class Microsoft.Maui.CommandMapper commands) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.#ctor(Microsoft.Maui.PropertyMapper,Microsoft.Maui.CommandMapper)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
@@ -45,71 +45,31 @@
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="mapper" Type="Microsoft.Maui.PropertyMapper" />
+        <Parameter Name="commands" Type="Microsoft.Maui.CommandMapper" />
       </Parameters>
       <Docs>
         <param name="mapper">To be added.</param>
+        <param name="commands">To be added.</param>
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="ConnectHandler">
-      <MemberSignature Language="C#" Value="protected override void ConnectHandler (SkiaSharp.Views.Windows.SKXamlCanvas nativeView);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ConnectHandler(class SkiaSharp.Views.Windows.SKXamlCanvas nativeView) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.ConnectHandler(SkiaSharp.Views.Windows.SKXamlCanvas)" />
+    <Member MemberName="CreatePlatformView">
+      <MemberSignature Language="C#" Value="protected override object CreatePlatformView ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object CreatePlatformView() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.CreatePlatformView" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="nativeView" Type="SkiaSharp.Views.Windows.SKXamlCanvas" />
-      </Parameters>
-      <Docs>
-        <param name="nativeView">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="CreateNativeView">
-      <MemberSignature Language="C#" Value="protected override SkiaSharp.Views.Windows.SKXamlCanvas CreateNativeView ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class SkiaSharp.Views.Windows.SKXamlCanvas CreateNativeView() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.CreateNativeView" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>SkiaSharp.Views.Windows.SKXamlCanvas</ReturnType>
+        <ReturnType>System.Object</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DisconnectHandler">
-      <MemberSignature Language="C#" Value="protected override void DisconnectHandler (SkiaSharp.Views.Windows.SKXamlCanvas nativeView);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisconnectHandler(class SkiaSharp.Views.Windows.SKXamlCanvas nativeView) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.DisconnectHandler(SkiaSharp.Views.Windows.SKXamlCanvas)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="nativeView" Type="SkiaSharp.Views.Windows.SKXamlCanvas" />
-      </Parameters>
-      <Docs>
-        <param name="nativeView">To be added.</param>
-        <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -160,9 +120,9 @@
       </Docs>
     </Member>
     <Member MemberName="OnInvalidateSurface">
-      <MemberSignature Language="C#" Value="public static void OnInvalidateSurface (SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler handler, SkiaSharp.Views.Maui.ISKCanvasView canvasView);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void OnInvalidateSurface(class SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler handler, class SkiaSharp.Views.Maui.ISKCanvasView canvasView) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.OnInvalidateSurface(SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler,SkiaSharp.Views.Maui.ISKCanvasView)" />
+      <MemberSignature Language="C#" Value="public static void OnInvalidateSurface (SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler handler, SkiaSharp.Views.Maui.ISKCanvasView canvasView, object? args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void OnInvalidateSurface(class SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler handler, class SkiaSharp.Views.Maui.ISKCanvasView canvasView, object args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.OnInvalidateSurface(SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler,SkiaSharp.Views.Maui.ISKCanvasView,System.Object)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
@@ -174,10 +134,29 @@
       <Parameters>
         <Parameter Name="handler" Type="SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler" />
         <Parameter Name="canvasView" Type="SkiaSharp.Views.Maui.ISKCanvasView" />
+        <Parameter Name="args" Type="System.Object" />
       </Parameters>
       <Docs>
         <param name="handler">To be added.</param>
         <param name="canvasView">To be added.</param>
+        <param name="args">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SKCanvasViewCommandMapper">
+      <MemberSignature Language="C#" Value="public static Microsoft.Maui.CommandMapper&lt;SkiaSharp.Views.Maui.ISKCanvasView,SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler&gt; SKCanvasViewCommandMapper;" />
+      <MemberSignature Language="ILAsm" Value=".field public static class Microsoft.Maui.CommandMapper`2&lt;class SkiaSharp.Views.Maui.ISKCanvasView, class SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler&gt; SKCanvasViewCommandMapper" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler.SKCanvasViewCommandMapper" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>2.88.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Maui.CommandMapper&lt;SkiaSharp.Views.Maui.ISKCanvasView,SkiaSharp.Views.Maui.Handlers.SKCanvasViewHandler&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
