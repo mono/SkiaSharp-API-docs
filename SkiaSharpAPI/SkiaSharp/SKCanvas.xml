@@ -378,9 +378,9 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="color" Type="SkiaSharp.SKColorF" Index="0" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="color">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="color">The color to fill the canvas with.</param>
+        <summary>Fills the entire canvas with the specified color.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ClipPath">
@@ -546,9 +546,9 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="m" Type="SkiaSharp.SKMatrix44" RefType="ref" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="m">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="m">The 4x4 matrix to concatenate with the current matrix.</param>
+        <summary>Pre-concatenates the current matrix with the specified 4x4 matrix.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Context">
@@ -564,9 +564,9 @@ using (var surface = SKSurface.Create(info)) {
         <ReturnType>SkiaSharp.GRRecordingContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the GPU recording context associated with this canvas.</summary>
+        <value>The GPU recording context, or null if not GPU-accelerated.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DeviceClipBounds">
@@ -739,13 +739,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="oval">To be added.</param>
-        <param name="startAngle">To be added.</param>
-        <param name="sweepAngle">To be added.</param>
-        <param name="useCenter">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="oval">The bounding rectangle of the oval containing the arc.</param>
+        <param name="startAngle">The starting angle (in degrees) where the arc begins.</param>
+        <param name="sweepAngle">The sweep angle (in degrees) measured clockwise.</param>
+        <param name="useCenter">Whether to include the center of the oval in the drawing.</param>
+        <param name="paint">The paint used to draw the arc.</param>
+        <summary>Draws an arc on the canvas.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
@@ -772,12 +772,12 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="atlas">To be added.</param>
-        <param name="sprites">To be added.</param>
-        <param name="transforms">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="atlas">The image atlas containing the sprites.</param>
+        <param name="sprites">The source rectangles within the atlas for each sprite.</param>
+        <param name="transforms">The rotation-scale transforms for each sprite.</param>
+        <param name="paint">The paint used to draw the sprites, or null.</param>
+        <summary>Draws a set of sprites from an atlas image with transforms.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
@@ -801,13 +801,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="atlas">To be added.</param>
-        <param name="sprites">To be added.</param>
-        <param name="transforms">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="atlas">The image atlas containing the sprites.</param>
+        <param name="sprites">The source rectangles within the atlas for each sprite.</param>
+        <param name="transforms">The rotation-scale transforms for each sprite.</param>
+        <param name="sampling">The sampling options for image filtering.</param>
+        <param name="paint">The paint used to draw the sprites, or null.</param>
+        <summary>Draws a set of sprites from an atlas image with transforms and sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
@@ -836,14 +836,14 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="atlas">To be added.</param>
-        <param name="sprites">To be added.</param>
-        <param name="transforms">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="atlas">The image atlas containing the sprites.</param>
+        <param name="sprites">The source rectangles within the atlas for each sprite.</param>
+        <param name="transforms">The rotation-scale transforms for each sprite.</param>
+        <param name="colors">The colors to blend with each sprite, or null.</param>
+        <param name="mode">The blend mode used when colors are specified.</param>
+        <param name="paint">The paint used to draw the sprites, or null.</param>
+        <summary>Draws a set of sprites from an atlas image with color blending.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
@@ -873,15 +873,15 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="6" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="atlas">To be added.</param>
-        <param name="sprites">To be added.</param>
-        <param name="transforms">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="cullRect">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="atlas">The image atlas containing the sprites.</param>
+        <param name="sprites">The source rectangles within the atlas for each sprite.</param>
+        <param name="transforms">The rotation-scale transforms for each sprite.</param>
+        <param name="colors">The colors to blend with each sprite, or null.</param>
+        <param name="mode">The blend mode used when colors are specified.</param>
+        <param name="cullRect">The rectangle to cull sprites that fall outside.</param>
+        <param name="paint">The paint used to draw the sprites, or null.</param>
+        <summary>Draws a set of sprites from an atlas image with culling support.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
@@ -907,15 +907,15 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="6" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="atlas">To be added.</param>
-        <param name="sprites">To be added.</param>
-        <param name="transforms">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="atlas">The image atlas containing the sprites.</param>
+        <param name="sprites">The source rectangles within the atlas for each sprite.</param>
+        <param name="transforms">The rotation-scale transforms for each sprite.</param>
+        <param name="colors">The colors to blend with each sprite, or null.</param>
+        <param name="mode">The blend mode used when colors are specified.</param>
+        <param name="sampling">The sampling options for image filtering.</param>
+        <param name="paint">The paint used to draw the sprites, or null.</param>
+        <summary>Draws a set of sprites from an atlas image with sampling and color blending.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
@@ -942,16 +942,16 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="7" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="atlas">To be added.</param>
-        <param name="sprites">To be added.</param>
-        <param name="transforms">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="cullRect">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="atlas">The image atlas containing the sprites.</param>
+        <param name="sprites">The source rectangles within the atlas for each sprite.</param>
+        <param name="transforms">The rotation-scale transforms for each sprite.</param>
+        <param name="colors">The colors to blend with each sprite, or null.</param>
+        <param name="mode">The blend mode used when colors are specified.</param>
+        <param name="sampling">The sampling options for image filtering.</param>
+        <param name="cullRect">The rectangle to cull sprites that fall outside.</param>
+        <param name="paint">The paint used to draw the sprites, or null.</param>
+        <summary>Draws a set of sprites from an atlas image with all options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1131,13 +1131,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="lattice">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The bitmap to draw.</param>
+        <param name="lattice">The lattice divider specifying how to divide the bitmap.</param>
+        <param name="dst">The destination rectangle to draw into.</param>
+        <param name="filterMode">The filter mode for scaling.</param>
+        <param name="paint">The paint used when drawing the bitmap, or null.</param>
+        <summary>Draws a bitmap using lattice (nine-patch) scaling with the specified filter mode.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapLattice">
@@ -1196,14 +1196,14 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="xDivs">To be added.</param>
-        <param name="yDivs">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The bitmap to draw.</param>
+        <param name="xDivs">The x-coordinates that divide the bitmap vertically.</param>
+        <param name="yDivs">The y-coordinates that divide the bitmap horizontally.</param>
+        <param name="dst">The destination rectangle to draw into.</param>
+        <param name="filterMode">The filter mode for scaling.</param>
+        <param name="paint">The paint used when drawing the bitmap, or null.</param>
+        <summary>Draws a bitmap using lattice scaling with explicit divisions and filter mode.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapNinePatch">
@@ -1259,13 +1259,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="center">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The bitmap to draw.</param>
+        <param name="center">The center rectangle that remains unscaled.</param>
+        <param name="dst">The destination rectangle to draw into.</param>
+        <param name="filterMode">The filter mode for scaling.</param>
+        <param name="paint">The paint used when drawing the bitmap, or null.</param>
+        <summary>Draws a bitmap using nine-patch scaling with the specified filter mode.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawCircle">
@@ -1377,10 +1377,10 @@ this information.
         <Parameter Name="mode" Type="SkiaSharp.SKBlendMode" Index="1" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="color">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="color">The color to fill the canvas with.</param>
+        <param name="mode">The blend mode to use when filling.</param>
+        <summary>Fills the entire canvas with the specified color using the blend mode.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawDrawable">
@@ -1548,12 +1548,12 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The image to draw.</param>
+        <param name="p">The point at which to draw the image.</param>
+        <param name="sampling">The sampling options for image filtering.</param>
+        <param name="paint">The paint used when drawing the image, or null.</param>
+        <summary>Draws an image at the specified point with sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
@@ -1608,12 +1608,12 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="dest">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The image to draw.</param>
+        <param name="dest">The destination rectangle to draw the image into.</param>
+        <param name="sampling">The sampling options for image filtering.</param>
+        <param name="paint">The paint used when drawing the image, or null.</param>
+        <summary>Draws an image scaled to fit the destination rectangle with sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
@@ -1669,13 +1669,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="source">To be added.</param>
-        <param name="dest">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The image to draw.</param>
+        <param name="source">The source rectangle within the image.</param>
+        <param name="dest">The destination rectangle to draw the image into.</param>
+        <param name="sampling">The sampling options for image filtering.</param>
+        <param name="paint">The paint used when drawing the image, or <see langword="null" />.</param>
+        <summary>Draws a portion of an image scaled to fit the destination rectangle with sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
@@ -1699,13 +1699,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The image to draw.</param>
+        <param name="x">The x-coordinate of the left edge of the image.</param>
+        <param name="y">The y-coordinate of the top edge of the image.</param>
+        <param name="sampling">The sampling options for image filtering.</param>
+        <param name="paint">The paint used when drawing the image, or <see langword="null" />.</param>
+        <summary>Draws an image at the specified coordinates with sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawImageLattice">
@@ -1761,13 +1761,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="lattice">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The image to draw.</param>
+        <param name="lattice">The lattice divider specifying how to divide the image.</param>
+        <param name="dst">The destination rectangle to draw into.</param>
+        <param name="filterMode">The filter mode for scaling.</param>
+        <param name="paint">The paint used when drawing the image, or <see langword="null" />.</param>
+        <summary>Draws an image using lattice (nine-patch) scaling with the specified filter mode.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawImageLattice">
@@ -1826,14 +1826,14 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="xDivs">To be added.</param>
-        <param name="yDivs">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The image to draw.</param>
+        <param name="xDivs">The x-coordinates that divide the image vertically.</param>
+        <param name="yDivs">The y-coordinates that divide the image horizontally.</param>
+        <param name="dst">The destination rectangle to draw into.</param>
+        <param name="filterMode">The filter mode for scaling.</param>
+        <param name="paint">The paint used when drawing the image, or <see langword="null" />.</param>
+        <summary>Draws an image using lattice scaling with explicit divisions and filter mode.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawImageNinePatch">
@@ -1889,13 +1889,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="center">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The image to draw.</param>
+        <param name="center">The center rectangle that remains unscaled.</param>
+        <param name="dst">The destination rectangle to draw into.</param>
+        <param name="filterMode">The filter mode for scaling.</param>
+        <param name="paint">The paint used when drawing the image, or <see langword="null" />.</param>
+        <summary>Draws an image using nine-patch scaling with the specified filter mode.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawLine">
@@ -2235,12 +2235,12 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="cubics">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="texCoords">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="cubics">The 12 cubic control points defining the patch boundaries.</param>
+        <param name="colors">The 4 corner colors for bilinear interpolation, or <see langword="null" />.</param>
+        <param name="texCoords">The 4 texture coordinates for the corners, or <see langword="null" />.</param>
+        <param name="paint">The paint used to draw the patch.</param>
+        <summary>Draws a Coons patch on the canvas.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawPatch">
@@ -2267,13 +2267,13 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="cubics">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="texCoords">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="cubics">The 12 cubic control points defining the patch boundaries.</param>
+        <param name="colors">The 4 corner colors for bilinear interpolation, or <see langword="null" />.</param>
+        <param name="texCoords">The 4 texture coordinates for the corners, or <see langword="null" />.</param>
+        <param name="mode">The blend mode used when colors are specified.</param>
+        <param name="paint">The paint used to draw the patch.</param>
+        <summary>Draws a Coons patch on the canvas with the specified blend mode.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawPath">
@@ -2955,11 +2955,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="outer">To be added.</param>
-        <param name="inner">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="outer">The outer rounded rectangle.</param>
+        <param name="inner">The inner rounded rectangle to subtract.</param>
+        <param name="paint">The paint used to draw the region.</param>
+        <summary>Draws the region between two rounded rectangles.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
@@ -3278,12 +3278,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="p">The point at which to draw the text.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text at the specified point using the specified font.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -3384,13 +3384,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="textAlign">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="p">The point at which to draw the text.</param>
+        <param name="textAlign">The text alignment relative to the point.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text at the specified point with alignment.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -3416,13 +3416,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="x">The x-coordinate of the origin of the text.</param>
+        <param name="y">The y-coordinate of the origin of the text.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text at the specified coordinates.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -3447,14 +3447,14 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textAlign">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="x">The x-coordinate of the text origin.</param>
+        <param name="y">The y-coordinate of the text origin.</param>
+        <param name="textAlign">The text alignment relative to the coordinates.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text at the specified coordinates with alignment.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
@@ -3633,13 +3633,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="offset">The offset from the path origin.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text along a path using the specified font.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
@@ -3670,13 +3670,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="warpGlyphs">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="offset">The offset from the path origin.</param>
+        <param name="warpGlyphs">Whether to warp the glyphs to follow the path curvature.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text along a path with optional glyph warping.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
@@ -3782,14 +3782,14 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="textAlign">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="offset">The offset from the path origin.</param>
+        <param name="textAlign">The text alignment along the path.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text along a path with alignment using the specified font.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
@@ -3816,14 +3816,14 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="warpGlyphs">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="offset">The offset from the path origin.</param>
+        <param name="warpGlyphs">Whether to warp the glyphs to follow the path curvature.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text along a path with optional glyph warping using the specified font.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
@@ -3848,14 +3848,14 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="hOffset">To be added.</param>
-        <param name="vOffset">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="hOffset">The horizontal offset along the path.</param>
+        <param name="vOffset">The vertical offset from the path.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text along a path with horizontal and vertical offsets.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
@@ -3881,15 +3881,15 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="6" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="warpGlyphs">To be added.</param>
-        <param name="textAlign">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="offset">The offset from the path origin.</param>
+        <param name="warpGlyphs">Whether to warp the glyphs to follow the path curvature.</param>
+        <param name="textAlign">The text alignment along the path.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text along a path with alignment and optional glyph warping.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
@@ -3915,15 +3915,15 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="6" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="hOffset">To be added.</param>
-        <param name="vOffset">To be added.</param>
-        <param name="textAlign">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to draw.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="hOffset">The horizontal offset along the path.</param>
+        <param name="vOffset">The vertical offset from the path.</param>
+        <param name="textAlign">The text alignment along the path.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text along a path with offsets and alignment.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawUrlAnnotation">
@@ -4256,9 +4256,9 @@ safely ignored.
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether the current clip is empty.</summary>
+        <value>true if the clip is empty; otherwise, false.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsClipRect">
@@ -4278,9 +4278,9 @@ safely ignored.
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether the current clip is a rectangle.</summary>
+        <value>true if the clip is a rectangle; otherwise, false.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="LocalClipBounds">
@@ -4609,9 +4609,9 @@ safely ignored.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Saves the current matrix and clip, and allocates an offscreen buffer for subsequent drawing.</summary>
+        <returns>The depth of the saved stack, which can be used with <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
@@ -4630,10 +4630,10 @@ safely ignored.
         <Parameter Name="rec" Type="SkiaSharp.SKCanvasSaveLayerRec" RefType="ref" Index="0" FrameworkAlternate="skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="rec">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="rec">The save layer parameters.</param>
+        <summary>Saves the current matrix and clip, and allocates an offscreen buffer using the specified parameters.</summary>
+        <returns>The depth of the saved stack.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
@@ -4837,9 +4837,9 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" RefType="ref" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="matrix">The matrix to set as the current transformation matrix.</param>
+        <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SetMatrix">
@@ -4883,9 +4883,9 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix44" RefType="ref" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="matrix">The 4x4 matrix to set as the current transformation matrix.</param>
+        <summary>Replaces the current matrix with a copy of the specified 4x4 matrix.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Skew">
@@ -4955,9 +4955,9 @@ guaranteed to happen. If exact clipping is desired, use
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the surface associated with this canvas.</summary>
+        <value>The <see cref="T:SkiaSharp.SKSurface" /> that owns this canvas, or null if none.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="TotalMatrix">
@@ -4997,9 +4997,9 @@ guaranteed to happen. If exact clipping is desired, use
         <ReturnType>SkiaSharp.SKMatrix44</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the current 4x4 transformation matrix on the canvas.</summary>
+        <value>The current 4x4 matrix.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Translate">

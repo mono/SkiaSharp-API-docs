@@ -12,8 +12,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>An abstract base class for custom rendering views in the Tizen NUI framework.</summary>
+    <remarks>This class extends Tizen.NUI.BaseComponents.ImageView and provides the foundation for SkiaSharp rendering on Tizen devices.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -28,8 +28,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Tizen.NUI.CustomRenderingView" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CanvasSize">
@@ -46,9 +46,9 @@
         <ReturnType>SkiaSharp.SKSize</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the current canvas size in pixels.</summary>
+        <value>The current size of the drawing canvas.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Invalidate">
@@ -66,8 +66,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Requests that the view be redrawn.</summary>
+        <remarks>Calling this method schedules a call to <see cref="M:SkiaSharp.Views.Tizen.NUI.CustomRenderingView.OnDrawFrame" /> on the next frame.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MainloopContext">
@@ -84,9 +84,9 @@
         <ReturnType>System.Threading.SynchronizationContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the synchronization context for the Tizen main loop.</summary>
+        <value>The <see cref="T:System.Threading.SynchronizationContext" /> for the main loop.</value>
+        <remarks>Use this context to post work to the main UI thread.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnDrawFrame">
@@ -104,8 +104,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Called when the view needs to render a frame.</summary>
+        <remarks>Derived classes must override this method to perform custom drawing operations.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnResized">
@@ -123,8 +123,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Called when the view has been resized.</summary>
+        <remarks>Derived classes must override this method to handle size changes and reallocate any resources that depend on the view size.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PaintSurface">
@@ -146,8 +146,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the surface needs to be painted.</summary>
+        <remarks>Subscribe to this event to perform drawing operations on the canvas provided in the event arguments.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendPaintSurface">
@@ -167,9 +167,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Tizen.SKPaintSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the surface and canvas information.</param>
+        <summary>Raises the <see cref="E:SkiaSharp.Views.Tizen.NUI.CustomRenderingView.PaintSurface" /> event.</summary>
+        <remarks>Derived classes should call this method to notify subscribers that the surface is ready to be painted.</remarks>
       </Docs>
     </Member>
   </Members>

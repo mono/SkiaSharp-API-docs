@@ -183,9 +183,9 @@ The example above produces the following:
         <Parameter Name="font" Type="SkiaSharp.SKFont" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="font">The <see cref="T:SkiaSharp.SKFont" /> to initialize text settings from.</param>
+        <summary>Creates a new <see cref="T:SkiaSharp.SKPaint" /> with text settings initialized from the specified font.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Blender">
@@ -202,9 +202,9 @@ The example above produces the following:
         <ReturnType>SkiaSharp.SKBlender</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the custom <see cref="T:SkiaSharp.SKBlender" /> for compositing.</summary>
+        <value>The custom blender, or <c>null</c> to use the default <see cref="P:SkiaSharp.SKPaint.BlendMode" />.</value>
+        <remarks>When set, the blender overrides the <see cref="P:SkiaSharp.SKPaint.BlendMode" /> property.</remarks>
       </Docs>
     </Member>
     <Member MemberName="BlendMode">
@@ -289,11 +289,11 @@ The example above produces the following:
         <Parameter Name="maxWidth" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="maxWidth">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to measure as a UTF-8 encoded byte span.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <summary>Measures the text and returns the number of bytes that fit within the specified width.</summary>
+        <returns>The number of bytes that fit within the maximum width.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="BreakText">
@@ -321,11 +321,11 @@ The example above produces the following:
         <Parameter Name="maxWidth" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="maxWidth">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to measure as a character span.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <summary>Measures the text and returns the number of characters that fit within the specified width.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="BreakText">
@@ -495,12 +495,12 @@ The example above produces the following:
         <Parameter Name="measuredWidth" Type="System.Single" RefType="out" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="maxWidth">To be added.</param>
-        <param name="measuredWidth">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to measure as a UTF-8 encoded byte span.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="measuredWidth">When this method returns, contains the actual measured width of the text that fits.</param>
+        <summary>Measures the text and returns the number of bytes that fit within the specified width.</summary>
+        <returns>The number of bytes that fit within the maximum width.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="BreakText">
@@ -529,12 +529,12 @@ The example above produces the following:
         <Parameter Name="measuredWidth" Type="System.Single" RefType="out" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="maxWidth">To be added.</param>
-        <param name="measuredWidth">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to measure as a character span.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="measuredWidth">When this method returns, contains the actual measured width of the text that fits.</param>
+        <summary>Measures the text and returns the number of characters that fit within the specified width.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="BreakText">
@@ -749,9 +749,9 @@ The example above produces the following:
         <ReturnType>SkiaSharp.SKColorF</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the paint's color as an <see cref="T:SkiaSharp.SKColorF" /> (floating-point RGBA).</summary>
+        <value>The color in floating-point representation.</value>
+        <remarks>This property provides higher precision color values than the <see cref="P:SkiaSharp.SKPaint.Color" /> property.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ColorFilter">
@@ -832,10 +832,11 @@ The example above produces the following:
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to check as a UTF-8 encoded byte span.</param>
+        <summary>Returns whether the current typeface contains glyphs for all characters in the text.</summary>
+        <returns>
+          <c>true</c> if the typeface contains glyphs for all characters; otherwise, <c>false</c>.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyphs">
@@ -862,10 +863,11 @@ The example above produces the following:
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to check as a character span.</param>
+        <summary>Returns whether the current typeface contains glyphs for all characters in the text.</summary>
+        <returns>
+          <c>true</c> if the typeface contains glyphs for all characters; otherwise, <c>false</c>.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyphs">
@@ -1020,10 +1022,10 @@ The example above produces the following:
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to count glyphs for as a UTF-8 encoded byte span.</param>
+        <summary>Returns the number of glyphs required to render the text.</summary>
+        <returns>The number of glyphs needed to render the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
@@ -1050,10 +1052,10 @@ The example above produces the following:
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to count glyphs for as a character span.</param>
+        <summary>Returns the number of glyphs required to render the text.</summary>
+        <returns>The number of glyphs needed to render the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
@@ -1387,11 +1389,11 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source path to transform.</param>
+        <param name="matrix">The transformation matrix to apply.</param>
+        <summary>Creates a new path from the result of applying any and all effects to a source path with a transformation matrix.</summary>
+        <returns>Returns the resulting fill path, or <c>null</c> if the source path should be drawn with a hairline.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -1497,12 +1499,13 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source path to transform.</param>
+        <param name="dst">The destination path to receive the result.</param>
+        <param name="matrix">The transformation matrix to apply.</param>
+        <summary>Applies any and all effects to a source path with a transformation matrix, writing the result to the destination.</summary>
+        <returns>
+          <c>true</c> if the path should be filled; <c>false</c> if it should be drawn with a hairline.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -1586,12 +1589,12 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="cullRect">To be added.</param>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source path to transform.</param>
+        <param name="cullRect">The culling rectangle to limit the path effect.</param>
+        <param name="matrix">The transformation matrix to apply.</param>
+        <summary>Creates a new path from the result of applying effects to a source path with culling and transformation.</summary>
+        <returns>Returns the resulting fill path, or <c>null</c> if the source path should be drawn with a hairline.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -1644,13 +1647,14 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="cullRect">To be added.</param>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source path to transform.</param>
+        <param name="dst">The destination path to receive the result.</param>
+        <param name="cullRect">The culling rectangle to limit the path effect.</param>
+        <param name="matrix">The transformation matrix to apply.</param>
+        <summary>Applies any and all effects to a source path with culling and transformation, writing the result to the destination.</summary>
+        <returns>
+          <c>true</c> if the path should be filled; <c>false</c> if it should be drawn with a hairline.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -1711,10 +1715,10 @@ The example above produces the following:
         <Parameter Name="metrics" Type="SkiaSharp.SKFontMetrics" RefType="out" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="metrics">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="metrics">When this method returns, contains the <see cref="T:SkiaSharp.SKFontMetrics" /> for the current typeface.</param>
+        <summary>Returns the font metrics and recommended line spacing for the current typeface.</summary>
+        <returns>The recommended spacing between lines.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetFontMetrics">
@@ -1778,11 +1782,11 @@ The example above produces the following:
         <Parameter Name="origin" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to get glyph offsets for as a UTF-8 encoded byte span.</param>
+        <param name="origin">The starting x-coordinate offset.</param>
+        <summary>Returns the x-coordinate offsets for each glyph in the text.</summary>
+        <returns>An array of x-coordinate offsets for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphOffsets">
@@ -1810,11 +1814,11 @@ The example above produces the following:
         <Parameter Name="origin" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to get glyph offsets for as a character span.</param>
+        <param name="origin">The starting x-coordinate offset.</param>
+        <summary>Returns the x-coordinate offsets for each glyph in the text.</summary>
+        <returns>An array of x-coordinate offsets for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphOffsets">
@@ -1842,11 +1846,11 @@ The example above produces the following:
         <Parameter Name="origin" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to get glyph offsets for.</param>
+        <param name="origin">The starting x-coordinate offset.</param>
+        <summary>Returns the x-coordinate offsets for each glyph in the text.</summary>
+        <returns>An array of x-coordinate offsets for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphOffsets">
@@ -1875,12 +1879,12 @@ The example above produces the following:
         <Parameter Name="origin" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">A pointer to the text buffer encoded using the paint's text encoding.</param>
+        <param name="length">The number of bytes to read from the buffer.</param>
+        <param name="origin">The starting x-coordinate offset.</param>
+        <summary>Returns the x-coordinate offsets for each glyph in the text.</summary>
+        <returns>An array of x-coordinate offsets for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphPositions">
@@ -1908,11 +1912,11 @@ The example above produces the following:
         <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to get glyph positions for as a UTF-8 encoded byte span.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Returns the positions for each glyph in the text.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphPositions">
@@ -1940,11 +1944,11 @@ The example above produces the following:
         <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to get glyph positions for as a character span.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Returns the positions for each glyph in the text.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphPositions">
@@ -1972,11 +1976,11 @@ The example above produces the following:
         <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to get glyph positions for.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Returns the positions for each glyph in the text.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphPositions">
@@ -2005,12 +2009,12 @@ The example above produces the following:
         <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">A pointer to the text buffer encoded using the paint's text encoding.</param>
+        <param name="length">The number of bytes to read from the buffer.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Returns the positions for each glyph in the text.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -2068,10 +2072,10 @@ The example above produces the following:
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to convert as a UTF-8 encoded byte span.</param>
+        <summary>Returns the glyph IDs for the characters in the text.</summary>
+        <returns>An array of glyph IDs for each character.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -2098,10 +2102,10 @@ The example above produces the following:
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to convert as a character span.</param>
+        <summary>Returns the glyph IDs for the characters in the text.</summary>
+        <returns>An array of glyph IDs for each character.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -2268,10 +2272,10 @@ Uses <xref:SkiaSharp.SKPaint.TextEncoding> to decode text,
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a UTF-8 encoded byte span.</param>
+        <summary>Retrieves the advance widths for each glyph in the text.</summary>
+        <returns>An array of glyph advance widths.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphWidths">
@@ -2298,10 +2302,10 @@ Uses <xref:SkiaSharp.SKPaint.TextEncoding> to decode text,
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a character span.</param>
+        <summary>Retrieves the advance widths for each glyph in the text.</summary>
+        <returns>An array of glyph advance widths.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphWidths">
@@ -2507,11 +2511,11 @@ Uses <xref:SkiaSharp.SKPaint.TextEncoding> to decode text,
         <Parameter Name="bounds" Type="SkiaSharp.SKRect[]" RefType="out" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a UTF-8 encoded byte span.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph relative to (0, 0).</param>
+        <summary>Retrieves the advance widths and bounding rectangles for each glyph in the text.</summary>
+        <returns>An array of glyph advance widths.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphWidths">
@@ -2539,11 +2543,11 @@ Uses <xref:SkiaSharp.SKPaint.TextEncoding> to decode text,
         <Parameter Name="bounds" Type="SkiaSharp.SKRect[]" RefType="out" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a character span.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph relative to (0, 0).</param>
+        <summary>Retrieves the advance widths and bounding rectangles for each glyph in the text.</summary>
+        <returns>An array of glyph advance widths.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphWidths">
@@ -2761,14 +2765,14 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="lowerBounds" Type="System.Single" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="xpositions">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="upperBounds">To be added.</param>
-        <param name="lowerBounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a UTF-8 encoded byte span.</param>
+        <param name="xpositions">The x-coordinate positions for each glyph.</param>
+        <param name="y">The y-coordinate for all glyphs.</param>
+        <param name="upperBounds">The upper y-coordinate for the intercept region.</param>
+        <param name="lowerBounds">The lower y-coordinate for the intercept region.</param>
+        <summary>Returns the intervals where the text glyphs intersect a horizontal band.</summary>
+        <returns>An array of x-coordinate pairs representing the left and right edges of each intersection.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetHorizontalTextIntercepts">
@@ -2799,14 +2803,14 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="lowerBounds" Type="System.Single" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="xpositions">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="upperBounds">To be added.</param>
-        <param name="lowerBounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a character span.</param>
+        <param name="xpositions">The x-coordinate positions for each glyph.</param>
+        <param name="y">The y-coordinate for all glyphs.</param>
+        <param name="upperBounds">The upper y-coordinate for the intercept region.</param>
+        <param name="lowerBounds">The lower y-coordinate for the intercept region.</param>
+        <summary>Returns the intervals where the text glyphs intersect a horizontal band.</summary>
+        <returns>An array of x-coordinate pairs representing the left and right edges of each intersection.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetHorizontalTextIntercepts">
@@ -3030,13 +3034,13 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="lowerBounds" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="upperBounds">To be added.</param>
-        <param name="lowerBounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a UTF-8 encoded byte span.</param>
+        <param name="positions">The positions for each glyph.</param>
+        <param name="upperBounds">The upper y-coordinate for the intercept region.</param>
+        <param name="lowerBounds">The lower y-coordinate for the intercept region.</param>
+        <summary>Returns the intervals where the positioned text glyphs intersect a horizontal band.</summary>
+        <returns>An array of x-coordinate pairs representing the left and right edges of each intersection.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetPositionedTextIntercepts">
@@ -3066,13 +3070,13 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="lowerBounds" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="upperBounds">To be added.</param>
-        <param name="lowerBounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a character span.</param>
+        <param name="positions">The positions for each glyph.</param>
+        <param name="upperBounds">The upper y-coordinate for the intercept region.</param>
+        <param name="lowerBounds">The lower y-coordinate for the intercept region.</param>
+        <summary>Returns the intervals where the positioned text glyphs intersect a horizontal band.</summary>
+        <returns>An array of x-coordinate pairs representing the left and right edges of each intersection.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetPositionedTextIntercepts">
@@ -3337,14 +3341,14 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="lowerBounds" Type="System.Single" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="upperBounds">To be added.</param>
-        <param name="lowerBounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a UTF-8 encoded byte span.</param>
+        <param name="x">The x-coordinate of the text origin.</param>
+        <param name="y">The y-coordinate of the text origin.</param>
+        <param name="upperBounds">The upper y-coordinate for the intercept region.</param>
+        <param name="lowerBounds">The lower y-coordinate for the intercept region.</param>
+        <summary>Returns the intervals where the text glyphs intersect a horizontal band.</summary>
+        <returns>An array of x-coordinate pairs representing the left and right edges of each intersection.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetTextIntercepts">
@@ -3375,14 +3379,14 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="lowerBounds" Type="System.Single" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="upperBounds">To be added.</param>
-        <param name="lowerBounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a character span.</param>
+        <param name="x">The x-coordinate of the text origin.</param>
+        <param name="y">The y-coordinate of the text origin.</param>
+        <param name="upperBounds">The upper y-coordinate for the intercept region.</param>
+        <param name="lowerBounds">The lower y-coordinate for the intercept region.</param>
+        <summary>Returns the intervals where the text glyphs intersect a horizontal band.</summary>
+        <returns>An array of x-coordinate pairs representing the left and right edges of each intersection.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetTextIntercepts">
@@ -3592,11 +3596,11 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="points" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="points">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a UTF-8 encoded byte span.</param>
+        <param name="points">The positions for each glyph.</param>
+        <summary>Returns the path (outline) for the specified positioned text.</summary>
+        <returns>Returns the <see cref="T:SkiaSharp.SKPath" /> containing the outline of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetTextPath">
@@ -3624,11 +3628,11 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="points" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="points">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a character span.</param>
+        <param name="points">The positions for each glyph.</param>
+        <summary>Returns the path (outline) for the specified positioned text.</summary>
+        <returns>Returns the <see cref="T:SkiaSharp.SKPath" /> containing the outline of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetTextPath">
@@ -3762,12 +3766,12 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="points" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="buffer">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="points">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="buffer">A pointer to the text buffer encoded using the paint's text encoding.</param>
+        <param name="length">The number of bytes to read from the buffer.</param>
+        <param name="points">The positions for each glyph.</param>
+        <summary>Returns the path (outline) for the specified positioned text.</summary>
+        <returns>Returns the <see cref="T:SkiaSharp.SKPath" /> containing the outline of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetTextPath">
@@ -3832,12 +3836,12 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="y" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a UTF-8 encoded byte span.</param>
+        <param name="x">The x-coordinate of the text origin.</param>
+        <param name="y">The y-coordinate of the text origin.</param>
+        <summary>Returns the path (outline) for the specified text at the given position.</summary>
+        <returns>Returns the <see cref="T:SkiaSharp.SKPath" /> containing the outline of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetTextPath">
@@ -3866,12 +3870,12 @@ and <xref:SkiaSharp.SKPaint.PathEffect> to scale and modify the glyph paths.
         <Parameter Name="y" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text as a character span.</param>
+        <param name="x">The x-coordinate of the text origin.</param>
+        <param name="y">The y-coordinate of the text origin.</param>
+        <summary>Returns the path (outline) for the specified text at the given position.</summary>
+        <returns>Returns the <see cref="T:SkiaSharp.SKPath" /> containing the outline of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetTextPath">
@@ -4335,10 +4339,10 @@ its glyphs vertically rather than horizontally.
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to measure as a UTF-8 encoded byte span.</param>
+        <summary>Measures the width of the text.</summary>
+        <returns>The width of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MeasureText">
@@ -4365,10 +4369,10 @@ its glyphs vertically rather than horizontally.
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to measure as a character span.</param>
+        <summary>Measures the width of the text.</summary>
+        <returns>The width of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MeasureText">
@@ -4529,11 +4533,11 @@ its glyphs vertically rather than horizontally.
         <Parameter Name="bounds" Type="SkiaSharp.SKRect" RefType="ref" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to measure as a UTF-8 encoded byte span.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangle of the text.</param>
+        <summary>Measures the width of the text and returns the bounding rectangle.</summary>
+        <returns>The width of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MeasureText">
@@ -4561,11 +4565,11 @@ its glyphs vertically rather than horizontally.
         <Parameter Name="bounds" Type="SkiaSharp.SKRect" RefType="ref" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to measure as a character span.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangle of the text.</param>
+        <summary>Measures the width of the text and returns the bounding rectangle.</summary>
+        <returns>The width of the text.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MeasureText">
@@ -4760,10 +4764,10 @@ consumes up to `length` bytes from the buffer.
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="color">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="color">The color value as an <see cref="T:SkiaSharp.SKColorF" />.</param>
+        <param name="colorspace">The <see cref="T:SkiaSharp.SKColorSpace" /> for interpreting the color.</param>
+        <summary>Sets the paint's color using a floating-point color value in the specified color space.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Shader">
@@ -5094,9 +5098,9 @@ consumes up to `length` bytes from the buffer.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates an <see cref="T:SkiaSharp.SKFont" /> from the paint's text settings.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKFont" /> initialized with the paint's typeface and text size settings.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Typeface">

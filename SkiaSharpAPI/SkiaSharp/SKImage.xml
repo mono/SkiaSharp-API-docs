@@ -142,15 +142,15 @@
         <Parameter Name="outOffset" Type="SkiaSharp.SKPointI" RefType="out" Index="5" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="filter">To be added.</param>
-        <param name="subset">To be added.</param>
-        <param name="clipBounds">To be added.</param>
-        <param name="outSubset">To be added.</param>
-        <param name="outOffset">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="filter">The image filter to apply.</param>
+        <param name="subset">The subset of the image to process.</param>
+        <param name="clipBounds">The clipping bounds.</param>
+        <param name="outSubset">Returns the subset of the resulting image.</param>
+        <param name="outOffset">Returns the offset of the resulting image.</param>
+        <summary>Applies an image filter to this image.</summary>
+        <returns>Returns the filtered image, or <see langword="null" /> if the filter could not be applied.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ApplyImageFilter">
@@ -176,15 +176,15 @@
         <Parameter Name="outOffset" Type="SkiaSharp.SKPointI" RefType="out" Index="5" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="filter">To be added.</param>
-        <param name="subset">To be added.</param>
-        <param name="clipBounds">To be added.</param>
-        <param name="outSubset">To be added.</param>
-        <param name="outOffset">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="filter">The image filter to apply.</param>
+        <param name="subset">The subset of the image to process.</param>
+        <param name="clipBounds">The clipping bounds.</param>
+        <param name="outSubset">Returns the subset of the resulting image.</param>
+        <param name="outOffset">Returns the offset of the resulting image.</param>
+        <summary>Applies an image filter to this image.</summary>
+        <returns>Returns the filtered image, or <see langword="null" /> if the filter could not be applied.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ColorSpace">
@@ -587,12 +587,12 @@
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="2" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <summary>Creates an image from the specified texture, taking ownership of the texture.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks>SkiaSharp will delete or recycle the texture when the image is released.</remarks>
       </Docs>
     </Member>
     <Member MemberName="FromAdoptedTexture">
@@ -648,13 +648,13 @@
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="3" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="origin">The origin of the texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <summary>Creates an image from the specified texture, taking ownership of the texture.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks>SkiaSharp will delete or recycle the texture when the image is released.</remarks>
       </Docs>
     </Member>
     <Member MemberName="FromAdoptedTexture">
@@ -713,14 +713,14 @@
         <Parameter Name="alpha" Type="SkiaSharp.SKAlphaType" Index="4" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="alpha">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="origin">The origin of the texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <param name="alpha">The alpha type of the image.</param>
+        <summary>Creates an image from the specified texture, taking ownership of the texture.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks>SkiaSharp will delete or recycle the texture when the image is released.</remarks>
       </Docs>
     </Member>
     <Member MemberName="FromAdoptedTexture">
@@ -782,15 +782,15 @@
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="5" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="alpha">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="origin">The origin of the texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <param name="alpha">The alpha type of the image.</param>
+        <param name="colorspace">The colorspace of the image.</param>
+        <summary>Creates an image from the specified texture, taking ownership of the texture.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks>SkiaSharp will delete or recycle the texture when the image is released.</remarks>
       </Docs>
     </Member>
     <Member MemberName="FromBitmap">
@@ -1573,11 +1573,11 @@
         <Parameter Name="data" Type="SkiaSharp.SKData" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="info">To be added.</param>
-        <param name="data">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="info">The image information.</param>
+        <param name="data">The pixel data.</param>
+        <summary>Creates an image from the specified raster data.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the data is invalid.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FromPixels">
@@ -1924,12 +1924,12 @@
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="2" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <summary>Creates an image from the specified texture without taking ownership.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FromTexture">
@@ -2063,13 +2063,13 @@
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="3" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="origin">The origin of the texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <summary>Creates an image from the specified texture without taking ownership.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FromTexture">
@@ -2210,14 +2210,14 @@
         <Parameter Name="alpha" Type="SkiaSharp.SKAlphaType" Index="4" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="alpha">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="origin">The origin of the texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <param name="alpha">The alpha type of the image.</param>
+        <summary>Creates an image from the specified texture without taking ownership.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FromTexture">
@@ -2279,15 +2279,15 @@
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="5" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="alpha">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="origin">The origin of the texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <param name="alpha">The alpha type of the image.</param>
+        <param name="colorspace">The colorspace of the image.</param>
+        <summary>Creates an image from the specified texture without taking ownership.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FromTexture">
@@ -2352,16 +2352,16 @@
         <Parameter Name="releaseProc" Type="SkiaSharp.SKImageTextureReleaseDelegate" Index="6" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="alpha">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="releaseProc">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="origin">The origin of the texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <param name="alpha">The alpha type of the image.</param>
+        <param name="colorspace">The colorspace of the image.</param>
+        <param name="releaseProc">The delegate to invoke when the image is released.</param>
+        <summary>Creates an image from the specified texture without taking ownership.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FromTexture">
@@ -2429,17 +2429,17 @@
         <Parameter Name="releaseContext" Type="System.Object" Index="7" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="alpha">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="releaseProc">To be added.</param>
-        <param name="releaseContext">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="texture">The backend texture.</param>
+        <param name="origin">The origin of the texture.</param>
+        <param name="colorType">The color type of the image.</param>
+        <param name="alpha">The alpha type of the image.</param>
+        <param name="colorspace">The colorspace of the image.</param>
+        <param name="releaseProc">The delegate to invoke when the image is released.</param>
+        <param name="releaseContext">User data to pass to the release delegate.</param>
+        <summary>Creates an image from the specified texture without taking ownership.</summary>
+        <returns>Returns a new image, or <see langword="null" /> if the texture is invalid.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Height">
@@ -2481,9 +2481,9 @@
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the image information describing the image.</summary>
+        <value>The <see cref="T:SkiaSharp.SKImageInfo" /> describing the image.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsAlphaOnly">
@@ -2575,10 +2575,10 @@
         <Parameter Name="context" Type="SkiaSharp.GRContext" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <summary>Returns whether the image is valid for the given GPU context.</summary>
+        <returns>Returns <see langword="true" /> if the image is valid; otherwise <see langword="false" />.</returns>
+        <remarks>If the image is GPU-backed and the context matches, the image is valid.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsValid">
@@ -2599,10 +2599,10 @@
         <Parameter Name="context" Type="SkiaSharp.GRRecordingContext" Index="0" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <summary>Returns whether the image is valid for the given GPU context.</summary>
+        <returns>Returns <see langword="true" /> if the image is valid; otherwise <see langword="false" />.</returns>
+        <remarks>If the image is GPU-backed and the context matches, the image is valid.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PeekPixels">
@@ -2676,10 +2676,10 @@
         <Parameter Name="pixmap" Type="SkiaSharp.SKPixmap" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="pixmap">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="pixmap">The pixmap to receive the pixel data.</param>
+        <summary>Copies the pixels from this image into the destination pixmap.</summary>
+        <returns>Returns <see langword="true" /> on success; otherwise <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ReadPixels">
@@ -2703,11 +2703,11 @@
         <Parameter Name="dstPixels" Type="System.IntPtr" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="dstInfo">To be added.</param>
-        <param name="dstPixels">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dstInfo">The destination image information.</param>
+        <param name="dstPixels">The destination pixel buffer.</param>
+        <summary>Copies the pixels from this image into the destination buffer.</summary>
+        <returns>Returns <see langword="true" /> on success; otherwise <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ReadPixels">
@@ -2732,12 +2732,12 @@
         <Parameter Name="dstRowBytes" Type="System.Int32" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="dstInfo">To be added.</param>
-        <param name="dstPixels">To be added.</param>
-        <param name="dstRowBytes">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dstInfo">The destination image information.</param>
+        <param name="dstPixels">The destination pixel buffer.</param>
+        <param name="dstRowBytes">The number of bytes between rows in the destination buffer.</param>
+        <summary>Copies the pixels from this image into the destination buffer.</summary>
+        <returns>Returns <see langword="true" /> on success; otherwise <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ReadPixels">
@@ -2928,11 +2928,11 @@
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The destination pixmap.</param>
+        <param name="sampling">The sampling options to use when scaling.</param>
+        <summary>Copies the pixels from this image into the destination pixmap, scaling the image if the dimensions differ.</summary>
+        <returns>Returns <see langword="true" /> on success; otherwise <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ScalePixels">
@@ -2990,12 +2990,12 @@
         <Parameter Name="cachingHint" Type="SkiaSharp.SKImageCachingHint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="cachingHint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The destination pixmap.</param>
+        <param name="sampling">The sampling options to use when scaling.</param>
+        <param name="cachingHint">Whether or not to cache intermediate results.</param>
+        <summary>Copies the pixels from this image into the destination pixmap, scaling the image if the dimensions differ.</summary>
+        <returns>Returns <see langword="true" /> on success; otherwise <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Subset">
@@ -3043,11 +3043,11 @@
         <Parameter Name="subset" Type="SkiaSharp.SKRectI" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="subset">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="subset">The subset of the image to process.</param>
+        <summary>Returns a new image that is a subset of this image.</summary>
+        <returns>Returns the new image, or <see langword="null" /> if the rectangle does not intersect the image.</returns>
+        <remarks>The underlying implementation may share the pixels, or it may make a copy.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ToRasterImage">
@@ -3094,10 +3094,10 @@
         <Parameter Name="ensurePixelData" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="ensurePixelData">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="ensurePixelData">Whether to ensure the image has pixel data.</param>
+        <summary>Returns a raster-backed image of the current image.</summary>
+        <returns>Returns a raster image, or <see langword="null" /> if the conversion fails.</returns>
+        <remarks>If the image is already raster-backed, it may return the same image.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ToRawShader">
@@ -3115,9 +3115,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a raw shader from the current image without color space conversion.</summary>
+        <returns>Returns a new raw shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToRawShader">
@@ -3138,11 +3138,11 @@
         <Parameter Name="tileY" Type="SkiaSharp.SKShaderTileMode" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tileX">To be added.</param>
-        <param name="tileY">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileX">The tile mode for the x-axis.</param>
+        <param name="tileY">The tile mode for the y-axis.</param>
+        <summary>Creates a raw shader from the current image without color space conversion.</summary>
+        <returns>Returns a new raw shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToRawShader">
@@ -3164,12 +3164,12 @@
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tileX">To be added.</param>
-        <param name="tileY">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileX">The tile mode for the x-axis.</param>
+        <param name="tileY">The tile mode for the y-axis.</param>
+        <param name="localMatrix">The local matrix to use with the shader.</param>
+        <summary>Creates a raw shader from the current image without color space conversion.</summary>
+        <returns>Returns a new raw shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToRawShader">
@@ -3191,12 +3191,12 @@
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tileX">To be added.</param>
-        <param name="tileY">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileX">The tile mode for the x-axis.</param>
+        <param name="tileY">The tile mode for the y-axis.</param>
+        <param name="sampling">The sampling options to use.</param>
+        <summary>Creates a raw shader from the current image without color space conversion.</summary>
+        <returns>Returns a new raw shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToRawShader">
@@ -3219,13 +3219,13 @@
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tileX">To be added.</param>
-        <param name="tileY">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileX">The tile mode for the x-axis.</param>
+        <param name="tileY">The tile mode for the y-axis.</param>
+        <param name="sampling">The sampling options to use.</param>
+        <param name="localMatrix">The local matrix to use with the shader.</param>
+        <summary>Creates a raw shader from the current image without color space conversion.</summary>
+        <returns>Returns a new raw shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3246,9 +3246,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a shader from the current image.</summary>
+        <returns>Returns a new shader that will draw the current image.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3304,12 +3304,12 @@
         <Parameter Name="quality" Type="SkiaSharp.SKFilterQuality" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tileX">To be added.</param>
-        <param name="tileY">To be added.</param>
-        <param name="quality">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileX">The tile mode for the x-axis.</param>
+        <param name="tileY">The tile mode for the y-axis.</param>
+        <param name="quality">The filter quality to use.</param>
+        <summary>Creates a shader from the current image.</summary>
+        <returns>Returns a new shader that will draw the current image.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3362,12 +3362,12 @@
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tileX">To be added.</param>
-        <param name="tileY">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileX">The tile mode for the x-axis.</param>
+        <param name="tileY">The tile mode for the y-axis.</param>
+        <param name="sampling">The sampling options to use.</param>
+        <summary>Creates a shader from the current image.</summary>
+        <returns>Returns a new shader that will draw the current image.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3395,13 +3395,13 @@
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tileX">To be added.</param>
-        <param name="tileY">To be added.</param>
-        <param name="quality">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileX">The tile mode for the x-axis.</param>
+        <param name="tileY">The tile mode for the y-axis.</param>
+        <param name="quality">The filter quality to use.</param>
+        <param name="localMatrix">The local matrix to use with the shader.</param>
+        <summary>Creates a shader from the current image.</summary>
+        <returns>Returns a new shader that will draw the current image.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3424,13 +3424,13 @@
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tileX">To be added.</param>
-        <param name="tileY">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileX">The tile mode for the x-axis.</param>
+        <param name="tileY">The tile mode for the y-axis.</param>
+        <param name="sampling">The sampling options to use.</param>
+        <param name="localMatrix">The local matrix to use with the shader.</param>
+        <summary>Creates a shader from the current image.</summary>
+        <returns>Returns a new shader that will draw the current image.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToTextureImage">
@@ -3453,10 +3453,10 @@
         <Parameter Name="context" Type="SkiaSharp.GRContext" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <summary>Returns a GPU-backed image from this image.</summary>
+        <returns>Returns a GPU-backed image, or <see langword="null" /> if the conversion fails.</returns>
+        <remarks>If the image is already GPU-backed, it may return the same image.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ToTextureImage">
@@ -3486,11 +3486,11 @@
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="colorspace">The colorspace of the image.</param>
+        <summary>Returns a GPU-backed image from this image.</summary>
+        <returns>Returns a GPU-backed image, or <see langword="null" /> if the conversion fails.</returns>
+        <remarks>If the image is already GPU-backed, it may return the same image.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ToTextureImage">
@@ -3513,11 +3513,11 @@
         <Parameter Name="mipmapped" Type="System.Boolean" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="mipmapped">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="mipmapped">Whether to generate mipmaps.</param>
+        <summary>Returns a GPU-backed image from this image.</summary>
+        <returns>Returns a GPU-backed image, or <see langword="null" /> if the conversion fails.</returns>
+        <remarks>If the image is already GPU-backed, it may return the same image.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ToTextureImage">
@@ -3539,12 +3539,12 @@
         <Parameter Name="budgeted" Type="System.Boolean" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="mipmapped">To be added.</param>
-        <param name="budgeted">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU context.</param>
+        <param name="mipmapped">Whether to generate mipmaps.</param>
+        <param name="budgeted">Whether the image should count against the GPU resource budget.</param>
+        <summary>Returns a GPU-backed image from this image.</summary>
+        <returns>Returns a GPU-backed image, or <see langword="null" /> if the conversion fails.</returns>
+        <remarks>If the image is already GPU-backed, it may return the same image.</remarks>
       </Docs>
     </Member>
     <Member MemberName="UniqueId">

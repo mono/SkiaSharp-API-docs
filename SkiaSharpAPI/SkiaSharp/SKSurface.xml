@@ -107,9 +107,9 @@ The example above produces the following:
         <ReturnType>SkiaSharp.GRRecordingContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the GPU recording context associated with this surface.</summary>
+        <value>The GPU recording context, or null if not GPU-accelerated.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -675,12 +675,12 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="2" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="renderTarget">The backend render target to wrap.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <summary>Creates a surface that wraps a GPU backend render target.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -703,12 +703,12 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="2" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="texture">The backend texture to wrap.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <summary>Creates a surface that wraps a GPU backend texture.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -731,12 +731,12 @@ The example above produces the following:
         <Parameter Name="info" Type="SkiaSharp.SKImageInfo" Index="2" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="budgeted">To be added.</param>
-        <param name="info">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
+        <param name="info">The image info describing the surface dimensions and format.</param>
+        <summary>Creates a GPU-accelerated surface with the specified image info.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1044,13 +1044,13 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="3" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="renderTarget">The backend render target to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <summary>Creates a surface that wraps a GPU backend render target with the specified origin.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1074,13 +1074,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="3" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="renderTarget">The backend render target to wrap.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a surface that wraps a GPU backend render target with surface properties.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1104,13 +1104,13 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="3" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="texture">The backend texture to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <summary>Creates a surface that wraps a GPU backend texture with the specified origin.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1134,13 +1134,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="3" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="texture">The backend texture to wrap.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a surface that wraps a GPU backend texture with surface properties.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1164,13 +1164,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="3" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="budgeted">To be added.</param>
-        <param name="info">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
+        <param name="info">The image info describing the surface dimensions and format.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a GPU-accelerated surface with the specified image info and properties.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1194,13 +1194,13 @@ The example above produces the following:
         <Parameter Name="sampleCount" Type="System.Int32" Index="3" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="budgeted">To be added.</param>
-        <param name="info">To be added.</param>
-        <param name="sampleCount">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
+        <param name="info">The image info describing the surface dimensions and format.</param>
+        <param name="sampleCount">The number of samples for MSAA rendering.</param>
+        <summary>Creates a GPU-accelerated surface with multisampling support.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1580,14 +1580,14 @@ The example above produces the following:
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="4" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="renderTarget">The backend render target to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="colorspace">The color space of the surface.</param>
+        <summary>Creates a surface that wraps a GPU backend render target with color space.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1612,14 +1612,14 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="4" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="renderTarget">The backend render target to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a surface that wraps a GPU backend render target with origin and properties.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1644,14 +1644,14 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="4" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="texture">The backend texture to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a surface that wraps a GPU backend texture with origin and properties.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1676,14 +1676,14 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="4" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="sampleCount">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="texture">The backend texture to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="sampleCount">The number of samples for MSAA rendering.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <summary>Creates a surface that wraps a GPU backend texture with multisampling.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1708,14 +1708,14 @@ The example above produces the following:
         <Parameter Name="origin" Type="SkiaSharp.GRSurfaceOrigin" Index="4" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="budgeted">To be added.</param>
-        <param name="info">To be added.</param>
-        <param name="sampleCount">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
+        <param name="info">The image info describing the surface dimensions and format.</param>
+        <param name="sampleCount">The number of samples for MSAA rendering.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <summary>Creates a GPU-accelerated surface with multisampling and specified origin.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1740,14 +1740,14 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="4" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="budgeted">To be added.</param>
-        <param name="info">To be added.</param>
-        <param name="sampleCount">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
+        <param name="info">The image info describing the surface dimensions and format.</param>
+        <param name="sampleCount">The number of samples for MSAA rendering.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a GPU-accelerated surface with multisampling and properties.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1956,15 +1956,15 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="5" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="renderTarget">The backend render target to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="colorspace">The color space of the surface.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a surface that wraps a GPU backend render target with color space and properties.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1990,15 +1990,15 @@ The example above produces the following:
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="5" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="sampleCount">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="texture">The backend texture to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="sampleCount">The number of samples for MSAA rendering.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="colorspace">The color space of the surface.</param>
+        <summary>Creates a surface that wraps a GPU backend texture with multisampling and color space.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -2024,15 +2024,15 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="5" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="sampleCount">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="texture">The backend texture to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="sampleCount">The number of samples for MSAA rendering.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a surface that wraps a GPU backend texture with multisampling and properties.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -2214,16 +2214,16 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" Index="6" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="texture">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="sampleCount">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="props">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="texture">The backend texture to wrap.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="sampleCount">The number of samples for MSAA rendering.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <param name="colorspace">The color space of the surface.</param>
+        <param name="props">The surface properties.</param>
+        <summary>Creates a surface that wraps a GPU backend texture with all options.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -2250,16 +2250,16 @@ The example above produces the following:
         <Parameter Name="shouldCreateWithMips" Type="System.Boolean" Index="6" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <param name="budgeted">To be added.</param>
-        <param name="info">To be added.</param>
-        <param name="sampleCount">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="props">To be added.</param>
-        <param name="shouldCreateWithMips">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="context">The GPU recording context.</param>
+        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
+        <param name="info">The image info describing the surface dimensions and format.</param>
+        <param name="sampleCount">The number of samples for MSAA rendering.</param>
+        <param name="origin">The origin of the surface texture.</param>
+        <param name="props">The surface properties.</param>
+        <param name="shouldCreateWithMips">Whether to create mipmaps.</param>
+        <summary>Creates a GPU-accelerated surface with all options including mipmap support.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or null on failure.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -2887,8 +2887,8 @@ The example above produces the following:
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Ensures all pending draw operations are submitted to the GPU.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -2910,10 +2910,10 @@ The example above produces the following:
         <Parameter Name="synchronous" Type="System.Boolean" Index="1" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="submit">To be added.</param>
-        <param name="synchronous">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="submit">Whether to submit the commands to the GPU.</param>
+        <param name="synchronous">Whether to wait for the GPU to finish processing.</param>
+        <summary>Ensures all pending draw operations are submitted to the GPU with specified options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="PeekPixels">
@@ -3045,10 +3045,10 @@ The example above produces the following:
         <Parameter Name="bounds" Type="SkiaSharp.SKRectI" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="bounds">The bounds of the area to capture.</param>
+        <summary>Creates an image from the specified area of the surface.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKImage" /> containing the captured area.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SurfaceProperties">

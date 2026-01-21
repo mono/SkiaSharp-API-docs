@@ -134,12 +134,12 @@
         <Parameter Name="y" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The glyph IDs for this run.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="positions">The horizontal X positions for each glyph.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <summary>Adds a new horizontally-positioned run to the builder.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddHorizontalRun">
@@ -496,14 +496,14 @@
         <Parameter Name="textAlign" Type="SkiaSharp.SKTextAlign" Index="5" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="glyphWidths">To be added.</param>
-        <param name="glyphOffsets">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="textAlign">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The glyph IDs for this run.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="glyphWidths">The widths for each glyph.</param>
+        <param name="glyphOffsets">The offsets for each glyph.</param>
+        <param name="path">The path along which glyphs are positioned.</param>
+        <param name="textAlign">The text alignment along the path.</param>
+        <summary>Adds a new run positioned along a path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddPositionedRun">
@@ -597,11 +597,11 @@
         <Parameter Name="positions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="positions">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The glyph IDs for this run.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="positions">The positions for each glyph.</param>
+        <summary>Adds a new fully-positioned run to the builder.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddPositionedRun">
@@ -939,11 +939,11 @@
         <Parameter Name="positions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKRotationScaleMatrix&gt;" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="positions">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The glyph IDs for this run.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="positions">The positions for each glyph.</param>
+        <summary>Adds a new run with rotation and scale transformations.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddRun">
@@ -967,11 +967,11 @@
         <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The glyph IDs for this run.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="origin">The origin point for the run.</param>
+        <summary>Adds a new run to the builder at the specified origin.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddRun">
@@ -1406,12 +1406,12 @@
         <Parameter Name="y" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <summary>Allocates a buffer for a horizontally-positioned run.</summary>
+        <returns>A run buffer for writing glyph and position data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateHorizontalRun">
@@ -1436,13 +1436,13 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a horizontally-positioned run.</summary>
+        <returns>A run buffer for writing glyph and position data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateHorizontalRun">
@@ -1474,13 +1474,13 @@
         <Parameter Name="textByteCount" Type="System.Int32" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <summary>Allocates a buffer for a horizontally-positioned run with text data.</summary>
+        <returns>A run buffer for writing glyph, position, and text data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateHorizontalRun">
@@ -1512,13 +1512,13 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a horizontally-positioned run.</summary>
+        <returns>A run buffer for writing glyph and position data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateHorizontalRun">
@@ -1551,14 +1551,14 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a horizontally-positioned text run with cluster data.</summary>
+        <returns>A text run buffer for writing glyph, position, cluster, and text data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateHorizontalTextRun">
@@ -1582,14 +1582,14 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a fully-positioned run.</summary>
+        <returns>A run buffer for writing glyph and position data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocatePositionedRun">
@@ -1619,11 +1619,11 @@
         <Parameter Name="count" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <summary>Allocates a buffer for a fully-positioned run.</summary>
+        <returns>A run buffer for writing glyph and position data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocatePositionedRun">
@@ -1647,12 +1647,12 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a fully-positioned run.</summary>
+        <returns>A run buffer for writing glyph and position data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocatePositionedRun">
@@ -1683,9 +1683,9 @@
         <Parameter Name="textByteCount" Type="System.Int32" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="textByteCount">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1719,12 +1719,12 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a fully-positioned run.</summary>
+        <returns>A run buffer for writing glyph and position data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocatePositionedRun">
@@ -1756,13 +1756,13 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a fully-positioned text run with cluster data.</summary>
+        <returns>A text run buffer for writing glyph, position, cluster, and text data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocatePositionedTextRun">
@@ -1785,10 +1785,10 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1814,10 +1814,10 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1844,11 +1844,11 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1873,9 +1873,9 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1901,10 +1901,10 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1929,9 +1929,9 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1957,10 +1957,10 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -1987,11 +1987,11 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="x">The horizontal X position for the origin.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -2019,15 +2019,15 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="x">The horizontal X position for the origin.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a rotation-scale run.</summary>
+        <returns>A run buffer for writing glyph and rotation-scale matrix data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateRotationScaleRun">
@@ -2048,11 +2048,11 @@
         <Parameter Name="count" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <summary>Allocates a buffer for a rotation-scale run.</summary>
+        <returns>A run buffer for writing glyph and rotation-scale matrix data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateRotationScaleRun">
@@ -2074,12 +2074,12 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a rotation-scale text run with cluster data.</summary>
+        <returns>A text run buffer for writing glyph, rotation-scale, cluster, and text data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateRotationScaleTextRun">
@@ -2102,10 +2102,10 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -2140,13 +2140,13 @@
         <Parameter Name="y" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="x">The horizontal X position for the origin.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <summary>Allocates a buffer for a horizontally-positioned run.</summary>
+        <returns>A run buffer for writing glyph and position data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateRun">
@@ -2172,14 +2172,14 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="x">The horizontal X position for the origin.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a run at a fixed origin.</summary>
+        <returns>A run buffer for writing glyph data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateRun">
@@ -2212,11 +2212,11 @@
         <Parameter Name="textByteCount" Type="System.Int32" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textByteCount">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="x">The horizontal X position for the origin.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -2252,14 +2252,14 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="x">The horizontal X position for the origin.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a run at a fixed origin.</summary>
+        <returns>A run buffer for writing glyph data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateRun">
@@ -2293,15 +2293,15 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="5" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="x">The horizontal X position for the origin.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
+        <summary>Allocates a buffer for a text run at a fixed origin with cluster data.</summary>
+        <returns>A text run buffer for writing glyph, cluster, and text data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllocateTextRun">
@@ -2326,12 +2326,12 @@
         <Parameter Name="bounds" Type="System.Nullable&lt;SkiaSharp.SKRect&gt;" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="font">To be added.</param>
-        <param name="count">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="textByteCount">To be added.</param>
-        <param name="bounds">To be added.</param>
+        <param name="font">The font used for this run.</param>
+        <param name="count">The number of glyphs to allocate in the buffer.</param>
+        <param name="x">The horizontal X position for the origin.</param>
+        <param name="y">The vertical Y position for the text baseline.</param>
+        <param name="textByteCount">The number of bytes to allocate for text storage.</param>
+        <param name="bounds">Optional bounds for the run.</param>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>

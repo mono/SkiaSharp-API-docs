@@ -257,13 +257,13 @@
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="width">To be added.</param>
-        <param name="height">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <param name="alphaType">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="width">The width of the bitmap in pixels.</param>
+        <param name="height">The height of the bitmap in pixels.</param>
+        <param name="colorType">The color type for the bitmap.</param>
+        <param name="alphaType">The alpha type for the bitmap.</param>
+        <param name="colorspace">The colorspace for the bitmap.</param>
+        <summary>Creates a new bitmap with the specified dimensions and format.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AlphaType">
@@ -722,10 +722,10 @@
         <Parameter Name="buffer" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="buffer">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="buffer">The encoded image data.</param>
+        <summary>Decodes a bitmap from the specified encoded data.</summary>
+        <returns>The decoded bitmap, or <see langword="null" /> on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Decode">
@@ -921,11 +921,11 @@
         <Parameter Name="bitmapInfo" Type="SkiaSharp.SKImageInfo" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="buffer">To be added.</param>
-        <param name="bitmapInfo">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="buffer">The encoded image data.</param>
+        <param name="bitmapInfo">The desired image information for decoding.</param>
+        <summary>Decodes a bitmap from the specified encoded data into the desired format.</summary>
+        <returns>The decoded bitmap, or <see langword="null" /> on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Decode">
@@ -1085,10 +1085,10 @@
         <Parameter Name="buffer" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="buffer">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="buffer">The encoded image data.</param>
+        <summary>Returns the image information without fully decoding the data.</summary>
+        <returns>The image information, or <see cref="F:SkiaSharp.SKImageInfo.Empty" /> on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DecodeBounds">
@@ -1213,9 +1213,9 @@
       <Docs>
         <param name="format">The file format used to encode the image.</param>
         <param name="quality">The quality level to use for the image. Quality range from 0-100. Higher values correspond to improved visual quality, but less compression.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Encodes the bitmap using the specified format and quality.</summary>
+        <returns>The encoded data, or <see langword="null" /> on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Encode">
@@ -1279,9 +1279,9 @@
         <param name="dst">The stream to write the encoded image to.</param>
         <param name="format">The file format used to encode the image.</param>
         <param name="quality">The quality level to use for the image. Quality range from 0-100. Higher values correspond to improved visual quality, but less compression.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Encodes the bitmap to the stream using the specified format.</summary>
+        <returns>Returns <see langword="true" /> on success.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Erase">
@@ -1670,11 +1670,11 @@
         <Parameter Name="y" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="x">The x-coordinate.</param>
+        <param name="y">The y-coordinate.</param>
+        <summary>Gets a pointer to the pixel at the specified coordinates.</summary>
+        <returns>A pointer to the pixel data.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetIndex8Color">
@@ -1836,11 +1836,11 @@
         <Parameter Name="y" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="x">The x-coordinate.</param>
+        <param name="y">The y-coordinate.</param>
+        <summary>Gets a span starting at the specified pixel coordinates.</summary>
+        <returns>A span of pixel data starting at the specified coordinates.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Height">
@@ -2508,11 +2508,11 @@
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="info">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="info">The destination image information.</param>
+        <param name="sampling">The sampling options for resizing.</param>
+        <summary>Resizes the bitmap to the specified size using the sampling options.</summary>
+        <returns>The resized bitmap, or <see langword="null" /> on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Resize">
@@ -2541,11 +2541,11 @@
         <Parameter Name="quality" Type="SkiaSharp.SKFilterQuality" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="size">To be added.</param>
-        <param name="quality">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="size">The destination size.</param>
+        <param name="quality">The filter quality for resizing.</param>
+        <summary>Resizes the bitmap to the specified size.</summary>
+        <returns>The resized bitmap, or <see langword="null" /> on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Resize">
@@ -2566,11 +2566,11 @@
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="size">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="size">The destination size.</param>
+        <param name="sampling">The sampling options for resizing.</param>
+        <summary>Resizes the bitmap to the specified size using the sampling options.</summary>
+        <returns>The resized bitmap, or <see langword="null" /> on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Resize">
@@ -2710,11 +2710,11 @@ Filter Quality:
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="destination">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="destination">The destination bitmap.</param>
+        <param name="sampling">The sampling options for resizing.</param>
+        <summary>Scales the pixels to the destination using the sampling options.</summary>
+        <returns>Returns <see langword="true" /> on success.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ScalePixels">
@@ -2794,11 +2794,11 @@ Filter Quality:
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="destination">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="destination">The destination pixmap.</param>
+        <param name="sampling">The sampling options for resizing.</param>
+        <summary>Scales the pixels to the destination using the sampling options.</summary>
+        <returns>Returns <see langword="true" /> on success.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SetColorTable">
@@ -2964,9 +2964,9 @@ Filter Quality:
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a shader from this bitmap.</summary>
+        <returns>The shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -2990,11 +2990,11 @@ Filter Quality:
         <Parameter Name="tmy" Type="SkiaSharp.SKShaderTileMode" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tmx">The tile mode for x axis.</param>
+        <param name="tmy">The tile mode for y axis.</param>
+        <summary>Creates a tiled shader from this bitmap.</summary>
+        <returns>The shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3021,12 +3021,12 @@ Filter Quality:
         <Parameter Name="quality" Type="SkiaSharp.SKFilterQuality" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="quality">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tmx">The tile mode for x axis.</param>
+        <param name="tmy">The tile mode for y axis.</param>
+        <param name="quality">The filter quality for resizing.</param>
+        <summary>Creates a tiled shader with the specified filtering.</summary>
+        <returns>The shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3051,12 +3051,12 @@ Filter Quality:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tmx">The tile mode for x axis.</param>
+        <param name="tmy">The tile mode for y axis.</param>
+        <param name="localMatrix">The local matrix to apply to the shader.</param>
+        <summary>Creates a tiled shader with a local transformation matrix.</summary>
+        <returns>The shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3078,12 +3078,12 @@ Filter Quality:
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tmx">The tile mode for x axis.</param>
+        <param name="tmy">The tile mode for y axis.</param>
+        <param name="sampling">The sampling options for resizing.</param>
+        <summary>Creates a tiled shader with the specified filtering.</summary>
+        <returns>The shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3111,13 +3111,13 @@ Filter Quality:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="quality">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tmx">The tile mode for x axis.</param>
+        <param name="tmy">The tile mode for y axis.</param>
+        <param name="quality">The filter quality for resizing.</param>
+        <param name="localMatrix">The local matrix to apply to the shader.</param>
+        <summary>Creates a tiled shader with the specified filtering.</summary>
+        <returns>The shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -3140,13 +3140,13 @@ Filter Quality:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tmx">The tile mode for x axis.</param>
+        <param name="tmy">The tile mode for y axis.</param>
+        <param name="sampling">The sampling options for resizing.</param>
+        <param name="localMatrix">The local matrix to apply to the shader.</param>
+        <summary>Creates a tiled shader with the specified filtering.</summary>
+        <returns>The shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="TryAllocPixels">

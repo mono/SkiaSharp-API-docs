@@ -12,8 +12,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a custom blending function that combines source and destination colors.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName="CreateArithmetic">
@@ -37,14 +37,14 @@
         <Parameter Name="enforcePMColor" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="k1">To be added.</param>
-        <param name="k2">To be added.</param>
-        <param name="k3">To be added.</param>
-        <param name="k4">To be added.</param>
-        <param name="enforcePMColor">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="k1">The coefficient for source * destination.</param>
+        <param name="k2">The coefficient for source.</param>
+        <param name="k3">The coefficient for destination.</param>
+        <param name="k4">The constant offset added to the result.</param>
+        <param name="enforcePMColor">If <see langword="true" />, clamps the result to valid premultiplied color values.</param>
+        <summary>Creates a blender that applies the arithmetic formula: k1 * src * dst + k2 * src + k3 * dst + k4.</summary>
+        <returns>A new blender that applies the arithmetic combination.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateBlendMode">
@@ -64,10 +64,10 @@
         <Parameter Name="mode" Type="SkiaSharp.SKBlendMode" />
       </Parameters>
       <Docs>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="mode">The blend mode to use.</param>
+        <summary>Creates a blender that applies the specified blend mode.</summary>
+        <returns>A new blender that applies the blend mode.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -87,9 +87,10 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="disposing">
+          <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+        <summary>Releases the unmanaged resources used by the <see cref="T:SkiaSharp.SKBlender" /> and optionally releases the managed resources.</summary>
+        <remarks />
       </Docs>
     </Member>
   </Members>

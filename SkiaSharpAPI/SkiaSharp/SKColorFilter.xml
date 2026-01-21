@@ -90,10 +90,10 @@
         <Parameter Name="matrix" Type="System.ReadOnlySpan&lt;System.Single&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="matrix">A span of <see cref="F:SkiaSharp.SKColorFilter.ColorMatrixSize" /> elements representing the 4x5 color matrix.</param>
+        <summary>Creates a new color filter that transforms a color by a 4x5 (row-major) matrix.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateColorMatrix">
@@ -226,10 +226,10 @@
         <Parameter Name="matrix" Type="System.ReadOnlySpan&lt;System.Single&gt;" Index="0" FrameworkAlternate="skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="matrix">A span of <see cref="F:SkiaSharp.SKColorFilter.ColorMatrixSize" /> elements representing the 4x5 HSLA color matrix.</param>
+        <summary>Creates a new color filter that transforms a color by a 4x5 (row-major) matrix in HSLA color space.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateLerp">
@@ -250,12 +250,12 @@
         <Parameter Name="filter1" Type="SkiaSharp.SKColorFilter" Index="2" FrameworkAlternate="skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="weight">To be added.</param>
-        <param name="filter0">To be added.</param>
-        <param name="filter1">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="weight">The interpolation weight between 0.0 and 1.0, where 0.0 returns the result of <paramref name="filter0" /> and 1.0 returns the result of <paramref name="filter1" />.</param>
+        <param name="filter0">The first color filter to interpolate.</param>
+        <param name="filter1">The second color filter to interpolate.</param>
+        <summary>Creates a new color filter that linearly interpolates between the results of two other color filters.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateLighting">
@@ -301,9 +301,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a new color filter that converts linear RGB colors to sRGB gamma-encoded colors.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateLumaColor">
@@ -344,9 +344,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a new color filter that converts sRGB gamma-encoded colors to linear RGB colors.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateTable">
@@ -393,10 +393,10 @@
         <Parameter Name="table" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="table">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="table">The table of values for each color component, with a length of <see cref="F:SkiaSharp.SKColorFilter.TableMaxLength" />.</param>
+        <summary>Creates a new table color filter.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateTable">
@@ -452,13 +452,13 @@
         <Parameter Name="tableB" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="tableA">To be added.</param>
-        <param name="tableR">To be added.</param>
-        <param name="tableG">To be added.</param>
-        <param name="tableB">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tableA">The table of values for the alpha component, with a length of <see cref="F:SkiaSharp.SKColorFilter.TableMaxLength" />.</param>
+        <param name="tableR">The table of values for the red component, with a length of <see cref="F:SkiaSharp.SKColorFilter.TableMaxLength" />.</param>
+        <param name="tableG">The table of values for the green component, with a length of <see cref="F:SkiaSharp.SKColorFilter.TableMaxLength" />.</param>
+        <param name="tableB">The table of values for the blue component, with a length of <see cref="F:SkiaSharp.SKColorFilter.TableMaxLength" />.</param>
+        <summary>Creates a new table color filter with separate tables for each color component.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Dispose">

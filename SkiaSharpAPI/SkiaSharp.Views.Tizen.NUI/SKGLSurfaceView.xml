@@ -12,8 +12,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A GPU-accelerated view for drawing SkiaSharp content using OpenGL ES in a Tizen NUI application.</summary>
+    <remarks>This view uses hardware-accelerated rendering for improved performance. For software rendering, use <see cref="T:SkiaSharp.Views.Tizen.NUI.SKCanvasView" /> instead.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -28,8 +28,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Tizen.NUI.SKGLSurfaceView" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -49,9 +49,10 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="disposing">
+          <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+        <summary>Releases the unmanaged resources used by the view and optionally releases the managed resources.</summary>
+        <remarks>This method releases the OpenGL context and any GPU resources associated with the view.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnDrawFrame">
@@ -69,8 +70,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Called when the view needs to render a frame.</summary>
+        <remarks>This method sets up the OpenGL context and raises the <see cref="E:SkiaSharp.Views.Tizen.NUI.CustomRenderingView.PaintSurface" /> event.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnResized">
@@ -88,8 +89,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Called when the view has been resized.</summary>
+        <remarks>This method updates the GPU render target to match the new view dimensions.</remarks>
       </Docs>
     </Member>
   </Members>

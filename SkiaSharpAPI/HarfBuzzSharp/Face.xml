@@ -87,10 +87,10 @@
         <Parameter Name="destroy" Type="HarfBuzzSharp.ReleaseDelegate" Index="1" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3;harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="getTable">To be added.</param>
-        <param name="destroy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="getTable">The delegate to retrieve the table data.</param>
+        <param name="destroy">The delegate to call when the face is destroyed, or <see langword="null" />.</param>
+        <summary>Creates a new <see cref="T:HarfBuzzSharp.Face" /> instance, using the delegate to assemble the data.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -164,9 +164,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the number of glyphs in the face.</summary>
+        <value>The number of glyphs in the face.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Index">
@@ -203,9 +203,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether this face is immutable.</summary>
+        <value>
+          <see langword="true" /> if the face is immutable; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MakeImmutable">
@@ -222,8 +223,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Makes this face immutable, preventing further modifications.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ReferenceTable">
@@ -242,10 +243,10 @@
         <Parameter Name="table" Type="HarfBuzzSharp.Tag" Index="0" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3;harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="table">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="table">The tag identifying the table to retrieve.</param>
+        <summary>Retrieves a reference to the specified font table as a blob.</summary>
+        <returns>A <see cref="T:HarfBuzzSharp.Blob" /> containing the table data, or an empty blob if the table is not found.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Tables">
@@ -261,9 +262,9 @@
         <ReturnType>HarfBuzzSharp.Tag[]</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the list of OpenType table tags present in this face.</summary>
+        <value>An array of <see cref="T:HarfBuzzSharp.Tag" /> values representing the tables in the face.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="UnitsPerEm">

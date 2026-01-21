@@ -390,12 +390,12 @@ be colorized using the color on the paint.
         <Parameter Name="shaderB" Type="SkiaSharp.SKShader" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="blender">To be added.</param>
-        <param name="shaderA">To be added.</param>
-        <param name="shaderB">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="blender">The <see cref="T:SkiaSharp.SKBlender" /> to use for combining the shaders.</param>
+        <param name="shaderA">The first shader to blend.</param>
+        <param name="shaderB">The second shader to blend.</param>
+        <summary>Creates a new shader that blends two shaders together using a custom blender.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateBlend">
@@ -417,12 +417,12 @@ be colorized using the color on the paint.
         <Parameter Name="shaderB" Type="SkiaSharp.SKShader" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="mode">To be added.</param>
-        <param name="shaderA">To be added.</param>
-        <param name="shaderB">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="mode">The <see cref="T:SkiaSharp.SKBlendMode" /> to use for combining the shaders.</param>
+        <param name="shaderA">The first shader to blend.</param>
+        <param name="shaderB">The second shader to blend.</param>
+        <summary>Creates a new shader that blends two shaders together using a blend mode.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateColor">
@@ -663,10 +663,10 @@ The example above produces the following:
         <Parameter Name="src" Type="SkiaSharp.SKImage" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source image to use for the shader.</param>
+        <summary>Creates a new shader that draws an image.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -691,12 +691,12 @@ The example above produces the following:
         <Parameter Name="tmy" Type="SkiaSharp.SKShaderTileMode" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source image to use for the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <summary>Creates a new shader that draws an image with specified tile modes.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -724,13 +724,13 @@ The example above produces the following:
         <Parameter Name="quality" Type="SkiaSharp.SKFilterQuality" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="quality">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source image to use for the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <param name="quality">The filter quality to use when sampling the image.</param>
+        <summary>Creates a new shader that draws an image with specified tile modes and filter quality.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -756,13 +756,13 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source image to use for the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Creates a new shader that draws an image with specified tile modes and transformation matrix.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -785,13 +785,13 @@ The example above produces the following:
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source image to use for the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <param name="sampling">The sampling options to use when sampling the image.</param>
+        <summary>Creates a new shader that draws an image with specified tile modes and sampling options.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -820,14 +820,14 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="quality">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source image to use for the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <param name="quality">The filter quality to use when sampling the image.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Creates a new shader that draws an image with specified tile modes, filter quality, and transformation matrix.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -851,14 +851,14 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source image to use for the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <param name="sampling">The sampling options to use when sampling the image.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Creates a new shader that draws an image with specified tile modes, sampling options, and transformation matrix.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateLerp">
@@ -880,12 +880,12 @@ The example above produces the following:
         <Parameter Name="src" Type="SkiaSharp.SKShader" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="weight">To be added.</param>
-        <param name="dst">To be added.</param>
-        <param name="src">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="weight">The interpolation weight between 0.0 and 1.0, where 0.0 returns the result of <paramref name="dst" /> and 1.0 returns the result of <paramref name="src" />.</param>
+        <param name="dst">The destination shader to interpolate.</param>
+        <param name="src">The source shader to interpolate.</param>
+        <summary>Creates a new shader that linearly interpolates between two shaders.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <MemberGroup MemberName="CreateLinearGradient">
@@ -1027,14 +1027,14 @@ The example above produces the following:
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="start">To be added.</param>
-        <param name="end">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="start">The start point for the gradient.</param>
+        <param name="end">The end point for the gradient.</param>
+        <param name="colors">The array of colors to be distributed between the two points.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <summary>Creates a shader that generates a linear gradient between the two specified points in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateLinearGradient">
@@ -1099,15 +1099,15 @@ The example above produces the following:
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" Index="5" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="start">To be added.</param>
-        <param name="end">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="start">The start point for the gradient.</param>
+        <param name="end">The end point for the gradient.</param>
+        <param name="colors">The array of colors to be distributed between the two points.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <summary>Creates a shader that generates a linear gradient between the two specified points in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateLinearGradient">
@@ -1136,16 +1136,16 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="6" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="start">To be added.</param>
-        <param name="end">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="start">The start point for the gradient.</param>
+        <param name="end">The end point for the gradient.</param>
+        <param name="colors">The array of colors to be distributed between the two points.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Creates a shader that generates a linear gradient between the two specified points in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateLocalMatrix">
@@ -1269,14 +1269,14 @@ The example above produces the following:
         <Parameter Name="tileSize" Type="SkiaSharp.SKSizeI" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">To be added.</param>
-        <param name="baseFrequencyY">To be added.</param>
-        <param name="numOctaves">To be added.</param>
-        <param name="seed">To be added.</param>
-        <param name="tileSize">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="baseFrequencyX">The base frequency in the X direction.</param>
+        <param name="baseFrequencyY">The base frequency in the Y direction.</param>
+        <param name="numOctaves">The number of octaves, usually a value between 1 and 10.</param>
+        <param name="seed">The seed value used to initialize the random number generator.</param>
+        <param name="tileSize">The tile size used to modify the frequencies for tiling.</param>
+        <summary>Creates a new shader that produces fractal Perlin noise with a specified tile size.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreatePerlinNoiseImprovedNoise">
@@ -1300,13 +1300,13 @@ The example above produces the following:
         <Parameter Name="z" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">To be added.</param>
-        <param name="baseFrequencyY">To be added.</param>
-        <param name="numOctaves">To be added.</param>
-        <param name="z">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="baseFrequencyX">The base frequency in the X direction.</param>
+        <param name="baseFrequencyY">The base frequency in the Y direction.</param>
+        <param name="numOctaves">The number of octaves, usually a value between 1 and 10.</param>
+        <param name="z">The z-coordinate value used to produce 3D noise.</param>
+        <summary>Creates a new shader that produces improved Perlin noise.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreatePerlinNoiseTurbulence">
@@ -1401,14 +1401,14 @@ The example above produces the following:
         <Parameter Name="tileSize" Type="SkiaSharp.SKSizeI" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">To be added.</param>
-        <param name="baseFrequencyY">To be added.</param>
-        <param name="numOctaves">To be added.</param>
-        <param name="seed">To be added.</param>
-        <param name="tileSize">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="baseFrequencyX">The base frequency in the X direction.</param>
+        <param name="baseFrequencyY">The base frequency in the Y direction.</param>
+        <param name="numOctaves">The number of octaves, usually a value between 1 and 10.</param>
+        <param name="seed">The seed value used to initialize the random number generator.</param>
+        <param name="tileSize">The tile size used to modify the frequencies for tiling.</param>
+        <summary>Creates a new shader that produces Perlin noise turbulence with a specified tile size.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1431,10 +1431,10 @@ The example above produces the following:
         <Parameter Name="src" Type="SkiaSharp.SKPicture" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The picture to use inside the shader.</param>
+        <summary>Creates a new shader that will draw with the specified picture.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1487,13 +1487,13 @@ The example above produces the following:
         <Parameter Name="filterMode" Type="SkiaSharp.SKFilterMode" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The picture to use inside the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <param name="filterMode">The filter mode to use when sampling the picture.</param>
+        <summary>Creates a new shader that will draw with the specified picture and filter mode.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1556,14 +1556,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="tile" Type="SkiaSharp.SKRect" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <param name="tile">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The picture to use inside the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <param name="filterMode">The filter mode to use when sampling the picture.</param>
+        <param name="tile">The tile rectangle in picture coordinates.</param>
+        <summary>Creates a new shader that will draw with the specified picture, filter mode, and tile rectangle.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1629,15 +1629,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="tile" Type="SkiaSharp.SKRect" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="tmx">To be added.</param>
-        <param name="tmy">To be added.</param>
-        <param name="filterMode">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <param name="tile">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The picture to use inside the shader.</param>
+        <param name="tmx">The tile mode in the X direction.</param>
+        <param name="tmy">The tile mode in the Y direction.</param>
+        <param name="filterMode">The filter mode to use when sampling the picture.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <param name="tile">The tile rectangle in picture coordinates.</param>
+        <summary>Creates a new shader that will draw with the specified picture, filter mode, transformation matrix, and tile rectangle.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1731,14 +1731,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="radius">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The center of the circle for this gradient.</param>
+        <param name="radius">The positive radius of the circle for this gradient.</param>
+        <param name="colors">The array of colors to be distributed between the center and edge of the circle.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <summary>Creates a shader that generates a radial gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1803,15 +1803,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" Index="5" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="radius">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The center of the circle for this gradient.</param>
+        <param name="radius">The positive radius of the circle for this gradient.</param>
+        <param name="colors">The array of colors to be distributed between the center and edge of the circle.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <summary>Creates a shader that generates a radial gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1840,16 +1840,16 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="6" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="radius">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The center of the circle for this gradient.</param>
+        <param name="radius">The positive radius of the circle for this gradient.</param>
+        <param name="colors">The array of colors to be distributed between the center and edge of the circle.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Creates a shader that generates a radial gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1933,12 +1933,12 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The coordinates of the center of the sweep.</param>
+        <param name="colors">The array of colors to be distributed around the center.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <summary>Creates a shader that generates a sweep gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1997,13 +1997,13 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="colorPos" Type="System.Single[]" Index="3" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The coordinates of the center of the sweep.</param>
+        <param name="colors">The array of colors to be distributed around the center.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <summary>Creates a shader that generates a sweep gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -2064,14 +2064,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="4" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The coordinates of the center of the sweep.</param>
+        <param name="colors">The array of colors to be distributed around the center.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Creates a shader that generates a sweep gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -2135,15 +2135,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="endAngle" Type="System.Single" Index="5" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="tileMode">To be added.</param>
-        <param name="startAngle">To be added.</param>
-        <param name="endAngle">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The coordinates of the center of the sweep.</param>
+        <param name="colors">The array of colors to be distributed around the center.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="tileMode">The tiling mode.</param>
+        <param name="startAngle">The start of the angular range.</param>
+        <param name="endAngle">The end of the angular range.</param>
+        <summary>Creates a shader that generates a sweep gradient with angular range in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -2210,16 +2210,16 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="endAngle" Type="System.Single" Index="6" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="tileMode">To be added.</param>
-        <param name="startAngle">To be added.</param>
-        <param name="endAngle">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The coordinates of the center of the sweep.</param>
+        <param name="colors">The array of colors to be distributed around the center.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="tileMode">The tiling mode.</param>
+        <param name="startAngle">The start of the angular range.</param>
+        <param name="endAngle">The end of the angular range.</param>
+        <summary>Creates a shader that generates a sweep gradient with angular range in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -2249,17 +2249,17 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="7" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="center">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="tileMode">To be added.</param>
-        <param name="startAngle">To be added.</param>
-        <param name="endAngle">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="center">The coordinates of the center of the sweep.</param>
+        <param name="colors">The array of colors to be distributed around the center.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="tileMode">The tiling mode.</param>
+        <param name="startAngle">The start of the angular range.</param>
+        <param name="endAngle">The end of the angular range.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Creates a shader that generates a sweep gradient with angular range in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -2363,16 +2363,16 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" Index="6" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="start">To be added.</param>
-        <param name="startRadius">To be added.</param>
-        <param name="end">To be added.</param>
-        <param name="endRadius">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="start">The coordinates for the starting point.</param>
+        <param name="startRadius">The radius at the starting point.</param>
+        <param name="end">The coordinates for the end point.</param>
+        <param name="endRadius">The radius at the end point.</param>
+        <param name="colors">The array of colors to be distributed between the two points.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <summary>Creates a shader that generates a conical gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -2443,17 +2443,17 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" Index="7" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="start">To be added.</param>
-        <param name="startRadius">To be added.</param>
-        <param name="end">To be added.</param>
-        <param name="endRadius">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="start">The coordinates for the starting point.</param>
+        <param name="startRadius">The radius at the starting point.</param>
+        <param name="end">The coordinates for the end point.</param>
+        <param name="endRadius">The radius at the end point.</param>
+        <param name="colors">The array of colors to be distributed between the two points.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <summary>Creates a shader that generates a conical gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -2484,18 +2484,18 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="8" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="start">To be added.</param>
-        <param name="startRadius">To be added.</param>
-        <param name="end">To be added.</param>
-        <param name="endRadius">To be added.</param>
-        <param name="colors">To be added.</param>
-        <param name="colorspace">To be added.</param>
-        <param name="colorPos">To be added.</param>
-        <param name="mode">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="start">The coordinates for the starting point.</param>
+        <param name="startRadius">The radius at the starting point.</param>
+        <param name="end">The coordinates for the end point.</param>
+        <param name="endRadius">The radius at the end point.</param>
+        <param name="colors">The array of colors to be distributed between the two points.</param>
+        <param name="colorspace">The color space for the gradient colors.</param>
+        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or null to evenly distribute the colors.</param>
+        <param name="mode">The tiling mode.</param>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Creates a shader that generates a conical gradient in a specified color space.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -2545,10 +2545,10 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="filter" Type="SkiaSharp.SKColorFilter" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="filter">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="filter">The <see cref="T:SkiaSharp.SKColorFilter" /> to apply to this shader's output.</param>
+        <summary>Returns a new shader that produces the same colors as this shader but with the specified color filter applied.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="WithLocalMatrix">
@@ -2571,10 +2571,10 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="localMatrix">The matrix to apply before applying the shader.</param>
+        <summary>Returns a new shader that produces the same colors as this shader but with the specified transformation matrix applied.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
+        <remarks />
       </Docs>
     </Member>
   </Members>
