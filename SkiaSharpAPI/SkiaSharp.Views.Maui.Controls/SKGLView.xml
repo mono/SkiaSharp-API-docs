@@ -48,8 +48,31 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A .NET MAUI view that uses GPU acceleration for hardware-accelerated 2D graphics rendering with SkiaSharp.</summary>
+    <remarks>
+      <para>The <see cref="T:SkiaSharp.Views.Maui.Controls.SKGLView" /> provides a GPU-accelerated drawing surface for SkiaSharp graphics in .NET MAUI applications. This view can provide better performance than the software-rendered <see cref="T:SkiaSharp.Views.Maui.Controls.SKCanvasView" /> for complex graphics or animations.</para>
+      <para>The underlying GPU technology varies by platform:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <b>Android</b>: OpenGL ES via <c>SKGLTextureView</c></description>
+        </item>
+        <item>
+          <description>
+            <b>iOS/tvOS</b>: OpenGL ES (deprecated) or Metal on Mac Catalyst</description>
+        </item>
+        <item>
+          <description>
+            <b>Mac Catalyst</b>: Metal via <c>SKMetalView</c></description>
+        </item>
+        <item>
+          <description>
+            <b>Windows</b>: DirectX via ANGLE using <c>SKSwapChainPanel</c></description>
+        </item>
+      </list>
+      <para>Subscribe to the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event to draw custom graphics. Set <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.HasRenderLoop" /> to <see langword="true" /> for continuous rendering (e.g., for animations).</para>
+      <para>Note: On Windows, the <c>Background</c> property is not supported due to WinUI 3 limitations with <c>SwapChainPanel</c>.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -65,8 +88,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Creates a new instance of the <see cref="T:SkiaSharp.Views.Maui.Controls.SKGLView" /> class.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="CanvasSize">
@@ -87,9 +110,9 @@
         <ReturnType>SkiaSharp.SKSize</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the current size of the canvas in pixels.</summary>
+        <value>The size of the drawing canvas in pixels.</value>
+        <remarks>This size accounts for the device's pixel density unless <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.IgnorePixelScaling" /> is set to <see langword="true" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableTouchEvents">
@@ -107,9 +130,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether touch events are enabled for this view.</summary>
+        <value>
+          <see langword="true" /> if touch events are enabled; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When enabled, the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.Touch" /> event is raised for touch interactions.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableTouchEventsProperty">
@@ -127,8 +151,8 @@
         <ReturnType>Microsoft.Maui.Controls.BindableProperty</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Identifies the <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.EnableTouchEvents" /> bindable property.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GRContext">
@@ -158,9 +182,9 @@
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the GPU graphics context used for rendering.</summary>
+        <value>The <see cref="T:SkiaSharp.GRContext" /> for the GPU rendering context, or <see langword="null" /> if the context is not yet available.</value>
+        <remarks>The context is created when the view's native handler initializes the GPU surface. The backend type (OpenGL, Metal, or DirectX) depends on the platform.</remarks>
       </Docs>
     </Member>
     <Member MemberName="HasRenderLoop">
@@ -178,9 +202,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the view should continuously render frames.</summary>
+        <value>
+          <see langword="true" /> if the render loop is enabled; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When enabled, the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event is raised continuously for each frame, suitable for animations. When disabled, rendering only occurs when <see cref="M:SkiaSharp.Views.Maui.Controls.SKGLView.InvalidateSurface" /> is called.</remarks>
       </Docs>
     </Member>
     <Member MemberName="HasRenderLoopProperty">
@@ -198,8 +223,8 @@
         <ReturnType>Microsoft.Maui.Controls.BindableProperty</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Identifies the <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.HasRenderLoop" /> bindable property.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="IgnorePixelScaling">
@@ -216,9 +241,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the view should ignore the device's pixel scaling.</summary>
+        <value>
+          <see langword="true" /> if pixel scaling is ignored and the canvas uses 1:1 pixel mapping; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When <see langword="false" />, the canvas is scaled to match the device's DPI, resulting in a canvas size larger than the view's size on high-DPI displays.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IgnorePixelScalingProperty">
@@ -235,8 +261,8 @@
         <ReturnType>Microsoft.Maui.Controls.BindableProperty</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Identifies the <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.IgnorePixelScaling" /> bindable property.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="InvalidateSurface">
@@ -259,8 +285,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Invalidates the view, causing the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event to be raised on the next frame.</summary>
+        <remarks>Call this method when the content needs to be redrawn. If <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.HasRenderLoop" /> is <see langword="true" />, calling this method is unnecessary.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnMeasure">
@@ -280,11 +306,11 @@
         <Parameter Name="heightConstraint" Type="System.Double" Index="1" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="widthConstraint">To be added.</param>
-        <param name="heightConstraint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="widthConstraint">The maximum available width for the view.</param>
+        <param name="heightConstraint">The maximum available height for the view.</param>
+        <summary>Called during the measure pass of layout to determine the desired size of the view.</summary>
+        <returns>The desired size for the view.</returns>
+        <remarks>Override this method to provide custom measurement behavior.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -305,9 +331,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the drawing surface and context.</param>
+        <summary>Raises the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event.</summary>
+        <remarks>Override this method to perform custom drawing operations. Use the <see cref="P:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs.Surface" /> property to access the <see cref="T:SkiaSharp.SKCanvas" /> for drawing.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnTouch">
@@ -328,9 +354,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing touch event details.</param>
+        <summary>Raises the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.Touch" /> event.</summary>
+        <remarks>Override this method to handle touch events. Set <see cref="P:SkiaSharp.Views.Maui.SKTouchEventArgs.Handled" /> to <see langword="true" /> to indicate the event was processed.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PaintSurface">
@@ -353,8 +379,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the view needs to be painted.</summary>
+        <remarks>Subscribe to this event to perform custom drawing on the GPU-accelerated surface. The event arguments provide access to the <see cref="T:SkiaSharp.SKSurface" /> for drawing and the <see cref="T:SkiaSharp.GRBackendRenderTarget" /> for render target information.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.GetCanvasSize">
@@ -373,8 +399,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs&lt;SkiaSharp.SKSize&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member is used internally by the handler to retrieve the canvas size.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.GetGRContext">
@@ -393,8 +419,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs&lt;SkiaSharp.GRContext&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member is used internally by the handler to retrieve the graphics context.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.OnPaintSurface">
@@ -416,9 +442,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the drawing surface.</param>
+        <summary>This member is used internally by the handler to trigger painting.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.OnTouch">
@@ -440,9 +466,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing touch event details.</param>
+        <summary>This member is used internally by the handler to forward touch events.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.SurfaceInvalidated">
@@ -461,8 +487,8 @@
         <ReturnType>System.EventHandler</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member is used internally by the handler to respond to surface invalidation.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop">
@@ -482,9 +508,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>This member implements <see cref="P:SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop" /> to provide render loop state.</summary>
+        <value>The value of <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.HasRenderLoop" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.OnCanvasSizeChanged">
@@ -507,9 +533,9 @@
         <Parameter Name="size" Type="SkiaSharp.SKSizeI" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
       </Parameters>
       <Docs>
-        <param name="size">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="size">The new canvas size in pixels.</param>
+        <summary>This member is used internally by the handler to notify size changes.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.OnGRContextChanged">
@@ -537,9 +563,9 @@
         <Parameter Name="context" Type="SkiaSharp.GRContext" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
       </Parameters>
       <Docs>
-        <param name="context">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="context">The new graphics context, or <see langword="null" /> if the context was destroyed.</param>
+        <summary>This member is used internally by the handler to notify context changes.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.OnPaintSurface">
@@ -562,9 +588,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the drawing surface.</param>
+        <summary>This member is used internally by the handler to trigger painting.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.OnTouch">
@@ -587,9 +613,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing touch event details.</param>
+        <summary>This member is used internally by the handler to forward touch events.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Touch">
@@ -612,8 +638,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.SKTouchEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the view receives a touch event.</summary>
+        <remarks>This event is only raised when <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.EnableTouchEvents" /> is <see langword="true" />. Set <see cref="P:SkiaSharp.Views.Maui.SKTouchEventArgs.Handled" /> to <see langword="true" /> to indicate the event was processed.</remarks>
       </Docs>
     </Member>
   </Members>

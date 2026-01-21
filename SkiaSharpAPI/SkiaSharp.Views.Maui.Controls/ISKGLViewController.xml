@@ -18,8 +18,8 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Defines the controller interface for <see cref="T:SkiaSharp.Views.Maui.Controls.SKGLView" /> to communicate with platform renderers.</summary>
+    <remarks>This interface provides the communication channel between the cross-platform <see cref="T:SkiaSharp.Views.Maui.Controls.SKGLView" /> control and its platform-specific renderer. It is primarily used for internal implementation and is typically not used directly by application code.</remarks>
   </Docs>
   <Members>
     <Member MemberName="GetCanvasSize">
@@ -35,8 +35,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs&lt;SkiaSharp.SKSize&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the renderer needs to retrieve the current canvas size.</summary>
+        <remarks>The renderer raises this event to get the canvas size from the control. Handlers should set the <see cref="P:SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs`1.Value" /> property with the current canvas size.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetGRContext">
@@ -52,8 +52,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs&lt;SkiaSharp.GRContext&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the renderer needs to retrieve the current GPU context.</summary>
+        <remarks>The renderer raises this event to get the <see cref="T:SkiaSharp.GRContext" /> from the control. Handlers should set the <see cref="P:SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs`1.Value" /> property with the current GPU context.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -72,9 +72,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the surface, canvas, and GPU context information.</param>
+        <summary>Called by the renderer when the surface needs to be painted.</summary>
+        <remarks>The renderer calls this method during the paint cycle. Implementations should raise the PaintSurface event to allow application code to perform GPU-accelerated drawing operations.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnTouch">
@@ -93,9 +93,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing touch information.</param>
+        <summary>Called by the renderer when a touch event occurs.</summary>
+        <remarks>The renderer calls this method when touch input is detected. Implementations should raise the Touch event to allow application code to handle touch interactions.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SurfaceInvalidated">
@@ -111,8 +111,8 @@
         <ReturnType>System.EventHandler</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the control requests a surface redraw.</summary>
+        <remarks>This event is raised when <see cref="M:SkiaSharp.Views.Maui.Controls.SKGLView.InvalidateSurface" /> is called. Renderers should subscribe to this event and trigger a redraw of the native view when it occurs.</remarks>
       </Docs>
     </Member>
   </Members>

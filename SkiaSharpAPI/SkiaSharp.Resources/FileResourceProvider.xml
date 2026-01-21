@@ -12,8 +12,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A resource provider that loads resources from a directory on the file system.</summary>
+    <remarks>Use this provider to load Lottie animation assets (images, fonts, nested animations) from a local directory.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -31,10 +31,13 @@
         <Parameter Name="preDecode" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="baseDirectory">To be added.</param>
-        <param name="preDecode">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="baseDirectory">The base directory path from which to load resources.</param>
+        <param name="preDecode">If <see langword="true" />, images are decoded upfront at load time; if <see langword="false" />, images are decoded on-the-fly at rasterization time.</param>
+        <summary>Creates a new file resource provider with the specified base directory.</summary>
+        <remarks>
+          <para>By default, images are decoded on-the-fly at rasterization time. Large images may cause jank as decoding is expensive and can thrash internal caches.</para>
+          <para>Set <paramref name="preDecode" /> to <see langword="true" /> to force-decode all images upfront, at the cost of potentially more RAM and slower animation build times.</para>
+        </remarks>
       </Docs>
     </Member>
   </Members>

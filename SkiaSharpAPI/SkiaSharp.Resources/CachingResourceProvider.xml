@@ -12,8 +12,11 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A resource provider proxy that caches loaded image assets.</summary>
+    <remarks>
+      <para>This provider wraps another <see cref="T:SkiaSharp.Resources.ResourceProvider" /> and caches loaded image assets to avoid repeated loading of the same resources.</para>
+      <para>Use this provider to improve performance when an animation references the same image assets multiple times.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -30,9 +33,9 @@
         <Parameter Name="resourceProvider" Type="SkiaSharp.Resources.ResourceProvider" />
       </Parameters>
       <Docs>
-        <param name="resourceProvider">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="resourceProvider">The underlying resource provider to wrap with caching.</param>
+        <summary>Creates a caching proxy around the specified resource provider.</summary>
+        <remarks>Image assets loaded through this provider will be cached and reused on subsequent requests for the same resource.</remarks>
       </Docs>
     </Member>
   </Members>

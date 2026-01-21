@@ -19,8 +19,8 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Defines the interface for an image source backed by an <see cref="T:SkiaSharp.SKPicture" />.</summary>
+    <remarks>This interface is implemented by <see cref="T:SkiaSharp.Views.Maui.Controls.SKPictureImageSource" /> and used by image source handlers to convert SkiaSharp pictures to platform-native images. Since pictures are resolution-independent, the <see cref="P:SkiaSharp.Views.Maui.ISKPictureImageSource.Dimensions" /> property specifies the target rasterization size.</remarks>
   </Docs>
   <Members>
     <Member MemberName="Dimensions">
@@ -38,9 +38,9 @@
         <ReturnType>SkiaSharp.SKSizeI</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the dimensions to use when rasterizing the picture.</summary>
+        <value>The target size in pixels for the rasterized image.</value>
+        <remarks>Since <see cref="T:SkiaSharp.SKPicture" /> is resolution-independent, this property specifies the pixel dimensions to use when converting the picture to a bitmap for display.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Picture">
@@ -58,9 +58,9 @@
         <ReturnType>SkiaSharp.SKPicture</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the underlying SkiaSharp picture.</summary>
+        <value>The <see cref="T:SkiaSharp.SKPicture" /> that contains the recorded drawing commands.</value>
+        <remarks>The picture is rasterized to the size specified by <see cref="P:SkiaSharp.Views.Maui.ISKPictureImageSource.Dimensions" /> when the image source is used with MAUI image controls.</remarks>
       </Docs>
     </Member>
   </Members>

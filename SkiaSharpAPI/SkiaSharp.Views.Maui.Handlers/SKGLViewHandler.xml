@@ -24,8 +24,8 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>The .NET MAUI handler for <see cref="T:SkiaSharp.Views.Maui.ISKGLView" /> that maps the cross-platform control to platform-specific GPU-accelerated implementations.</summary>
+    <remarks>This handler creates and manages the platform-specific GPU view (Android SKGLTextureView using OpenGL ES, Mac Catalyst SKMetalView using Metal, or Windows SKSwapChainPanel using DirectX via ANGLE) and handles property synchronization between the cross-platform control and native view.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -40,8 +40,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" /> class with default mappers.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -64,10 +64,10 @@
         <Parameter Name="commands" Type="Microsoft.Maui.CommandMapper" />
       </Parameters>
       <Docs>
-        <param name="mapper">To be added.</param>
-        <param name="commands">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="mapper">The property mapper to use, or <see langword="null" /> to use the default.</param>
+        <param name="commands">The command mapper to use, or <see langword="null" /> to use the default.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" /> class with custom mappers.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreatePlatformView">
@@ -85,9 +85,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates the platform-specific GPU view for the current platform.</summary>
+        <returns>The platform-specific GPU-backed view instance.</returns>
+        <remarks>Returns an Android SKGLTextureView (OpenGL ES), Mac Catalyst SKMetalView (Metal), or Windows SKSwapChainPanel (DirectX via ANGLE) depending on the platform.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MapEnableTouchEvents">
@@ -108,10 +108,10 @@
         <Parameter Name="view" Type="SkiaSharp.Views.Maui.ISKGLView" />
       </Parameters>
       <Docs>
-        <param name="handler">To be added.</param>
-        <param name="view">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="handler">The handler instance.</param>
+        <param name="view">The view whose property changed.</param>
+        <summary>Maps the <see cref="P:SkiaSharp.Views.Maui.ISKGLView.EnableTouchEvents" /> property to the platform view.</summary>
+        <remarks>This method is called when the EnableTouchEvents property changes to update the native view's touch handling.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MapHasRenderLoop">
@@ -132,10 +132,10 @@
         <Parameter Name="view" Type="SkiaSharp.Views.Maui.ISKGLView" />
       </Parameters>
       <Docs>
-        <param name="handler">To be added.</param>
-        <param name="view">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="handler">The handler instance.</param>
+        <param name="view">The view whose property changed.</param>
+        <summary>Maps the <see cref="P:SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop" /> property to the platform view.</summary>
+        <remarks>This method is called when the HasRenderLoop property changes to enable or disable continuous rendering on the native view.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MapIgnorePixelScaling">
@@ -156,10 +156,10 @@
         <Parameter Name="view" Type="SkiaSharp.Views.Maui.ISKGLView" />
       </Parameters>
       <Docs>
-        <param name="handler">To be added.</param>
-        <param name="view">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="handler">The handler instance.</param>
+        <param name="view">The view whose property changed.</param>
+        <summary>Maps the <see cref="P:SkiaSharp.Views.Maui.ISKGLView.IgnorePixelScaling" /> property to the platform view.</summary>
+        <remarks>This method is called when the IgnorePixelScaling property changes to update the native view's pixel scaling behavior.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnInvalidateSurface">
@@ -187,11 +187,11 @@
         </Parameter>
       </Parameters>
       <Docs>
-        <param name="handler">To be added.</param>
-        <param name="view">To be added.</param>
-        <param name="args">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="handler">The handler instance.</param>
+        <param name="view">The view requesting invalidation.</param>
+        <param name="args">Optional arguments (not used).</param>
+        <summary>Handles the <see cref="M:SkiaSharp.Views.Maui.ISKGLView.InvalidateSurface" /> command to trigger a redraw.</summary>
+        <remarks>This method is called when the cross-platform control requests a surface invalidation, causing the native GPU view to repaint.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SKGLViewCommandMapper">
@@ -208,8 +208,8 @@
         <ReturnType>Microsoft.Maui.CommandMapper&lt;SkiaSharp.Views.Maui.ISKGLView,SkiaSharp.Views.Maui.Handlers.SKGLViewHandler&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>The command mapper that maps cross-platform commands to handler methods.</summary>
+        <remarks>Contains the mapping for the InvalidateSurface command.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SKGLViewMapper">
@@ -226,8 +226,8 @@
         <ReturnType>Microsoft.Maui.PropertyMapper&lt;SkiaSharp.Views.Maui.ISKGLView,SkiaSharp.Views.Maui.Handlers.SKGLViewHandler&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>The property mapper that maps cross-platform properties to handler methods.</summary>
+        <remarks>Contains mappings for EnableTouchEvents, HasRenderLoop, and IgnorePixelScaling properties.</remarks>
       </Docs>
     </Member>
   </Members>

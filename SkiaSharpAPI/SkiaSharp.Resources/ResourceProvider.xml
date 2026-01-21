@@ -12,8 +12,11 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>An interface that lets rich-content modules defer loading of external resources (images, fonts, etc.) to embedding clients.</summary>
+    <remarks>
+      <para>ResourceProvider is used by <see cref="T:SkiaSharp.Skottie.AnimationBuilder" /> to load external assets referenced by Lottie animations, such as images, fonts, and nested animations.</para>
+      <para>Several built-in implementations are available: <see cref="T:SkiaSharp.Resources.FileResourceProvider" /> for loading from the file system, <see cref="T:SkiaSharp.Resources.CachingResourceProvider" /> for caching loaded assets, and <see cref="T:SkiaSharp.Resources.DataUriResourceProvider" /> for loading embedded data URIs.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="Load">
@@ -33,10 +36,10 @@
         <Parameter Name="resourceName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="resourceName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="resourceName">The name of the resource to load.</param>
+        <summary>Loads a generic resource by name and returns it as data.</summary>
+        <returns>The resource data, or <see langword="null" /> if the resource could not be loaded.</returns>
+        <remarks>This is equivalent to calling <see cref="M:SkiaSharp.Resources.ResourceProvider.Load(System.String,System.String)" /> with an empty path.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Load">
@@ -57,11 +60,11 @@
         <Parameter Name="resourceName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="resourcePath">To be added.</param>
-        <param name="resourceName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="resourcePath">The path to the resource directory.</param>
+        <param name="resourceName">The name of the resource to load.</param>
+        <summary>Loads a generic resource specified by path and name, and returns it as data.</summary>
+        <returns>The resource data, or <see langword="null" /> if the resource could not be loaded.</returns>
+        <remarks>This method is typically used to load nested animations or other generic data assets.</remarks>
       </Docs>
     </Member>
   </Members>

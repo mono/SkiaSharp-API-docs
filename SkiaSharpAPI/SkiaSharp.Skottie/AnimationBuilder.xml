@@ -12,8 +12,11 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides a builder pattern for creating animations with custom configuration.</summary>
+    <remarks>
+      <para>Use the builder to configure custom font managers and resource providers before loading an animation.</para>
+      <para>Create a builder using <see cref="M:SkiaSharp.Skottie.Animation.CreateBuilder(SkiaSharp.Skottie.AnimationBuilderFlags)" />.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="Build">
@@ -33,10 +36,10 @@
         <Parameter Name="data" Type="SkiaSharp.SKData" />
       </Parameters>
       <Docs>
-        <param name="data">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="data">The Lottie animation data in JSON format.</param>
+        <summary>Builds an animation from Lottie JSON data.</summary>
+        <returns>A new <see cref="T:SkiaSharp.Skottie.Animation" /> instance, or <see langword="null" /> if the data could not be parsed.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Build">
@@ -56,10 +59,10 @@
         <Parameter Name="stream" Type="SkiaSharp.SKStream" />
       </Parameters>
       <Docs>
-        <param name="stream">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="stream">A Skia stream containing Lottie animation JSON data.</param>
+        <summary>Builds an animation from a Skia stream containing Lottie JSON data.</summary>
+        <returns>A new <see cref="T:SkiaSharp.Skottie.Animation" /> instance, or <see langword="null" /> if the stream could not be parsed.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Build">
@@ -79,10 +82,10 @@
         <Parameter Name="stream" Type="System.IO.Stream" />
       </Parameters>
       <Docs>
-        <param name="stream">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="stream">A .NET stream containing Lottie animation JSON data.</param>
+        <summary>Builds an animation from a .NET stream containing Lottie JSON data.</summary>
+        <returns>A new <see cref="T:SkiaSharp.Skottie.Animation" /> instance, or <see langword="null" /> if the stream could not be parsed.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Build">
@@ -102,10 +105,10 @@
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="path">The path to a Lottie animation JSON file.</param>
+        <summary>Builds an animation from a Lottie JSON file.</summary>
+        <returns>A new <see cref="T:SkiaSharp.Skottie.Animation" /> instance, or <see langword="null" /> if the file could not be loaded or parsed.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DisposeNative">
@@ -123,8 +126,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Disposes of the native resources associated with this builder.</summary>
+        <remarks>Called when the builder is disposed.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetFontManager">
@@ -144,10 +147,10 @@
         <Parameter Name="fontManager" Type="SkiaSharp.SKFontManager" />
       </Parameters>
       <Docs>
-        <param name="fontManager">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="fontManager">The font manager to use for text rendering.</param>
+        <summary>Sets the font manager used for text rendering in the animation.</summary>
+        <returns>This builder instance for method chaining.</returns>
+        <remarks>Use this method to provide custom fonts for animations that contain text layers.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetResourceProvider">
@@ -167,10 +170,10 @@
         <Parameter Name="resourceProvider" Type="SkiaSharp.Resources.ResourceProvider" />
       </Parameters>
       <Docs>
-        <param name="resourceProvider">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="resourceProvider">The resource provider to use for loading external assets.</param>
+        <summary>Sets the resource provider used for loading external assets referenced by the animation.</summary>
+        <returns>This builder instance for method chaining.</returns>
+        <remarks>Use this method to provide custom resource loading for animations that reference external files such as images.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Stats">
@@ -187,9 +190,9 @@
         <ReturnType>SkiaSharp.Skottie.AnimationBuilderStats</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the statistics for the most recent animation build operation.</summary>
+        <value>Statistics about the animation parsing and loading process.</value>
+        <remarks>Check this property after calling <see cref="M:SkiaSharp.Skottie.AnimationBuilder.Build(System.String)" /> to get timing and size information about the build process.</remarks>
       </Docs>
     </Member>
   </Members>

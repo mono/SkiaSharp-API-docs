@@ -13,8 +13,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides data for the <see cref="E:SkiaSharp.Views.Maui.Controls.SKCanvasView.Touch" /> event.</summary>
+    <remarks>Set <see cref="P:SkiaSharp.Views.Maui.SKTouchEventArgs.Handled" /> to <see langword="true" /> to indicate the event has been handled and prevent further processing.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -35,12 +35,12 @@
         <Parameter Name="inContact" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="id">To be added.</param>
-        <param name="type">To be added.</param>
-        <param name="location">To be added.</param>
-        <param name="inContact">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="id">The unique identifier for this touch point.</param>
+        <param name="type">The type of touch action.</param>
+        <param name="location">The location of the touch point in pixels.</param>
+        <param name="inContact">Whether the pointer is in contact with the surface.</param>
+        <summary>Creates a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKTouchEventArgs" /> class.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -63,14 +63,14 @@
         <Parameter Name="inContact" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="id">To be added.</param>
-        <param name="type">To be added.</param>
-        <param name="mouseButton">To be added.</param>
-        <param name="deviceType">To be added.</param>
-        <param name="location">To be added.</param>
-        <param name="inContact">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="id">The unique identifier for this touch point.</param>
+        <param name="type">The type of touch action.</param>
+        <param name="mouseButton">The mouse button involved in the event.</param>
+        <param name="deviceType">The type of input device.</param>
+        <param name="location">The location of the touch point in pixels.</param>
+        <param name="inContact">Whether the pointer is in contact with the surface.</param>
+        <summary>Creates a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKTouchEventArgs" /> class with device type information.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -94,15 +94,15 @@
         <Parameter Name="wheelDelta" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="id">To be added.</param>
-        <param name="type">To be added.</param>
-        <param name="mouseButton">To be added.</param>
-        <param name="deviceType">To be added.</param>
-        <param name="location">To be added.</param>
-        <param name="inContact">To be added.</param>
-        <param name="wheelDelta">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="id">The unique identifier for this touch point.</param>
+        <param name="type">The type of touch action.</param>
+        <param name="mouseButton">The mouse button involved in the event.</param>
+        <param name="deviceType">The type of input device.</param>
+        <param name="location">The location of the touch point in pixels.</param>
+        <param name="inContact">Whether the pointer is in contact with the surface.</param>
+        <param name="wheelDelta">The mouse wheel delta value.</param>
+        <summary>Creates a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKTouchEventArgs" /> class with wheel delta.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -127,16 +127,16 @@
         <Parameter Name="pressure" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="id">To be added.</param>
-        <param name="type">To be added.</param>
-        <param name="mouseButton">To be added.</param>
-        <param name="deviceType">To be added.</param>
-        <param name="location">To be added.</param>
-        <param name="inContact">To be added.</param>
-        <param name="wheelDelta">To be added.</param>
-        <param name="pressure">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="id">The unique identifier for this touch point.</param>
+        <param name="type">The type of touch action.</param>
+        <param name="mouseButton">The mouse button involved in the event.</param>
+        <param name="deviceType">The type of input device.</param>
+        <param name="location">The location of the touch point in pixels.</param>
+        <param name="inContact">Whether the pointer is in contact with the surface.</param>
+        <param name="wheelDelta">The mouse wheel delta value.</param>
+        <param name="pressure">The pressure value from a pen or touch device (0.0 to 1.0).</param>
+        <summary>Creates a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKTouchEventArgs" /> class with pressure support.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ActionType">
@@ -154,9 +154,9 @@
         <ReturnType>SkiaSharp.Views.Maui.SKTouchAction</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the type of touch action that occurred.</summary>
+        <value>A <see cref="T:SkiaSharp.Views.Maui.SKTouchAction" /> value indicating the type of action.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DeviceType">
@@ -174,9 +174,9 @@
         <ReturnType>SkiaSharp.Views.Maui.SKTouchDeviceType</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the type of input device that generated the event.</summary>
+        <value>A <see cref="T:SkiaSharp.Views.Maui.SKTouchDeviceType" /> value indicating the device type.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Handled">
@@ -194,9 +194,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the event has been handled.</summary>
+        <value>
+          <see langword="true" /> if the event has been handled; otherwise, <see langword="false" />.</value>
+        <remarks>Set this property to <see langword="true" /> to indicate the event has been handled and prevent further processing by the platform.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Id">
@@ -214,9 +215,9 @@
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the unique identifier for this touch point.</summary>
+        <value>A unique identifier for tracking this touch point across multiple events.</value>
+        <remarks>This ID remains consistent for a given touch point from Pressed through Moved to Released.</remarks>
       </Docs>
     </Member>
     <Member MemberName="InContact">
@@ -234,9 +235,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether the pointer is in contact with the surface.</summary>
+        <value>
+          <see langword="true" /> if the finger is touching the screen or the mouse button is pressed; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Location">
@@ -254,9 +256,9 @@
         <ReturnType>SkiaSharp.SKPoint</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the location of the touch point in pixels relative to the view.</summary>
+        <value>The coordinates of the touch point in the canvas coordinate system.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="MouseButton">
@@ -274,9 +276,9 @@
         <ReturnType>SkiaSharp.Views.Maui.SKMouseButton</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the mouse button involved in the event.</summary>
+        <value>A <see cref="T:SkiaSharp.Views.Maui.SKMouseButton" /> value indicating which mouse button was used.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Pressure">
@@ -294,9 +296,9 @@
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the pressure of the touch or pen input.</summary>
+        <value>A value between 0.0 and 1.0 indicating the pressure, where 0.0 is no pressure and 1.0 is maximum pressure.</value>
+        <remarks>Pressure is typically available only for pen or stylus input devices.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -320,9 +322,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns a string representation of the touch event.</summary>
+        <returns>A string describing the touch event properties.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="WheelDelta">
@@ -340,9 +342,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the mouse wheel delta value.</summary>
+        <value>The amount the mouse wheel was scrolled. Positive values indicate scrolling up or forward, negative values indicate scrolling down or backward.</value>
+        <remarks>This value is only meaningful when <see cref="P:SkiaSharp.Views.Maui.SKTouchEventArgs.ActionType" /> is <see cref="F:SkiaSharp.Views.Maui.SKTouchAction.WheelChanged" />.</remarks>
       </Docs>
     </Member>
   </Members>
