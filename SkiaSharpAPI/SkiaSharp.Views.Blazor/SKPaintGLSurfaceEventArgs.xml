@@ -13,8 +13,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides data for the <see cref="P:SkiaSharp.Views.Blazor.SKGLView.OnPaintSurface" /> callback.</summary>
+    <remarks>This class contains the GPU-backed drawing surface and information about its size, format, and backend render target for WebGL-accelerated Blazor canvas views.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -33,10 +33,10 @@
         <Parameter Name="renderTarget" Type="SkiaSharp.GRBackendRenderTarget" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The GPU-backed surface to draw on.</param>
+        <param name="renderTarget">The backend render target.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -57,12 +57,12 @@
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The GPU-backed surface to draw on.</param>
+        <param name="renderTarget">The backend render target.</param>
+        <param name="origin">The surface origin.</param>
+        <param name="colorType">The color type of the surface.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs" /> class with the specified origin and color type.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -83,12 +83,12 @@
         <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="info">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The GPU-backed surface to draw on.</param>
+        <param name="renderTarget">The backend render target.</param>
+        <param name="origin">The surface origin.</param>
+        <param name="info">The image information describing the surface.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs" /> class with the specified origin and image info.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -110,13 +110,13 @@
         <Parameter Name="rawInfo" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="info">To be added.</param>
-        <param name="rawInfo">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The GPU-backed surface to draw on.</param>
+        <param name="renderTarget">The backend render target.</param>
+        <param name="origin">The surface origin.</param>
+        <param name="info">The image information describing the user-visible surface dimensions.</param>
+        <param name="rawInfo">The image information describing the actual physical surface dimensions.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs" /> class with separate user and raw dimensions.</summary>
+        <remarks>Use this constructor when <see cref="P:SkiaSharp.Views.Blazor.SKGLView.IgnorePixelScaling" /> causes the user-visible dimensions to differ from the physical dimensions.</remarks>
       </Docs>
     </Member>
     <Member MemberName="BackendRenderTarget">
@@ -134,9 +134,9 @@
         <ReturnType>SkiaSharp.GRBackendRenderTarget</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the backend render target for the GPU surface.</summary>
+        <value>The <see cref="T:SkiaSharp.GRBackendRenderTarget" /> that wraps the WebGL framebuffer.</value>
+        <remarks>This provides access to the underlying GPU render target for advanced rendering scenarios.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ColorType">
@@ -154,9 +154,9 @@
         <ReturnType>SkiaSharp.SKColorType</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the color type of the surface.</summary>
+        <value>The <see cref="T:SkiaSharp.SKColorType" /> used by the surface.</value>
+        <remarks>For WebGL, this is typically <see cref="F:SkiaSharp.SKColorType.Rgba8888" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Info">
@@ -174,9 +174,9 @@
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the image information describing the user-visible surface dimensions.</summary>
+        <value>The <see cref="T:SkiaSharp.SKImageInfo" /> for the surface as seen by the drawing code.</value>
+        <remarks>When <see cref="P:SkiaSharp.Views.Blazor.SKGLView.IgnorePixelScaling" /> is <see langword="true" />, this returns the logical size. When <see langword="false" />, this equals <see cref="P:SkiaSharp.Views.Blazor.SKPaintGLSurfaceEventArgs.RawInfo" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Origin">
@@ -194,9 +194,9 @@
         <ReturnType>SkiaSharp.GRSurfaceOrigin</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the origin of the surface.</summary>
+        <value>The <see cref="T:SkiaSharp.GRSurfaceOrigin" /> indicating whether the origin is at the top-left or bottom-left.</value>
+        <remarks>WebGL typically uses <see cref="F:SkiaSharp.GRSurfaceOrigin.BottomLeft" /> as the default origin.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RawInfo">
@@ -214,9 +214,9 @@
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the image information describing the actual physical surface dimensions.</summary>
+        <value>The <see cref="T:SkiaSharp.SKImageInfo" /> for the physical surface in pixels.</value>
+        <remarks>This always returns the actual pixel dimensions of the underlying surface, regardless of the <see cref="P:SkiaSharp.Views.Blazor.SKGLView.IgnorePixelScaling" /> setting.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Surface">
@@ -234,9 +234,9 @@
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the GPU-backed surface to draw on.</summary>
+        <value>The <see cref="T:SkiaSharp.SKSurface" /> that provides the canvas for drawing.</value>
+        <remarks>Use <see cref="P:SkiaSharp.SKSurface.Canvas" /> to get the canvas for drawing operations. The surface is backed by WebGL and supports hardware-accelerated rendering.</remarks>
       </Docs>
     </Member>
   </Members>
