@@ -13,8 +13,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a compiled SkSL runtime effect that can be used to create shaders, color filters, or blenders.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName="BuildBlender">
@@ -34,10 +34,10 @@
         <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="sksl">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sksl">The SkSL blender source code.</param>
+        <summary>Compiles SkSL source code and returns a blender builder.</summary>
+        <returns>A new blender builder.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="BuildColorFilter">
@@ -57,10 +57,10 @@
         <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="sksl">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sksl">The SkSL color filter source code.</param>
+        <summary>Compiles SkSL source code and returns a color filter builder.</summary>
+        <returns>A new color filter builder.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="BuildShader">
@@ -80,10 +80,10 @@
         <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="sksl">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sksl">The SkSL shader source code.</param>
+        <summary>Compiles SkSL source code and returns a shader builder.</summary>
+        <returns>A new shader builder.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Children">
@@ -101,9 +101,9 @@
         <ReturnType>System.Collections.Generic.IReadOnlyList&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the names of child effects declared in the SkSL source.</summary>
+        <value>A list of child effect names.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -123,11 +123,11 @@
         <Parameter Name="errors" Type="System.String" RefType="out" Index="1" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="sksl">To be added.</param>
-        <param name="errors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sksl">The SkSL source code.</param>
+        <param name="errors">Returns any compilation errors.</param>
+        <summary>Compiles SkSL source code into a runtime effect.</summary>
+        <returns>A new runtime effect, or <see langword="null" /> if compilation failed.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateBlender">
@@ -148,11 +148,11 @@
         <Parameter Name="errors" Type="System.String" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="sksl">To be added.</param>
-        <param name="errors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sksl">The SkSL blender source code.</param>
+        <param name="errors">Returns any compilation errors.</param>
+        <summary>Compiles SkSL source code into a blender runtime effect.</summary>
+        <returns>A new runtime effect, or <see langword="null" /> if compilation failed.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateColorFilter">
@@ -173,11 +173,11 @@
         <Parameter Name="errors" Type="System.String" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="sksl">To be added.</param>
-        <param name="errors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sksl">The SkSL color filter source code.</param>
+        <param name="errors">Returns any compilation errors.</param>
+        <summary>Compiles SkSL source code into a color filter runtime effect.</summary>
+        <returns>A new runtime effect, or <see langword="null" /> if compilation failed.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateShader">
@@ -198,11 +198,11 @@
         <Parameter Name="errors" Type="System.String" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="sksl">To be added.</param>
-        <param name="errors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sksl">The SkSL shader source code.</param>
+        <param name="errors">Returns any compilation errors.</param>
+        <summary>Compiles SkSL source code into a shader runtime effect.</summary>
+        <returns>A new runtime effect, or <see langword="null" /> if compilation failed.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToBlender">
@@ -220,9 +220,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a blender from this runtime effect with default uniforms.</summary>
+        <returns>A new blender.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToBlender">
@@ -242,10 +242,10 @@
         <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <summary>Creates a blender from this runtime effect with the specified uniforms.</summary>
+        <returns>A new blender.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToBlender">
@@ -266,11 +266,11 @@
         <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <summary>Creates a blender from this runtime effect with the specified uniforms and children.</summary>
+        <returns>A new blender.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorFilter">
@@ -289,9 +289,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a color filter from this runtime effect with default uniforms.</summary>
+        <returns>A new color filter.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorFilter">
@@ -312,10 +312,10 @@
         <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <summary>Creates a color filter from this runtime effect with the specified uniforms.</summary>
+        <returns>A new color filter.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorFilter">
@@ -337,11 +337,11 @@
         <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <summary>Creates a color filter from this runtime effect with the specified uniforms and children.</summary>
+        <returns>A new color filter.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -359,9 +359,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a shader from this runtime effect with default uniforms.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -381,10 +381,10 @@
         <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -403,10 +403,10 @@
         <Parameter Name="isOpaque" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="isOpaque">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="isOpaque">Whether the shader output is fully opaque.</param>
+        <summary>Creates a shader from this runtime effect.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -427,11 +427,11 @@
         <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms and children.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -451,11 +451,11 @@
         <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="1" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="isOpaque">To be added.</param>
-        <param name="uniforms">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="isOpaque">Whether the shader output is fully opaque.</param>
+        <param name="uniforms">The uniform values to use.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -477,12 +477,12 @@
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <param name="localMatrix">The local transformation matrix to apply.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms, children, and local matrix.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -503,12 +503,12 @@
         <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" Index="2" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="isOpaque">To be added.</param>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="isOpaque">Whether the shader output is fully opaque.</param>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms and children.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -530,13 +530,13 @@
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="isOpaque">To be added.</param>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="isOpaque">Whether the shader output is fully opaque.</param>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <param name="localMatrix">The local transformation matrix to apply.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms, children, and local matrix.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Uniforms">
@@ -554,9 +554,9 @@
         <ReturnType>System.Collections.Generic.IReadOnlyList&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the names of uniforms declared in the SkSL source.</summary>
+        <value>A list of uniform names.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="UniformSize">
@@ -574,9 +574,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the total size in bytes required for all uniforms.</summary>
+        <value>The uniform data size in bytes.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

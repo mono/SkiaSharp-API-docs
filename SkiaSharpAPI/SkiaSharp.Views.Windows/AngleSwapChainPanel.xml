@@ -12,8 +12,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A XAML SwapChainPanel that uses ANGLE to provide an OpenGL ES rendering context.</summary>
+    <remarks>This is the base class for <see cref="T:SkiaSharp.Views.Windows.SKSwapChainPanel" /> and provides the OpenGL ES context management via ANGLE (Almost Native Graphics Layer Engine).</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -28,8 +28,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Windows.AngleSwapChainPanel" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContentsScale">
@@ -46,9 +46,9 @@
         <ReturnType>System.Double</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the scale factor applied to the contents of the panel.</summary>
+        <value>The current composition scale factor, typically matching the display's DPI scaling.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawInBackground">
@@ -65,9 +65,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether rendering should occur on a background thread.</summary>
+        <value>
+          <see langword="true" /> if rendering should occur on a background thread; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="EnableRenderLoop">
@@ -84,9 +85,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether a continuous render loop is enabled.</summary>
+        <value>
+          <see langword="true" /> if continuous rendering is enabled; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When enabled, the panel will continuously render frames. When disabled, call <see cref="M:SkiaSharp.Views.Windows.AngleSwapChainPanel.Invalidate" /> to request a single frame render.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Invalidate">
@@ -104,8 +106,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Requests that the panel render a new frame.</summary>
+        <remarks>This method has no effect when <see cref="P:SkiaSharp.Views.Windows.AngleSwapChainPanel.EnableRenderLoop" /> is <see langword="true" /> or when the panel is not loaded.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnDestroyingContext">
@@ -123,8 +125,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Called when the OpenGL ES context is being destroyed.</summary>
+        <remarks>Override this method to perform cleanup of any OpenGL resources before the context is destroyed.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnRenderFrame">
@@ -144,9 +146,9 @@
         <Parameter Name="rect" Type="Windows.Foundation.Rect" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The rectangle defining the render area dimensions in pixels.</param>
+        <summary>Called when a frame should be rendered.</summary>
+        <remarks>Override this method to perform OpenGL rendering operations.</remarks>
       </Docs>
     </Member>
   </Members>

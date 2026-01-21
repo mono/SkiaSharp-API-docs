@@ -1,13 +1,9 @@
 <Type Name="SKGLView" FullName="SkiaSharp.Views.Forms.SKGLView">
-  <TypeSignature Language="C#" Value="public class SKGLView : Xamarin.Forms.View" FrameworkAlternate="skiasharp-views-forms-1.60" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLView extends Xamarin.Forms.View implements class Xamarin.Forms.IElementController, class Xamarin.Forms.IViewController, class Xamarin.Forms.IVisualElementController" FrameworkAlternate="skiasharp-views-forms-1.60" />
+  <TypeSignature Language="C#" Value="public class SKGLView : Xamarin.Forms.View, SkiaSharp.Views.Forms.ISKGLViewController" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLView extends Xamarin.Forms.View implements class SkiaSharp.Views.Forms.ISKGLViewController, class Xamarin.Forms.IElementController, class Xamarin.Forms.IViewController, class Xamarin.Forms.IVisualElementController" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Forms.SKGLView" />
-  <TypeSignature Language="C#" Value="public class SKGLView : Xamarin.Forms.View, SkiaSharp.Views.Forms.ISKGLViewController" FrameworkAlternate="skiasharp-views-forms-1.68;skiasharp-views-forms-2.80;skiasharp-views-forms-2.88" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLView extends Xamarin.Forms.View implements class SkiaSharp.Views.Forms.ISKGLViewController, class Xamarin.Forms.IElementController, class Xamarin.Forms.IViewController, class Xamarin.Forms.IVisualElementController" FrameworkAlternate="skiasharp-views-forms-1.68;skiasharp-views-forms-2.80;skiasharp-views-forms-2.88" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -15,6 +11,9 @@
     <BaseTypeName>Xamarin.Forms.View</BaseTypeName>
   </Base>
   <Interfaces>
+    <Interface>
+      <InterfaceName>SkiaSharp.Views.Forms.ISKGLViewController</InterfaceName>
+    </Interface>
     <Interface>
       <InterfaceName>Xamarin.Forms.IElementController</InterfaceName>
     </Interface>
@@ -24,9 +23,6 @@
     <Interface>
       <InterfaceName>Xamarin.Forms.IVisualElementController</InterfaceName>
     </Interface>
-    <Interface FrameworkAlternate="skiasharp-views-forms-1.68;skiasharp-views-forms-2.80;skiasharp-views-forms-2.88">
-      <InterfaceName>SkiaSharp.Views.Forms.ISKGLViewController</InterfaceName>
-    </Interface>
   </Interfaces>
   <Attributes>
     <Attribute>
@@ -35,7 +31,7 @@
   </Attributes>
   <Docs>
     <summary>A hardware-accelerated view that can be drawn on using SkiaSharp drawing commands.</summary>
-    <remarks></remarks>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -45,15 +41,13 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>Creates a new instance of the <see cref="T:SkiaSharp.Views.Forms.SKGLView" /> view.</summary>
-        <remarks></remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Forms.SKGLView" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CanvasSize">
@@ -63,8 +57,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -73,7 +65,7 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the current canvas size.</summary>
-        <value></value>
+        <value>The current canvas size in pixels.</value>
         <remarks>The canvas size may be different to the view size as a result of the current device's pixel density.</remarks>
       </Docs>
     </Member>
@@ -84,8 +76,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -93,9 +83,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating whether or not to enable touch events for this view.</summary>
-        <value></value>
-        <remarks></remarks>
+        <summary>Gets or sets a value indicating whether touch events are enabled for this view.</summary>
+        <value>
+          <see langword="true" /> if touch events are enabled; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="EnableTouchEventsProperty">
@@ -105,8 +96,6 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -115,7 +104,7 @@
       </ReturnValue>
       <Docs>
         <summary>Implements the <see cref="P:SkiaSharp.Views.Forms.SKGLView.EnableTouchEvents" /> property, and allows the <see cref="T:SkiaSharp.Views.Forms.SKGLView" /> class to bind it to properties on other objects at run time.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GRContext">
@@ -125,8 +114,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -135,8 +122,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the current GPU context.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The current GPU context.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="HasRenderLoop">
@@ -146,8 +133,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -156,8 +141,9 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets a value indicating whether the surface is drawn using a render loop.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>
+          <see langword="true" /> if the surface is drawn using a render loop; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="HasRenderLoopProperty">
@@ -167,8 +153,6 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -177,7 +161,7 @@
       </ReturnValue>
       <Docs>
         <summary>Identifies the <see cref="P:SkiaSharp.Views.Forms.SKGLView.HasRenderLoop" /> bindable property.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="InvalidateSurface">
@@ -187,8 +171,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -198,7 +180,7 @@
       <Parameters />
       <Docs>
         <summary>Informs the surface that it needs to redraw itself.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="OnMeasure">
@@ -208,8 +190,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -225,7 +205,7 @@
         <param name="heightConstraint">The height constraint.</param>
         <summary>Method that is called when a layout measurement happens.</summary>
         <returns>Returns the requested size for the layout.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -235,8 +215,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -293,8 +271,6 @@ protected override void OnPaintSurface (SKPaintGLSurfaceEventArgs e)
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -307,19 +283,17 @@ protected override void OnPaintSurface (SKPaintGLSurfaceEventArgs e)
       <Docs>
         <param name="e">The event arguments that contain the touch information.</param>
         <summary>Implement this to handle touch events on the surface.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="PaintSurface">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs&gt; PaintSurface;" FrameworkAlternate="skiasharp-views-forms-1.60;skiasharp-views-forms-1.68;skiasharp-views-forms-2.80" />
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs&gt; PaintSurface;" FrameworkAlternate="skiasharp-views-forms-2.80" />
       <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs&gt; PaintSurface" />
       <MemberSignature Language="DocId" Value="E:SkiaSharp.Views.Forms.SKGLView.PaintSurface" />
       <MemberSignature Language="C#" Value="public event EventHandler&lt;SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs&gt;? PaintSurface;" FrameworkAlternate="skiasharp-views-forms-2.88" />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -369,7 +343,6 @@ myView.PaintSurface += (sender, e) => {
       </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -391,7 +364,6 @@ myView.PaintSurface += (sender, e) => {
       </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -413,7 +385,6 @@ myView.PaintSurface += (sender, e) => {
       </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -421,11 +392,11 @@ myView.PaintSurface += (sender, e) => {
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="e" Type="SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs" Index="0" FrameworkAlternate="skiasharp-views-forms-1.68;skiasharp-views-forms-2.80;skiasharp-views-forms-2.88" />
+        <Parameter Name="e" Type="SkiaSharp.Views.Forms.SKPaintGLSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">The event arguments that contain the drawing surface and information.</param>
-        <summary>Invokes the paint surface handler on the view.</summary>
+        <param name="e">The event arguments containing the surface and drawing information.</param>
+        <summary>Handles the paint surface event for the OpenGL view.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -439,7 +410,6 @@ myView.PaintSurface += (sender, e) => {
       </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -447,11 +417,11 @@ myView.PaintSurface += (sender, e) => {
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="e" Type="SkiaSharp.Views.Forms.SKTouchEventArgs" Index="0" FrameworkAlternate="skiasharp-views-forms-1.68;skiasharp-views-forms-2.80;skiasharp-views-forms-2.88" />
+        <Parameter Name="e" Type="SkiaSharp.Views.Forms.SKTouchEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">The event arguments that contain the touch information.</param>
-        <summary>Invokes the touch handler on the view.</summary>
+        <param name="e">The event arguments containing the touch information.</param>
+        <summary>Handles touch events for the OpenGL view.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -465,7 +435,6 @@ myView.PaintSurface += (sender, e) => {
       </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -478,15 +447,13 @@ myView.PaintSurface += (sender, e) => {
       </Docs>
     </Member>
     <Member MemberName="Touch">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;SkiaSharp.Views.Forms.SKTouchEventArgs&gt; Touch;" FrameworkAlternate="skiasharp-views-forms-1.60;skiasharp-views-forms-1.68;skiasharp-views-forms-2.80" />
+      <MemberSignature Language="C#" Value="public event EventHandler&lt;SkiaSharp.Views.Forms.SKTouchEventArgs&gt; Touch;" FrameworkAlternate="skiasharp-views-forms-2.80" />
       <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class SkiaSharp.Views.Forms.SKTouchEventArgs&gt; Touch" />
       <MemberSignature Language="DocId" Value="E:SkiaSharp.Views.Forms.SKGLView.Touch" />
       <MemberSignature Language="C#" Value="public event EventHandler&lt;SkiaSharp.Views.Forms.SKTouchEventArgs&gt;? Touch;" FrameworkAlternate="skiasharp-views-forms-2.88" />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Forms</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -494,8 +461,8 @@ myView.PaintSurface += (sender, e) => {
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Forms.SKTouchEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Occurs when the the surface received a touch event.</summary>
-        <remarks></remarks>
+        <summary>Occurs when the surface received a touch event.</summary>
+        <remarks />
       </Docs>
     </Member>
   </Members>

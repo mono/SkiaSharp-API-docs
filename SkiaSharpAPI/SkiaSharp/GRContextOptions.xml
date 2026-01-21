@@ -1,25 +1,21 @@
 <Type Name="GRContextOptions" FullName="SkiaSharp.GRContextOptions">
-  <TypeSignature Language="C#" Value="public struct GRContextOptions" FrameworkAlternate="skiasharp-1.60" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit GRContextOptions extends System.ValueType" FrameworkAlternate="skiasharp-1.60" />
+  <TypeSignature Language="C#" Value="public class GRContextOptions" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GRContextOptions extends System.Object" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.GRContextOptions" />
-  <TypeSignature Language="C#" Value="public class GRContextOptions" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GRContextOptions extends System.Object" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
     <AssemblyVersion>3.116.0.0</AssemblyVersion>
     <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
-    <BaseTypeName>System.ValueType</BaseTypeName>
-    <BaseTypeName FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119">System.Object</BaseTypeName>
+    <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
     <summary>Represents the collection of options for the construction of a context.</summary>
-    <remarks></remarks>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -36,8 +32,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.GRContextOptions" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AllowPathMaskCaching">
@@ -47,7 +43,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -58,8 +53,9 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets a value indicating whether to allow path mask textures to be cached.</summary>
-        <value></value>
-        <remarks>This is only really useful if paths are commonly rendered at the same scale and fractional translation. Default is false.</remarks>
+        <value>
+          <see langword="true" /> if path mask textures can be cached; otherwise, <see langword="false" />.</value>
+        <remarks>This is only really useful if paths are commonly rendered at the same scale and fractional translation. Default is <see langword="false" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AvoidStencilBuffers">
@@ -69,7 +65,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -80,7 +75,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets a value indicating whether to avoid allocating stencil buffers.</summary>
-        <value></value>
+        <value>
+          <see langword="true" /> if stencil buffer allocation should be avoided; otherwise, <see langword="false" />.</value>
         <remarks>Bugs on certain drivers cause stencil buffers to leak. This flag causes Skia to avoid allocating stencil buffers and use alternate rasterization paths, avoiding the leak.</remarks>
       </Docs>
     </Member>
@@ -91,7 +87,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -102,44 +97,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the threshold, in bytes, above which a buffer mapping API will be used to map vertex and index buffers to CPU memory in order to update them.</summary>
-        <value></value>
+        <value>The threshold in bytes for buffer mapping.</value>
         <remarks>A value of -1 means the context should deduce the optimal value for this platform. Default is -1.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Default">
-      <MemberSignature Language="C#" Value="public static SkiaSharp.GRContextOptions Default { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property valuetype SkiaSharp.GRContextOptions Default" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.Default" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>SkiaSharp.GRContextOptions</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets a new instance with the values set to the defaults.</summary>
-        <value></value>
-        <remarks></remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DisableGpuYuvConversion">
-      <MemberSignature Language="C#" Value="public bool DisableGpuYuvConversion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool DisableGpuYuvConversion" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.DisableGpuYuvConversion" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether the GPU will be used to perform YUV -&gt; RGB conversion when generating textures from codec-backed images.</summary>
-        <value></value>
-        <remarks>Default is false.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DoManualMipmapping">
@@ -149,7 +108,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -160,141 +118,30 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets a value indicating whether to construct mipmaps manually, via repeated downsampling draw-calls.</summary>
-        <value></value>
-        <remarks>This is used when the driver's implementation (glGenerateMipmap) contains bugs. This requires mipmap level and LOD control (for example, desktop or ES3). Default is false.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="EnableInstancedRendering">
-      <MemberSignature Language="C#" Value="public bool EnableInstancedRendering { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool EnableInstancedRendering" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.EnableInstancedRendering" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether to enable instanced rendering as long as all required functionality is supported by the hardware.</summary>
-        <value></value>
-        <remarks>Instanced rendering is still experimental at this point and disabled by default. Default is false.</remarks>
+        <value>
+          <see langword="true" /> if mipmaps should be constructed manually; otherwise, <see langword="false" />.</value>
+        <remarks>This is used when the driver's implementation (glGenerateMipmap) contains bugs. This requires mipmap level and LOD control (for example, desktop or ES3). Default is <see langword="false" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GlyphCacheTextureMaximumBytes">
-      <MemberSignature Language="C#" Value="public float GlyphCacheTextureMaximumBytes { get; set; }" FrameworkAlternate="skiasharp-1.60" />
-      <MemberSignature Language="ILAsm" Value=".property instance float32 GlyphCacheTextureMaximumBytes" FrameworkAlternate="skiasharp-1.60" />
+      <MemberSignature Language="C#" Value="public int GlyphCacheTextureMaximumBytes { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 GlyphCacheTextureMaximumBytes" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.GlyphCacheTextureMaximumBytes" />
-      <MemberSignature Language="C#" Value="public int GlyphCacheTextureMaximumBytes { get; set; }" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 GlyphCacheTextureMaximumBytes" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
         <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType FrameworkAlternate="skiasharp-1.60">System.Single</ReturnType>
-        <ReturnType FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119">System.Int32</ReturnType>
+        <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the maximum size of cache textures used for the SkiaSharp Glyph cache.</summary>
-        <value></value>
+        <value>The maximum size in bytes of cache textures for the glyph cache.</value>
         <remarks>Default is 2048 * 1024 * 4.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="GpuPathRenderers">
-      <MemberSignature Language="C#" Value="public SkiaSharp.GRContextOptionsGpuPathRenderers GpuPathRenderers { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.GRContextOptionsGpuPathRenderers GpuPathRenderers" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.GpuPathRenderers" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>SkiaSharp.GRContextOptionsGpuPathRenderers</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets the GPU path renderers.</summary>
-        <value></value>
-        <remarks>Default is <see cref="F:SkiaSharp.GRContextOptionsGpuPathRenderers.All" />.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="ImmediateMode">
-      <MemberSignature Language="C#" Value="public bool ImmediateMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool ImmediateMode" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.ImmediateMode" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether the context operates in immediate mode.</summary>
-        <value></value>
-        <remarks>The context will issue all draws to the backend API immediately. Intended to ease debugging. Default is false.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="MaxTextureSizeOverride">
-      <MemberSignature Language="C#" Value="public int MaxTextureSizeOverride { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxTextureSizeOverride" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.MaxTextureSizeOverride" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Int32</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets the maximum size of a texture.</summary>
-        <value></value>
-        <remarks>An option to override feature detection using backend API queries. The override can only reduce the feature set or limits, never increase them beyond the detected values. Default is 0x7FFFFFFF.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="MaxTileSizeOverride">
-      <MemberSignature Language="C#" Value="public int MaxTileSizeOverride { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxTileSizeOverride" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.MaxTileSizeOverride" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Int32</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets the maximum size (if non-zero) of a tile for software-backed images and bitmaps rendered by the device.</summary>
-        <value></value>
-        <remarks>An option to override feature detection using backend API queries. The override can only reduce the feature set or limits, never increase them beyond the detected values. Default is 0.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="RequireDecodeDisableForSrgb">
-      <MemberSignature Language="C#" Value="public bool RequireDecodeDisableForSrgb { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool RequireDecodeDisableForSrgb" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.RequireDecodeDisableForSrgb" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether sRGB support will be disabled if sRGB decoding cannot be enabled.</summary>
-        <value></value>
-        <remarks>Default is true.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RuntimeProgramCacheSize">
@@ -313,117 +160,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="SuppressDualSourceBlending">
-      <MemberSignature Language="C#" Value="public bool SuppressDualSourceBlending { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SuppressDualSourceBlending" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.SuppressDualSourceBlending" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether to suppress dual source blending.</summary>
-        <value></value>
-        <remarks>Default is false.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="SuppressPathRendering">
-      <MemberSignature Language="C#" Value="public bool SuppressPathRendering { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SuppressPathRendering" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.SuppressPathRendering" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether the caps will never report driver support for path rendering.</summary>
-        <value></value>
-        <remarks>Default is false.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="SuppressPrints">
-      <MemberSignature Language="C#" Value="public bool SuppressPrints { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SuppressPrints" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.SuppressPrints" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether to suppress prints for the <see cref="T:SkiaSharp.GRContext" />.</summary>
-        <value></value>
-        <remarks>Default is false.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="UseDrawInsteadOfPartialRenderTargetWrite">
-      <MemberSignature Language="C#" Value="public bool UseDrawInsteadOfPartialRenderTargetWrite { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool UseDrawInsteadOfPartialRenderTargetWrite" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.UseDrawInsteadOfPartialRenderTargetWrite" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether to avoid partial writes.</summary>
-        <value></value>
-        <remarks>Some GPUs have problems with partial writes of the render target. Default is false.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="UseShaderSwizzling">
-      <MemberSignature Language="C#" Value="public bool UseShaderSwizzling { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool UseShaderSwizzling" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.UseShaderSwizzling" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether to do all swizzling manually in the shader and don't rely on extensions to do swizzling.</summary>
-        <value></value>
-        <remarks>Default is false.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="WireframeMode">
-      <MemberSignature Language="C#" Value="public bool WireframeMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool WireframeMode" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContextOptions.WireframeMode" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets a value indicating whether to render everything in wireframe.</summary>
-        <value></value>
-        <remarks>Default is false.</remarks>
+        <summary>Gets or sets the number of GPU programs that may be cached.</summary>
+        <value>The number of GPU programs that may be cached. Default is 256.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

@@ -4,8 +4,6 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKPathMeasure" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
     <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -17,7 +15,7 @@
   <Interfaces />
   <Docs>
     <summary>Represents a type that can be used to calculate the length of, and segments of, a path.</summary>
-    <remarks></remarks>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -27,8 +25,6 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -36,8 +32,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>Create a new <see cref="T:SkiaSharp.SKPathMeasure" /> instance with a null path.</summary>
-        <remarks></remarks>
+        <summary>Create a new <see cref="T:SkiaSharp.SKPathMeasure" /> instance with a <see langword="null" /> path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -47,8 +43,6 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -60,11 +54,12 @@
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="path">The path to use, or null.</param>
-        <param name="forceClosed">Controls whether or not the path is treated as closed.</param>
+        <param name="path">The path to use, or <see langword="null" />.</param>
+        <param name="forceClosed">
+          <see langword="true" /> to treat the path as closed; otherwise, <see langword="false" />.</param>
         <param name="resScale">Controls the precision of the measure. Values greater 1 increase the precision (and possibly slow down the computation).</param>
         <summary>Create a new <see cref="T:SkiaSharp.SKPathMeasure" /> instance with the specified path.</summary>
-        <remarks>The path must remain valid for the lifetime of the measure object, or until <see cref="M:SkiaSharp.SKPathMeasure.SetPath(SkiaSharp.SKPath,System.Boolean)" /> is called with a different path (or null), since the measure object keeps a reference to the path object (does not copy its data).</remarks>
+        <remarks>The path must remain valid for the lifetime of the measure object, or until <see cref="M:SkiaSharp.SKPathMeasure.SetPath(SkiaSharp.SKPath,System.Boolean)" /> is called with a different path (or <see langword="null" />), since the measure object keeps a reference to the path object (does not copy its data).</remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -74,8 +69,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -101,7 +94,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -113,7 +105,7 @@
       <Parameters />
       <Docs>
         <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to destroy any native objects.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetMatrix">
@@ -123,7 +115,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -133,15 +124,15 @@
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="distance" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
-        <Parameter Name="flags" Type="SkiaSharp.SKPathMeasureMatrixFlags" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="distance" Type="System.Single" />
+        <Parameter Name="flags" Type="SkiaSharp.SKPathMeasureMatrixFlags" />
       </Parameters>
       <Docs>
-        <param name="distance">To be added.</param>
-        <param name="flags">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="distance">The distance along the path.</param>
+        <param name="flags">Flags to indicate how to compute the matrix.</param>
+        <summary>Computes a <see cref="T:SkiaSharp.SKMatrix" /> from the specified distance along the path.</summary>
+        <returns>The computed matrix, or <see cref="P:SkiaSharp.SKMatrix.Empty" /> if there is no path or a zero-length path was specified.</returns>
+        <remarks>Distance is pinned to 0 &lt;= distance &lt;= <see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetMatrix">
@@ -151,8 +142,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -171,7 +160,8 @@
         <param name="matrix">The computed matrix.</param>
         <param name="flags">Flags to indicate how to compute the matrix.</param>
         <summary>Computes a <see cref="T:SkiaSharp.SKMatrix" /> from the specified distance along the path.</summary>
-        <returns>Returns false if there is no path, or a zero-length path was specified, in which case matrix is unchanged.</returns>
+        <returns>
+          <see langword="false" /> if there is no path, or a zero-length path was specified, in which case matrix is unchanged.</returns>
         <remarks>Distance is pinned to 0 &lt;= distance &lt;= <see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
@@ -182,7 +172,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -192,13 +181,13 @@
         <ReturnType>SkiaSharp.SKPoint</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="distance" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="distance" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="distance">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="distance">The distance along the path.</param>
+        <summary>Computes the corresponding position from the specified distance along the path.</summary>
+        <returns>The position of a point along the current contour, or <see cref="P:SkiaSharp.SKPoint.Empty" /> if there is no path or a zero-length path was specified.</returns>
+        <remarks>Distance is pinned to 0 &lt;= distance &lt;= <see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetPosition">
@@ -208,8 +197,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -226,7 +213,8 @@
         <param name="distance">The distance to use.</param>
         <param name="position">The position of a point along the current contour.</param>
         <summary>Computes the corresponding position from the specified distance along the path.</summary>
-        <returns>Returns false if there is no path, or a zero-length path was specified, in which case position is unchanged.</returns>
+        <returns>
+          <see langword="false" /> if there is no path, or a zero-length path was specified, in which case position is unchanged.</returns>
         <remarks>Distance is pinned to 0 &lt;= distance &lt;= <see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
@@ -237,8 +225,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -253,11 +239,12 @@
         <Parameter Name="tangent" Type="SkiaSharp.SKPoint" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="distance">The distance to use. </param>
+        <param name="distance">The distance to use.</param>
         <param name="position">The position of a point along the current contour.</param>
         <param name="tangent">The tangent along the current contour.</param>
         <summary>Computes the corresponding position and tangent from the specified distance along the path.</summary>
-        <returns>Returns false if there is no path, or a zero-length path was specified, in which case position and tangent are unchanged.</returns>
+        <returns>
+          <see langword="false" /> if there is no path, or a zero-length path was specified, in which case position and tangent are unchanged.</returns>
         <remarks>Distance is pinned to 0 &lt;= distance &lt;= <see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
@@ -268,7 +255,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -278,17 +264,17 @@
         <ReturnType>SkiaSharp.SKPath</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="start" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
-        <Parameter Name="stop" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
-        <Parameter Name="startWithMoveTo" Type="System.Boolean" Index="2" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="start" Type="System.Single" />
+        <Parameter Name="stop" Type="System.Single" />
+        <Parameter Name="startWithMoveTo" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="start">To be added.</param>
-        <param name="stop">To be added.</param>
-        <param name="startWithMoveTo">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="start">The starting offset of the segment.</param>
+        <param name="stop">The end offset of the segment.</param>
+        <param name="startWithMoveTo">If <see langword="true" />, begin the path segment with a <see cref="M:SkiaSharp.SKPath.MoveTo(SkiaSharp.SKPoint)" />.</param>
+        <summary>Returns a new path containing the intervening segment(s) between the start and stop distances.</summary>
+        <returns>A new path containing the segment, or <see langword="null" /> if the segment is zero-length.</returns>
+        <remarks>The start and stop parameters are pinned to 0..<see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetSegment">
@@ -298,8 +284,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -320,7 +304,8 @@
         <param name="dst">The path to hold the new segment.</param>
         <param name="startWithMoveTo">If true, begin the path segment with a <see cref="M:SkiaSharp.SKPath.MoveTo(SkiaSharp.SKPoint)" />.</param>
         <summary>Given a start and stop distance, update the destination path with the intervening segment(s).</summary>
-        <returns>Returns false if the segment is zero-length, otherwise returns true.</returns>
+        <returns>
+          <see langword="false" /> if the segment is zero-length, otherwise returns <see langword="true" />.</returns>
         <remarks>The start and stop parameters are pinned to 0..<see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
@@ -331,7 +316,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -341,13 +325,13 @@
         <ReturnType>SkiaSharp.SKPoint</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="distance" Type="System.Single" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="distance" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="distance">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="distance">The distance along the path.</param>
+        <summary>Computes the corresponding tangent from the specified distance along the path.</summary>
+        <returns>The tangent along the current contour, or <see cref="P:SkiaSharp.SKPoint.Empty" /> if there is no path or a zero-length path was specified.</returns>
+        <remarks>Distance is pinned to 0 &lt;= distance &lt;= <see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetTangent">
@@ -357,8 +341,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -375,7 +357,8 @@
         <param name="distance">The distance to use.</param>
         <param name="tangent">The tangent along the current contour.</param>
         <summary>Computes the corresponding tangent from the specified distance along the path.</summary>
-        <returns>Returns false if there is no path, or a zero-length path was specified, in which case position and tangent are unchanged.</returns>
+        <returns>
+          <see langword="false" /> if there is no path, or a zero-length path was specified, in which case position and tangent are unchanged.</returns>
         <remarks>Distance is pinned to 0 &lt;= distance &lt;= <see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
       </Docs>
     </Member>
@@ -386,8 +369,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -398,8 +379,9 @@
       </ReturnValue>
       <Docs>
         <summary>Gets a value indicating if the current contour is closed.</summary>
-        <value>Returns true if the current contour is closed.</value>
-        <remarks></remarks>
+        <value>
+          <see langword="true" /> if the current contour is closed.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Length">
@@ -409,8 +391,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -422,7 +402,7 @@
       <Docs>
         <summary>Gets the total length of the current contour, or 0 if no path is associated.</summary>
         <value>The total length of the current contour.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="NextContour">
@@ -432,8 +412,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -445,8 +423,9 @@
       <Parameters />
       <Docs>
         <summary>Move to the next contour in the path.</summary>
-        <returns>Returns true if another one exists, otherwise false.</returns>
-        <remarks></remarks>
+        <returns>
+          <see langword="true" /> if another one exists; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SetPath">
@@ -456,7 +435,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -466,12 +444,12 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="path">The path to use, or <see langword="null" />.</param>
+        <summary>Reset the path measure with the specified path.</summary>
+        <remarks>The path must remain valid for the lifetime of the measure object, or until <see cref="M:SkiaSharp.SKPathMeasure.SetPath(SkiaSharp.SKPath,System.Boolean)" /> is called with a different path (or <see langword="null" />), since the measure object keeps a reference to the path object (does not copy its data).</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetPath">
@@ -481,8 +459,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -496,10 +472,11 @@
         <Parameter Name="forceClosed" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="path">The path to use, or null.</param>
-        <param name="forceClosed">Controls whether or not the path is treated as closed.</param>
+        <param name="path">The path to use, or <see langword="null" />.</param>
+        <param name="forceClosed">
+          <see langword="true" /> to treat the path as closed; otherwise, <see langword="false" />.</param>
         <summary>Reset the path measure with the specified path.</summary>
-        <remarks>The path must remain valid for the lifetime of the measure object, or until <see cref="M:SkiaSharp.SKPathMeasure.SetPath(SkiaSharp.SKPath,System.Boolean)" /> is called with a different path (or null), since the measure object keeps a reference to the path object (does not copy its data).</remarks>
+        <remarks>The path must remain valid for the lifetime of the measure object, or until <see cref="M:SkiaSharp.SKPathMeasure.SetPath(SkiaSharp.SKPath,System.Boolean)" /> is called with a different path (or <see langword="null" />), since the measure object keeps a reference to the path object (does not copy its data).</remarks>
       </Docs>
     </Member>
   </Members>

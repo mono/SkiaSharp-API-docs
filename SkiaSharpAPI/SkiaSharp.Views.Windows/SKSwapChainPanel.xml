@@ -12,8 +12,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A XAML control that uses hardware-accelerated rendering via ANGLE to draw using SkiaSharp.</summary>
+    <remarks>This control uses an OpenGL ES context via ANGLE to provide GPU-accelerated SkiaSharp drawing. It inherits from <see cref="T:SkiaSharp.Views.Windows.AngleSwapChainPanel" /> and provides SkiaSharp-specific rendering functionality.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -28,8 +28,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Windows.SKSwapChainPanel" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CanvasSize">
@@ -46,9 +46,9 @@
         <ReturnType>SkiaSharp.SKSize</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the current canvas size in pixels.</summary>
+        <value>The size of the drawing canvas in pixels.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GRContext">
@@ -65,9 +65,9 @@
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the GPU context used for rendering.</summary>
+        <value>The <see cref="T:SkiaSharp.GRContext" /> used for GPU-accelerated rendering.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="OnDestroyingContext">
@@ -85,8 +85,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Called when the OpenGL ES context is being destroyed.</summary>
+        <remarks>Override this method to clean up SkiaSharp and OpenGL resources before the context is destroyed.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -106,9 +106,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the surface and render target information.</param>
+        <summary>Raises the <see cref="E:SkiaSharp.Views.Windows.SKSwapChainPanel.PaintSurface" /> event.</summary>
+        <remarks>Override this method to perform custom drawing on the surface without subscribing to the <see cref="E:SkiaSharp.Views.Windows.SKSwapChainPanel.PaintSurface" /> event.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnRenderFrame">
@@ -128,9 +128,9 @@
         <Parameter Name="rect" Type="Windows.Foundation.Rect" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The rectangle defining the render area dimensions.</param>
+        <summary>Called when a frame should be rendered.</summary>
+        <remarks>This method creates the SkiaSharp context and surface, then invokes <see cref="M:SkiaSharp.Views.Windows.SKSwapChainPanel.OnPaintSurface(SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs)" /> to perform the actual drawing.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PaintSurface">
@@ -147,8 +147,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Windows.SKPaintGLSurfaceEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the surface needs to be repainted.</summary>
+        <remarks>Handle this event to perform drawing operations on the GPU-accelerated surface.</remarks>
       </Docs>
     </Member>
   </Members>

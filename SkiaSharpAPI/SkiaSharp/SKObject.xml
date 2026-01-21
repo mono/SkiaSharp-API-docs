@@ -1,12 +1,9 @@
 <Type Name="SKObject" FullName="SkiaSharp.SKObject">
   <TypeSignature Language="C#" Value="public abstract class SKObject : SkiaSharp.SKNativeObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SKObject extends SkiaSharp.SKNativeObject" FrameworkAlternate="skiasharp-1.60" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract SKObject extends SkiaSharp.SKNativeObject" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract SKObject extends SkiaSharp.SKNativeObject" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
     <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -18,7 +15,7 @@
   <Interfaces></Interfaces>
   <Docs>
     <summary>Represents a tracked native object.</summary>
-    <remarks>This object wraps a native handle and keeps track of it's lifetime for the garbage collector. For a simple object, use <see cref="T:SkiaSharp.SKNativeObject" />.</remarks>
+    <remarks>This object wraps a native handle and keeps track of its lifetime for the garbage collector. For a simple object, use <see cref="T:SkiaSharp.SKNativeObject" />.</remarks>
   </Docs>
   <Members>
     <Member MemberName="Dispose">
@@ -28,8 +25,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -55,7 +50,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -67,7 +61,7 @@
       <Parameters />
       <Docs>
         <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to destroy any managed objects.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DisposeNative">
@@ -77,7 +71,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -89,7 +82,7 @@
       <Parameters />
       <Docs>
         <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to destroy any native objects.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DisposeUnownedManaged">
@@ -109,8 +102,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to dispose managed objects that are not owned by this instance.</summary>
+        <remarks>This method is called during disposal to clean up managed objects that were created by native code but are not owned by this instance. The default implementation disposes any child objects that don't own their handles.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Handle">
@@ -120,8 +113,6 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
         <AssemblyVersion>3.116.0.0</AssemblyVersion>
@@ -132,27 +123,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the handle to the underlying native object.</summary>
-        <value></value>
+        <value>The pointer to the native object.</value>
         <remarks>Setting this value will register this object with the lifetime tracker.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="OwnsHandle">
-      <MemberSignature Language="C#" Value="protected bool OwnsHandle { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool OwnsHandle" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKObject.OwnsHandle" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Boolean</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets a value indicating whether this object should destroy the underlying native object.</summary>
-        <value></value>
-        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
