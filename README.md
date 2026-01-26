@@ -7,7 +7,6 @@ The docs are available online for:
  - [HarfBuzzSharp](https://docs.microsoft.com/dotnet/api/harfbuzzsharp)
  - [Skottie (SkiaSharp + Lottie)](https://docs.microsoft.com/dotnet/api/skiasharp.skottie)
 
-
 ## Microsoft Open Source Code of Conduct
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
