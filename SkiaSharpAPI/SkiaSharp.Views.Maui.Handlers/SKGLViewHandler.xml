@@ -1,0 +1,234 @@
+<Type Name="SKGLViewHandler" FullName="SkiaSharp.Views.Maui.Handlers.SKGLViewHandler">
+  <TypeSignature Language="C#" Value="public class SKGLViewHandler : Microsoft.Maui.Handlers.ViewHandler&lt;SkiaSharp.Views.Maui.ISKGLView,object&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLViewHandler extends Microsoft.Maui.Handlers.ViewHandler`2&lt;class SkiaSharp.Views.Maui.ISKGLView, object&gt;" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>Microsoft.Maui.Handlers.ViewHandler&lt;SkiaSharp.Views.Maui.ISKGLView,System.Object&gt;</BaseTypeName>
+    <BaseTypeArguments>
+      <BaseTypeArgument TypeParamName="!0">SkiaSharp.Views.Maui.ISKGLView</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="!1">System.Object</BaseTypeArgument>
+    </BaseTypeArguments>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 0, 1, 1 })]</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>The .NET MAUI handler for <see cref="T:SkiaSharp.Views.Maui.ISKGLView" /> that maps the cross-platform control to platform-specific GPU-accelerated implementations.</summary>
+    <remarks>This handler creates and manages the platform-specific GPU view (Android SKGLTextureView using OpenGL ES, Mac Catalyst SKMetalView using Metal, or Windows SKSwapChainPanel using DirectX via ANGLE) and handles property synchronization between the cross-platform control and native view.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SKGLViewHandler ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.#ctor" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" /> class with default mappers.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SKGLViewHandler (Microsoft.Maui.PropertyMapper? mapper, Microsoft.Maui.CommandMapper? commands);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Microsoft.Maui.PropertyMapper mapper, class Microsoft.Maui.CommandMapper commands) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.#ctor(Microsoft.Maui.PropertyMapper,Microsoft.Maui.CommandMapper)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="mapper" Type="Microsoft.Maui.PropertyMapper" />
+        <Parameter Name="commands" Type="Microsoft.Maui.CommandMapper" />
+      </Parameters>
+      <Docs>
+        <param name="mapper">The property mapper to use, or <see langword="null" /> to use the default.</param>
+        <param name="commands">The command mapper to use, or <see langword="null" /> to use the default.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" /> class with custom mappers.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreatePlatformView">
+      <MemberSignature Language="C#" Value="protected override object CreatePlatformView ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object CreatePlatformView() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.CreatePlatformView" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates the platform-specific GPU view for the current platform.</summary>
+        <returns>The platform-specific GPU-backed view instance.</returns>
+        <remarks>Returns an Android SKGLTextureView (OpenGL ES), Mac Catalyst SKMetalView (Metal), or Windows SKSwapChainPanel (DirectX via ANGLE) depending on the platform.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MapEnableTouchEvents">
+      <MemberSignature Language="C#" Value="public static void MapEnableTouchEvents (SkiaSharp.Views.Maui.Handlers.SKGLViewHandler handler, SkiaSharp.Views.Maui.ISKGLView view);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void MapEnableTouchEvents(class SkiaSharp.Views.Maui.Handlers.SKGLViewHandler handler, class SkiaSharp.Views.Maui.ISKGLView view) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.MapEnableTouchEvents(SkiaSharp.Views.Maui.Handlers.SKGLViewHandler,SkiaSharp.Views.Maui.ISKGLView)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="handler" Type="SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" />
+        <Parameter Name="view" Type="SkiaSharp.Views.Maui.ISKGLView" />
+      </Parameters>
+      <Docs>
+        <param name="handler">The handler instance.</param>
+        <param name="view">The view whose property changed.</param>
+        <summary>Maps the <see cref="P:SkiaSharp.Views.Maui.ISKGLView.EnableTouchEvents" /> property to the platform view.</summary>
+        <remarks>This method is called when the EnableTouchEvents property changes to update the native view's touch handling.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MapHasRenderLoop">
+      <MemberSignature Language="C#" Value="public static void MapHasRenderLoop (SkiaSharp.Views.Maui.Handlers.SKGLViewHandler handler, SkiaSharp.Views.Maui.ISKGLView view);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void MapHasRenderLoop(class SkiaSharp.Views.Maui.Handlers.SKGLViewHandler handler, class SkiaSharp.Views.Maui.ISKGLView view) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.MapHasRenderLoop(SkiaSharp.Views.Maui.Handlers.SKGLViewHandler,SkiaSharp.Views.Maui.ISKGLView)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="handler" Type="SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" />
+        <Parameter Name="view" Type="SkiaSharp.Views.Maui.ISKGLView" />
+      </Parameters>
+      <Docs>
+        <param name="handler">The handler instance.</param>
+        <param name="view">The view whose property changed.</param>
+        <summary>Maps the <see cref="P:SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop" /> property to the platform view.</summary>
+        <remarks>This method is called when the HasRenderLoop property changes to enable or disable continuous rendering on the native view.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MapIgnorePixelScaling">
+      <MemberSignature Language="C#" Value="public static void MapIgnorePixelScaling (SkiaSharp.Views.Maui.Handlers.SKGLViewHandler handler, SkiaSharp.Views.Maui.ISKGLView view);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void MapIgnorePixelScaling(class SkiaSharp.Views.Maui.Handlers.SKGLViewHandler handler, class SkiaSharp.Views.Maui.ISKGLView view) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.MapIgnorePixelScaling(SkiaSharp.Views.Maui.Handlers.SKGLViewHandler,SkiaSharp.Views.Maui.ISKGLView)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="handler" Type="SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" />
+        <Parameter Name="view" Type="SkiaSharp.Views.Maui.ISKGLView" />
+      </Parameters>
+      <Docs>
+        <param name="handler">The handler instance.</param>
+        <param name="view">The view whose property changed.</param>
+        <summary>Maps the <see cref="P:SkiaSharp.Views.Maui.ISKGLView.IgnorePixelScaling" /> property to the platform view.</summary>
+        <remarks>This method is called when the IgnorePixelScaling property changes to update the native view's pixel scaling behavior.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnInvalidateSurface">
+      <MemberSignature Language="C#" Value="public static void OnInvalidateSurface (SkiaSharp.Views.Maui.Handlers.SKGLViewHandler handler, SkiaSharp.Views.Maui.ISKGLView view, object? args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void OnInvalidateSurface(class SkiaSharp.Views.Maui.Handlers.SKGLViewHandler handler, class SkiaSharp.Views.Maui.ISKGLView view, object args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.OnInvalidateSurface(SkiaSharp.Views.Maui.Handlers.SKGLViewHandler,SkiaSharp.Views.Maui.ISKGLView,System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="handler" Type="SkiaSharp.Views.Maui.Handlers.SKGLViewHandler" />
+        <Parameter Name="view" Type="SkiaSharp.Views.Maui.ISKGLView" />
+        <Parameter Name="args" Type="System.Object">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="handler">The handler instance.</param>
+        <param name="view">The view requesting invalidation.</param>
+        <param name="args">Optional arguments (not used).</param>
+        <summary>Handles the <see cref="M:SkiaSharp.Views.Maui.ISKGLView.InvalidateSurface" /> command to trigger a redraw.</summary>
+        <remarks>This method is called when the cross-platform control requests a surface invalidation, causing the native GPU view to repaint.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SKGLViewCommandMapper">
+      <MemberSignature Language="C#" Value="public static Microsoft.Maui.CommandMapper&lt;SkiaSharp.Views.Maui.ISKGLView,SkiaSharp.Views.Maui.Handlers.SKGLViewHandler&gt; SKGLViewCommandMapper;" />
+      <MemberSignature Language="ILAsm" Value=".field public static class Microsoft.Maui.CommandMapper`2&lt;class SkiaSharp.Views.Maui.ISKGLView, class SkiaSharp.Views.Maui.Handlers.SKGLViewHandler&gt; SKGLViewCommandMapper" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.SKGLViewCommandMapper" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Maui.CommandMapper&lt;SkiaSharp.Views.Maui.ISKGLView,SkiaSharp.Views.Maui.Handlers.SKGLViewHandler&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The command mapper that maps cross-platform commands to handler methods.</summary>
+        <remarks>Contains the mapping for the InvalidateSurface command.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SKGLViewMapper">
+      <MemberSignature Language="C#" Value="public static Microsoft.Maui.PropertyMapper&lt;SkiaSharp.Views.Maui.ISKGLView,SkiaSharp.Views.Maui.Handlers.SKGLViewHandler&gt; SKGLViewMapper;" />
+      <MemberSignature Language="ILAsm" Value=".field public static class Microsoft.Maui.PropertyMapper`2&lt;class SkiaSharp.Views.Maui.ISKGLView, class SkiaSharp.Views.Maui.Handlers.SKGLViewHandler&gt; SKGLViewMapper" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.Views.Maui.Handlers.SKGLViewHandler.SKGLViewMapper" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Maui.PropertyMapper&lt;SkiaSharp.Views.Maui.ISKGLView,SkiaSharp.Views.Maui.Handlers.SKGLViewHandler&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>The property mapper that maps cross-platform properties to handler methods.</summary>
+        <remarks>Contains mappings for EnableTouchEvents, HasRenderLoop, and IgnorePixelScaling properties.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

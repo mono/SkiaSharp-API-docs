@@ -1,22 +1,26 @@
 <Type Name="SKCanvasView" FullName="SkiaSharp.Views.Maui.Controls.SKCanvasView">
-  <TypeSignature Language="C#" Value="public class SKCanvasView : Microsoft.Maui.Controls.View, SkiaSharp.Views.Maui.Controls.ISKCanvasViewController, SkiaSharp.Views.Maui.ISKCanvasView" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKCanvasView extends Microsoft.Maui.Controls.View implements class Microsoft.Maui.Controls.IElementController, class Microsoft.Maui.Controls.IViewController, class Microsoft.Maui.Controls.IVisualElementController, class Microsoft.Maui.IElement, class Microsoft.Maui.ITransform, class Microsoft.Maui.IView, class SkiaSharp.Views.Maui.Controls.ISKCanvasViewController, class SkiaSharp.Views.Maui.ISKCanvasView" />
+  <TypeSignature Language="C#" Value="public class SKCanvasView : Microsoft.Maui.Controls.View, SkiaSharp.Views.Maui.Controls.ISKCanvasViewController, SkiaSharp.Views.Maui.ISKCanvasView" FrameworkAlternate="skiasharp-views-maui-2.88" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKCanvasView extends Microsoft.Maui.Controls.View implements class Microsoft.Maui.Controls.IElementController, class Microsoft.Maui.Controls.IViewController, class Microsoft.Maui.Controls.IVisualElementController, class Microsoft.Maui.IElement, class Microsoft.Maui.ITransform, class Microsoft.Maui.IView, class SkiaSharp.Views.Maui.Controls.ISKCanvasViewController, class SkiaSharp.Views.Maui.ISKCanvasView" FrameworkAlternate="skiasharp-views-maui-2.88" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Maui.Controls.SKCanvasView" />
+  <TypeSignature Language="C#" Value="public class SKCanvasView : Microsoft.Maui.Controls.View, SkiaSharp.Views.Maui.ISKCanvasView" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKCanvasView extends Microsoft.Maui.Controls.View implements class Microsoft.Maui.IElement, class Microsoft.Maui.ITransform, class Microsoft.Maui.IView, class SkiaSharp.Views.Maui.ISKCanvasView" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Maui.Controls.View</BaseTypeName>
   </Base>
   <Interfaces>
-    <Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-2.88">
       <InterfaceName>Microsoft.Maui.Controls.IElementController</InterfaceName>
     </Interface>
-    <Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-2.88">
       <InterfaceName>Microsoft.Maui.Controls.IViewController</InterfaceName>
     </Interface>
-    <Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-2.88">
       <InterfaceName>Microsoft.Maui.Controls.IVisualElementController</InterfaceName>
     </Interface>
     <Interface>
@@ -28,16 +32,43 @@
     <Interface>
       <InterfaceName>Microsoft.Maui.IView</InterfaceName>
     </Interface>
-    <Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-2.88">
       <InterfaceName>SkiaSharp.Views.Maui.Controls.ISKCanvasViewController</InterfaceName>
     </Interface>
     <Interface>
       <InterfaceName>SkiaSharp.Views.Maui.ISKCanvasView</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(0)]</AttributeName>
+    </Attribute>
+    <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A .NET MAUI view that can be used to draw 2D graphics using SkiaSharp with software (CPU) rendering.</summary>
+    <remarks>
+      <para>The <see cref="T:SkiaSharp.Views.Maui.Controls.SKCanvasView" /> provides a software-rendered drawing surface for SkiaSharp graphics in .NET MAUI applications. For GPU-accelerated rendering, consider using <see cref="T:SkiaSharp.Views.Maui.Controls.SKGLView" /> instead.</para>
+      <para>Subscribe to the <see cref="E:SkiaSharp.Views.Maui.Controls.SKCanvasView.PaintSurface" /> event to draw custom graphics using the <see cref="T:SkiaSharp.SKCanvas" /> provided in the event arguments.</para>
+      <para>To request a redraw, call <see cref="M:SkiaSharp.Views.Maui.Controls.SKCanvasView.InvalidateSurface" />. The view also supports touch events when <see cref="P:SkiaSharp.Views.Maui.Controls.SKCanvasView.EnableTouchEvents" /> is set to <see langword="true" />.</para>
+      <para>The underlying platform views are:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <b>Android</b>: <c>SKCanvasView</c> (Android)</description>
+        </item>
+        <item>
+          <description>
+            <b>iOS/Mac Catalyst/tvOS</b>: <c>SKCanvasView</c> (iOS)</description>
+        </item>
+        <item>
+          <description>
+            <b>Windows</b>: <c>SKXamlCanvas</c></description>
+        </item>
+      </list>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -48,11 +79,13 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.Controls.SKCanvasView" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CanvasSize">
@@ -66,14 +99,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSize</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the current size of the canvas in pixels.</summary>
+        <value>The size of the drawing canvas in pixels.</value>
+        <remarks>This size accounts for the device's pixel density unless <see cref="P:SkiaSharp.Views.Maui.Controls.SKCanvasView.IgnorePixelScaling" /> is set to <see langword="true" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableTouchEvents">
@@ -84,14 +119,17 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether touch events are enabled for this view.</summary>
+        <value>
+          <see langword="true" /> if touch events are enabled; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When enabled, the <see cref="E:SkiaSharp.Views.Maui.Controls.SKCanvasView.Touch" /> event is raised for touch interactions.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableTouchEventsProperty">
@@ -102,13 +140,15 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Maui.Controls.BindableProperty</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Identifies the <see cref="P:SkiaSharp.Views.Maui.Controls.SKCanvasView.EnableTouchEvents" /> bindable property.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IgnorePixelScaling">
@@ -119,14 +159,17 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the canvas should ignore the device's pixel density scaling.</summary>
+        <value>
+          <see langword="true" /> to ignore pixel scaling and use 1:1 pixel mapping; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When <see langword="false" />, the canvas size is scaled by the device pixel density, resulting in a larger pixel canvas on high-DPI devices. When <see langword="true" />, the canvas size matches the view's logical size.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IgnorePixelScalingProperty">
@@ -137,13 +180,15 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Maui.Controls.BindableProperty</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Identifies the <see cref="P:SkiaSharp.Views.Maui.Controls.SKCanvasView.IgnorePixelScaling" /> bindable property.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="InvalidateSurface">
@@ -157,14 +202,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Invalidates the surface and requests a redraw.</summary>
+        <remarks>Call this method when you want to trigger a repaint of the canvas. This will cause the <see cref="E:SkiaSharp.Views.Maui.Controls.SKCanvasView.PaintSurface" /> event to be raised.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnMeasure">
@@ -180,15 +227,15 @@
         <ReturnType>Microsoft.Maui.SizeRequest</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="widthConstraint" Type="System.Double" />
-        <Parameter Name="heightConstraint" Type="System.Double" />
+        <Parameter Name="widthConstraint" Type="System.Double" Index="0" FrameworkAlternate="skiasharp-views-maui-2.88" />
+        <Parameter Name="heightConstraint" Type="System.Double" Index="1" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="widthConstraint">To be added.</param>
-        <param name="heightConstraint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="widthConstraint">The width constraint to use during measurement.</param>
+        <param name="heightConstraint">The height constraint to use during measurement.</param>
+        <summary>Called when the view is measured.</summary>
+        <returns>The size request for the view.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -199,6 +246,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -207,9 +256,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the surface and canvas information.</param>
+        <summary>Called when the surface needs to be painted.</summary>
+        <remarks>Override this method in a derived class to perform custom drawing. The base implementation raises the <see cref="E:SkiaSharp.Views.Maui.Controls.SKCanvasView.PaintSurface" /> event.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnTouch">
@@ -220,6 +269,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -228,9 +279,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing touch information.</param>
+        <summary>Called when a touch event occurs on the view.</summary>
+        <remarks>Override this method in a derived class to handle touch events. The base implementation raises the <see cref="E:SkiaSharp.Views.Maui.Controls.SKCanvasView.Touch" /> event. Touch events are only raised when <see cref="P:SkiaSharp.Views.Maui.Controls.SKCanvasView.EnableTouchEvents" /> is <see langword="true" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PaintSurface">
@@ -241,13 +292,20 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1 })]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the surface needs to be painted.</summary>
+        <remarks>Subscribe to this event to draw custom graphics using the <see cref="T:SkiaSharp.SKCanvas" /> provided in the <see cref="T:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKCanvasViewController.GetCanvasSize">
@@ -266,8 +324,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs&lt;SkiaSharp.SKSize&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member is used internally by the handler and should not be called directly.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKCanvasViewController.OnPaintSurface">
@@ -286,12 +344,12 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs" />
+        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The paint surface event arguments.</param>
+        <summary>This member is used internally by the handler and should not be called directly.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKCanvasViewController.OnTouch">
@@ -310,12 +368,12 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" />
+        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The touch event arguments.</param>
+        <summary>This member is used internally by the handler and should not be called directly.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKCanvasViewController.SurfaceInvalidated">
@@ -334,8 +392,8 @@
         <ReturnType>System.EventHandler</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member is used internally by the handler and should not be called directly.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.ISKCanvasView.OnCanvasSizeChanged">
@@ -349,6 +407,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -357,9 +417,9 @@
         <Parameter Name="size" Type="SkiaSharp.SKSizeI" />
       </Parameters>
       <Docs>
-        <param name="size">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="size">The new canvas size in pixels.</param>
+        <summary>This member is used internally by the handler and should not be called directly.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.ISKCanvasView.OnPaintSurface">
@@ -373,6 +433,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -381,9 +443,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The paint surface event arguments.</param>
+        <summary>This member is used internally by the handler and should not be called directly.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.ISKCanvasView.OnTouch">
@@ -397,6 +459,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -405,9 +469,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The touch event arguments.</param>
+        <summary>This member is used internally by the handler and should not be called directly.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Touch">
@@ -418,13 +482,20 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1 })]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.SKTouchEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when a touch event is detected on the view.</summary>
+        <remarks>This event is only raised when <see cref="P:SkiaSharp.Views.Maui.Controls.SKCanvasView.EnableTouchEvents" /> is set to <see langword="true" />. Set <see cref="P:SkiaSharp.Views.Maui.SKTouchEventArgs.Handled" /> to <see langword="true" /> to indicate that the event has been handled.</remarks>
       </Docs>
     </Member>
   </Members>

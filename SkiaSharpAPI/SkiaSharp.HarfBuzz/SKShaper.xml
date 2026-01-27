@@ -4,10 +4,10 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.HarfBuzz.SKShaper" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -19,7 +19,7 @@
   </Interfaces>
   <Docs>
     <summary>Encapsulates basic text shaping.</summary>
-    <remarks></remarks>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -29,10 +29,10 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="typeface" Type="SkiaSharp.SKTypeface" />
@@ -40,7 +40,7 @@
       <Docs>
         <param name="typeface">The typeface to use for the text shaping.</param>
         <summary>Creates a new <see cref="T:SkiaSharp.HarfBuzz.SKShaper" /> instance using the specified typeface.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -53,10 +53,10 @@
       </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -68,29 +68,85 @@
       </Docs>
     </Member>
     <Member MemberName="Shape">
+      <MemberSignature Language="C#" Value="public SkiaSharp.HarfBuzz.SKShaper.Result Shape (HarfBuzzSharp.Buffer buffer, SkiaSharp.SKFont font);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.HarfBuzz.SKShaper/Result Shape(class HarfBuzzSharp.Buffer buffer, class SkiaSharp.SKFont font) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.SKShaper.Shape(HarfBuzzSharp.Buffer,SkiaSharp.SKFont)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.HarfBuzz.SKShaper+Result</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="buffer" Type="HarfBuzzSharp.Buffer" Index="0" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+        <Parameter Name="font" Type="SkiaSharp.SKFont" Index="1" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="buffer">The HarfBuzz buffer containing the text to shape.</param>
+        <param name="font">The font to use for shaping.</param>
+        <summary>Shapes the text in the specified buffer using the font.</summary>
+        <returns>Returns the results of the shaping operation.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Shape">
       <MemberSignature Language="C#" Value="public SkiaSharp.HarfBuzz.SKShaper.Result Shape (HarfBuzzSharp.Buffer buffer, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.HarfBuzz.SKShaper/Result Shape(class HarfBuzzSharp.Buffer buffer, class SkiaSharp.SKPaint paint) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.SKShaper.Shape(HarfBuzzSharp.Buffer,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119">
+          <AttributeName Language="C#">[System.Obsolete("Use Shape(Buffer buffer, SKFont font) instead.")]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.HarfBuzz.SKShaper+Result</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="buffer" Type="HarfBuzzSharp.Buffer" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
+      </Parameters>
+      <Docs>
+        <param name="buffer">The HarfBuzz buffer containing the text to shape.</param>
+        <param name="paint">The paint to use for shaping.</param>
+        <summary>Shapes the text in the specified buffer using the properties from the paint.</summary>
+        <returns>Returns the results of the shaping operation.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Shape">
+      <MemberSignature Language="C#" Value="public SkiaSharp.HarfBuzz.SKShaper.Result Shape (string text, SkiaSharp.SKFont font);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.HarfBuzz.SKShaper/Result Shape(string text, class SkiaSharp.SKFont font) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.SKShaper.Shape(System.String,SkiaSharp.SKFont)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.HarfBuzz.SKShaper+Result</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="buffer" Type="HarfBuzzSharp.Buffer" Index="0" FrameworkAlternate="skiasharp-harfbuzz-1.68;skiasharp-harfbuzz-2.80;skiasharp-harfbuzz-2.88" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="1" FrameworkAlternate="skiasharp-harfbuzz-1.68;skiasharp-harfbuzz-2.80;skiasharp-harfbuzz-2.88" />
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+        <Parameter Name="font" Type="SkiaSharp.SKFont" Index="1" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
       </Parameters>
       <Docs>
-        <param name="buffer">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to shape.</param>
+        <param name="font">The font to use for shaping.</param>
+        <summary>Shapes the specified text using the font.</summary>
+        <returns>Returns the results of the shaping operation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Shape">
@@ -100,11 +156,16 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119">
+          <AttributeName Language="C#">[System.Obsolete("Use Shape(string text, SKFont font) instead.")]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.HarfBuzz.SKShaper+Result</ReturnType>
       </ReturnValue>
@@ -117,7 +178,36 @@
         <param name="paint">The paint to use.</param>
         <summary>Shapes the specified text using the properties from the paint.</summary>
         <returns>Returns the results of the shaping operation.</returns>
-        <remarks></remarks>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Shape">
+      <MemberSignature Language="C#" Value="public SkiaSharp.HarfBuzz.SKShaper.Result Shape (HarfBuzzSharp.Buffer buffer, float xOffset, float yOffset, SkiaSharp.SKFont font);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.HarfBuzz.SKShaper/Result Shape(class HarfBuzzSharp.Buffer buffer, float32 xOffset, float32 yOffset, class SkiaSharp.SKFont font) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.SKShaper.Shape(HarfBuzzSharp.Buffer,System.Single,System.Single,SkiaSharp.SKFont)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.HarfBuzz.SKShaper+Result</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="buffer" Type="HarfBuzzSharp.Buffer" Index="0" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+        <Parameter Name="xOffset" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+        <Parameter Name="yOffset" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+        <Parameter Name="font" Type="SkiaSharp.SKFont" Index="3" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="buffer">The HarfBuzz buffer containing the text to shape.</param>
+        <param name="xOffset">The x-offset to apply to the glyph positions.</param>
+        <param name="yOffset">The y-offset to apply to the glyph positions.</param>
+        <param name="font">The font to use for shaping.</param>
+        <summary>Shapes the text in the specified buffer using the font, with the specified offset.</summary>
+        <returns>Returns the results of the shaping operation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Shape">
@@ -127,27 +217,62 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119">
+          <AttributeName Language="C#">[System.Obsolete("Use Shape(Buffer buffer, float xOffset, float yOffset, SKFont font) instead.")]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.HarfBuzz.SKShaper+Result</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="buffer" Type="HarfBuzzSharp.Buffer" />
+        <Parameter Name="xOffset" Type="System.Single" />
+        <Parameter Name="yOffset" Type="System.Single" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
+      </Parameters>
+      <Docs>
+        <param name="buffer">The HarfBuzz buffer containing the text to shape.</param>
+        <param name="xOffset">The x-offset to apply to the glyph positions.</param>
+        <param name="yOffset">The y-offset to apply to the glyph positions.</param>
+        <param name="paint">The paint to use for shaping.</param>
+        <summary>Shapes the text in the specified buffer using the properties from the paint, with the specified offset.</summary>
+        <returns>Returns the results of the shaping operation.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Shape">
+      <MemberSignature Language="C#" Value="public SkiaSharp.HarfBuzz.SKShaper.Result Shape (string text, float xOffset, float yOffset, SkiaSharp.SKFont font);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.HarfBuzz.SKShaper/Result Shape(string text, float32 xOffset, float32 yOffset, class SkiaSharp.SKFont font) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.SKShaper.Shape(System.String,System.Single,System.Single,SkiaSharp.SKFont)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.HarfBuzz.SKShaper+Result</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="buffer" Type="HarfBuzzSharp.Buffer" Index="0" FrameworkAlternate="skiasharp-harfbuzz-1.68;skiasharp-harfbuzz-2.80;skiasharp-harfbuzz-2.88" />
-        <Parameter Name="xOffset" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-harfbuzz-1.68;skiasharp-harfbuzz-2.80;skiasharp-harfbuzz-2.88" />
-        <Parameter Name="yOffset" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-harfbuzz-1.68;skiasharp-harfbuzz-2.80;skiasharp-harfbuzz-2.88" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-harfbuzz-1.68;skiasharp-harfbuzz-2.80;skiasharp-harfbuzz-2.88" />
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+        <Parameter Name="xOffset" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+        <Parameter Name="yOffset" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
+        <Parameter Name="font" Type="SkiaSharp.SKFont" Index="3" FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119" />
       </Parameters>
       <Docs>
-        <param name="buffer">To be added.</param>
-        <param name="xOffset">To be added.</param>
-        <param name="yOffset">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to shape.</param>
+        <param name="xOffset">The x-offset to apply to the glyph positions.</param>
+        <param name="yOffset">The y-offset to apply to the glyph positions.</param>
+        <param name="font">The font to use for shaping.</param>
+        <summary>Shapes the specified text using the font, with the specified offset.</summary>
+        <returns>Returns the results of the shaping operation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Shape">
@@ -157,11 +282,16 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-harfbuzz-3.116;skiasharp-harfbuzz-3.119">
+          <AttributeName Language="C#">[System.Obsolete("Use Shape(string text, float xOffset, float yOffset, SKFont font) instead.")]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.HarfBuzz.SKShaper+Result</ReturnType>
       </ReturnValue>
@@ -178,7 +308,7 @@
         <param name="paint">The paint to use.</param>
         <summary>Shapes the specified text using the properties from the paint.</summary>
         <returns>Returns the results of the shaping operation.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Typeface">
@@ -188,18 +318,18 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKTypeface</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets the typeface used when creating the shaper.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The typeface used by the shaper.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

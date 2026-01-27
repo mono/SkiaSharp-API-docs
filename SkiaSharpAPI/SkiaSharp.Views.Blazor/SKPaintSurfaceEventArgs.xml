@@ -5,14 +5,16 @@
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.EventArgs</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides data for the <see cref="P:SkiaSharp.Views.Blazor.SKCanvasView.OnPaintSurface" /> callback.</summary>
+    <remarks>This class contains the drawing surface and information about its size and format for software-rendered Blazor canvas views.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -23,16 +25,18 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="surface" Type="SkiaSharp.SKSurface" />
         <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="info">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The surface to draw on.</param>
+        <param name="info">The image information describing the surface.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs" /> class.</summary>
+        <remarks>The <see cref="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.RawInfo" /> property will be set to the same value as <paramref name="info" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -43,6 +47,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="surface" Type="SkiaSharp.SKSurface" />
@@ -50,11 +56,11 @@
         <Parameter Name="rawInfo" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="info">To be added.</param>
-        <param name="rawInfo">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The surface to draw on.</param>
+        <param name="info">The image information describing the user-visible surface dimensions.</param>
+        <param name="rawInfo">The image information describing the actual physical surface dimensions.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs" /> class with separate user and raw dimensions.</summary>
+        <remarks>Use this constructor when <see cref="P:SkiaSharp.Views.Blazor.SKCanvasView.IgnorePixelScaling" /> causes the user-visible dimensions to differ from the physical dimensions.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Info">
@@ -65,14 +71,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the image information describing the user-visible surface dimensions.</summary>
+        <value>The <see cref="T:SkiaSharp.SKImageInfo" /> for the surface as seen by the drawing code.</value>
+        <remarks>When <see cref="P:SkiaSharp.Views.Blazor.SKCanvasView.IgnorePixelScaling" /> is <see langword="true" />, this returns the logical size. When <see langword="false" />, this equals <see cref="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.RawInfo" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RawInfo">
@@ -83,14 +91,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the image information describing the actual physical surface dimensions.</summary>
+        <value>The <see cref="T:SkiaSharp.SKImageInfo" /> for the physical surface in pixels.</value>
+        <remarks>This always returns the actual pixel dimensions of the underlying surface, regardless of the <see cref="P:SkiaSharp.Views.Blazor.SKCanvasView.IgnorePixelScaling" /> setting.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Surface">
@@ -101,14 +111,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the surface to draw on.</summary>
+        <value>The <see cref="T:SkiaSharp.SKSurface" /> that provides the canvas for drawing.</value>
+        <remarks>Use <see cref="P:SkiaSharp.SKSurface.Canvas" /> to get the canvas for drawing operations. The surface is managed by the component and should not be disposed.</remarks>
       </Docs>
     </Member>
   </Members>

@@ -1,24 +1,24 @@
 <Type Name="GRContext" FullName="SkiaSharp.GRContext">
-  <TypeSignature Language="C#" Value="public class GRContext : SkiaSharp.SKObject" FrameworkAlternate="skiasharp-1.60;skiasharp-1.68;skiasharp-2.80" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GRContext extends SkiaSharp.SKObject" FrameworkAlternate="skiasharp-1.60;skiasharp-1.68;skiasharp-2.80" />
+  <TypeSignature Language="C#" Value="public class GRContext : SkiaSharp.SKObject" FrameworkAlternate="skiasharp-2.80" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GRContext extends SkiaSharp.SKObject" FrameworkAlternate="skiasharp-2.80" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.GRContext" />
-  <TypeSignature Language="C#" Value="public class GRContext : SkiaSharp.GRRecordingContext" FrameworkAlternate="skiasharp-2.88" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GRContext extends SkiaSharp.GRRecordingContext" FrameworkAlternate="skiasharp-2.88" />
+  <TypeSignature Language="C#" Value="public class GRContext : SkiaSharp.GRRecordingContext" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GRContext extends SkiaSharp.GRRecordingContext" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
-    <BaseTypeName FrameworkAlternate="skiasharp-2.88">SkiaSharp.GRRecordingContext</BaseTypeName>
+    <BaseTypeName FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119">SkiaSharp.GRRecordingContext</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
     <summary>Represents an underlying backend 3D API context.</summary>
-    <remarks></remarks>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName="AbandonContext">
@@ -28,10 +28,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -41,28 +41,30 @@
       </Parameters>
       <Docs>
         <param name="releaseResources">Use true to indicate that the underlying 3D context is not yet lost and the <see cref="T:SkiaSharp.GRContext" /> will cleanup all allocated resources before returning. Using false will ensure that the destructors of the <see cref="T:SkiaSharp.GRContext" /> and any of its created resource objects will not make backend 3D API calls.</param>
-        <summary>Abandons all GPU resources and assumes the underlying backend 3D API context is not longer usable. After returning it will assume that the underlying context may no longer be valid.</summary>
-        <remarks></remarks>
+        <summary>Abandons all GPU resources and assumes the underlying backend 3D API context is no longer usable. After returning it will assume that the underlying context may no longer be valid.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Backend">
-      <MemberSignature Language="C#" Value="public SkiaSharp.GRBackend Backend { get; }" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.GRBackend Backend { get; }" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.GRBackend Backend" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContext.Backend" />
+      <MemberSignature Language="C#" Value="public override SkiaSharp.GRBackend Backend { get; }" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRBackend</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets the backend that this context is wrapping.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The backend type.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -72,8 +74,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -89,13 +89,13 @@
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backend" Type="SkiaSharp.GRBackend" />
+        <Parameter Name="backend" Type="SkiaSharp.GRBackend" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="backend">The backend to use.</param>
         <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a backend context using the default interface for the specified backend.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -105,8 +105,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -122,15 +120,15 @@
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backend" Type="SkiaSharp.GRBackend" />
-        <Parameter Name="backendContext" Type="SkiaSharp.GRGlInterface" />
+        <Parameter Name="backend" Type="SkiaSharp.GRBackend" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="backendContext" Type="SkiaSharp.GRGlInterface" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="backend">The backend to use.</param>
         <param name="backendContext">The backend interface to use.</param>
         <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a backend context.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -140,17 +138,12 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+        <Attribute FrameworkAlternate="skiasharp-2.80;skiasharp-2.88">
           <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
-        </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-1.68">
-          <AttributeName Language="C#">[System.Obsolete("Use Create(GRBackend, GRGlInterface) instead.")]</AttributeName>
         </Attribute>
         <Attribute FrameworkAlternate="skiasharp-2.80;skiasharp-2.88">
           <AttributeName Language="C#">[System.Obsolete("Use CreateGl(GRGlInterface) instead.")]</AttributeName>
@@ -160,67 +153,61 @@
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backend" Type="SkiaSharp.GRBackend" />
-        <Parameter Name="backendContext" Type="System.IntPtr" />
+        <Parameter Name="backend" Type="SkiaSharp.GRBackend" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="backendContext" Type="System.IntPtr" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="backend">The backend to use.</param>
         <param name="backendContext">The backend interface to use.</param>
         <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a backend context.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
-    <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static SkiaSharp.GRContext Create (SkiaSharp.GRBackend backend, SkiaSharp.GRGlInterface backendContext, SkiaSharp.GRContextOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.GRContext Create(valuetype SkiaSharp.GRBackend backend, class SkiaSharp.GRGlInterface backendContext, valuetype SkiaSharp.GRContextOptions options) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRContext.Create(SkiaSharp.GRBackend,SkiaSharp.GRGlInterface,SkiaSharp.GRContextOptions)" />
+    <Member MemberName="CreateDirect3D">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.GRContext CreateDirect3D (SkiaSharp.GRD3DBackendContext backendContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.GRContext CreateDirect3D(class SkiaSharp.GRD3DBackendContext backendContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRContext.CreateDirect3D(SkiaSharp.GRD3DBackendContext)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backend" Type="SkiaSharp.GRBackend" Index="0" FrameworkAlternate="skiasharp-1.60" />
-        <Parameter Name="backendContext" Type="SkiaSharp.GRGlInterface" Index="1" FrameworkAlternate="skiasharp-1.60" />
-        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" Index="2" FrameworkAlternate="skiasharp-1.60" />
+        <Parameter Name="backendContext" Type="SkiaSharp.GRD3DBackendContext" Index="0" FrameworkAlternate="skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="backend">The backend to use.</param>
-        <param name="backendContext">The backend interface to use.</param>
-        <param name="options">The context-creation options.</param>
-        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a backend context.</summary>
+        <param name="backendContext">The Direct3D backend context to use.</param>
+        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a Direct3D context.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
-    <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static SkiaSharp.GRContext Create (SkiaSharp.GRBackend backend, IntPtr backendContext, SkiaSharp.GRContextOptions options);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.GRContext Create(valuetype SkiaSharp.GRBackend backend, native int backendContext, valuetype SkiaSharp.GRContextOptions options) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRContext.Create(SkiaSharp.GRBackend,System.IntPtr,SkiaSharp.GRContextOptions)" />
+    <Member MemberName="CreateDirect3D">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.GRContext CreateDirect3D (SkiaSharp.GRD3DBackendContext backendContext, SkiaSharp.GRContextOptions options);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.GRContext CreateDirect3D(class SkiaSharp.GRD3DBackendContext backendContext, class SkiaSharp.GRContextOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRContext.CreateDirect3D(SkiaSharp.GRD3DBackendContext,SkiaSharp.GRContextOptions)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backend" Type="SkiaSharp.GRBackend" Index="0" FrameworkAlternate="skiasharp-1.60" />
-        <Parameter Name="backendContext" Type="System.IntPtr" Index="1" FrameworkAlternate="skiasharp-1.60" />
-        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" Index="2" FrameworkAlternate="skiasharp-1.60" />
+        <Parameter Name="backendContext" Type="SkiaSharp.GRD3DBackendContext" Index="0" FrameworkAlternate="skiasharp-3.119" />
+        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" Index="1" FrameworkAlternate="skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="backend">The backend to use.</param>
-        <param name="backendContext">The backend interface to use.</param>
+        <param name="backendContext">The Direct3D backend context to use.</param>
         <param name="options">The context-creation options.</param>
-        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a backend context.</summary>
+        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a Direct3D context.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateGl">
@@ -230,9 +217,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
@@ -241,7 +229,7 @@
       <Docs>
         <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for an OpenGL context.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateGl">
@@ -253,18 +241,20 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" />
       </Parameters>
       <Docs>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="options">The context-creation options.</param>
+        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for an OpenGL context.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateGl">
@@ -274,21 +264,22 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backendContext" Type="SkiaSharp.GRGlInterface" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="backendContext" Type="SkiaSharp.GRGlInterface" />
       </Parameters>
       <Docs>
         <param name="backendContext">The OpenGL interface to use.</param>
         <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for an OpenGL context.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateGl">
@@ -300,20 +291,70 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backendContext" Type="SkiaSharp.GRGlInterface" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
-        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="backendContext" Type="SkiaSharp.GRGlInterface" />
+        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" />
       </Parameters>
       <Docs>
-        <param name="backendContext">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="backendContext">The OpenGL interface to use.</param>
+        <param name="options">The context-creation options.</param>
+        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for an OpenGL context.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateMetal">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.GRContext CreateMetal (SkiaSharp.GRMtlBackendContext backendContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.GRContext CreateMetal(class SkiaSharp.GRMtlBackendContext backendContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRContext.CreateMetal(SkiaSharp.GRMtlBackendContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.GRContext</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendContext" Type="SkiaSharp.GRMtlBackendContext" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="backendContext">The Metal backend context to use.</param>
+        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a Metal context.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateMetal">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.GRContext CreateMetal (SkiaSharp.GRMtlBackendContext backendContext, SkiaSharp.GRContextOptions options);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.GRContext CreateMetal(class SkiaSharp.GRMtlBackendContext backendContext, class SkiaSharp.GRContextOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRContext.CreateMetal(SkiaSharp.GRMtlBackendContext,SkiaSharp.GRContextOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.GRContext</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendContext" Type="SkiaSharp.GRMtlBackendContext" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="backendContext">The Metal backend context to use.</param>
+        <param name="options">The context-creation options.</param>
+        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a Metal context.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateVulkan">
@@ -325,18 +366,20 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backendContext" Type="SkiaSharp.GRVkBackendContext" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="backendContext" Type="SkiaSharp.GRVkBackendContext" />
       </Parameters>
       <Docs>
-        <param name="backendContext">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="backendContext">The Vulkan backend context to use.</param>
+        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a Vulkan context.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateVulkan">
@@ -348,20 +391,22 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="backendContext" Type="SkiaSharp.GRVkBackendContext" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
-        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="backendContext" Type="SkiaSharp.GRVkBackendContext" />
+        <Parameter Name="options" Type="SkiaSharp.GRContextOptions" />
       </Parameters>
       <Docs>
-        <param name="backendContext">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="backendContext">The Vulkan backend context to use.</param>
+        <param name="options">The context-creation options.</param>
+        <summary>Creates a <see cref="T:SkiaSharp.GRContext" /> for a Vulkan context.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.GRContext" /> if one was created, otherwise <see langword="null" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -371,10 +416,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -397,14 +442,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Releases the native resources used by the <see cref="T:SkiaSharp.GRContext" />.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DumpMemoryStatistics">
@@ -416,17 +463,19 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dump" Type="SkiaSharp.SKTraceMemoryDump" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="dump" Type="SkiaSharp.SKTraceMemoryDump" />
       </Parameters>
       <Docs>
-        <param name="dump">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="dump">The memory dump object to populate with statistics.</param>
+        <summary>Dumps memory statistics for the context to the specified dump object.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -436,10 +485,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -447,7 +496,7 @@
       <Parameters />
       <Docs>
         <summary>Call to ensure all drawing to the context has been issued to the underlying 3D API.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -458,19 +507,23 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="submit" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88" />
-        <Parameter Name="synchronous" Type="System.Boolean" Index="1" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="submit" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="synchronous" Type="System.Boolean" Index="1" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="submit">To be added.</param>
-        <param name="synchronous">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="submit">
+          <see langword="true" /> to submit the work to the GPU after flushing; otherwise, <see langword="false" />.</param>
+        <param name="synchronous">
+          <see langword="true" /> to wait for the GPU to complete the work; otherwise, <see langword="false" />.</param>
+        <summary>Flushes all pending drawing operations to the underlying 3D API, optionally submitting work to the GPU.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetMaxSurfaceSampleCount">
@@ -480,19 +533,20 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
         <param name="colorType">The color type.</param>
-        <summary>Get the maximum supported sample count for the specified color type.</summary>
+        <summary>Gets the maximum supported sample count for the specified color type.</summary>
         <returns>Returns the maximum supported sample count.</returns>
         <remarks>1 is returned if only non-MSAA rendering is supported for the color type. 0 is returned if rendering to this color type is not supported at all.</remarks>
       </Docs>
@@ -504,16 +558,14 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+        <Attribute FrameworkAlternate="skiasharp-2.80;skiasharp-2.88">
           <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+        <Attribute FrameworkAlternate="skiasharp-2.80;skiasharp-2.88">
           <AttributeName Language="C#">[System.Obsolete]</AttributeName>
         </Attribute>
       </Attributes>
@@ -521,8 +573,8 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="config" Type="SkiaSharp.GRPixelConfig" />
-        <Parameter Name="dpi" Type="System.Single" />
+        <Parameter Name="config" Type="SkiaSharp.GRPixelConfig" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="dpi" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="config">The configuration of the render target.</param>
@@ -541,15 +593,17 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the maximum number of bytes of video memory that can be held in the cache.</summary>
+        <returns>The maximum number of bytes of video memory that can be held in the cache.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetResourceCacheLimits">
@@ -559,8 +613,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -576,14 +628,14 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxResources" Type="System.Int32" RefType="out" />
-        <Parameter Name="maxResourceBytes" Type="System.Int64" RefType="out" />
+        <Parameter Name="maxResources" Type="System.Int32" RefType="out" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="maxResourceBytes" Type="System.Int64" RefType="out" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="maxResources">The maximum number of resources that can be held in the cache.</param>
         <param name="maxResourceBytes">The maximum number of bytes of video memory that can be held in the cache.</param>
         <summary>Returns the current GPU resource cache limits.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetResourceCacheUsage">
@@ -593,10 +645,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -609,26 +661,30 @@
         <param name="maxResources">The number of resources that are held in the cache.</param>
         <param name="maxResourceBytes">The total number of bytes of video memory held in the cache.</param>
         <summary>Returns the current GPU resource cache usage.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsAbandoned">
-      <MemberSignature Language="C#" Value="public bool IsAbandoned { get; }" />
+      <MemberSignature Language="C#" Value="public bool IsAbandoned { get; }" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       <MemberSignature Language="ILAsm" Value=".property instance bool IsAbandoned" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.GRContext.IsAbandoned" />
+      <MemberSignature Language="C#" Value="public override bool IsAbandoned { get; }" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether the context has been abandoned.</summary>
+        <value>
+          <see langword="true" /> if the context has been abandoned; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="PurgeResources">
@@ -640,14 +696,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Frees all GPU resources held by the context.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="PurgeUnlockedResources">
@@ -659,17 +717,20 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="scratchResourcesOnly" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="scratchResourcesOnly" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="scratchResourcesOnly">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="scratchResourcesOnly">
+          <see langword="true" /> to purge only scratch resources; otherwise, <see langword="false" /> to purge all unlocked resources.</param>
+        <summary>Purges unlocked resources from the cache.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="PurgeUnlockedResources">
@@ -681,19 +742,22 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="bytesToPurge" Type="System.Int64" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
-        <Parameter Name="preferScratchResources" Type="System.Boolean" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="bytesToPurge" Type="System.Int64" />
+        <Parameter Name="preferScratchResources" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="bytesToPurge">To be added.</param>
-        <param name="preferScratchResources">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bytesToPurge">The number of bytes to attempt to purge.</param>
+        <param name="preferScratchResources">
+          <see langword="true" /> to prefer purging scratch resources first; otherwise, <see langword="false" />.</param>
+        <summary>Purges unlocked resources from the cache until the specified number of bytes have been freed.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="PurgeUnusedResources">
@@ -705,17 +769,19 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="milliseconds" Type="System.Int64" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="milliseconds" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="milliseconds">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="milliseconds">The time period in milliseconds. Resources that have not been used within this time period will be purged.</param>
+        <summary>Purges resources that have not been used within the specified time period.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ResetContext">
@@ -725,10 +791,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -749,10 +815,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -773,10 +839,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -799,17 +865,19 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxResourceBytes" Type="System.Int64" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="maxResourceBytes" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="maxResourceBytes">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="maxResourceBytes">The maximum number of bytes of video memory that can be held in the cache.</param>
+        <summary>Specifies the GPU resource cache limit.</summary>
+        <remarks>If the current cache exceeds this limit, it will be purged (LRU) to keep the cache within this limit.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetResourceCacheLimits">
@@ -819,8 +887,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -836,8 +902,8 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxResources" Type="System.Int32" />
-        <Parameter Name="maxResourceBytes" Type="System.Int64" />
+        <Parameter Name="maxResources" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="maxResourceBytes" Type="System.Int64" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="maxResources">The maximum number of resources that can be held in the cache.</param>
@@ -854,17 +920,20 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="synchronous" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="synchronous" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
-        <param name="synchronous">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="synchronous">
+          <see langword="true" /> to wait for the GPU to complete all outstanding work; otherwise, <see langword="false" />.</param>
+        <summary>Submits outstanding work to the GPU.</summary>
+        <remarks />
       </Docs>
     </Member>
   </Members>

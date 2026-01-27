@@ -1,0 +1,255 @@
+<Type Name="ISKGLView" FullName="SkiaSharp.Views.Maui.ISKGLView">
+  <TypeSignature Language="C#" Value="public interface ISKGLView : Microsoft.Maui.IView" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract beforefieldinit ISKGLView implements class Microsoft.Maui.IElement, class Microsoft.Maui.ITransform, class Microsoft.Maui.IView" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Maui.ISKGLView" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.Maui.IElement</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.Maui.ITransform</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.Maui.IView</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Defines the interface for a GPU-accelerated SkiaSharp view in .NET MAUI.</summary>
+    <remarks>This interface is implemented by <see cref="T:SkiaSharp.Views.Maui.Controls.SKGLView" /> and used by platform-specific handlers to communicate between the cross-platform view and native GPU-backed views. The GPU backend varies by platform: OpenGL ES on Android, Metal on Mac Catalyst, and DirectX via ANGLE on Windows.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CanvasSize">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKSize CanvasSize { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKSize CanvasSize" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.ISKGLView.CanvasSize" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSize</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the current size of the canvas in pixels.</summary>
+        <value>The size of the canvas in pixels.</value>
+        <remarks>The size depends on the <see cref="P:SkiaSharp.Views.Maui.ISKGLView.IgnorePixelScaling" /> setting. When <see langword="false" />, this returns physical pixels; when <see langword="true" />, this returns logical pixels matching the view size.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnableTouchEvents">
+      <MemberSignature Language="C#" Value="public bool EnableTouchEvents { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool EnableTouchEvents" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.ISKGLView.EnableTouchEvents" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether touch events are enabled for this view.</summary>
+        <value>
+          <see langword="true" /> if touch events are enabled; otherwise, <see langword="false" />.</value>
+        <remarks>When enabled, the <see cref="M:SkiaSharp.Views.Maui.ISKGLView.OnTouch(SkiaSharp.Views.Maui.SKTouchEventArgs)" /> method is called for touch interactions.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GRContext">
+      <MemberSignature Language="C#" Value="public SkiaSharp.GRContext? GRContext { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.GRContext GRContext" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.ISKGLView.GRContext" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.GRContext</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the GPU context used for rendering.</summary>
+        <value>The <see cref="T:SkiaSharp.GRContext" /> instance, or <see langword="null" /> if the context is not yet available.</value>
+        <remarks>The context is created by the platform handler and may be <see langword="null" /> before the view is fully initialized. The backend type varies by platform.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="HasRenderLoop">
+      <MemberSignature Language="C#" Value="public bool HasRenderLoop { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool HasRenderLoop" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether the view uses a continuous render loop.</summary>
+        <value>
+          <see langword="true" /> if the view renders continuously; <see langword="false" /> if it only renders when invalidated.</value>
+        <remarks>When <see langword="true" />, <see cref="M:SkiaSharp.Views.Maui.ISKGLView.OnPaintSurface(SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs)" /> is called continuously for animations. When <see langword="false" />, call <see cref="M:SkiaSharp.Views.Maui.ISKGLView.InvalidateSurface" /> to trigger redraws.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IgnorePixelScaling">
+      <MemberSignature Language="C#" Value="public bool IgnorePixelScaling { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IgnorePixelScaling" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.ISKGLView.IgnorePixelScaling" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether the drawing canvas should ignore the physical pixel density.</summary>
+        <value>
+          <see langword="true" /> to use logical pixels; <see langword="false" /> to use physical pixels.</value>
+        <remarks>When <see langword="false" /> (the default), the canvas size is scaled to match the physical pixel density, resulting in sharper rendering on high-DPI displays. When <see langword="true" />, the canvas uses logical pixels matching the view's layout size.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="InvalidateSurface">
+      <MemberSignature Language="C#" Value="public void InvalidateSurface ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void InvalidateSurface() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.ISKGLView.InvalidateSurface" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Invalidates the surface, causing a redraw.</summary>
+        <remarks>Call this method when you need to trigger a repaint of the view. When <see cref="P:SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop" /> is <see langword="false" />, this is the primary way to request rendering updates.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnCanvasSizeChanged">
+      <MemberSignature Language="C#" Value="public void OnCanvasSizeChanged (SkiaSharp.SKSizeI size);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnCanvasSizeChanged(valuetype SkiaSharp.SKSizeI size) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.ISKGLView.OnCanvasSizeChanged(SkiaSharp.SKSizeI)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="size" Type="SkiaSharp.SKSizeI" />
+      </Parameters>
+      <Docs>
+        <param name="size">The new canvas size in pixels.</param>
+        <summary>Called by the handler when the canvas size changes.</summary>
+        <remarks>This method is invoked by the platform handler to notify the view that the underlying canvas size has changed, typically due to layout changes or device rotation.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnGRContextChanged">
+      <MemberSignature Language="C#" Value="public void OnGRContextChanged (SkiaSharp.GRContext? context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnGRContextChanged(class SkiaSharp.GRContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.ISKGLView.OnGRContextChanged(SkiaSharp.GRContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="SkiaSharp.GRContext" />
+      </Parameters>
+      <Docs>
+        <param name="context">The new GPU context, or <see langword="null" /> if the context was destroyed.</param>
+        <summary>Called by the handler when the GPU context changes.</summary>
+        <remarks>This method is invoked when the GPU context is created, recreated, or destroyed. Implementations should release any GPU resources tied to the old context and recreate them with the new context if needed.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnPaintSurface">
+      <MemberSignature Language="C#" Value="public void OnPaintSurface (SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnPaintSurface(class SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.ISKGLView.OnPaintSurface(SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">The event arguments containing the surface, canvas, and GPU context information.</param>
+        <summary>Called by the handler when the surface needs to be painted.</summary>
+        <remarks>This method is invoked during the paint cycle. Implementations should perform drawing operations using the canvas provided in the event arguments. The surface is GPU-backed and supports hardware-accelerated rendering.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnTouch">
+      <MemberSignature Language="C#" Value="public void OnTouch (SkiaSharp.Views.Maui.SKTouchEventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnTouch(class SkiaSharp.Views.Maui.SKTouchEventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.ISKGLView.OnTouch(SkiaSharp.Views.Maui.SKTouchEventArgs)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" />
+      </Parameters>
+      <Docs>
+        <param name="e">The event arguments containing touch information.</param>
+        <summary>Called by the handler when a touch event occurs.</summary>
+        <remarks>This method is only called when <see cref="P:SkiaSharp.Views.Maui.ISKGLView.EnableTouchEvents" /> is <see langword="true" />. Implementations should handle touch interactions such as presses, moves, and releases.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

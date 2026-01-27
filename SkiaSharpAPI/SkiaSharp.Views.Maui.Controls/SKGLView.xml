@@ -1,31 +1,78 @@
 <Type Name="SKGLView" FullName="SkiaSharp.Views.Maui.Controls.SKGLView">
-  <TypeSignature Language="C#" Value="public class SKGLView : Microsoft.Maui.Controls.View, SkiaSharp.Views.Maui.Controls.ISKGLViewController" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLView extends Microsoft.Maui.Controls.View implements class Microsoft.Maui.Controls.IElementController, class Microsoft.Maui.Controls.IViewController, class Microsoft.Maui.Controls.IVisualElementController, class SkiaSharp.Views.Maui.Controls.ISKGLViewController" />
+  <TypeSignature Language="C#" Value="public class SKGLView : Microsoft.Maui.Controls.View, SkiaSharp.Views.Maui.Controls.ISKGLViewController" FrameworkAlternate="skiasharp-views-maui-2.88" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLView extends Microsoft.Maui.Controls.View implements class Microsoft.Maui.Controls.IElementController, class Microsoft.Maui.Controls.IViewController, class Microsoft.Maui.Controls.IVisualElementController, class SkiaSharp.Views.Maui.Controls.ISKGLViewController" FrameworkAlternate="skiasharp-views-maui-2.88" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Maui.Controls.SKGLView" />
+  <TypeSignature Language="C#" Value="public class SKGLView : Microsoft.Maui.Controls.View, SkiaSharp.Views.Maui.ISKGLView" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGLView extends Microsoft.Maui.Controls.View implements class Microsoft.Maui.IElement, class Microsoft.Maui.ITransform, class Microsoft.Maui.IView, class SkiaSharp.Views.Maui.ISKGLView" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.Maui.Controls.View</BaseTypeName>
   </Base>
   <Interfaces>
-    <Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-2.88">
       <InterfaceName>Microsoft.Maui.Controls.IElementController</InterfaceName>
     </Interface>
-    <Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-2.88">
       <InterfaceName>Microsoft.Maui.Controls.IViewController</InterfaceName>
     </Interface>
-    <Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-2.88">
       <InterfaceName>Microsoft.Maui.Controls.IVisualElementController</InterfaceName>
     </Interface>
-    <Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-2.88">
       <InterfaceName>SkiaSharp.Views.Maui.Controls.ISKGLViewController</InterfaceName>
     </Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <InterfaceName>Microsoft.Maui.IElement</InterfaceName>
+    </Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <InterfaceName>Microsoft.Maui.ITransform</InterfaceName>
+    </Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <InterfaceName>Microsoft.Maui.IView</InterfaceName>
+    </Interface>
+    <Interface FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <InterfaceName>SkiaSharp.Views.Maui.ISKGLView</InterfaceName>
+    </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(0)]</AttributeName>
+    </Attribute>
+    <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A .NET MAUI view that uses GPU acceleration for hardware-accelerated 2D graphics rendering with SkiaSharp.</summary>
+    <remarks>
+      <para>The <see cref="T:SkiaSharp.Views.Maui.Controls.SKGLView" /> provides a GPU-accelerated drawing surface for SkiaSharp graphics in .NET MAUI applications. This view can provide better performance than the software-rendered <see cref="T:SkiaSharp.Views.Maui.Controls.SKCanvasView" /> for complex graphics or animations.</para>
+      <para>The underlying GPU technology varies by platform:</para>
+      <list type="bullet">
+        <item>
+          <description>
+            <b>Android</b>: OpenGL ES via <c>SKGLTextureView</c></description>
+        </item>
+        <item>
+          <description>
+            <b>iOS/tvOS</b>: OpenGL ES (deprecated) or Metal on Mac Catalyst</description>
+        </item>
+        <item>
+          <description>
+            <b>Mac Catalyst</b>: Metal via <c>SKMetalView</c></description>
+        </item>
+        <item>
+          <description>
+            <b>Windows</b>: DirectX via ANGLE using <c>SKSwapChainPanel</c></description>
+        </item>
+      </list>
+      <para>Subscribe to the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event to draw custom graphics. Set <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.HasRenderLoop" /> to <see langword="true" /> for continuous rendering (e.g., for animations).</para>
+      <para>Note: On Windows, the <c>Background</c> property is not supported due to WinUI 3 limitations with <c>SwapChainPanel</c>.</para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -36,11 +83,13 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.Controls.SKGLView" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CanvasSize">
@@ -48,17 +97,22 @@
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKSize CanvasSize" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.Controls.SKGLView.CanvasSize" />
       <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">P:SkiaSharp.Views.Maui.ISKGLView.CanvasSize</InterfaceMember>
+      </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSize</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the current size of the canvas in pixels.</summary>
+        <value>The size of the drawing canvas in pixels.</value>
+        <remarks>This size accounts for the device's pixel density unless <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.IgnorePixelScaling" /> is set to <see langword="true" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableTouchEvents">
@@ -69,14 +123,17 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether touch events are enabled for this view.</summary>
+        <value>
+          <see langword="true" /> if touch events are enabled; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When enabled, the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.Touch" /> event is raised for touch interactions.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableTouchEventsProperty">
@@ -87,31 +144,47 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Maui.Controls.BindableProperty</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Identifies the <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.EnableTouchEvents" /> bindable property.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GRContext">
-      <MemberSignature Language="C#" Value="public SkiaSharp.GRContext GRContext { get; }" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.GRContext GRContext { get; }" FrameworkAlternate="skiasharp-views-maui-2.88" />
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.GRContext GRContext" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.Controls.SKGLView.GRContext" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.GRContext? GRContext { get; }" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
       <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">P:SkiaSharp.Views.Maui.ISKGLView.GRContext</InterfaceMember>
+      </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the GPU graphics context used for rendering.</summary>
+        <value>The <see cref="T:SkiaSharp.GRContext" /> for the GPU rendering context, or <see langword="null" /> if the context is not yet available.</value>
+        <remarks>The context is created when the view's native handler initializes the GPU surface. The backend type (OpenGL, Metal, or DirectX) depends on the platform.</remarks>
       </Docs>
     </Member>
     <Member MemberName="HasRenderLoop">
@@ -122,14 +195,17 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the view should continuously render frames.</summary>
+        <value>
+          <see langword="true" /> if the render loop is enabled; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When enabled, the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event is raised continuously for each frame, suitable for animations. When disabled, rendering only occurs when <see cref="M:SkiaSharp.Views.Maui.Controls.SKGLView.InvalidateSurface" /> is called.</remarks>
       </Docs>
     </Member>
     <Member MemberName="HasRenderLoopProperty">
@@ -140,31 +216,77 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Maui.Controls.BindableProperty</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Identifies the <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.HasRenderLoop" /> bindable property.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="IgnorePixelScaling">
+      <MemberSignature Language="C#" Value="public bool IgnorePixelScaling { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IgnorePixelScaling" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.Controls.SKGLView.IgnorePixelScaling" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets a value indicating whether the view should ignore the device's pixel scaling.</summary>
+        <value>
+          <see langword="true" /> if pixel scaling is ignored and the canvas uses 1:1 pixel mapping; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
+        <remarks>When <see langword="false" />, the canvas is scaled to match the device's DPI, resulting in a canvas size larger than the view's size on high-DPI displays.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IgnorePixelScalingProperty">
+      <MemberSignature Language="C#" Value="public static readonly Microsoft.Maui.Controls.BindableProperty IgnorePixelScalingProperty;" />
+      <MemberSignature Language="ILAsm" Value=".field public static initonly class Microsoft.Maui.Controls.BindableProperty IgnorePixelScalingProperty" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.Views.Maui.Controls.SKGLView.IgnorePixelScalingProperty" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.Maui.Controls.BindableProperty</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Identifies the <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.IgnorePixelScaling" /> bindable property.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="InvalidateSurface">
       <MemberSignature Language="C#" Value="public void InvalidateSurface ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void InvalidateSurface() cil managed" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void InvalidateSurface() cil managed" FrameworkAlternate="skiasharp-views-maui-2.88" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.SKGLView.InvalidateSurface" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void InvalidateSurface() cil managed" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
       <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">M:SkiaSharp.Views.Maui.ISKGLView.InvalidateSurface</InterfaceMember>
+      </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Invalidates the view, causing the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event to be raised on the next frame.</summary>
+        <remarks>Call this method when the content needs to be redrawn. If <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.HasRenderLoop" /> is <see langword="true" />, calling this method is unnecessary.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnMeasure">
@@ -180,15 +302,15 @@
         <ReturnType>Microsoft.Maui.SizeRequest</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="widthConstraint" Type="System.Double" />
-        <Parameter Name="heightConstraint" Type="System.Double" />
+        <Parameter Name="widthConstraint" Type="System.Double" Index="0" FrameworkAlternate="skiasharp-views-maui-2.88" />
+        <Parameter Name="heightConstraint" Type="System.Double" Index="1" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="widthConstraint">To be added.</param>
-        <param name="heightConstraint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="widthConstraint">The maximum available width for the view.</param>
+        <param name="heightConstraint">The maximum available height for the view.</param>
+        <summary>Called during the measure pass of layout to determine the desired size of the view.</summary>
+        <returns>The desired size for the view.</returns>
+        <remarks>Override this method to provide custom measurement behavior.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -199,6 +321,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -207,9 +331,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the drawing surface and context.</param>
+        <summary>Raises the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event.</summary>
+        <remarks>Override this method to perform custom drawing operations. Use the <see cref="P:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs.Surface" /> property to access the <see cref="T:SkiaSharp.SKCanvas" /> for drawing.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnTouch">
@@ -220,6 +344,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -228,9 +354,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing touch event details.</param>
+        <summary>Raises the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.Touch" /> event.</summary>
+        <remarks>Override this method to handle touch events. Set <see cref="P:SkiaSharp.Views.Maui.SKTouchEventArgs.Handled" /> to <see langword="true" /> to indicate the event was processed.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PaintSurface">
@@ -241,13 +367,20 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1 })]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the view needs to be painted.</summary>
+        <remarks>Subscribe to this event to perform custom drawing on the GPU-accelerated surface. The event arguments provide access to the <see cref="T:SkiaSharp.SKSurface" /> for drawing and the <see cref="T:SkiaSharp.GRBackendRenderTarget" /> for render target information.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.GetCanvasSize">
@@ -266,8 +399,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs&lt;SkiaSharp.SKSize&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member is used internally by the handler to retrieve the canvas size.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.GetGRContext">
@@ -286,8 +419,8 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.Controls.GetPropertyValueEventArgs&lt;SkiaSharp.GRContext&gt;&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member is used internally by the handler to retrieve the graphics context.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.OnPaintSurface">
@@ -306,12 +439,12 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" />
+        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing the drawing surface.</param>
+        <summary>This member is used internally by the handler to trigger painting.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.OnTouch">
@@ -330,12 +463,12 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" />
+        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-2.88" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="e">The event arguments containing touch event details.</param>
+        <summary>This member is used internally by the handler to forward touch events.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkiaSharp.Views.Maui.Controls.ISKGLViewController.SurfaceInvalidated">
@@ -354,8 +487,135 @@
         <ReturnType>System.EventHandler</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member is used internally by the handler to respond to surface invalidation.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop">
+      <MemberSignature Language="C#" Value="bool SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.Controls.SKGLView.SkiaSharp#Views#Maui#ISKGLView#HasRenderLoop" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>This member implements <see cref="P:SkiaSharp.Views.Maui.ISKGLView.HasRenderLoop" /> to provide render loop state.</summary>
+        <value>The value of <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.HasRenderLoop" />.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.OnCanvasSizeChanged">
+      <MemberSignature Language="C#" Value="void ISKGLView.OnCanvasSizeChanged (SkiaSharp.SKSizeI size);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void SkiaSharp.Views.Maui.ISKGLView.OnCanvasSizeChanged(valuetype SkiaSharp.SKSizeI size) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.SKGLView.SkiaSharp#Views#Maui#ISKGLView#OnCanvasSizeChanged(SkiaSharp.SKSizeI)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:SkiaSharp.Views.Maui.ISKGLView.OnCanvasSizeChanged(SkiaSharp.SKSizeI)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="size" Type="SkiaSharp.SKSizeI" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="size">The new canvas size in pixels.</param>
+        <summary>This member is used internally by the handler to notify size changes.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.OnGRContextChanged">
+      <MemberSignature Language="C#" Value="void ISKGLView.OnGRContextChanged (SkiaSharp.GRContext? context);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void SkiaSharp.Views.Maui.ISKGLView.OnGRContextChanged(class SkiaSharp.GRContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.SKGLView.SkiaSharp#Views#Maui#ISKGLView#OnGRContextChanged(SkiaSharp.GRContext)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:SkiaSharp.Views.Maui.ISKGLView.OnGRContextChanged(SkiaSharp.GRContext)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="SkiaSharp.GRContext" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="context">The new graphics context, or <see langword="null" /> if the context was destroyed.</param>
+        <summary>This member is used internally by the handler to notify context changes.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.OnPaintSurface">
+      <MemberSignature Language="C#" Value="void ISKGLView.OnPaintSurface (SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void SkiaSharp.Views.Maui.ISKGLView.OnPaintSurface(class SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.SKGLView.SkiaSharp#Views#Maui#ISKGLView#OnPaintSurface(SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:SkiaSharp.Views.Maui.ISKGLView.OnPaintSurface(SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="e">The event arguments containing the drawing surface.</param>
+        <summary>This member is used internally by the handler to trigger painting.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SkiaSharp.Views.Maui.ISKGLView.OnTouch">
+      <MemberSignature Language="C#" Value="void ISKGLView.OnTouch (SkiaSharp.Views.Maui.SKTouchEventArgs e);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void SkiaSharp.Views.Maui.ISKGLView.OnTouch(class SkiaSharp.Views.Maui.SKTouchEventArgs e) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.Controls.SKGLView.SkiaSharp#Views#Maui#ISKGLView#OnTouch(SkiaSharp.Views.Maui.SKTouchEventArgs)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:SkiaSharp.Views.Maui.ISKGLView.OnTouch(SkiaSharp.Views.Maui.SKTouchEventArgs)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="e" Type="SkiaSharp.Views.Maui.SKTouchEventArgs" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="e">The event arguments containing touch event details.</param>
+        <summary>This member is used internally by the handler to forward touch events.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Touch">
@@ -366,13 +626,20 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Controls</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1 })]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Maui.SKTouchEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Occurs when the view receives a touch event.</summary>
+        <remarks>This event is only raised when <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.EnableTouchEvents" /> is <see langword="true" />. Set <see cref="P:SkiaSharp.Views.Maui.SKTouchEventArgs.Handled" /> to <see langword="true" /> to indicate the event was processed.</remarks>
       </Docs>
     </Member>
   </Members>

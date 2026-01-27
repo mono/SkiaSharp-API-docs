@@ -1,13 +1,9 @@
 <Type Name="GRGlBackendTextureDesc" FullName="SkiaSharp.GRGlBackendTextureDesc">
-  <TypeSignature Language="C#" Value="public struct GRGlBackendTextureDesc" FrameworkAlternate="skiasharp-1.60" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit GRGlBackendTextureDesc extends System.ValueType" FrameworkAlternate="skiasharp-1.60" />
+  <TypeSignature Language="C#" Value="public struct GRGlBackendTextureDesc : IEquatable&lt;SkiaSharp.GRGlBackendTextureDesc&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit GRGlBackendTextureDesc extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.GRGlBackendTextureDesc&gt;" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.GRGlBackendTextureDesc" />
-  <TypeSignature Language="C#" Value="public struct GRGlBackendTextureDesc : IEquatable&lt;SkiaSharp.GRGlBackendTextureDesc&gt;" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit GRGlBackendTextureDesc extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.GRGlBackendTextureDesc&gt;" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -15,22 +11,22 @@
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
   <Interfaces>
-    <Interface FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+    <Interface>
       <InterfaceName>System.IEquatable&lt;SkiaSharp.GRGlBackendTextureDesc&gt;</InterfaceName>
     </Interface>
   </Interfaces>
   <Attributes>
-    <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+    <Attribute>
       <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
     </Attribute>
-    <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+    <Attribute>
       <AttributeName Language="C#">[System.Obsolete("Use GRBackendTexture instead.")]</AttributeName>
     </Attribute>
   </Attributes>
   <Docs>
     <summary>Wrap an existing OpenGL texture created by the client in the 3D API with an underlying GRTexture object.</summary>
     <remarks>
-      <para>The client is responsible for ensuring that the texture lives at least as long as the GRTexture object wrapping it. </para>
+      <para>The client is responsible for ensuring that the texture lives at least as long as the GRTexture object wrapping it.</para>
       <para>We require the client to explicitly provide information about the texture, such as width, height, and pixel configuration, rather than querying the 3D API for these values. We expect these to be immutable even if the 3D API doesn't require this (OpenGL).</para>
       <para>Textures that are also render targets are supported as well. Any ancillary 3D API (stencil buffer, FBO id, etc) objects necessary will be managed.</para>
     </remarks>
@@ -43,23 +39,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRPixelConfig</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the color format.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>One of the enumeration values that specifies the color format.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -72,26 +61,21 @@
       </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="obj" Type="SkiaSharp.GRGlBackendTextureDesc" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="obj" Type="SkiaSharp.GRGlBackendTextureDesc" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The <see cref="T:SkiaSharp.GRGlBackendTextureDesc" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:SkiaSharp.GRGlBackendTextureDesc" /> is equal to the current instance.</summary>
+        <returns>
+          <see langword="true" /> if the specified object is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -101,26 +85,21 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
+        <returns>
+          <see langword="true" /> if the specified object is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Flags">
@@ -130,23 +109,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRBackendTextureDescFlags</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets or sets additional options about the texture.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>A bitwise combination of the enumeration values that specify additional options about the texture.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -156,23 +128,17 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns a hash code for this instance.</summary>
+        <returns>A hash code for the current instance.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Height">
@@ -182,23 +148,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the height in pixels.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The height in pixels.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -208,7 +167,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -216,15 +174,16 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="left" Type="SkiaSharp.GRGlBackendTextureDesc" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
-        <Parameter Name="right" Type="SkiaSharp.GRGlBackendTextureDesc" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="left" Type="SkiaSharp.GRGlBackendTextureDesc" />
+        <Parameter Name="right" Type="SkiaSharp.GRGlBackendTextureDesc" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.GRGlBackendTextureDesc" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.GRGlBackendTextureDesc" /> to compare.</param>
+        <summary>Determines whether two specified <see cref="T:SkiaSharp.GRGlBackendTextureDesc" /> instances are equal.</summary>
+        <returns>
+          <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -234,7 +193,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -242,15 +200,16 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="left" Type="SkiaSharp.GRGlBackendTextureDesc" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
-        <Parameter Name="right" Type="SkiaSharp.GRGlBackendTextureDesc" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="left" Type="SkiaSharp.GRGlBackendTextureDesc" />
+        <Parameter Name="right" Type="SkiaSharp.GRGlBackendTextureDesc" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.GRGlBackendTextureDesc" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.GRGlBackendTextureDesc" /> to compare.</param>
+        <summary>Determines whether two specified <see cref="T:SkiaSharp.GRGlBackendTextureDesc" /> instances are not equal.</summary>
+        <returns>
+          <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Origin">
@@ -260,23 +219,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRSurfaceOrigin</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the pixel origin.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>One of the enumeration values that specifies the pixel origin.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Rect">
@@ -286,22 +238,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRectI</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the texture bounds as a rectangle.</summary>
+        <value>A rectangle with origin (0, 0) and dimensions equal to <see cref="P:SkiaSharp.GRGlBackendTextureDesc.Width" /> and <see cref="P:SkiaSharp.GRGlBackendTextureDesc.Height" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SampleCount">
@@ -311,23 +257,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the number of samples per pixel.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The number of samples per pixel.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Size">
@@ -337,22 +276,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSizeI</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the texture dimensions as a size.</summary>
+        <value>The width and height of the texture in pixels.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="TextureHandle">
@@ -362,23 +295,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRGlTextureInfo</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the handle to the OpenGL texture.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The OpenGL texture information.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Width">
@@ -388,23 +314,16 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the width in pixels.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The width in pixels.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

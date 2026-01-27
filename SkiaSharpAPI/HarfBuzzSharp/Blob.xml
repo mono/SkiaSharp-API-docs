@@ -1,8 +1,7 @@
 <Type Name="Blob" FullName="HarfBuzzSharp.Blob">
   <TypeSignature Language="C#" Value="public class Blob : HarfBuzzSharp.NativeObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi Blob extends HarfBuzzSharp.NativeObject" FrameworkAlternate="harfbuzzsharp-1.4" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Blob extends HarfBuzzSharp.NativeObject" />
   <TypeSignature Language="DocId" Value="T:HarfBuzzSharp.Blob" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Blob extends HarfBuzzSharp.NativeObject" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
   <AssemblyInfo>
     <AssemblyName>HarfBuzzSharp</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -13,7 +12,7 @@
   <Interfaces />
   <Docs>
     <summary>Represents a blob of data in memory.</summary>
-    <remarks></remarks>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -26,15 +25,15 @@
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="data" Type="System.IntPtr" Index="0" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
-        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
-        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" Index="2" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+        <Parameter Name="data" Type="System.IntPtr" />
+        <Parameter Name="length" Type="System.Int32" />
+        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" />
       </Parameters>
       <Docs>
         <param name="data">The data to wrap.</param>
         <param name="length">The length of the data being wrapped.</param>
         <param name="mode">The memory mode to use.</param>
-        <summary>Creates a new <see cref="T:HarfBuzzSharp.Blob" /> instance, wrapping the specified data.</summary>
+        <summary>Initializes a new instance of the <see cref="T:HarfBuzzSharp.Blob" /> class, wrapping the specified data.</summary>
         <remarks>If there was a problem creating the blob, or if the data length was zero, then an empty blob will be created.</remarks>
       </Docs>
     </Member>
@@ -48,17 +47,17 @@
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="data" Type="System.IntPtr" Index="0" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
-        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
-        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" Index="2" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
-        <Parameter Name="releaseDelegate" Type="HarfBuzzSharp.ReleaseDelegate" Index="3" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+        <Parameter Name="data" Type="System.IntPtr" />
+        <Parameter Name="length" Type="System.Int32" />
+        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" />
+        <Parameter Name="releaseDelegate" Type="HarfBuzzSharp.ReleaseDelegate" />
       </Parameters>
       <Docs>
         <param name="data">The data to wrap.</param>
         <param name="length">The length of the data being wrapped.</param>
         <param name="mode">The memory mode to use.</param>
         <param name="releaseDelegate">The delegate to invoke when the data is not needed anymore.</param>
-        <summary>Creates a new <see cref="T:HarfBuzzSharp.Blob" /> instance, wrapping the specified data.</summary>
+        <summary>Initializes a new instance of the <see cref="T:HarfBuzzSharp.Blob" /> class, wrapping the specified data.</summary>
         <remarks>If there was a problem creating the blob, or if the data length was zero, then an empty blob will be created.</remarks>
       </Docs>
     </Member>
@@ -80,11 +79,11 @@
         </Attribute>
       </Attributes>
       <Parameters>
-        <Parameter Name="data" Type="System.IntPtr" />
-        <Parameter Name="length" Type="System.UInt32" />
-        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" />
-        <Parameter Name="userData" Type="System.Object" />
-        <Parameter Name="releaseDelegate" Type="HarfBuzzSharp.BlobReleaseDelegate" />
+        <Parameter Name="data" Type="System.IntPtr" Index="0" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+        <Parameter Name="length" Type="System.UInt32" Index="1" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+        <Parameter Name="mode" Type="HarfBuzzSharp.MemoryMode" Index="2" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+        <Parameter Name="userData" Type="System.Object" Index="3" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+        <Parameter Name="releaseDelegate" Type="HarfBuzzSharp.BlobReleaseDelegate" Index="4" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
       </Parameters>
       <Docs>
         <param name="data">The data to wrap.</param>
@@ -92,21 +91,24 @@
         <param name="mode">The memory mode to use.</param>
         <param name="userData">The user data to pass to the release delegate.</param>
         <param name="releaseDelegate">The delegate to invoke when the data is not needed anymore.</param>
-        <summary>Creates a new <see cref="T:HarfBuzzSharp.Blob" /> instance, wrapping the specified data.</summary>
+        <summary>Initializes a new instance of the <see cref="T:HarfBuzzSharp.Blob" /> class, wrapping the specified data.</summary>
         <remarks>If there was a problem creating the blob, or if the data length was zero, then an empty blob will be created.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AsSpan">
-      <MemberSignature Language="C#" Value="public ReadOnlySpan&lt;byte&gt; AsSpan ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; AsSpan() cil managed" />
+      <MemberSignature Language="C#" Value="public ReadOnlySpan&lt;byte&gt; AsSpan ();" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; AsSpan() cil managed" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
       <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Blob.AsSpan" />
+      <MemberSignature Language="C#" Value="public Span&lt;byte&gt; AsSpan ();" FrameworkAlternate="harfbuzzsharp-8.3" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Span`1&lt;unsigned int8&gt; AsSpan() cil managed" FrameworkAlternate="harfbuzzsharp-8.3" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>HarfBuzzSharp</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.ReadOnlySpan&lt;System.Byte&gt;</ReturnType>
+        <ReturnType FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3">System.ReadOnlySpan&lt;System.Byte&gt;</ReturnType>
+        <ReturnType FrameworkAlternate="harfbuzzsharp-8.3">System.Span&lt;System.Byte&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
@@ -171,7 +173,7 @@
       <Parameters />
       <Docs>
         <summary>Releases the unmanaged resources used.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Empty">
@@ -188,8 +190,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets a reference to the empty <see cref="T:HarfBuzzSharp.Blob" /> instance.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The empty <see cref="T:HarfBuzzSharp.Blob" /> instance.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FaceCount">
@@ -206,8 +208,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the number of faces in this blob.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The number of faces in this blob.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FromFile">
@@ -223,13 +225,13 @@
         <ReturnType>HarfBuzzSharp.Blob</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="fileName" Type="System.String" Index="0" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+        <Parameter Name="fileName" Type="System.String" />
       </Parameters>
       <Docs>
         <param name="fileName">The path to the file to load.</param>
         <summary>Creates a new <see cref="T:HarfBuzzSharp.Blob" /> instance from the contents of the file.</summary>
         <returns>Returns the new <see cref="T:HarfBuzzSharp.Blob" /> instance.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FromStream">
@@ -245,13 +247,13 @@
         <ReturnType>HarfBuzzSharp.Blob</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="stream" Type="System.IO.Stream" Index="0" FrameworkAlternate="harfbuzzsharp-2.6;harfbuzzsharp-2.8;harfbuzzsharp-7.3" />
+        <Parameter Name="stream" Type="System.IO.Stream" />
       </Parameters>
       <Docs>
         <param name="stream">The stream to use.</param>
         <summary>Creates a new <see cref="T:HarfBuzzSharp.Blob" /> instance from the contents of the stream.</summary>
         <returns>Returns the new <see cref="T:HarfBuzzSharp.Blob" /> instance.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsImmutable">
@@ -267,9 +269,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the value indicating whether the blob is immutable.</summary>
-        <value></value>
-        <remarks></remarks>
+        <summary>Gets a value indicating whether the blob is immutable.</summary>
+        <value>
+          <see langword="true" /> if the blob is immutable; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Length">
@@ -286,8 +289,8 @@
       </ReturnValue>
       <Docs>
         <summary>Gets the length of blob data in bytes.</summary>
-        <value></value>
-        <remarks></remarks>
+        <value>The length of blob data in bytes.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MakeImmutable">
@@ -305,7 +308,7 @@
       <Parameters />
       <Docs>
         <summary>Makes the blob immutable.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
   </Members>

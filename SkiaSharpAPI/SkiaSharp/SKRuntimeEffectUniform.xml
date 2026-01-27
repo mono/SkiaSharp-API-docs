@@ -5,22 +5,16 @@
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
   <Interfaces />
-  <Attributes>
-    <Attribute>
-      <AttributeName Language="C#">[System.Runtime.CompilerServices.IsByRefLike]</AttributeName>
-    </Attribute>
-    <Attribute>
-      <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-    </Attribute>
-  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a uniform value that can be passed to an <see cref="T:SkiaSharp.SKRuntimeEffect" />.</summary>
+    <remarks>This ref struct wraps various data types (floats, integers, colors, matrices) and provides implicit conversions for convenient assignment to runtime effect uniforms.</remarks>
   </Docs>
   <Members>
     <Member MemberName="Empty">
@@ -31,14 +25,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets an empty uniform value.</summary>
+        <value>An empty <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> instance.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsEmpty">
@@ -49,14 +45,63 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether this uniform is empty.</summary>
+        <value>
+          <see langword="true" /> if this uniform is empty; otherwise, <see langword="false" />.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (SkiaSharp.SKColor value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype SkiaSharp.SKColor value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(SkiaSharp.SKColor)~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="SkiaSharp.SKColor" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The color value to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKColor" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the color value.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (SkiaSharp.SKColorF value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype SkiaSharp.SKColorF value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(SkiaSharp.SKColorF)~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="SkiaSharp.SKColorF" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The color value to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKColorF" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the color value.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -67,6 +112,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
@@ -75,10 +122,194 @@
         <Parameter Name="value" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="value">The matrix value to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKMatrix" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the matrix values as a float array.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (SkiaSharp.SKPoint value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype SkiaSharp.SKPoint value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(SkiaSharp.SKPoint)~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="SkiaSharp.SKPoint" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The point value to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKPoint" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the point as a float2.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (SkiaSharp.SKPoint3 value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype SkiaSharp.SKPoint3 value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(SkiaSharp.SKPoint3)~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="SkiaSharp.SKPoint3" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The 3D point value to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKPoint3" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the point as a float3.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (SkiaSharp.SKPointI value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype SkiaSharp.SKPointI value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(SkiaSharp.SKPointI)~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="SkiaSharp.SKPointI" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The integer point value to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKPointI" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the point as an int2.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (SkiaSharp.SKSize value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype SkiaSharp.SKSize value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(SkiaSharp.SKSize)~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="SkiaSharp.SKSize" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The size value to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKSize" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the size as a float2.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (SkiaSharp.SKSizeI value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype SkiaSharp.SKSizeI value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(SkiaSharp.SKSizeI)~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="SkiaSharp.SKSizeI" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The integer size value to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKSizeI" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the size as an int2.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (int value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(int32 value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(System.Int32)~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Int32" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The integer value to convert.</param>
+        <summary>Converts an <see cref="T:System.Int32" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the integer value.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (int[] value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(int32[] value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(System.Int32[])~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Int32[]" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The integer array to convert.</param>
+        <summary>Converts an array of <see cref="T:System.Int32" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the integer array.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (ReadOnlySpan&lt;int&gt; value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype System.ReadOnlySpan`1&lt;int32&gt; value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(System.ReadOnlySpan{System.Int32})~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.ReadOnlySpan&lt;System.Int32&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The read-only span of integers to convert.</param>
+        <summary>Converts a <see cref="T:System.ReadOnlySpan`1" /> of <see cref="T:System.Int32" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the integer values.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -89,6 +320,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
@@ -97,10 +330,10 @@
         <Parameter Name="value" Type="System.ReadOnlySpan&lt;System.Single&gt;" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="value">The read-only span of floats to convert.</param>
+        <summary>Converts a <see cref="T:System.ReadOnlySpan`1" /> of <see cref="T:System.Single" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the float values.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -111,6 +344,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
@@ -119,10 +354,10 @@
         <Parameter Name="value" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="value">The float value to convert.</param>
+        <summary>Converts a <see cref="T:System.Single" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the float value.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -133,6 +368,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
@@ -141,10 +378,10 @@
         <Parameter Name="value" Type="System.Single[]" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="value">The float array to convert.</param>
+        <summary>Converts an array of <see cref="T:System.Single" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the float array.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -155,6 +392,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
@@ -163,10 +402,33 @@
         <Parameter Name="value" Type="System.Single[][]" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="value">The jagged float array to convert.</param>
+        <summary>Converts a jagged array of <see cref="T:System.Single" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the flattened float values.</returns>
+        <remarks>The jagged array is flattened into a single contiguous array of floats.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKRuntimeEffectUniform (Span&lt;int&gt; value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKRuntimeEffectUniform op_Implicit(valuetype System.Span`1&lt;int32&gt; value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectUniform.op_Implicit(System.Span{System.Int32})~SkiaSharp.SKRuntimeEffectUniform" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.Span&lt;System.Int32&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="value">The span of integers to convert.</param>
+        <summary>Converts a <see cref="T:System.Span`1" /> of <see cref="T:System.Int32" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the integer values.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -177,6 +439,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRuntimeEffectUniform</ReturnType>
@@ -185,10 +449,10 @@
         <Parameter Name="value" Type="System.Span&lt;System.Single&gt;" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="value">The span of floats to convert.</param>
+        <summary>Converts a <see cref="T:System.Span`1" /> of <see cref="T:System.Single" /> to an <see cref="T:SkiaSharp.SKRuntimeEffectUniform" />.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRuntimeEffectUniform" /> containing the float values.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Size">
@@ -199,14 +463,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the size of the uniform data in bytes.</summary>
+        <value>The size of the uniform data in bytes.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="WriteTo">
@@ -217,6 +483,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -225,9 +493,9 @@
         <Parameter Name="data" Type="System.Span&lt;System.Byte&gt;" />
       </Parameters>
       <Docs>
-        <param name="data">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="data">The destination span to write the uniform data to.</param>
+        <summary>Writes the uniform data to the specified byte span.</summary>
+        <remarks>The destination span must have sufficient capacity to hold the uniform data.</remarks>
       </Docs>
     </Member>
   </Members>

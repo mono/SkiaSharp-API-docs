@@ -5,32 +5,37 @@
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A context for recording GPU operations that can be replayed later.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName="Backend">
-      <MemberSignature Language="C#" Value="public SkiaSharp.GRBackend Backend { get; }" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.GRBackend Backend { get; }" FrameworkAlternate="skiasharp-2.88" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.GRBackend Backend" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.GRRecordingContext.Backend" />
+      <MemberSignature Language="C#" Value="public virtual SkiaSharp.GRBackend Backend { get; }" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRBackend</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the GPU backend type for this context.</summary>
+        <value>The GPU backend type.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetMaxSurfaceSampleCount">
@@ -41,6 +46,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -49,10 +56,68 @@
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="colorType">The color type to check.</param>
+        <summary>Gets the maximum supported sample count for a surface with the specified color type.</summary>
+        <returns>The maximum sample count, or 0 if the color type is not supported.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="IsAbandoned">
+      <MemberSignature Language="C#" Value="public virtual bool IsAbandoned { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsAbandoned" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRRecordingContext.IsAbandoned" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether the context has been abandoned.</summary>
+        <value>
+          <see langword="true" /> if the context has been abandoned; otherwise, <see langword="false" />.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MaxRenderTargetSize">
+      <MemberSignature Language="C#" Value="public int MaxRenderTargetSize { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxRenderTargetSize" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRRecordingContext.MaxRenderTargetSize" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the maximum supported render target size.</summary>
+        <value>The maximum render target size in pixels.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MaxTextureSize">
+      <MemberSignature Language="C#" Value="public int MaxTextureSize { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxTextureSize" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRRecordingContext.MaxTextureSize" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the maximum supported texture size.</summary>
+        <value>The maximum texture size in pixels.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

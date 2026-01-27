@@ -5,6 +5,8 @@
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.AspNetCore.Components.ComponentBase</BaseTypeName>
@@ -14,9 +16,14 @@
       <InterfaceName>System.IDisposable</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute FrameworkAlternate="skiasharp-views-3.116;skiasharp-views-3.119">
+      <AttributeName Language="C#">[System.Runtime.Versioning.SupportedOSPlatform("browser")]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A Blazor component that provides a SkiaSharp drawing surface using software rendering.</summary>
+    <remarks>This component renders to an HTML canvas element using WebAssembly. The drawing surface is CPU-based and renders each frame by transferring pixel data to the browser canvas. For GPU-accelerated rendering, use <see cref="T:SkiaSharp.Views.Blazor.SKGLView" /> instead.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -27,11 +34,13 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Blazor.SKCanvasView" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AdditionalAttributes">
@@ -42,6 +51,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -52,9 +63,9 @@
         <ReturnType>System.Collections.Generic.IReadOnlyDictionary&lt;System.String,System.Object&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets additional HTML attributes to apply to the canvas element.</summary>
+        <value>A dictionary of attribute names and values, or <see langword="null" />.</value>
+        <remarks>Use this property to add CSS classes, styles, or other HTML attributes to the underlying canvas element.</remarks>
       </Docs>
     </Member>
     <Member MemberName="BuildRenderTree">
@@ -65,6 +76,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -73,9 +86,9 @@
         <Parameter Name="__builder" Type="Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder" />
       </Parameters>
       <Docs>
-        <param name="__builder">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="__builder">The render tree builder.</param>
+        <summary>Renders the component to the render tree.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -89,14 +102,35 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Releases all resources used by this component.</summary>
+        <remarks>Call this method when the component is no longer needed to free the underlying pixel buffer and JavaScript interop resources.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dpi">
+      <MemberSignature Language="C#" Value="public double Dpi { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance float64 Dpi" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Blazor.SKCanvasView.Dpi" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Double</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the current device pixel ratio (DPI scaling factor).</summary>
+        <value>The device pixel ratio, typically 1.0 for standard displays and 2.0 or higher for high-DPI displays.</value>
+        <remarks>This value is automatically updated when the browser's DPI changes, such as when moving windows between monitors with different scaling.</remarks>
       </Docs>
     </Member>
     <Member MemberName="EnableRenderLoop">
@@ -107,6 +141,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -117,9 +153,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether continuous rendering is enabled.</summary>
+        <value>
+          <see langword="true" /> to render continuously using requestAnimationFrame; <see langword="false" /> to render only when <see cref="M:SkiaSharp.Views.Blazor.SKCanvasView.Invalidate" /> is called.</value>
+        <remarks>Enable this for animations that need to update every frame. Disable for static content to conserve resources.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IgnorePixelScaling">
@@ -130,6 +167,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -140,9 +179,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the canvas should ignore the device pixel ratio.</summary>
+        <value>
+          <see langword="true" /> to use logical pixels matching the CSS size; <see langword="false" /> to use physical pixels scaled by the DPI.</value>
+        <remarks>When <see langword="false" /> (the default), the canvas is scaled to match the physical pixel density, resulting in sharper rendering on high-DPI displays. When <see langword="true" />, drawing coordinates match the CSS pixel size.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Invalidate">
@@ -153,14 +193,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Requests a redraw of the canvas.</summary>
+        <remarks>This method schedules a repaint using the browser's requestAnimationFrame API. The <see cref="P:SkiaSharp.Views.Blazor.SKCanvasView.OnPaintSurface" /> callback will be invoked on the next animation frame.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnAfterRenderAsync">
@@ -171,6 +213,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
@@ -179,10 +223,11 @@
         <Parameter Name="firstRender" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="firstRender">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="firstRender">
+          <see langword="true" /> if this is the first time the component has been rendered; otherwise, <see langword="false" />.</param>
+        <summary>Called after the component has rendered.</summary>
+        <returns>A task representing the asynchronous operation.</returns>
+        <remarks>On first render, this method initializes the JavaScript interop for the HTML canvas and sets up DPI and size change watchers.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -193,6 +238,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Blazor</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
@@ -203,9 +250,9 @@
         <ReturnType>System.Action&lt;SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the callback invoked when the canvas needs to be painted.</summary>
+        <value>An action that receives <see cref="T:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs" /> containing the surface and canvas information.</value>
+        <remarks>Use this callback to perform your drawing operations. The callback is invoked when <see cref="M:SkiaSharp.Views.Blazor.SKCanvasView.Invalidate" /> is called or continuously when <see cref="P:SkiaSharp.Views.Blazor.SKCanvasView.EnableRenderLoop" /> is <see langword="true" />.</remarks>
       </Docs>
     </Member>
   </Members>

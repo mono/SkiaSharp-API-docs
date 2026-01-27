@@ -5,14 +5,24 @@
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.EventArgs</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(0)]</AttributeName>
+    </Attribute>
+    <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides data for the <see cref="E:SkiaSharp.Views.Maui.Controls.SKGLView.PaintSurface" /> event.</summary>
+    <remarks>This class provides access to the GPU-backed drawing surface, render target information, and image metadata needed for hardware-accelerated drawing operations.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -23,16 +33,18 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="surface" Type="SkiaSharp.SKSurface" />
         <Parameter Name="renderTarget" Type="SkiaSharp.GRBackendRenderTarget" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The GPU-backed surface to draw on.</param>
+        <param name="renderTarget">The backend render target information.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -43,6 +55,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="surface" Type="SkiaSharp.SKSurface" />
@@ -51,12 +65,64 @@
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="renderTarget">To be added.</param>
-        <param name="origin">To be added.</param>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The GPU-backed surface to draw on.</param>
+        <param name="renderTarget">The backend render target information.</param>
+        <param name="origin">The surface origin (top-left or bottom-left).</param>
+        <param name="colorType">The color type of the surface.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" /> class with origin and color type.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SKPaintGLSurfaceEventArgs (SkiaSharp.SKSurface surface, SkiaSharp.GRBackendRenderTarget renderTarget, SkiaSharp.GRSurfaceOrigin origin, SkiaSharp.SKImageInfo info);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class SkiaSharp.SKSurface surface, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKImageInfo info) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="surface" Type="SkiaSharp.SKSurface" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+        <Parameter Name="renderTarget" Type="SkiaSharp.GRBackendRenderTarget" Index="1" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.GRSurfaceOrigin" Index="2" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" Index="3" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="surface">The GPU-backed surface to draw on.</param>
+        <param name="renderTarget">The backend render target information.</param>
+        <param name="origin">The surface origin (top-left or bottom-left).</param>
+        <param name="info">The image information describing the surface.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" /> class with image info.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SKPaintGLSurfaceEventArgs (SkiaSharp.SKSurface surface, SkiaSharp.GRBackendRenderTarget renderTarget, SkiaSharp.GRSurfaceOrigin origin, SkiaSharp.SKImageInfo info, SkiaSharp.SKImageInfo rawInfo);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class SkiaSharp.SKSurface surface, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKImageInfo info, valuetype SkiaSharp.SKImageInfo rawInfo) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs.#ctor(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKImageInfo,SkiaSharp.SKImageInfo)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="surface" Type="SkiaSharp.SKSurface" Index="0" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+        <Parameter Name="renderTarget" Type="SkiaSharp.GRBackendRenderTarget" Index="1" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.GRSurfaceOrigin" Index="2" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" Index="3" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+        <Parameter Name="rawInfo" Type="SkiaSharp.SKImageInfo" Index="4" FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="surface">The GPU-backed surface to draw on.</param>
+        <param name="renderTarget">The backend render target information.</param>
+        <param name="origin">The surface origin (top-left or bottom-left).</param>
+        <param name="info">The image information describing the surface (scaled for pixel density).</param>
+        <param name="rawInfo">The raw image information describing the actual surface size.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs" /> class with image info and raw info.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="BackendRenderTarget">
@@ -67,14 +133,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRBackendRenderTarget</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the backend render target for the GPU surface.</summary>
+        <value>The <see cref="T:SkiaSharp.GRBackendRenderTarget" /> that describes the GPU render target.</value>
+        <remarks>This provides information about the underlying GPU framebuffer, including its dimensions and sample count.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ColorType">
@@ -85,14 +153,35 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKColorType</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the color type of the surface.</summary>
+        <value>The <see cref="T:SkiaSharp.SKColorType" /> that describes the pixel format of the surface.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Info">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKImageInfo Info { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKImageInfo Info" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs.Info" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the image information describing the surface.</summary>
+        <value>The image information that describes the size and format of the surface.</value>
+        <remarks>When <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.IgnorePixelScaling" /> is <see langword="true" />, this returns the user-visible size (logical pixels). Otherwise, it returns the same as <see cref="P:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs.RawInfo" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Origin">
@@ -103,14 +192,35 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRSurfaceOrigin</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the origin of the surface coordinate system.</summary>
+        <value>The <see cref="T:SkiaSharp.GRSurfaceOrigin" /> indicating whether the origin is at the top-left or bottom-left corner.</value>
+        <remarks>OpenGL typically uses bottom-left origin, while other backends may use top-left.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RawInfo">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKImageInfo RawInfo { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKImageInfo RawInfo" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Maui.SKPaintGLSurfaceEventArgs.RawInfo" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the raw image information describing the actual surface size in physical pixels.</summary>
+        <value>The raw image information representing the actual surface dimensions in physical device pixels.</value>
+        <remarks>This is the actual pixel buffer size regardless of the <see cref="P:SkiaSharp.Views.Maui.Controls.SKGLView.IgnorePixelScaling" /> setting. On high-DPI devices, this will be larger than the logical view size.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Surface">
@@ -121,14 +231,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the GPU-backed surface to draw on.</summary>
+        <value>The <see cref="T:SkiaSharp.SKSurface" /> that provides the canvas for GPU-accelerated drawing.</value>
+        <remarks>Use <c>Surface.Canvas</c> to access the <see cref="T:SkiaSharp.SKCanvas" /> for drawing operations. The surface is backed by a GPU texture or render target.</remarks>
       </Docs>
     </Member>
   </Members>

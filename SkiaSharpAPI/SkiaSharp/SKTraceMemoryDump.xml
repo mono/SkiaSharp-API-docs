@@ -6,14 +6,16 @@
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>An abstract base class for receiving memory tracing callbacks from Skia.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -25,16 +27,18 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="detailedDump" Type="System.Boolean" />
         <Parameter Name="dumpWrappedObjects" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="detailedDump">To be added.</param>
-        <param name="dumpWrappedObjects">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="detailedDump">Whether to include detailed memory information.</param>
+        <param name="dumpWrappedObjects">Whether to include wrapped objects in the dump.</param>
+        <summary>Creates a new instance of <see cref="T:SkiaSharp.SKTraceMemoryDump" />.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DisposeNative">
@@ -46,25 +50,31 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Releases the native resources associated with this object.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="OnDumpNumericValue">
-      <MemberSignature Language="C#" Value="protected virtual void OnDumpNumericValue (string dumpName, string valueName, string units, ulong value);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnDumpNumericValue(string dumpName, string valueName, string units, unsigned int64 value) cil managed" />
+      <MemberSignature Language="C#" Value="protected virtual void OnDumpNumericValue (string dumpName, string valueName, string units, ulong value);" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnDumpNumericValue(string dumpName, string valueName, string units, unsigned int64 value) cil managed" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTraceMemoryDump.OnDumpNumericValue(System.String,System.String,System.String,System.UInt64)" />
+      <MemberSignature Language="C#" Value="protected internal virtual void OnDumpNumericValue (string dumpName, string valueName, string units, ulong value);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance void OnDumpNumericValue(string dumpName, string valueName, string units, unsigned int64 value) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -76,23 +86,27 @@
         <Parameter Name="value" Type="System.UInt64" />
       </Parameters>
       <Docs>
-        <param name="dumpName">To be added.</param>
-        <param name="valueName">To be added.</param>
-        <param name="units">To be added.</param>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="dumpName">The name of the memory dump entry.</param>
+        <param name="valueName">The name of the numeric value.</param>
+        <param name="units">The units of measurement for the value.</param>
+        <param name="value">The numeric value.</param>
+        <summary>Called when a numeric value is being dumped.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="OnDumpStringValue">
-      <MemberSignature Language="C#" Value="protected virtual void OnDumpStringValue (string dumpName, string valueName, string value);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnDumpStringValue(string dumpName, string valueName, string value) cil managed" />
+      <MemberSignature Language="C#" Value="protected virtual void OnDumpStringValue (string dumpName, string valueName, string value);" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnDumpStringValue(string dumpName, string valueName, string value) cil managed" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKTraceMemoryDump.OnDumpStringValue(System.String,System.String,System.String)" />
+      <MemberSignature Language="C#" Value="protected internal virtual void OnDumpStringValue (string dumpName, string valueName, string value);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance void OnDumpStringValue(string dumpName, string valueName, string value) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -103,11 +117,11 @@
         <Parameter Name="value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="dumpName">To be added.</param>
-        <param name="valueName">To be added.</param>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="dumpName">The name of the memory dump entry.</param>
+        <param name="valueName">The name of the string value.</param>
+        <param name="value">The string value.</param>
+        <summary>Called when a string value is being dumped.</summary>
+        <remarks />
       </Docs>
     </Member>
   </Members>

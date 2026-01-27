@@ -5,14 +5,24 @@
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.EventArgs</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(0)]</AttributeName>
+    </Attribute>
+    <Attribute FrameworkAlternate="skiasharp-views-maui-3.116;skiasharp-views-maui-3.119">
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides data for the <see cref="E:SkiaSharp.Views.Maui.Controls.SKCanvasView.PaintSurface" /> event.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -23,16 +33,18 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="surface" Type="SkiaSharp.SKSurface" />
         <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="info">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The surface to draw on.</param>
+        <param name="info">The image information describing the surface.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -43,6 +55,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="surface" Type="SkiaSharp.SKSurface" />
@@ -50,11 +64,11 @@
         <Parameter Name="rawInfo" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="info">To be added.</param>
-        <param name="rawInfo">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The surface to draw on.</param>
+        <param name="info">The image information describing the surface (scaled for pixel density).</param>
+        <param name="rawInfo">The raw image information describing the actual surface size.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs" /> class with raw image information.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Info">
@@ -65,14 +79,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the image information describing the surface.</summary>
+        <value>The image information that describes the size and format of the surface.</value>
+        <remarks>When <see cref="P:SkiaSharp.Views.Maui.Controls.SKCanvasView.IgnorePixelScaling" /> is <see langword="true" />, this returns the user-visible size (logical pixels). Otherwise, it returns the same as <see cref="P:SkiaSharp.Views.Maui.SKPaintSurfaceEventArgs.RawInfo" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="RawInfo">
@@ -83,14 +99,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKImageInfo</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the raw image information describing the actual surface size in physical pixels.</summary>
+        <value>The raw image information representing the actual surface dimensions in physical device pixels.</value>
+        <remarks>This is the actual pixel buffer size regardless of the <see cref="P:SkiaSharp.Views.Maui.Controls.SKCanvasView.IgnorePixelScaling" /> setting. On high-DPI devices, this will be larger than the logical view size.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Surface">
@@ -101,14 +119,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Maui.Core</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the surface to draw on.</summary>
+        <value>The <see cref="T:SkiaSharp.SKSurface" /> that provides the canvas for drawing.</value>
+        <remarks>Use <c>Surface.Canvas</c> to access the <see cref="T:SkiaSharp.SKCanvas" /> for drawing operations.</remarks>
       </Docs>
     </Member>
   </Members>

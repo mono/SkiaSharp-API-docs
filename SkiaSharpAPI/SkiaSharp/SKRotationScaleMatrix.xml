@@ -4,9 +4,10 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKRotationScaleMatrix" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.ValueType</BaseTypeName>
@@ -17,8 +18,8 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a 2D rotation and uniform scale matrix.</summary>
+    <remarks>This struct stores rotation as scaled cosine/sine values (<see cref="P:SkiaSharp.SKRotationScaleMatrix.SCos" /> and <see cref="P:SkiaSharp.SKRotationScaleMatrix.SSin" />) and translation (<see cref="P:SkiaSharp.SKRotationScaleMatrix.TX" /> and <see cref="P:SkiaSharp.SKRotationScaleMatrix.TY" />). Use <see cref="M:SkiaSharp.SKRotationScaleMatrix.ToMatrix" /> to convert to a full <see cref="T:SkiaSharp.SKMatrix" />.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -28,9 +29,10 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="scos" Type="System.Single" />
@@ -39,12 +41,12 @@
         <Parameter Name="ty" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="scos">To be added.</param>
-        <param name="ssin">To be added.</param>
-        <param name="tx">To be added.</param>
-        <param name="ty">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="scos">The scaled cosine value (scale * cos(angle)).</param>
+        <param name="ssin">The scaled sine value (scale * sin(angle)).</param>
+        <param name="tx">The x-axis translation component.</param>
+        <param name="ty">The y-axis translation component.</param>
+        <summary>Creates a new <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> with the specified components.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -54,9 +56,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
@@ -70,15 +73,15 @@
         <Parameter Name="anchorY" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="scale">To be added.</param>
-        <param name="radians">To be added.</param>
-        <param name="tx">To be added.</param>
-        <param name="ty">To be added.</param>
-        <param name="anchorX">To be added.</param>
-        <param name="anchorY">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="scale">The uniform scale factor.</param>
+        <param name="radians">The rotation angle in radians.</param>
+        <param name="tx">The x-axis translation component.</param>
+        <param name="ty">The y-axis translation component.</param>
+        <param name="anchorX">The x-coordinate of the anchor point for rotation.</param>
+        <param name="anchorY">The y-coordinate of the anchor point for rotation.</param>
+        <summary>Creates a rotation-scale matrix with the specified scale, rotation (in radians), translation, and anchor point.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> representing the combined transformation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateDegrees">
@@ -88,9 +91,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
@@ -104,15 +108,15 @@
         <Parameter Name="anchorY" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="scale">To be added.</param>
-        <param name="degrees">To be added.</param>
-        <param name="tx">To be added.</param>
-        <param name="ty">To be added.</param>
-        <param name="anchorX">To be added.</param>
-        <param name="anchorY">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="scale">The uniform scale factor.</param>
+        <param name="degrees">The rotation angle in degrees.</param>
+        <param name="tx">The x-axis translation component.</param>
+        <param name="ty">The y-axis translation component.</param>
+        <param name="anchorX">The x-coordinate of the anchor point for rotation.</param>
+        <param name="anchorY">The y-coordinate of the anchor point for rotation.</param>
+        <summary>Creates a rotation-scale matrix with the specified scale, rotation (in degrees), translation, and anchor point.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> representing the combined transformation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateIdentity">
@@ -122,18 +126,19 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates an identity matrix that represents no transformation.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> with scale of 1, no rotation, and no translation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateRotation">
@@ -143,9 +148,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
@@ -156,12 +162,12 @@
         <Parameter Name="anchorY" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="radians">To be added.</param>
-        <param name="anchorX">To be added.</param>
-        <param name="anchorY">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="radians">The rotation angle in radians.</param>
+        <param name="anchorX">The x-coordinate of the anchor point for rotation.</param>
+        <param name="anchorY">The y-coordinate of the anchor point for rotation.</param>
+        <summary>Creates a rotation matrix with the specified angle (in radians) around an anchor point.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> representing the rotation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateRotationDegrees">
@@ -171,9 +177,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
@@ -184,12 +191,12 @@
         <Parameter Name="anchorY" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="degrees">To be added.</param>
-        <param name="anchorX">To be added.</param>
-        <param name="anchorY">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="degrees">The rotation angle in degrees.</param>
+        <param name="anchorX">The x-coordinate of the anchor point for rotation.</param>
+        <param name="anchorY">The y-coordinate of the anchor point for rotation.</param>
+        <summary>Creates a rotation matrix with the specified angle (in degrees) around an anchor point.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> representing the rotation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateScale">
@@ -199,9 +206,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
@@ -210,10 +218,10 @@
         <Parameter Name="s" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="s">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="s">The uniform scale factor.</param>
+        <summary>Creates a uniform scale matrix with no rotation or translation.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> representing the scale transformation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateTranslation">
@@ -223,9 +231,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
@@ -235,11 +244,11 @@
         <Parameter Name="y" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="x">The x-axis translation value.</param>
+        <param name="y">The y-axis translation value.</param>
+        <summary>Creates a translation matrix with no rotation or scale.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> representing the translation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Empty">
@@ -249,16 +258,17 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Represents an empty matrix with all components set to zero.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -271,15 +281,11 @@
       </Implements>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -287,10 +293,11 @@
         <Parameter Name="obj" Type="SkiaSharp.SKRotationScaleMatrix" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> is equal to the current instance.</summary>
+        <returns>
+          <see langword="true" /> if the specified matrix is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -300,15 +307,11 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -316,10 +319,11 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
+        <returns>
+          <see langword="true" /> if the specified object is a <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> and is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -329,23 +333,19 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the hash code for this instance.</summary>
+        <returns>A 32-bit signed integer hash code.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Identity">
@@ -355,16 +355,17 @@
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRotationScaleMatrix</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Represents the identity matrix (scale of 1, no rotation, no translation).</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -374,9 +375,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -386,11 +388,12 @@
         <Parameter Name="right" Type="SkiaSharp.SKRotationScaleMatrix" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> instances are equal.</summary>
+        <returns>
+          <see langword="true" /> if the two matrices are equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -400,9 +403,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -412,11 +416,12 @@
         <Parameter Name="right" Type="SkiaSharp.SKRotationScaleMatrix" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKRotationScaleMatrix" /> instances are not equal.</summary>
+        <returns>
+          <see langword="true" /> if the two matrices are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SCos">
@@ -426,22 +431,18 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the scaled cosine component (scale * cos(angle)).</summary>
+        <value>The scaled cosine value representing the combined scale and rotation.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SSin">
@@ -451,22 +452,18 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the scaled sine component (scale * sin(angle)).</summary>
+        <value>The scaled sine value representing the combined scale and rotation.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToMatrix">
@@ -476,23 +473,19 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Converts this rotation-scale matrix to a full 3x3 transformation matrix.</summary>
+        <returns>A <see cref="T:SkiaSharp.SKMatrix" /> representing the same transformation.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="TX">
@@ -502,22 +495,18 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the x-axis translation component.</summary>
+        <value>The horizontal translation value.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="TY">
@@ -527,22 +516,18 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-2.88">
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the y-axis translation component.</summary>
+        <value>The vertical translation value.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

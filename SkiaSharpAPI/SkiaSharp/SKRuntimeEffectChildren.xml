@@ -1,10 +1,14 @@
 <Type Name="SKRuntimeEffectChildren" FullName="SkiaSharp.SKRuntimeEffectChildren">
-  <TypeSignature Language="C#" Value="public class SKRuntimeEffectChildren : System.Collections.Generic.IEnumerable&lt;string&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKRuntimeEffectChildren extends System.Object implements class System.Collections.Generic.IEnumerable`1&lt;string&gt;, class System.Collections.IEnumerable" />
+  <TypeSignature Language="C#" Value="public class SKRuntimeEffectChildren : System.Collections.Generic.IEnumerable&lt;string&gt;" FrameworkAlternate="skiasharp-2.88" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKRuntimeEffectChildren extends System.Object implements class System.Collections.Generic.IEnumerable`1&lt;string&gt;, class System.Collections.IEnumerable" FrameworkAlternate="skiasharp-2.88" />
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKRuntimeEffectChildren" />
+  <TypeSignature Language="C#" Value="public class SKRuntimeEffectChildren : IDisposable, System.Collections.Generic.IEnumerable&lt;string&gt;" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKRuntimeEffectChildren extends System.Object implements class System.Collections.Generic.IEnumerable`1&lt;string&gt;, class System.Collections.IEnumerable, class System.IDisposable" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -16,10 +20,13 @@
     <Interface>
       <InterfaceName>System.Collections.IEnumerable</InterfaceName>
     </Interface>
+    <Interface FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a collection of child shaders or color filters for use with <see cref="T:SkiaSharp.SKRuntimeEffect" />.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -30,14 +37,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="effect" Type="SkiaSharp.SKRuntimeEffect" />
       </Parameters>
       <Docs>
-        <param name="effect">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="effect">The runtime effect that defines the available child slots.</param>
+        <summary>Creates a new instance of <see cref="T:SkiaSharp.SKRuntimeEffectChildren" /> for the specified effect.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -53,14 +62,38 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="value" Type="SkiaSharp.SKShader" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="value" Type="SkiaSharp.SKShader" Index="1" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="name">The name of the child slot as defined in the SkSL shader.</param>
+        <param name="value">The shader to assign to the child slot.</param>
+        <summary>Adds a shader to the specified child slot.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public void Add (string name, SkiaSharp.SKRuntimeEffectChild? value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(string name, valuetype System.Nullable`1&lt;valuetype SkiaSharp.SKRuntimeEffectChild&gt; value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectChildren.Add(System.String,System.Nullable{SkiaSharp.SKRuntimeEffectChild})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="value" Type="System.Nullable&lt;SkiaSharp.SKRuntimeEffectChild&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="name">The name of the child slot as defined in the SkSL shader.</param>
+        <param name="value">The shader, color filter, or blender to assign to the child slot.</param>
+        <summary>Adds a child object to the specified child slot.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -71,6 +104,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -79,10 +114,11 @@
         <Parameter Name="name" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="name">The name of the child slot to check.</param>
+        <summary>Determines whether a child slot with the specified name exists.</summary>
+        <returns>
+          <see langword="true" /> if a child slot with the name exists; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -93,14 +129,38 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the number of child slots defined by the runtime effect.</summary>
+        <value>The number of child slots.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectChildren.Dispose" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Releases all resources used by this instance.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
@@ -114,37 +174,44 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IEnumerator&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns an enumerator that iterates through the child slot names.</summary>
+        <returns>An enumerator for the child slot names.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public SkiaSharp.SKShader this[string name] { set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKShader Item(string)" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKShader this[string name] { set; }" FrameworkAlternate="skiasharp-2.88" />
+      <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKShader Item(string)" FrameworkAlternate="skiasharp-2.88" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKRuntimeEffectChildren.Item(System.String)" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKRuntimeEffectChild? this[string name] { set; }" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype SkiaSharp.SKRuntimeEffectChild&gt; Item(string)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>SkiaSharp.SKShader</ReturnType>
+        <ReturnType FrameworkAlternate="skiasharp-2.88">SkiaSharp.SKShader</ReturnType>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Nullable&lt;SkiaSharp.SKRuntimeEffectChild&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <param name="name">The name of the child slot.</param>
+        <summary>Sets the child object for the specified slot.</summary>
+        <value>The child object assigned to the slot.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Names">
@@ -155,14 +222,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IReadOnlyList&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the list of child slot names defined by the runtime effect.</summary>
+        <value>A read-only list of child slot names.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -173,14 +242,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Clears all assigned child objects from all slots.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
@@ -194,34 +265,41 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns an enumerator that iterates through the child slot names.</summary>
+        <returns>An enumerator for the child slot names.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToArray">
-      <MemberSignature Language="C#" Value="public SkiaSharp.SKShader[] ToArray ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKShader[] ToArray() cil managed" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKShader[] ToArray ();" FrameworkAlternate="skiasharp-2.88" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKShader[] ToArray() cil managed" FrameworkAlternate="skiasharp-2.88" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffectChildren.ToArray" />
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKObject[] ToArray ();" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKObject[] ToArray() cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>SkiaSharp.SKShader[]</ReturnType>
+        <ReturnType FrameworkAlternate="skiasharp-2.88">SkiaSharp.SKShader[]</ReturnType>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKObject[]</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns all child objects as an array.</summary>
+        <returns>An array containing all assigned child objects.</returns>
+        <remarks />
       </Docs>
     </Member>
   </Members>

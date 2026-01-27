@@ -6,14 +6,16 @@
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a font used for drawing and measuring text.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -25,11 +27,13 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Creates a new <see cref="T:SkiaSharp.SKFont" /> with the default typeface and size.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -41,6 +45,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="typeface" Type="SkiaSharp.SKTypeface" />
@@ -49,12 +55,12 @@
         <Parameter Name="skewX" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="typeface">To be added.</param>
-        <param name="size">To be added.</param>
-        <param name="scaleX">To be added.</param>
-        <param name="skewX">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="typeface">The <see cref="T:SkiaSharp.SKTypeface" /> to use, or <see langword="null" /> for the default typeface.</param>
+        <param name="size">The font size in points. The default is 12.</param>
+        <param name="scaleX">The horizontal scale factor. The default is 1.</param>
+        <param name="skewX">The horizontal skew factor for oblique/italic effect. The default is 0.</param>
+        <summary>Creates a new <see cref="T:SkiaSharp.SKFont" /> with the specified typeface and settings.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="BaselineSnap">
@@ -66,14 +72,253 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether glyphs snap to pixel boundaries on the baseline.</summary>
+        <value>
+          <see langword="true" /> if glyphs snap to pixels; otherwise, <see langword="false" />.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BreakText">
+      <MemberSignature Language="C#" Value="public int BreakText (ReadOnlySpan&lt;char&gt; text, float maxWidth, SkiaSharp.SKPaint paint = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 BreakText(valuetype System.ReadOnlySpan`1&lt;char&gt; text, float32 maxWidth, class SkiaSharp.SKPaint paint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.BreakText(System.ReadOnlySpan{System.Char},System.Single,SkiaSharp.SKPaint)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="maxWidth" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to measure.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Measures text, stopping when the maximum width is exceeded.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BreakText">
+      <MemberSignature Language="C#" Value="public int BreakText (string text, float maxWidth, SkiaSharp.SKPaint paint = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 BreakText(string text, float32 maxWidth, class SkiaSharp.SKPaint paint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.BreakText(System.String,System.Single,SkiaSharp.SKPaint)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="maxWidth" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to measure.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Measures text, stopping when the maximum width is exceeded.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BreakText">
+      <MemberSignature Language="C#" Value="public int BreakText (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, float maxWidth, SkiaSharp.SKPaint paint = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 BreakText(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, float32 maxWidth, class SkiaSharp.SKPaint paint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.BreakText(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,System.Single,SkiaSharp.SKPaint)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="maxWidth" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to measure.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Measures text, stopping when the maximum width is exceeded.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BreakText">
+      <MemberSignature Language="C#" Value="public int BreakText (ReadOnlySpan&lt;char&gt; text, float maxWidth, out float measuredWidth, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 BreakText(valuetype System.ReadOnlySpan`1&lt;char&gt; text, float32 maxWidth, [out] float32&amp; measuredWidth, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.BreakText(System.ReadOnlySpan{System.Char},System.Single,System.Single@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="maxWidth" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="measuredWidth" Type="System.Single" RefType="out" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to measure.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="measuredWidth">When this method returns, contains the actual measured width of the text.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Measures text, stopping when the maximum width is exceeded.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BreakText">
+      <MemberSignature Language="C#" Value="public int BreakText (string text, float maxWidth, out float measuredWidth, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 BreakText(string text, float32 maxWidth, [out] float32&amp; measuredWidth, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.BreakText(System.String,System.Single,System.Single@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="maxWidth" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="measuredWidth" Type="System.Single" RefType="out" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to measure.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="measuredWidth">When this method returns, contains the actual measured width of the text.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Measures text, stopping when the maximum width is exceeded.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BreakText">
+      <MemberSignature Language="C#" Value="public int BreakText (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, float maxWidth, SkiaSharp.SKPaint paint = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 BreakText(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, float32 maxWidth, class SkiaSharp.SKPaint paint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.BreakText(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,System.Single,SkiaSharp.SKPaint)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="maxWidth" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Measures text, stopping when the maximum width is exceeded.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BreakText">
+      <MemberSignature Language="C#" Value="public int BreakText (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, float maxWidth, out float measuredWidth, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 BreakText(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, float32 maxWidth, [out] float32&amp; measuredWidth, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.BreakText(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,System.Single,System.Single@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="maxWidth" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="measuredWidth" Type="System.Single" RefType="out" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to measure.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="measuredWidth">When this method returns, contains the actual measured width of the text.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Measures text, stopping when the maximum width is exceeded.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BreakText">
+      <MemberSignature Language="C#" Value="public int BreakText (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, float maxWidth, out float measuredWidth, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 BreakText(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, float32 maxWidth, [out] float32&amp; measuredWidth, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.BreakText(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,System.Single,System.Single@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="maxWidth" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="measuredWidth" Type="System.Single" RefType="out" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="maxWidth">The maximum width constraint.</param>
+        <param name="measuredWidth">When this method returns, contains the actual measured width of the text.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Measures text, stopping when the maximum width is exceeded.</summary>
+        <returns>The number of characters that fit within the maximum width.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyph">
@@ -85,6 +330,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -93,10 +340,11 @@
         <Parameter Name="codepoint" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="codepoint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="codepoint">The Unicode codepoint to check.</param>
+        <summary>Determines whether the font contains a glyph for the specified codepoint.</summary>
+        <returns>
+          <see langword="true" /> if the font contains a glyph for the codepoint; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyphs">
@@ -108,6 +356,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -116,10 +366,11 @@
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to check.</param>
+        <summary>Determines whether the font contains glyphs for all characters in the text.</summary>
+        <returns>
+          <see langword="true" /> if the font contains glyphs for all characters; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyphs">
@@ -131,6 +382,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -139,10 +392,11 @@
         <Parameter Name="codepoints" Type="System.ReadOnlySpan&lt;System.Int32&gt;" />
       </Parameters>
       <Docs>
-        <param name="codepoints">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="codepoints">The Unicode codepoints to check.</param>
+        <summary>Determines whether the font contains glyphs for all specified codepoints.</summary>
+        <returns>
+          <see langword="true" /> if the font contains glyphs for all codepoints; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyphs">
@@ -154,6 +408,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -162,10 +418,11 @@
         <Parameter Name="text" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to check.</param>
+        <summary>Determines whether the font contains glyphs for all characters in the string.</summary>
+        <returns>
+          <see langword="true" /> if the font contains glyphs for all characters; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyphs">
@@ -177,6 +434,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -186,11 +445,12 @@
         <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to check.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <summary>Determines whether the font contains glyphs for all characters in the text.</summary>
+        <returns>
+          <see langword="true" /> if the font contains glyphs for all characters; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyphs">
@@ -202,6 +462,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -212,12 +474,13 @@
         <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <summary>Determines whether the font contains glyphs for all characters in the text.</summary>
+        <returns>
+          <see langword="true" /> if the font contains glyphs for all characters; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
@@ -229,6 +492,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -237,10 +502,10 @@
         <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to count.</param>
+        <summary>Counts the number of glyphs needed to represent the text.</summary>
+        <returns>The number of glyphs.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
@@ -252,6 +517,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -260,10 +527,10 @@
         <Parameter Name="text" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to count.</param>
+        <summary>Counts the number of glyphs needed to represent the text.</summary>
+        <returns>The number of glyphs.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
@@ -275,6 +542,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -284,11 +553,11 @@
         <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to count.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <summary>Counts the number of glyphs needed to represent the text.</summary>
+        <returns>The number of glyphs.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CountGlyphs">
@@ -300,6 +569,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -310,12 +581,12 @@
         <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <summary>Counts the number of glyphs needed to represent the text.</summary>
+        <returns>The number of glyphs.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DisposeNative">
@@ -327,14 +598,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Releases the native resources associated with this font.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Edging">
@@ -346,14 +619,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKFontEdging</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the font edging mode, which controls anti-aliasing.</summary>
+        <value>The <see cref="T:SkiaSharp.SKFontEdging" /> mode.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="EmbeddedBitmaps">
@@ -365,14 +640,17 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether to use embedded bitmap strikes in the font.</summary>
+        <value>
+          <see langword="true" /> to use embedded bitmaps; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Embolden">
@@ -384,14 +662,17 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether to algorithmically embolden (thicken) the glyphs.</summary>
+        <value>
+          <see langword="true" /> to embolden glyphs; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ForceAutoHinting">
@@ -403,14 +684,17 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether to force auto-hinting instead of using the font's native hints.</summary>
+        <value>
+          <see langword="true" /> to force auto-hinting; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetFontMetrics">
@@ -422,6 +706,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
@@ -430,10 +716,10 @@
         <Parameter Name="metrics" Type="SkiaSharp.SKFontMetrics" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="metrics">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="metrics">When this method returns, contains the <see cref="T:SkiaSharp.SKFontMetrics" /> for this font.</param>
+        <summary>Gets the font metrics for this font.</summary>
+        <returns>The recommended line spacing.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyph">
@@ -445,6 +731,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.UInt16</ReturnType>
@@ -453,10 +741,138 @@
         <Parameter Name="codepoint" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="codepoint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="codepoint">The Unicode codepoint.</param>
+        <summary>Gets the glyph ID for a Unicode codepoint.</summary>
+        <returns>The glyph ID, or 0 if the codepoint is not in the font.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphOffsets (ReadOnlySpan&lt;char&gt; text, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphOffsets(valuetype System.ReadOnlySpan`1&lt;char&gt; text, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.ReadOnlySpan{System.Char},System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <returns>An array of horizontal offsets for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphOffsets (ReadOnlySpan&lt;ushort&gt; glyphs, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphOffsets(valuetype System.ReadOnlySpan`1&lt;unsigned int16&gt; glyphs, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.ReadOnlySpan{System.UInt16},System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="glyphs" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <returns>An array of horizontal offsets for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphOffsets (string text, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphOffsets(string text, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.String,System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <returns>An array of horizontal offsets for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphOffsets (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphOffsets(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <returns>An array of horizontal offsets for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public void GetGlyphOffsets (ReadOnlySpan&lt;char&gt; text, Span&lt;float&gt; offsets, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphOffsets(valuetype System.ReadOnlySpan`1&lt;char&gt; text, valuetype System.Span`1&lt;float32&gt; offsets, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.ReadOnlySpan{System.Char},System.Span{System.Single},System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offsets" Type="System.Span&lt;System.Single&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="offsets">The span to receive the horizontal offsets.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphOffsets">
@@ -468,6 +884,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -478,11 +896,124 @@
         <Parameter Name="origin" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="offsets">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="offsets">The span to receive the horizontal offsets.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public void GetGlyphOffsets (string text, Span&lt;float&gt; offsets, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphOffsets(string text, valuetype System.Span`1&lt;float32&gt; offsets, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.String,System.Span{System.Single},System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offsets" Type="System.Span&lt;System.Single&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="offsets">The span to receive the horizontal offsets.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphOffsets (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphOffsets(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <returns>An array of horizontal offsets for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public void GetGlyphOffsets (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, Span&lt;float&gt; offsets, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphOffsets(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, valuetype System.Span`1&lt;float32&gt; offsets, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,System.Span{System.Single},System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offsets" Type="System.Span&lt;System.Single&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="offsets">The span to receive the horizontal offsets.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphOffsets">
+      <MemberSignature Language="C#" Value="public void GetGlyphOffsets (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, Span&lt;float&gt; offsets, float origin = 0);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphOffsets(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, valuetype System.Span`1&lt;float32&gt; offsets, float32 origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphOffsets(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,System.Span{System.Single},System.Single)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offsets" Type="System.Span&lt;System.Single&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="System.Single" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="offsets">The span to receive the horizontal offsets.</param>
+        <param name="origin">The starting horizontal offset.</param>
+        <summary>Gets the horizontal offsets for the glyphs.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphPath">
@@ -494,6 +1025,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPath</ReturnType>
@@ -502,10 +1035,10 @@
         <Parameter Name="glyph" Type="System.UInt16" />
       </Parameters>
       <Docs>
-        <param name="glyph">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="glyph">The glyph ID.</param>
+        <summary>Gets the outline path for a glyph.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the glyph outline, or <see langword="null" /> if the glyph has no outline.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphPaths">
@@ -517,6 +1050,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -526,10 +1061,138 @@
         <Parameter Name="glyphPathDelegate" Type="SkiaSharp.SKGlyphPathDelegate" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="glyphPathDelegate">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="glyphPathDelegate">A delegate called for each glyph path.</param>
+        <summary>Gets the outline paths for multiple glyphs by invoking a delegate for each.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPoint[] GetGlyphPositions (ReadOnlySpan&lt;char&gt; text, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKPoint[] GetGlyphPositions(valuetype System.ReadOnlySpan`1&lt;char&gt; text, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.ReadOnlySpan{System.Char},SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPoint[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPoint[] GetGlyphPositions (ReadOnlySpan&lt;ushort&gt; glyphs, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKPoint[] GetGlyphPositions(valuetype System.ReadOnlySpan`1&lt;unsigned int16&gt; glyphs, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.ReadOnlySpan{System.UInt16},SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPoint[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="glyphs" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPoint[] GetGlyphPositions (string text, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKPoint[] GetGlyphPositions(string text, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.String,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPoint[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPoint[] GetGlyphPositions (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKPoint[] GetGlyphPositions(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPoint[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public void GetGlyphPositions (ReadOnlySpan&lt;char&gt; text, Span&lt;SkiaSharp.SKPoint&gt; offsets, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphPositions(valuetype System.ReadOnlySpan`1&lt;char&gt; text, valuetype System.Span`1&lt;valuetype SkiaSharp.SKPoint&gt; offsets, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.ReadOnlySpan{System.Char},System.Span{SkiaSharp.SKPoint},SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offsets" Type="System.Span&lt;SkiaSharp.SKPoint&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="offsets">The span to receive the glyph positions.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphPositions">
@@ -541,6 +1204,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -551,11 +1216,218 @@
         <Parameter Name="origin" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="positions">To be added.</param>
-        <param name="origin">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="positions">The span to receive the glyph positions.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public void GetGlyphPositions (string text, Span&lt;SkiaSharp.SKPoint&gt; offsets, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphPositions(string text, valuetype System.Span`1&lt;valuetype SkiaSharp.SKPoint&gt; offsets, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.String,System.Span{SkiaSharp.SKPoint},SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offsets" Type="System.Span&lt;SkiaSharp.SKPoint&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="offsets">The span to receive the glyph positions.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPoint[] GetGlyphPositions (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKPoint[] GetGlyphPositions(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPoint[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <returns>An array of positions for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public void GetGlyphPositions (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, Span&lt;SkiaSharp.SKPoint&gt; offsets, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphPositions(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, valuetype System.Span`1&lt;valuetype SkiaSharp.SKPoint&gt; offsets, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,System.Span{SkiaSharp.SKPoint},SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offsets" Type="System.Span&lt;SkiaSharp.SKPoint&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="offsets">The span to receive the glyph positions.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphPositions">
+      <MemberSignature Language="C#" Value="public void GetGlyphPositions (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, Span&lt;SkiaSharp.SKPoint&gt; offsets, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphPositions(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, valuetype System.Span`1&lt;valuetype SkiaSharp.SKPoint&gt; offsets, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphPositions(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,System.Span{SkiaSharp.SKPoint},SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offsets" Type="System.Span&lt;SkiaSharp.SKPoint&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="offsets">The span to receive the glyph positions.</param>
+        <param name="origin">The starting position offset.</param>
+        <summary>Gets the x,y positions for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphs">
+      <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (ReadOnlySpan&lt;char&gt; text);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(valuetype System.ReadOnlySpan`1&lt;char&gt; text) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphs(System.ReadOnlySpan{System.Char})" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.UInt16[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <returns>An array of glyph IDs.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphs">
+      <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (ReadOnlySpan&lt;int&gt; codepoints);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(valuetype System.ReadOnlySpan`1&lt;int32&gt; codepoints) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphs(System.ReadOnlySpan{System.Int32})" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.UInt16[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="codepoints" Type="System.ReadOnlySpan&lt;System.Int32&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="codepoints">The Unicode codepoints to convert.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <returns>An array of glyph IDs.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphs">
+      <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (string text);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(string text) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphs(System.String)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.UInt16[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <returns>An array of glyph IDs.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphs">
+      <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphs(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.UInt16[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <returns>An array of glyph IDs.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -567,6 +1439,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -576,10 +1450,10 @@
         <Parameter Name="glyphs" Type="System.Span&lt;System.UInt16&gt;" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to convert.</param>
+        <param name="glyphs">The span to receive the glyph IDs.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -591,6 +1465,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -600,10 +1476,10 @@
         <Parameter Name="glyphs" Type="System.Span&lt;System.UInt16&gt;" />
       </Parameters>
       <Docs>
-        <param name="codepoints">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="codepoints">The Unicode codepoints to convert.</param>
+        <param name="glyphs">The span to receive the glyph IDs.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -615,6 +1491,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -624,10 +1502,37 @@
         <Parameter Name="glyphs" Type="System.Span&lt;System.UInt16&gt;" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to convert.</param>
+        <param name="glyphs">The span to receive the glyph IDs.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphs">
+      <MemberSignature Language="C#" Value="public ushort[] GetGlyphs (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int16[] GetGlyphs(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphs(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.UInt16[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <returns>An array of glyph IDs.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -639,6 +1544,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -649,11 +1556,11 @@
         <Parameter Name="glyphs" Type="System.Span&lt;System.UInt16&gt;" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">The text to convert.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="glyphs">The span to receive the glyph IDs.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphs">
@@ -665,6 +1572,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -676,12 +1585,281 @@
         <Parameter Name="glyphs" Type="System.Span&lt;System.UInt16&gt;" />
       </Parameters>
       <Docs>
-        <param name="text">To be added.</param>
-        <param name="length">To be added.</param>
-        <param name="encoding">To be added.</param>
-        <param name="glyphs">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="glyphs">The span to receive the glyph IDs.</param>
+        <summary>Converts text to glyph IDs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (ReadOnlySpan&lt;char&gt; text, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(valuetype System.ReadOnlySpan`1&lt;char&gt; text, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.ReadOnlySpan{System.Char},SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (ReadOnlySpan&lt;ushort&gt; glyphs, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(valuetype System.ReadOnlySpan`1&lt;unsigned int16&gt; glyphs, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.ReadOnlySpan{System.UInt16},SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="glyphs" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (string text, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(string text, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.String,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (ReadOnlySpan&lt;char&gt; text, out SkiaSharp.SKRect[] bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(valuetype System.ReadOnlySpan`1&lt;char&gt; text, [out] valuetype SkiaSharp.SKRect[]&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.ReadOnlySpan{System.Char},SkiaSharp.SKRect[]@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect[]" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (ReadOnlySpan&lt;ushort&gt; glyphs, out SkiaSharp.SKRect[] bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(valuetype System.ReadOnlySpan`1&lt;unsigned int16&gt; glyphs, [out] valuetype SkiaSharp.SKRect[]&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.ReadOnlySpan{System.UInt16},SkiaSharp.SKRect[]@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="glyphs" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect[]" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (string text, out SkiaSharp.SKRect[] bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(string text, [out] valuetype SkiaSharp.SKRect[]&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.String,SkiaSharp.SKRect[]@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect[]" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, out SkiaSharp.SKRect[] bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, [out] valuetype SkiaSharp.SKRect[]&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,SkiaSharp.SKRect[]@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect[]" RefType="out" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public void GetGlyphWidths (ReadOnlySpan&lt;char&gt; text, Span&lt;float&gt; widths, Span&lt;SkiaSharp.SKRect&gt; bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphWidths(valuetype System.ReadOnlySpan`1&lt;char&gt; text, valuetype System.Span`1&lt;float32&gt; widths, valuetype System.Span`1&lt;valuetype SkiaSharp.SKRect&gt; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.ReadOnlySpan{System.Char},System.Span{System.Single},System.Span{SkiaSharp.SKRect},SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="widths" Type="System.Span&lt;System.Single&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="System.Span&lt;SkiaSharp.SKRect&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="widths">The span to receive the advance widths.</param>
+        <param name="bounds">The span to receive the bounding rectangles.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetGlyphWidths">
@@ -693,6 +1871,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -704,12 +1884,527 @@
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="widths">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="widths">The span to receive the advance widths.</param>
+        <param name="bounds">The span to receive the bounding rectangles.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public void GetGlyphWidths (string text, Span&lt;float&gt; widths, Span&lt;SkiaSharp.SKRect&gt; bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphWidths(string text, valuetype System.Span`1&lt;float32&gt; widths, valuetype System.Span`1&lt;valuetype SkiaSharp.SKRect&gt; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.String,System.Span{System.Single},System.Span{SkiaSharp.SKRect},SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="widths" Type="System.Span&lt;System.Single&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="System.Span&lt;SkiaSharp.SKRect&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="widths">The span to receive the advance widths.</param>
+        <param name="bounds">The span to receive the bounding rectangles.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public float[] GetGlyphWidths (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, out SkiaSharp.SKRect[] bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32[] GetGlyphWidths(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, [out] valuetype SkiaSharp.SKRect[]&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,SkiaSharp.SKRect[]@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect[]" RefType="out" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public void GetGlyphWidths (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, Span&lt;float&gt; widths, Span&lt;SkiaSharp.SKRect&gt; bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphWidths(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, valuetype System.Span`1&lt;float32&gt; widths, valuetype System.Span`1&lt;valuetype SkiaSharp.SKRect&gt; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,System.Span{System.Single},System.Span{SkiaSharp.SKRect},SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="widths" Type="System.Span&lt;System.Single&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="System.Span&lt;SkiaSharp.SKRect&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="widths">The span to receive the advance widths.</param>
+        <param name="bounds">The span to receive the bounding rectangles.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetGlyphWidths">
+      <MemberSignature Language="C#" Value="public void GetGlyphWidths (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, Span&lt;float&gt; widths, Span&lt;SkiaSharp.SKRect&gt; bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GetGlyphWidths(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, valuetype System.Span`1&lt;float32&gt; widths, valuetype System.Span`1&lt;valuetype SkiaSharp.SKRect&gt; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetGlyphWidths(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,System.Span{System.Single},System.Span{SkiaSharp.SKRect},SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="widths" Type="System.Span&lt;System.Single&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="System.Span&lt;SkiaSharp.SKRect&gt;" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="widths">The span to receive the advance widths.</param>
+        <param name="bounds">The span to receive the bounding rectangles.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPath (ReadOnlySpan&lt;char&gt; text, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPath(valuetype System.ReadOnlySpan`1&lt;char&gt; text, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPath(System.ReadOnlySpan{System.Char},SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for the text.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPath (ReadOnlySpan&lt;char&gt; text, ReadOnlySpan&lt;SkiaSharp.SKPoint&gt; positions);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPath(valuetype System.ReadOnlySpan`1&lt;char&gt; text, valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKPoint&gt; positions) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPath(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{SkiaSharp.SKPoint})" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="positions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="positions">The positions for each glyph.</param>
+        <summary>Gets the path for the text.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPath (string text, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPath(string text, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPath(System.String,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for the text.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPath (string text, ReadOnlySpan&lt;SkiaSharp.SKPoint&gt; positions);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPath(string text, valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKPoint&gt; positions) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPath(System.String,System.ReadOnlySpan{SkiaSharp.SKPoint})" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="positions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="positions">The positions for each glyph.</param>
+        <summary>Gets the path for the text.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPath (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPath(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPath(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for the text.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPath (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, ReadOnlySpan&lt;SkiaSharp.SKPoint&gt; positions);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPath(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKPoint&gt; positions) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPath(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,System.ReadOnlySpan{SkiaSharp.SKPoint})" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="positions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="positions">The positions for each glyph.</param>
+        <summary>Gets the path for the text.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPath (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPath(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPath(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for the text.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPath (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, ReadOnlySpan&lt;SkiaSharp.SKPoint&gt; positions);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPath(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKPoint&gt; positions) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPath(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,System.ReadOnlySpan{SkiaSharp.SKPoint})" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="positions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="positions">The positions for each glyph.</param>
+        <summary>Gets the path for the text.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPathOnPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPathOnPath (ReadOnlySpan&lt;char&gt; text, SkiaSharp.SKPath path, SkiaSharp.SKTextAlign textAlign = SkiaSharp.SKTextAlign.Left, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPathOnPath(valuetype System.ReadOnlySpan`1&lt;char&gt; text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKTextAlign textAlign, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPathOnPath(System.ReadOnlySpan{System.Char},SkiaSharp.SKPath,SkiaSharp.SKTextAlign,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="textAlign" Type="SkiaSharp.SKTextAlign" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="path">The <see cref="T:SkiaSharp.SKPath" /> along which to lay out the text.</param>
+        <param name="textAlign">The text alignment relative to the path.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for text laid out along another path.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline along the path.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPathOnPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPathOnPath (ReadOnlySpan&lt;ushort&gt; glyphs, SkiaSharp.SKPath path, SkiaSharp.SKTextAlign textAlign = SkiaSharp.SKTextAlign.Left, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPathOnPath(valuetype System.ReadOnlySpan`1&lt;unsigned int16&gt; glyphs, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKTextAlign textAlign, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPathOnPath(System.ReadOnlySpan{System.UInt16},SkiaSharp.SKPath,SkiaSharp.SKTextAlign,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="glyphs" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="textAlign" Type="SkiaSharp.SKTextAlign" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="path">The <see cref="T:SkiaSharp.SKPath" /> along which to lay out the text.</param>
+        <param name="textAlign">The text alignment relative to the path.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for text laid out along another path.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline along the path.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPathOnPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPathOnPath (string text, SkiaSharp.SKPath path, SkiaSharp.SKTextAlign textAlign = SkiaSharp.SKTextAlign.Left, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPathOnPath(string text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKTextAlign textAlign, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPathOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKTextAlign,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="textAlign" Type="SkiaSharp.SKTextAlign" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="path">The <see cref="T:SkiaSharp.SKPath" /> along which to lay out the text.</param>
+        <param name="textAlign">The text alignment relative to the path.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for text laid out along another path.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline along the path.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPathOnPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPathOnPath (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPath path, SkiaSharp.SKTextAlign textAlign = SkiaSharp.SKTextAlign.Left, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPathOnPath(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKTextAlign textAlign, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPathOnPath(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,SkiaSharp.SKPath,SkiaSharp.SKTextAlign,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="textAlign" Type="SkiaSharp.SKTextAlign" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to convert to a path.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="path">The <see cref="T:SkiaSharp.SKPath" /> along which to lay out the text.</param>
+        <param name="textAlign">The text alignment relative to the path.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for text laid out along another path.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline along the path.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPathOnPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPathOnPath (ReadOnlySpan&lt;ushort&gt; glyphs, ReadOnlySpan&lt;float&gt; glyphWidths, ReadOnlySpan&lt;SkiaSharp.SKPoint&gt; glyphPositions, SkiaSharp.SKPath path, SkiaSharp.SKTextAlign textAlign = SkiaSharp.SKTextAlign.Left);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPathOnPath(valuetype System.ReadOnlySpan`1&lt;unsigned int16&gt; glyphs, valuetype System.ReadOnlySpan`1&lt;float32&gt; glyphWidths, valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKPoint&gt; glyphPositions, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKTextAlign textAlign) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPathOnPath(System.ReadOnlySpan{System.UInt16},System.ReadOnlySpan{System.Single},System.ReadOnlySpan{SkiaSharp.SKPoint},SkiaSharp.SKPath,SkiaSharp.SKTextAlign)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="glyphs" Type="System.ReadOnlySpan&lt;System.UInt16&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="glyphWidths" Type="System.ReadOnlySpan&lt;System.Single&gt;" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="glyphPositions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="textAlign" Type="SkiaSharp.SKTextAlign" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="glyphWidths">The advance widths for each glyph.</param>
+        <param name="glyphPositions">The positions for each glyph.</param>
+        <param name="path">The <see cref="T:SkiaSharp.SKPath" /> along which to lay out the text.</param>
+        <param name="textAlign">The text alignment relative to the path.</param>
+        <summary>Gets the path for text laid out along another path.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline along the path.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetTextPathOnPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetTextPathOnPath (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPath path, SkiaSharp.SKTextAlign textAlign = SkiaSharp.SKTextAlign.Left, SkiaSharp.SKPoint origin = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetTextPathOnPath(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKTextAlign textAlign, valuetype SkiaSharp.SKPoint origin) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.GetTextPathOnPath(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,SkiaSharp.SKPath,SkiaSharp.SKTextAlign,SkiaSharp.SKPoint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">SkiaSharp.SKPath</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="textAlign" Type="SkiaSharp.SKTextAlign" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="origin" Type="SkiaSharp.SKPoint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="path">The <see cref="T:SkiaSharp.SKPath" /> along which to lay out the text.</param>
+        <param name="textAlign">The text alignment relative to the path.</param>
+        <param name="origin">The starting position for the text.</param>
+        <summary>Gets the path for text laid out along another path.</summary>
+        <returns>The <see cref="T:SkiaSharp.SKPath" /> representing the text outline along the path.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Hinting">
@@ -721,14 +2416,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKFontHinting</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the font hinting level.</summary>
+        <value>The <see cref="T:SkiaSharp.SKFontHinting" /> level.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="LinearMetrics">
@@ -740,14 +2437,42 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether metrics should ignore hinting for improved precision.</summary>
+        <value>
+          <see langword="true" /> to use linear metrics; otherwise, <see langword="false" />.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureText">
+      <MemberSignature Language="C#" Value="public float MeasureText (ReadOnlySpan&lt;char&gt; text, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 MeasureText(valuetype System.ReadOnlySpan`1&lt;char&gt; text, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.MeasureText(System.ReadOnlySpan{System.Char},SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MeasureText">
@@ -759,6 +2484,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
@@ -768,11 +2495,90 @@
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureText">
+      <MemberSignature Language="C#" Value="public float MeasureText (string text, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 MeasureText(string text, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.MeasureText(System.String,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureText">
+      <MemberSignature Language="C#" Value="public float MeasureText (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 MeasureText(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.MeasureText(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureText">
+      <MemberSignature Language="C#" Value="public float MeasureText (ReadOnlySpan&lt;char&gt; text, out SkiaSharp.SKRect bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 MeasureText(valuetype System.ReadOnlySpan`1&lt;char&gt; text, [out] valuetype SkiaSharp.SKRect&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.MeasureText(System.ReadOnlySpan{System.Char},SkiaSharp.SKRect@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Char&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MeasureText">
@@ -784,6 +2590,8 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
@@ -794,12 +2602,128 @@
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="glyphs">To be added.</param>
-        <param name="bounds">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="glyphs">The array of glyph IDs.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureText">
+      <MemberSignature Language="C#" Value="public float MeasureText (string text, out SkiaSharp.SKRect bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 MeasureText(string text, [out] valuetype SkiaSharp.SKRect&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.MeasureText(System.String,SkiaSharp.SKRect@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureText">
+      <MemberSignature Language="C#" Value="public float MeasureText (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 MeasureText(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.MeasureText(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureText">
+      <MemberSignature Language="C#" Value="public float MeasureText (ReadOnlySpan&lt;byte&gt; text, SkiaSharp.SKTextEncoding encoding, out SkiaSharp.SKRect bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 MeasureText(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; text, valuetype SkiaSharp.SKTextEncoding encoding, [out] valuetype SkiaSharp.SKRect&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.MeasureText(System.ReadOnlySpan{System.Byte},SkiaSharp.SKTextEncoding,SkiaSharp.SKRect@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.ReadOnlySpan&lt;System.Byte&gt;" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" RefType="out" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">The text to process.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MeasureText">
+      <MemberSignature Language="C#" Value="public float MeasureText (IntPtr text, int length, SkiaSharp.SKTextEncoding encoding, out SkiaSharp.SKRect bounds, SkiaSharp.SKPaint paint = default);" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float32 MeasureText(native int text, int32 length, valuetype SkiaSharp.SKTextEncoding encoding, [out] valuetype SkiaSharp.SKRect&amp; bounds, class SkiaSharp.SKPaint paint) cil managed" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFont.MeasureText(System.IntPtr,System.Int32,SkiaSharp.SKTextEncoding,SkiaSharp.SKRect@,SkiaSharp.SKPaint)" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">System.Single</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="text" Type="System.IntPtr" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="length" Type="System.Int32" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKTextEncoding" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" RefType="out" Index="3" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="text">A pointer to the text buffer.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
+        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
+        <summary>Gets the advance widths for the glyphs.</summary>
+        <returns>An array of advance widths for each glyph.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Metrics">
@@ -811,14 +2735,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKFontMetrics</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the font metrics for this font.</summary>
+        <value>The <see cref="T:SkiaSharp.SKFontMetrics" /> for this font.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ScaleX">
@@ -830,14 +2756,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the horizontal scale factor applied to the font.</summary>
+        <value>The horizontal scale factor. The default is 1.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Size">
@@ -849,14 +2777,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the font size in points.</summary>
+        <value>The font size in points. The default is 12.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SkewX">
@@ -868,14 +2798,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the horizontal skew factor for an oblique or italic effect.</summary>
+        <value>The horizontal skew factor. The default is 0.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Spacing">
@@ -887,14 +2819,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the recommended line spacing for this font.</summary>
+        <value>The line spacing.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Subpixel">
@@ -906,14 +2840,17 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether subpixel glyph positioning is enabled.</summary>
+        <value>
+          <see langword="true" /> if subpixel positioning is enabled; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Typeface">
@@ -925,14 +2862,16 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKTypeface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the typeface used by this font.</summary>
+        <value>The <see cref="T:SkiaSharp.SKTypeface" />, or <see langword="null" /> for the default typeface.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

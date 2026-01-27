@@ -4,10 +4,10 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SkiaExtensions" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -15,7 +15,7 @@
   <Interfaces />
   <Docs>
     <summary>Convenience methods for <see cref="T:SkiaSharp.SKPixelGeometry" />.</summary>
-    <remarks></remarks>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName="GetAlphaType">
@@ -25,23 +25,47 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKAlphaType</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
-        <Parameter Name="alphaType" Type="SkiaSharp.SKAlphaType" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" />
+        <Parameter Name="alphaType" Type="SkiaSharp.SKAlphaType" />
       </Parameters>
       <Docs>
-        <param name="colorType">To be added.</param>
-        <param name="alphaType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="colorType">The color type to validate against.</param>
+        <param name="alphaType">The alpha type to validate.</param>
+        <summary>Returns a valid alpha type for the specified color type.</summary>
+        <returns>A valid alpha type that is compatible with the color type.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetBitShiftPerPixel">
+      <MemberSignature Language="C#" Value="public static int GetBitShiftPerPixel (this SkiaSharp.SKColorType colorType);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig int32 GetBitShiftPerPixel(valuetype SkiaSharp.SKColorType colorType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SkiaExtensions.GetBitShiftPerPixel(SkiaSharp.SKColorType)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="colorType">The color type to query.</param>
+        <summary>Gets the bit shift value per pixel for the specified color type.</summary>
+        <returns>The number of bits to shift to calculate byte offsets for pixels.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetBytesPerPixel">
@@ -51,21 +75,22 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="colorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="colorType">The color type to query.</param>
+        <summary>Gets the number of bytes per pixel for the specified color type.</summary>
+        <returns>The number of bytes required to store one pixel.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsBgr">
@@ -75,10 +100,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -88,9 +113,10 @@
       </Parameters>
       <Docs>
         <param name="pg">The pixel geometry to test.</param>
-        <summary>Returns true if the pixel geometry is BGR.</summary>
-        <returns></returns>
-        <remarks></remarks>
+        <summary>Determines whether the pixel geometry is BGR.</summary>
+        <returns>
+          <see langword="true" /> if the pixel geometry is BGR; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsHorizontal">
@@ -100,10 +126,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -113,9 +139,10 @@
       </Parameters>
       <Docs>
         <param name="pg">The pixel geometry to test.</param>
-        <summary>Returns true if the pixel geometry is horizontal.</summary>
-        <returns></returns>
-        <remarks></remarks>
+        <summary>Determines whether the pixel geometry is horizontal.</summary>
+        <returns>
+          <see langword="true" /> if the pixel geometry is horizontal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsRgb">
@@ -125,10 +152,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -138,9 +165,10 @@
       </Parameters>
       <Docs>
         <param name="pg">The pixel geometry to test.</param>
-        <summary>Returns true if the pixel geometry is RGB.</summary>
-        <returns></returns>
-        <remarks></remarks>
+        <summary>Determines whether the pixel geometry is RGB.</summary>
+        <returns>
+          <see langword="true" /> if the pixel geometry is RGB; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsVertical">
@@ -150,10 +178,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -163,9 +191,10 @@
       </Parameters>
       <Docs>
         <param name="pg">The pixel geometry to test.</param>
-        <summary>Returns true if the pixel geometry is vertical.</summary>
-        <returns></returns>
-        <remarks></remarks>
+        <summary>Determines whether the pixel geometry is vertical.</summary>
+        <returns>
+          <see langword="true" /> if the pixel geometry is vertical; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorChannel">
@@ -193,10 +222,10 @@
         <Parameter Name="channelSelectorType" Type="SkiaSharp.SKDisplacementMapEffectChannelSelectorType" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="channelSelectorType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="channelSelectorType">The channel selector type to convert.</param>
+        <summary>Converts a displacement map channel selector type to a color channel.</summary>
+        <returns>The corresponding <see cref="T:SkiaSharp.SKColorChannel" /> value.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorSpaceTransferFn">
@@ -224,10 +253,10 @@
         <Parameter Name="gamma" Type="SkiaSharp.SKColorSpaceRenderTargetGamma" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="gamma">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="gamma">The render target gamma to convert.</param>
+        <summary>Converts a render target gamma to a color space transfer function.</summary>
+        <returns>The corresponding <see cref="T:SkiaSharp.SKColorSpaceTransferFn" /> value.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorSpaceTransferFn">
@@ -255,10 +284,10 @@
         <Parameter Name="gamma" Type="SkiaSharp.SKNamedGamma" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="gamma">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="gamma">The named gamma to convert.</param>
+        <summary>Converts a named gamma to a color space transfer function.</summary>
+        <returns>The corresponding <see cref="T:SkiaSharp.SKColorSpaceTransferFn" /> value.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorSpaceXyz">
@@ -286,10 +315,10 @@
         <Parameter Name="gamut" Type="SkiaSharp.SKColorSpaceGamut" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="gamut">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="gamut">The color space gamut to convert.</param>
+        <summary>Converts a color space gamut to an XYZ transformation matrix.</summary>
+        <returns>The corresponding <see cref="T:SkiaSharp.SKColorSpaceXyz" /> matrix.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorSpaceXyz">
@@ -317,10 +346,10 @@
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix44" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="matrix">The 4x4 matrix to convert.</param>
+        <summary>Converts a 4x4 matrix to an XYZ color space transformation matrix.</summary>
+        <returns>The corresponding <see cref="T:SkiaSharp.SKColorSpaceXyz" /> matrix.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorType">
@@ -330,7 +359,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -343,13 +371,13 @@
         <ReturnType>SkiaSharp.SKColorType</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="config" Type="SkiaSharp.GRPixelConfig" RefType="this" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="config" Type="SkiaSharp.GRPixelConfig" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="config">The <see cref="T:SkiaSharp.GRPixelConfig" /> to convert.</param>
         <summary>Converts a <see cref="T:SkiaSharp.GRPixelConfig" /> to an equivalent <see cref="T:SkiaSharp.SKColorType" />, if possible.</summary>
         <returns>Returns the equivalent <see cref="T:SkiaSharp.SKColorType" />, or <see cref="F:SkiaSharp.SKColorType.Unknown" /> if there is none.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToFilterQuality">
@@ -359,15 +387,14 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+        <Attribute FrameworkAlternate="skiasharp-2.80;skiasharp-2.88">
           <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+        <Attribute FrameworkAlternate="skiasharp-2.80;skiasharp-2.88">
           <AttributeName Language="C#">[System.Obsolete]</AttributeName>
         </Attribute>
       </Attributes>
@@ -375,13 +402,13 @@
         <ReturnType>SkiaSharp.SKFilterQuality</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="method" Type="SkiaSharp.SKBitmapResizeMethod" RefType="this" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="method" Type="SkiaSharp.SKBitmapResizeMethod" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="method">The <see cref="T:SkiaSharp.SKBitmapResizeMethod" /> to convert.</param>
         <summary>Converts a <see cref="T:SkiaSharp.SKBitmapResizeMethod" /> to an equivalent <see cref="T:SkiaSharp.SKFilterQuality" />.</summary>
         <returns>Returns the equivalent <see cref="T:SkiaSharp.SKFilterQuality" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToGlSizedFormat">
@@ -391,7 +418,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -407,13 +433,13 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="config" Type="SkiaSharp.GRPixelConfig" RefType="this" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="config" Type="SkiaSharp.GRPixelConfig" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="config">The <see cref="T:SkiaSharp.GRPixelConfig" /> to convert.</param>
         <summary>Converts a <see cref="T:SkiaSharp.GRPixelConfig" /> to the equivalent OpenGL sized format, if possible.</summary>
         <returns>Returns the equivalent OpenGL sized format, or 0 if there is none.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToGlSizedFormat">
@@ -423,21 +449,22 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" />
       </Parameters>
       <Docs>
         <param name="colorType">The <see cref="T:SkiaSharp.SKColorType" /> to convert.</param>
         <summary>Converts a <see cref="T:SkiaSharp.SKColorType" /> to the equivalent OpenGL sized format, if possible.</summary>
         <returns>Returns the equivalent OpenGL sized format, or 0 if there is none.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToPixelConfig">
@@ -447,7 +474,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -463,13 +489,41 @@
         <ReturnType>SkiaSharp.GRPixelConfig</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="colorType">The <see cref="T:SkiaSharp.SKColorType" /> to convert.</param>
         <summary>Converts a <see cref="T:SkiaSharp.SKColorType" /> to an equivalent <see cref="T:SkiaSharp.GRPixelConfig" />, if possible.</summary>
         <returns>Returns the equivalent <see cref="T:SkiaSharp.GRPixelConfig" />, or <see cref="F:SkiaSharp.GRPixelConfig.Unknown" /> if there is none.</returns>
-        <remarks></remarks>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToSamplingOptions">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSamplingOptions ToSamplingOptions (this SkiaSharp.SKFilterQuality quality);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKSamplingOptions ToSamplingOptions(valuetype SkiaSharp.SKFilterQuality quality) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SkiaExtensions.ToSamplingOptions(SkiaSharp.SKFilterQuality)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">
+          <AttributeName Language="C#">[System.Obsolete("Use SKSamplingOptions instead.")]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSamplingOptions</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="quality" Type="SkiaSharp.SKFilterQuality" RefType="this" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="quality">The filter quality to convert.</param>
+        <summary>Converts a filter quality to sampling options.</summary>
+        <returns>The corresponding <see cref="T:SkiaSharp.SKSamplingOptions" /> value.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShaderTileMode">
@@ -497,10 +551,10 @@
         <Parameter Name="tileMode" Type="SkiaSharp.SKMatrixConvolutionTileMode" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="tileMode">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tileMode">The matrix convolution tile mode to convert.</param>
+        <summary>Converts a matrix convolution tile mode to a shader tile mode.</summary>
+        <returns>The corresponding <see cref="T:SkiaSharp.SKShaderTileMode" /> value.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToTextEncoding">
@@ -510,7 +564,6 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
@@ -526,13 +579,13 @@
         <ReturnType>SkiaSharp.SKTextEncoding</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="encoding" Type="SkiaSharp.SKEncoding" RefType="this" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="encoding" Type="SkiaSharp.SKEncoding" RefType="this" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="encoding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="encoding">The encoding to convert.</param>
+        <summary>Converts an encoding to a text encoding.</summary>
+        <returns>The corresponding <see cref="T:SkiaSharp.SKTextEncoding" /> value.</returns>
+        <remarks />
       </Docs>
     </Member>
   </Members>

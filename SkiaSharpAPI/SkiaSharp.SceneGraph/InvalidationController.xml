@@ -5,14 +5,16 @@
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.SceneGraph</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Controls invalidation tracking for scene graph animations.</summary>
+    <remarks>This class is used with Skottie animations to track which regions of the scene graph need to be redrawn. Call <see cref="M:SkiaSharp.SceneGraph.InvalidationController.Begin" /> before seeking/ticking an animation, then <see cref="M:SkiaSharp.SceneGraph.InvalidationController.End" /> afterward to capture the invalidated bounds.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -23,11 +25,13 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.SceneGraph</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Creates a new instance of <see cref="T:SkiaSharp.SceneGraph.InvalidationController" />.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Begin">
@@ -38,14 +42,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.SceneGraph</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Begins an invalidation tracking session.</summary>
+        <remarks>Call this method before seeking or ticking an animation to start tracking invalidated regions. Call <see cref="M:SkiaSharp.SceneGraph.InvalidationController.End" /> when finished.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Bounds">
@@ -56,14 +62,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.SceneGraph</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKRect</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the bounding rectangle encompassing all invalidated regions.</summary>
+        <value>The accumulated bounds of all invalidated areas since the last <see cref="M:SkiaSharp.SceneGraph.InvalidationController.Reset" /> or construction.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DisposeNative">
@@ -74,14 +82,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.SceneGraph</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Releases the native resources associated with this object.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="End">
@@ -92,14 +102,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.SceneGraph</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Ends an invalidation tracking session.</summary>
+        <remarks>Call this method after seeking or ticking an animation to finalize the invalidated region tracking. The <see cref="P:SkiaSharp.SceneGraph.InvalidationController.Bounds" /> property will contain the accumulated invalidated area.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Invalidate">
@@ -110,6 +122,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.SceneGraph</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -119,10 +133,10 @@
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The local-space rectangle to mark as invalidated.</param>
+        <param name="matrix">The transformation matrix to apply to the rectangle.</param>
+        <summary>Marks a rectangular region as invalidated.</summary>
+        <remarks>The rectangle is transformed by the specified matrix before being added to the accumulated invalidated bounds.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -133,14 +147,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.SceneGraph</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Clears all accumulated invalidation state.</summary>
+        <remarks>After calling this method, <see cref="P:SkiaSharp.SceneGraph.InvalidationController.Bounds" /> will return an empty rectangle until new regions are invalidated.</remarks>
       </Docs>
     </Member>
   </Members>

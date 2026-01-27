@@ -4,10 +4,10 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKSvgCanvas" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.60.0.0</AssemblyVersion>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -25,23 +25,24 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKCanvas</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="bounds" Type="SkiaSharp.SKRect" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
-        <Parameter Name="stream" Type="SkiaSharp.SKWStream" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" />
+        <Parameter Name="stream" Type="SkiaSharp.SKWStream" />
       </Parameters>
       <Docs>
-        <param name="bounds">To be added.</param>
-        <param name="stream">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="bounds">The initial SVG viewport (viewBox attribute on the root SVG element).</param>
+        <param name="stream">The SkiaSharp stream to write the SVG data to.</param>
+        <summary>Creates a new <see cref="T:SkiaSharp.SKCanvas" /> which generates SVG commands and writes them to the specified stream.</summary>
+        <returns>Returns the new SVG canvas.</returns>
+        <remarks>The canvas may buffer some drawing calls, so the output is not guaranteed to be valid or complete until the canvas instance is disposed. The stream must remain valid during the lifetime of the returned canvas.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -51,16 +52,14 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.60.0.0</AssemblyVersion>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+        <Attribute FrameworkAlternate="skiasharp-2.80;skiasharp-2.88">
           <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88">
+        <Attribute FrameworkAlternate="skiasharp-2.80;skiasharp-2.88">
           <AttributeName Language="C#">[System.Obsolete("Use Create(SKRect, Stream) instead.")]</AttributeName>
         </Attribute>
       </Attributes>
@@ -68,8 +67,8 @@
         <ReturnType>SkiaSharp.SKCanvas</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="bounds" Type="SkiaSharp.SKRect" />
-        <Parameter Name="writer" Type="SkiaSharp.SKXmlWriter" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="writer" Type="SkiaSharp.SKXmlWriter" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
         <param name="bounds">The initial SVG viewport (viewBox attribute on the root SVG element).</param>
@@ -86,23 +85,24 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKCanvas</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="bounds" Type="SkiaSharp.SKRect" Index="0" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
-        <Parameter Name="stream" Type="System.IO.Stream" Index="1" FrameworkAlternate="skiasharp-1.68;skiasharp-2.80;skiasharp-2.88" />
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" />
+        <Parameter Name="stream" Type="System.IO.Stream" />
       </Parameters>
       <Docs>
-        <param name="bounds">To be added.</param>
-        <param name="stream">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="bounds">The initial SVG viewport (viewBox attribute on the root SVG element).</param>
+        <param name="stream">The .NET stream to write the SVG data to.</param>
+        <summary>Creates a new <see cref="T:SkiaSharp.SKCanvas" /> which generates SVG commands and writes them to the specified .NET stream.</summary>
+        <returns>Returns the new SVG canvas.</returns>
+        <remarks>The canvas may buffer some drawing calls, so the output is not guaranteed to be valid or complete until the canvas instance is disposed. The stream must remain valid during the lifetime of the returned canvas.</remarks>
       </Docs>
     </Member>
   </Members>

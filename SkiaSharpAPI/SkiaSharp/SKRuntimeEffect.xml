@@ -5,16 +5,87 @@
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a compiled SkSL runtime effect that can be used to create shaders, color filters, or blenders.</summary>
+    <remarks />
   </Docs>
   <Members>
+    <Member MemberName="BuildBlender">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKRuntimeBlenderBuilder BuildBlender (string sksl);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKRuntimeBlenderBuilder BuildBlender(string sksl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.BuildBlender(System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeBlenderBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="sksl">The SkSL blender source code.</param>
+        <summary>Compiles SkSL source code and returns a blender builder.</summary>
+        <returns>A new blender builder.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BuildColorFilter">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKRuntimeColorFilterBuilder BuildColorFilter (string sksl);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKRuntimeColorFilterBuilder BuildColorFilter(string sksl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.BuildColorFilter(System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeColorFilterBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="sksl">The SkSL color filter source code.</param>
+        <summary>Compiles SkSL source code and returns a color filter builder.</summary>
+        <returns>A new color filter builder.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="BuildShader">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKRuntimeShaderBuilder BuildShader (string sksl);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKRuntimeShaderBuilder BuildShader(string sksl) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.BuildShader(System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeShaderBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="sksl">The SkSL shader source code.</param>
+        <summary>Compiles SkSL source code and returns a shader builder.</summary>
+        <returns>A new shader builder.</returns>
+        <remarks />
+      </Docs>
+    </Member>
     <Member MemberName="Children">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.IReadOnlyList&lt;string&gt; Children { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; Children" />
@@ -23,14 +94,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IReadOnlyList&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the names of child effects declared in the SkSL source.</summary>
+        <value>A list of child effect names.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -46,15 +119,158 @@
         <ReturnType>SkiaSharp.SKRuntimeEffect</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sksl" Type="System.String" />
-        <Parameter Name="errors" Type="System.String" RefType="out" />
+        <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="errors" Type="System.String" RefType="out" Index="1" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="sksl">To be added.</param>
-        <param name="errors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="sksl">The SkSL source code.</param>
+        <param name="errors">Returns any compilation errors.</param>
+        <summary>Compiles SkSL source code into a runtime effect.</summary>
+        <returns>A new runtime effect, or <see langword="null" /> if compilation failed.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateBlender">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKRuntimeEffect CreateBlender (string sksl, out string errors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKRuntimeEffect CreateBlender(string sksl, [out] string&amp; errors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.CreateBlender(System.String,System.String@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffect</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="errors" Type="System.String" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="sksl">The SkSL blender source code.</param>
+        <param name="errors">Returns any compilation errors.</param>
+        <summary>Compiles SkSL source code into a blender runtime effect.</summary>
+        <returns>A new runtime effect, or <see langword="null" /> if compilation failed.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateColorFilter">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKRuntimeEffect CreateColorFilter (string sksl, out string errors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKRuntimeEffect CreateColorFilter(string sksl, [out] string&amp; errors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.CreateColorFilter(System.String,System.String@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffect</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="errors" Type="System.String" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="sksl">The SkSL color filter source code.</param>
+        <param name="errors">Returns any compilation errors.</param>
+        <summary>Compiles SkSL source code into a color filter runtime effect.</summary>
+        <returns>A new runtime effect, or <see langword="null" /> if compilation failed.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateShader">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKRuntimeEffect CreateShader (string sksl, out string errors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKRuntimeEffect CreateShader(string sksl, [out] string&amp; errors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.CreateShader(System.String,System.String@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKRuntimeEffect</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="sksl" Type="System.String" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="errors" Type="System.String" RefType="out" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="sksl">The SkSL shader source code.</param>
+        <param name="errors">Returns any compilation errors.</param>
+        <summary>Compiles SkSL source code into a shader runtime effect.</summary>
+        <returns>A new runtime effect, or <see langword="null" /> if compilation failed.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToBlender">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKBlender ToBlender ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKBlender ToBlender() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.ToBlender" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKBlender</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a blender from this runtime effect with default uniforms.</summary>
+        <returns>A new blender.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToBlender">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKBlender ToBlender (SkiaSharp.SKRuntimeEffectUniforms uniforms);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKBlender ToBlender(class SkiaSharp.SKRuntimeEffectUniforms uniforms) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.ToBlender(SkiaSharp.SKRuntimeEffectUniforms)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKBlender</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="uniforms">The uniform values to use.</param>
+        <summary>Creates a blender from this runtime effect with the specified uniforms.</summary>
+        <returns>A new blender.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToBlender">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKBlender ToBlender (SkiaSharp.SKRuntimeEffectUniforms uniforms, SkiaSharp.SKRuntimeEffectChildren children);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKBlender ToBlender(class SkiaSharp.SKRuntimeEffectUniforms uniforms, class SkiaSharp.SKRuntimeEffectChildren children) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.ToBlender(SkiaSharp.SKRuntimeEffectUniforms,SkiaSharp.SKRuntimeEffectChildren)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKBlender</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <summary>Creates a blender from this runtime effect with the specified uniforms and children.</summary>
+        <returns>A new blender.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorFilter">
@@ -65,15 +281,17 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Creates a color filter from this runtime effect with default uniforms.</summary>
+        <returns>A new color filter.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorFilter">
@@ -84,6 +302,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
@@ -92,10 +312,10 @@
         <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <summary>Creates a color filter from this runtime effect with the specified uniforms.</summary>
+        <returns>A new color filter.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToColorFilter">
@@ -106,6 +326,8 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
@@ -115,11 +337,54 @@
         <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" />
       </Parameters>
       <Docs>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <summary>Creates a color filter from this runtime effect with the specified uniforms and children.</summary>
+        <returns>A new color filter.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToShader">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKShader ToShader ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKShader ToShader() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.ToShader" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKShader</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a shader from this runtime effect with default uniforms.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToShader">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKShader ToShader (SkiaSharp.SKRuntimeEffectUniforms uniforms);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKShader ToShader(class SkiaSharp.SKRuntimeEffectUniforms uniforms) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.ToShader(SkiaSharp.SKRuntimeEffectUniforms)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKShader</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="uniforms">The uniform values to use.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -135,13 +400,38 @@
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="isOpaque" Type="System.Boolean" />
+        <Parameter Name="isOpaque" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="isOpaque">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="isOpaque">Whether the shader output is fully opaque.</param>
+        <summary>Creates a shader from this runtime effect.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToShader">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKShader ToShader (SkiaSharp.SKRuntimeEffectUniforms uniforms, SkiaSharp.SKRuntimeEffectChildren children);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKShader ToShader(class SkiaSharp.SKRuntimeEffectUniforms uniforms, class SkiaSharp.SKRuntimeEffectChildren children) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.ToShader(SkiaSharp.SKRuntimeEffectUniforms,SkiaSharp.SKRuntimeEffectChildren)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKShader</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms and children.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -157,15 +447,42 @@
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="isOpaque" Type="System.Boolean" />
-        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" />
+        <Parameter Name="isOpaque" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="1" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="isOpaque">To be added.</param>
-        <param name="uniforms">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="isOpaque">Whether the shader output is fully opaque.</param>
+        <param name="uniforms">The uniform values to use.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToShader">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKShader ToShader (SkiaSharp.SKRuntimeEffectUniforms uniforms, SkiaSharp.SKRuntimeEffectChildren children, SkiaSharp.SKMatrix localMatrix);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKShader ToShader(class SkiaSharp.SKRuntimeEffectUniforms uniforms, class SkiaSharp.SKRuntimeEffectChildren children, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKRuntimeEffect.ToShader(SkiaSharp.SKRuntimeEffectUniforms,SkiaSharp.SKRuntimeEffectChildren,SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKShader</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="0" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" Index="1" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="2" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119" />
+      </Parameters>
+      <Docs>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <param name="localMatrix">The local transformation matrix to apply.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms, children, and local matrix.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -181,17 +498,17 @@
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="isOpaque" Type="System.Boolean" />
-        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" />
-        <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" />
+        <Parameter Name="isOpaque" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="1" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" Index="2" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="isOpaque">To be added.</param>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="isOpaque">Whether the shader output is fully opaque.</param>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms and children.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ToShader">
@@ -207,19 +524,19 @@
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="isOpaque" Type="System.Boolean" />
-        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" />
-        <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" />
-        <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
+        <Parameter Name="isOpaque" Type="System.Boolean" Index="0" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="uniforms" Type="SkiaSharp.SKRuntimeEffectUniforms" Index="1" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="children" Type="SkiaSharp.SKRuntimeEffectChildren" Index="2" FrameworkAlternate="skiasharp-2.88" />
+        <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" Index="3" FrameworkAlternate="skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="isOpaque">To be added.</param>
-        <param name="uniforms">To be added.</param>
-        <param name="children">To be added.</param>
-        <param name="localMatrix">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="isOpaque">Whether the shader output is fully opaque.</param>
+        <param name="uniforms">The uniform values to use.</param>
+        <param name="children">The child effects to use.</param>
+        <param name="localMatrix">The local transformation matrix to apply.</param>
+        <summary>Creates a shader from this runtime effect with the specified uniforms, children, and local matrix.</summary>
+        <returns>A new shader.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Uniforms">
@@ -230,14 +547,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IReadOnlyList&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the names of uniforms declared in the SkSL source.</summary>
+        <value>A list of uniform names.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="UniformSize">
@@ -248,14 +567,16 @@
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the total size in bytes required for all uniforms.</summary>
+        <value>The uniform data size in bytes.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

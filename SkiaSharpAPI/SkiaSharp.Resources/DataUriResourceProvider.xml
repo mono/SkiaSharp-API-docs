@@ -1,0 +1,69 @@
+<Type Name="DataUriResourceProvider" FullName="SkiaSharp.Resources.DataUriResourceProvider">
+  <TypeSignature Language="C#" Value="public sealed class DataUriResourceProvider : SkiaSharp.Resources.ResourceProvider" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit DataUriResourceProvider extends SkiaSharp.Resources.ResourceProvider" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.Resources.DataUriResourceProvider" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.Resources</AssemblyName>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>SkiaSharp.Resources.ResourceProvider</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A resource provider that can load resources from data URIs embedded in Lottie JSON files.</summary>
+    <remarks>
+      <para>Data URIs allow embedding image and font data directly in the Lottie JSON file using base64 encoding. This provider parses and decodes such embedded resources.</para>
+      <para>Use the constructor with a fallback provider to handle both embedded data URIs and external resources.</para>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DataUriResourceProvider (bool preDecode = false);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool preDecode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Resources.DataUriResourceProvider.#ctor(System.Boolean)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Resources</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="preDecode" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="preDecode">If <see langword="true" />, images are decoded upfront at load time; if <see langword="false" />, images are decoded on-the-fly at rasterization time.</param>
+        <summary>Creates a data URI resource provider without a fallback provider.</summary>
+        <remarks>
+          <para>This constructor creates a provider that only handles data URIs. Resources that are not embedded as data URIs will not be loaded.</para>
+          <para>Use the constructor with a fallback provider if you need to load both embedded and external resources.</para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DataUriResourceProvider (SkiaSharp.Resources.ResourceProvider? fallbackProvider, bool preDecode = false);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class SkiaSharp.Resources.ResourceProvider fallbackProvider, bool preDecode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Resources.DataUriResourceProvider.#ctor(SkiaSharp.Resources.ResourceProvider,System.Boolean)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Resources</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="fallbackProvider" Type="SkiaSharp.Resources.ResourceProvider" />
+        <Parameter Name="preDecode" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="fallbackProvider">A resource provider to use for resources that are not embedded as data URIs. Can be <see langword="null" />.</param>
+        <param name="preDecode">If <see langword="true" />, images are decoded upfront at load time; if <see langword="false" />, images are decoded on-the-fly at rasterization time.</param>
+        <summary>Creates a data URI resource provider with an optional fallback provider.</summary>
+        <remarks>
+          <para>Resources that are embedded as data URIs will be decoded directly. Resources that are not data URIs will be delegated to the fallback provider.</para>
+          <para>A common pattern is to use a <see cref="T:SkiaSharp.Resources.FileResourceProvider" /> as the fallback to load non-embedded resources from the file system.</para>
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

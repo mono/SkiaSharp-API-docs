@@ -4,17 +4,18 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKPositionedRunBuffer" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>1.68.0.0</AssemblyVersion>
     <AssemblyVersion>2.80.0.0</AssemblyVersion>
     <AssemblyVersion>2.88.0.0</AssemblyVersion>
+    <AssemblyVersion>3.116.0.0</AssemblyVersion>
+    <AssemblyVersion>3.119.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKRunBuffer</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>A run buffer for fully-positioned text where each glyph has an independent X and Y position.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName="GetPositionSpan">
@@ -24,18 +25,43 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">
+          <AttributeName Language="C#">[System.Obsolete("Use Positions instead.")]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Span&lt;SkiaSharp.SKPoint&gt;</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Gets the span of positions for each glyph.</summary>
+        <returns>A span containing the positions.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Positions">
+      <MemberSignature Language="C#" Value="public Span&lt;SkiaSharp.SKPoint&gt; Positions { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Span`1&lt;valuetype SkiaSharp.SKPoint&gt; Positions" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPositionedRunBuffer.Positions" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Span&lt;SkiaSharp.SKPoint&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the span of positions for each glyph.</summary>
+        <value>A span containing the positions.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SetPositions">
@@ -45,9 +71,10 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>1.68.0.0</AssemblyVersion>
         <AssemblyVersion>2.80.0.0</AssemblyVersion>
         <AssemblyVersion>2.88.0.0</AssemblyVersion>
+        <AssemblyVersion>3.116.0.0</AssemblyVersion>
+        <AssemblyVersion>3.119.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -56,9 +83,9 @@
         <Parameter Name="positions" Type="System.ReadOnlySpan&lt;SkiaSharp.SKPoint&gt;" />
       </Parameters>
       <Docs>
-        <param name="positions">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="positions">The positions to set for each glyph.</param>
+        <summary>Sets the positions for each glyph in the run.</summary>
+        <remarks />
       </Docs>
     </Member>
   </Members>
