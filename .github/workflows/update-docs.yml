@@ -1,0 +1,82 @@
+name: Update API Docs
+
+on:
+  workflow_dispatch:
+    inputs:
+      skiasharp-branch:
+        description: 'SkiaSharp branch to generate docs from'
+        type: string
+        default: 'main'
+  schedule:
+    - cron: '0 6 * * *' # daily at 6 AM UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-docs:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout SkiaSharp
+        uses: actions/checkout@v4
+        with:
+          repository: mono/SkiaSharp
+          ref: ${{ inputs.skiasharp-branch || 'main' }}
+          fetch-depth: 1
+
+      - name: Checkout docs
+        uses: actions/checkout@v4
+        with:
+          path: docs
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install GTK# 2
+        shell: pwsh
+        run: |
+          $msiUrl = "https://github.com/mono/gtk-sharp/releases/download/2.12.45/gtk-sharp-2.12.45.msi"
+          $msiPath = "$env:RUNNER_TEMP\gtk-sharp.msi"
+          Invoke-WebRequest -Uri $msiUrl -OutFile $msiPath
+          Start-Process msiexec.exe -ArgumentList "/i", $msiPath, "/quiet", "/norestart" -Wait -NoNewWindow
+
+      - name: Restore tools
+        run: dotnet tool restore
+
+      - name: Download latest NuGet packages
+        run: dotnet cake --target=docs-download-output
+
+      - name: Regenerate API docs
+        run: dotnet cake --target=update-docs
+
+      - name: Create pull request
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd docs
+          git add -A
+          git diff --cached --quiet
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "No documentation changes detected"
+            exit 0
+          }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B automation/update-api-docs
+          git commit -m "Update API docs from latest CI build"
+          git push origin automation/update-api-docs --force
+          # Create PR if one doesn't already exist
+          $existing = gh pr list --head automation/update-api-docs --state open --json number --jq '.[0].number'
+          if ($existing) {
+            Write-Host "PR #$existing already exists, force-pushed updates"
+          } else {
+            gh pr create --base main --head automation/update-api-docs `
+              --title "Update API docs from latest CI build" `
+              --body "Automated update of XML API documentation generated from the latest CI NuGet packages.`n`nThis PR was created by the [Update API Docs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) workflow."
+          }

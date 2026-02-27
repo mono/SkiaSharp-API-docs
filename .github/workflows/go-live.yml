@@ -1,0 +1,31 @@
+name: Go Live
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  go-live:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          existing=$(gh pr list --base live --head main --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            echo "PR #$existing already exists"
+          else
+            gh pr create --base live --head main \
+              --title "Go Live: publish latest API docs" \
+              --body "Merge \`main\` into \`live\` to publish the latest API documentation."
+          fi
