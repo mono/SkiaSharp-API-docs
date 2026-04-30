@@ -52,21 +52,28 @@ jobs:
           # 10.0.122 is the first version with ref/net10.0/. (mono/SkiaSharp#3824)
           $versFile = "scripts/VERSIONS.txt"
           $content = Get-Content $versFile -Raw
-          $content = $content -replace 'Samsung\.Tizen\.Ref(\s+release\s+)10\.0\.109', 'Samsung.Tizen.Ref$110.0.122'
+          # Use single-quoted replacement so ${1} is a regex back-reference, not a PS variable
+          $content = $content -replace 'Samsung\.Tizen\.Ref(\s+release\s+)10\.0\.109', 'Samsung.Tizen.Ref${1}10.0.122'
           if ($content -notmatch 'GirCore\.Gdk-4\.0') {
-            $content = $content -replace '(AtkSharp\s+release\s+\S+)',
-              "`$1`nGirCore.Gdk-4.0                                 release     0.7.0`nGirCore.Gtk-4.0                                 release     0.7.0"
+            $gircoreLines = "`r`nGirCore.Gdk-4.0                                 release     0.7.0`r`nGirCore.Gtk-4.0                                 release     0.7.0"
+            $content = $content.TrimEnd() + $gircoreLines + "`r`n"
           }
-          [System.IO.File]::WriteAllText((Resolve-Path $versFile), $content)
+          [System.IO.File]::WriteAllText((Resolve-Path $versFile).Path, $content)
+          Write-Host "=== VERSIONS.txt Samsung/GirCore lines ==="
+          $content -split "`n" | Select-String 'Samsung\.Tizen\.Ref|GirCore'
 
           # Add GirCore AddDep calls so mdoc can resolve Gdk-4.0 and Gtk-4.0 for SkiaSharp.Views.Gtk4.
           $cakeFile = "scripts/cake/UpdateDocs.cake"
           $cake = Get-Content $cakeFile -Raw
           if ($cake -notmatch 'GirCore\.Gdk-4\.0') {
-            $cake = $cake -replace '(await AddDep\("Samsung\.Tizen\.Ref", "net10\.0"\);)',
-              "`$1`n    await AddDep(`"GirCore.Gdk-4.0`", `"net10.0`");`n    await AddDep(`"GirCore.Gtk-4.0`", `"net10.0`");"
-            [System.IO.File]::WriteAllText((Resolve-Path $cakeFile), $cake)
+            # Use string .Replace() to avoid multi-line regex continuation issues
+            $oldLine = 'await AddDep("Samsung.Tizen.Ref", "net10.0");'
+            $newLines = 'await AddDep("Samsung.Tizen.Ref", "net10.0");' + [Environment]::NewLine + '    await AddDep("GirCore.Gdk-4.0", "net10.0");' + [Environment]::NewLine + '    await AddDep("GirCore.Gtk-4.0", "net10.0");'
+            $cake = $cake.Replace($oldLine, $newLines)
+            [System.IO.File]::WriteAllText((Resolve-Path $cakeFile).Path, $cake)
           }
+          Write-Host "=== UpdateDocs.cake GirCore lines ==="
+          $cake -split "`n" | Select-String 'GirCore|Samsung\.Tizen'
 
       - name: Restore tools
         run: dotnet tool restore
