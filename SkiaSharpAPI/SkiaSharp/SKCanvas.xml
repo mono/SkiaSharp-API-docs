@@ -3000,12 +3000,12 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The surface to draw.</param>
+        <param name="p">The destination point at which to draw the surface.</param>
+        <param name="sampling">The sampling options to use when drawing the surface.</param>
+        <param name="paint">The paint to use when drawing the surface, or <see langword="null" />.</param>
+        <summary>Draws a surface on the canvas at the specified point using the given sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
@@ -3059,71 +3059,15 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The surface to draw.</param>
+        <param name="x">The x-coordinate at which to draw the surface.</param>
+        <param name="y">The y-coordinate at which to draw the surface.</param>
+        <param name="sampling">The sampling options to use when drawing the surface.</param>
+        <param name="paint">The paint to use when drawing the surface, or <see langword="null" />.</param>
+        <summary>Draws a surface on the canvas at the specified coordinates using the given sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
-    <MemberGroup MemberName="DrawText">
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-      </AssemblyInfo>
-      <Docs>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Examples
-
-```csharp
-var info = new SKImageInfo(512, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // draw left-aligned text, solid
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x42, 0x81, 0xA4);
-        paint.IsStroke = false;
-
-        canvas.DrawText("Skia", info.Width / 2f, 64.0f, paint);
-    }
-
-    // draw centered text, stroked
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
-        paint.IsStroke = true;
-        paint.StrokeWidth = 3;
-        paint.TextAlign = SKTextAlign.Center;
-
-        canvas.DrawText("Skia", info.Width / 2f, 144.0f, paint);
-    }
-
-    // draw right-aligned text, scaled
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
-        paint.TextScaleX = 1.5f;
-        paint.TextAlign = SKTextAlign.Right;
-
-        canvas.DrawText("Skia", info.Width / 2f, 224.0f, paint);
-    }
-}
-```
-
-
-]]></format>
-        </remarks>
-      </Docs>
-    </MemberGroup>
     <Member MemberName="DrawText">
       <MemberSignature Language="C#" Value="public void DrawText (byte[] text, SkiaSharp.SKPoint p, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(unsigned int8[] text, valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKPaint paint) cil managed" />
@@ -3151,10 +3095,10 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
-        <param name="p">The coordinates of the origin of the text being drawn.</param>
+        <param name="text">The UTF-8 encoded text to draw.</param>
+        <param name="p">The point at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas at the specified coordinates.</summary>
+        <summary>Draws text at the specified point using the specified paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3186,9 +3130,9 @@ using (var surface = SKSurface.Create(info)) {
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
-        <param name="p">The coordinates of the origin of the text being drawn.</param>
+        <param name="p">The point at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas at the specified coordinates.</summary>
+        <summary>Draws text at the specified point using the specified paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3216,10 +3160,10 @@ using (var surface = SKSurface.Create(info)) {
       </Parameters>
       <Docs>
         <param name="text">The text blob to draw.</param>
-        <param name="x">The x-coordinate of the origin of the text being drawn.</param>
-        <param name="y">The y-coordinate of the origin of the text being drawn.</param>
+        <param name="x">The x-coordinate at which to draw the text.</param>
+        <param name="y">The y-coordinate at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws a text blob on the canvas at the specified coordinates.</summary>
+        <summary>Draws a text blob at the specified coordinates using the specified paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3251,11 +3195,11 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
-        <param name="x">The x-coordinate of the origin of the text being drawn.</param>
-        <param name="y">The y-coordinate of the origin of the text being drawn.</param>
+        <param name="text">The UTF-8 encoded text to draw.</param>
+        <param name="x">The x-coordinate at which to draw the text.</param>
+        <param name="y">The y-coordinate at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas at the specified coordinates.</summary>
+        <summary>Draws text at the specified coordinates using the specified paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3287,11 +3231,11 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="buffer">The pointer to a region holding UTF-8 encoded text to draw.</param>
-        <param name="length">The number of bytes to read from the <paramref name="buffer" /></param>
-        <param name="p">The coordinates of the origin of the text being drawn.</param>
+        <param name="buffer">A pointer to the UTF-8 encoded text data to draw.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="p">The point at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text encoded in a UTF-8 buffer on the canvas at the specified coordinates.</summary>
+        <summary>Draws text from a buffer at the specified point using the specified paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3318,9 +3262,9 @@ using (var surface = SKSurface.Create(info)) {
       <Docs>
         <param name="text">The text to draw.</param>
         <param name="p">The point at which to draw the text.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text at the specified point using the specified font.</summary>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text at the specified point using the specified font and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3353,10 +3297,10 @@ using (var surface = SKSurface.Create(info)) {
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
-        <param name="x">The x-coordinate of the origin of the text being drawn.</param>
-        <param name="y">The y-coordinate of the origin of the text being drawn.</param>
+        <param name="x">The x-coordinate at which to draw the text.</param>
+        <param name="y">The y-coordinate at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas at the specified coordinates.</summary>
+        <summary>Draws text at the specified coordinates using the specified paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3389,12 +3333,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="buffer">The pointer to a region holding UTF-8 encoded text to draw.</param>
-        <param name="length">The number of bytes to read from the <paramref name="buffer" /></param>
-        <param name="x">The x-coordinate of the origin of the text being drawn.</param>
-        <param name="y">The y-coordinate of the origin of the text being drawn.</param>
+        <param name="buffer">A pointer to the UTF-8 encoded text data to draw.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="x">The x-coordinate at which to draw the text.</param>
+        <param name="y">The y-coordinate at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text encoded in a UTF-8 buffer on the canvas at the specified coordinates.</summary>
+        <summary>Draws text from a buffer at the specified coordinates using the specified paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3422,10 +3366,10 @@ using (var surface = SKSurface.Create(info)) {
       <Docs>
         <param name="text">The text to draw.</param>
         <param name="p">The point at which to draw the text.</param>
-        <param name="textAlign">The text alignment relative to the point.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text at the specified point with alignment.</summary>
+        <param name="textAlign">One of the enumeration values that specifies the text alignment relative to the point.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text at the specified point using the specified text alignment, font, and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3454,11 +3398,11 @@ using (var surface = SKSurface.Create(info)) {
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
-        <param name="x">The x-coordinate of the origin of the text.</param>
-        <param name="y">The y-coordinate of the origin of the text.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text at the specified coordinates.</summary>
+        <param name="x">The x-coordinate at which to draw the text.</param>
+        <param name="y">The y-coordinate at which to draw the text.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text at the specified coordinates using the specified font and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3486,12 +3430,12 @@ using (var surface = SKSurface.Create(info)) {
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
-        <param name="x">The x-coordinate of the text origin.</param>
-        <param name="y">The y-coordinate of the text origin.</param>
-        <param name="textAlign">The text alignment relative to the coordinates.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text at the specified coordinates with alignment.</summary>
+        <param name="x">The x-coordinate at which to draw the text.</param>
+        <param name="y">The y-coordinate at which to draw the text.</param>
+        <param name="textAlign">One of the enumeration values that specifies the text alignment relative to the coordinates.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text at the specified coordinates using the specified text alignment, font, and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3523,11 +3467,11 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
-        <param name="path">The path the text should follow for its baseline.</param>
-        <param name="offset">The offset to the path to add to the text's starting position.</param>
+        <param name="text">The UTF-8 encoded text to draw along the path.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="offset">The offset from the start of the path at which to begin drawing.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas following a path.</summary>
+        <summary>Draws text along the specified path starting at the specified offset.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3559,11 +3503,11 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
-        <param name="path">The path the text should follow for its baseline.</param>
-        <param name="offset">The offset to the path to add to the text's starting position.</param>
+        <param name="text">The text to draw along the path.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="offset">The offset from the start of the path at which to begin drawing.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas following a path.</summary>
+        <summary>Draws text along the specified path starting at the specified offset.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3596,12 +3540,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
-        <param name="path">The path the text should follow for its baseline.</param>
-        <param name="hOffset">The distance along the path to add to the text's starting position.</param>
-        <param name="vOffset">The distance above (-) or below (+) the path to position the text.</param>
+        <param name="text">The UTF-8 encoded text to draw along the path.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="hOffset">The horizontal distance along the path at which to begin drawing.</param>
+        <param name="vOffset">The vertical offset from the path at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas following a path.</summary>
+        <summary>Draws text along the specified path using the specified horizontal and vertical offsets.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3634,12 +3578,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="buffer">The pointer to a region holding UTF-8 encoded text to draw.</param>
-        <param name="length">The number of bytes to read from the <paramref name="buffer" /></param>
-        <param name="path">The path the text should follow for its baseline.</param>
-        <param name="offset">The offset to the path to add to the text's starting position.</param>
+        <param name="buffer">A pointer to the UTF-8 encoded text data to draw along the path.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="offset">The offset from the start of the path at which to begin drawing.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas following a path.</summary>
+        <summary>Draws text from a buffer along the specified path starting at the specified offset.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3665,12 +3609,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
+        <param name="text">The text to draw along the path.</param>
         <param name="path">The path along which to draw the text.</param>
-        <param name="offset">The offset from the path origin.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text along a path using the specified font.</summary>
+        <param name="offset">The offset from the start of the path at which to begin drawing.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text along the specified path starting at the specified offset using the specified font and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3703,12 +3647,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
+        <param name="text">The text to draw along the path.</param>
         <param name="path">The path along which to draw the text.</param>
-        <param name="offset">The offset from the path origin.</param>
-        <param name="warpGlyphs">Whether to warp the glyphs to follow the path curvature.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text along a path with optional glyph warping.</summary>
+        <param name="offset">The offset from the start of the path at which to begin drawing.</param>
+        <param name="warpGlyphs">
+          <see langword="true" /> to warp glyph shapes to follow the path curvature; otherwise, <see langword="false" />.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text along the specified path starting at the specified offset, optionally warping the glyphs.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3741,12 +3686,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
-        <param name="path">The path the text should follow for its baseline.</param>
-        <param name="hOffset">The distance along the path to add to the text's starting position.</param>
-        <param name="vOffset">The distance above (-) or below (+) the path to position the text.</param>
+        <param name="text">The text to draw along the path.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="hOffset">The horizontal distance along the path at which to begin drawing.</param>
+        <param name="vOffset">The vertical offset from the path at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text on the canvas following a path.</summary>
+        <summary>Draws text along the specified path using the specified horizontal and vertical offsets.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3780,13 +3725,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
       </Parameters>
       <Docs>
-        <param name="buffer">The pointer to a region holding UTF-8 encoded text to draw.</param>
-        <param name="length">The number of bytes to read from the <paramref name="buffer" /></param>
-        <param name="path">The path the text should follow for its baseline.</param>
-        <param name="hOffset">The distance along the path to add to the text's starting position.</param>
-        <param name="vOffset">The distance above (-) or below (+) the path to position the text.</param>
+        <param name="buffer">A pointer to the UTF-8 encoded text data to draw along the path.</param>
+        <param name="length">The number of bytes in the text buffer.</param>
+        <param name="path">The path along which to draw the text.</param>
+        <param name="hOffset">The horizontal distance along the path at which to begin drawing.</param>
+        <param name="vOffset">The vertical offset from the path at which to draw the text.</param>
         <param name="paint">The paint to use when drawing the text.</param>
-        <summary>Draws text encoded in a UTF-8 buffer on the canvas following a path.</summary>
+        <summary>Draws text from a buffer along the specified path using the specified horizontal and vertical offsets.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3813,13 +3758,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
+        <param name="text">The text to draw along the path.</param>
         <param name="path">The path along which to draw the text.</param>
-        <param name="offset">The offset from the path origin.</param>
-        <param name="textAlign">The text alignment along the path.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text along a path with alignment using the specified font.</summary>
+        <param name="offset">The offset from the start of the path at which to begin drawing.</param>
+        <param name="textAlign">One of the enumeration values that specifies the text alignment relative to the offset.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text along the specified path starting at the specified offset using the specified text alignment, font, and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3848,13 +3793,14 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
+        <param name="text">The text to draw along the path.</param>
         <param name="path">The path along which to draw the text.</param>
-        <param name="offset">The offset from the path origin.</param>
-        <param name="warpGlyphs">Whether to warp the glyphs to follow the path curvature.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text along a path with optional glyph warping using the specified font.</summary>
+        <param name="offset">The offset from the start of the path at which to begin drawing.</param>
+        <param name="warpGlyphs">
+          <see langword="true" /> to warp glyph shapes to follow the path curvature; otherwise, <see langword="false" />.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text along the specified path starting at the specified offset, optionally warping the glyphs, using the specified font and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3881,13 +3827,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="5" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
+        <param name="text">The text to draw along the path.</param>
         <param name="path">The path along which to draw the text.</param>
-        <param name="hOffset">The horizontal offset along the path.</param>
-        <param name="vOffset">The vertical offset from the path.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text along a path with horizontal and vertical offsets.</summary>
+        <param name="hOffset">The horizontal distance along the path at which to begin drawing.</param>
+        <param name="vOffset">The vertical offset from the path at which to draw the text.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text along the specified path using the specified horizontal and vertical offsets, font, and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3915,14 +3861,15 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="6" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
+        <param name="text">The text to draw along the path.</param>
         <param name="path">The path along which to draw the text.</param>
-        <param name="offset">The offset from the path origin.</param>
-        <param name="warpGlyphs">Whether to warp the glyphs to follow the path curvature.</param>
-        <param name="textAlign">The text alignment along the path.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text along a path with alignment and optional glyph warping.</summary>
+        <param name="offset">The offset from the start of the path at which to begin drawing.</param>
+        <param name="warpGlyphs">
+          <see langword="true" /> to warp glyph shapes to follow the path curvature; otherwise, <see langword="false" />.</param>
+        <param name="textAlign">One of the enumeration values that specifies the text alignment relative to the offset.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text along the specified path starting at the specified offset, optionally warping the glyphs, using the specified text alignment, font, and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3950,14 +3897,14 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="6" FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="text">The text to draw.</param>
+        <param name="text">The text to draw along the path.</param>
         <param name="path">The path along which to draw the text.</param>
-        <param name="hOffset">The horizontal offset along the path.</param>
-        <param name="vOffset">The vertical offset from the path.</param>
-        <param name="textAlign">The text alignment along the path.</param>
-        <param name="font">The font used to render the text.</param>
-        <param name="paint">The paint used to draw the text.</param>
-        <summary>Draws text along a path with offsets and alignment.</summary>
+        <param name="hOffset">The horizontal distance along the path at which to begin drawing.</param>
+        <param name="vOffset">The vertical offset from the path at which to draw the text.</param>
+        <param name="textAlign">One of the enumeration values that specifies the text alignment relative to the offset.</param>
+        <param name="font">The font to use when drawing the text.</param>
+        <param name="paint">The paint to use when drawing the text.</param>
+        <summary>Draws text along the specified path using the specified horizontal and vertical offsets, text alignment, font, and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -3982,19 +3929,10 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="value" Type="SkiaSharp.SKData" />
       </Parameters>
       <Docs>
-        <param name="rect">The bounds of the annotation.</param>
-        <param name="value">The data that specifies the URL.</param>
-        <summary>Annotates the canvas by associating the specified URL with the specified rectangle (in local coordinates).</summary>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller is responsible for managing its ownership of the data.
-
-If the backend of this canvas does not support annotations, this call is
-safely ignored.
-]]></format>
-        </remarks>
+        <param name="rect">The rectangle to associate with the URL annotation.</param>
+        <param name="value">The annotation data containing the URL.</param>
+        <summary>Draws a URL annotation on the canvas over the specified rectangle.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawUrlAnnotation">
@@ -4018,11 +3956,11 @@ safely ignored.
         <Parameter Name="value" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="rect">The bounds of the annotation.</param>
-        <param name="value">The URL.</param>
-        <summary>Annotates the canvas by associating the specified URL with the specified rectangle (in local coordinates).</summary>
-        <returns>Returns the actual data object that was attached to the canvas.</returns>
-        <remarks>If the backend of this canvas does not support annotations, this call is safely ignored.</remarks>
+        <param name="rect">The rectangle to associate with the URL annotation.</param>
+        <param name="value">The URL string to annotate.</param>
+        <summary>Draws a URL annotation on the canvas over the specified rectangle and returns the annotation data.</summary>
+        <returns>The annotation data representing the URL.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
@@ -4047,11 +3985,11 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="vertices">The mesh to draw.</param>
-        <param name="mode">The blend mode to use to combine the colors with the texture, before being drawn using the paint. Used if both texture coordinates and colors are present.</param>
-        <param name="paint">The shader/texture.</param>
-        <summary>Draws a set of vertices.</summary>
-        <remarks>If both textures and vertex-colors are <see langword="null" />, it strokes hairlines with the paint's color. This behavior is a useful debugging mode to visualize the mesh.</remarks>
+        <param name="vertices">The vertices object to draw.</param>
+        <param name="mode">One of the enumeration values that specifies the blend mode for combining vertex colors with the paint color.</param>
+        <param name="paint">The paint to use when drawing the vertices.</param>
+        <summary>Draws the specified vertices using the specified blend mode and paint.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
@@ -4077,11 +4015,11 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="vmode">How to interpret the array of vertices.</param>
-        <param name="vertices">The array of vertices for the mesh.</param>
-        <param name="colors">The color for each vertex, to be interpolated across the triangle. May be <see langword="null" />.</param>
-        <param name="paint">The shader/texture.</param>
-        <summary>Draws an array of vertices, interpreted as triangles (based on mode).</summary>
+        <param name="vmode">One of the enumeration values that specifies how to interpret the vertex array.</param>
+        <param name="vertices">The array of vertex positions.</param>
+        <param name="colors">The array of colors to apply at each vertex.</param>
+        <param name="paint">The paint to use when drawing the vertices.</param>
+        <summary>Draws a triangle mesh using the specified vertex positions, colors, and paint.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4109,13 +4047,13 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="vmode">How to interpret the array of vertices.</param>
-        <param name="vertices">The array of vertices for the mesh.</param>
-        <param name="texs">The coordinates in texture space (not UV space) for each vertex. May be <see langword="null" />.</param>
-        <param name="colors">The color for each vertex, to be interpolated across the triangle. May be <see langword="null" />.</param>
-        <param name="paint">The shader/texture.</param>
-        <summary>Draws an array of vertices, interpreted as triangles (based on mode).</summary>
-        <remarks>If both textures and vertex-colors are <see langword="null" />, it strokes hairlines with the paint's color. This behavior is a useful debugging mode to visualize the mesh.</remarks>
+        <param name="vmode">One of the enumeration values that specifies how to interpret the vertex array.</param>
+        <param name="vertices">The array of vertex positions.</param>
+        <param name="texs">The array of texture coordinates for each vertex.</param>
+        <param name="colors">The array of colors to apply at each vertex.</param>
+        <param name="paint">The paint to use when drawing the vertices.</param>
+        <summary>Draws a triangle mesh using the specified vertex positions, texture coordinates, colors, and paint.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
@@ -4143,14 +4081,14 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="vmode">How to interpret the array of vertices.</param>
-        <param name="vertices">The array of vertices for the mesh.</param>
-        <param name="texs">The coordinates in texture space (not UV space) for each vertex. May be <see langword="null" />.</param>
-        <param name="colors">The color for each vertex, to be interpolated across the triangle. May be <see langword="null" />.</param>
-        <param name="indices">The array of indices to reference into the vertex (texture coordinates, colors) array.</param>
-        <param name="paint">The shader/texture.</param>
-        <summary>Draws an array of vertices, interpreted as triangles (based on mode).</summary>
-        <remarks>If both textures and vertex-colors are <see langword="null" />, it strokes hairlines with the paint's color. This behavior is a useful debugging mode to visualize the mesh.</remarks>
+        <param name="vmode">One of the enumeration values that specifies how to interpret the vertex array.</param>
+        <param name="vertices">The array of vertex positions.</param>
+        <param name="texs">The array of texture coordinates for each vertex.</param>
+        <param name="colors">The array of colors to apply at each vertex.</param>
+        <param name="indices">The array of indices that index into the vertex array to define the triangles.</param>
+        <param name="paint">The paint to use when drawing the vertices.</param>
+        <summary>Draws an indexed triangle mesh using the specified vertex positions, texture coordinates, colors, indices, and paint.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
@@ -4179,15 +4117,15 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="vmode">How to interpret the array of vertices.</param>
-        <param name="vertices">The array of vertices for the mesh.</param>
-        <param name="texs">The coordinates in texture space (not UV space) for each vertex. May be <see langword="null" />.</param>
-        <param name="colors">The color for each vertex, to be interpolated across the triangle. May be <see langword="null" />.</param>
-        <param name="mode">The blend mode to use to combine the colors with the texture, before being drawn using the paint. Used if both texture coordinates and colors are present.</param>
-        <param name="indices">The array of indices to reference into the vertex (texture coordinates, colors) array.</param>
-        <param name="paint">The shader/texture.</param>
-        <summary>Draws an array of vertices, interpreted as triangles (based on mode).</summary>
-        <remarks>If both textures and vertex-colors are <see langword="null" />, it strokes hairlines with the paint's color. This behavior is a useful debugging mode to visualize the mesh.</remarks>
+        <param name="vmode">One of the enumeration values that specifies how to interpret the vertex array.</param>
+        <param name="vertices">The array of vertex positions.</param>
+        <param name="texs">The array of texture coordinates for each vertex.</param>
+        <param name="colors">The array of colors to apply at each vertex.</param>
+        <param name="mode">One of the enumeration values that specifies the blend mode for combining vertex colors with the paint color.</param>
+        <param name="indices">The array of indices that index into the vertex array to define the triangles.</param>
+        <param name="paint">The paint to use when drawing the vertices.</param>
+        <summary>Draws an indexed triangle mesh using the specified vertex positions, texture coordinates, colors, blend mode, indices, and paint.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -4208,8 +4146,8 @@ safely ignored.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Triggers the immediate execution of all pending draw operations.</summary>
-        <remarks>For the GPU backend this will resolve all rendering to the GPU surface backing the surface that owns this canvas.</remarks>
+        <summary>Flushes any pending drawing commands to the canvas.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetDeviceClipBounds">
@@ -4232,8 +4170,8 @@ safely ignored.
         <Parameter Name="bounds" Type="SkiaSharp.SKRectI" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="bounds">The resulting clip bounds.</param>
-        <summary>Returns the bounds of the current clip (in device coordinates).</summary>
+        <param name="bounds">When this method returns, contains the device clip bounds if the clip is non-empty. This parameter is treated as uninitialized.</param>
+        <summary>Attempts to get the current clip bounds in device coordinates.</summary>
         <returns>
           <see langword="true" /> if the clip bounds are non-empty; otherwise, <see langword="false" />.</returns>
         <remarks />
@@ -4259,11 +4197,11 @@ safely ignored.
         <Parameter Name="bounds" Type="SkiaSharp.SKRect" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="bounds">The resulting clip bounds.</param>
-        <summary>Returns the bounds of the current clip (in local coordinates).</summary>
+        <param name="bounds">When this method returns, contains the local clip bounds if the clip is non-empty. This parameter is treated as uninitialized.</param>
+        <summary>Attempts to get the current clip bounds in local coordinates.</summary>
         <returns>
           <see langword="true" /> if the clip bounds are non-empty; otherwise, <see langword="false" />.</returns>
-        <remarks>This can be useful in that it tells you that drawing outside of these bounds will be clipped out.</remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsClipEmpty">
@@ -4283,9 +4221,9 @@ safely ignored.
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets a value indicating whether the current clip is empty.</summary>
+        <summary>Gets a value indicating whether the current clip region is empty.</summary>
         <value>
-          <see langword="true" /> if the clip is empty; otherwise, <see langword="false" />.</value>
+          <see langword="true" /> if the clip region is empty; otherwise, <see langword="false" />.</value>
         <remarks />
       </Docs>
     </Member>
@@ -4306,9 +4244,9 @@ safely ignored.
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets a value indicating whether the current clip is a rectangle.</summary>
+        <summary>Gets a value indicating whether the current clip region is a simple rectangle.</summary>
         <value>
-          <see langword="true" /> if the clip is a rectangle; otherwise, <see langword="false" />.</value>
+          <see langword="true" /> if the clip region is a rectangle; otherwise, <see langword="false" />.</value>
         <remarks />
       </Docs>
     </Member>
@@ -4329,8 +4267,8 @@ safely ignored.
         <ReturnType>SkiaSharp.SKRect</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the bounds of the current clip (in local coordinates).</summary>
-        <value>The bounds of the current clip in local coordinates.</value>
+        <summary>Gets the bounds of the current clip region in local coordinates.</summary>
+        <value>The bounds of the clip region in local coordinates.</value>
         <remarks />
       </Docs>
     </Member>
@@ -4354,11 +4292,11 @@ safely ignored.
         <Parameter Name="path" Type="SkiaSharp.SKPath" />
       </Parameters>
       <Docs>
-        <param name="path">The path to compare with the current clip.</param>
-        <summary>Checks to see if the specified path, after being transformed by the current matrix, would lie completely outside of the current clip.</summary>
+        <param name="path">The path to test against the current clip region.</param>
+        <summary>Determines whether the specified path would be entirely clipped by the current clip region.</summary>
         <returns>
-          <see langword="true" /> if the path (transformed by the canvas' matrix) does not intersect with the canvas' clip.</returns>
-        <remarks>Call this to check if an area you intend to draw into is clipped out (and therefore you can skip making the draw calls).</remarks>
+          <see langword="true" /> if the path would be clipped; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="QuickReject">
@@ -4381,11 +4319,11 @@ safely ignored.
         <Parameter Name="rect" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="rect">The rectangle to compare with the current clip.</param>
-        <summary>Checks to see if the specified rectangle, after being transformed by the current matrix, would lie completely outside of the current clip.</summary>
+        <param name="rect">The rectangle to test against the current clip region.</param>
+        <summary>Determines whether the specified rectangle would be entirely clipped by the current clip region.</summary>
         <returns>
-          <see langword="true" /> if the rectangle (transformed by the canvas' matrix) does not intersect with the canvas' clip.</returns>
-        <remarks>Call this to check if an area you intend to draw into is clipped out (and therefore you can skip making the draw calls).</remarks>
+          <see langword="true" /> if the rectangle would be clipped; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ResetMatrix">
@@ -4406,7 +4344,7 @@ safely ignored.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Sets the current matrix to identity.</summary>
+        <summary>Resets the current transformation matrix to the identity matrix.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4428,8 +4366,8 @@ safely ignored.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Restore the canvas state.</summary>
-        <remarks>This call balances a previous call to <see cref="M:SkiaSharp.SKCanvas.Save" />, and is used to remove all modifications to the matrix, clip and draw filter state since the last save call. It is an error to restore more times than was previously saved.</remarks>
+        <summary>Restores the canvas state to the most recently saved state.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RestoreToCount">
@@ -4452,9 +4390,9 @@ safely ignored.
         <Parameter Name="count" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="count">The number of <see cref="M:SkiaSharp.SKCanvas.Save" /> levels to restore from, or -1 to restore all the way back to the initial value.</param>
-        <summary>Efficiently restores the state to a specific level.</summary>
-        <remarks>Efficient way to pop any calls to <see cref="M:SkiaSharp.SKCanvas.Save" /> that happened after the save count reached <paramref name="count" />. It is an error for <paramref name="count" /> to be greater than <see cref="P:SkiaSharp.SKCanvas.SaveCount" />. To pop all the way back to the initial matrix/clip context set count to -1.</remarks>
+        <param name="count">The save count to restore to. The canvas will be restored until the save count equals this value.</param>
+        <summary>Restores the canvas state until the save count equals the specified count.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RotateDegrees">
@@ -4477,8 +4415,8 @@ safely ignored.
         <Parameter Name="degrees" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="degrees">The number of degrees to rotate.</param>
-        <summary>Pre-concatenates the current matrix with the specified rotation.</summary>
+        <param name="degrees">The angle of rotation in degrees, applied clockwise.</param>
+        <summary>Rotates the canvas by the specified angle around the origin.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4504,10 +4442,10 @@ safely ignored.
         <Parameter Name="py" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="degrees">The number of degrees to rotate.</param>
-        <param name="px">The x-coordinate of the point to rotate about.</param>
-        <param name="py">The y-coordinate of the point to rotate about.</param>
-        <summary>Pre-concatenates the current matrix with the specified rotation, around the specified point.</summary>
+        <param name="degrees">The angle of rotation in degrees, applied clockwise.</param>
+        <param name="px">The x-coordinate of the pivot point for the rotation.</param>
+        <param name="py">The y-coordinate of the pivot point for the rotation.</param>
+        <summary>Rotates the canvas by the specified angle around the specified pivot point.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4531,8 +4469,8 @@ safely ignored.
         <Parameter Name="radians" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="radians">The number of radians to rotate.</param>
-        <summary>Pre-concatenates the current matrix with the specified rotation.</summary>
+        <param name="radians">The angle of rotation in radians, applied clockwise.</param>
+        <summary>Rotates the canvas by the specified angle around the origin.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4558,10 +4496,10 @@ safely ignored.
         <Parameter Name="py" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="radians">The number of radians to rotate.</param>
-        <param name="px">The x-coordinate of the point to rotate about.</param>
-        <param name="py">The y-coordinate of the point to rotate about.</param>
-        <summary>Pre-concatenates the current matrix with the specified rotation, around the specified point.</summary>
+        <param name="radians">The angle of rotation in radians, applied clockwise.</param>
+        <param name="px">The x-coordinate of the pivot point for the rotation.</param>
+        <param name="py">The y-coordinate of the pivot point for the rotation.</param>
+        <summary>Rotates the canvas by the specified angle around the specified pivot point.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4583,9 +4521,9 @@ safely ignored.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Saves the canvas state.</summary>
-        <returns>The value to pass to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to balance this save.</returns>
-        <remarks>This call saves the current matrix, clip, and draw filter, and pushes a copy onto a private stack. Subsequent calls to translate, scale, rotate, skew, concatenate or clipping path or drawing filter all operate on this copy. When the balancing call to <see cref="M:SkiaSharp.SKCanvas.Restore" /> is made, the previous matrix, clipping, and drawing filters are restored.</remarks>
+        <summary>Saves the current canvas state onto a stack and returns the current save count.</summary>
+        <returns>The save count that can be passed to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to restore to this state.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SaveCount">
@@ -4605,9 +4543,9 @@ safely ignored.
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the number of matrix/clip states on the canvas' private stack.</summary>
-        <value>The number of saved states on the stack.</value>
-        <remarks>This will equal the number of <see cref="M:SkiaSharp.SKCanvas.Save" /> calls minus <see cref="M:SkiaSharp.SKCanvas.Restore" /> calls + 1. The save count on a new canvas is 1.</remarks>
+        <summary>Gets the number of saved canvas states.</summary>
+        <value>The current save count.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
@@ -4628,8 +4566,8 @@ safely ignored.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Saves the current matrix and clip, and allocates an offscreen buffer for subsequent drawing.</summary>
-        <returns>The depth of the saved stack, which can be used with <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" />.</returns>
+        <summary>Saves the current canvas state and creates a new layer for drawing, returning the current save count.</summary>
+        <returns>The save count that can be passed to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to restore to this state.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -4656,9 +4594,9 @@ safely ignored.
         </Parameter>
       </Parameters>
       <Docs>
-        <param name="rec">The save layer parameters.</param>
-        <summary>Saves the current matrix and clip, and allocates an offscreen buffer using the specified parameters.</summary>
-        <returns>The depth of the saved stack.</returns>
+        <param name="rec">The layer configuration record specifying bounds, paint, and other options for the new layer.</param>
+        <summary>Saves the current canvas state and creates a new layer using the specified configuration, returning the current save count.</summary>
+        <returns>The save count that can be passed to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to restore to this state.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -4688,10 +4626,10 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="paint">This is copied, and is applied to the offscreen when <see cref="M:SkiaSharp.SKCanvas.Restore" /> is called.</param>
-        <summary>Saves the canvas state and allocates an offscreen bitmap.</summary>
-        <returns>The value to pass to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to balance this save.</returns>
-        <remarks>This behaves the same as <see cref="M:SkiaSharp.SKCanvas.Save" /> but in addition it allocates an offscreen bitmap. All drawing calls are directed there, and only when the balancing call to <see cref="M:SkiaSharp.SKCanvas.Restore" /> is made is that offscreen transfered to the canvas (or the previous layer).</remarks>
+        <param name="paint">The paint to apply when compositing the layer back to the canvas, or <see langword="null" /> to use the default.</param>
+        <summary>Saves the current canvas state and creates a new layer that will be composited using the specified paint, returning the current save count.</summary>
+        <returns>The save count that can be passed to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to restore to this state.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
@@ -4721,25 +4659,11 @@ safely ignored.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="limit">This clipping rectangle hint to limit the size of the offscreen bitmap.</param>
-        <param name="paint">This is copied, and is applied to the offscreen when <see cref="M:SkiaSharp.SKCanvas.Restore" /> is called.</param>
-        <summary>Saves the canvas state and allocates an offscreen bitmap.</summary>
-        <returns>The value to pass to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to balance this save.</returns>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-This behaves the same as <xref:SkiaSharp.SKCanvas.Save> but in addition it
-allocates an offscreen bitmap. All drawing calls are directed there, and only
-when the balancing call to <xref:SkiaSharp.SKCanvas.Restore> is made is that
-offscreen transfered to the canvas (or the previous layer).
-
-The limit rectangle, is used as a hint to limit the size of the offscreen
-bitmap, and thus drawing may be clipped to it, though that clipping is not
-guaranteed to happen. If exact clipping is desired, use
-<xref:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKClipOperation,System.Boolean)>.
-]]></format>
-        </remarks>
+        <param name="limit">The bounds of the new layer. Drawing outside these bounds is clipped.</param>
+        <param name="paint">The paint to apply when compositing the layer back to the canvas, or <see langword="null" /> to use the default.</param>
+        <summary>Saves the current canvas state and creates a new layer with bounds limited to the specified rectangle, returning the current save count.</summary>
+        <returns>The save count that can be passed to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to restore to this state.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Scale">
@@ -4762,8 +4686,8 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="size" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="size">The amount to scale.</param>
-        <summary>Pre-concatenates the current matrix with the specified scale.</summary>
+        <param name="size">The point whose X and Y components specify the horizontal and vertical scale factors.</param>
+        <summary>Scales the canvas by the specified horizontal and vertical factors.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4787,8 +4711,8 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="s" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="s">The amount to scale.</param>
-        <summary>Pre-concatenates the current matrix with the specified scale.</summary>
+        <param name="s">The uniform scale factor to apply to both axes.</param>
+        <summary>Scales the canvas uniformly by the specified factor.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4813,9 +4737,9 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="sy" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="sx">The amount to scale in the x-direction.</param>
-        <param name="sy">The amount to scale in the y-direction.</param>
-        <summary>Pre-concatenates the current matrix with the specified scale.</summary>
+        <param name="sx">The horizontal scale factor.</param>
+        <param name="sy">The vertical scale factor.</param>
+        <summary>Scales the canvas by the specified horizontal and vertical factors.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4842,11 +4766,33 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="py" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="sx">The amount to scale in the x-direction.</param>
-        <param name="sy">The amount to scale in the y-direction.</param>
-        <param name="px">The x-coordinate for the scaling center.</param>
-        <param name="py">The y-coordinate for the scaling center.</param>
-        <summary>Pre-concatenates the current matrix with the specified scale, at the specific offset.</summary>
+        <param name="sx">The horizontal scale factor.</param>
+        <param name="sy">The vertical scale factor.</param>
+        <param name="px">The x-coordinate of the pivot point for the scaling.</param>
+        <param name="py">The y-coordinate of the pivot point for the scaling.</param>
+        <summary>Scales the canvas by the specified horizontal and vertical factors around the specified pivot point.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SetMatrix">
+      <MemberSignature Language="C#" Value="public void SetMatrix (SkiaSharp.SKMatrix matrix);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
+        <AssemblyVersion>2.88.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+      </Parameters>
+      <Docs>
+        <param name="matrix">The transformation matrix to set as the current matrix.</param>
+        <summary>Sets the current transformation matrix to the specified matrix.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4874,30 +4820,8 @@ guaranteed to happen. If exact clipping is desired, use
         </Parameter>
       </Parameters>
       <Docs>
-        <param name="matrix">The matrix to set as the current transformation matrix.</param>
-        <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
-        <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="SetMatrix">
-      <MemberSignature Language="C#" Value="public void SetMatrix (SkiaSharp.SKMatrix matrix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
-      </Parameters>
-      <Docs>
-        <param name="matrix">The matrix that will be copied into the current matrix.</param>
-        <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
+        <param name="matrix">The transformation matrix to set as the current matrix.</param>
+        <summary>Sets the current transformation matrix to the specified matrix.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4925,8 +4849,8 @@ guaranteed to happen. If exact clipping is desired, use
         </Parameter>
       </Parameters>
       <Docs>
-        <param name="matrix">The 4x4 matrix to set as the current transformation matrix.</param>
-        <summary>Replaces the current matrix with a copy of the specified 4x4 matrix.</summary>
+        <param name="matrix">The 4x4 transformation matrix to set as the current matrix.</param>
+        <summary>Sets the current transformation matrix to the specified 4x4 matrix.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4950,8 +4874,8 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="skew" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="skew">The amount to skew.</param>
-        <summary>Pre-concatenates the current matrix with the specified skew.</summary>
+        <param name="skew">The point whose X and Y components specify the horizontal and vertical skew factors.</param>
+        <summary>Skews the canvas by the specified horizontal and vertical factors.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -4976,9 +4900,9 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="sy" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="sx">The amount to skew in the x-direction.</param>
-        <param name="sy">The amount to skew in the y-direction.</param>
-        <summary>Pre-concatenates the current matrix with the specified skew.</summary>
+        <param name="sx">The horizontal skew factor.</param>
+        <param name="sy">The vertical skew factor.</param>
+        <summary>Skews the canvas by the specified horizontal and vertical factors.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -5004,8 +4928,8 @@ guaranteed to happen. If exact clipping is desired, use
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the surface associated with this canvas.</summary>
-        <value>The <see cref="T:SkiaSharp.SKSurface" /> that owns this canvas, or <see langword="null" /> if none.</value>
+        <summary>Gets the surface associated with this canvas, or <see langword="null" /> if this canvas is not backed by a surface.</summary>
+        <value>The surface that created this canvas, or <see langword="null" />.</value>
         <remarks />
       </Docs>
     </Member>
@@ -5026,9 +4950,9 @@ guaranteed to happen. If exact clipping is desired, use
         <ReturnType>SkiaSharp.SKMatrix</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the current matrix on the canvas.</summary>
+        <summary>Gets the current transformation matrix of the canvas.</summary>
         <value>The current transformation matrix.</value>
-        <remarks>This does not account for the translate in any of the devices.</remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="TotalMatrix44">
@@ -5046,8 +4970,8 @@ guaranteed to happen. If exact clipping is desired, use
         <ReturnType>SkiaSharp.SKMatrix44</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the current 4x4 transformation matrix on the canvas.</summary>
-        <value>The current 4x4 matrix.</value>
+        <summary>Gets the current 4x4 transformation matrix of the canvas.</summary>
+        <value>The current 4x4 transformation matrix.</value>
         <remarks />
       </Docs>
     </Member>
@@ -5071,8 +4995,8 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="point" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point">The distance to translate.</param>
-        <summary>Pre-concatenates the current matrix with the specified translation.</summary>
+        <param name="point">The point specifying the horizontal and vertical translation distances.</param>
+        <summary>Translates the canvas by the specified point.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -5097,9 +5021,9 @@ guaranteed to happen. If exact clipping is desired, use
         <Parameter Name="dy" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="dx">The distance to translate in the x-direction.</param>
-        <param name="dy">The distance to translate in the y-direction.</param>
-        <summary>Pre-concatenates the current matrix with the specified translation.</summary>
+        <param name="dx">The horizontal translation distance.</param>
+        <param name="dy">The vertical translation distance.</param>
+        <summary>Translates the canvas by the specified horizontal and vertical distances.</summary>
         <remarks />
       </Docs>
     </Member>
