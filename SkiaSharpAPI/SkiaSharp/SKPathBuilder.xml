@@ -11,8 +11,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides a mutable builder for constructing <see cref="T:SkiaSharp.SKPath" /> objects by incrementally adding geometric elements such as lines, curves, arcs, and shapes.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -26,8 +26,8 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKPathBuilder" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -43,9 +43,9 @@
         <Parameter Name="path" Type="SkiaSharp.SKPath" />
       </Parameters>
       <Docs>
-        <param name="path">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="path">The path to copy into the new builder.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKPathBuilder" /> class with the contents of the specified path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddArc">
@@ -66,11 +66,11 @@
         <Parameter Name="sweepAngle" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="oval">To be added.</param>
-        <param name="startAngle">To be added.</param>
-        <param name="sweepAngle">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="oval">The bounding rectangle of the oval that defines the arc.</param>
+        <param name="startAngle">The starting angle of the arc, in degrees.</param>
+        <param name="sweepAngle">The sweep angle of the arc, in degrees.</param>
+        <summary>Appends an arc of an oval to the path as a new contour.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddCircle">
@@ -92,12 +92,12 @@
         <Parameter Name="dir" Type="SkiaSharp.SKPathDirection" />
       </Parameters>
       <Docs>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="radius">To be added.</param>
-        <param name="dir">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="x">The x-coordinate of the center of the circle.</param>
+        <param name="y">The y-coordinate of the center of the circle.</param>
+        <param name="radius">The radius of the circle.</param>
+        <param name="dir">One of the enumeration values that specifies the direction to wind the circle contour.</param>
+        <summary>Appends a circle to the path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddOval">
@@ -117,14 +117,11 @@
         <Parameter Name="direction" Type="SkiaSharp.SKPathDirection" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <param name="direction">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The bounding rectangle of the oval to add.</param>
+        <param name="direction">One of the enumeration values that specifies the direction to wind the oval contour.</param>
+        <summary>Appends an oval to the path.</summary>
+        <remarks />
       </Docs>
-    </Member>
-    <Member MemberName="AddPath">
-      <MemberSignature Language="C#" Value="public void AddPath (SkiaSharp.SKPath other, SkiaSharp.SKPathAddMode mode = SkiaSharp.SKPathAddMode.Append);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddPath(class SkiaSharp.SKPath other, valuetype SkiaSharp.SKPathAddMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.AddPath(SkiaSharp.SKPath,SkiaSharp.SKPathAddMode)" />
       <MemberType>Method</MemberType>
@@ -140,10 +137,10 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="other">The path to add.</param>
+        <param name="mode">One of the enumeration values that specifies how the path is added.</param>
+        <summary>Appends a copy of the specified path to this path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddPath">
@@ -170,11 +167,11 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">To be added.</param>
-        <param name="matrix">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="other">The path to add.</param>
+        <param name="matrix">The matrix transformation to apply to the path before adding it.</param>
+        <param name="mode">One of the enumeration values that specifies how the path is added.</param>
+        <summary>Appends a copy of the specified path, transformed by the given matrix, to this path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddPath">
@@ -196,12 +193,12 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">To be added.</param>
-        <param name="dx">To be added.</param>
-        <param name="dy">To be added.</param>
-        <param name="mode">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="other">The path to add.</param>
+        <param name="dx">The amount to translate in the x direction before adding the path.</param>
+        <param name="dy">The amount to translate in the y direction before adding the path.</param>
+        <param name="mode">One of the enumeration values that specifies how the path is added.</param>
+        <summary>Appends a copy of the specified path, offset by the given amounts, to this path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddPoly">
@@ -221,10 +218,11 @@
         <Parameter Name="close" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="points">To be added.</param>
-        <param name="close">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="points">The array of points defining the polygon.</param>
+        <param name="close">
+          <see langword="true" /> to close the polygon by connecting the last point to the first; otherwise, <see langword="false" />.</param>
+        <summary>Appends a polygon defined by the given points to the path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddPoly">
@@ -244,10 +242,11 @@
         <Parameter Name="close" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="points">To be added.</param>
-        <param name="close">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="points">The span of points defining the polygon.</param>
+        <param name="close">
+          <see langword="true" /> to close the polygon by connecting the last point to the first; otherwise, <see langword="false" />.</param>
+        <summary>Appends a polygon defined by the given points to the path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddRect">
@@ -267,14 +266,11 @@
         <Parameter Name="direction" Type="SkiaSharp.SKPathDirection" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <param name="direction">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The rectangle to add.</param>
+        <param name="direction">One of the enumeration values that specifies the direction to wind the rectangle contour.</param>
+        <summary>Appends a rectangle to the path.</summary>
+        <remarks />
       </Docs>
-    </Member>
-    <Member MemberName="AddRect">
-      <MemberSignature Language="C#" Value="public void AddRect (SkiaSharp.SKRect rect, SkiaSharp.SKPathDirection direction, uint startIndex);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddRect(valuetype SkiaSharp.SKRect rect, valuetype SkiaSharp.SKPathDirection direction, unsigned int32 startIndex) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.AddRect(SkiaSharp.SKRect,SkiaSharp.SKPathDirection,System.UInt32)" />
       <MemberType>Method</MemberType>
@@ -291,11 +287,11 @@
         <Parameter Name="startIndex" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <param name="direction">To be added.</param>
-        <param name="startIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The rectangle to add.</param>
+        <param name="direction">One of the enumeration values that specifies the direction to wind the rectangle contour.</param>
+        <param name="startIndex">The index of the first corner to start the contour (0 to 3, inclusive).</param>
+        <summary>Appends a rectangle to the path, starting at the specified corner.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddRoundRect">
@@ -315,10 +311,10 @@
         <Parameter Name="direction" Type="SkiaSharp.SKPathDirection" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <param name="direction">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The rounded rectangle to add.</param>
+        <param name="direction">One of the enumeration values that specifies the direction to wind the contour.</param>
+        <summary>Appends a rounded rectangle to the path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddRoundRect">
@@ -339,11 +335,11 @@
         <Parameter Name="startIndex" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <param name="direction">To be added.</param>
-        <param name="startIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The rounded rectangle to add.</param>
+        <param name="direction">One of the enumeration values that specifies the direction to wind the contour.</param>
+        <param name="startIndex">The index of the first corner to start the contour.</param>
+        <summary>Appends a rounded rectangle to the path, starting at the specified corner.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="AddRoundRect">
@@ -365,12 +361,12 @@
         <Parameter Name="dir" Type="SkiaSharp.SKPathDirection" />
       </Parameters>
       <Docs>
-        <param name="rect">To be added.</param>
-        <param name="rx">To be added.</param>
-        <param name="ry">To be added.</param>
-        <param name="dir">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rect">The bounding rectangle of the rounded rectangle.</param>
+        <param name="rx">The x-radius of the rounded corners.</param>
+        <param name="ry">The y-radius of the rounded corners.</param>
+        <param name="dir">One of the enumeration values that specifies the direction to wind the contour.</param>
+        <summary>Appends a rounded rectangle with uniform corner radii to the path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ArcTo">
@@ -391,11 +387,11 @@
         <Parameter Name="radius" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="point1">To be added.</param>
-        <param name="point2">To be added.</param>
-        <param name="radius">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point1">The first tangent point defining the arc.</param>
+        <param name="point2">The second tangent point defining the arc.</param>
+        <param name="radius">The radius of the arc.</param>
+        <summary>Appends an arc to the path that is tangent to the line from the current point to <paramref name="point1" /> and to the line from <paramref name="point1" /> to <paramref name="point2" />.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ArcTo">
@@ -417,12 +413,13 @@
         <Parameter Name="forceMoveTo" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="oval">To be added.</param>
-        <param name="startAngle">To be added.</param>
-        <param name="sweepAngle">To be added.</param>
-        <param name="forceMoveTo">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="oval">The bounding rectangle of the oval that defines the arc.</param>
+        <param name="startAngle">The starting angle of the arc, in degrees.</param>
+        <param name="sweepAngle">The sweep angle of the arc, in degrees.</param>
+        <param name="forceMoveTo">
+          <see langword="true" /> to start a new contour at the arc's first point; otherwise, <see langword="false" /> to connect from the current point.</param>
+        <summary>Appends an arc of an oval to the path.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ArcTo">
@@ -445,13 +442,13 @@
         <Parameter Name="xy" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="r">To be added.</param>
-        <param name="xAxisRotate">To be added.</param>
-        <param name="largeArc">To be added.</param>
-        <param name="sweep">To be added.</param>
-        <param name="xy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="r">The radii of the ellipse used to define the arc, as a point with x and y components.</param>
+        <param name="xAxisRotate">The rotation of the ellipse x-axis, in degrees.</param>
+        <param name="largeArc">One of the enumeration values that specifies whether to use the large or small arc.</param>
+        <param name="sweep">One of the enumeration values that specifies the sweep direction of the arc.</param>
+        <param name="xy">The endpoint of the arc.</param>
+        <summary>Appends an SVG-style elliptical arc to the path using absolute coordinates.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ArcTo">
@@ -474,13 +471,13 @@
         <Parameter Name="radius" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="x1">To be added.</param>
-        <param name="y1">To be added.</param>
-        <param name="x2">To be added.</param>
-        <param name="y2">To be added.</param>
-        <param name="radius">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="x1">The x-coordinate of the first tangent point.</param>
+        <param name="y1">The y-coordinate of the first tangent point.</param>
+        <param name="x2">The x-coordinate of the second tangent point.</param>
+        <param name="y2">The y-coordinate of the second tangent point.</param>
+        <param name="radius">The radius of the arc.</param>
+        <summary>Appends an arc to the path that is tangent to two lines defined by the given coordinates.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ArcTo">
@@ -505,15 +502,15 @@
         <Parameter Name="y" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="rx">To be added.</param>
-        <param name="ry">To be added.</param>
-        <param name="xAxisRotate">To be added.</param>
-        <param name="largeArc">To be added.</param>
-        <param name="sweep">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rx">The x-radius of the ellipse.</param>
+        <param name="ry">The y-radius of the ellipse.</param>
+        <param name="xAxisRotate">The rotation of the ellipse x-axis, in degrees.</param>
+        <param name="largeArc">One of the enumeration values that specifies whether to use the large or small arc.</param>
+        <param name="sweep">One of the enumeration values that specifies the sweep direction of the arc.</param>
+        <param name="x">The x-coordinate of the endpoint of the arc.</param>
+        <param name="y">The y-coordinate of the endpoint of the arc.</param>
+        <summary>Appends an SVG-style elliptical arc to the path using absolute coordinates.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -530,11 +527,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Closes the current contour by appending a line segment from the current point to the start of the contour.</summary>
+        <remarks />
       </Docs>
-    </Member>
-    <Member MemberName="ConicTo">
       <MemberSignature Language="C#" Value="public void ConicTo (SkiaSharp.SKPoint point0, SkiaSharp.SKPoint point1, float w);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ConicTo(valuetype SkiaSharp.SKPoint point0, valuetype SkiaSharp.SKPoint point1, float32 w) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.ConicTo(SkiaSharp.SKPoint,SkiaSharp.SKPoint,System.Single)" />
@@ -552,11 +547,11 @@
         <Parameter Name="w" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="point0">To be added.</param>
-        <param name="point1">To be added.</param>
-        <param name="w">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point0">The control point of the conic curve.</param>
+        <param name="point1">The end point of the conic curve.</param>
+        <param name="w">The weight of the conic curve, which controls its shape.</param>
+        <summary>Appends a weighted conic curve from the current point to <paramref name="point1" />, using <paramref name="point0" /> as the control point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ConicTo">
@@ -579,13 +574,13 @@
         <Parameter Name="w" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="x0">To be added.</param>
-        <param name="y0">To be added.</param>
-        <param name="x1">To be added.</param>
-        <param name="y1">To be added.</param>
-        <param name="w">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="x0">The x-coordinate of the control point.</param>
+        <param name="y0">The y-coordinate of the control point.</param>
+        <param name="x1">The x-coordinate of the end point.</param>
+        <param name="y1">The y-coordinate of the end point.</param>
+        <param name="w">The weight of the conic curve, which controls its shape.</param>
+        <summary>Appends a weighted conic curve from the current point to (<paramref name="x1" />, <paramref name="y1" />), using (<paramref name="x0" />, <paramref name="y0" />) as the control point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CubicTo">
@@ -606,11 +601,11 @@
         <Parameter Name="point2" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point0">To be added.</param>
-        <param name="point1">To be added.</param>
-        <param name="point2">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point0">The first control point of the cubic Bezier curve.</param>
+        <param name="point1">The second control point of the cubic Bezier curve.</param>
+        <param name="point2">The end point of the cubic Bezier curve.</param>
+        <summary>Appends a cubic Bezier curve from the current point to <paramref name="point2" />, using <paramref name="point0" /> and <paramref name="point1" /> as the control points.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CubicTo">
@@ -634,14 +629,14 @@
         <Parameter Name="y2" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="x0">To be added.</param>
-        <param name="y0">To be added.</param>
-        <param name="x1">To be added.</param>
-        <param name="y1">To be added.</param>
-        <param name="x2">To be added.</param>
-        <param name="y2">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="x0">The x-coordinate of the first control point.</param>
+        <param name="y0">The y-coordinate of the first control point.</param>
+        <param name="x1">The x-coordinate of the second control point.</param>
+        <param name="y1">The y-coordinate of the second control point.</param>
+        <param name="x2">The x-coordinate of the end point.</param>
+        <param name="y2">The y-coordinate of the end point.</param>
+        <summary>Appends a cubic Bezier curve from the current point to (<paramref name="x2" />, <paramref name="y2" />), using the specified control points.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Detach">
@@ -658,12 +653,10 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Builds the path and transfers ownership to the caller, resetting the builder to an empty state.</summary>
+        <returns>The finalized <see cref="T:SkiaSharp.SKPath" />.</returns>
+        <remarks />
       </Docs>
-    </Member>
-    <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.Dispose(System.Boolean)" />
@@ -679,9 +672,10 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="disposing">
+          <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+        <summary>Called by the <see cref="M:SkiaSharp.SKObject.Dispose" /> and <see cref="M:System.Object.Finalize" /> methods to release the managed and unmanaged resources used by the current instance of the <see cref="T:SkiaSharp.SKPathBuilder" /> class.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DisposeNative">
@@ -698,11 +692,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>This member supports the SkiaSharp infrastructure and is not intended to be used directly from your code.</summary>
+        <remarks />
       </Docs>
-    </Member>
-    <Member MemberName="FillType">
       <MemberSignature Language="C#" Value="public SkiaSharp.SKPathFillType FillType { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKPathFillType FillType" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPathBuilder.FillType" />
@@ -715,9 +707,9 @@
         <ReturnType>SkiaSharp.SKPathFillType</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the fill type of the path being built.</summary>
+        <value>One of the enumeration values that specifies how the filled area is determined.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="LineTo">
@@ -736,9 +728,9 @@
         <Parameter Name="point" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point">The destination point of the line segment.</param>
+        <summary>Appends a line segment from the current point to the specified point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="LineTo">
@@ -758,10 +750,10 @@
         <Parameter Name="y" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="x">The x-coordinate of the destination point.</param>
+        <param name="y">The y-coordinate of the destination point.</param>
+        <summary>Appends a line segment from the current point to the specified coordinates.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MoveTo">
@@ -780,9 +772,9 @@
         <Parameter Name="point" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point">The new current point to move to.</param>
+        <summary>Begins a new contour at the specified point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MoveTo">
@@ -802,10 +794,10 @@
         <Parameter Name="y" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="x">The x-coordinate of the new current point.</param>
+        <param name="y">The y-coordinate of the new current point.</param>
+        <summary>Begins a new contour at the specified coordinates.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="QuadTo">
@@ -825,10 +817,10 @@
         <Parameter Name="point1" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point0">To be added.</param>
-        <param name="point1">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point0">The control point of the quadratic Bezier curve.</param>
+        <param name="point1">The end point of the quadratic Bezier curve.</param>
+        <summary>Appends a quadratic Bezier curve from the current point to <paramref name="point1" />, using <paramref name="point0" /> as the control point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="QuadTo">
@@ -850,12 +842,12 @@
         <Parameter Name="y1" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="x0">To be added.</param>
-        <param name="y0">To be added.</param>
-        <param name="x1">To be added.</param>
-        <param name="y1">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="x0">The x-coordinate of the control point.</param>
+        <param name="y0">The y-coordinate of the control point.</param>
+        <param name="x1">The x-coordinate of the end point.</param>
+        <param name="y1">The y-coordinate of the end point.</param>
+        <summary>Appends a quadratic Bezier curve from the current point to (<paramref name="x1" />, <paramref name="y1" />), using (<paramref name="x0" />, <paramref name="y0" />) as the control point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RArcTo">
@@ -878,13 +870,13 @@
         <Parameter Name="xy" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="r">To be added.</param>
-        <param name="xAxisRotate">To be added.</param>
-        <param name="largeArc">To be added.</param>
-        <param name="sweep">To be added.</param>
-        <param name="xy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="r">The radii of the ellipse used to define the arc, as a point with x and y components.</param>
+        <param name="xAxisRotate">The rotation of the ellipse x-axis, in degrees.</param>
+        <param name="largeArc">One of the enumeration values that specifies whether to use the large or small arc.</param>
+        <param name="sweep">One of the enumeration values that specifies the sweep direction of the arc.</param>
+        <param name="xy">The endpoint of the arc, relative to the current point.</param>
+        <summary>Appends an SVG-style elliptical arc to the path using relative coordinates.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RArcTo">
@@ -909,15 +901,15 @@
         <Parameter Name="y" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="rx">To be added.</param>
-        <param name="ry">To be added.</param>
-        <param name="xAxisRotate">To be added.</param>
-        <param name="largeArc">To be added.</param>
-        <param name="sweep">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="rx">The x-radius of the ellipse.</param>
+        <param name="ry">The y-radius of the ellipse.</param>
+        <param name="xAxisRotate">The rotation of the ellipse x-axis, in degrees.</param>
+        <param name="largeArc">One of the enumeration values that specifies whether to use the large or small arc.</param>
+        <param name="sweep">One of the enumeration values that specifies the sweep direction of the arc.</param>
+        <param name="x">The x offset of the endpoint of the arc, relative to the current point.</param>
+        <param name="y">The y offset of the endpoint of the arc, relative to the current point.</param>
+        <summary>Appends an SVG-style elliptical arc to the path using relative coordinates.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RConicTo">
@@ -938,11 +930,11 @@
         <Parameter Name="w" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="point0">To be added.</param>
-        <param name="point1">To be added.</param>
-        <param name="w">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point0">The control point of the conic curve, relative to the current point.</param>
+        <param name="point1">The end point of the conic curve, relative to the current point.</param>
+        <param name="w">The weight of the conic curve, which controls its shape.</param>
+        <summary>Appends a weighted conic curve using offsets relative to the current point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RConicTo">
@@ -965,13 +957,13 @@
         <Parameter Name="w" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="dx0">To be added.</param>
-        <param name="dy0">To be added.</param>
-        <param name="dx1">To be added.</param>
-        <param name="dy1">To be added.</param>
-        <param name="w">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="dx0">The x offset of the control point, relative to the current point.</param>
+        <param name="dy0">The y offset of the control point, relative to the current point.</param>
+        <param name="dx1">The x offset of the end point, relative to the current point.</param>
+        <param name="dy1">The y offset of the end point, relative to the current point.</param>
+        <param name="w">The weight of the conic curve, which controls its shape.</param>
+        <summary>Appends a weighted conic curve using coordinate offsets relative to the current point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RCubicTo">
@@ -992,11 +984,11 @@
         <Parameter Name="point2" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point0">To be added.</param>
-        <param name="point1">To be added.</param>
-        <param name="point2">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point0">The first control point of the cubic Bezier curve, relative to the current point.</param>
+        <param name="point1">The second control point of the cubic Bezier curve, relative to the current point.</param>
+        <param name="point2">The end point of the cubic Bezier curve, relative to the current point.</param>
+        <summary>Appends a cubic Bezier curve using offsets relative to the current point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RCubicTo">
@@ -1020,14 +1012,14 @@
         <Parameter Name="dy2" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="dx0">To be added.</param>
-        <param name="dy0">To be added.</param>
-        <param name="dx1">To be added.</param>
-        <param name="dy1">To be added.</param>
-        <param name="dx2">To be added.</param>
-        <param name="dy2">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="dx0">The x offset of the first control point, relative to the current point.</param>
+        <param name="dy0">The y offset of the first control point, relative to the current point.</param>
+        <param name="dx1">The x offset of the second control point, relative to the current point.</param>
+        <param name="dy1">The y offset of the second control point, relative to the current point.</param>
+        <param name="dx2">The x offset of the end point, relative to the current point.</param>
+        <param name="dy2">The y offset of the end point, relative to the current point.</param>
+        <summary>Appends a cubic Bezier curve using coordinate offsets relative to the current point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -1044,11 +1036,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <summary>Resets the builder to an empty state, discarding all previously added geometry.</summary>
+        <remarks />
       </Docs>
-    </Member>
-    <Member MemberName="ReverseAddPath">
       <MemberSignature Language="C#" Value="public void ReverseAddPath (SkiaSharp.SKPath other);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReverseAddPath(class SkiaSharp.SKPath other) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.ReverseAddPath(SkiaSharp.SKPath)" />
@@ -1064,12 +1054,10 @@
         <Parameter Name="other" Type="SkiaSharp.SKPath" />
       </Parameters>
       <Docs>
-        <param name="other">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="other">The path to add in reverse order.</param>
+        <summary>Appends the specified path to this path in reverse order.</summary>
+        <remarks />
       </Docs>
-    </Member>
-    <Member MemberName="RLineTo">
       <MemberSignature Language="C#" Value="public void RLineTo (SkiaSharp.SKPoint point);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RLineTo(valuetype SkiaSharp.SKPoint point) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.RLineTo(SkiaSharp.SKPoint)" />
@@ -1085,9 +1073,9 @@
         <Parameter Name="point" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point">The offset from the current point to the destination point.</param>
+        <summary>Appends a line segment from the current point to a point offset by the specified amount.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RLineTo">
@@ -1107,10 +1095,10 @@
         <Parameter Name="dy" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="dx">To be added.</param>
-        <param name="dy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="dx">The x offset from the current point to the destination point.</param>
+        <param name="dy">The y offset from the current point to the destination point.</param>
+        <summary>Appends a line segment from the current point to a point offset by the specified amounts.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RMoveTo">
@@ -1129,9 +1117,9 @@
         <Parameter Name="point" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point">The offset from the current point to the new starting point of the contour.</param>
+        <summary>Begins a new contour at a point offset from the current point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RMoveTo">
@@ -1151,10 +1139,10 @@
         <Parameter Name="dy" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="dx">To be added.</param>
-        <param name="dy">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="dx">The x offset from the current point to the new starting point of the contour.</param>
+        <param name="dy">The y offset from the current point to the new starting point of the contour.</param>
+        <summary>Begins a new contour at a point offset from the current point by the specified amounts.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RQuadTo">
@@ -1174,10 +1162,10 @@
         <Parameter Name="point1" Type="SkiaSharp.SKPoint" />
       </Parameters>
       <Docs>
-        <param name="point0">To be added.</param>
-        <param name="point1">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="point0">The control point offset, relative to the current point.</param>
+        <param name="point1">The end point offset, relative to the current point.</param>
+        <summary>Appends a quadratic Bezier curve using offsets relative to the current point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="RQuadTo">
@@ -1199,12 +1187,12 @@
         <Parameter Name="dy1" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="dx0">To be added.</param>
-        <param name="dy0">To be added.</param>
-        <param name="dx1">To be added.</param>
-        <param name="dy1">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="dx0">The x offset of the control point, relative to the current point.</param>
+        <param name="dy0">The y offset of the control point, relative to the current point.</param>
+        <param name="dx1">The x offset of the end point, relative to the current point.</param>
+        <param name="dy1">The y offset of the end point, relative to the current point.</param>
+        <summary>Appends a quadratic Bezier curve using coordinate offsets relative to the current point.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Snapshot">
@@ -1221,9 +1209,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Builds a snapshot of the current path without resetting the builder.</summary>
+        <returns>The current <see cref="T:SkiaSharp.SKPath" /> as an immutable snapshot.</returns>
+        <remarks />
       </Docs>
     </Member>
   </Members>
