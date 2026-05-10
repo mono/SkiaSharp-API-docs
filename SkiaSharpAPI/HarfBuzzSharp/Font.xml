@@ -305,6 +305,28 @@
         <remarks />
       </Docs>
     </Member>
+    <Member MemberName="GetVariationCoordsNormalized">
+      <MemberSignature Language="C#" Value="public int GetVariationCoordsNormalized (Span&lt;int&gt; coords);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetVariationCoordsNormalized(valuetype System.Span`1&lt;int32&gt; coords) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Font.GetVariationCoordsNormalized(System.Span{System.Int32})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="coords" Type="System.Span&lt;System.Int32&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
+      </Parameters>
+      <Docs>
+        <param name="coords">The span to receive the normalized variation coordinates.</param>
+        <summary>Gets the normalized variation coordinates of the font into the specified span.</summary>
+        <returns>The number of variation coordinates written into <paramref name="coords" />.</returns>
+        <remarks />
+      </Docs>
+    </Member>
     <Member MemberName="GetVerticalGlyphAdvance">
       <MemberSignature Language="C#" Value="public int GetVerticalGlyphAdvance (uint glyph);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetVerticalGlyphAdvance(unsigned int32 glyph) cil managed" />
@@ -538,6 +560,90 @@
         <param name="xScale">The scale along the x-axis.</param>
         <param name="yScale">The scale along the y-axis.</param>
         <summary>Sets the font scale.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SetVariationCoordsDesign">
+      <MemberSignature Language="C#" Value="public void SetVariationCoordsDesign (ReadOnlySpan&lt;float&gt; coords);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetVariationCoordsDesign(valuetype System.ReadOnlySpan`1&lt;float32&gt; coords) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Font.SetVariationCoordsDesign(System.ReadOnlySpan{System.Single})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="coords" Type="System.ReadOnlySpan&lt;System.Single&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
+      </Parameters>
+      <Docs>
+        <param name="coords">The span of design-space variation coordinates to apply.</param>
+        <summary>Sets the font variation coordinates in design space.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SetVariationCoordsNormalized">
+      <MemberSignature Language="C#" Value="public void SetVariationCoordsNormalized (ReadOnlySpan&lt;int&gt; coords);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetVariationCoordsNormalized(valuetype System.ReadOnlySpan`1&lt;int32&gt; coords) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Font.SetVariationCoordsNormalized(System.ReadOnlySpan{System.Int32})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="coords" Type="System.ReadOnlySpan&lt;System.Int32&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
+      </Parameters>
+      <Docs>
+        <param name="coords">The span of normalized variation coordinates to apply.</param>
+        <summary>Sets the font variation coordinates in normalized space.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SetVariationNamedInstance">
+      <MemberSignature Language="C#" Value="public void SetVariationNamedInstance (int instanceIndex);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetVariationNamedInstance(int32 instanceIndex) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Font.SetVariationNamedInstance(System.Int32)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="instanceIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
+      </Parameters>
+      <Docs>
+        <param name="instanceIndex">The zero-based index of the named instance to apply.</param>
+        <summary>Sets the font to the specified named variation instance.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SetVariations">
+      <MemberSignature Language="C#" Value="public void SetVariations (ReadOnlySpan&lt;HarfBuzzSharp.Variation&gt; variations);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetVariations(valuetype System.ReadOnlySpan`1&lt;valuetype HarfBuzzSharp.Variation&gt; variations) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.Font.SetVariations(System.ReadOnlySpan{HarfBuzzSharp.Variation})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="variations" Type="System.ReadOnlySpan&lt;HarfBuzzSharp.Variation&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
+      </Parameters>
+      <Docs>
+        <param name="variations">The span of font variations to apply.</param>
+        <summary>Sets the font variations.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -1129,6 +1235,24 @@
         <returns>
           <see langword="true" /> if the origin was found; otherwise, <see langword="false" />.</returns>
         <remarks>The origin is the point from which the glyph is drawn for vertical text.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VariationCoordsNormalized">
+      <MemberSignature Language="C#" Value="public int[] VariationCoordsNormalized { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32[] VariationCoordsNormalized" />
+      <MemberSignature Language="DocId" Value="P:HarfBuzzSharp.Font.VariationCoordsNormalized" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32[]</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the current normalized variation coordinates of the font.</summary>
+        <value>An array of normalized variation coordinates.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>
