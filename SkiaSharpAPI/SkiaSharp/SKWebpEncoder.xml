@@ -11,8 +11,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides methods for encoding images and animated image sequences in the WebP format.</summary>
+    <remarks>Use <see cref="M:SkiaSharp.SKWebpEncoder.Encode(SkiaSharp.SKPixmap,SkiaSharp.SKWebpEncoderOptions)" /> for single-frame WebP output and the <c>EncodeAnimated</c> overloads for animated WebP output.</remarks>
   </Docs>
   <Members>
     <Member MemberName="Encode">
@@ -42,11 +42,11 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source pixel data to encode.</param>
+        <param name="options">The encoding options that control quality and compression.</param>
+        <summary>Encodes the specified pixmap as a WebP image and returns the encoded data.</summary>
+        <returns>The encoded WebP data, or <see langword="null" /> if encoding failed.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Encode">
@@ -72,12 +72,13 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The write stream that receives the encoded WebP data.</param>
+        <param name="src">The source pixel data to encode.</param>
+        <param name="options">The encoding options that control quality and compression.</param>
+        <summary>Encodes the specified pixmap as a WebP image and writes the result to the specified write stream.</summary>
+        <returns>
+          <see langword="true" /> if encoding succeeded; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Encode">
@@ -103,12 +104,13 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The stream that receives the encoded WebP data.</param>
+        <param name="src">The source pixel data to encode.</param>
+        <param name="options">The encoding options that control quality and compression.</param>
+        <summary>Encodes the specified pixmap as a WebP image and writes the result to the specified stream.</summary>
+        <returns>
+          <see langword="true" /> if encoding succeeded; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -133,11 +135,11 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="frames">The sequence of frames that make up the animation.</param>
+        <param name="options">The encoding options that control quality and compression.</param>
+        <summary>Encodes the specified frames as an animated WebP image and returns the encoded data.</summary>
+        <returns>The encoded animated WebP data, or <see langword="null" /> if encoding failed.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -164,12 +166,13 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The write stream that receives the encoded animated WebP data.</param>
+        <param name="frames">The sequence of frames that make up the animation.</param>
+        <param name="options">The encoding options that control quality and compression.</param>
+        <summary>Encodes the specified frames as an animated WebP image and writes the result to the specified write stream.</summary>
+        <returns>
+          <see langword="true" /> if encoding succeeded; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -196,12 +199,13 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The stream that receives the encoded animated WebP data.</param>
+        <param name="frames">The sequence of frames that make up the animation.</param>
+        <param name="options">The encoding options that control quality and compression.</param>
+        <summary>Encodes the specified frames as an animated WebP image and writes the result to the specified stream.</summary>
+        <returns>
+          <see langword="true" /> if encoding succeeded; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
   </Members>
