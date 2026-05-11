@@ -19,8 +19,25 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Describes arguments for instantiating or cloning a typeface with specific variation and palette settings.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFontArguments` is a ref struct that bundles the parameters used when creating or cloning a typeface with a particular variation design position, collection index, palette selection, and palette color overrides. Pass it to <xref:SkiaSharp.SKTypeface.Clone(SkiaSharp.SKFontArguments)> to produce a new typeface instance with the requested settings.
+
+Because this is a `ref struct`, it cannot be stored on the heap.
+
+## Examples
+
+```csharp
+var args = new SKFontArguments
+{
+    CollectionIndex = 0,
+    PaletteIndex = 0,
+};
+using var cloned = typeface.Clone(args);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="CollectionIndex">
@@ -41,9 +58,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the index of the desired typeface within a font collection.</summary>
+        <value>The zero-based index of the typeface within a font collection.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="PaletteIndex">
@@ -64,9 +81,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the index of the color palette to use for this typeface.</summary>
+        <value>The zero-based index of the color palette to use.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="PaletteOverrides">
@@ -87,9 +104,9 @@
         <ReturnType>System.ReadOnlySpan&lt;SkiaSharp.SKFontPaletteOverride&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the palette color overrides for this typeface.</summary>
+        <value>A read-only span of <see cref="T:SkiaSharp.SKFontPaletteOverride" /> entries that override individual palette color entries.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="VariationDesignPosition">
@@ -110,9 +127,9 @@
         <ReturnType>System.ReadOnlySpan&lt;SkiaSharp.SKFontVariationPositionCoordinate&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the variation design position for this typeface.</summary>
+        <value>A read-only span of <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values specifying each axis and its design value.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

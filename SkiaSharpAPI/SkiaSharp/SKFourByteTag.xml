@@ -20,8 +20,26 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a four-byte tag value used to identify font tables, variation axes, and other OpenType features.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFourByteTag` wraps a 32-bit unsigned integer whose four bytes each represent an ASCII character, forming a human-readable tag such as `wght` (weight) or `ital` (italic). These tags are used throughout OpenType fonts to identify tables and variation axes.
+
+You can create a tag from four characters, from a `uint`, or by parsing a string. The struct is implicitly convertible to and from `uint`.
+
+This is a value type; no disposal is required.
+
+## Examples
+
+```csharp
+// Create a weight-axis tag
+var wght = new SKFourByteTag('w', 'e', 'i', 'g');
+// Or parse from a string
+var wght2 = SKFourByteTag.Parse("wght");
+Console.WriteLine(wght2.ToString()); // "wght"
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -37,9 +55,9 @@
         <Parameter Name="value" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="value">The raw 32-bit tag value.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKFourByteTag" /> struct from a 32-bit unsigned integer.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -58,12 +76,12 @@
         <Parameter Name="c4" Type="System.Char" />
       </Parameters>
       <Docs>
-        <param name="c1">To be added.</param>
-        <param name="c2">To be added.</param>
-        <param name="c3">To be added.</param>
-        <param name="c4">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="c1">The first character of the tag.</param>
+        <param name="c2">The second character of the tag.</param>
+        <param name="c3">The third character of the tag.</param>
+        <param name="c4">The fourth character of the tag.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKFourByteTag" /> struct from four ASCII characters.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -85,10 +103,10 @@
         <Parameter Name="other" Type="SkiaSharp.SKFourByteTag" />
       </Parameters>
       <Docs>
-        <param name="other">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="other">The <see cref="T:SkiaSharp.SKFourByteTag" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:SkiaSharp.SKFourByteTag" /> is equal to the current instance.</summary>
+        <returns><see langword="true" /> if the specified value is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -112,10 +130,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
+        <returns><see langword="true" /> if the specified object is an <see cref="T:SkiaSharp.SKFourByteTag" /> equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -132,9 +150,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns a hash code for the current instance.</summary>
+        <returns>A hash code for the current instance.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -154,11 +172,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFourByteTag" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.SKFourByteTag" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.SKFourByteTag" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFourByteTag" /> values are equal.</summary>
+        <returns><see langword="true" /> if the two values are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -177,10 +195,10 @@
         <Parameter Name="tag" Type="SkiaSharp.SKFourByteTag" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tag">The <see cref="T:SkiaSharp.SKFourByteTag" /> to convert.</param>
+        <summary>Implicitly converts an <see cref="T:SkiaSharp.SKFourByteTag" /> to a <see cref="T:System.UInt32" />.</summary>
+        <returns>The raw 32-bit tag value.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -199,10 +217,10 @@
         <Parameter Name="tag" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tag">The raw 32-bit tag value to convert.</param>
+        <summary>Implicitly converts a <see cref="T:System.UInt32" /> to an <see cref="T:SkiaSharp.SKFourByteTag" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKFourByteTag" /> wrapping the specified value.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -222,11 +240,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFourByteTag" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.SKFourByteTag" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.SKFourByteTag" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFourByteTag" /> values are not equal.</summary>
+        <returns><see langword="true" /> if the two values are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Parse">
@@ -250,10 +268,10 @@
         <Parameter Name="tag" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tag">The string to parse. Only the first four characters are used.</param>
+        <summary>Parses up to four characters from a string into an <see cref="T:SkiaSharp.SKFourByteTag" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKFourByteTag" /> built from the first four characters of <paramref name="tag" />, padded with spaces if the string is shorter than four characters. Returns a zero tag if <paramref name="tag" /> is <see langword="null" /> or empty.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -275,9 +293,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the four-character string representation of this tag.</summary>
+        <returns>A four-character string where each character corresponds to one byte of the tag value.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
