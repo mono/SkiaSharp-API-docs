@@ -2,15 +2,8 @@ name: Auto-merge docs PR
 
 on:
   status:
-  workflow_dispatch:
-    inputs:
-      dry_run:
-        description: 'Dry run — comment what would happen without merging'
-        type: boolean
-        default: true
 
-# Set to true to enable dry-run mode by default on status events.
-# Change to false when ready to auto-merge for real.
+# Set to false when ready to auto-merge for real.
 env:
   DRY_RUN: true
 
@@ -90,8 +83,7 @@ jobs:
         if: |
           steps.pr.outputs.found == 'true' &&
           steps.check.outputs.should_merge == 'true' &&
-          env.DRY_RUN != 'true' &&
-          inputs.dry_run != true
+          env.DRY_RUN != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.pr.outputs.number }}
@@ -107,7 +99,7 @@ jobs:
         if: |
           steps.pr.outputs.found == 'true' &&
           steps.check.outputs.should_merge == 'true' &&
-          (env.DRY_RUN == 'true' || inputs.dry_run == true)
+          env.DRY_RUN == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.pr.outputs.number }}
