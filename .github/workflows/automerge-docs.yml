@@ -2,6 +2,17 @@ name: Auto-merge docs PR
 
 on:
   status:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run — comment what would happen without merging'
+        type: boolean
+        default: true
+
+# Set to true to enable dry-run mode by default on status events.
+# Change to false when ready to auto-merge for real.
+env:
+  DRY_RUN: true
 
 permissions:
   contents: write
@@ -76,7 +87,11 @@ jobs:
         run: python3 .github/scripts/check-learn-build.py
 
       - name: Merge PR
-        if: steps.pr.outputs.found == 'true' && steps.check.outputs.should_merge == 'true'
+        if: |
+          steps.pr.outputs.found == 'true' &&
+          steps.check.outputs.should_merge == 'true' &&
+          env.DRY_RUN != 'true' &&
+          inputs.dry_run != true
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.pr.outputs.number }}
@@ -87,6 +102,26 @@ jobs:
             --match-head-commit "$MERGE_SHA" \
             --subject "Update API docs from latest CI build" \
             --body "Auto-merged after Learn Build validation passed (all checks green, no new warnings)."
+
+      - name: Dry-run report
+        if: |
+          steps.pr.outputs.found == 'true' &&
+          steps.check.outputs.should_merge == 'true' &&
+          (env.DRY_RUN == 'true' || inputs.dry_run == true)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          MERGE_SHA: ${{ steps.pr.outputs.head_sha }}
+        run: |
+          echo "🔍 DRY RUN: Would merge PR #$PR_NUMBER (SHA: $MERGE_SHA)"
+          gh pr comment "$PR_NUMBER" --body \
+            "🔍 **Dry run**: Auto-merge check passed — this PR **would** be merged.
+
+          - All status checks green
+          - No new warnings vs baseline
+          - Commit: $MERGE_SHA
+
+          Set \`DRY_RUN: false\` in the workflow to enable actual merging."
 
       - name: Post comment on failure
         if: failure() && steps.pr.outputs.found == 'true'
