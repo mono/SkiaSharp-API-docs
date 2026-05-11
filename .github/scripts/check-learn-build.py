@@ -305,11 +305,20 @@ def main():
         print(f"    {name}: {info['state']}")
 
     if not all_green:
-        names = ", ".join(f"{n} ({s})" for n, s in failures)
-        print(f"  ❌ Not all checks are green: {names}")
-        set_output("should_merge", "false")
-        set_output("reason", f"Checks not green: {names}")
-        sys.exit(1)
+        # Distinguish "still pending" from "actually failed"
+        only_pending = all(s == "PENDING" for _, s in failures)
+        if only_pending:
+            names = ", ".join(n for n, _ in failures)
+            print(f"  Waiting: checks still pending: {names}")
+            set_output("should_merge", "false")
+            set_output("reason", f"Waiting for: {names}")
+            sys.exit(0)
+        else:
+            names = ", ".join(f"{n} ({s})" for n, s in failures)
+            print(f"  ❌ Not all checks are green: {names}")
+            set_output("should_merge", "false")
+            set_output("reason", f"Checks not green: {names}")
+            sys.exit(1)
 
     # Verify all required statuses are present
     missing, not_green = check_required_statuses(status_map)
