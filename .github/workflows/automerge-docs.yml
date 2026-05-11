@@ -1,0 +1,128 @@
+name: Auto-merge docs PR
+
+on:
+  status:
+
+# Set to false when ready to auto-merge for real.
+env:
+  DRY_RUN: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  statuses: read
+
+jobs:
+  check-and-merge:
+    # Only run when a Learn Build status reports on the automation branch
+    if: |
+      (github.event.context == 'OpenPublishing.Build' ||
+       github.event.context == 'PoliCheck Scan') &&
+      contains(github.event.branches.*.name, 'automation/write-api-docs')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Find PR for commit
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCHES_JSON: ${{ toJSON(github.event.branches.*.name) }}
+          EVENT_SHA: ${{ github.event.sha }}
+        run: |
+          # Extract the automation branch from the event (via env var, not interpolation).
+          branch=$(printf '%s' "$BRANCHES_JSON" | jq -r '.[] | select(. == "automation/write-api-docs")' | head -1)
+          if [ -z "$branch" ]; then
+            echo "automation/write-api-docs branch not found in status event"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "Branch: $branch"
+
+          pr_json=$(gh pr list --repo "${{ github.repository }}" \
+            --head "$branch" --state open \
+            --json number,headRefOid --jq '.[0]')
+          if [ -z "$pr_json" ] || [ "$pr_json" = "null" ]; then
+            echo "No open PR found for branch $branch"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          pr_number=$(echo "$pr_json" | jq -r '.number')
+          pr_head=$(echo "$pr_json" | jq -r '.headRefOid')
+
+          # Only proceed if the status event SHA matches the PR HEAD.
+          # Prevents validating a stale commit while a newer one exists.
+          if [ "$EVENT_SHA" != "$pr_head" ]; then
+            echo "Status event SHA ($EVENT_SHA) does not match PR HEAD ($pr_head), skipping"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "PR: #$pr_number (HEAD: $pr_head)"
+          echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+          echo "head_sha=$pr_head" >> "$GITHUB_OUTPUT"
+          echo "found=true" >> "$GITHUB_OUTPUT"
+
+      # Check out main branch for the baseline file — never the PR branch.
+      # This prevents a PR from modifying known-warnings.csv to bypass the gate.
+      - name: Checkout baseline from main
+        if: steps.pr.outputs.found == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Check Learn Build statuses
+        if: steps.pr.outputs.found == 'true'
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          VALIDATED_SHA: ${{ steps.pr.outputs.head_sha }}
+        run: python3 .github/scripts/check-learn-build.py
+
+      - name: Merge PR
+        if: |
+          steps.pr.outputs.found == 'true' &&
+          steps.check.outputs.should_merge == 'true' &&
+          env.DRY_RUN != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          MERGE_SHA: ${{ steps.pr.outputs.head_sha }}
+        run: |
+          echo "Auto-merging PR #$PR_NUMBER (SHA: $MERGE_SHA)..."
+          gh pr merge "$PR_NUMBER" --squash \
+            --match-head-commit "$MERGE_SHA" \
+            --subject "Update API docs from latest CI build" \
+            --body "Auto-merged after Learn Build validation passed (all checks green, no new warnings)."
+
+      - name: Dry-run report
+        if: |
+          steps.pr.outputs.found == 'true' &&
+          steps.check.outputs.should_merge == 'true' &&
+          env.DRY_RUN == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          MERGE_SHA: ${{ steps.pr.outputs.head_sha }}
+        run: |
+          echo "🔍 DRY RUN: Would merge PR #$PR_NUMBER (SHA: $MERGE_SHA)"
+          gh pr comment "$PR_NUMBER" --body \
+            "🔍 **Dry run**: Auto-merge check passed — this PR **would** be merged.
+
+          - All status checks green
+          - No new warnings vs baseline
+          - Commit: $MERGE_SHA
+
+          Set \`DRY_RUN: false\` in the workflow to enable actual merging."
+
+      - name: Post comment on failure
+        if: failure() && steps.pr.outputs.found == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          REASON: ${{ steps.check.outputs.reason }}
+        run: |
+          gh pr comment "$PR_NUMBER" --body \
+            "⚠️ **Auto-merge blocked**: ${REASON:-unknown failure}
+
+          Review the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details. Update \`.github/known-warnings.csv\` on \`main\` if new warnings are expected."
