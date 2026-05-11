@@ -3,9 +3,8 @@ name: Auto-merge docs PR
 on:
   status:
 
-# Set to false when ready to auto-merge for real.
 env:
-  DRY_RUN: true
+  DRY_RUN: false
 
 permissions:
   contents: write
@@ -89,6 +88,7 @@ jobs:
         run: python3 .github/scripts/check-learn-build.py
 
       - name: Merge PR
+        id: merge
         if: |
           steps.pr.outputs.found == 'true' &&
           steps.check.outputs.should_merge == 'true' &&
@@ -99,10 +99,15 @@ jobs:
           MERGE_SHA: ${{ steps.pr.outputs.head_sha }}
         run: |
           echo "Auto-merging PR #$PR_NUMBER (SHA: $MERGE_SHA)..."
-          gh pr merge "$PR_NUMBER" --squash \
+          merge_output=$(gh pr merge "$PR_NUMBER" --squash \
             --match-head-commit "$MERGE_SHA" \
             --subject "Update API docs from latest CI build" \
-            --body "Auto-merged after Learn Build validation passed (all checks green, no new warnings)."
+            --body "Auto-merged after Learn Build validation passed (all checks green, no new warnings)." 2>&1) || {
+            echo "merge_error<<EOF" >> "$GITHUB_OUTPUT"
+            echo "$merge_output" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+            exit 1
+          }
 
       - name: Dry-run report
         if: |
@@ -129,9 +134,32 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.pr.outputs.number }}
-          REASON: ${{ steps.check.outputs.reason }}
+          CHECK_REASON: ${{ steps.check.outputs.reason }}
+          NEW_WARNINGS: ${{ steps.check.outputs.new_warnings }}
+          MERGE_ERROR: ${{ steps.merge.outputs.merge_error }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          gh pr comment "$PR_NUMBER" --body \
-            "⚠️ **Auto-merge blocked**: ${REASON:-unknown failure}
+          body="⚠️ **Auto-merge blocked**"
+          body+="\n"
 
-          Review the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details. Update \`.github/known-warnings.csv\` on \`main\` if new warnings are expected."
+          # Validation failure
+          if [ "$CHECK_REASON" != "All checks passed" ] && [ -n "$CHECK_REASON" ]; then
+            body+="\n**Validation**: $CHECK_REASON"
+          fi
+
+          # New warnings detail
+          if [ -n "$NEW_WARNINGS" ]; then
+            body+="\nUpdate \`.github/known-warnings.csv\` on \`main\` if these warnings are expected."
+          fi
+
+          # Merge failure (separate from validation)
+          if [ -n "$MERGE_ERROR" ]; then
+            body+="\n**Merge failed**: $MERGE_ERROR"
+            if echo "$MERGE_ERROR" | grep -q "not up to date"; then
+              body+="\nThe PR branch needs to be updated with \`main\` before it can be merged."
+            fi
+          fi
+
+          body+="\n\n[Workflow run]($RUN_URL)"
+
+          printf "$body" | gh pr comment "$PR_NUMBER" --body-file -
