@@ -153,16 +153,31 @@ def load_baseline(path):
 
 
 def compare_warnings(current, baseline):
-    """Compare current warnings against baseline.
+    """Compare current warnings against baseline using multiset comparison.
+
+    Duplicate warnings (same file/code/message appearing multiple times) are
+    tracked individually. If the baseline has 2 occurrences of a warning and
+    the current build has 4, that counts as 2 new warnings.
 
     Returns (ok, new_warnings, removed_warnings).
     - ok is True if there are no NEW warnings (removals are fine).
     """
-    current_set = set(current)
-    baseline_set = set(baseline)
+    from collections import Counter
 
-    new_warnings = sorted(current_set - baseline_set)
-    removed_warnings = sorted(baseline_set - current_set)
+    current_counts = Counter(current)
+    baseline_counts = Counter(baseline)
+
+    new_warnings = []
+    for entry, count in sorted(current_counts.items()):
+        extra = count - baseline_counts.get(entry, 0)
+        for _ in range(extra):
+            new_warnings.append(entry)
+
+    removed_warnings = []
+    for entry, count in sorted(baseline_counts.items()):
+        missing = count - current_counts.get(entry, 0)
+        for _ in range(missing):
+            removed_warnings.append(entry)
 
     return len(new_warnings) == 0, new_warnings, removed_warnings
 
@@ -197,11 +212,15 @@ def main():
     print(f"  Head SHA: {head_sha[:12]}")
     print(f"  Total comments: {len(comments)}")
 
-    # Only auto-merge the automation branch
-    if head_ref != "automation/update-api-docs":
-        print(f"  Skipping: not the automation branch (got {head_ref})")
+    # Only auto-merge automation branches
+    automation_branches = [
+        "automation/update-api-docs",
+        "automation/write-api-docs",
+    ]
+    if head_ref not in automation_branches:
+        print(f"  Skipping: not an automation branch (got {head_ref})")
         set_output("should_merge", "false")
-        set_output("reason", "Not the automation branch")
+        set_output("reason", "Not an automation branch")
         sys.exit(0)
 
     # Find latest bot comments for the head commit
