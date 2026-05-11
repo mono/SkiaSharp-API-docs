@@ -11,8 +11,25 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a single frame in an animated WebP sequence, combining pixel data with a display duration.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKWebpEncoderFrame` pairs an image (as a bitmap, image, or pixmap) with the duration it should be displayed. Use a collection of these frames with <see cref="M:SkiaSharp.SKWebpEncoder.EncodeAnimated(System.ReadOnlySpan{SkiaSharp.SKWebpEncoderFrame},SkiaSharp.SKWebpEncoderOptions)" /> to produce an animated WebP file.
+
+## Examples
+
+```csharp
+var frames = new[]
+{
+    new SKWebpEncoderFrame(frame1Bitmap, TimeSpan.FromMilliseconds(200)),
+    new SKWebpEncoderFrame(frame2Bitmap, TimeSpan.FromMilliseconds(200)),
+    new SKWebpEncoderFrame(frame3Bitmap, TimeSpan.FromMilliseconds(200)),
+};
+var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossy, 85);
+using var data = SKWebpEncoder.EncodeAnimated(frames, options);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -29,10 +46,10 @@
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="duration">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> containing the frame's pixel data.</param>
+        <param name="duration">The duration for which this frame is displayed.</param>
+        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from a bitmap and a duration.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -49,10 +66,10 @@
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="duration">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The <see cref="T:SkiaSharp.SKImage" /> containing the frame's pixel data.</param>
+        <param name="duration">The duration for which this frame is displayed.</param>
+        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from an image and a duration.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -69,10 +86,10 @@
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="pixmap">To be added.</param>
-        <param name="duration">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="pixmap">The <see cref="T:SkiaSharp.SKPixmap" /> containing the frame's pixel data.</param>
+        <param name="duration">The duration for which this frame is displayed.</param>
+        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from a pixmap and a duration.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Duration">
@@ -93,9 +110,9 @@
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the duration for which this frame is displayed in the animated WebP.</summary>
+        <value>The <see cref="T:System.TimeSpan" /> indicating how long this frame is displayed.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Pixmap">
@@ -116,9 +133,9 @@
         <ReturnType>SkiaSharp.SKPixmap</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the pixel data for this frame.</summary>
+        <value>The <see cref="T:SkiaSharp.SKPixmap" /> containing this frame's pixel data.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

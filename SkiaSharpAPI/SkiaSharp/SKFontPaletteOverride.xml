@@ -15,8 +15,25 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies an override for a single color entry in a font's CPAL color palette.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFontPaletteOverride` pairs a palette color index with a replacement ARGB color value. Use a collection of these overrides in <see cref="P:SkiaSharp.SKFontArguments.PaletteOverrides" /> to customize individual colors of a color font without replacing the entire palette.
+
+## Examples
+
+```csharp
+// Override color index 0 with red
+var override0 = new SKFontPaletteOverride { Index = 0, Color = (uint)SKColors.Red };
+
+var args = new SKFontArguments
+{
+    PaletteIndex = 0,
+    PaletteOverrides = new[] { override0 },
+};
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Color">
@@ -37,9 +54,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the replacement ARGB color for this palette entry override.</summary>
+        <value>The ARGB replacement color as a packed 32-bit unsigned integer.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -66,10 +83,10 @@
         <Parameter Name="obj" Type="SkiaSharp.SKFontPaletteOverride" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare with the current instance.</param>
+        <summary>Indicates whether the current instance is equal to another <see cref="T:SkiaSharp.SKFontPaletteOverride" />.</summary>
+        <returns><see langword="true" /> if the values are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -93,10 +110,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Indicates whether the current instance is equal to a specified object.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is a <see cref="T:SkiaSharp.SKFontPaletteOverride" /> and equals the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -118,9 +135,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns a hash code for the current instance.</summary>
+        <returns>A hash code for the current instance.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Index">
@@ -141,9 +158,9 @@
         <ReturnType>System.UInt16</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the index of the palette color entry to override.</summary>
+        <value>The zero-based index of the palette color entry to override.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -163,11 +180,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFontPaletteOverride" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The left operand.</param>
+        <param name="right">The right operand.</param>
+        <summary>Returns a value indicating whether two <see cref="T:SkiaSharp.SKFontPaletteOverride" /> values are equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> equals <paramref name="right" />; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -187,11 +204,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFontPaletteOverride" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The left operand.</param>
+        <param name="right">The right operand.</param>
+        <summary>Returns a value indicating whether two <see cref="T:SkiaSharp.SKFontPaletteOverride" /> values are not equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> does not equal <paramref name="right" />; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
