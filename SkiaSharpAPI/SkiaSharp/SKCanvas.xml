@@ -3000,12 +3000,12 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The <see cref="T:SkiaSharp.SKSurface" /> to draw.</param>
+        <param name="p">The point at which to draw the top-left corner of the surface.</param>
+        <param name="sampling">The <see cref="T:SkiaSharp.SKSamplingOptions" /> used when sampling the surface pixels.</param>
+        <param name="paint">The <see cref="T:SkiaSharp.SKPaint" /> to apply during drawing, or <see langword="null" /> for default settings.</param>
+        <summary>Draws the contents of the specified surface onto the canvas at the specified point.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
@@ -3059,13 +3059,13 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The <see cref="T:SkiaSharp.SKSurface" /> to draw.</param>
+        <param name="x">The x-coordinate of the top-left corner of the surface.</param>
+        <param name="y">The y-coordinate of the top-left corner of the surface.</param>
+        <param name="sampling">The <see cref="T:SkiaSharp.SKSamplingOptions" /> used when sampling the surface pixels.</param>
+        <param name="paint">The <see cref="T:SkiaSharp.SKPaint" /> to apply during drawing, or <see langword="null" /> for default settings.</param>
+        <summary>Draws the contents of the specified surface onto the canvas at the specified coordinates.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <MemberGroup MemberName="DrawText">
@@ -4851,6 +4851,28 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="SetMatrix">
+      <MemberSignature Language="C#" Value="public void SetMatrix (SkiaSharp.SKMatrix matrix);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
+        <AssemblyVersion>2.88.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+      </Parameters>
+      <Docs>
+        <param name="matrix">The matrix that will be copied into the current matrix.</param>
+        <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SetMatrix">
       <MemberSignature Language="C#" Value="public void SetMatrix (in SkiaSharp.SKMatrix matrix);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix([in]valuetype SkiaSharp.SKMatrix&amp; matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix@)" />
@@ -4875,28 +4897,6 @@ guaranteed to happen. If exact clipping is desired, use
       </Parameters>
       <Docs>
         <param name="matrix">The matrix to set as the current transformation matrix.</param>
-        <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
-        <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="SetMatrix">
-      <MemberSignature Language="C#" Value="public void SetMatrix (SkiaSharp.SKMatrix matrix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
-      </Parameters>
-      <Docs>
-        <param name="matrix">The matrix that will be copied into the current matrix.</param>
         <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
         <remarks />
       </Docs>

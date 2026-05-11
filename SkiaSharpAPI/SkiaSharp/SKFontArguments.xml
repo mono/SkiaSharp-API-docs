@@ -19,8 +19,30 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides arguments used to configure font selection when cloning or creating a <see cref="T:SkiaSharp.SKTypeface" />.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFontArguments` is a `ref struct` that groups settings for selecting a specific variation of a font, including the collection index, variation design position, palette index, and palette color overrides. Pass it to <xref:SkiaSharp.SKTypeface.Clone(SkiaSharp.SKFontArguments)> to obtain a typeface configured with the specified parameters.
+
+Because `SKFontArguments` is a `ref struct`, it can only be used on the stack and cannot be stored in fields or used as a generic type argument.
+
+## Examples
+
+```csharp
+// Clone a variable font with a custom weight axis value
+var coord = new SKFontVariationPositionCoordinate
+{
+    Axis = SKFourByteTag.Parse("wght"),
+    Value = 700,
+};
+var args = new SKFontArguments
+{
+    VariationDesignPosition = new ReadOnlySpan<SKFontVariationPositionCoordinate>(new[] { coord }),
+};
+using var boldTypeface = typeface.Clone(args);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="CollectionIndex">
@@ -41,9 +63,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the zero-based index of the typeface within a font collection file.</summary>
+        <value>The index of the typeface to select from a TTC or other collection font.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="PaletteIndex">
@@ -64,9 +86,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the zero-based index of the color palette to use.</summary>
+        <value>The index of the color palette defined in the font's CPAL table.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="PaletteOverrides">
@@ -87,9 +109,9 @@
         <ReturnType>System.ReadOnlySpan&lt;SkiaSharp.SKFontPaletteOverride&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the color overrides for individual palette entries.</summary>
+        <value>A span of <see cref="T:SkiaSharp.SKFontPaletteOverride" /> values that replace specific colors in the selected palette.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="VariationDesignPosition">
@@ -110,9 +132,9 @@
         <ReturnType>System.ReadOnlySpan&lt;SkiaSharp.SKFontVariationPositionCoordinate&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the design position for variable font axes.</summary>
+        <value>A span of <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values specifying the value for each variation axis.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
