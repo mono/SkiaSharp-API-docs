@@ -14,12 +14,13 @@ permissions:
 
 jobs:
   check-and-merge:
-    # Only run when a Learn Build status succeeds on the automation branch.
-    # Ignore pending/error/failure — we only care when a status completes green.
+    # Only trigger on OpenPublishing.Build success — this is the status that
+    # carries the build report URL we need. PoliCheck is verified as a required
+    # status inside the script, but we don't need to trigger separately for it
+    # (that would cause duplicate comments/merges).
     if: |
       github.event.state == 'success' &&
-      (github.event.context == 'OpenPublishing.Build' ||
-       github.event.context == 'PoliCheck Scan') &&
+      github.event.context == 'OpenPublishing.Build' &&
       contains(github.event.branches.*.name, 'automation/write-api-docs')
     runs-on: ubuntu-latest
 
