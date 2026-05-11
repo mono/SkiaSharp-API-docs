@@ -14,13 +14,20 @@ permissions:
 
 jobs:
   check-and-merge:
-    # Only run when a Learn Build status succeeds on the automation branch.
-    # Ignore pending/error/failure — we only care when a status completes green.
+    # Trigger when either Learn Build status succeeds on the automation branch.
+    # The script requires BOTH to be present before proceeding.
     if: |
       github.event.state == 'success' &&
       (github.event.context == 'OpenPublishing.Build' ||
        github.event.context == 'PoliCheck Scan') &&
       contains(github.event.branches.*.name, 'automation/write-api-docs')
+
+    # Only one run at a time per commit SHA. If both statuses succeed
+    # simultaneously, the second run waits then gets cancelled since
+    # the first already handled it (PR merged or comment posted).
+    concurrency:
+      group: automerge-${{ github.event.sha }}
+      cancel-in-progress: false
     runs-on: ubuntu-latest
 
     steps:
