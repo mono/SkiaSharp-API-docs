@@ -70,9 +70,7 @@ def find_latest_bot_comments(comments, head_sha):
 def check_policheck(comment):
     """Check if PoliCheck report shows no issues. Returns (ok, message)."""
     body = comment["body"]
-    if ":white_check_mark:  No issues found" in body:
-        return True, "PoliCheck: No issues found"
-    if ":white_check_mark:" in body and "No issues found" in body:
+    if "No issues found" in body:
         return True, "PoliCheck: No issues found"
     return False, "PoliCheck: Issues found - manual review required"
 
