@@ -14,8 +14,10 @@ permissions:
 
 jobs:
   check-and-merge:
-    # Only run when a Learn Build status reports on the automation branch
+    # Only run when a Learn Build status succeeds on the automation branch.
+    # Ignore pending/error/failure — we only care when a status completes green.
     if: |
+      github.event.state == 'success' &&
       (github.event.context == 'OpenPublishing.Build' ||
        github.event.context == 'PoliCheck Scan') &&
       contains(github.event.branches.*.name, 'automation/write-api-docs')
