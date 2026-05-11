@@ -10,11 +10,11 @@ permissions:
 
 jobs:
   check-and-merge:
-    # Only run when a Learn Build status reports on an automation branch
+    # Only run when a Learn Build status reports on the automation branch
     if: |
       (github.event.context == 'OpenPublishing.Build' ||
        github.event.context == 'PoliCheck Scan') &&
-      contains(toJSON(github.event.branches.*.name), 'automation/')
+      contains(toJSON(github.event.branches.*.name), 'automation/write-api-docs')
     runs-on: ubuntu-latest
 
     steps:
@@ -26,9 +26,9 @@ jobs:
           # The status event includes the branches this commit belongs to.
           # Find the automation branch and look up the open PR for it.
           branches='${{ toJSON(github.event.branches.*.name) }}'
-          branch=$(echo "$branches" | jq -r '.[] | select(startswith("automation/"))' | head -1)
+          branch=$(echo "$branches" | jq -r '.[] | select(. == "automation/write-api-docs")' | head -1)
           if [ -z "$branch" ]; then
-            echo "No automation branch found in status event"
+            echo "automation/write-api-docs branch not found in status event"
             echo "found=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
