@@ -15,6 +15,7 @@ Environment variables:
   GITHUB_OUTPUT  - GitHub Actions output file
 """
 
+import csv
 import json
 import os
 import re
@@ -145,11 +146,21 @@ def fetch_build_log_warnings(build_log_url):
 
 
 def load_baseline(path):
-    """Load the known-warnings.txt baseline file."""
+    """Load the known-warnings.csv baseline file.
+
+    Returns a Counter mapping 'file|code|message' -> count.
+    """
+    from collections import Counter
+
     if not os.path.exists(path):
         return None
-    with open(path) as f:
-        return sorted(line.strip() for line in f if line.strip())
+    baseline = Counter()
+    with open(path, newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            entry = f"{row['file']}|{row['code']}|{row['message']}"
+            baseline[entry] = int(row["count"])
+    return baseline
 
 
 def check_github_statuses(checks):
@@ -187,9 +198,8 @@ def check_github_statuses(checks):
 def compare_warnings(current, baseline):
     """Compare current warnings against baseline using multiset comparison.
 
-    Duplicate warnings (same file/code/message appearing multiple times) are
-    tracked individually. If the baseline has 2 occurrences of a warning and
-    the current build has 4, that counts as 2 new warnings.
+    current is a sorted list of 'file|code|message' strings (may have dupes).
+    baseline is a Counter mapping 'file|code|message' -> expected count.
 
     Returns (ok, new_warnings, removed_warnings).
     - ok is True if there are no NEW warnings (removals are fine).
@@ -197,16 +207,15 @@ def compare_warnings(current, baseline):
     from collections import Counter
 
     current_counts = Counter(current)
-    baseline_counts = Counter(baseline)
 
     new_warnings = []
     for entry, count in sorted(current_counts.items()):
-        extra = count - baseline_counts.get(entry, 0)
+        extra = count - baseline.get(entry, 0)
         for _ in range(extra):
             new_warnings.append(entry)
 
     removed_warnings = []
-    for entry, count in sorted(baseline_counts.items()):
+    for entry, count in sorted(baseline.items()):
         missing = count - current_counts.get(entry, 0)
         for _ in range(missing):
             removed_warnings.append(entry)
@@ -230,7 +239,7 @@ def main():
 
     baseline_path = os.path.join(
         os.environ.get("GITHUB_WORKSPACE", "."),
-        ".github", "known-warnings.txt",
+        ".github", "known-warnings.csv",
     )
 
     # Get PR info and comments
@@ -340,13 +349,14 @@ def main():
     # Load and compare baseline
     baseline = load_baseline(baseline_path)
     if baseline is None:
-        print("  WARNING: No baseline file found at .github/known-warnings.txt")
+        print("  WARNING: No baseline file found at .github/known-warnings.csv")
         print("  Cannot compare warnings - manual review required")
         set_output("should_merge", "false")
         set_output("reason", "No baseline file found")
         sys.exit(1)
 
-    print(f"  Baseline has {len(baseline)} known warnings")
+    baseline_total = sum(baseline.values())
+    print(f"  Baseline has {len(baseline)} unique warnings ({baseline_total} total)")
 
     ok, new_warnings, removed_warnings = compare_warnings(
         current_warnings, baseline,
