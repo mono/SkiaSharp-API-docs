@@ -10,10 +10,11 @@ permissions:
 
 jobs:
   check-and-merge:
-    # Only run when a Learn Build status completes
+    # Only run when a Learn Build status reports on an automation branch
     if: |
-      github.event.context == 'OpenPublishing.Build' ||
-      github.event.context == 'PoliCheck Scan'
+      (github.event.context == 'OpenPublishing.Build' ||
+       github.event.context == 'PoliCheck Scan') &&
+      contains(toJSON(github.event.branches.*.name), 'automation/')
     runs-on: ubuntu-latest
 
     steps:
@@ -22,25 +23,27 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          pr=$(gh pr list --repo ${{ github.repository }} \
-            --search "${{ github.event.sha }}" --state open \
-            --json number,headRefOid,headRefName \
-            --jq '.[] | select(.headRefOid == "${{ github.event.sha }}")')
-          if [ -z "$pr" ]; then
-            echo "No open PR found for commit ${{ github.event.sha }}"
+          # The status event includes the branches this commit belongs to.
+          # Find the automation branch and look up the open PR for it.
+          branches='${{ toJSON(github.event.branches.*.name) }}'
+          branch=$(echo "$branches" | jq -r '.[] | select(startswith("automation/"))' | head -1)
+          if [ -z "$branch" ]; then
+            echo "No automation branch found in status event"
             echo "found=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          pr_number=$(echo "$pr" | jq -r '.number')
-          branch=$(echo "$pr" | jq -r '.headRefName')
-          # Only auto-merge automation branches
-          if [[ "$branch" != automation/* ]]; then
-            echo "Skipping: branch '$branch' is not an automation branch"
+          echo "Branch: $branch"
+
+          pr_number=$(gh pr list --repo ${{ github.repository }} \
+            --head "$branch" --state open \
+            --json number --jq '.[0].number')
+          if [ -z "$pr_number" ]; then
+            echo "No open PR found for branch $branch"
             echo "found=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          echo "PR: #$pr_number"
           echo "number=$pr_number" >> "$GITHUB_OUTPUT"
-          echo "branch=$branch" >> "$GITHUB_OUTPUT"
           echo "found=true" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
