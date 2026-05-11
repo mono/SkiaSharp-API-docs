@@ -36,7 +36,7 @@ def get_pr_comments(pr_number):
     """Get all comments on a PR, sorted by creation time."""
     raw = gh(
         "pr", "view", str(pr_number),
-        "--json", "comments,headRefName,headRefOid",
+        "--json", "comments,headRefName,headRefOid,statusCheckRollup",
     )
     return json.loads(raw)
 
@@ -152,6 +152,38 @@ def load_baseline(path):
         return sorted(line.strip() for line in f if line.strip())
 
 
+def check_github_statuses(checks):
+    """Verify all GitHub commit statuses and check runs are green.
+
+    Returns (ok, failures) where failures is a list of (name, state) tuples.
+    Commit statuses use 'state' (SUCCESS/ERROR/PENDING/FAILURE).
+    Check runs use 'status' + 'conclusion' (COMPLETED+SUCCESS, etc.).
+    """
+    failures = []
+    for check in checks:
+        name = check.get("context") or check.get("name") or "unknown"
+        # Commit status API
+        state = check.get("state", "")
+        # Check runs API
+        status = check.get("status", "")
+        conclusion = check.get("conclusion", "")
+
+        if state in ("SUCCESS",):
+            continue
+        if status == "COMPLETED" and conclusion == "SUCCESS":
+            continue
+        if state == "PENDING" or status in ("IN_PROGRESS", "QUEUED"):
+            failures.append((name, "PENDING"))
+        elif state in ("ERROR", "FAILURE"):
+            failures.append((name, state))
+        elif status == "COMPLETED" and conclusion not in ("SUCCESS", "NEUTRAL", "SKIPPED"):
+            failures.append((name, conclusion or status))
+        elif state or status:
+            failures.append((name, state or f"{status}/{conclusion}"))
+
+    return len(failures) == 0, failures
+
+
 def compare_warnings(current, baseline):
     """Compare current warnings against baseline using multiset comparison.
 
@@ -222,6 +254,26 @@ def main():
         set_output("should_merge", "false")
         set_output("reason", "Not an automation branch")
         sys.exit(0)
+
+    # Check all GitHub commit statuses and check runs are green
+    checks = pr_data.get("statusCheckRollup", [])
+    print(f"  Status checks: {len(checks)}")
+    statuses_ok, failures = check_github_statuses(checks)
+    for check in checks:
+        name = check.get("context") or check.get("name") or "unknown"
+        state = check.get("state") or check.get("status", "")
+        conclusion = check.get("conclusion", "")
+        display = state if state else f"{conclusion}"
+        print(f"    {name}: {display}")
+
+    if not statuses_ok:
+        names = ", ".join(f"{n} ({s})" for n, s in failures)
+        print(f"  ❌ Not all checks are green: {names}")
+        set_output("should_merge", "false")
+        set_output("reason", f"Checks not green: {names}")
+        sys.exit(1)
+
+    print("  All status checks are green")
 
     # Find latest bot comments for the head commit
     policheck, build_report = find_latest_bot_comments(comments, head_sha)
