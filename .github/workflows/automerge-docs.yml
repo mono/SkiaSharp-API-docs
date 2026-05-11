@@ -1,49 +1,67 @@
 name: Auto-merge docs PR
 
 on:
-  issue_comment:
-    types: [created]
+  status:
 
 permissions:
   contents: write
   pull-requests: write
-  issues: read
+  statuses: read
 
 jobs:
   check-and-merge:
-    # Only run on PR comments from the Learn Build bot
+    # Only run when a Learn Build status completes
     if: |
-      github.event.issue.pull_request &&
-      github.event.comment.user.login == 'learn-build-service-prod'
+      github.event.context == 'OpenPublishing.Build' ||
+      github.event.context == 'PoliCheck Scan'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Check Learn Build comments
-        id: check
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.issue.number }}
-        run: python3 .github/scripts/check-learn-build.py
-
-      - name: Merge PR
-        if: steps.check.outputs.should_merge == 'true'
+      - name: Find PR for commit
+        id: pr
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          echo "Auto-merging PR #${{ github.event.issue.number }}..."
-          gh pr merge ${{ github.event.issue.number }} --squash \
+          pr_number=$(gh pr list --repo ${{ github.repository }} \
+            --search "${{ github.event.sha }}" --state open \
+            --json number,headRefOid \
+            --jq '.[] | select(.headRefOid == "${{ github.event.sha }}") | .number')
+          if [ -z "$pr_number" ]; then
+            echo "No open PR found for commit ${{ github.event.sha }}"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+          echo "found=true" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout
+        if: steps.pr.outputs.found == 'true'
+        uses: actions/checkout@v4
+
+      - name: Check Learn Build statuses
+        if: steps.pr.outputs.found == 'true'
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+        run: python3 .github/scripts/check-learn-build.py
+
+      - name: Merge PR
+        if: steps.pr.outputs.found == 'true' && steps.check.outputs.should_merge == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "Auto-merging PR #${{ steps.pr.outputs.number }}..."
+          gh pr merge ${{ steps.pr.outputs.number }} --squash \
             --subject "Update API docs from latest CI build" \
-            --body "Auto-merged after Learn Build validation passed (PoliCheck clean, no new warnings)."
+            --body "Auto-merged after Learn Build validation passed (all checks green, no new warnings)."
 
       - name: Post comment on new warnings
         if: failure() && steps.check.outputs.new_warnings != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr comment ${{ github.event.issue.number }} --body \
+          gh pr comment ${{ steps.pr.outputs.number }} --body \
             "⚠️ **Auto-merge blocked**: ${{ steps.check.outputs.reason }}
 
           New warnings need manual review before merging. Update \`.github/known-warnings.csv\` if these warnings are expected."

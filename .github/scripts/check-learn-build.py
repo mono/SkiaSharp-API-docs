@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""Check Learn Build bot comments on a PR and decide if auto-merge is safe.
+"""Check Learn Build PR statuses and decide if auto-merge is safe.
 
-This script:
-1. Fetches all comments from the PR
-2. Finds the latest PoliCheck and Build Report comments from learn-build-service-prod
-3. Validates PoliCheck shows "No issues found"
-4. Fetches the full build report, extracts the JSON build log URL, and parses warnings
-5. Compares warnings against the known-warnings.txt baseline
-6. Exits 0 if safe to merge, 1 if not
+This script reads GitHub commit statuses (not PR comments) to determine
+if a docs PR can be auto-merged. The two Learn Build statuses each have
+a targetUrl pointing to a build report, which links to a JSON build log.
+
+Flow:
+1. Get PR status checks via gh CLI
+2. Verify all checks are green (SUCCESS / COMPLETED+SUCCESS)
+3. Find the OpenPublishing.Build targetUrl → build report → JSON build log
+4. Extract warnings/errors from the JSON log
+5. Compare warnings against the known-warnings.csv baseline
+6. Exit 0 if safe to merge, 1 if not
 
 Environment variables:
   GH_TOKEN       - GitHub token for API access
@@ -33,73 +37,53 @@ def gh(*args):
     return result.stdout.strip()
 
 
-def get_pr_comments(pr_number):
-    """Get all comments on a PR, sorted by creation time."""
+def get_pr_info(pr_number):
+    """Get PR metadata and status checks."""
     raw = gh(
         "pr", "view", str(pr_number),
-        "--json", "comments,headRefName,headRefOid,statusCheckRollup",
+        "--json", "headRefName,headRefOid,statusCheckRollup",
     )
     return json.loads(raw)
 
 
-def find_latest_bot_comments(comments, head_sha):
-    """Find the latest PoliCheck and Build Report comments for the head commit.
+def check_statuses(checks):
+    """Verify all GitHub commit statuses and check runs are green.
 
-    The Build Report comment contains the commit SHA, so we can match it.
-    PoliCheck comments don't contain the SHA, so we take the latest one
-    that was posted BEFORE or at the same time as the matching Build Report.
+    Returns (all_green, failures, status_map).
+    - failures is a list of (name, state) tuples for non-green checks.
+    - status_map is a dict of name -> {state, url} for all checks.
     """
-    policheck = None
-    build_report = None
+    failures = []
+    status_map = {}
 
-    for comment in comments:
-        if comment["author"]["login"] != "learn-build-service-prod":
-            continue
+    for check in checks:
+        name = check.get("context") or check.get("name") or "unknown"
+        state = check.get("state", "")
+        status = check.get("status", "")
+        conclusion = check.get("conclusion", "")
+        url = check.get("targetUrl") or check.get("detailsUrl") or ""
 
-        body = comment["body"]
+        is_green = (
+            state == "SUCCESS"
+            or (status == "COMPLETED" and conclusion == "SUCCESS")
+        )
+        display_state = state or conclusion or status
+        status_map[name] = {"state": display_state, "url": url}
 
-        if "PoliCheck Scan Report" in body:
-            policheck = comment
+        if not is_green:
+            if state == "PENDING" or status in ("IN_PROGRESS", "QUEUED"):
+                failures.append((name, "PENDING"))
+            else:
+                failures.append((name, display_state))
 
-        if "Validation status:" in body and head_sha[:7] in body:
-            build_report = comment
-
-    return policheck, build_report
-
-
-def check_policheck(comment):
-    """Check if PoliCheck report shows no issues. Returns (ok, message)."""
-    body = comment["body"]
-    if "No issues found" in body:
-        return True, "PoliCheck: No issues found"
-    return False, "PoliCheck: Issues found - manual review required"
-
-
-def extract_build_report_url(comment):
-    """Extract the full build report URL from the Build Report comment."""
-    body = comment["body"]
-    match = re.search(
-        r'\[build report\]\((https://buildapi\.docs\.microsoft\.com/[^)]+)\)',
-        body, re.IGNORECASE,
-    )
-    if match:
-        return match.group(1)
-    return None
-
-
-def check_build_status(comment):
-    """Check if the build has errors. Returns (has_errors, status_text)."""
-    body = comment["body"]
-    if ":x:" in body and "errors" in body.lower():
-        return True, "Build has errors"
-    return False, "No build errors"
+    return len(failures) == 0, failures, status_map
 
 
 def extract_build_log_url(report_url):
     """Fetch the build report HTML and extract the JSON build log URL.
 
-    The build report page has a `build_log_url` attribute on the #Summary element
-    that points to a JSON endpoint with structured warning data.
+    The build report page has a `build_log_url` attribute on the #Summary
+    element that points to a JSON endpoint with structured data.
     """
     req = urllib.request.Request(report_url)
     with urllib.request.urlopen(req, timeout=30) as response:
@@ -107,15 +91,15 @@ def extract_build_log_url(report_url):
 
     match = re.search(r'build_log_url="([^"]+)"', content)
     if match:
-        return match.group(1), None
-    return None, "Could not find build_log_url in build report HTML"
+        return match.group(1)
+    return None
 
 
-def fetch_build_log_warnings(build_log_url):
-    """Fetch the JSON build log and extract all warnings.
+def fetch_build_log(build_log_url):
+    """Fetch the JSON build log and categorize items by severity.
 
-    The JSON has a `build_log_error_items` array with structured entries
-    containing file, code, message, and severity fields.
+    Returns (warnings, errors) where each is a sorted list of
+    'file|code|message' strings.
     """
     req = urllib.request.Request(build_log_url)
     with urllib.request.urlopen(req, timeout=30) as response:
@@ -128,14 +112,14 @@ def fetch_build_log_warnings(build_log_url):
 
     for item in items:
         severity = item.get("message_severity", -1)
-        file_path = item.get("file", "")
-        code = item.get("code", "")
-        message = item.get("message", "")
-        entry = f"{file_path}|{code}|{message}"
-
-        if severity == 0:  # Error
+        entry = "{file}|{code}|{message}".format(
+            file=item.get("file", ""),
+            code=item.get("code", ""),
+            message=item.get("message", ""),
+        )
+        if severity == 0:
             errors.append(entry)
-        elif severity == 1:  # Warning
+        elif severity == 1:
             warnings.append(entry)
 
     warnings.sort()
@@ -159,38 +143,6 @@ def load_baseline(path):
             entry = f"{row['file']}|{row['code']}|{row['message']}"
             baseline[entry] = int(row["count"])
     return baseline
-
-
-def check_github_statuses(checks):
-    """Verify all GitHub commit statuses and check runs are green.
-
-    Returns (ok, failures) where failures is a list of (name, state) tuples.
-    Commit statuses use 'state' (SUCCESS/ERROR/PENDING/FAILURE).
-    Check runs use 'status' + 'conclusion' (COMPLETED+SUCCESS, etc.).
-    """
-    failures = []
-    for check in checks:
-        name = check.get("context") or check.get("name") or "unknown"
-        # Commit status API
-        state = check.get("state", "")
-        # Check runs API
-        status = check.get("status", "")
-        conclusion = check.get("conclusion", "")
-
-        if state in ("SUCCESS",):
-            continue
-        if status == "COMPLETED" and conclusion == "SUCCESS":
-            continue
-        if state == "PENDING" or status in ("IN_PROGRESS", "QUEUED"):
-            failures.append((name, "PENDING"))
-        elif state in ("ERROR", "FAILURE"):
-            failures.append((name, state))
-        elif status == "COMPLETED" and conclusion not in ("SUCCESS", "NEUTRAL", "SKIPPED"):
-            failures.append((name, conclusion or status))
-        elif state or status:
-            failures.append((name, state or f"{status}/{conclusion}"))
-
-    return len(failures) == 0, failures
 
 
 def compare_warnings(current, baseline):
@@ -240,16 +192,14 @@ def main():
         ".github", "known-warnings.csv",
     )
 
-    # Get PR info and comments
+    # Get PR info
     print(f"Checking PR #{pr_number}...")
-    pr_data = get_pr_comments(pr_number)
+    pr_data = get_pr_info(pr_number)
     head_ref = pr_data["headRefName"]
     head_sha = pr_data["headRefOid"]
-    comments = pr_data["comments"]
 
     print(f"  Branch: {head_ref}")
     print(f"  Head SHA: {head_sha[:12]}")
-    print(f"  Total comments: {len(comments)}")
 
     # Only auto-merge automation branches
     automation_branches = [
@@ -262,18 +212,20 @@ def main():
         set_output("reason", "Not an automation branch")
         sys.exit(0)
 
-    # Check all GitHub commit statuses and check runs are green
+    # Check all GitHub statuses are green
     checks = pr_data.get("statusCheckRollup", [])
-    print(f"  Status checks: {len(checks)}")
-    statuses_ok, failures = check_github_statuses(checks)
-    for check in checks:
-        name = check.get("context") or check.get("name") or "unknown"
-        state = check.get("state") or check.get("status", "")
-        conclusion = check.get("conclusion", "")
-        display = state if state else f"{conclusion}"
-        print(f"    {name}: {display}")
+    if not checks:
+        print("  Waiting: no status checks found yet")
+        set_output("should_merge", "false")
+        set_output("reason", "No status checks found")
+        sys.exit(0)
 
-    if not statuses_ok:
+    all_green, failures, status_map = check_statuses(checks)
+    print(f"  Status checks ({len(checks)}):")
+    for name, info in sorted(status_map.items()):
+        print(f"    {name}: {info['state']}")
+
+    if not all_green:
         names = ", ".join(f"{n} ({s})" for n, s in failures)
         print(f"  ❌ Not all checks are green: {names}")
         set_output("should_merge", "false")
@@ -282,57 +234,25 @@ def main():
 
     print("  All status checks are green")
 
-    # Find latest bot comments for the head commit
-    policheck, build_report = find_latest_bot_comments(comments, head_sha)
-
-    if not policheck:
-        print("  Waiting: no PoliCheck comment found yet")
+    # Get the OpenPublishing.Build report URL from the status targetUrl
+    build_status = status_map.get("OpenPublishing.Build")
+    if not build_status or not build_status["url"]:
+        print("  ERROR: No OpenPublishing.Build status with targetUrl found")
         set_output("should_merge", "false")
-        set_output("reason", "Waiting for PoliCheck comment")
-        sys.exit(0)
-
-    if not build_report:
-        print("  Waiting: no Build Report comment found for head commit")
-        set_output("should_merge", "false")
-        set_output("reason", "Waiting for Build Report comment")
-        sys.exit(0)
-
-    print("  Found both PoliCheck and Build Report comments")
-
-    # Check PoliCheck
-    poli_ok, poli_msg = check_policheck(policheck)
-    print(f"  {poli_msg}")
-    if not poli_ok:
-        set_output("should_merge", "false")
-        set_output("reason", poli_msg)
+        set_output("reason", "No OpenPublishing.Build status found")
         sys.exit(1)
 
-    # Check for build errors
-    has_errors, error_msg = check_build_status(build_report)
-    print(f"  {error_msg}")
-    if has_errors:
+    report_url = build_status["url"]
+    print(f"  Fetching build report from status targetUrl...")
+    build_log_url = extract_build_log_url(report_url)
+    if not build_log_url:
+        print("  ERROR: Could not find build_log_url in build report")
         set_output("should_merge", "false")
-        set_output("reason", "Build has errors - manual review required")
-        sys.exit(1)
-
-    # Extract and fetch the full build report
-    report_url = extract_build_report_url(build_report)
-    if not report_url:
-        print("  WARNING: Could not find build report URL in comment")
-        set_output("should_merge", "false")
-        set_output("reason", "Could not find build report URL")
-        sys.exit(1)
-
-    print("  Fetching build report to find JSON log URL...")
-    build_log_url, log_err = extract_build_log_url(report_url)
-    if log_err:
-        print(f"  ERROR: {log_err}")
-        set_output("should_merge", "false")
-        set_output("reason", f"Failed to extract build log URL: {log_err}")
+        set_output("reason", "Could not find build_log_url in report")
         sys.exit(1)
 
     print("  Fetching structured build log (JSON)...")
-    current_warnings, current_errors = fetch_build_log_warnings(build_log_url)
+    current_warnings, current_errors = fetch_build_log(build_log_url)
 
     if current_errors:
         print(f"  ❌ {len(current_errors)} build error(s) found:")
