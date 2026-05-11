@@ -41,7 +41,7 @@ def get_pr_info(pr_number):
     """Get PR metadata and status checks."""
     raw = gh(
         "pr", "view", str(pr_number),
-        "--json", "headRefName,headRefOid,statusCheckRollup",
+        "--json", "headRefName,statusCheckRollup",
     )
     return json.loads(raw)
 
@@ -196,21 +196,8 @@ def main():
     print(f"Checking PR #{pr_number}...")
     pr_data = get_pr_info(pr_number)
     head_ref = pr_data["headRefName"]
-    head_sha = pr_data["headRefOid"]
 
     print(f"  Branch: {head_ref}")
-    print(f"  Head SHA: {head_sha[:12]}")
-
-    # Only auto-merge automation branches
-    automation_branches = [
-        "automation/update-api-docs",
-        "automation/write-api-docs",
-    ]
-    if head_ref not in automation_branches:
-        print(f"  Skipping: not an automation branch (got {head_ref})")
-        set_output("should_merge", "false")
-        set_output("reason", "Not an automation branch")
-        sys.exit(0)
 
     # Check all GitHub statuses are green
     checks = pr_data.get("statusCheckRollup", [])

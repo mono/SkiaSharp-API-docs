@@ -22,16 +22,25 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          pr_number=$(gh pr list --repo ${{ github.repository }} \
+          pr=$(gh pr list --repo ${{ github.repository }} \
             --search "${{ github.event.sha }}" --state open \
-            --json number,headRefOid \
-            --jq '.[] | select(.headRefOid == "${{ github.event.sha }}") | .number')
-          if [ -z "$pr_number" ]; then
+            --json number,headRefOid,headRefName \
+            --jq '.[] | select(.headRefOid == "${{ github.event.sha }}")')
+          if [ -z "$pr" ]; then
             echo "No open PR found for commit ${{ github.event.sha }}"
             echo "found=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          pr_number=$(echo "$pr" | jq -r '.number')
+          branch=$(echo "$pr" | jq -r '.headRefName')
+          # Only auto-merge automation branches
+          if [[ "$branch" != automation/* ]]; then
+            echo "Skipping: branch '$branch' is not an automation branch"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
           echo "found=true" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
