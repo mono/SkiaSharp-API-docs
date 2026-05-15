@@ -89,11 +89,6 @@ safe-outputs:
     recreate-ref: true
 
 # -- Pre-agent steps (host) -------------------------------------------
-steps:
-  - name: Set up agent output directory
-    run: |
-      mkdir -p /tmp/gh-aw/agent
-
 pre-agent-steps:
   - name: Download regenerated docs
     uses: actions/download-artifact@v4
