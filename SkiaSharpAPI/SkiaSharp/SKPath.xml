@@ -188,9 +188,9 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">The path to add.</param>
-        <param name="mode">One of the enumeration values that specifies how the path is added.</param>
-        <summary>Appends the specified path to this path.</summary>
+        <param name="other">The path containing the elements to be added to the current path.</param>
+        <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
+        <summary>Extends the current path with the path elements from another path, using the specified extension mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -229,10 +229,10 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">The path to add.</param>
-        <param name="matrix">The transformation matrix to apply to the path before adding.</param>
-        <param name="mode">One of the enumeration values that specifies how the path is added.</param>
-        <summary>Appends the specified path to this path after applying a transformation matrix.</summary>
+        <param name="other">The path containing the elements to be added to the current path.</param>
+        <param name="matrix">Transformation matrix applied to the <paramref name="other" /> path.</param>
+        <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
+        <summary>Extends the current path with the path elements from another path, by applying the specified transformation matrix, using the specified extension mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -264,11 +264,11 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">The path to add.</param>
-        <param name="dx">The horizontal offset to apply before adding.</param>
-        <param name="dy">The vertical offset to apply before adding.</param>
-        <param name="mode">One of the enumeration values that specifies how the path is added.</param>
-        <summary>Appends the specified path to this path, offset by the given translation.</summary>
+        <param name="other">The path containing the elements to be added to the current path.</param>
+        <param name="dx">The amount to translate the path in X as it is added.</param>
+        <param name="dy">The amount to translate the path in Y as it is added.</param>
+        <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
+        <summary>Extends the current path with the path elements from another path offset by (<paramref name="dx" />, <paramref name="dy" />), using the specified extension mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -297,8 +297,8 @@
         <Parameter Name="other" Type="SkiaSharp.SKPath" />
       </Parameters>
       <Docs>
-        <param name="other">The path to add in reverse.</param>
-        <summary>Appends the specified path to this path in reverse order.</summary>
+        <param name="other">The path containing the elements to be added to the current path.</param>
+        <summary>Extends the current path with the path elements from another path in reverse order.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -1582,9 +1582,9 @@ the first point is automatically set to (0, 0).
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the handle to the underlying native object.</summary>
-        <value>The native handle.</value>
-        <remarks></remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsConcave">
