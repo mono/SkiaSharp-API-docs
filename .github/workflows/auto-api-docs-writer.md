@@ -118,23 +118,36 @@ pre-agent-steps:
 
 # Auto API Docs Writer
 
-**Read `skiasharp/.agents/skills/api-docs/SKILL.md` and follow all phases.** This workflow pre-computes Phases 1–2, so they will be no-ops — start effectively at Phase 3.
+**Read `skiasharp/.agents/skills/api-docs/SKILL.md` for reference.** Follow the phases below — this workflow pre-computes Phases 1–2, so start at Phase 3.
 
-After Phase 6 (merge + format), commit and create a PR:
+## Execution order
 
-```bash
-git add -A
-git commit -m "Fill API documentation placeholders"
-```
+1. **Phase 3 (Discover)** — read JSON files in `output/docs-work/`, read source code for context.
+2. **Phase 4 (Write)** — fill placeholders in the JSON files. Follow the rules in SKILL.md Phase 4.
+3. **Phase 5 (Review)** — do a **quick inline review yourself** (do NOT launch background sub-agents). Scan for "Gets or sets" on read-only properties, fabricated method names in code examples, and remaining "To be added." values. Fix issues directly.
+4. **Phase 6 (Merge)** — this is the critical step. Run:
+   ```bash
+   cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && dotnet cake --target=docs-format-docs && cd ..
+   ```
+5. **Commit and PR** — commit the XML changes and create a pull request:
+   ```bash
+   git add -A
+   git commit -m "Fill API documentation placeholders"
+   ```
+   Then use the `create_pull_request` tool:
+   - Branch: `automation/write-api-docs`
+   - Title: `Fill API documentation placeholders`
+   - Body: `Automated AI-generated documentation for XML API docs with 'To be added.' placeholders.`
 
-Then use the `create_pull_request` tool:
-- Branch: `automation/write-api-docs`
-- Title: `Fill API documentation placeholders`
-- Body: `Automated AI-generated documentation for XML API docs with 'To be added.' placeholders.`
+If there are no documentation changes after merging, call the `noop` tool instead.
 
-If there are no documentation changes after merging, skip the commit and PR.
+## Critical rules
 
-## Notes — path differences from SKILL.md
+- **Do NOT launch background sub-agents.** Do all work inline. Background agents time out and prevent Phase 6 from running.
+- **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
+- **Phase 6 MUST run.** If you skip it, no PR is created and the entire run is wasted.
+
+## Path differences from SKILL.md
 
 Because this workflow runs from the docs repo (not SkiaSharp), paths differ:
 
@@ -146,5 +159,3 @@ Because this workflow runs from the docs repo (not SkiaSharp), paths differ:
 | `binding/HarfBuzzSharp/` | `skiasharp/binding/HarfBuzzSharp/` |
 | `samples/Gallery/Shared/Samples/` | `skiasharp/samples/Gallery/Shared/Samples/` |
 | `dotnet cake --target=docs-format-docs` | `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` |
-
-**Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
