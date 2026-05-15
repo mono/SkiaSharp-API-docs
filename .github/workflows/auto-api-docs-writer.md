@@ -38,7 +38,13 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-          cache: true
+      - name: Cache NuGet global packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-global-${{ hashFiles('scripts/VERSIONS.txt', 'scripts/infra/shared/shared.cake') }}
+          restore-keys: |
+            nuget-global-
       - name: Cache GTK# installer
         id: cache-gtk
         uses: actions/cache@v4
