@@ -138,8 +138,6 @@ Because this workflow runs from the docs repo (not SkiaSharp), paths differ:
 | `binding/SkiaSharp/` | `skiasharp/binding/SkiaSharp/` |
 | `binding/HarfBuzzSharp/` | `skiasharp/binding/HarfBuzzSharp/` |
 | `samples/Gallery/Shared/Samples/` | `skiasharp/samples/Gallery/Shared/Samples/` |
-| `output/docs-work/` | `output/docs-work/` (same) |
 | `dotnet cake --target=docs-format-docs` | `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` |
-| `pwsh .agents/skills/api-docs/scripts/docs-tool.ps1` | `pwsh skiasharp/.agents/skills/api-docs/scripts/docs-tool.ps1` |
 
 **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
