@@ -57,6 +57,13 @@ jobs:
           Start-Process msiexec.exe -ArgumentList "/i", "$env:RUNNER_TEMP\gtk-sharp.msi", "/quiet", "/norestart" -Wait -NoNewWindow
       - name: Restore tools
         run: dotnet tool restore
+      - name: Cache NuGet package_cache
+        uses: actions/cache@v4
+        with:
+          path: externals/package_cache
+          key: docs-package-cache-${{ hashFiles('scripts/infra/shared/shared.cake') }}
+          restore-keys: |
+            docs-package-cache-
       - name: Download latest NuGet packages
         run: dotnet cake --target=docs-download-output
       - name: Regenerate API docs
