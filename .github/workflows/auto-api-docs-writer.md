@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: externals/package_cache
-          key: docs-package-cache-${{ hashFiles('scripts/infra/shared/shared.cake') }}
+          key: docs-package-cache-${{ hashFiles('scripts/VERSIONS.txt', 'scripts/infra/shared/shared.cake') }}
           restore-keys: |
             docs-package-cache-
       - name: Download latest NuGet packages
