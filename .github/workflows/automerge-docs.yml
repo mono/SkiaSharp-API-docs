@@ -101,7 +101,7 @@ jobs:
           echo "Auto-merging PR #$PR_NUMBER (SHA: $MERGE_SHA)..."
           merge_output=$(gh pr merge "$PR_NUMBER" --squash \
             --match-head-commit "$MERGE_SHA" \
-            --subject "Update API docs from latest CI build" \
+            --subject "Update API docs from latest CI build (#$PR_NUMBER)" \
             --body "Auto-merged after Learn Build validation passed (all checks green, no new warnings)." 2>&1) || {
             echo "merge_error<<EOF" >> "$GITHUB_OUTPUT"
             echo "$merge_output" >> "$GITHUB_OUTPUT"
