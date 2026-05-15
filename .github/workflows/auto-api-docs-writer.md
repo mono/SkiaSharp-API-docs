@@ -124,7 +124,7 @@ pre-agent-steps:
 
 1. **Phase 3 (Discover)** — read JSON files in `output/docs-work/`, read source code for context.
 2. **Phase 4 (Write)** — fill placeholders in the JSON files. Follow the rules in SKILL.md Phase 4.
-3. **Phase 5 (Review)** — do a **quick inline review yourself** (do NOT launch background sub-agents). Scan for "Gets or sets" on read-only properties, fabricated method names in code examples, and remaining "To be added." values. Fix issues directly.
+3. **Phase 5 (Review)** — launch the two background review agents described in SKILL.md Phase 5 (Fabrication Detector and Quality Reviewer). Wait for both to complete, then fix all CRITICAL issues. **Important: tell each review agent that it must do all its work directly — it must NOT spawn its own sub-agents or delegate to further background agents.**
 4. **Phase 6 (Merge)** — this is the critical step. Run:
    ```bash
    cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && dotnet cake --target=docs-format-docs && cd ..
@@ -143,7 +143,7 @@ If there are no documentation changes after merging, call the `noop` tool instea
 
 ## Critical rules
 
-- **Do NOT launch background sub-agents.** Do all work inline. Background agents time out and prevent Phase 6 from running.
+- **Review agents must NOT spawn their own sub-agents.** Each review agent must do all its work directly. Nested sub-agents hit the depth limit and cause timeouts.
 - **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
 - **Phase 6 MUST run.** If you skip it, no PR is created and the entire run is wasted.
 
