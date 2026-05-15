@@ -189,8 +189,8 @@
       </Parameters>
       <Docs>
         <param name="other">The path containing the elements to be added to the current path.</param>
-        <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-        <summary>Extends the current path with the path elements from another path, using the specified extension mode.</summary>
+        <param name="mode">One of the enumeration values that specifies how the path elements are appended.</param>
+        <summary>Appends the elements of another path to this path using the specified add mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -230,9 +230,9 @@
       </Parameters>
       <Docs>
         <param name="other">The path containing the elements to be added to the current path.</param>
-        <param name="matrix">Transformation matrix applied to the <paramref name="other" /> path.</param>
-        <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-        <summary>Extends the current path with the path elements from another path, by applying the specified transformation matrix, using the specified extension mode.</summary>
+        <param name="matrix">The matrix to apply to the elements of the other path before appending.</param>
+        <param name="mode">One of the enumeration values that specifies how the path elements are appended.</param>
+        <summary>Appends the elements of another path, transformed by the specified matrix, to this path using the specified add mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -265,10 +265,10 @@
       </Parameters>
       <Docs>
         <param name="other">The path containing the elements to be added to the current path.</param>
-        <param name="dx">The amount to translate the path in X as it is added.</param>
-        <param name="dy">The amount to translate the path in Y as it is added.</param>
-        <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-        <summary>Extends the current path with the path elements from another path offset by (<paramref name="dx" />, <paramref name="dy" />), using the specified extension mode.</summary>
+        <param name="dx">The horizontal offset to apply.</param>
+        <param name="dy">The vertical offset to apply.</param>
+        <param name="mode">One of the enumeration values that specifies how the path elements are appended.</param>
+        <summary>Appends the elements of another path, offset by the specified translation, to this path using the specified add mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -298,7 +298,7 @@
       </Parameters>
       <Docs>
         <param name="other">The path containing the elements to be added to the current path.</param>
-        <summary>Extends the current path with the path elements from another path in reverse order.</summary>
+        <summary>Appends the elements of another path in reverse order to this path.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -1582,9 +1582,9 @@ the first point is automatically set to (0, 0).
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the native handle to the underlying Skia object.</summary>
+        <value>An IntPtr representing the native Skia pointer.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="IsConcave">
