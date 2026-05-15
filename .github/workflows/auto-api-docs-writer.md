@@ -105,7 +105,8 @@ pre-agent-steps:
 
   - name: Clone SkiaSharp (shallow, with submodules)
     run: |
-      git clone --depth 1 --recurse-submodules --shallow-submodules \
+      git clone --depth 1 --branch mattleibow/dev-simplify-api-docs-workflow \
+        --recurse-submodules --shallow-submodules \
         https://github.com/mono/SkiaSharp.git skiasharp
       ln -sfn "$(pwd)" skiasharp/docs
       cd skiasharp && dotnet tool restore
