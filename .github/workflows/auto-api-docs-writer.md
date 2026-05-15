@@ -38,13 +38,23 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Install GTK# 2
+          cache: true
+      - name: Cache GTK# installer
+        id: cache-gtk
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}\gtk-sharp.msi
+          key: gtk-sharp-2.12.45
+      - name: Download GTK# 2
+        if: steps.cache-gtk.outputs.cache-hit != 'true'
         shell: pwsh
         run: |
           $msiUrl = "https://github.com/mono/gtk-sharp/releases/download/2.12.45/gtk-sharp-2.12.45.msi"
-          $msiPath = "$env:RUNNER_TEMP\gtk-sharp.msi"
-          Invoke-WebRequest -Uri $msiUrl -OutFile $msiPath
-          Start-Process msiexec.exe -ArgumentList "/i", $msiPath, "/quiet", "/norestart" -Wait -NoNewWindow
+          Invoke-WebRequest -Uri $msiUrl -OutFile "$env:RUNNER_TEMP\gtk-sharp.msi"
+      - name: Install GTK# 2
+        shell: pwsh
+        run: |
+          Start-Process msiexec.exe -ArgumentList "/i", "$env:RUNNER_TEMP\gtk-sharp.msi", "/quiet", "/norestart" -Wait -NoNewWindow
       - name: Restore tools
         run: dotnet tool restore
       - name: Download latest NuGet packages
