@@ -111,42 +111,35 @@ pre-agent-steps:
 
 # Auto API Docs Writer
 
-**Read `skiasharp/.agents/skills/api-docs/SKILL.md` and follow Phases 3–5.** Overrides for this workflow:
+**Read `skiasharp/.agents/skills/api-docs/SKILL.md` and follow all phases.** This workflow pre-computes Phases 1–2, so they will be no-ops — start effectively at Phase 3.
 
-- **Phases 1–2 are pre-computed** — stub regeneration and JSON extraction already ran. Skip them.
-- **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
-- **Source code reference**: SkiaSharp source is at `skiasharp/` (C# wrappers at `skiasharp/binding/SkiaSharp/`, C headers at `skiasharp/externals/skia/include/c/`).
+After Phase 6 (merge + format), commit and create a PR:
 
-Your workflow:
-1. **Phase 3 (Discover)** — read patterns, study existing good docs in `SkiaSharpAPI/`, read source code in `skiasharp/`
-2. **Phase 4 (Write)** — fill JSON files with documentation
-3. **Phase 5 (Review)** — launch two background agents, fix issues, repeat until clean
-4. **Finalize** — merge, validate, commit, and create the PR (see below)
+```bash
+git add -A
+git commit -m "Fill API documentation placeholders"
+```
 
-## Finalize — Merge, Format, and Create PR
-
-After completing Phases 3–5, run Phase 6 from the skill with adjusted paths:
-
-1. **Merge** JSON changes back into XML:
-   ```bash
-   pwsh skiasharp/.agents/skills/api-docs/scripts/docs-tool.ps1 merge output/docs-work/
-   ```
-
-2. **Format** the XML docs using the SkiaSharp build system:
-   ```bash
-   cd skiasharp && dotnet cake --target=docs-format-docs || true
-   cd ..
-   ```
-
-3. **Commit**:
-   ```bash
-   git add -A
-   git commit -m "Fill API documentation placeholders"
-   ```
-
-4. **Create PR** — use the `create_pull_request` tool:
-   - Branch: `automation/write-api-docs`
-   - Title: `Fill API documentation placeholders`
-   - Body: `Automated AI-generated documentation for XML API docs with 'To be added.' placeholders.`
+Then use the `create_pull_request` tool:
+- Branch: `automation/write-api-docs`
+- Title: `Fill API documentation placeholders`
+- Body: `Automated AI-generated documentation for XML API docs with 'To be added.' placeholders.`
 
 If there are no documentation changes after merging, skip the commit and PR.
+
+## Notes — path differences from SKILL.md
+
+Because this workflow runs from the docs repo (not SkiaSharp), paths differ:
+
+| SKILL.md reference | Actual path in this workflow |
+|---|---|
+| `docs/SkiaSharpAPI/` | `SkiaSharpAPI/` (repo root) |
+| `.agents/skills/api-docs/` | `skiasharp/.agents/skills/api-docs/` |
+| `binding/SkiaSharp/` | `skiasharp/binding/SkiaSharp/` |
+| `binding/HarfBuzzSharp/` | `skiasharp/binding/HarfBuzzSharp/` |
+| `samples/Gallery/Shared/Samples/` | `skiasharp/samples/Gallery/Shared/Samples/` |
+| `output/docs-work/` | `output/docs-work/` (same) |
+| `dotnet cake --target=docs-format-docs` | `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` |
+| `pwsh .agents/skills/api-docs/scripts/docs-tool.ps1` | `pwsh skiasharp/.agents/skills/api-docs/scripts/docs-tool.ps1` |
+
+**Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
