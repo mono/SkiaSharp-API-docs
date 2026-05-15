@@ -41,7 +41,7 @@ jobs:
       - name: Cache NuGet global packages
         uses: actions/cache@v4
         with:
-          path: ~/.nuget/packages
+          path: ${{ env.USERPROFILE }}\.nuget\packages
           key: nuget-global-${{ hashFiles('scripts/VERSIONS.txt', 'scripts/infra/shared/shared.cake') }}
           restore-keys: |
             nuget-global-
