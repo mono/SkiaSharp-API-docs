@@ -123,9 +123,9 @@ Your workflow:
 3. **Phase 5 (Review)** — launch two background agents, fix issues, repeat until clean
 4. **Finalize** — merge, validate, commit, and create the PR (see below)
 
-## Finalize — Merge, Validate, and Create PR
+## Finalize — Merge, Format, and Create PR
 
-After completing Phases 3–5:
+After completing Phases 3–5, run Phase 6 from the skill with adjusted paths:
 
 1. **Merge** JSON changes back into XML:
    ```bash
@@ -138,19 +138,13 @@ After completing Phases 3–5:
    cd ..
    ```
 
-3. **Safety check** — verify no `MemberSignature` or `TypeSignature` lines were deleted:
-   ```bash
-   git diff -- '*.xml' | grep '^-.*<\(MemberSignature\|TypeSignature\)' | head -20
-   ```
-   If any deletions appear, revert those files with `git checkout HEAD -- <file>` and re-run merge.
-
-4. **Commit**:
+3. **Commit**:
    ```bash
    git add -A
    git commit -m "Fill API documentation placeholders"
    ```
 
-5. **Create PR** — use the `create_pull_request` tool:
+4. **Create PR** — use the `create_pull_request` tool:
    - Branch: `automation/write-api-docs`
    - Title: `Fill API documentation placeholders`
    - Body: `Automated AI-generated documentation for XML API docs with 'To be added.' placeholders.`
