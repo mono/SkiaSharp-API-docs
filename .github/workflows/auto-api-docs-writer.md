@@ -170,7 +170,7 @@ post-steps:
 
 1. **Phase 3 (Discover)** — read `output/docs-work/manifest.json` first to see the list of files and field counts. Then read each JSON file individually as needed (do NOT try to concatenate or batch-read all files at once — they exceed tool output limits). Read source code for context.
 2. **Phase 4 (Write)** — fill placeholders in the JSON files. Follow the rules in SKILL.md Phase 4.
-3. **Phase 5 (Review)** — launch the two background review agents described in SKILL.md Phase 5 (Fabrication Detector and Quality Reviewer). Wait for both to complete, then fix all CRITICAL issues. **Important: tell each review agent that it must do all its work directly — it must NOT spawn its own sub-agents or delegate to further background agents.**
+3. **Phase 5 (Review)** — launch the **three** background review agents described in SKILL.md Phase 5 (Code Example Verifier, Factual Claim Verifier, Quality Reviewer). Wait for all three to complete, then fix all CRITICAL issues. **Important: tell each review agent that it must do all its work directly — it must NOT spawn its own sub-agents or delegate to further background agents.**
 4. **Phase 6 (Merge)** — this is the critical step. Run:
    ```bash
    cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && cd ..
