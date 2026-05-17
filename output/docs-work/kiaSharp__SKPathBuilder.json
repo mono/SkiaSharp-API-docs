@@ -1,0 +1,737 @@
+{
+  "entries": [
+    {
+      "memberType": "type",
+      "docId": null,
+      "fields": {
+        "summary": "Provides a mutable builder for constructing <see cref=\"T:SkiaSharp.SKPath\" /> objects incrementally.",
+        "remarksRequired": true,
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKPathBuilder` lets you build a path step-by-step by adding move, line, curve, arc, and shape operations, then produce an <xref:SkiaSharp.SKPath> with <xref:SkiaSharp.SKPathBuilder.Snapshot> (non-destructive copy) or <xref:SkiaSharp.SKPathBuilder.Detach> (transfers ownership, resetting the builder).\n\nThis type wraps a native Skia resource and implements `IDisposable`. Always dispose of it when done, either with a `using` statement or by calling `Dispose()` directly.\n\n## Examples\n\n```csharp\nusing var builder = new SKPathBuilder();\nbuilder.MoveTo(0, 0);\nbuilder.LineTo(100, 0);\nbuilder.LineTo(100, 100);\nbuilder.Close();\nusing var path = builder.Snapshot();\ncanvas.DrawPath(path, paint);\n```\n]]></format>"
+      }
+    },
+    {
+      "memberName": ".ctor",
+      "fields": {
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKPathBuilder\" /> class.",
+        "remarks": ""
+      },
+      "memberType": "Constructor",
+      "docId": "M:SkiaSharp.SKPathBuilder.#ctor",
+      "signature": "public SKPathBuilder ();"
+    },
+    {
+      "memberName": ".ctor",
+      "fields": {
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKPathBuilder\" /> class, pre-populated with a copy of the specified path.",
+        "params": {
+          "path": "The path whose contents are copied into the new builder."
+        },
+        "remarks": ""
+      },
+      "memberType": "Constructor",
+      "docId": "M:SkiaSharp.SKPathBuilder.#ctor(SkiaSharp.SKPath)",
+      "signature": "public SKPathBuilder (SkiaSharp.SKPath path);"
+    },
+    {
+      "memberName": "AddArc",
+      "fields": {
+        "summary": "Adds an arc that fits inside the specified oval, beginning at <paramref name=\"startAngle\" /> and sweeping <paramref name=\"sweepAngle\" /> degrees.",
+        "params": {
+          "oval": "The bounding oval that contains the arc.",
+          "startAngle": "The starting angle of the arc, in degrees.",
+          "sweepAngle": "The sweep angle of the arc, in degrees."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddArc(SkiaSharp.SKRect,System.Single,System.Single)",
+      "signature": "public void AddArc (SkiaSharp.SKRect oval, float startAngle, float sweepAngle);"
+    },
+    {
+      "memberName": "AddCircle",
+      "fields": {
+        "summary": "Adds a complete circle contour to the path.",
+        "params": {
+          "x": "The x-coordinate of the circle center.",
+          "y": "The y-coordinate of the circle center.",
+          "radius": "The radius of the circle.",
+          "dir": "One of the enumeration values that specifies the winding direction of the contour."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddCircle(System.Single,System.Single,System.Single,SkiaSharp.SKPathDirection)",
+      "signature": "public void AddCircle (float x, float y, float radius, SkiaSharp.SKPathDirection dir = SkiaSharp.SKPathDirection.Clockwise);"
+    },
+    {
+      "memberName": "AddOval",
+      "fields": {
+        "summary": "Adds a complete oval contour to the path.",
+        "params": {
+          "rect": "The bounding rectangle of the oval.",
+          "direction": "One of the enumeration values that specifies the winding direction of the contour."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddOval(SkiaSharp.SKRect,SkiaSharp.SKPathDirection)",
+      "signature": "public void AddOval (SkiaSharp.SKRect rect, SkiaSharp.SKPathDirection direction = SkiaSharp.SKPathDirection.Clockwise);"
+    },
+    {
+      "memberName": "AddPath",
+      "fields": {
+        "summary": "Appends all contours from another path to this builder.",
+        "params": {
+          "other": "The path whose contours are appended.",
+          "mode": "One of the enumeration values that specifies how the path is added."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddPath(SkiaSharp.SKPath,SkiaSharp.SKPathAddMode)",
+      "signature": "public void AddPath (SkiaSharp.SKPath other, SkiaSharp.SKPathAddMode mode = SkiaSharp.SKPathAddMode.Append);"
+    },
+    {
+      "memberName": "AddPath",
+      "fields": {
+        "summary": "Appends all contours from another path to this builder, transformed by the specified matrix.",
+        "params": {
+          "other": "The path whose contours are appended.",
+          "matrix": "The transformation matrix applied to the path before appending.",
+          "mode": "One of the enumeration values that specifies how the path is added."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddPath(SkiaSharp.SKPath,SkiaSharp.SKMatrix@,SkiaSharp.SKPathAddMode)",
+      "signature": "public void AddPath (SkiaSharp.SKPath other, in SkiaSharp.SKMatrix matrix, SkiaSharp.SKPathAddMode mode = SkiaSharp.SKPathAddMode.Append);"
+    },
+    {
+      "memberName": "AddPath",
+      "fields": {
+        "summary": "Appends all contours from another path to this builder, offset by the specified translation.",
+        "params": {
+          "other": "The path whose contours are appended.",
+          "dx": "The x offset applied to the path before appending.",
+          "dy": "The y offset applied to the path before appending.",
+          "mode": "One of the enumeration values that specifies how the path is added."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddPath(SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKPathAddMode)",
+      "signature": "public void AddPath (SkiaSharp.SKPath other, float dx, float dy, SkiaSharp.SKPathAddMode mode = SkiaSharp.SKPathAddMode.Append);"
+    },
+    {
+      "memberName": "AddPoly",
+      "fields": {
+        "summary": "Adds a polygon contour to the path from the specified array of points.",
+        "params": {
+          "points": "The array of points forming the polygon.",
+          "close": "<see langword=\"true\" /> to close the polygon contour; otherwise, <see langword=\"false\" />."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddPoly(SkiaSharp.SKPoint[],System.Boolean)",
+      "signature": "public void AddPoly (SkiaSharp.SKPoint[] points, bool close = true);"
+    },
+    {
+      "memberName": "AddPoly",
+      "fields": {
+        "summary": "Adds a polygon contour to the path from the specified span of points.",
+        "params": {
+          "points": "The span of points forming the polygon.",
+          "close": "<see langword=\"true\" /> to close the polygon contour; otherwise, <see langword=\"false\" />."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddPoly(System.ReadOnlySpan{SkiaSharp.SKPoint},System.Boolean)",
+      "signature": "public void AddPoly (ReadOnlySpan<SkiaSharp.SKPoint> points, bool close = true);"
+    },
+    {
+      "memberName": "AddRect",
+      "fields": {
+        "summary": "Adds a closed rectangle contour to the path.",
+        "params": {
+          "rect": "The rectangle to add.",
+          "direction": "One of the enumeration values that specifies the winding direction."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddRect(SkiaSharp.SKRect,SkiaSharp.SKPathDirection)",
+      "signature": "public void AddRect (SkiaSharp.SKRect rect, SkiaSharp.SKPathDirection direction = SkiaSharp.SKPathDirection.Clockwise);"
+    },
+    {
+      "memberName": "AddRect",
+      "fields": {
+        "summary": "Adds a closed rectangle contour to the path, starting at the specified corner.",
+        "params": {
+          "rect": "The rectangle to add.",
+          "direction": "One of the enumeration values that specifies the winding direction.",
+          "startIndex": "The zero-based index of the corner at which to start the contour."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddRect(SkiaSharp.SKRect,SkiaSharp.SKPathDirection,System.UInt32)",
+      "signature": "public void AddRect (SkiaSharp.SKRect rect, SkiaSharp.SKPathDirection direction, uint startIndex);"
+    },
+    {
+      "memberName": "AddRoundRect",
+      "fields": {
+        "summary": "Adds a closed rounded-rectangle contour to the path.",
+        "params": {
+          "rect": "The rounded rectangle to add.",
+          "direction": "One of the enumeration values that specifies the winding direction."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddRoundRect(SkiaSharp.SKRoundRect,SkiaSharp.SKPathDirection)",
+      "signature": "public void AddRoundRect (SkiaSharp.SKRoundRect rect, SkiaSharp.SKPathDirection direction = SkiaSharp.SKPathDirection.Clockwise);"
+    },
+    {
+      "memberName": "AddRoundRect",
+      "fields": {
+        "summary": "Adds a closed rounded-rectangle contour to the path, starting at the specified corner.",
+        "params": {
+          "rect": "The rounded rectangle to add.",
+          "direction": "One of the enumeration values that specifies the winding direction.",
+          "startIndex": "The zero-based index of the corner at which to start the contour."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddRoundRect(SkiaSharp.SKRoundRect,SkiaSharp.SKPathDirection,System.UInt32)",
+      "signature": "public void AddRoundRect (SkiaSharp.SKRoundRect rect, SkiaSharp.SKPathDirection direction, uint startIndex);"
+    },
+    {
+      "memberName": "AddRoundRect",
+      "fields": {
+        "summary": "Adds a closed rounded-rectangle contour to the path using individual x and y radii.",
+        "params": {
+          "rect": "The bounding rectangle.",
+          "rx": "The x-axis radius of the rounded corners.",
+          "ry": "The y-axis radius of the rounded corners.",
+          "dir": "One of the enumeration values that specifies the winding direction."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.AddRoundRect(SkiaSharp.SKRect,System.Single,System.Single,SkiaSharp.SKPathDirection)",
+      "signature": "public void AddRoundRect (SkiaSharp.SKRect rect, float rx, float ry, SkiaSharp.SKPathDirection dir = SkiaSharp.SKPathDirection.Clockwise);"
+    },
+    {
+      "memberName": "ArcTo",
+      "fields": {
+        "summary": "Appends an arc that connects the current point to <paramref name=\"point1\" />, then curves to <paramref name=\"point2\" />, with the specified radius.",
+        "params": {
+          "point1": "The tangent point after the current point.",
+          "point2": "The tangent point at the end of the arc.",
+          "radius": "The radius of the arc."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.ArcTo(SkiaSharp.SKPoint,SkiaSharp.SKPoint,System.Single)",
+      "signature": "public void ArcTo (SkiaSharp.SKPoint point1, SkiaSharp.SKPoint point2, float radius);"
+    },
+    {
+      "memberName": "ArcTo",
+      "fields": {
+        "summary": "Appends an arc that fits inside the specified oval, beginning at <paramref name=\"startAngle\" /> and sweeping <paramref name=\"sweepAngle\" /> degrees.",
+        "params": {
+          "oval": "The bounding oval that contains the arc.",
+          "startAngle": "The starting angle of the arc, in degrees.",
+          "sweepAngle": "The sweep angle of the arc, in degrees.",
+          "forceMoveTo": "<see langword=\"true\" /> to begin a new contour with a move-to before the arc; otherwise, <see langword=\"false\" />."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.ArcTo(SkiaSharp.SKRect,System.Single,System.Single,System.Boolean)",
+      "signature": "public void ArcTo (SkiaSharp.SKRect oval, float startAngle, float sweepAngle, bool forceMoveTo);"
+    },
+    {
+      "memberName": "ArcTo",
+      "fields": {
+        "summary": "Appends an SVG-style arc to the path.",
+        "params": {
+          "r": "The radii of the ellipse (x and y).",
+          "xAxisRotate": "The rotation of the ellipse x-axis, in degrees.",
+          "largeArc": "One of the enumeration values specifying whether to draw the larger arc.",
+          "sweep": "One of the enumeration values specifying the arc direction.",
+          "xy": "The end point of the arc."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.ArcTo(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPathArcSize,SkiaSharp.SKPathDirection,SkiaSharp.SKPoint)",
+      "signature": "public void ArcTo (SkiaSharp.SKPoint r, float xAxisRotate, SkiaSharp.SKPathArcSize largeArc, SkiaSharp.SKPathDirection sweep, SkiaSharp.SKPoint xy);"
+    },
+    {
+      "memberName": "ArcTo",
+      "fields": {
+        "summary": "Appends a tangent arc that connects the current point to (<paramref name=\"x2\" />, <paramref name=\"y2\" />) via (<paramref name=\"x1\" />, <paramref name=\"y1\" />), with the specified radius.",
+        "params": {
+          "x1": "The x-coordinate of the first tangent point.",
+          "y1": "The y-coordinate of the first tangent point.",
+          "x2": "The x-coordinate of the second tangent point.",
+          "y2": "The y-coordinate of the second tangent point.",
+          "radius": "The radius of the arc."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.ArcTo(System.Single,System.Single,System.Single,System.Single,System.Single)",
+      "signature": "public void ArcTo (float x1, float y1, float x2, float y2, float radius);"
+    },
+    {
+      "memberName": "ArcTo",
+      "fields": {
+        "summary": "Appends an SVG-style arc to the path using scalar radii and coordinates.",
+        "params": {
+          "rx": "The x-axis radius of the ellipse.",
+          "ry": "The y-axis radius of the ellipse.",
+          "xAxisRotate": "The rotation of the ellipse x-axis, in degrees.",
+          "largeArc": "One of the enumeration values specifying whether to draw the larger arc.",
+          "sweep": "One of the enumeration values specifying the arc direction.",
+          "x": "The x-coordinate of the end point.",
+          "y": "The y-coordinate of the end point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.ArcTo(System.Single,System.Single,System.Single,SkiaSharp.SKPathArcSize,SkiaSharp.SKPathDirection,System.Single,System.Single)",
+      "signature": "public void ArcTo (float rx, float ry, float xAxisRotate, SkiaSharp.SKPathArcSize largeArc, SkiaSharp.SKPathDirection sweep, float x, float y);"
+    },
+    {
+      "memberName": "Close",
+      "fields": {
+        "summary": "Closes the current contour by adding a line segment from the current point to the start of the contour.",
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.Close",
+      "signature": "public void Close ();"
+    },
+    {
+      "memberName": "ConicTo",
+      "fields": {
+        "summary": "Appends a conic curve to the path.",
+        "params": {
+          "point0": "The control point of the conic.",
+          "point1": "The end point of the conic.",
+          "w": "The weight of the conic, which controls the curvature."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.ConicTo(SkiaSharp.SKPoint,SkiaSharp.SKPoint,System.Single)",
+      "signature": "public void ConicTo (SkiaSharp.SKPoint point0, SkiaSharp.SKPoint point1, float w);"
+    },
+    {
+      "memberName": "ConicTo",
+      "fields": {
+        "summary": "Appends a conic curve to the path using scalar coordinates.",
+        "params": {
+          "x0": "The x-coordinate of the control point.",
+          "y0": "The y-coordinate of the control point.",
+          "x1": "The x-coordinate of the end point.",
+          "y1": "The y-coordinate of the end point.",
+          "w": "The weight of the conic, which controls the curvature."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.ConicTo(System.Single,System.Single,System.Single,System.Single,System.Single)",
+      "signature": "public void ConicTo (float x0, float y0, float x1, float y1, float w);"
+    },
+    {
+      "memberName": "CubicTo",
+      "fields": {
+        "summary": "Appends a cubic Bezier curve to the path.",
+        "params": {
+          "point0": "The first control point.",
+          "point1": "The second control point.",
+          "point2": "The end point of the curve."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.CubicTo(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKPoint)",
+      "signature": "public void CubicTo (SkiaSharp.SKPoint point0, SkiaSharp.SKPoint point1, SkiaSharp.SKPoint point2);"
+    },
+    {
+      "memberName": "CubicTo",
+      "fields": {
+        "summary": "Appends a cubic Bezier curve to the path using scalar coordinates.",
+        "params": {
+          "x0": "The x-coordinate of the first control point.",
+          "y0": "The y-coordinate of the first control point.",
+          "x1": "The x-coordinate of the second control point.",
+          "y1": "The y-coordinate of the second control point.",
+          "x2": "The x-coordinate of the end point.",
+          "y2": "The y-coordinate of the end point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.CubicTo(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)",
+      "signature": "public void CubicTo (float x0, float y0, float x1, float y1, float x2, float y2);"
+    },
+    {
+      "memberName": "Detach",
+      "fields": {
+        "returns": "A new <see cref=\"T:SkiaSharp.SKPath\" /> containing the path built so far. The builder is reset after this call.",
+        "remarks": "",
+        "summary": "Produces a new <see cref=\"T:SkiaSharp.SKPath\" /> from the current builder state and resets the builder."
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.Detach",
+      "signature": "public SkiaSharp.SKPath Detach ();"
+    },
+    {
+      "memberName": "Dispose",
+      "fields": {
+        "summary": "Called by the <see cref=\"M:SkiaSharp.SKPathBuilder.Dispose\" /> and <see cref=\"M:System.Object.Finalize\" /> methods to release the managed and unmanaged resources used by the current instance of the <see cref=\"T:SkiaSharp.SKPathBuilder\" /> class.",
+        "params": {
+          "disposing": "<see langword=\"true\" /> to release both managed and unmanaged resources; <see langword=\"false\" /> to release only unmanaged resources."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.Dispose(System.Boolean)",
+      "signature": "protected override void Dispose (bool disposing);"
+    },
+    {
+      "memberName": "DisposeNative",
+      "fields": {
+        "summary": "Releases the native resources used by this path builder.",
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.DisposeNative",
+      "signature": "protected override void DisposeNative ();"
+    },
+    {
+      "memberName": "FillType",
+      "fields": {
+        "summary": "Gets or sets the fill type used when converting this builder to a path.",
+        "remarks": "",
+        "value": "One of the enumeration values that specifies how the interior of the path is determined."
+      },
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKPathBuilder.FillType",
+      "signature": "public SkiaSharp.SKPathFillType FillType { get; set; }"
+    },
+    {
+      "memberName": "LineTo",
+      "fields": {
+        "summary": "Appends a line segment from the current point to the specified point.",
+        "params": {
+          "point": "The end point of the line segment."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.LineTo(SkiaSharp.SKPoint)",
+      "signature": "public void LineTo (SkiaSharp.SKPoint point);"
+    },
+    {
+      "memberName": "LineTo",
+      "fields": {
+        "summary": "Appends a line segment from the current point to the specified coordinates.",
+        "params": {
+          "x": "The x-coordinate of the end point.",
+          "y": "The y-coordinate of the end point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.LineTo(System.Single,System.Single)",
+      "signature": "public void LineTo (float x, float y);"
+    },
+    {
+      "memberName": "MoveTo",
+      "fields": {
+        "summary": "Begins a new contour at the specified point.",
+        "params": {
+          "point": "The starting point of the new contour."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.MoveTo(SkiaSharp.SKPoint)",
+      "signature": "public void MoveTo (SkiaSharp.SKPoint point);"
+    },
+    {
+      "memberName": "MoveTo",
+      "fields": {
+        "summary": "Begins a new contour at the specified coordinates.",
+        "params": {
+          "x": "The x-coordinate of the starting point.",
+          "y": "The y-coordinate of the starting point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.MoveTo(System.Single,System.Single)",
+      "signature": "public void MoveTo (float x, float y);"
+    },
+    {
+      "memberName": "QuadTo",
+      "fields": {
+        "summary": "Appends a quadratic Bezier curve to the path.",
+        "params": {
+          "point0": "The control point of the curve.",
+          "point1": "The end point of the curve."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.QuadTo(SkiaSharp.SKPoint,SkiaSharp.SKPoint)",
+      "signature": "public void QuadTo (SkiaSharp.SKPoint point0, SkiaSharp.SKPoint point1);"
+    },
+    {
+      "memberName": "QuadTo",
+      "fields": {
+        "summary": "Appends a quadratic Bezier curve to the path using scalar coordinates.",
+        "params": {
+          "x0": "The x-coordinate of the control point.",
+          "y0": "The y-coordinate of the control point.",
+          "x1": "The x-coordinate of the end point.",
+          "y1": "The y-coordinate of the end point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.QuadTo(System.Single,System.Single,System.Single,System.Single)",
+      "signature": "public void QuadTo (float x0, float y0, float x1, float y1);"
+    },
+    {
+      "memberName": "RArcTo",
+      "fields": {
+        "summary": "Appends an SVG-style arc to the path, with the end point specified relative to the current point.",
+        "params": {
+          "r": "The radii of the ellipse (x and y).",
+          "xAxisRotate": "The rotation of the ellipse x-axis, in degrees.",
+          "largeArc": "One of the enumeration values specifying whether to draw the larger arc.",
+          "sweep": "One of the enumeration values specifying the arc direction.",
+          "xy": "The end point offset relative to the current point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RArcTo(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPathArcSize,SkiaSharp.SKPathDirection,SkiaSharp.SKPoint)",
+      "signature": "public void RArcTo (SkiaSharp.SKPoint r, float xAxisRotate, SkiaSharp.SKPathArcSize largeArc, SkiaSharp.SKPathDirection sweep, SkiaSharp.SKPoint xy);"
+    },
+    {
+      "memberName": "RArcTo",
+      "fields": {
+        "summary": "Appends an SVG-style arc to the path using scalar radii, with the end point specified relative to the current point.",
+        "params": {
+          "rx": "The x-axis radius of the ellipse.",
+          "ry": "The y-axis radius of the ellipse.",
+          "xAxisRotate": "The rotation of the ellipse x-axis, in degrees.",
+          "largeArc": "One of the enumeration values specifying whether to draw the larger arc.",
+          "sweep": "One of the enumeration values specifying the arc direction.",
+          "x": "The x offset of the end point relative to the current point.",
+          "y": "The y offset of the end point relative to the current point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RArcTo(System.Single,System.Single,System.Single,SkiaSharp.SKPathArcSize,SkiaSharp.SKPathDirection,System.Single,System.Single)",
+      "signature": "public void RArcTo (float rx, float ry, float xAxisRotate, SkiaSharp.SKPathArcSize largeArc, SkiaSharp.SKPathDirection sweep, float x, float y);"
+    },
+    {
+      "memberName": "RConicTo",
+      "fields": {
+        "summary": "Appends a relative conic curve to the path, with points specified as offsets from the current point.",
+        "params": {
+          "point0": "The offset of the control point from the current point.",
+          "point1": "The offset of the end point from the current point.",
+          "w": "The weight of the conic, which controls the curvature."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RConicTo(SkiaSharp.SKPoint,SkiaSharp.SKPoint,System.Single)",
+      "signature": "public void RConicTo (SkiaSharp.SKPoint point0, SkiaSharp.SKPoint point1, float w);"
+    },
+    {
+      "memberName": "RConicTo",
+      "fields": {
+        "summary": "Appends a relative conic curve to the path using scalar offsets from the current point.",
+        "params": {
+          "dx0": "The x offset of the control point.",
+          "dy0": "The y offset of the control point.",
+          "dx1": "The x offset of the end point.",
+          "dy1": "The y offset of the end point.",
+          "w": "The weight of the conic, which controls the curvature."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RConicTo(System.Single,System.Single,System.Single,System.Single,System.Single)",
+      "signature": "public void RConicTo (float dx0, float dy0, float dx1, float dy1, float w);"
+    },
+    {
+      "memberName": "RCubicTo",
+      "fields": {
+        "summary": "Appends a relative cubic Bezier curve to the path, with points specified as offsets from the current point.",
+        "params": {
+          "point0": "The offset of the first control point.",
+          "point1": "The offset of the second control point.",
+          "point2": "The offset of the end point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RCubicTo(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKPoint)",
+      "signature": "public void RCubicTo (SkiaSharp.SKPoint point0, SkiaSharp.SKPoint point1, SkiaSharp.SKPoint point2);"
+    },
+    {
+      "memberName": "RCubicTo",
+      "fields": {
+        "summary": "Appends a relative cubic Bezier curve to the path using scalar offsets from the current point.",
+        "params": {
+          "dx0": "The x offset of the first control point.",
+          "dy0": "The y offset of the first control point.",
+          "dx1": "The x offset of the second control point.",
+          "dy1": "The y offset of the second control point.",
+          "dx2": "The x offset of the end point.",
+          "dy2": "The y offset of the end point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RCubicTo(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)",
+      "signature": "public void RCubicTo (float dx0, float dy0, float dx1, float dy1, float dx2, float dy2);"
+    },
+    {
+      "memberName": "Reset",
+      "fields": {
+        "summary": "Resets the builder to its empty state, removing all previously added path data.",
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.Reset",
+      "signature": "public void Reset ();"
+    },
+    {
+      "memberName": "ReverseAddPath",
+      "fields": {
+        "summary": "Appends all contours from another path to this builder in reverse order.",
+        "params": {
+          "other": "The path whose contours are appended in reverse."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.ReverseAddPath(SkiaSharp.SKPath)",
+      "signature": "public void ReverseAddPath (SkiaSharp.SKPath other);"
+    },
+    {
+      "memberName": "RLineTo",
+      "fields": {
+        "summary": "Appends a relative line segment from the current point, offset by the specified point.",
+        "params": {
+          "point": "The offset from the current point to the end of the line segment."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RLineTo(SkiaSharp.SKPoint)",
+      "signature": "public void RLineTo (SkiaSharp.SKPoint point);"
+    },
+    {
+      "memberName": "RLineTo",
+      "fields": {
+        "summary": "Appends a relative line segment from the current point using scalar offsets.",
+        "params": {
+          "dx": "The x offset from the current point.",
+          "dy": "The y offset from the current point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RLineTo(System.Single,System.Single)",
+      "signature": "public void RLineTo (float dx, float dy);"
+    },
+    {
+      "memberName": "RMoveTo",
+      "fields": {
+        "summary": "Begins a new contour at a point offset from the current point by the specified point.",
+        "params": {
+          "point": "The offset from the current point to the new contour start."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RMoveTo(SkiaSharp.SKPoint)",
+      "signature": "public void RMoveTo (SkiaSharp.SKPoint point);"
+    },
+    {
+      "memberName": "RMoveTo",
+      "fields": {
+        "summary": "Begins a new contour at a point offset from the current point using scalar offsets.",
+        "params": {
+          "dx": "The x offset from the current point.",
+          "dy": "The y offset from the current point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RMoveTo(System.Single,System.Single)",
+      "signature": "public void RMoveTo (float dx, float dy);"
+    },
+    {
+      "memberName": "RQuadTo",
+      "fields": {
+        "summary": "Appends a relative quadratic Bezier curve to the path, with points specified as offsets from the current point.",
+        "params": {
+          "point0": "The offset of the control point from the current point.",
+          "point1": "The offset of the end point from the current point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RQuadTo(SkiaSharp.SKPoint,SkiaSharp.SKPoint)",
+      "signature": "public void RQuadTo (SkiaSharp.SKPoint point0, SkiaSharp.SKPoint point1);"
+    },
+    {
+      "memberName": "RQuadTo",
+      "fields": {
+        "summary": "Appends a relative quadratic Bezier curve to the path using scalar offsets from the current point.",
+        "params": {
+          "dx0": "The x offset of the control point.",
+          "dy0": "The y offset of the control point.",
+          "dx1": "The x offset of the end point.",
+          "dy1": "The y offset of the end point."
+        },
+        "remarks": ""
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.RQuadTo(System.Single,System.Single,System.Single,System.Single)",
+      "signature": "public void RQuadTo (float dx0, float dy0, float dx1, float dy1);"
+    },
+    {
+      "memberName": "Snapshot",
+      "fields": {
+        "returns": "A new <see cref=\"T:SkiaSharp.SKPath\" /> containing the current path data. The builder retains its state after this call.",
+        "remarks": "",
+        "summary": "Produces a new <see cref=\"T:SkiaSharp.SKPath\" /> snapshot of the current builder state without resetting the builder."
+      },
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKPathBuilder.Snapshot",
+      "signature": "public SkiaSharp.SKPath Snapshot ();"
+    }
+  ],
+  "file": "/home/runner/work/SkiaSharp-API-docs/SkiaSharp-API-docs/SkiaSharpAPI/SkiaSharp/SKPathBuilder.xml",
+  "typeName": "SkiaSharp.SKPathBuilder"
+}

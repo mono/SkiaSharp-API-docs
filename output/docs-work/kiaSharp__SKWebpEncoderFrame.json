@@ -1,0 +1,79 @@
+{
+  "entries": [
+    {
+      "memberType": "type",
+      "docId": null,
+      "fields": {
+        "summary": "Represents a single frame in an animated WebP sequence, pairing pixel data with a display duration.",
+        "remarksRequired": true,
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKWebpEncoderFrame` associates an image (supplied as an <xref:SkiaSharp.SKBitmap>, <xref:SkiaSharp.SKImage>, or <xref:SkiaSharp.SKPixmap>) with a `TimeSpan` duration. Build an array of frames and pass it to <xref:SkiaSharp.SKWebpEncoder.EncodeAnimated(System.ReadOnlySpan{SkiaSharp.SKWebpEncoderFrame},SkiaSharp.SKWebpEncoderOptions)> to produce an animated WebP file.\n\nThis struct is a value type and does not require disposal, but the underlying image data it references may need to be kept alive.\n\n## Examples\n\n```csharp\nvar frames = new SKWebpEncoderFrame[]\n{\n    new SKWebpEncoderFrame(bitmap1, TimeSpan.FromMilliseconds(100)),\n    new SKWebpEncoderFrame(bitmap2, TimeSpan.FromMilliseconds(100)),\n};\nvar options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossy, 80);\nusing var data = SKWebpEncoder.EncodeAnimated(frames, options);\n```\n]]></format>"
+      }
+    },
+    {
+      "memberName": ".ctor",
+      "fields": {
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> struct with the specified bitmap and duration.",
+        "params": {
+          "bitmap": "The bitmap providing the pixel data for this frame.",
+          "duration": "The duration for which this frame is displayed."
+        },
+        "remarks": ""
+      },
+      "memberType": "Constructor",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKBitmap,System.TimeSpan)",
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKBitmap bitmap, TimeSpan duration);"
+    },
+    {
+      "memberName": ".ctor",
+      "fields": {
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> struct with the specified image and duration.",
+        "params": {
+          "image": "The image providing the pixel data for this frame.",
+          "duration": "The duration for which this frame is displayed."
+        },
+        "remarks": ""
+      },
+      "memberType": "Constructor",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKImage,System.TimeSpan)",
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKImage image, TimeSpan duration);"
+    },
+    {
+      "memberName": ".ctor",
+      "fields": {
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> struct with the specified pixmap and duration.",
+        "params": {
+          "pixmap": "The pixmap providing the pixel data for this frame.",
+          "duration": "The duration for which this frame is displayed."
+        },
+        "remarks": ""
+      },
+      "memberType": "Constructor",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKPixmap,System.TimeSpan)",
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKPixmap pixmap, TimeSpan duration);"
+    },
+    {
+      "memberName": "Duration",
+      "fields": {
+        "summary": "Gets or sets the duration for which this frame is displayed.",
+        "remarks": "",
+        "value": "The display duration of this frame."
+      },
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKWebpEncoderFrame.Duration",
+      "signature": "public TimeSpan Duration { get; set; }"
+    },
+    {
+      "memberName": "Pixmap",
+      "fields": {
+        "summary": "Gets or sets the pixel data for this frame.",
+        "remarks": "",
+        "value": "The <see cref=\"T:SkiaSharp.SKPixmap\" /> providing the pixel data for this frame."
+      },
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKWebpEncoderFrame.Pixmap",
+      "signature": "public SkiaSharp.SKPixmap Pixmap { get; set; }"
+    }
+  ],
+  "file": "/home/runner/work/SkiaSharp-API-docs/SkiaSharp-API-docs/SkiaSharpAPI/SkiaSharp/SKWebpEncoderFrame.xml",
+  "typeName": "SkiaSharp.SKWebpEncoderFrame"
+}

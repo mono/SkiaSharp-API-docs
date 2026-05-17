@@ -1,0 +1,59 @@
+{
+  "entries": [
+    {
+      "memberType": "type",
+      "docId": null,
+      "fields": {
+        "summary": "Specifies arguments for creating or cloning a typeface with specific font variation settings and palette overrides.",
+        "remarksRequired": true,
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKFontArguments` is a `ref struct` that holds font configuration options passed to <xref:SkiaSharp.SKTypeface.Clone(SkiaSharp.SKFontArguments)>. Use it to specify a variation design position, a color palette index, and individual palette color overrides.\n\nBecause this is a `ref struct`, it cannot be boxed or stored on the heap.\n\n## Examples\n\n```csharp\nvar args = new SKFontArguments\n{\n    CollectionIndex = 0,\n    PaletteIndex = 0,\n};\nusing var cloned = typeface.Clone(args);\n```\n]]></format>"
+      }
+    },
+    {
+      "memberName": "CollectionIndex",
+      "fields": {
+        "summary": "Gets or sets the index of the desired font within a font collection.",
+        "remarks": "",
+        "value": "The zero-based index of the font within the collection."
+      },
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKFontArguments.CollectionIndex",
+      "signature": "public int CollectionIndex { get; set; }"
+    },
+    {
+      "memberName": "PaletteIndex",
+      "fields": {
+        "summary": "Gets or sets the index of the color palette to use for the font.",
+        "remarks": "",
+        "value": "The zero-based index of the color palette."
+      },
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKFontArguments.PaletteIndex",
+      "signature": "public int PaletteIndex { get; set; }"
+    },
+    {
+      "memberName": "PaletteOverrides",
+      "fields": {
+        "summary": "Gets or sets the color overrides applied to specific entries in the selected palette.",
+        "remarks": "",
+        "value": "A read-only span of <see cref=\"T:SkiaSharp.SKFontPaletteOverride\" /> values specifying which palette entries to override."
+      },
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKFontArguments.PaletteOverrides",
+      "signature": "public ReadOnlySpan<SkiaSharp.SKFontPaletteOverride> PaletteOverrides { get; set; }"
+    },
+    {
+      "memberName": "VariationDesignPosition",
+      "fields": {
+        "summary": "Gets or sets the variation design position coordinates for font variations.",
+        "remarks": "",
+        "value": "A read-only span of <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> values specifying the axis-value pairs for the variation design position."
+      },
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKFontArguments.VariationDesignPosition",
+      "signature": "public ReadOnlySpan<SkiaSharp.SKFontVariationPositionCoordinate> VariationDesignPosition { get; set; }"
+    }
+  ],
+  "file": "/home/runner/work/SkiaSharp-API-docs/SkiaSharp-API-docs/SkiaSharpAPI/SkiaSharp/SKFontArguments.xml",
+  "typeName": "SkiaSharp.SKFontArguments"
+}
