@@ -131,13 +131,35 @@ pre-agent-steps:
       git clone --depth 1 --branch mattleibow/dev-simplify-api-docs-workflow \
         --recurse-submodules --shallow-submodules \
         https://github.com/mono/SkiaSharp.git skiasharp
-      ln -sfn "$(pwd)" skiasharp/docs
+      mkdir -p skiasharp/docs
+      ln -sfn "$(pwd)/SkiaSharpAPI" skiasharp/docs/SkiaSharpAPI
       cd skiasharp && dotnet tool restore
 
-  - name: Extract placeholders
+  - name: Extract placeholders and manifest
     run: |
       mkdir -p output/docs-work
       pwsh skiasharp/.agents/skills/api-docs/scripts/docs-tool.ps1 extract SkiaSharpAPI/ -Output output/docs-work/
+      python3 -c "
+      import json, os, glob
+      manifest = []
+      for f in sorted(glob.glob('output/docs-work/*.json')):
+          d = json.load(open(f))
+          manifest.append({
+              'file': os.path.basename(f),
+              'typeName': d.get('typeName',''),
+              'entryCount': len(d.get('entries',[])),
+              'fieldCount': sum(len(e.get('fields',{})) for e in d.get('entries',[]))
+          })
+      json.dump(manifest, open('output/docs-work/manifest.json','w'), indent=2)
+      print(f'Manifest: {len(manifest)} files, {sum(m[\"fieldCount\"] for m in manifest)} total fields')
+      "
+
+# -- Post-agent steps (host) ------------------------------------------
+# Format docs AFTER the agent merges JSON→XML. Runs on host outside the
+# sandbox so it has full access to the SkiaSharp cake scripts.
+post-steps:
+  - name: Format docs
+    run: cd skiasharp && dotnet cake --target=docs-format-docs
 ---
 
 # Auto API Docs Writer
@@ -146,13 +168,14 @@ pre-agent-steps:
 
 ## Execution order
 
-1. **Phase 3 (Discover)** — read JSON files in `output/docs-work/`, read source code for context.
+1. **Phase 3 (Discover)** — read `output/docs-work/manifest.json` first to see the list of files and field counts. Then read each JSON file individually as needed (do NOT try to concatenate or batch-read all files at once — they exceed tool output limits). Read source code for context.
 2. **Phase 4 (Write)** — fill placeholders in the JSON files. Follow the rules in SKILL.md Phase 4.
 3. **Phase 5 (Review)** — launch the two background review agents described in SKILL.md Phase 5 (Fabrication Detector and Quality Reviewer). Wait for both to complete, then fix all CRITICAL issues. **Important: tell each review agent that it must do all its work directly — it must NOT spawn its own sub-agents or delegate to further background agents.**
 4. **Phase 6 (Merge)** — this is the critical step. Run:
    ```bash
-   cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && dotnet cake --target=docs-format-docs && cd ..
+   cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && cd ..
    ```
+   Do NOT run `docs-format-docs` — it runs automatically as a post-step after the agent finishes.
 5. **Commit and PR** — commit the XML changes and create a pull request:
    ```bash
    git add -A
@@ -169,7 +192,8 @@ If there are no documentation changes after merging, call the `noop` tool instea
 
 - **Review agents must NOT spawn their own sub-agents.** Each review agent must do all its work directly. Nested sub-agents hit the depth limit and cause timeouts.
 - **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
-- **Phase 6 MUST run.** If you skip it, no PR is created and the entire run is wasted.
+- **Phase 6 MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
+- **Do NOT run `docs-format-docs`** — formatting runs automatically as a post-step.
 
 ## Path differences from SKILL.md
 
@@ -182,4 +206,3 @@ Because this workflow runs from the docs repo (not SkiaSharp), paths differ:
 | `binding/SkiaSharp/` | `skiasharp/binding/SkiaSharp/` |
 | `binding/HarfBuzzSharp/` | `skiasharp/binding/HarfBuzzSharp/` |
 | `samples/Gallery/Shared/Samples/` | `skiasharp/samples/Gallery/Shared/Samples/` |
-| `dotnet cake --target=docs-format-docs` | `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` |
