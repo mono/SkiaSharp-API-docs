@@ -10,8 +10,25 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies transfer function characteristics as defined by CICP (Coding-Independent Code Points, ITU-T H.273).</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKColorspaceTransferFnCicp` enumerates the transfer function (opto-electronic or
+electro-optical) values defined by the CICP specification (ITU-T H.273 / ISO/IEC 23091-2).
+These values describe how scene light is encoded into signal values.
+
+Use these values with <xref:SkiaSharp.SKColorSpace.CreateCicp(SkiaSharp.SKColorspacePrimariesCicp,SkiaSharp.SKColorspaceTransferFnCicp)>
+to create a color space from standard CICP parameters.
+
+## Examples
+
+```csharp
+var colorSpace = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec2020,
+    SKColorspaceTransferFnCicp.Pq);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Hlg">
@@ -28,7 +45,7 @@
       </ReturnValue>
       <MemberValue>18</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Hybrid Log-Gamma (HLG) transfer function for HDR content (CICP code 18).</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196621">
@@ -45,7 +62,7 @@
       </ReturnValue>
       <MemberValue>13</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>IEC 61966-2-1 (sRGB) transfer function (CICP code 13).</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196624">
@@ -62,7 +79,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>IEC 61966-2-4 transfer function (CICP code 11).</summary>
       </Docs>
     </Member>
     <Member MemberName="Linear">
@@ -79,7 +96,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Linear transfer function with no gamma encoding (CICP code 8).</summary>
       </Docs>
     </Member>
     <Member MemberName="Pq">
@@ -96,7 +113,7 @@
       </ReturnValue>
       <MemberValue>16</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Perceptual Quantizer (PQ) transfer function for HDR content (CICP code 16).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202010bit">
@@ -113,7 +130,7 @@
       </ReturnValue>
       <MemberValue>14</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 transfer function for 10-bit content (CICP code 14).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202012bit">
@@ -130,7 +147,7 @@
       </ReturnValue>
       <MemberValue>15</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 transfer function for 12-bit content (CICP code 15).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -147,7 +164,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System B/G transfer function with assumed gamma 2.8 (CICP code 5).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -164,7 +181,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M transfer function with assumed gamma 2.2 (CICP code 4).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -181,7 +198,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 transfer function for standard definition content (CICP code 6).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -198,7 +215,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 transfer function for high definition content (CICP code 1).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -215,7 +232,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240 transfer function for early HDTV content (CICP code 7).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -232,7 +249,7 @@
       </ReturnValue>
       <MemberValue>17</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 (DCDM) transfer function (CICP code 17).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -249,7 +266,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Unknown or unspecified transfer function (CICP code 0).</summary>
       </Docs>
     </Member>
   </Members>
