@@ -190,7 +190,7 @@
       <Docs>
         <param name="other">The path containing the elements to be added to the current path.</param>
         <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-        <summary>Extends the current path with the path elements from another path, using the specified extension mode.</summary>
+        <summary>Appends the specified path to this path using the given add mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -232,7 +232,7 @@
         <param name="other">The path containing the elements to be added to the current path.</param>
         <param name="matrix">Transformation matrix applied to the <paramref name="other" /> path.</param>
         <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-        <summary>Extends the current path with the path elements from another path, by applying the specified transformation matrix, using the specified extension mode.</summary>
+        <summary>Appends the specified path to this path after applying the given matrix transformation, using the given add mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -268,7 +268,7 @@
         <param name="dx">The amount to translate the path in X as it is added.</param>
         <param name="dy">The amount to translate the path in Y as it is added.</param>
         <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-        <summary>Extends the current path with the path elements from another path offset by (<paramref name="dx" />, <paramref name="dy" />), using the specified extension mode.</summary>
+        <summary>Appends the specified path to this path offset by the given translation, using the given add mode.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -298,7 +298,7 @@
       </Parameters>
       <Docs>
         <param name="other">The path containing the elements to be added to the current path.</param>
-        <summary>Extends the current path with the path elements from another path in reverse order.</summary>
+        <summary>Appends the specified path to this path in reverse order.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -1582,9 +1582,9 @@ the first point is automatically set to (0, 0).
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the handle to the underlying native Skia path object.</summary>
+        <value>The native pointer to the underlying Skia path object.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="IsConcave">
