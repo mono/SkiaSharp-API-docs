@@ -175,11 +175,12 @@ post-steps:
    
    **Do NOT pre-read JSON files or source code.** The writer agent handles its own discovery. Move to Phase 4 immediately after reading the manifest and references.
 
-2. **Phase 4 (Write — single agent)** — launch **1** background `general-purpose` agent:
-   - Use the writer prompt from SKILL.md Phase 4
-   - The writer reads ALL JSON files + corresponding C# source and fills all documentation
-   - One agent sees everything for cross-file consistency
-   - Wait for the writer to complete before Phase 5
+2. **Phase 4 (Write — 2 parallel agents)** — launch **2** background `general-purpose` agents:
+   - Read `manifest.json` to get the file list, split in half
+   - Writer 1 gets the first half, Writer 2 gets the second half
+   - Use the writer prompt from SKILL.md Phase 4, listing each writer's specific files
+   - Each writer reads its assigned JSON files + corresponding C# source and fills documentation
+   - Wait for BOTH writers to complete before Phase 5
 
 3. **Phase 5 (Review — 3 independent agents)** — launch **three** background `general-purpose` agents in parallel as described in SKILL.md Phase 5:
    - **Factual Claim Verifier** — reads source FIRST, then challenges every factual claim
