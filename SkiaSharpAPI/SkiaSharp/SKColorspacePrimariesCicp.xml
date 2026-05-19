@@ -10,8 +10,21 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Identifies the color primaries of a color space using CICP (Coding-Independent Code Points) codes from ITU-T H.273.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKColorspacePrimariesCicp` enumerates the color-primary standards defined in ITU-T H.273 (ISO/IEC 23091-2). These values are used with <xref:SkiaSharp.SKColorSpace.CreateCicp(SkiaSharp.SKColorspacePrimariesCicp,SkiaSharp.SKColorspaceTransferFnCicp)> to create a color space from standardized CICP codes, as found in HEIF, AVIF, and other modern image formats.
+
+## Examples
+
+```csharp
+// Create an sRGB-equivalent color space using CICP codes
+using var cs = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec709,
+    SKColorspaceTransferFnCicp.Iec6196621);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="GenericFilm">
@@ -28,7 +41,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Generic film primaries (CICP value 8).</summary>
       </Docs>
     </Member>
     <Member MemberName="ItuTH273Value22">
@@ -45,7 +58,7 @@
       </ReturnValue>
       <MemberValue>22</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>EBU Tech. 3213-E primaries used in some camera systems (CICP value 22).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec2020">
@@ -62,7 +75,7 @@
       </ReturnValue>
       <MemberValue>9</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 and BT.2100 wide-gamut primaries (CICP value 9).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -79,7 +92,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System B/G primaries used in PAL/SECAM broadcasting (CICP value 5).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -96,7 +109,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M primaries used in NTSC broadcasting (CICP value 4).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -113,7 +126,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 primaries used in standard-definition video (CICP value 6).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -130,7 +143,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 primaries used in HDTV and sRGB (CICP value 1).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteEg4321">
@@ -147,7 +160,7 @@
       </ReturnValue>
       <MemberValue>12</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE EG 432-1 (P3-D65) primaries used in digital cinema and Display P3 (CICP value 12).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteRp4312">
@@ -164,7 +177,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE RP 431-2 (DCI-P3) primaries used in digital cinema projection (CICP value 11).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -181,7 +194,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240 primaries used in early HDTV production (CICP value 7).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -198,7 +211,7 @@
       </ReturnValue>
       <MemberValue>10</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 (CIE 1931 XYZ) primaries (CICP value 10).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -215,7 +228,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Unknown or unspecified color primaries (CICP value 0).</summary>
       </Docs>
     </Member>
   </Members>

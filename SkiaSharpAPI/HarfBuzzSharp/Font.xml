@@ -321,10 +321,10 @@
         <Parameter Name="coords" Type="System.Span&lt;System.Int32&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="coords">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="coords">The span to fill with normalized variation coordinate values. Values are in the normalized HarfBuzz 2.14 fixed-point range.</param>
+        <summary>Copies the current normalized variation coordinates into the provided span.</summary>
+        <returns>The number of coordinates copied, which is the lesser of the number of axes and the length of <paramref name="coords" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetVerticalGlyphAdvance">
@@ -579,9 +579,9 @@
         <Parameter Name="coords" Type="System.ReadOnlySpan&lt;System.Single&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="coords">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="coords">The design-space coordinates, one per variation axis in the font's axis order.</param>
+        <summary>Sets the variation coordinates for the font using design-space float values.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetVariationCoordsNormalized">
@@ -600,9 +600,9 @@
         <Parameter Name="coords" Type="System.ReadOnlySpan&lt;System.Int32&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="coords">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="coords">The normalized coordinates, one per variation axis in the font's axis order.</param>
+        <summary>Sets the variation coordinates for the font using normalized HarfBuzz fixed-point values.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetVariationNamedInstance">
@@ -621,9 +621,9 @@
         <Parameter Name="instanceIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="instanceIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="instanceIndex">The zero-based index of the named instance as defined in the font's <c>fvar</c> table.</param>
+        <summary>Sets the font variation to the named instance at the specified index.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetVariations">
@@ -642,9 +642,9 @@
         <Parameter Name="variations" Type="System.ReadOnlySpan&lt;HarfBuzzSharp.Variation&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="variations">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="variations">The variation axis settings to apply. Each <see cref="T:HarfBuzzSharp.Variation" /> specifies an axis tag and its desired value.</param>
+        <summary>Sets the variation axes for the font using the specified tag–value pairs.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Shape">
@@ -1250,9 +1250,9 @@
         <ReturnType>System.Int32[]</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the current normalized variation coordinates for all axes of the font.</summary>
+        <value>An array of normalized HarfBuzz fixed-point coordinates, one per variation axis, or an empty array if the font has no variation axes.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
