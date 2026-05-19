@@ -173,22 +173,28 @@ post-steps:
    - `skiasharp/.agents/skills/api-docs/references/patterns.md` — formatting rules
    - `skiasharp/.agents/skills/api-docs/references/skia-patterns.md` — domain knowledge
    
-   **Do NOT pre-read JSON files or source code.** The writer agents handle their own discovery. Move to Phase 4 immediately after reading the manifest and references.
+   **Do NOT pre-read JSON files or source code.** The writer agent handles its own discovery. Move to Phase 4 immediately after reading the manifest and references.
 
-2. **Phase 4 (Write+Review — parallel)** — split the work across **3 parallel writer agents**:
-   - Sort manifest files by `fieldCount` descending
-   - Distribute round-robin into 3 groups to balance total fields
-   - Launch 3 parallel background `general-purpose` agents using the writer prompt from SKILL.md Phase 4
-   - Each agent writes docs AND self-reviews its own work (combined write+review in one agent)
-   - Wait for all 3 to complete before Phase 5
+2. **Phase 4 (Write — single agent)** — launch **1** background `general-purpose` agent:
+   - Use the writer prompt from SKILL.md Phase 4
+   - The writer reads ALL JSON files + corresponding C# source and fills all documentation
+   - One agent sees everything for cross-file consistency
+   - Wait for the writer to complete before Phase 5
 
-3. **Phase 5 (Merge)** — this is the critical step. Run:
+3. **Phase 5 (Review — 3 independent agents)** — launch **three** background `general-purpose` agents in parallel as described in SKILL.md Phase 5:
+   - **Factual Claim Verifier** — reads source FIRST, then challenges every factual claim
+   - **Code Example Verifier** — verifies every code example uses real APIs
+   - **Quality Reviewer** — checks style, completeness, and patterns
+   
+   Wait for all three to complete, then fix all CRITICAL issues directly in the JSON files.
+
+4. **Phase 6 (Merge)** — this is the critical step. Run:
    ```bash
    cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && cd ..
    ```
    Do NOT run `docs-format-docs` — it runs automatically as a post-step after the agent finishes.
 
-4. **Commit and PR** — commit the XML changes and create a pull request:
+5. **Commit and PR** — commit the XML changes and create a pull request:
    ```bash
    git checkout -b automation/write-api-docs
    git add SkiaSharpAPI/
@@ -203,11 +209,11 @@ If there are no documentation changes after merging, call the `noop` tool instea
 
 ## Critical rules
 
-- **Writer agents must NOT spawn their own sub-agents.** Each writer must do all its work (write + self-review) directly. Nested sub-agents hit the depth limit and cause timeouts.
+- **Sub-agents must NOT spawn their own sub-agents.** Each agent (writer and reviewers) must do all its work directly. Nested sub-agents hit the depth limit and cause timeouts.
 - **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
-- **Phase 5 (Merge) MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
+- **Phase 6 MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
 - **Do NOT run `docs-format-docs`** — formatting runs automatically as a post-step.
-- **Budget awareness:** You have limited tokens. Do NOT launch separate review sub-agents — the writers self-review. After writers complete, proceed IMMEDIATELY to merge and PR creation.
+- **Budget awareness:** After the writer completes and reviewers report, fix CRITICAL issues and proceed to merge+PR immediately. Do not re-run reviewers unless absolutely necessary.
 
 ## Path differences from SKILL.md
 
