@@ -1,0 +1,106 @@
+{
+  "file": "/home/runner/work/SkiaSharp-API-docs/SkiaSharp-API-docs/SkiaSharpAPI/SkiaSharp/SKFontVariationPositionCoordinate.xml",
+  "entries": [
+    {
+      "fields": {
+        "remarksRequired": true,
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKFontVariationPositionCoordinate` is a struct that pairs a variation axis tag with its current design-space value. Use an array or span of these coordinates to specify or inspect the variation position of a variable font.\n\nPass coordinates to <xref:SkiaSharp.SKTypeface.Clone(System.ReadOnlySpan{SkiaSharp.SKFontVariationPositionCoordinate})> or set them on <xref:SkiaSharp.SKFontArguments.VariationDesignPosition>. Read the current position from <xref:SkiaSharp.SKTypeface.VariationDesignPosition>.\n\n## Examples\n\n```csharp\nusing var typeface = SKTypeface.FromFile(\"Roboto-Variable.ttf\");\n\nvar coords = new[]\n{\n    new SKFontVariationPositionCoordinate\n    {\n        Axis = new SKFourByteTag('w', 'g', 'h', 't'),\n        Value = 700f\n    }\n};\n\nusing var bold = typeface.Clone(coords.AsSpan());\n```\n]]></format>",
+        "summary": "Pairs a variation axis tag with its design-space coordinate value."
+      },
+      "docId": null,
+      "memberType": "type"
+    },
+    {
+      "fields": {
+        "value": "The four-byte tag identifying the variation axis.",
+        "remarks": "",
+        "summary": "Gets or sets the four-byte tag identifying the variation axis."
+      },
+      "docId": "P:SkiaSharp.SKFontVariationPositionCoordinate.Axis",
+      "signature": "public SkiaSharp.SKFourByteTag Axis { get; set; }",
+      "memberType": "Property",
+      "memberName": "Axis"
+    },
+    {
+      "fields": {
+        "params": {
+          "obj": "The <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> to compare with the current instance."
+        },
+        "returns": "true if the specified instance is equal to the current instance; otherwise, false.",
+        "remarks": "",
+        "summary": "Determines whether the specified <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> is equal to the current instance."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationPositionCoordinate.Equals(SkiaSharp.SKFontVariationPositionCoordinate)",
+      "signature": "public readonly bool Equals (SkiaSharp.SKFontVariationPositionCoordinate obj);",
+      "memberType": "Method",
+      "memberName": "Equals"
+    },
+    {
+      "fields": {
+        "params": {
+          "obj": "The object to compare with the current instance."
+        },
+        "returns": "true if the specified object is equal to the current instance; otherwise, false.",
+        "remarks": "",
+        "summary": "Determines whether the specified object is equal to the current instance."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationPositionCoordinate.Equals(System.Object)",
+      "signature": "public override readonly bool Equals (object obj);",
+      "memberType": "Method",
+      "memberName": "Equals"
+    },
+    {
+      "fields": {
+        "returns": "A hash code for the current instance.",
+        "remarks": "",
+        "summary": "Returns the hash code for the current instance."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationPositionCoordinate.GetHashCode",
+      "signature": "public override readonly int GetHashCode ();",
+      "memberType": "Method",
+      "memberName": "GetHashCode"
+    },
+    {
+      "fields": {
+        "params": {
+          "left": "The first <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> to compare.",
+          "right": "The second <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> to compare."
+        },
+        "returns": "true if the two instances are equal; otherwise, false.",
+        "remarks": "",
+        "summary": "Determines whether two <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> instances are equal."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationPositionCoordinate.op_Equality(SkiaSharp.SKFontVariationPositionCoordinate,SkiaSharp.SKFontVariationPositionCoordinate)",
+      "signature": "public static bool operator == (SkiaSharp.SKFontVariationPositionCoordinate left, SkiaSharp.SKFontVariationPositionCoordinate right);",
+      "memberType": "Method",
+      "memberName": "op_Equality"
+    },
+    {
+      "fields": {
+        "params": {
+          "left": "The first <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> to compare.",
+          "right": "The second <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> to compare."
+        },
+        "returns": "true if the two instances are not equal; otherwise, false.",
+        "remarks": "",
+        "summary": "Determines whether two <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> instances are not equal."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationPositionCoordinate.op_Inequality(SkiaSharp.SKFontVariationPositionCoordinate,SkiaSharp.SKFontVariationPositionCoordinate)",
+      "signature": "public static bool operator != (SkiaSharp.SKFontVariationPositionCoordinate left, SkiaSharp.SKFontVariationPositionCoordinate right);",
+      "memberType": "Method",
+      "memberName": "op_Inequality"
+    },
+    {
+      "fields": {
+        "value": "The design-space value for the variation axis.",
+        "remarks": "",
+        "summary": "Gets or sets the design-space value for the variation axis."
+      },
+      "docId": "P:SkiaSharp.SKFontVariationPositionCoordinate.Value",
+      "signature": "public float Value { get; set; }",
+      "memberType": "Property",
+      "memberName": "Value"
+    }
+  ],
+  "typeName": "SkiaSharp.SKFontVariationPositionCoordinate"
+}

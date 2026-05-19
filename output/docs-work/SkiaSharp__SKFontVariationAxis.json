@@ -1,0 +1,139 @@
+{
+  "file": "/home/runner/work/SkiaSharp-API-docs/SkiaSharp-API-docs/SkiaSharpAPI/SkiaSharp/SKFontVariationAxis.xml",
+  "entries": [
+    {
+      "fields": {
+        "remarksRequired": true,
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKFontVariationAxis` is a struct that describes a single variation axis of an OpenType variable font. Each axis has a four-character tag, a minimum, default, and maximum value, and an optional flag indicating whether the axis should be hidden from user interfaces.\n\nUse <xref:SkiaSharp.SKTypeface.VariationDesignParameters> to retrieve all axes, or <xref:SkiaSharp.SKTypeface.GetVariationDesignParameters(System.Span{SkiaSharp.SKFontVariationAxis})> for a span-based overload.\n\n## Examples\n\n```csharp\nusing var typeface = SKTypeface.FromFile(\"Roboto-Variable.ttf\");\nvar axes = typeface.VariationDesignParameters;\n\nforeach (var axis in axes)\n{\n    Console.WriteLine($\"Tag: {axis.Tag}, Min: {axis.Min}, Default: {axis.Default}, Max: {axis.Max}, Hidden: {axis.IsHidden}\");\n}\n```\n]]></format>",
+        "summary": "Describes a single variation axis of an OpenType variable font."
+      },
+      "docId": null,
+      "memberType": "type"
+    },
+    {
+      "fields": {
+        "value": "The default value for this variation axis.",
+        "remarks": "",
+        "summary": "Gets or sets the default value for this variation axis."
+      },
+      "docId": "P:SkiaSharp.SKFontVariationAxis.Default",
+      "signature": "public float Default { get; set; }",
+      "memberType": "Property",
+      "memberName": "Default"
+    },
+    {
+      "fields": {
+        "params": {
+          "obj": "The <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> to compare with the current instance."
+        },
+        "returns": "true if the specified instance is equal to the current instance; otherwise, false.",
+        "remarks": "",
+        "summary": "Determines whether the specified <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> is equal to the current instance."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationAxis.Equals(SkiaSharp.SKFontVariationAxis)",
+      "signature": "public readonly bool Equals (SkiaSharp.SKFontVariationAxis obj);",
+      "memberType": "Method",
+      "memberName": "Equals"
+    },
+    {
+      "fields": {
+        "params": {
+          "obj": "The object to compare with the current instance."
+        },
+        "returns": "true if the specified object is equal to the current instance; otherwise, false.",
+        "remarks": "",
+        "summary": "Determines whether the specified object is equal to the current instance."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationAxis.Equals(System.Object)",
+      "signature": "public override readonly bool Equals (object obj);",
+      "memberType": "Method",
+      "memberName": "Equals"
+    },
+    {
+      "fields": {
+        "returns": "A hash code for the current instance.",
+        "remarks": "",
+        "summary": "Returns the hash code for the current instance."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationAxis.GetHashCode",
+      "signature": "public override readonly int GetHashCode ();",
+      "memberType": "Method",
+      "memberName": "GetHashCode"
+    },
+    {
+      "fields": {
+        "value": "true if this axis should be hidden from user interfaces; otherwise, false.",
+        "remarks": "",
+        "summary": "Gets or sets a value indicating whether this variation axis should be hidden from user interfaces."
+      },
+      "docId": "P:SkiaSharp.SKFontVariationAxis.IsHidden",
+      "signature": "public bool IsHidden { get; set; }",
+      "memberType": "Property",
+      "memberName": "IsHidden"
+    },
+    {
+      "fields": {
+        "value": "The maximum allowed value for this variation axis.",
+        "remarks": "",
+        "summary": "Gets or sets the maximum allowed value for this variation axis."
+      },
+      "docId": "P:SkiaSharp.SKFontVariationAxis.Max",
+      "signature": "public float Max { get; set; }",
+      "memberType": "Property",
+      "memberName": "Max"
+    },
+    {
+      "fields": {
+        "value": "The minimum allowed value for this variation axis.",
+        "remarks": "",
+        "summary": "Gets or sets the minimum allowed value for this variation axis."
+      },
+      "docId": "P:SkiaSharp.SKFontVariationAxis.Min",
+      "signature": "public float Min { get; set; }",
+      "memberType": "Property",
+      "memberName": "Min"
+    },
+    {
+      "fields": {
+        "params": {
+          "left": "The first <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> to compare.",
+          "right": "The second <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> to compare."
+        },
+        "returns": "true if the two instances are equal; otherwise, false.",
+        "remarks": "",
+        "summary": "Determines whether two <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> instances are equal."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationAxis.op_Equality(SkiaSharp.SKFontVariationAxis,SkiaSharp.SKFontVariationAxis)",
+      "signature": "public static bool operator == (SkiaSharp.SKFontVariationAxis left, SkiaSharp.SKFontVariationAxis right);",
+      "memberType": "Method",
+      "memberName": "op_Equality"
+    },
+    {
+      "fields": {
+        "params": {
+          "left": "The first <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> to compare.",
+          "right": "The second <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> to compare."
+        },
+        "returns": "true if the two instances are not equal; otherwise, false.",
+        "remarks": "",
+        "summary": "Determines whether two <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> instances are not equal."
+      },
+      "docId": "M:SkiaSharp.SKFontVariationAxis.op_Inequality(SkiaSharp.SKFontVariationAxis,SkiaSharp.SKFontVariationAxis)",
+      "signature": "public static bool operator != (SkiaSharp.SKFontVariationAxis left, SkiaSharp.SKFontVariationAxis right);",
+      "memberType": "Method",
+      "memberName": "op_Inequality"
+    },
+    {
+      "fields": {
+        "value": "The four-byte tag that identifies this variation axis (e.g., <c>'w','g','h','t'</c> for weight).",
+        "remarks": "",
+        "summary": "Gets or sets the four-byte tag that identifies this variation axis."
+      },
+      "docId": "P:SkiaSharp.SKFontVariationAxis.Tag",
+      "signature": "public SkiaSharp.SKFourByteTag Tag { get; set; }",
+      "memberType": "Property",
+      "memberName": "Tag"
+    }
+  ],
+  "typeName": "SkiaSharp.SKFontVariationAxis"
+}
