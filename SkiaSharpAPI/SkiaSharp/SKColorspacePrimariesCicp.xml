@@ -10,8 +10,20 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Defines CICP (Coding-independent Code Points) color primaries per ITU-T H.273.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKColorspacePrimariesCicp` enumerates standardized color primaries as defined by ITU-T H.273. These values are used with <xref:SkiaSharp.SKColorSpace.CreateCicp*> to create color spaces for wide-gamut and HDR content.
+
+## Examples
+
+```csharp
+var cs = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec2020,
+    SKColorspaceTransferFnCicp.Pq);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="GenericFilm">
@@ -28,7 +40,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Generic film color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="ItuTH273Value22">
@@ -45,7 +57,7 @@
       </ReturnValue>
       <MemberValue>22</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-T H.273 value 22 primaries (EBU Tech 3213-E).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec2020">
@@ -62,7 +74,7 @@
       </ReturnValue>
       <MemberValue>9</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 and BT.2100 primaries, used in HDR content.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -79,7 +91,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System B/G primaries (PAL/SECAM).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -96,7 +108,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M primaries (NTSC).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -113,7 +125,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -130,7 +142,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 primaries, used in HDTV and sRGB.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteEg4321">
@@ -147,7 +159,7 @@
       </ReturnValue>
       <MemberValue>12</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE EG 432-1 primaries (Display P3).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteRp4312">
@@ -164,7 +176,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE RP 431-2 primaries (DCI-P3).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -181,7 +193,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240 primaries, a precursor to Rec.709.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -198,7 +210,7 @@
       </ReturnValue>
       <MemberValue>10</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 primaries using the D65 illuminant.</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -215,7 +227,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Unknown or unspecified color primaries.</summary>
       </Docs>
     </Member>
   </Members>
