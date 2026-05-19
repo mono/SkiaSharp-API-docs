@@ -175,27 +175,20 @@ post-steps:
    
    **Do NOT pre-read JSON files or source code.** The writer agents handle their own discovery. Move to Phase 4 immediately after reading the manifest and references.
 
-2. **Phase 4 (Write — parallel)** — split the work across **3 parallel writer agents**:
+2. **Phase 4 (Write+Review — parallel)** — split the work across **3 parallel writer agents**:
    - Sort manifest files by `fieldCount` descending
    - Distribute round-robin into 3 groups to balance total fields
    - Launch 3 parallel background `general-purpose` agents using the writer prompt from SKILL.md Phase 4
-   - Each agent gets its file list, reads the patterns/skia-patterns, reads its JSON + source, and writes docs
+   - Each agent writes docs AND self-reviews its own work (combined write+review in one agent)
    - Wait for all 3 to complete before Phase 5
 
-3. **Phase 5 (Review — 4 parallel agents)** — launch **four** background review agents as described in SKILL.md Phase 5:
-   - **Code Example Verifier** (all files)
-   - **Factual Claim Verifier A** (first half of files, alphabetically)
-   - **Factual Claim Verifier B** (second half of files, alphabetically)
-   - **Quality Reviewer** (all files)
-   
-   Wait for all four to complete, then fix all CRITICAL issues. Each review agent must do all its work directly — it must NOT spawn sub-agents.
-
-4. **Phase 6 (Merge)** — this is the critical step. Run:
+3. **Phase 5 (Merge)** — this is the critical step. Run:
    ```bash
    cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && cd ..
    ```
    Do NOT run `docs-format-docs` — it runs automatically as a post-step after the agent finishes.
-5. **Commit and PR** — commit the XML changes and create a pull request:
+
+4. **Commit and PR** — commit the XML changes and create a pull request:
    ```bash
    git checkout -b automation/write-api-docs
    git add SkiaSharpAPI/
@@ -210,10 +203,11 @@ If there are no documentation changes after merging, call the `noop` tool instea
 
 ## Critical rules
 
-- **Review agents must NOT spawn their own sub-agents.** Each review agent must do all its work directly. Nested sub-agents hit the depth limit and cause timeouts.
+- **Writer agents must NOT spawn their own sub-agents.** Each writer must do all its work (write + self-review) directly. Nested sub-agents hit the depth limit and cause timeouts.
 - **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
-- **Phase 6 MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
+- **Phase 5 (Merge) MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
 - **Do NOT run `docs-format-docs`** — formatting runs automatically as a post-step.
+- **Budget awareness:** You have limited tokens. Do NOT launch separate review sub-agents — the writers self-review. After writers complete, proceed IMMEDIATELY to merge and PR creation.
 
 ## Path differences from SKILL.md
 
