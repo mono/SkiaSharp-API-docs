@@ -168,9 +168,28 @@ post-steps:
 
 ## Execution order
 
-1. **Phase 3 (Discover)** — read `output/docs-work/manifest.json` first to see the list of files and field counts. Then read each JSON file individually as needed (do NOT try to concatenate or batch-read all files at once — they exceed tool output limits). Read source code for context.
-2. **Phase 4 (Write)** — fill placeholders in the JSON files. Follow the rules in SKILL.md Phase 4.
-3. **Phase 5 (Review)** — launch the **three** background review agents described in SKILL.md Phase 5 (Code Example Verifier, Factual Claim Verifier, Quality Reviewer). Wait for all three to complete, then fix all CRITICAL issues. **Important: tell each review agent that it must do all its work directly — it must NOT spawn its own sub-agents or delegate to further background agents.**
+1. **Phase 3 (Discover — lightweight)** — you are an **orchestrator**, not a writer. Read ONLY:
+   - `output/docs-work/manifest.json` — file list and field counts
+   - `skiasharp/.agents/skills/api-docs/references/patterns.md` — formatting rules
+   - `skiasharp/.agents/skills/api-docs/references/skia-patterns.md` — domain knowledge
+   
+   **Do NOT pre-read JSON files or source code.** The writer agents handle their own discovery. Move to Phase 4 immediately after reading the manifest and references.
+
+2. **Phase 4 (Write — parallel)** — split the work across **3 parallel writer agents**:
+   - Sort manifest files by `fieldCount` descending
+   - Distribute round-robin into 3 groups to balance total fields
+   - Launch 3 parallel background `general-purpose` agents using the writer prompt from SKILL.md Phase 4
+   - Each agent gets its file list, reads the patterns/skia-patterns, reads its JSON + source, and writes docs
+   - Wait for all 3 to complete before Phase 5
+
+3. **Phase 5 (Review — 4 parallel agents)** — launch **four** background review agents as described in SKILL.md Phase 5:
+   - **Code Example Verifier** (all files)
+   - **Factual Claim Verifier A** (first half of files, alphabetically)
+   - **Factual Claim Verifier B** (second half of files, alphabetically)
+   - **Quality Reviewer** (all files)
+   
+   Wait for all four to complete, then fix all CRITICAL issues. Each review agent must do all its work directly — it must NOT spawn sub-agents.
+
 4. **Phase 6 (Merge)** — this is the critical step. Run:
    ```bash
    cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && cd ..
@@ -178,7 +197,8 @@ post-steps:
    Do NOT run `docs-format-docs` — it runs automatically as a post-step after the agent finishes.
 5. **Commit and PR** — commit the XML changes and create a pull request:
    ```bash
-   git add -A
+   git checkout -b automation/write-api-docs
+   git add SkiaSharpAPI/
    git commit -m "Fill API documentation placeholders"
    ```
    Then use the `create_pull_request` tool:
