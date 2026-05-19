@@ -10,8 +10,21 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies color primaries as defined by ITU-T H.273 (CICP) for use when creating color spaces.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+Specifies the color primaries of a color space as defined by ITU-T H.273 (CICP). These values are used with <see cref="M:SkiaSharp.SKColorSpace.CreateCicp(SkiaSharp.SKColorspacePrimariesCicp,SkiaSharp.SKColorspaceTransferFnCicp)" /> to create a standard color space.
+
+## Examples
+
+```csharp
+// Create an sRGB-like color space using Rec.709 primaries
+var colorSpace = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec709,
+    SKColorspaceTransferFnCicp.Rec709);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="GenericFilm">
@@ -28,7 +41,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Generic film color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="ItuTH273Value22">
@@ -45,7 +58,7 @@
       </ReturnValue>
       <MemberValue>22</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Color primaries corresponding to ITU-T H.273 value 22 (EG 432-1 / Display P3).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec2020">
@@ -62,7 +75,7 @@
       </ReturnValue>
       <MemberValue>9</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 / BT.2100 color primaries for ultra-high-definition content.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -79,7 +92,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System B/G color primaries (used in PAL/SECAM).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -96,7 +109,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M color primaries (used in NTSC).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -113,7 +126,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 color primaries for standard-definition video.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -130,7 +143,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 color primaries used for sRGB and high-definition video.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteEg4321">
@@ -147,7 +160,7 @@
       </ReturnValue>
       <MemberValue>12</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE EG 432-1 color primaries (P3 D65, used for Display P3).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteRp4312">
@@ -164,7 +177,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE RP 431-2 color primaries (P3 DCI, used for digital cinema).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -181,7 +194,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240M color primaries for early HDTV systems.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -198,7 +211,7 @@
       </ReturnValue>
       <MemberValue>10</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 color primaries for digital cinema (XYZ).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -215,7 +228,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Unknown or unspecified color primaries.</summary>
       </Docs>
     </Member>
   </Members>
