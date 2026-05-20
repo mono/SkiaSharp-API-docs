@@ -15,8 +15,31 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Overrides a single color entry in a color font's palette with a custom color.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFontPaletteOverride` overrides a single color entry in a color font's palette.
+Set <xref:SkiaSharp.SKFontPaletteOverride.Index> to the zero-based palette slot
+to replace, and <xref:SkiaSharp.SKFontPaletteOverride.Color> to the replacement
+color as a packed `sk_color_t` value in ARGB format (`0xAARRGGBB`).
+
+Pass an array of overrides via <xref:SkiaSharp.SKFontArguments.PaletteOverrides>
+when cloning a typeface.
+
+This struct is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+// Override the first palette entry with a custom red color
+var override0 = new SKFontPaletteOverride
+{
+    Index = 0,
+    Color = (uint)new SKColor(255, 0, 0),
+};
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Color">
@@ -37,9 +60,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the replacement color for the specified palette entry.</summary>
+        <value>The replacement color as a packed <c>sk_color_t</c> value in ARGB order (<c>0xAARRGGBB</c>).</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -66,10 +89,10 @@
         <Parameter Name="obj" Type="SkiaSharp.SKFontPaletteOverride" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:SkiaSharp.SKFontPaletteOverride" /> is equal to the current instance.</summary>
+        <returns><see langword="true" /> if both instances have the same <see cref="P:SkiaSharp.SKFontPaletteOverride.Index" /> and <see cref="P:SkiaSharp.SKFontPaletteOverride.Color" /> values; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -93,10 +116,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is a <see cref="T:SkiaSharp.SKFontPaletteOverride" /> with equal property values; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -118,9 +141,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns a hash code for the current instance.</summary>
+        <returns>A hash code derived from the <see cref="P:SkiaSharp.SKFontPaletteOverride.Index" /> and <see cref="P:SkiaSharp.SKFontPaletteOverride.Color" /> values.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Index">
@@ -141,9 +164,9 @@
         <ReturnType>System.UInt16</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the index of the palette color entry to replace.</summary>
+        <value>The zero-based index of the palette color entry to override.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -163,11 +186,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFontPaletteOverride" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontPaletteOverride" /> instances are equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> have equal property values; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -187,11 +210,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFontPaletteOverride" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontPaletteOverride" /> instances are not equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> differ in any property value; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
