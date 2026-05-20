@@ -13,6 +13,12 @@ on:
     paths:
       - ".github/workflows/auto-api-docs-writer*"
   workflow_dispatch:
+    inputs:
+      skiasharp_branch:
+        description: "SkiaSharp branch to use for scripts and references"
+        required: false
+        default: "main"
+        type: string
 
 # -- Custom jobs -------------------------------------------------------
 # Stub regeneration requires Windows (mdoc.exe is .NET Framework).
@@ -25,6 +31,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: mono/SkiaSharp
+          ref: ${{ inputs.skiasharp_branch || 'main' }}
           fetch-depth: 1
           submodules: recursive
       - name: Align docs to latest main
@@ -127,8 +134,10 @@ pre-agent-steps:
       path: SkiaSharpAPI/
 
   - name: Clone SkiaSharp (shallow, with submodules)
+    env:
+      SKIASHARP_BRANCH: ${{ inputs.skiasharp_branch || 'main' }}
     run: |
-      git clone --depth 1 --branch main \
+      git clone --depth 1 --branch "$SKIASHARP_BRANCH" \
         --recurse-submodules --shallow-submodules \
         https://github.com/mono/SkiaSharp.git skiasharp
       mkdir -p skiasharp/docs
@@ -139,20 +148,6 @@ pre-agent-steps:
     run: |
       mkdir -p output/docs-work
       pwsh skiasharp/.agents/skills/api-docs/scripts/docs-tool.ps1 extract SkiaSharpAPI/ -Output output/docs-work/
-      python3 -c "
-      import json, os, glob
-      manifest = []
-      for f in sorted(glob.glob('output/docs-work/*.json')):
-          d = json.load(open(f))
-          manifest.append({
-              'file': os.path.basename(f),
-              'typeName': d.get('typeName',''),
-              'entryCount': len(d.get('entries',[])),
-              'fieldCount': sum(len(e.get('fields',{})) for e in d.get('entries',[]))
-          })
-      json.dump(manifest, open('output/docs-work/manifest.json','w'), indent=2)
-      print(f'Manifest: {len(manifest)} files, {sum(m[\"fieldCount\"] for m in manifest)} total fields')
-      "
 
 # -- Post-agent steps (host) ------------------------------------------
 # Format docs AFTER the agent merges JSON→XML. Runs on host outside the
