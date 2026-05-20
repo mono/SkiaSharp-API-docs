@@ -1,0 +1,166 @@
+{
+  "entries": [
+    {
+      "fields": {
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKFourByteTag` represents a four-character code (FourCC) packed into a 32-bit unsigned integer, where the first character occupies the most-significant byte. This format is used throughout OpenType and Skia for identifying font tables, variation axes, and other tagged resources.\n\nYou can construct an `SKFourByteTag` from four characters (e.g., `new SKFourByteTag('w','g','h','t')`), from a raw `uint`, or by parsing a string with `SKFourByteTag.Parse`. The implicit conversions to and from `uint` make it interoperable with raw tag values.\n\nThis struct is a value type and does not require disposal.\n\n## Examples\n\n```csharp\nvar wght = SKFourByteTag.Parse(\"wght\");\nvar ital = new SKFourByteTag('i', 't', 'a', 'l');\nConsole.WriteLine(wght.ToString()); // \"wght\"\n```\n]]></format>",
+        "remarksRequired": true,
+        "summary": "Represents a four-byte tag (FourCC) used to identify OpenType font tables, variation axes, and other resources."
+      },
+      "docId": null,
+      "memberType": "type"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "params": {
+          "value": "The raw 32-bit unsigned integer value of the tag."
+        },
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKFourByteTag\" /> struct from a raw 32-bit value."
+      },
+      "signature": "public SKFourByteTag (uint value);",
+      "memberName": ".ctor",
+      "docId": "M:SkiaSharp.SKFourByteTag.#ctor(System.UInt32)",
+      "memberType": "Constructor"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "params": {
+          "c1": "The first character (most-significant byte).",
+          "c2": "The second character.",
+          "c3": "The third character.",
+          "c4": "The fourth character (least-significant byte)."
+        },
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKFourByteTag\" /> struct from four characters."
+      },
+      "signature": "public SKFourByteTag (char c1, char c2, char c3, char c4);",
+      "memberName": ".ctor",
+      "docId": "M:SkiaSharp.SKFourByteTag.#ctor(System.Char,System.Char,System.Char,System.Char)",
+      "memberType": "Constructor"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if the two tags are equal; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "other": "The <see cref=\"T:SkiaSharp.SKFourByteTag\" /> to compare with the current instance."
+        },
+        "summary": "Determines whether the specified <see cref=\"T:SkiaSharp.SKFourByteTag\" /> is equal to the current instance."
+      },
+      "signature": "public bool Equals (SkiaSharp.SKFourByteTag other);",
+      "memberName": "Equals",
+      "docId": "M:SkiaSharp.SKFourByteTag.Equals(SkiaSharp.SKFourByteTag)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if the specified object is a <see cref=\"T:SkiaSharp.SKFourByteTag\" /> equal to the current instance; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "obj": "The object to compare with the current instance."
+        },
+        "summary": "Determines whether the specified object is equal to the current instance."
+      },
+      "signature": "public override bool Equals (object obj);",
+      "memberName": "Equals",
+      "docId": "M:SkiaSharp.SKFourByteTag.Equals(System.Object)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "A hash code for the current instance.",
+        "summary": "Returns a hash code for the current instance."
+      },
+      "signature": "public override int GetHashCode ();",
+      "memberName": "GetHashCode",
+      "docId": "M:SkiaSharp.SKFourByteTag.GetHashCode",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"left\" /> equals <paramref name=\"right\" />; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "left": "The left operand.",
+          "right": "The right operand."
+        },
+        "summary": "Determines whether two <see cref=\"T:SkiaSharp.SKFourByteTag\" /> instances are equal."
+      },
+      "signature": "public static bool operator == (SkiaSharp.SKFourByteTag left, SkiaSharp.SKFourByteTag right);",
+      "memberName": "op_Equality",
+      "docId": "M:SkiaSharp.SKFourByteTag.op_Equality(SkiaSharp.SKFourByteTag,SkiaSharp.SKFourByteTag)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "The tag's packed 32-bit unsigned integer value.",
+        "params": {
+          "tag": "The <see cref=\"T:SkiaSharp.SKFourByteTag\" /> to convert."
+        },
+        "summary": "Implicitly converts a <see cref=\"T:SkiaSharp.SKFourByteTag\" /> to a 32-bit unsigned integer."
+      },
+      "signature": "public static implicit operator uint (SkiaSharp.SKFourByteTag tag);",
+      "memberName": "op_Implicit",
+      "docId": "M:SkiaSharp.SKFourByteTag.op_Implicit(SkiaSharp.SKFourByteTag)~System.UInt32",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "An <see cref=\"T:SkiaSharp.SKFourByteTag\" /> with the given raw value.",
+        "params": {
+          "tag": "The raw 32-bit unsigned integer to convert."
+        },
+        "summary": "Implicitly converts a 32-bit unsigned integer to a <see cref=\"T:SkiaSharp.SKFourByteTag\" />."
+      },
+      "signature": "public static implicit operator SkiaSharp.SKFourByteTag (uint tag);",
+      "memberName": "op_Implicit",
+      "docId": "M:SkiaSharp.SKFourByteTag.op_Implicit(System.UInt32)~SkiaSharp.SKFourByteTag",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"left\" /> does not equal <paramref name=\"right\" />; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "left": "The left operand.",
+          "right": "The right operand."
+        },
+        "summary": "Determines whether two <see cref=\"T:SkiaSharp.SKFourByteTag\" /> instances are not equal."
+      },
+      "signature": "public static bool operator != (SkiaSharp.SKFourByteTag left, SkiaSharp.SKFourByteTag right);",
+      "memberName": "op_Inequality",
+      "docId": "M:SkiaSharp.SKFourByteTag.op_Inequality(SkiaSharp.SKFourByteTag,SkiaSharp.SKFourByteTag)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "An <see cref=\"T:SkiaSharp.SKFourByteTag\" /> parsed from the string. If <paramref name=\"tag\" /> is <see langword=\"null\" /> or empty, returns a tag with the value zero. Strings shorter than four characters are padded with spaces; longer strings are truncated.",
+        "params": {
+          "tag": "The string to parse. Only the first four characters are used; shorter strings are padded with spaces."
+        },
+        "summary": "Parses a string into a <see cref=\"T:SkiaSharp.SKFourByteTag\" />."
+      },
+      "signature": "public static SkiaSharp.SKFourByteTag Parse (string? tag);",
+      "memberName": "Parse",
+      "docId": "M:SkiaSharp.SKFourByteTag.Parse(System.String)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "A four-character string representation of the tag.",
+        "summary": "Returns the four-character string representation of this tag."
+      },
+      "signature": "public override string ToString ();",
+      "memberName": "ToString",
+      "docId": "M:SkiaSharp.SKFourByteTag.ToString",
+      "memberType": "Method"
+    }
+  ],
+  "file": "/home/runner/work/SkiaSharp-API-docs/SkiaSharp-API-docs/SkiaSharpAPI/SkiaSharp/SKFourByteTag.xml",
+  "typeName": "SkiaSharp.SKFourByteTag"
+}

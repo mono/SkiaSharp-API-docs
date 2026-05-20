@@ -1,0 +1,108 @@
+{
+  "entries": [
+    {
+      "fields": {
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKWebpEncoder` provides static methods to encode raster images and animated sequences into the WebP image format. Use the `Encode` overloads for single-frame WebP images and the `EncodeAnimated` overloads for animated WebP sequences composed of multiple `SKWebpEncoderFrame` frames.\n\n## Examples\n\n```csharp\n// Encode a single pixmap to a WebP byte array\nusing var pixmap = bitmap.PeekPixels();\nvar options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossy, 80);\nusing SKData? data = SKWebpEncoder.Encode(pixmap, options);\nif (data != null)\n    File.WriteAllBytes(\"image.webp\", data.ToArray());\n```\n]]></format>",
+        "summary": "Provides static methods to encode images and animated sequences as WebP."
+      },
+      "docId": null,
+      "memberType": "type"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "An <see cref=\"T:SkiaSharp.SKData\" /> instance containing the encoded WebP image, or <see langword=\"null\" /> if encoding fails.",
+        "params": {
+          "src": "The source pixel data to encode.",
+          "options": "The encoding options, including quality and compression type."
+        },
+        "summary": "Encodes the specified pixmap as a WebP image and returns the result as an <see cref=\"T:SkiaSharp.SKData\" /> instance."
+      },
+      "signature": "public static SkiaSharp.SKData? Encode (SkiaSharp.SKPixmap src, SkiaSharp.SKWebpEncoderOptions options);",
+      "memberName": "Encode",
+      "docId": "M:SkiaSharp.SKWebpEncoder.Encode(SkiaSharp.SKPixmap,SkiaSharp.SKWebpEncoderOptions)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if encoding was successful; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "options": "The encoding options, including quality and compression type.",
+          "src": "The source pixel data to encode.",
+          "dst": "The destination stream to which the encoded WebP image is written."
+        },
+        "summary": "Encodes the specified pixmap as a WebP image and writes the result to a native stream."
+      },
+      "signature": "public static bool Encode (SkiaSharp.SKWStream dst, SkiaSharp.SKPixmap src, SkiaSharp.SKWebpEncoderOptions options);",
+      "memberName": "Encode",
+      "docId": "M:SkiaSharp.SKWebpEncoder.Encode(SkiaSharp.SKWStream,SkiaSharp.SKPixmap,SkiaSharp.SKWebpEncoderOptions)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if encoding was successful; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "options": "The encoding options, including quality and compression type.",
+          "src": "The source pixel data to encode.",
+          "dst": "The destination stream to which the encoded WebP image is written."
+        },
+        "summary": "Encodes the specified pixmap as a WebP image and writes the result to a managed stream."
+      },
+      "signature": "public static bool Encode (System.IO.Stream dst, SkiaSharp.SKPixmap src, SkiaSharp.SKWebpEncoderOptions options);",
+      "memberName": "Encode",
+      "docId": "M:SkiaSharp.SKWebpEncoder.Encode(System.IO.Stream,SkiaSharp.SKPixmap,SkiaSharp.SKWebpEncoderOptions)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "An <see cref=\"T:SkiaSharp.SKData\" /> instance containing the encoded animated WebP image, or <see langword=\"null\" /> if encoding fails.",
+        "params": {
+          "frames": "The sequence of frames to include in the animated WebP image.",
+          "options": "The encoding options, including quality and compression type."
+        },
+        "summary": "Encodes the specified frames as an animated WebP image and returns the result as an <see cref=\"T:SkiaSharp.SKData\" /> instance."
+      },
+      "signature": "public static SkiaSharp.SKData? EncodeAnimated (ReadOnlySpan<SkiaSharp.SKWebpEncoderFrame> frames, SkiaSharp.SKWebpEncoderOptions options);",
+      "memberName": "EncodeAnimated",
+      "docId": "M:SkiaSharp.SKWebpEncoder.EncodeAnimated(System.ReadOnlySpan{SkiaSharp.SKWebpEncoderFrame},SkiaSharp.SKWebpEncoderOptions)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if encoding was successful; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "options": "The encoding options, including quality and compression type.",
+          "dst": "The destination native stream to which the encoded animated WebP image is written.",
+          "frames": "The sequence of frames to include in the animated WebP image."
+        },
+        "summary": "Encodes the specified frames as an animated WebP image and writes the result to a native stream."
+      },
+      "signature": "public static bool EncodeAnimated (SkiaSharp.SKWStream dst, ReadOnlySpan<SkiaSharp.SKWebpEncoderFrame> frames, SkiaSharp.SKWebpEncoderOptions options);",
+      "memberName": "EncodeAnimated",
+      "docId": "M:SkiaSharp.SKWebpEncoder.EncodeAnimated(SkiaSharp.SKWStream,System.ReadOnlySpan{SkiaSharp.SKWebpEncoderFrame},SkiaSharp.SKWebpEncoderOptions)",
+      "memberType": "Method"
+    },
+    {
+      "fields": {
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if encoding was successful; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "options": "The encoding options, including quality and compression type.",
+          "dst": "The destination managed stream to which the encoded animated WebP image is written.",
+          "frames": "The sequence of frames to include in the animated WebP image."
+        },
+        "summary": "Encodes the specified frames as an animated WebP image and writes the result to a managed stream."
+      },
+      "signature": "public static bool EncodeAnimated (System.IO.Stream dst, ReadOnlySpan<SkiaSharp.SKWebpEncoderFrame> frames, SkiaSharp.SKWebpEncoderOptions options);",
+      "memberName": "EncodeAnimated",
+      "docId": "M:SkiaSharp.SKWebpEncoder.EncodeAnimated(System.IO.Stream,System.ReadOnlySpan{SkiaSharp.SKWebpEncoderFrame},SkiaSharp.SKWebpEncoderOptions)",
+      "memberType": "Method"
+    }
+  ],
+  "file": "/home/runner/work/SkiaSharp-API-docs/SkiaSharp-API-docs/SkiaSharpAPI/SkiaSharp/SKWebpEncoder.xml",
+  "typeName": "SkiaSharp.SKWebpEncoder"
+}
