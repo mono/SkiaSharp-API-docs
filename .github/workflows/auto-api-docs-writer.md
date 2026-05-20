@@ -128,7 +128,7 @@ pre-agent-steps:
 
   - name: Clone SkiaSharp (shallow, with submodules)
     run: |
-      git clone --depth 1 --branch mattleibow/dev-simplify-api-docs-workflow \
+      git clone --depth 1 --branch main \
         --recurse-submodules --shallow-submodules \
         https://github.com/mono/SkiaSharp.git skiasharp
       mkdir -p skiasharp/docs
