@@ -10,8 +10,25 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies the opto-electronic transfer function (EOTF/OETF) of a color space using Coding-Independent Code Points (CICP) as defined in ITU-T H.273.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKColorspaceTransferFnCicp` identifies the transfer function (gamma curve) of a color space using the standardized numeric codes from ITU-T H.273 (formerly ISO/IEC 23091-2). These values are used in container formats such as HEIF, AVIF, and WebP to signal the electro-optical or opto-electronic transfer characteristics of image data.
+
+Pass a value from this enumeration together with a value from <xref:SkiaSharp.SKColorspacePrimariesCicp> to <xref:SkiaSharp.SKColorSpace.CreateCicp(SkiaSharp.SKColorspacePrimariesCicp,SkiaSharp.SKColorspaceTransferFnCicp)> to construct a standard color space.
+
+Because this is an enumeration, no disposal is required.
+
+## Examples
+
+```csharp
+// Create a standard sRGB color space using CICP identifiers
+using var colorSpace = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec709,
+    SKColorspaceTransferFnCicp.Iec6196621);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Hlg">
@@ -28,7 +45,7 @@
       </ReturnValue>
       <MemberValue>18</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Hybrid Log-Gamma (HLG) transfer function defined in ITU-R BT.2100, used for broadcast HDR video (CICP code point 18).</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196621">
@@ -45,7 +62,7 @@
       </ReturnValue>
       <MemberValue>13</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>IEC 61966-2-1 transfer function, which defines the sRGB standard gamma curve (CICP code point 13).</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196624">
@@ -62,7 +79,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>IEC 61966-2-4 transfer function, used for extended-gamut video (xvYCC) (CICP code point 11).</summary>
       </Docs>
     </Member>
     <Member MemberName="Linear">
@@ -79,7 +96,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Linear transfer function with no gamma encoding (CICP code point 8).</summary>
       </Docs>
     </Member>
     <Member MemberName="Pq">
@@ -96,7 +113,7 @@
       </ReturnValue>
       <MemberValue>16</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 2084 Perceptual Quantizer (PQ) transfer function defined in ITU-R BT.2100, used for HDR10 and Dolby Vision content (CICP code point 16).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202010bit">
@@ -113,7 +130,7 @@
       </ReturnValue>
       <MemberValue>14</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 transfer function for 10-bit content (CICP code point 14).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202012bit">
@@ -130,7 +147,7 @@
       </ReturnValue>
       <MemberValue>15</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 transfer function for 12-bit content (CICP code point 15).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -147,7 +164,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System B/G transfer function, assumed gamma of 2.8 (CICP code point 5).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -164,7 +181,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M transfer function, assumed gamma of 2.2 (CICP code point 4).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -181,7 +198,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 / BT.709 transfer function used for standard-definition and high-definition video (CICP code point 6).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -198,7 +215,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 transfer function used for high-definition video (CICP code point 1).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -215,7 +232,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240 transfer function, used for early HDTV production (CICP code point 7).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -232,7 +249,7 @@
       </ReturnValue>
       <MemberValue>17</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 transfer function, used for Digital Cinema (CICP code point 17).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -249,7 +266,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Unknown or unspecified transfer function (CICP code point 0).</summary>
       </Docs>
     </Member>
   </Members>
