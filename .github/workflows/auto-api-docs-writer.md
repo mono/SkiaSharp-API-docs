@@ -175,7 +175,7 @@ post-steps:
    
    **Do NOT pre-read JSON files or source code.** The writer agent handles its own discovery. Move to Phase 4 immediately after reading the manifest and references.
 
-2. **Phase 4 (Write — 2 parallel agents)** — launch **2** background `general-purpose` agents:
+2. **Phase 4 (Write — 1 agent)** — launch **1** background `general-purpose` agent:
    - Read `manifest.json` to get the file list, split in half
    - Writer 1 gets the first half, Writer 2 gets the second half
    - Use the writer prompt from SKILL.md Phase 4, listing each writer's specific files
