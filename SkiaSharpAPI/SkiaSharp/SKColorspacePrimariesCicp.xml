@@ -10,8 +10,26 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies the color primaries defined by ITU-T H.273 (Coding-Independent Code Points).</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKColorspacePrimariesCicp` enumerates the color primaries defined by ITU-T H.273
+(Coding-Independent Code Points). Each value corresponds to a specific set of color
+primary chromaticity coordinates used to define a color space.
+
+Use these values with <xref:SkiaSharp.SKColorSpace.CreateCicp(SkiaSharp.SKColorspacePrimariesCicp,SkiaSharp.SKColorspaceTransferFnCicp)>
+to create an <xref:SkiaSharp.SKColorSpace> from a CICP primaries and transfer characteristics pair.
+
+## Examples
+
+```csharp
+// Create an sRGB-compatible color space using CICP values
+var colorSpace = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec709,
+    SKColorspaceTransferFnCicp.Iec6196621);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="GenericFilm">
@@ -28,7 +46,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Generic film primaries (value 8). Identical to the CIE 1931 color gamut.</summary>
       </Docs>
     </Member>
     <Member MemberName="ItuTH273Value22">
@@ -45,7 +63,7 @@
       </ReturnValue>
       <MemberValue>22</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>EBU Tech. 3213-E primaries (value 22), used in some broadcast applications.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec2020">
@@ -62,7 +80,7 @@
       </ReturnValue>
       <MemberValue>9</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 / BT.2100 primaries (value 9), used for ultra-high-definition television.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -79,7 +97,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System B/G primaries (value 5), used for PAL and SECAM standard-definition television.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -96,7 +114,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M primaries (value 4), used for NTSC standard-definition television.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -113,7 +131,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 / SMPTE 170M primaries (value 6), used for standard-definition digital television.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -130,7 +148,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 primaries (value 1), used for high-definition television and sRGB.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteEg4321">
@@ -147,7 +165,7 @@
       </ReturnValue>
       <MemberValue>12</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE EG 432-1 (DCI-P3) primaries (value 12), used for digital cinema and modern wide-color-gamut displays.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteRp4312">
@@ -164,7 +182,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE RP 431-2 (DCI-P3 with D60 white point) primaries (value 11).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -181,7 +199,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240M primaries (value 7), originally used for early HDTV production.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -198,7 +216,7 @@
       </ReturnValue>
       <MemberValue>10</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 primaries (value 10), used for digital cinema (XYZ color space).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -215,7 +233,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Unknown or unspecified color primaries (value 0).</summary>
       </Docs>
     </Member>
   </Members>

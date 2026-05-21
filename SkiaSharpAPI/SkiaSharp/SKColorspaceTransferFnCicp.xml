@@ -10,8 +10,26 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies the transfer characteristics (opto-electronic transfer function) defined by ITU-T H.273 (Coding-Independent Code Points).</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKColorspaceTransferFnCicp` enumerates the opto-electronic transfer functions (OETF)
+defined by ITU-T H.273 (Coding-Independent Code Points). Each value specifies how
+linear scene light is encoded as a digital signal.
+
+Use these values with <xref:SkiaSharp.SKColorSpace.CreateCicp(SkiaSharp.SKColorspacePrimariesCicp,SkiaSharp.SKColorspaceTransferFnCicp)>
+to create an <xref:SkiaSharp.SKColorSpace> from a CICP primaries and transfer characteristics pair.
+
+## Examples
+
+```csharp
+// Create a P3-D65 color space with PQ transfer function (HDR)
+var colorSpace = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec2020,
+    SKColorspaceTransferFnCicp.Pq);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Hlg">
@@ -28,7 +46,7 @@
       </ReturnValue>
       <MemberValue>18</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2100 Hybrid Log-Gamma (HLG) transfer function (value 18), used for HDR broadcast.</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196621">
@@ -45,7 +63,7 @@
       </ReturnValue>
       <MemberValue>13</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>IEC 61966-2-1 (sRGB) transfer function (value 13), the standard transfer function for computer monitors and the web.</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196624">
@@ -62,7 +80,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>IEC 61966-2-4 (xvYCC) transfer function (value 11).</summary>
       </Docs>
     </Member>
     <Member MemberName="Linear">
@@ -79,7 +97,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Linear transfer function — no gamma encoding (value 8).</summary>
       </Docs>
     </Member>
     <Member MemberName="Pq">
@@ -96,7 +114,7 @@
       </ReturnValue>
       <MemberValue>16</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 2084 Perceptual Quantizer (PQ) transfer function (value 16), used for HDR10 and Dolby Vision content.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202010bit">
@@ -113,7 +131,7 @@
       </ReturnValue>
       <MemberValue>14</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 10-bit transfer function (value 14).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202012bit">
@@ -130,7 +148,7 @@
       </ReturnValue>
       <MemberValue>15</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 12-bit transfer function (value 15).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -147,7 +165,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System B/G (assumed display gamma) transfer function (value 5), used for PAL and SECAM television.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -164,7 +182,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M (assumed display gamma) transfer function (value 4), used for NTSC television.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -181,7 +199,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 / SMPTE 170M transfer function (value 6), used for standard-definition digital television.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -198,7 +216,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 transfer function (value 1), used for high-definition television.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -215,7 +233,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240M transfer function (value 7), used for early HDTV production.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -232,7 +250,7 @@
       </ReturnValue>
       <MemberValue>17</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 transfer function (value 17), used for digital cinema.</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -249,7 +267,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Unknown or unspecified transfer characteristics (value 0).</summary>
       </Docs>
     </Member>
   </Members>
