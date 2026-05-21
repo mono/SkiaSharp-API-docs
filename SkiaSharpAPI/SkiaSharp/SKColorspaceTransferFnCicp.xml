@@ -10,8 +10,25 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies transfer characteristics (opto-electronic transfer functions) as defined by the CICP standard (ITU-T H.273).</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKColorspaceTransferFnCicp` enumerates the opto-electronic transfer functions (OETF) and
+electro-optical transfer functions (EOTF) defined by the CICP standard (ITU-T H.273 / ISO/IEC 23091-2).
+These values describe how linear light values map to encoded signal values.
+
+Use these values with <xref:SkiaSharp.SKColorSpace.CreateCicp(SkiaSharp.SKColorspacePrimariesCicp,SkiaSharp.SKColorspaceTransferFnCicp)>
+to create a color space from CICP parameters.
+
+## Examples
+
+```csharp
+var hdrColorSpace = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec2020,
+    SKColorspaceTransferFnCicp.Pq);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Hlg">
@@ -28,7 +45,7 @@
       </ReturnValue>
       <MemberValue>18</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Hybrid Log-Gamma (HLG) transfer function for HDR broadcast, as defined by ARIB STD-B67 (CICP value 18).</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196621">
@@ -45,7 +62,7 @@
       </ReturnValue>
       <MemberValue>13</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>IEC 61966-2-1 transfer function defining the sRGB standard (CICP value 13).</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196624">
@@ -62,7 +79,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>IEC 61966-2-4 extended-gamut YCC transfer function (CICP value 11).</summary>
       </Docs>
     </Member>
     <Member MemberName="Linear">
@@ -79,7 +96,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Linear transfer function with no gamma encoding (CICP value 8).</summary>
       </Docs>
     </Member>
     <Member MemberName="Pq">
@@ -96,7 +113,7 @@
       </ReturnValue>
       <MemberValue>16</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 2084 Perceptual Quantizer (PQ) transfer function for HDR content (CICP value 16).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202010bit">
@@ -113,7 +130,7 @@
       </ReturnValue>
       <MemberValue>14</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 10-bit transfer function (CICP value 14).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202012bit">
@@ -130,7 +147,7 @@
       </ReturnValue>
       <MemberValue>15</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 12-bit transfer function (CICP value 15).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -147,7 +164,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System B/G assumed display gamma transfer function, used in older European broadcasts (CICP value 5).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -164,7 +181,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M assumed display gamma transfer function, used in older NTSC broadcasts (CICP value 4).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -181,7 +198,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 transfer function for standard-definition television (CICP value 6).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -198,7 +215,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 transfer function for high-definition television (CICP value 1).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -215,7 +232,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240 transfer function, used in early HDTV production (CICP value 7).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -232,7 +249,7 @@
       </ReturnValue>
       <MemberValue>17</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 linear light transfer function for Digital Cinema (CICP value 17).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -249,7 +266,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Unknown or unspecified transfer characteristics (CICP value 0).</summary>
       </Docs>
     </Member>
   </Members>

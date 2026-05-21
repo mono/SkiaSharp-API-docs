@@ -15,8 +15,32 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies options for creating an XPS document.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKDocumentXpsOptions` controls how an XPS document is created by
+<xref:SkiaSharp.SKDocument.CreateXps(System.String,SkiaSharp.SKDocumentXpsOptions)>.
+Set `DPI` to control output resolution and set `AllowNoPngs` to control
+whether raster images must be encoded as PNG.
+
+This struct is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+var options = new SKDocumentXpsOptions
+{
+    DPI = 300,
+    AllowNoPngs = false,
+};
+using var document = SKDocument.CreateXps("output.xps", options);
+var canvas = document.BeginPage(595, 842);
+// ... draw content ...
+document.EndPage();
+document.Close();
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="AllowNoPngs">
@@ -37,9 +61,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether raster images may be embedded in formats other than PNG.</summary>
+        <value><see langword="true" /> to allow raster images to be embedded in formats other than PNG; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DPI">
@@ -60,9 +84,9 @@
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the output resolution, in dots per inch (DPI), for the XPS document.</summary>
+        <value>The output resolution in dots per inch.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -89,10 +113,10 @@
         <Parameter Name="obj" Type="SkiaSharp.SKDocumentXpsOptions" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The value to compare with the current instance.</param>
+        <summary>Determines whether the current instance is equal to another <see cref="T:SkiaSharp.SKDocumentXpsOptions" />.</summary>
+        <returns><see langword="true" /> if the two instances are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -116,10 +140,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the current instance is equal to the specified object.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is an <see cref="T:SkiaSharp.SKDocumentXpsOptions" /> equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -141,9 +165,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns a hash code for the current instance.</summary>
+        <returns>A hash code for the current instance.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -163,11 +187,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKDocumentXpsOptions" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKDocumentXpsOptions" /> instances are equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -187,11 +211,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKDocumentXpsOptions" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKDocumentXpsOptions" /> instances are not equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
