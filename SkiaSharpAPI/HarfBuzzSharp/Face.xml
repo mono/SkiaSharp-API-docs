@@ -167,10 +167,10 @@
         <Parameter Name="instanceIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="instanceIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="instanceIndex">The zero-based index of the named instance.</param>
+        <summary>Gets the design-space coordinates for the named instance at the specified index.</summary>
+        <returns>An array of design coordinates, one per variation axis.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetNamedInstanceDesignCoords">
@@ -190,11 +190,11 @@
         <Parameter Name="coords" Type="System.Span&lt;System.Single&gt;" Index="1" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="instanceIndex">To be added.</param>
-        <param name="coords">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="instanceIndex">The zero-based index of the named instance.</param>
+        <param name="coords">A span to receive the design coordinates.</param>
+        <summary>Gets the design-space coordinates for the named instance at the specified index into a caller-supplied span.</summary>
+        <returns>The number of design coordinates written into <paramref name="coords" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetNamedInstanceDesignCoordsCount">
@@ -213,10 +213,10 @@
         <Parameter Name="instanceIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="instanceIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="instanceIndex">The zero-based index of the named instance.</param>
+        <summary>Gets the number of design-space coordinates for the named instance at the specified index.</summary>
+        <returns>The number of design coordinates for the named instance.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetNamedInstancePostScriptNameId">
@@ -235,10 +235,10 @@
         <Parameter Name="instanceIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="instanceIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="instanceIndex">The zero-based index of the named instance.</param>
+        <summary>Gets the name identifier for the PostScript name of the named instance at the specified index.</summary>
+        <returns>The <see cref="T:HarfBuzzSharp.OpenTypeNameId" /> for the PostScript name of the named instance.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetNamedInstanceSubfamilyNameId">
@@ -257,10 +257,10 @@
         <Parameter Name="instanceIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="instanceIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="instanceIndex">The zero-based index of the named instance.</param>
+        <summary>Gets the name identifier for the subfamily name of the named instance at the specified index.</summary>
+        <returns>The <see cref="T:HarfBuzzSharp.OpenTypeNameId" /> for the subfamily name of the named instance.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetPaletteColorNameId">
@@ -279,10 +279,10 @@
         <Parameter Name="colorIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="colorIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="colorIndex">The zero-based index of the color entry in the palette.</param>
+        <summary>Gets the name identifier for the color entry at the specified color index.</summary>
+        <returns>The <see cref="T:HarfBuzzSharp.OpenTypeNameId" /> for the color entry name.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetPaletteColors">
@@ -301,10 +301,10 @@
         <Parameter Name="paletteIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="paletteIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="paletteIndex">The zero-based index of the palette.</param>
+        <summary>Gets all colors in the palette at the specified index.</summary>
+        <returns>An array of <c>hb_color_t</c> values (packed as <see langword="uint" /> in BGRA byte order) for the palette, or an empty array if the palette index is out of range.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetPaletteColors">
@@ -324,11 +324,11 @@
         <Parameter Name="colors" Type="System.Span&lt;System.UInt32&gt;" Index="1" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="paletteIndex">To be added.</param>
-        <param name="colors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="paletteIndex">The zero-based index of the palette.</param>
+        <param name="colors">A span to receive the <c>hb_color_t</c> color values.</param>
+        <summary>Gets colors from the palette at the specified index into a caller-supplied span.</summary>
+        <returns>The number of colors written into <paramref name="colors" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetPaletteFlags">
@@ -347,10 +347,10 @@
         <Parameter Name="paletteIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="paletteIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="paletteIndex">The zero-based index of the palette.</param>
+        <summary>Gets the flags that describe the intended use of the palette at the specified index.</summary>
+        <returns>One or more <see cref="T:HarfBuzzSharp.OpenTypeColorPaletteFlags" /> values that describe the palette.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetPaletteNameId">
@@ -369,10 +369,10 @@
         <Parameter Name="paletteIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="paletteIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="paletteIndex">The zero-based index of the palette.</param>
+        <summary>Gets the name identifier for the palette at the specified index.</summary>
+        <returns>The <see cref="T:HarfBuzzSharp.OpenTypeNameId" /> for the palette name.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetVariationAxisInfos">
@@ -391,10 +391,10 @@
         <Parameter Name="axes" Type="System.Span&lt;HarfBuzzSharp.OpenTypeVarAxisInfo&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="axes">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="axes">A span to receive the <see cref="T:HarfBuzzSharp.OpenTypeVarAxisInfo" /> entries.</param>
+        <summary>Gets information about all variation axes supported by this font face into a caller-supplied span.</summary>
+        <returns>The number of variation axis entries written into <paramref name="axes" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GlyphCount">
@@ -428,9 +428,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether this font face contains color layer data in the COLR table.</summary>
+        <value><see langword="true" /> if the font has a COLR table with color layer data; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="HasColorPng">
@@ -446,9 +446,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether this font face contains color PNG bitmap glyphs.</summary>
+        <value><see langword="true" /> if the font has color PNG glyph data; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="HasColorSvg">
@@ -464,9 +464,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether this font face contains color SVG glyphs.</summary>
+        <value><see langword="true" /> if the font has an SVG table with color glyph data; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="HasPalettes">
@@ -482,9 +482,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether this font face contains color palette data in the CPAL table.</summary>
+        <value><see langword="true" /> if the font has a CPAL table; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="HasVariationData">
@@ -500,9 +500,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets a value indicating whether this font face contains OpenType variation data.</summary>
+        <value><see langword="true" /> if the font has variation axis data; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Index">
@@ -573,9 +573,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the number of named instances defined in this font face.</summary>
+        <value>The total number of named instances.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="PaletteCount">
@@ -591,9 +591,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the number of color palettes defined in this font face.</summary>
+        <value>The total number of palettes in the CPAL table.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ReferenceTable">
@@ -653,11 +653,11 @@
         <Parameter Name="axisInfo" Type="HarfBuzzSharp.OpenTypeVarAxisInfo" RefType="out" Index="1" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <param name="axisInfo">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tag">The four-byte tag identifying the variation axis.</param>
+        <param name="axisInfo">When this method returns, contains information about the variation axis if it was found. This parameter is treated as uninitialized.</param>
+        <summary>Attempts to find a variation axis with the specified tag.</summary>
+        <returns><see langword="true" /> if the axis was found; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="UnitsPerEm">
@@ -691,9 +691,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the number of variation axes supported by this font face.</summary>
+        <value>The total number of variation axes.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="VariationAxisInfos">
@@ -709,9 +709,9 @@
         <ReturnType>HarfBuzzSharp.OpenTypeVarAxisInfo[]</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets information about all variation axes supported by this font face.</summary>
+        <value>An array of <see cref="T:HarfBuzzSharp.OpenTypeVarAxisInfo" /> entries, one per variation axis.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
