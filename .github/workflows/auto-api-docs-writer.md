@@ -81,12 +81,23 @@ jobs:
         run: dotnet cake --target=docs-download-output
       - name: Regenerate API docs
         run: dotnet cake --target=update-docs
+      - name: Extract placeholders and manifest
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path output/docs-work -Force | Out-Null
+          & .agents/skills/api-docs/scripts/docs-tool.ps1 extract docs/SkiaSharpAPI/ -Output output/docs-work/
       - name: Upload regenerated docs
         uses: actions/upload-artifact@v4
         with:
           name: docs-regenerated
           path: docs/SkiaSharpAPI/
           retention-days: 1
+      - name: Upload extracted JSON (immutable baseline)
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-extracted
+          path: output/docs-work/
+          retention-days: 7
 
 # -- Checkout ----------------------------------------------------------
 # Primary: this docs repo only. SkiaSharp is cloned in pre-agent-steps.
@@ -133,6 +144,12 @@ pre-agent-steps:
       name: docs-regenerated
       path: SkiaSharpAPI/
 
+  - name: Download pre-extracted JSON
+    uses: actions/download-artifact@v4
+    with:
+      name: docs-extracted
+      path: output/docs-work/
+
   - name: Clone SkiaSharp (shallow, with submodules)
     env:
       SKIASHARP_BRANCH: ${{ inputs.skiasharp_branch || 'main' }}
@@ -144,15 +161,20 @@ pre-agent-steps:
       ln -sfn "$(pwd)/SkiaSharpAPI" skiasharp/docs/SkiaSharpAPI
       cd skiasharp && dotnet tool restore
 
-  - name: Extract placeholders and manifest
+  - name: Save original JSON to agent artifact cache
     run: |
-      mkdir -p output/docs-work
-      pwsh skiasharp/.agents/skills/api-docs/scripts/docs-tool.ps1 extract SkiaSharpAPI/ -Output output/docs-work/
+      mkdir -p /tmp/gh-aw/agent/docs-work-original
+      cp -r output/docs-work/* /tmp/gh-aw/agent/docs-work-original/
 
 # -- Post-agent steps (host) ------------------------------------------
 # Format docs AFTER the agent merges JSON→XML. Runs on host outside the
 # sandbox so it has full access to the SkiaSharp cake scripts.
 post-steps:
+  - name: Save final JSON to agent artifact cache
+    run: |
+      mkdir -p /tmp/gh-aw/agent/docs-work-final
+      cp -r output/docs-work/* /tmp/gh-aw/agent/docs-work-final/
+
   - name: Format docs
     run: cd skiasharp && dotnet cake --target=docs-format-docs
 ---
@@ -207,7 +229,12 @@ If there are no documentation changes after merging, call the `noop` tool instea
 - **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
 - **Phase 6 MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
 - **Do NOT run `docs-format-docs`** — formatting runs automatically as a post-step.
-- **Budget awareness:** After the writer completes and reviewers report, fix CRITICAL issues and proceed to merge+PR immediately. Do not re-run reviewers unless absolutely necessary.
+- **Budget awareness:** After the writer completes and reviewers report, fix CRITICAL issues and proceed to merge+PR immediately. Do not re-run reviewers unless absolutely necessary. **If you're past 10 minutes and haven't merged yet, skip Phase 5 (review) entirely and go straight to Phase 6 (merge) + PR. A PR without review is better than no PR.**
+- **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent, you MUST call `read_agent` with `wait: true` in the SAME response. Do NOT output text saying "waiting" and end your turn — the session WILL terminate and all work is lost.
+  - **Single agent:** `task(background)` + `read_agent(id, wait=true)` in the same response.
+  - **Multiple agents:** Launch all agents, then call `read_agent` for THE FIRST ONE with `wait: true`. When it returns, call `read_agent` for the next, and so on. You MUST have an active `read_agent` call at all times until all agents complete.
+  - **FORBIDDEN pattern:** Launching agents → saying "Waiting for them to complete" → ending turn. This KILLS the session.
+- **COMPLETION GATE:** Your session is NOT complete until you have called `create_pull_request` or `noop`. If you reach a point where you think you're done but haven't called either, something went wrong — retrace your steps and complete the remaining phases.
 
 ## Path differences from SKILL.md
 
