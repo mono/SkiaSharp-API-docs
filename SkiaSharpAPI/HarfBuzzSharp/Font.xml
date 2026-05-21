@@ -321,10 +321,10 @@
         <Parameter Name="coords" Type="System.Span&lt;System.Int32&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="coords">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="coords">A span to receive the normalized variation coordinate values. Each value is a 2.14 fixed-point integer in the range [-16384, 16384], one per axis.</param>
+        <summary>Gets the current normalized variation coordinates of the font into a caller-supplied buffer.</summary>
+        <returns>The number of normalized coordinate values written into <paramref name="coords" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetVerticalGlyphAdvance">
@@ -579,9 +579,9 @@
         <Parameter Name="coords" Type="System.ReadOnlySpan&lt;System.Single&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="coords">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="coords">A read-only span of design-space coordinate values, one per variation axis, in the order returned by the face's variation axis list.</param>
+        <summary>Sets the variation axes of the font using design-space coordinate values.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetVariationCoordsNormalized">
@@ -600,9 +600,9 @@
         <Parameter Name="coords" Type="System.ReadOnlySpan&lt;System.Int32&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="coords">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="coords">A read-only span of normalized variation coordinate values. Each value is a 2.14 fixed-point integer in the range [-16384, 16384], one per axis.</param>
+        <summary>Sets the variation axes of the font using normalized coordinate values.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetVariationNamedInstance">
@@ -621,9 +621,9 @@
         <Parameter Name="instanceIndex" Type="System.Int32" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="instanceIndex">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="instanceIndex">The zero-based index of the named instance defined in the face's variation data.</param>
+        <summary>Sets the font's variation to the named instance at the specified index.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetVariations">
@@ -642,9 +642,9 @@
         <Parameter Name="variations" Type="System.ReadOnlySpan&lt;HarfBuzzSharp.Variation&gt;" Index="0" FrameworkAlternate="harfbuzzsharp-8.3" />
       </Parameters>
       <Docs>
-        <param name="variations">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="variations">A read-only span of <see cref="T:HarfBuzzSharp.Variation" /> values specifying the axis tag and desired value for each axis to set.</param>
+        <summary>Sets the variation axes of the font using the specified <see cref="T:HarfBuzzSharp.Variation" /> values.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Shape">
@@ -1250,9 +1250,9 @@
         <ReturnType>System.Int32[]</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the current normalized variation coordinates of the font.</summary>
+        <value>An array of normalized variation coordinate values, one per axis. Each value is a 2.14 fixed-point integer in the range [-16384, 16384]. Returns an empty array if no variation coordinates are set.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
