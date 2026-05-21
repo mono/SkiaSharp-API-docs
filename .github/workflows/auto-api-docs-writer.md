@@ -81,12 +81,23 @@ jobs:
         run: dotnet cake --target=docs-download-output
       - name: Regenerate API docs
         run: dotnet cake --target=update-docs
+      - name: Extract placeholders and manifest
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path output/docs-work -Force | Out-Null
+          & .agents/skills/api-docs/scripts/docs-tool.ps1 extract docs/SkiaSharpAPI/ -Output output/docs-work/
       - name: Upload regenerated docs
         uses: actions/upload-artifact@v4
         with:
           name: docs-regenerated
           path: docs/SkiaSharpAPI/
           retention-days: 1
+      - name: Upload extracted JSON (immutable baseline)
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-extracted
+          path: output/docs-work/
+          retention-days: 7
 
 # -- Checkout ----------------------------------------------------------
 # Primary: this docs repo only. SkiaSharp is cloned in pre-agent-steps.
@@ -133,6 +144,12 @@ pre-agent-steps:
       name: docs-regenerated
       path: SkiaSharpAPI/
 
+  - name: Download pre-extracted JSON
+    uses: actions/download-artifact@v4
+    with:
+      name: docs-extracted
+      path: output/docs-work/
+
   - name: Clone SkiaSharp (shallow, with submodules)
     env:
       SKIASHARP_BRANCH: ${{ inputs.skiasharp_branch || 'main' }}
@@ -144,15 +161,20 @@ pre-agent-steps:
       ln -sfn "$(pwd)/SkiaSharpAPI" skiasharp/docs/SkiaSharpAPI
       cd skiasharp && dotnet tool restore
 
-  - name: Extract placeholders and manifest
+  - name: Save original JSON to agent artifact cache
     run: |
-      mkdir -p output/docs-work
-      pwsh skiasharp/.agents/skills/api-docs/scripts/docs-tool.ps1 extract SkiaSharpAPI/ -Output output/docs-work/
+      mkdir -p /tmp/gh-aw/agent/docs-work-original
+      cp -r output/docs-work/* /tmp/gh-aw/agent/docs-work-original/
 
 # -- Post-agent steps (host) ------------------------------------------
 # Format docs AFTER the agent merges JSON→XML. Runs on host outside the
 # sandbox so it has full access to the SkiaSharp cake scripts.
 post-steps:
+  - name: Save final JSON to agent artifact cache
+    run: |
+      mkdir -p /tmp/gh-aw/agent/docs-work-final
+      cp -r output/docs-work/* /tmp/gh-aw/agent/docs-work-final/
+
   - name: Format docs
     run: cd skiasharp && dotnet cake --target=docs-format-docs
 ---
