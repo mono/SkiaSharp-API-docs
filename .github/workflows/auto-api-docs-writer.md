@@ -230,6 +230,8 @@ If there are no documentation changes after merging, call the `noop` tool instea
 - **Phase 6 MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
 - **Do NOT run `docs-format-docs`** — formatting runs automatically as a post-step.
 - **Budget awareness:** After the writer completes and reviewers report, fix CRITICAL issues and proceed to merge+PR immediately. Do not re-run reviewers unless absolutely necessary.
+- **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent and need its result, you MUST call `read_agent` with `wait: true` in the SAME turn. Do NOT just say "waiting" in text and end your turn — the session will terminate. The pattern is: launch agent → immediately call `read_agent(agent_id, wait=true)` → process result → continue.
+- **COMPLETION GATE:** Your session is NOT complete until you have called `create_pull_request` or `noop`. If you reach a point where you think you're done but haven't called either, something went wrong — retrace your steps and complete the remaining phases.
 
 ## Path differences from SKILL.md
 
