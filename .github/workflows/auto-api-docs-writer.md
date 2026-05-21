@@ -229,8 +229,11 @@ If there are no documentation changes after merging, call the `noop` tool instea
 - **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
 - **Phase 6 MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
 - **Do NOT run `docs-format-docs`** — formatting runs automatically as a post-step.
-- **Budget awareness:** After the writer completes and reviewers report, fix CRITICAL issues and proceed to merge+PR immediately. Do not re-run reviewers unless absolutely necessary.
-- **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent and need its result, you MUST call `read_agent` with `wait: true` in the SAME turn. Do NOT just say "waiting" in text and end your turn — the session will terminate. The pattern is: launch agent → immediately call `read_agent(agent_id, wait=true)` → process result → continue.
+- **Budget awareness:** After the writer completes and reviewers report, fix CRITICAL issues and proceed to merge+PR immediately. Do not re-run reviewers unless absolutely necessary. **If you're past 10 minutes and haven't merged yet, skip Phase 5 (review) entirely and go straight to Phase 6 (merge) + PR. A PR without review is better than no PR.**
+- **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent, you MUST call `read_agent` with `wait: true` in the SAME response. Do NOT output text saying "waiting" and end your turn — the session WILL terminate and all work is lost.
+  - **Single agent:** `task(background)` + `read_agent(id, wait=true)` in the same response.
+  - **Multiple agents:** Launch all agents, then call `read_agent` for THE FIRST ONE with `wait: true`. When it returns, call `read_agent` for the next, and so on. You MUST have an active `read_agent` call at all times until all agents complete.
+  - **FORBIDDEN pattern:** Launching agents → saying "Waiting for them to complete" → ending turn. This KILLS the session.
 - **COMPLETION GATE:** Your session is NOT complete until you have called `create_pull_request` or `noop`. If you reach a point where you think you're done but haven't called either, something went wrong — retrace your steps and complete the remaining phases.
 
 ## Path differences from SKILL.md
