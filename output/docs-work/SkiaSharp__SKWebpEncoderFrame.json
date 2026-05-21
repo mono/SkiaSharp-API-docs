@@ -1,0 +1,105 @@
+{
+  "typeName": "SkiaSharp.SKWebpEncoderFrame",
+  "entries": [
+    {
+      "memberType": "type",
+      "fields": {
+        "summary": "Represents a single frame in an animated WebP sequence, consisting of pixel data and a display duration.",
+        "_extractedKeys": [
+          "summary",
+          "remarks"
+        ],
+        "remarksRequired": true,
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKWebpEncoderFrame` pairs an <xref:SkiaSharp.SKPixmap> with a frame\nduration in milliseconds. Pass a span of frames to\n<xref:SkiaSharp.SKWebpEncoder.EncodeAnimated*> to produce an animated WebP.\n\nThe struct stores a reference to an `SKPixmap` obtained from the source\nimage. When constructing from an <xref:SkiaSharp.SKBitmap> or\n<xref:SkiaSharp.SKImage>, the pixmap is obtained by calling `PeekPixels()`\non the source object.\n\n## Examples\n\n```csharp\nvar frames = new SKWebpEncoderFrame[]\n{\n    new SKWebpEncoderFrame(frame1Pixmap) { Duration = 100 },\n    new SKWebpEncoderFrame(frame2Pixmap) { Duration = 100 },\n};\nvar options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossy, 80);\nusing var data = SKWebpEncoder.EncodeAnimated(frames, options);\n```\n]]></format>"
+      },
+      "docId": null
+    },
+    {
+      "memberType": "Constructor",
+      "memberName": "SKWebpEncoderFrame",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKPixmap)",
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKPixmap pixmap);",
+      "fields": {
+        "summary": "Initializes a new <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> with the specified pixmap.",
+        "params": {
+          "pixmap": "The pixel data for this frame."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "params.pixmap"
+        ],
+        "remarks": ""
+      }
+    },
+    {
+      "memberType": "Constructor",
+      "memberName": "SKWebpEncoderFrame",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKBitmap)",
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKBitmap bitmap);",
+      "fields": {
+        "summary": "Initializes a new <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> from the specified bitmap.",
+        "params": {
+          "bitmap": "The bitmap whose pixel data is used for this frame."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "params.bitmap"
+        ],
+        "remarks": ""
+      }
+    },
+    {
+      "memberType": "Constructor",
+      "memberName": "SKWebpEncoderFrame",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKImage)",
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKImage image);",
+      "fields": {
+        "summary": "Initializes a new <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> from the specified image.",
+        "params": {
+          "image": "The image whose pixel data is used for this frame."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "params.image"
+        ],
+        "remarks": ""
+      }
+    },
+    {
+      "memberType": "Property",
+      "memberName": "Duration",
+      "docId": "P:SkiaSharp.SKWebpEncoderFrame.Duration",
+      "signature": "public int Duration { get; set; }",
+      "fields": {
+        "summary": "Gets or sets the display duration of this frame in milliseconds.",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ],
+        "value": "The number of milliseconds this frame is displayed before advancing to the next frame.",
+        "remarks": ""
+      }
+    },
+    {
+      "memberType": "Property",
+      "memberName": "Pixmap",
+      "docId": "P:SkiaSharp.SKWebpEncoderFrame.Pixmap",
+      "signature": "public SkiaSharp.SKPixmap Pixmap { get; set; }",
+      "fields": {
+        "summary": "Gets or sets the pixel data for this frame.",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ],
+        "value": "The <see cref=\"T:SkiaSharp.SKPixmap\" /> containing the pixel data for this frame.",
+        "remarks": ""
+      }
+    }
+  ],
+  "file": "D:\\a\\SkiaSharp-API-docs\\SkiaSharp-API-docs\\docs\\SkiaSharpAPI\\SkiaSharp\\SKWebpEncoderFrame.xml"
+}

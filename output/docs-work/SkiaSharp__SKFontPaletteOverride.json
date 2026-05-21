@@ -1,0 +1,151 @@
+{
+  "typeName": "SkiaSharp.SKFontPaletteOverride",
+  "entries": [
+    {
+      "memberType": "type",
+      "fields": {
+        "summary": "Specifies a replacement color for a single entry in a font's color palette.",
+        "_extractedKeys": [
+          "summary",
+          "remarks"
+        ],
+        "remarksRequired": true,
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKFontPaletteOverride` pairs a palette color index with an ARGB replacement\ncolor. A span of these overrides can be supplied via\n<xref:SkiaSharp.SKFontArguments.PaletteOverrides> when cloning a typeface to\nchange specific colors in the active CPAL palette without switching to a\ndifferent palette entirely.\n\nThe <xref:SkiaSharp.SKFontPaletteOverride.Color> field stores a packed ARGB\nvalue in the same format as <xref:SkiaSharp.SKColor> (`0xAARRGGBB`).\n\nThis is a value type and does not require disposal.\n\n## Examples\n\n```csharp\nvar overrides = new SKFontPaletteOverride[]\n{\n    new() { Index = 0, Color = (uint)SKColors.Red },\n    new() { Index = 1, Color = (uint)SKColors.Blue },\n};\n\nvar args = new SKFontArguments\n{\n    PaletteIndex = 0,\n    PaletteOverrides = overrides,\n};\n\nusing var customTypeface = typeface.Clone(args);\n```\n]]></format>"
+      },
+      "docId": null
+    },
+    {
+      "memberType": "Property",
+      "memberName": "Color",
+      "docId": "P:SkiaSharp.SKFontPaletteOverride.Color",
+      "signature": "public uint Color { get; set; }",
+      "fields": {
+        "summary": "Gets or sets the replacement color as a packed ARGB value.",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ],
+        "value": "The ARGB color packed as <c>0xAARRGGBB</c>, matching the <see cref=\"T:SkiaSharp.SKColor\" /> layout.",
+        "remarks": ""
+      }
+    },
+    {
+      "memberType": "Method",
+      "memberName": "Equals",
+      "docId": "M:SkiaSharp.SKFontPaletteOverride.Equals(SkiaSharp.SKFontPaletteOverride)",
+      "signature": "public readonly bool Equals (SkiaSharp.SKFontPaletteOverride obj);",
+      "fields": {
+        "summary": "Determines whether the specified <see cref=\"T:SkiaSharp.SKFontPaletteOverride\" /> is equal to the current instance.",
+        "params": {
+          "obj": "The value to compare with the current instance."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.obj"
+        ],
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if both the index and color are equal; otherwise, <see langword=\"false\" />."
+      }
+    },
+    {
+      "memberType": "Method",
+      "memberName": "Equals",
+      "docId": "M:SkiaSharp.SKFontPaletteOverride.Equals(System.Object)",
+      "signature": "public override readonly bool Equals (object obj);",
+      "fields": {
+        "summary": "Determines whether the specified object is equal to the current instance.",
+        "params": {
+          "obj": "The object to compare with the current instance."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.obj"
+        ],
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"obj\" /> is a <see cref=\"T:SkiaSharp.SKFontPaletteOverride\" /> with equal field values; otherwise, <see langword=\"false\" />."
+      }
+    },
+    {
+      "memberType": "Method",
+      "memberName": "GetHashCode",
+      "docId": "M:SkiaSharp.SKFontPaletteOverride.GetHashCode",
+      "signature": "public override readonly int GetHashCode ();",
+      "fields": {
+        "summary": "Returns a hash code for the current instance.",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns"
+        ],
+        "returns": "A hash code based on the palette index and color value."
+      }
+    },
+    {
+      "memberType": "Property",
+      "memberName": "Index",
+      "docId": "P:SkiaSharp.SKFontPaletteOverride.Index",
+      "signature": "public ushort Index { get; set; }",
+      "fields": {
+        "summary": "Gets or sets the zero-based index of the palette color entry to override.",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ],
+        "value": "The zero-based index into the active color palette.",
+        "remarks": ""
+      }
+    },
+    {
+      "memberType": "Method",
+      "memberName": "op_Equality",
+      "docId": "M:SkiaSharp.SKFontPaletteOverride.op_Equality(SkiaSharp.SKFontPaletteOverride,SkiaSharp.SKFontPaletteOverride)",
+      "signature": "public static bool operator == (SkiaSharp.SKFontPaletteOverride left, SkiaSharp.SKFontPaletteOverride right);",
+      "fields": {
+        "summary": "Returns a value indicating whether two <see cref=\"T:SkiaSharp.SKFontPaletteOverride\" /> instances are equal.",
+        "params": {
+          "left": "The first value to compare.",
+          "right": "The second value to compare."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.left",
+          "params.right"
+        ],
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"left\" /> and <paramref name=\"right\" /> are equal; otherwise, <see langword=\"false\" />."
+      }
+    },
+    {
+      "memberType": "Method",
+      "memberName": "op_Inequality",
+      "docId": "M:SkiaSharp.SKFontPaletteOverride.op_Inequality(SkiaSharp.SKFontPaletteOverride,SkiaSharp.SKFontPaletteOverride)",
+      "signature": "public static bool operator != (SkiaSharp.SKFontPaletteOverride left, SkiaSharp.SKFontPaletteOverride right);",
+      "fields": {
+        "summary": "Returns a value indicating whether two <see cref=\"T:SkiaSharp.SKFontPaletteOverride\" /> instances are not equal.",
+        "params": {
+          "left": "The first value to compare.",
+          "right": "The second value to compare."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.left",
+          "params.right"
+        ],
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"left\" /> and <paramref name=\"right\" /> are not equal; otherwise, <see langword=\"false\" />."
+      }
+    }
+  ],
+  "file": "D:\\a\\SkiaSharp-API-docs\\SkiaSharp-API-docs\\docs\\SkiaSharpAPI\\SkiaSharp\\SKFontPaletteOverride.xml"
+}
