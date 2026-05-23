@@ -15,8 +15,36 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies options for creating an XPS document with <see cref="T:SkiaSharp.SKDocument" />.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKDocumentXpsOptions` controls how an XPS document is rendered, including the output DPI
+and whether PNG images may be omitted in favor of alternative encodings. Pass an instance
+to <xref:SkiaSharp.SKDocument.CreateXps(SkiaSharp.SKWStream,SkiaSharp.SKDocumentXpsOptions)>
+or its overloads to apply the settings.
+
+This is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+var options = new SKDocumentXpsOptions
+{
+    Dpi = 150,
+    AllowNoPngs = false,
+};
+
+using var stream = File.OpenWrite("output.xps");
+using var document = SKDocument.CreateXps(stream, options);
+using (var canvas = document.BeginPage(595, 842))
+{
+    canvas.DrawColor(SKColors.White);
+}
+document.EndPage();
+document.Close();
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="AllowNoPngs">
@@ -37,15 +65,15 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether PNG images may be omitted from the XPS output.</summary>
+        <value><see langword="true" /> to allow the encoder to omit PNG images; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
-    <Member MemberName="DPI">
-      <MemberSignature Language="C#" Value="public float DPI { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance float32 DPI" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKDocumentXpsOptions.DPI" />
+    <Member MemberName="Dpi">
+      <MemberSignature Language="C#" Value="public float Dpi { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance float32 Dpi" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKDocumentXpsOptions.Dpi" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -60,9 +88,9 @@
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the rasterization DPI for the XPS document.</summary>
+        <value>The resolution in dots per inch used when rasterizing vector content.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -89,10 +117,10 @@
         <Parameter Name="obj" Type="SkiaSharp.SKDocumentXpsOptions" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The <see cref="T:SkiaSharp.SKDocumentXpsOptions" /> to compare with this instance.</param>
+        <summary>Indicates whether this instance equals the specified <see cref="T:SkiaSharp.SKDocumentXpsOptions" />.</summary>
+        <returns><see langword="true" /> if all option fields are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -116,10 +144,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with this instance.</param>
+        <summary>Indicates whether this instance equals the specified object.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is a <see cref="T:SkiaSharp.SKDocumentXpsOptions" /> with identical values; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -141,9 +169,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the hash code for this instance.</summary>
+        <returns>A 32-bit signed integer hash code.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -163,11 +191,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKDocumentXpsOptions" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKDocumentXpsOptions" /> values are equal.</summary>
+        <returns><see langword="true" /> if the two instances are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -187,11 +215,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKDocumentXpsOptions" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKDocumentXpsOptions" /> values are not equal.</summary>
+        <returns><see langword="true" /> if the two instances differ; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
