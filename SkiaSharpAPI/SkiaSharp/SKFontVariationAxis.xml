@@ -15,8 +15,29 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Describes a single variation axis of a variable font.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFontVariationAxis` describes one axis of a variable font as returned by
+<xref:SkiaSharp.SKTypeface.VariationDesignParameters> or
+<xref:SkiaSharp.SKTypeface.GetVariationDesignParameters(System.Span{SkiaSharp.SKFontVariationAxis})>.
+Each axis has a four-byte tag identifier, a minimum value, a default value, and a
+maximum value. The <xref:SkiaSharp.SKFontVariationAxis.IsHidden> property indicates
+whether the axis is intended for internal use and should not be exposed in a UI.
+
+This type is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+// Enumerate the variation axes of a typeface
+foreach (var axis in typeface.VariationDesignParameters)
+{
+    Console.WriteLine($"{axis.Tag}: [{axis.Min}, {axis.Default}, {axis.Max}]");
+}
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Default">
@@ -37,9 +58,9 @@
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the default value of the variation axis.</summary>
+        <value>The default design coordinate for this axis.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -66,10 +87,10 @@
         <Parameter Name="obj" Type="SkiaSharp.SKFontVariationAxis" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The <see cref="T:SkiaSharp.SKFontVariationAxis" /> to compare with this instance.</param>
+        <summary>Indicates whether this instance is equal to the specified <see cref="T:SkiaSharp.SKFontVariationAxis" />.</summary>
+        <returns><see langword="true" /> if all fields are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -93,10 +114,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with this instance.</param>
+        <summary>Indicates whether this instance is equal to the specified object.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is an <see cref="T:SkiaSharp.SKFontVariationAxis" /> with the same values; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -118,9 +139,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the hash code for this instance.</summary>
+        <returns>A hash code for the current <see cref="T:SkiaSharp.SKFontVariationAxis" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="IsHidden">
@@ -141,9 +162,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the variation axis is hidden.</summary>
+        <value><see langword="true" /> if the axis is flagged as hidden and should not be displayed in a font-selection UI; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Max">
@@ -164,9 +185,9 @@
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the maximum value of the variation axis.</summary>
+        <value>The upper bound of the allowable design coordinate range for this axis.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Min">
@@ -187,9 +208,9 @@
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the minimum value of the variation axis.</summary>
+        <value>The lower bound of the allowable design coordinate range for this axis.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -209,11 +230,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFontVariationAxis" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontVariationAxis" /> values are equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -233,11 +254,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFontVariationAxis" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontVariationAxis" /> values are not equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> differ; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Tag">
@@ -258,9 +279,9 @@
         <ReturnType>SkiaSharp.SKFourByteTag</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the four-byte tag that identifies this variation axis.</summary>
+        <value>The <see cref="T:SkiaSharp.SKFourByteTag" /> identifier for the axis (for example, <c>'w','g','h','t'</c> for weight).</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

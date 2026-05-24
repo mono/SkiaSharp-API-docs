@@ -11,8 +11,30 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a single frame in an animated WebP image, combining image data with a display duration.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKWebpEncoderFrame` pairs an image (represented as an <xref:SkiaSharp.SKPixmap>) with a
+<xref:System.TimeSpan> duration for use in animated WebP encoding via
+<xref:SkiaSharp.SKWebpEncoder.EncodeAnimated%2A>.
+
+Constructors that accept an <xref:SkiaSharp.SKBitmap> or <xref:SkiaSharp.SKImage> create an
+internal pixmap from the provided source.
+
+This type is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+var frames = new[]
+{
+    new SKWebpEncoderFrame(bitmap1, TimeSpan.FromMilliseconds(100)),
+    new SKWebpEncoderFrame(bitmap2, TimeSpan.FromMilliseconds(200)),
+};
+using SKData? data = SKWebpEncoder.EncodeAnimated(frames, SKWebpEncoderOptions.Default);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -29,10 +51,10 @@
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="duration">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The bitmap providing the pixel data for this frame.</param>
+        <param name="duration">The time this frame is displayed.</param>
+        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from a bitmap and a display duration.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -49,10 +71,10 @@
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="image">To be added.</param>
-        <param name="duration">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="image">The image providing the pixel data for this frame.</param>
+        <param name="duration">The time this frame is displayed.</param>
+        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from an image and a display duration.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -69,10 +91,10 @@
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="pixmap">To be added.</param>
-        <param name="duration">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="pixmap">The pixmap providing the pixel data for this frame.</param>
+        <param name="duration">The time this frame is displayed.</param>
+        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from a pixmap and a display duration.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Duration">
@@ -93,9 +115,9 @@
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the length of time this frame is displayed.</summary>
+        <value>A <see cref="T:System.TimeSpan" /> specifying how long this frame is shown before advancing to the next frame.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Pixmap">
@@ -116,9 +138,9 @@
         <ReturnType>SkiaSharp.SKPixmap</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the pixmap containing the pixel data for this frame.</summary>
+        <value>An <see cref="T:SkiaSharp.SKPixmap" /> with the frame's pixel data.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
