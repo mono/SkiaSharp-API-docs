@@ -1,0 +1,83 @@
+{
+  "entries": [
+    {
+      "fields": {
+        "summary": "Specifies arguments used to select and configure a typeface from a font collection or variable font.",
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKFontArguments` carries the parameters passed to\n<xref:SkiaSharp.SKTypeface.Clone(SkiaSharp.SKFontArguments)> when creating a customized\ncopy of a typeface. You can set a font collection index, choose a color palette, provide\npalette color overrides, and specify variation design-position coordinates.\n\nThis type is a value type and does not require disposal.\n\n## Examples\n\n```csharp\n// Clone a variable font with a specific weight axis value\nvar args = new SKFontArguments\n{\n    VariationDesignPosition = new SKFontVariationPositionCoordinate[]\n    {\n        new SKFontVariationPositionCoordinate\n        {\n            Axis = new SKFourByteTag('w', 'g', 'h', 't'),\n            Value = 700f,\n        },\n    },\n};\nusing var bold = typeface.Clone(args);\n```\n]]></format>",
+        "remarksRequired": true,
+        "_extractedKeys": [
+          "remarks",
+          "summary"
+        ]
+      },
+      "docId": null,
+      "memberType": "type"
+    },
+    {
+      "fields": {
+        "summary": "Gets or sets the zero-based index of the desired font within a font collection.",
+        "value": "The index of the font to select from the collection. The default value is 0.",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:SkiaSharp.SKFontArguments.CollectionIndex",
+      "signature": "public int CollectionIndex { get; set; }",
+      "memberType": "Property",
+      "memberName": "CollectionIndex"
+    },
+    {
+      "fields": {
+        "summary": "Gets or sets the zero-based index of the color palette to use from the font.",
+        "value": "The index of the CPAL palette to select. The default value is 0.",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:SkiaSharp.SKFontArguments.PaletteIndex",
+      "signature": "public int PaletteIndex { get; set; }",
+      "memberType": "Property",
+      "memberName": "PaletteIndex"
+    },
+    {
+      "fields": {
+        "summary": "Gets or sets the per-color overrides to apply on top of the selected palette.",
+        "value": "A span of <see cref=\"T:SkiaSharp.SKFontPaletteOverride\" /> entries that replace specific palette color slots.",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:SkiaSharp.SKFontArguments.PaletteOverrides",
+      "signature": "public ReadOnlySpan<SkiaSharp.SKFontPaletteOverride> PaletteOverrides { get; set; }",
+      "memberType": "Property",
+      "memberName": "PaletteOverrides"
+    },
+    {
+      "fields": {
+        "summary": "Gets or sets the variation design-position coordinates that define the desired instance of a variable font.",
+        "value": "A span of <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> values, each specifying an axis tag and a target value.",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:SkiaSharp.SKFontArguments.VariationDesignPosition",
+      "signature": "public ReadOnlySpan<SkiaSharp.SKFontVariationPositionCoordinate> VariationDesignPosition { get; set; }",
+      "memberType": "Property",
+      "memberName": "VariationDesignPosition"
+    }
+  ],
+  "typeName": "SkiaSharp.SKFontArguments",
+  "file": "D:\\a\\SkiaSharp-API-docs\\SkiaSharp-API-docs\\docs\\SkiaSharpAPI\\SkiaSharp\\SKFontArguments.xml"
+}

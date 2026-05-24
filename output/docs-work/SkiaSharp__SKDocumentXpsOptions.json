@@ -1,0 +1,151 @@
+{
+  "entries": [
+    {
+      "fields": {
+        "summary": "Provides options for creating an XPS document with <see cref=\"T:SkiaSharp.SKDocument\" />.",
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKDocumentXpsOptions` controls output settings when creating XPS documents via\n<xref:SkiaSharp.SKDocument.CreateXps(SkiaSharp.SKWStream,SkiaSharp.SKDocumentXpsOptions)>.\nUse it to specify resolution and image encoding preferences.\n\nThis type is a value type and does not require disposal.\n\n## Examples\n\n```csharp\nusing var stream = new SKFileWStream(\"output.xps\");\nvar options = new SKDocumentXpsOptions\n{\n    Dpi = 150,\n    AllowNoPngs = false,\n};\nusing var document = SKDocument.CreateXps(stream, options);\nusing var page = document.BeginPage(595, 842);\npage.DrawColor(SKColors.White);\ndocument.EndPage();\ndocument.Close();\n```\n]]></format>",
+        "remarksRequired": true,
+        "_extractedKeys": [
+          "remarks",
+          "summary"
+        ]
+      },
+      "docId": null,
+      "memberType": "type"
+    },
+    {
+      "fields": {
+        "summary": "Gets or sets a value indicating whether the encoder is permitted to omit PNG encoding for images.",
+        "value": "<see langword=\"true\" /> to allow images to be encoded without PNG when a more efficient format is available; <see langword=\"false\" /> to require PNG encoding.",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:SkiaSharp.SKDocumentXpsOptions.AllowNoPngs",
+      "signature": "public bool AllowNoPngs { get; set; }",
+      "memberType": "Property",
+      "memberName": "AllowNoPngs"
+    },
+    {
+      "fields": {
+        "summary": "Gets or sets the rasterization resolution in dots per inch.",
+        "value": "The DPI value used when converting vector content to raster form.",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:SkiaSharp.SKDocumentXpsOptions.Dpi",
+      "signature": "public float Dpi { get; set; }",
+      "memberType": "Property",
+      "memberName": "Dpi"
+    },
+    {
+      "fields": {
+        "summary": "Indicates whether this instance is equal to the specified <see cref=\"T:SkiaSharp.SKDocumentXpsOptions\" />.",
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if both instances have equal field values; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "obj": "The <see cref=\"T:SkiaSharp.SKDocumentXpsOptions\" /> to compare with this instance."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.obj"
+        ]
+      },
+      "docId": "M:SkiaSharp.SKDocumentXpsOptions.Equals(SkiaSharp.SKDocumentXpsOptions)",
+      "signature": "public readonly bool Equals (SkiaSharp.SKDocumentXpsOptions obj);",
+      "memberType": "Method",
+      "memberName": "Equals"
+    },
+    {
+      "fields": {
+        "summary": "Indicates whether this instance is equal to the specified object.",
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"obj\" /> is an <see cref=\"T:SkiaSharp.SKDocumentXpsOptions\" /> with the same values; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "obj": "The object to compare with this instance."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.obj"
+        ]
+      },
+      "docId": "M:SkiaSharp.SKDocumentXpsOptions.Equals(System.Object)",
+      "signature": "public override readonly bool Equals (object obj);",
+      "memberType": "Method",
+      "memberName": "Equals"
+    },
+    {
+      "fields": {
+        "summary": "Returns the hash code for this instance.",
+        "remarks": "",
+        "returns": "A hash code for the current <see cref=\"T:SkiaSharp.SKDocumentXpsOptions\" />.",
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns"
+        ]
+      },
+      "docId": "M:SkiaSharp.SKDocumentXpsOptions.GetHashCode",
+      "signature": "public override readonly int GetHashCode ();",
+      "memberType": "Method",
+      "memberName": "GetHashCode"
+    },
+    {
+      "fields": {
+        "summary": "Determines whether two <see cref=\"T:SkiaSharp.SKDocumentXpsOptions\" /> values are equal.",
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"left\" /> and <paramref name=\"right\" /> are equal; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "left": "The first value to compare.",
+          "right": "The second value to compare."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.left",
+          "params.right"
+        ]
+      },
+      "docId": "M:SkiaSharp.SKDocumentXpsOptions.op_Equality(SkiaSharp.SKDocumentXpsOptions,SkiaSharp.SKDocumentXpsOptions)",
+      "signature": "public static bool operator == (SkiaSharp.SKDocumentXpsOptions left, SkiaSharp.SKDocumentXpsOptions right);",
+      "memberType": "Method",
+      "memberName": "op_Equality"
+    },
+    {
+      "fields": {
+        "summary": "Determines whether two <see cref=\"T:SkiaSharp.SKDocumentXpsOptions\" /> values are not equal.",
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"left\" /> and <paramref name=\"right\" /> differ; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "left": "The first value to compare.",
+          "right": "The second value to compare."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.left",
+          "params.right"
+        ]
+      },
+      "docId": "M:SkiaSharp.SKDocumentXpsOptions.op_Inequality(SkiaSharp.SKDocumentXpsOptions,SkiaSharp.SKDocumentXpsOptions)",
+      "signature": "public static bool operator != (SkiaSharp.SKDocumentXpsOptions left, SkiaSharp.SKDocumentXpsOptions right);",
+      "memberType": "Method",
+      "memberName": "op_Inequality"
+    }
+  ],
+  "typeName": "SkiaSharp.SKDocumentXpsOptions",
+  "file": "D:\\a\\SkiaSharp-API-docs\\SkiaSharp-API-docs\\docs\\SkiaSharpAPI\\SkiaSharp\\SKDocumentXpsOptions.xml"
+}

@@ -1,0 +1,91 @@
+{
+  "entries": [
+    {
+      "fields": {
+        "summary": "Provides extension methods for converting between <see cref=\"T:SkiaSharp.SKColor\" />, <see cref=\"T:SkiaSharp.SKColorF\" />, and <see cref=\"T:HarfBuzzSharp.HBColor\" />.",
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`ColorExtensions` bridges the color representations used by SkiaSharp and HarfBuzzSharp.\n<xref:SkiaSharp.SKColor> stores color as `0xAARRGGBB` (ARGB), while\n<xref:HarfBuzzSharp.HBColor> uses `0xBBGGRRAA` (BGRA). The conversion methods handle\nthe byte reordering automatically.\n\nThese methods are available as extension methods on `SKColor`, `SKColorF`, and `HBColor`.\n\n## Examples\n\n```csharp\nSKColor skColor = SKColors.Red;\nHBColor hbColor = skColor.ToHBColor();\n\nSKColor roundTripped = hbColor.ToSKColor();\n```\n]]></format>",
+        "remarksRequired": true,
+        "_extractedKeys": ["remarks", "summary"]
+      },
+      "docId": null,
+      "memberType": "type"
+    },
+    {
+      "fields": {
+        "summary": "Converts an <see cref=\"T:SkiaSharp.SKColor\" /> to the equivalent <see cref=\"T:HarfBuzzSharp.HBColor\" />.",
+        "remarks": "",
+        "returns": "An <see cref=\"T:HarfBuzzSharp.HBColor\" /> with the same red, green, blue, and alpha components as <paramref name=\"color\" />.",
+        "params": {
+          "color": "The <see cref=\"T:SkiaSharp.SKColor\" /> to convert."
+        },
+        "_extractedKeys": ["summary", "remarks", "returns", "params.color"]
+      },
+      "docId": "M:SkiaSharp.HarfBuzz.ColorExtensions.ToHBColor(SkiaSharp.SKColor)",
+      "signature": "public static HarfBuzzSharp.HBColor ToHBColor (this SkiaSharp.SKColor color);",
+      "memberType": "Method",
+      "memberName": "ToHBColor"
+    },
+    {
+      "fields": {
+        "summary": "Converts an <see cref=\"T:SkiaSharp.SKColorF\" /> to the nearest <see cref=\"T:HarfBuzzSharp.HBColor\" />.",
+        "remarks": "",
+        "returns": "An <see cref=\"T:HarfBuzzSharp.HBColor\" /> with components clamped to the 0–255 range and rounded from <paramref name=\"color\" />.",
+        "params": {
+          "color": "The <see cref=\"T:SkiaSharp.SKColorF\" /> to convert."
+        },
+        "_extractedKeys": ["summary", "remarks", "returns", "params.color"]
+      },
+      "docId": "M:SkiaSharp.HarfBuzz.ColorExtensions.ToHBColor(SkiaSharp.SKColorF)",
+      "signature": "public static HarfBuzzSharp.HBColor ToHBColor (this SkiaSharp.SKColorF color);",
+      "memberType": "Method",
+      "memberName": "ToHBColor"
+    },
+    {
+      "fields": {
+        "summary": "Converts an <see cref=\"T:HarfBuzzSharp.HBColor\" /> to the equivalent <see cref=\"T:SkiaSharp.SKColor\" />.",
+        "remarks": "",
+        "returns": "An <see cref=\"T:SkiaSharp.SKColor\" /> with the same red, green, blue, and alpha components as <paramref name=\"hbColor\" />.",
+        "params": {
+          "hbColor": "The <see cref=\"T:HarfBuzzSharp.HBColor\" /> to convert."
+        },
+        "_extractedKeys": ["summary", "remarks", "returns", "params.hbColor"]
+      },
+      "docId": "M:SkiaSharp.HarfBuzz.ColorExtensions.ToSKColor(HarfBuzzSharp.HBColor)",
+      "signature": "public static SkiaSharp.SKColor ToSKColor (this HarfBuzzSharp.HBColor hbColor);",
+      "memberType": "Method",
+      "memberName": "ToSKColor"
+    },
+    {
+      "fields": {
+        "summary": "Converts an <see cref=\"T:HarfBuzzSharp.HBColor\" /> to the equivalent <see cref=\"T:SkiaSharp.SKColorF\" />.",
+        "remarks": "",
+        "returns": "An <see cref=\"T:SkiaSharp.SKColorF\" /> with each component normalized to the 0.0–1.0 range.",
+        "params": {
+          "hbColor": "The <see cref=\"T:HarfBuzzSharp.HBColor\" /> to convert."
+        },
+        "_extractedKeys": ["summary", "remarks", "returns", "params.hbColor"]
+      },
+      "docId": "M:SkiaSharp.HarfBuzz.ColorExtensions.ToSKColorF(HarfBuzzSharp.HBColor)",
+      "signature": "public static SkiaSharp.SKColorF ToSKColorF (this HarfBuzzSharp.HBColor hbColor);",
+      "memberType": "Method",
+      "memberName": "ToSKColorF"
+    },
+    {
+      "fields": {
+        "summary": "Converts an array of <see cref=\"T:HarfBuzzSharp.HBColor\" /> values to an array of <see cref=\"T:SkiaSharp.SKColor\" /> values.",
+        "remarks": "",
+        "returns": "An array of <see cref=\"T:SkiaSharp.SKColor\" /> values corresponding to each element in <paramref name=\"hbColors\" />.",
+        "params": {
+          "hbColors": "The array of <see cref=\"T:HarfBuzzSharp.HBColor\" /> values to convert."
+        },
+        "_extractedKeys": ["summary", "remarks", "returns", "params.hbColors"]
+      },
+      "docId": "M:SkiaSharp.HarfBuzz.ColorExtensions.ToSKColors(HarfBuzzSharp.HBColor[])",
+      "signature": "public static SkiaSharp.SKColor[] ToSKColors (this HarfBuzzSharp.HBColor[] hbColors);",
+      "memberType": "Method",
+      "memberName": "ToSKColors"
+    }
+  ],
+  "typeName": "SkiaSharp.HarfBuzz.ColorExtensions",
+  "file": "D:\\a\\SkiaSharp-API-docs\\SkiaSharp-API-docs\\docs\\SkiaSharpAPI\\SkiaSharp.HarfBuzz\\ColorExtensions.xml"
+}

@@ -1,0 +1,297 @@
+{
+  "entries": [
+    {
+      "fields": {
+        "summary": "Represents a HarfBuzz color value with BGRA byte ordering.",
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`HBColor` wraps the native `hb_color_t` type used throughout HarfBuzz color APIs. The\nunderlying 32-bit value uses BGRA byte ordering: `0xBBGGRRAA` (blue in the high byte,\nalpha in the low byte). This differs from <xref:SkiaSharp.SKColor>, which uses\n`0xAARRGGBB`.\n\nUse the named properties (<xref:HarfBuzzSharp.HBColor.Red>, <xref:HarfBuzzSharp.HBColor.Green>,\n<xref:HarfBuzzSharp.HBColor.Blue>, <xref:HarfBuzzSharp.HBColor.Alpha>) to access color\nchannels without needing to understand the internal layout. Conversions to and from\n<xref:SkiaSharp.SKColor> are available via the extension methods in\n<xref:SkiaSharp.HarfBuzz.ColorExtensions>.\n\n`HBColor` is a value type and does not require disposal.\n\n## Examples\n\n```csharp\n// Create from individual channels\nvar red = new HBColor(255, 0, 0, 255);\n\n// Access channels by name\nbyte r = red.Red;   // 255\nbyte g = red.Green; // 0\nbyte b = red.Blue;  // 0\nbyte a = red.Alpha; // 255\n\n// Convert from SKColor\nHBColor hb = SKColors.CornflowerBlue.ToHBColor();\n```\n]]></format>",
+        "remarksRequired": true,
+        "_extractedKeys": [
+          "remarks",
+          "summary"
+        ]
+      },
+      "docId": null,
+      "memberType": "type"
+    },
+    {
+      "fields": {
+        "summary": "Initializes a new instance of the <see cref=\"T:HarfBuzzSharp.HBColor\" /> struct from a raw <c>hb_color_t</c> value.",
+        "remarks": "",
+        "params": {
+          "value": "The raw 32-bit color value in BGRA byte ordering (<c>0xBBGGRRAA</c>)."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "params.value"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.#ctor(System.UInt32)",
+      "signature": "public HBColor (uint value);",
+      "memberType": "Constructor",
+      "memberName": ".ctor"
+    },
+    {
+      "fields": {
+        "summary": "Initializes a new instance of the <see cref=\"T:HarfBuzzSharp.HBColor\" /> struct from individual color channel values.",
+        "remarks": "",
+        "params": {
+          "blue": "The blue channel value (0–255).",
+          "green": "The green channel value (0–255).",
+          "red": "The red channel value (0–255).",
+          "alpha": "The alpha channel value (0–255), where 0 is fully transparent and 255 is fully opaque."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "params.blue",
+          "params.green",
+          "params.red",
+          "params.alpha"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.#ctor(System.Byte,System.Byte,System.Byte,System.Byte)",
+      "signature": "public HBColor (byte red, byte green, byte blue, byte alpha);",
+      "memberType": "Constructor",
+      "memberName": ".ctor"
+    },
+    {
+      "fields": {
+        "summary": "Gets the alpha channel value.",
+        "value": "The alpha channel value (0–255), where 0 is fully transparent and 255 is fully opaque.",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:HarfBuzzSharp.HBColor.Alpha",
+      "signature": "public byte Alpha { get; }",
+      "memberType": "Property",
+      "memberName": "Alpha"
+    },
+    {
+      "fields": {
+        "summary": "Gets the blue channel value.",
+        "value": "The blue channel value (0–255).",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:HarfBuzzSharp.HBColor.Blue",
+      "signature": "public byte Blue { get; }",
+      "memberType": "Property",
+      "memberName": "Blue"
+    },
+    {
+      "fields": {
+        "summary": "Indicates whether this instance is equal to another <see cref=\"T:HarfBuzzSharp.HBColor\" /> value.",
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if both instances represent the same color; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "other": "The <see cref=\"T:HarfBuzzSharp.HBColor\" /> to compare with this instance."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.other"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.Equals(HarfBuzzSharp.HBColor)",
+      "signature": "public bool Equals (HarfBuzzSharp.HBColor other);",
+      "memberType": "Method",
+      "memberName": "Equals"
+    },
+    {
+      "fields": {
+        "summary": "Indicates whether this instance is equal to the specified object.",
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"obj\" /> is a <see cref=\"T:HarfBuzzSharp.HBColor\" /> with the same value; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "obj": "The object to compare with this instance."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.obj"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.Equals(System.Object)",
+      "signature": "public override bool Equals (object obj);",
+      "memberType": "Method",
+      "memberName": "Equals"
+    },
+    {
+      "fields": {
+        "summary": "Returns the hash code for this instance.",
+        "remarks": "",
+        "returns": "A hash code for the current <see cref=\"T:HarfBuzzSharp.HBColor\" />.",
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.GetHashCode",
+      "signature": "public override int GetHashCode ();",
+      "memberType": "Method",
+      "memberName": "GetHashCode"
+    },
+    {
+      "fields": {
+        "summary": "Gets the green channel value.",
+        "value": "The green channel value (0–255).",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:HarfBuzzSharp.HBColor.Green",
+      "signature": "public byte Green { get; }",
+      "memberType": "Property",
+      "memberName": "Green"
+    },
+    {
+      "fields": {
+        "summary": "Determines whether two <see cref=\"T:HarfBuzzSharp.HBColor\" /> values are equal.",
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"left\" /> and <paramref name=\"right\" /> represent the same color; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "left": "The first color to compare.",
+          "right": "The second color to compare."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.left",
+          "params.right"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.op_Equality(HarfBuzzSharp.HBColor,HarfBuzzSharp.HBColor)",
+      "signature": "public static bool operator == (HarfBuzzSharp.HBColor left, HarfBuzzSharp.HBColor right);",
+      "memberType": "Method",
+      "memberName": "op_Equality"
+    },
+    {
+      "fields": {
+        "summary": "Explicitly converts a raw 32-bit BGRA value to an <see cref=\"T:HarfBuzzSharp.HBColor\" />.",
+        "remarks": "",
+        "returns": "An <see cref=\"T:HarfBuzzSharp.HBColor\" /> with the given raw value.",
+        "params": {
+          "value": "The raw 32-bit color value in BGRA byte ordering (<c>0xBBGGRRAA</c>)."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.value"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.op_Explicit(System.UInt32)~HarfBuzzSharp.HBColor",
+      "signature": "public static explicit operator HarfBuzzSharp.HBColor (uint value);",
+      "memberType": "Method",
+      "memberName": "op_Explicit"
+    },
+    {
+      "fields": {
+        "summary": "Implicitly converts an <see cref=\"T:HarfBuzzSharp.HBColor\" /> to its raw 32-bit BGRA value.",
+        "remarks": "",
+        "returns": "The underlying raw 32-bit color value in BGRA byte ordering (<c>0xBBGGRRAA</c>).",
+        "params": {
+          "color": "The <see cref=\"T:HarfBuzzSharp.HBColor\" /> to convert."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.color"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.op_Implicit(HarfBuzzSharp.HBColor)~System.UInt32",
+      "signature": "public static implicit operator uint (HarfBuzzSharp.HBColor color);",
+      "memberType": "Method",
+      "memberName": "op_Implicit"
+    },
+    {
+      "fields": {
+        "summary": "Determines whether two <see cref=\"T:HarfBuzzSharp.HBColor\" /> values are not equal.",
+        "remarks": "",
+        "returns": "<see langword=\"true\" /> if <paramref name=\"left\" /> and <paramref name=\"right\" /> do not represent the same color; otherwise, <see langword=\"false\" />.",
+        "params": {
+          "left": "The first color to compare.",
+          "right": "The second color to compare."
+        },
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns",
+          "params.left",
+          "params.right"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.op_Inequality(HarfBuzzSharp.HBColor,HarfBuzzSharp.HBColor)",
+      "signature": "public static bool operator != (HarfBuzzSharp.HBColor left, HarfBuzzSharp.HBColor right);",
+      "memberType": "Method",
+      "memberName": "op_Inequality"
+    },
+    {
+      "fields": {
+        "summary": "Gets the red channel value.",
+        "value": "The red channel value (0–255).",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:HarfBuzzSharp.HBColor.Red",
+      "signature": "public byte Red { get; }",
+      "memberType": "Property",
+      "memberName": "Red"
+    },
+    {
+      "fields": {
+        "summary": "Returns the color as a hexadecimal string in <c>#AARRGGBB</c> format.",
+        "remarks": "",
+        "returns": "A string representation of the color in the form <c>#AARRGGBB</c>.",
+        "_extractedKeys": [
+          "summary",
+          "remarks",
+          "returns"
+        ]
+      },
+      "docId": "M:HarfBuzzSharp.HBColor.ToString",
+      "signature": "public override string ToString ();",
+      "memberType": "Method",
+      "memberName": "ToString"
+    },
+    {
+      "fields": {
+        "summary": "Gets the raw underlying <c>hb_color_t</c> value.",
+        "value": "The 32-bit packed color value in BGRA byte ordering (<c>0xBBGGRRAA</c>).",
+        "remarks": "",
+        "_extractedKeys": [
+          "summary",
+          "value",
+          "remarks"
+        ]
+      },
+      "docId": "P:HarfBuzzSharp.HBColor.Value",
+      "signature": "public uint Value { get; }",
+      "memberType": "Property",
+      "memberName": "Value"
+    }
+  ],
+  "typeName": "HarfBuzzSharp.HBColor",
+  "file": "D:\\a\\SkiaSharp-API-docs\\SkiaSharp-API-docs\\docs\\SkiaSharpAPI\\HarfBuzzSharp\\HBColor.xml"
+}
