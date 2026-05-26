@@ -67,6 +67,8 @@
       <Member Id="M:SkiaSharp.GRContext.DisposeNative" />
       <Member Id="M:SkiaSharp.GRContext.DumpMemoryStatistics(SkiaSharp.SKTraceMemoryDump)" />
       <Member Id="M:SkiaSharp.GRContext.Flush" />
+      <Member Id="M:SkiaSharp.GRContext.Flush(SkiaSharp.SKImage)" />
+      <Member Id="M:SkiaSharp.GRContext.Flush(SkiaSharp.SKSurface)" />
       <Member Id="M:SkiaSharp.GRContext.Flush(System.Boolean,System.Boolean)" />
       <Member Id="M:SkiaSharp.GRContext.GetMaxSurfaceSampleCount(SkiaSharp.SKColorType)" />
       <Member Id="M:SkiaSharp.GRContext.GetResourceCacheLimit" />
@@ -262,22 +264,38 @@
       <Member Id="P:SkiaSharp.GRVkYcbcrComponents.R" />
     </Type>
     <Type Name="SkiaSharp.GrVkYcbcrConversionInfo" Id="T:SkiaSharp.GrVkYcbcrConversionInfo">
-      <Member Id="M:SkiaSharp.GrVkYcbcrConversionInfo.Equals(SkiaSharp.GrVkYcbcrConversionInfo)" />
-      <Member Id="M:SkiaSharp.GrVkYcbcrConversionInfo.Equals(System.Object)" />
-      <Member Id="M:SkiaSharp.GrVkYcbcrConversionInfo.GetHashCode" />
-      <Member Id="M:SkiaSharp.GrVkYcbcrConversionInfo.op_Equality(SkiaSharp.GrVkYcbcrConversionInfo,SkiaSharp.GrVkYcbcrConversionInfo)" />
-      <Member Id="M:SkiaSharp.GrVkYcbcrConversionInfo.op_Inequality(SkiaSharp.GrVkYcbcrConversionInfo,SkiaSharp.GrVkYcbcrConversionInfo)" />
+      <Member Id="M:SkiaSharp.GrVkYcbcrConversionInfo.op_Implicit(SkiaSharp.GrVkYcbcrConversionInfo)~SkiaSharp.GRVkYcbcrConversionInfo" />
+      <Member Id="M:SkiaSharp.GrVkYcbcrConversionInfo.op_Implicit(SkiaSharp.GRVkYcbcrConversionInfo)~SkiaSharp.GrVkYcbcrConversionInfo" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.ChromaFilter" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.Components" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.ExternalFormat" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.ForceExplicitReconstruction" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.Format" />
+      <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.FormatFeatures" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.SamplerFilterMustMatchChromaFilter" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.SupportsLinearFilter" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.XChromaOffset" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.YcbcrModel" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.YcbcrRange" />
       <Member Id="P:SkiaSharp.GrVkYcbcrConversionInfo.YChromaOffset" />
+    </Type>
+    <Type Name="SkiaSharp.GRVkYcbcrConversionInfo" Id="T:SkiaSharp.GRVkYcbcrConversionInfo">
+      <Member Id="M:SkiaSharp.GRVkYcbcrConversionInfo.Equals(SkiaSharp.GRVkYcbcrConversionInfo)" />
+      <Member Id="M:SkiaSharp.GRVkYcbcrConversionInfo.Equals(System.Object)" />
+      <Member Id="M:SkiaSharp.GRVkYcbcrConversionInfo.GetHashCode" />
+      <Member Id="M:SkiaSharp.GRVkYcbcrConversionInfo.op_Equality(SkiaSharp.GRVkYcbcrConversionInfo,SkiaSharp.GRVkYcbcrConversionInfo)" />
+      <Member Id="M:SkiaSharp.GRVkYcbcrConversionInfo.op_Inequality(SkiaSharp.GRVkYcbcrConversionInfo,SkiaSharp.GRVkYcbcrConversionInfo)" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.ChromaFilter" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.Components" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.ExternalFormat" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.ForceExplicitReconstruction" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.Format" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.SamplerFilterMustMatchChromaFilter" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.SupportsLinearFilter" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.XChromaOffset" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.YcbcrModel" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.YcbcrRange" />
+      <Member Id="P:SkiaSharp.GRVkYcbcrConversionInfo.YChromaOffset" />
     </Type>
     <Type Name="SkiaSharp.SKAbstractManagedStream" Id="T:SkiaSharp.SKAbstractManagedStream">
       <Member Id="M:SkiaSharp.SKAbstractManagedStream.#ctor" />
@@ -1187,10 +1205,13 @@
       <Member Id="M:SkiaSharp.SKDocument.CreatePdf(System.String,SkiaSharp.SKDocumentPdfMetadata)" />
       <Member Id="M:SkiaSharp.SKDocument.CreatePdf(System.String,System.Single)" />
       <Member Id="M:SkiaSharp.SKDocument.CreateXps(SkiaSharp.SKWStream)" />
+      <Member Id="M:SkiaSharp.SKDocument.CreateXps(SkiaSharp.SKWStream,SkiaSharp.SKDocumentXpsOptions)" />
       <Member Id="M:SkiaSharp.SKDocument.CreateXps(SkiaSharp.SKWStream,System.Single)" />
       <Member Id="M:SkiaSharp.SKDocument.CreateXps(System.IO.Stream)" />
+      <Member Id="M:SkiaSharp.SKDocument.CreateXps(System.IO.Stream,SkiaSharp.SKDocumentXpsOptions)" />
       <Member Id="M:SkiaSharp.SKDocument.CreateXps(System.IO.Stream,System.Single)" />
       <Member Id="M:SkiaSharp.SKDocument.CreateXps(System.String)" />
+      <Member Id="M:SkiaSharp.SKDocument.CreateXps(System.String,SkiaSharp.SKDocumentXpsOptions)" />
       <Member Id="M:SkiaSharp.SKDocument.CreateXps(System.String,System.Single)" />
       <Member Id="M:SkiaSharp.SKDocument.Dispose(System.Boolean)" />
       <Member Id="M:SkiaSharp.SKDocument.EndPage" />
@@ -1226,7 +1247,7 @@
       <Member Id="M:SkiaSharp.SKDocumentXpsOptions.op_Equality(SkiaSharp.SKDocumentXpsOptions,SkiaSharp.SKDocumentXpsOptions)" />
       <Member Id="M:SkiaSharp.SKDocumentXpsOptions.op_Inequality(SkiaSharp.SKDocumentXpsOptions,SkiaSharp.SKDocumentXpsOptions)" />
       <Member Id="P:SkiaSharp.SKDocumentXpsOptions.AllowNoPngs" />
-      <Member Id="P:SkiaSharp.SKDocumentXpsOptions.DPI" />
+      <Member Id="P:SkiaSharp.SKDocumentXpsOptions.Dpi" />
     </Type>
     <Type Name="SkiaSharp.SKDrawable" Id="T:SkiaSharp.SKDrawable">
       <Member Id="M:SkiaSharp.SKDrawable.#ctor" />
@@ -1990,6 +2011,7 @@
       <Member Id="M:SkiaSharp.SKMaskFilter.CreateBlur(SkiaSharp.SKBlurStyle,System.Single,System.Boolean)" />
       <Member Id="M:SkiaSharp.SKMaskFilter.CreateClip(System.Byte,System.Byte)" />
       <Member Id="M:SkiaSharp.SKMaskFilter.CreateGamma(System.Single)" />
+      <Member Id="M:SkiaSharp.SKMaskFilter.CreateShader(SkiaSharp.SKShader)" />
       <Member Id="M:SkiaSharp.SKMaskFilter.CreateTable(System.Byte[])" />
       <Member Id="M:SkiaSharp.SKMaskFilter.Dispose(System.Boolean)" />
     </Type>
