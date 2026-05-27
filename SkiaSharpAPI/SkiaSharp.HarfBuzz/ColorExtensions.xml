@@ -1,0 +1,150 @@
+<Type Name="ColorExtensions" FullName="SkiaSharp.HarfBuzz.ColorExtensions">
+  <TypeSignature Language="C#" Value="public static class ColorExtensions" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit ColorExtensions extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.HarfBuzz.ColorExtensions" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+    <AssemblyVersion>4.147.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Provides extension methods for converting between <see cref="T:SkiaSharp.SKColor" /> and <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`ColorExtensions` bridges the color types of the SkiaSharp and HarfBuzzSharp
+libraries. `SKColor` uses ARGB byte order (`0xAARRGGBB`), while `HBColor`
+uses BGRA byte order (`0xBBGGRRAA`). These extension methods handle the
+conversion transparently.
+
+This is a static utility class and does not require disposal.
+
+## Examples
+
+```csharp
+using SkiaSharp.HarfBuzz;
+
+// Convert SKColor → HBColor
+HBColor hb = SKColors.CornflowerBlue.ToHBColor();
+
+// Convert HBColor → SKColor
+SKColor sk = hb.ToSKColor();
+```
+]]></format></remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ToHBColor">
+      <MemberSignature Language="C#" Value="public static HarfBuzzSharp.HBColor ToHBColor (this SkiaSharp.SKColor color);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype HarfBuzzSharp.HBColor ToHBColor(valuetype SkiaSharp.SKColor color) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.ColorExtensions.ToHBColor(SkiaSharp.SKColor)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>4.147.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>HarfBuzzSharp.HBColor</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="color" Type="SkiaSharp.SKColor" RefType="this" />
+      </Parameters>
+      <Docs>
+        <param name="color">The <see cref="T:SkiaSharp.SKColor" /> to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKColor" /> to an <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
+        <returns>An <see cref="T:HarfBuzzSharp.HBColor" /> with the same RGBA component values.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToHBColor">
+      <MemberSignature Language="C#" Value="public static HarfBuzzSharp.HBColor ToHBColor (this SkiaSharp.SKColorF color);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype HarfBuzzSharp.HBColor ToHBColor(valuetype SkiaSharp.SKColorF color) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.ColorExtensions.ToHBColor(SkiaSharp.SKColorF)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>4.147.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>HarfBuzzSharp.HBColor</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" />
+      </Parameters>
+      <Docs>
+        <param name="color">The <see cref="T:SkiaSharp.SKColorF" /> to convert. Each component is clamped to the range [0, 1] and scaled to [0, 255].</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKColorF" /> to an <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
+        <returns>An <see cref="T:HarfBuzzSharp.HBColor" /> representing the converted color.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToSKColor">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColor ToSKColor (this HarfBuzzSharp.HBColor hbColor);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKColor ToSKColor(valuetype HarfBuzzSharp.HBColor hbColor) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.ColorExtensions.ToSKColor(HarfBuzzSharp.HBColor)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>4.147.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColor</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="hbColor" Type="HarfBuzzSharp.HBColor" RefType="this" />
+      </Parameters>
+      <Docs>
+        <param name="hbColor">The <see cref="T:HarfBuzzSharp.HBColor" /> to convert.</param>
+        <summary>Converts an <see cref="T:HarfBuzzSharp.HBColor" /> to an <see cref="T:SkiaSharp.SKColor" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKColor" /> with the same RGBA component values.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToSKColorF">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorF ToSKColorF (this HarfBuzzSharp.HBColor hbColor);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKColorF ToSKColorF(valuetype HarfBuzzSharp.HBColor hbColor) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.ColorExtensions.ToSKColorF(HarfBuzzSharp.HBColor)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>4.147.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorF</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="hbColor" Type="HarfBuzzSharp.HBColor" RefType="this" />
+      </Parameters>
+      <Docs>
+        <param name="hbColor">The <see cref="T:HarfBuzzSharp.HBColor" /> to convert.</param>
+        <summary>Converts an <see cref="T:HarfBuzzSharp.HBColor" /> to an <see cref="T:SkiaSharp.SKColorF" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKColorF" /> with each component in the range [0, 1].</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToSKColors">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColor[] ToSKColors (this HarfBuzzSharp.HBColor[] hbColors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKColor[] ToSKColors(valuetype HarfBuzzSharp.HBColor[] hbColors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.HarfBuzz.ColorExtensions.ToSKColors(HarfBuzzSharp.HBColor[])" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.HarfBuzz</AssemblyName>
+        <AssemblyVersion>4.147.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColor[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="hbColors" Type="HarfBuzzSharp.HBColor[]" RefType="this" />
+      </Parameters>
+      <Docs>
+        <param name="hbColors">The array of <see cref="T:HarfBuzzSharp.HBColor" /> values to convert.</param>
+        <summary>Converts an array of <see cref="T:HarfBuzzSharp.HBColor" /> values to an array of <see cref="T:SkiaSharp.SKColor" /> values.</summary>
+        <returns>An array of <see cref="T:SkiaSharp.SKColor" /> values with equivalent RGBA component values.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

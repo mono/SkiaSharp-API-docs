@@ -1,0 +1,361 @@
+<Type Name="HBColor" FullName="HarfBuzzSharp.HBColor">
+  <TypeSignature Language="C#" Value="public readonly struct HBColor : IEquatable&lt;HarfBuzzSharp.HBColor&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit HBColor extends System.ValueType implements class System.IEquatable`1&lt;valuetype HarfBuzzSharp.HBColor&gt;" />
+  <TypeSignature Language="DocId" Value="T:HarfBuzzSharp.HBColor" />
+  <AssemblyInfo>
+    <AssemblyName>HarfBuzzSharp</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.ValueType</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;HarfBuzzSharp.HBColor&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents a HarfBuzz color value using BGRA byte ordering.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`HBColor` wraps a `hb_color_t` value, which stores color channels as `0xBBGGRRAA`
+(blue in the highest byte, alpha in the lowest byte). This differs from
+<xref:SkiaSharp.SKColor>, which uses `0xAARRGGBB` (ARGB).
+
+Use the named properties (`Red`, `Green`, `Blue`, `Alpha`) to read individual
+channels, and the `HBColor(byte, byte, byte, byte)` constructor to create a
+color from components without worrying about byte ordering.
+
+This is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+// Create from RGBA components
+var color = new HBColor(red: 255, green: 128, blue: 0, alpha: 255);
+Console.WriteLine($"R={color.Red} G={color.Green} B={color.Blue} A={color.Alpha}");
+
+// Convert from SKColor
+using SkiaSharp.HarfBuzz;
+HBColor hb = SKColors.CornflowerBlue.ToHBColor();
+```
+]]></format></remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public HBColor (uint value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int32 value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.#ctor(System.UInt32)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="value" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="value">The raw BGRA color value in <c>0xBBGGRRAA</c> byte order.</param>
+        <summary>Initializes a new instance of the <see cref="T:HarfBuzzSharp.HBColor" /> struct from a raw <c>hb_color_t</c> value.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public HBColor (byte red, byte green, byte blue, byte alpha);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8 red, unsigned int8 green, unsigned int8 blue, unsigned int8 alpha) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.#ctor(System.Byte,System.Byte,System.Byte,System.Byte)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="red" Type="System.Byte" />
+        <Parameter Name="green" Type="System.Byte" />
+        <Parameter Name="blue" Type="System.Byte" />
+        <Parameter Name="alpha" Type="System.Byte" />
+      </Parameters>
+      <Docs>
+        <param name="red">The red channel value (0–255).</param>
+        <param name="green">The green channel value (0–255).</param>
+        <param name="blue">The blue channel value (0–255).</param>
+        <param name="alpha">The alpha channel value (0–255), where 0 is fully transparent and 255 is fully opaque.</param>
+        <summary>Initializes a new instance of the <see cref="T:HarfBuzzSharp.HBColor" /> struct from individual RGBA components.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Alpha">
+      <MemberSignature Language="C#" Value="public byte Alpha { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int8 Alpha" />
+      <MemberSignature Language="DocId" Value="P:HarfBuzzSharp.HBColor.Alpha" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the alpha channel value.</summary>
+        <value>A byte in the range 0–255, where 0 is fully transparent and 255 is fully opaque.</value>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Blue">
+      <MemberSignature Language="C#" Value="public byte Blue { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int8 Blue" />
+      <MemberSignature Language="DocId" Value="P:HarfBuzzSharp.HBColor.Blue" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the blue channel value.</summary>
+        <value>A byte in the range 0–255.</value>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (HarfBuzzSharp.HBColor other);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype HarfBuzzSharp.HBColor other) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.Equals(HarfBuzzSharp.HBColor)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IEquatable`1.Equals(`0)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="other" Type="HarfBuzzSharp.HBColor" />
+      </Parameters>
+      <Docs>
+        <param name="other">The <see cref="T:HarfBuzzSharp.HBColor" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:HarfBuzzSharp.HBColor" /> is equal to the current instance.</summary>
+        <returns><see langword="true" /> if the values are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is an <see cref="T:HarfBuzzSharp.HBColor" /> equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the hash code for the current instance.</summary>
+        <returns>A hash code for the current <see cref="T:HarfBuzzSharp.HBColor" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Green">
+      <MemberSignature Language="C#" Value="public byte Green { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int8 Green" />
+      <MemberSignature Language="DocId" Value="P:HarfBuzzSharp.HBColor.Green" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the green channel value.</summary>
+        <value>A byte in the range 0–255.</value>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (HarfBuzzSharp.HBColor left, HarfBuzzSharp.HBColor right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype HarfBuzzSharp.HBColor left, valuetype HarfBuzzSharp.HBColor right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.op_Equality(HarfBuzzSharp.HBColor,HarfBuzzSharp.HBColor)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="HarfBuzzSharp.HBColor" />
+        <Parameter Name="right" Type="HarfBuzzSharp.HBColor" />
+      </Parameters>
+      <Docs>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Returns a value indicating whether two <see cref="T:HarfBuzzSharp.HBColor" /> values are equal.</summary>
+        <returns><see langword="true" /> if the values are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Explicit">
+      <MemberSignature Language="C#" Value="public static explicit operator HarfBuzzSharp.HBColor (uint value);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype HarfBuzzSharp.HBColor op_Explicit(unsigned int32 value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.op_Explicit(System.UInt32)~HarfBuzzSharp.HBColor" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>HarfBuzzSharp.HBColor</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="value" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="value">The raw <c>hb_color_t</c> value in <c>0xBBGGRRAA</c> byte order.</param>
+        <summary>Explicitly converts a <see langword="uint" /> raw value to an <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
+        <returns>An <see cref="T:HarfBuzzSharp.HBColor" /> wrapping the raw value.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator uint (HarfBuzzSharp.HBColor color);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname unsigned int32 op_Implicit(valuetype HarfBuzzSharp.HBColor color) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.op_Implicit(HarfBuzzSharp.HBColor)~System.UInt32" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="color" Type="HarfBuzzSharp.HBColor" />
+      </Parameters>
+      <Docs>
+        <param name="color">The color to convert.</param>
+        <summary>Implicitly converts an <see cref="T:HarfBuzzSharp.HBColor" /> to its underlying <see langword="uint" /> value.</summary>
+        <returns>The raw <c>hb_color_t</c> value in <c>0xBBGGRRAA</c> byte order.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (HarfBuzzSharp.HBColor left, HarfBuzzSharp.HBColor right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype HarfBuzzSharp.HBColor left, valuetype HarfBuzzSharp.HBColor right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.op_Inequality(HarfBuzzSharp.HBColor,HarfBuzzSharp.HBColor)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="HarfBuzzSharp.HBColor" />
+        <Parameter Name="right" Type="HarfBuzzSharp.HBColor" />
+      </Parameters>
+      <Docs>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Returns a value indicating whether two <see cref="T:HarfBuzzSharp.HBColor" /> values are not equal.</summary>
+        <returns><see langword="true" /> if the values are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Red">
+      <MemberSignature Language="C#" Value="public byte Red { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int8 Red" />
+      <MemberSignature Language="DocId" Value="P:HarfBuzzSharp.HBColor.Red" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the red channel value.</summary>
+        <value>A byte in the range 0–255.</value>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:HarfBuzzSharp.HBColor.ToString" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the string representation of the color as a hex value.</summary>
+        <returns>A string in the format <c>#AARRGGBB</c>.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Value">
+      <MemberSignature Language="C#" Value="public uint Value { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 Value" />
+      <MemberSignature Language="DocId" Value="P:HarfBuzzSharp.HBColor.Value" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the raw <c>hb_color_t</c> value.</summary>
+        <value>A <see langword="uint" /> in <c>0xBBGGRRAA</c> byte order (blue in the high byte, alpha in the low byte).</value>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
