@@ -10,8 +10,26 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies the color primaries component of a CICP color space descriptor.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKColorspacePrimariesCicp` specifies the color primaries component of a CICP
+(Coding-Independent Code Points) color space descriptor, as defined in
+ITU-T H.273. These values identify the set of color primaries (i.e., the
+chromaticity coordinates) used to encode or display color.
+
+Use this enumeration with <xref:SkiaSharp.SKColorSpace.CreateCicp(SkiaSharp.SKColorspacePrimariesCicp,SkiaSharp.SKColorspaceTransferFnCicp)>
+to create a color space from CICP descriptors.
+
+## Examples
+
+```csharp
+var colorSpace = SKColorSpace.CreateCicp(
+    SKColorspacePrimariesCicp.Rec709,
+    SKColorspaceTransferFnCicp.Rec709);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="GenericFilm">
@@ -28,7 +46,7 @@
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Generic film color primaries representing the primaries of a typical film display (CICP value 8).</summary>
       </Docs>
     </Member>
     <Member MemberName="ItuTH273Value22">
@@ -45,7 +63,7 @@
       </ReturnValue>
       <MemberValue>22</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-T H.273 unspecified value 22, corresponding to EBU Tech 3213-E color primaries (CICP value 22).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec2020">
@@ -62,7 +80,7 @@
       </ReturnValue>
       <MemberValue>9</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.2020 color primaries for ultra-high-definition television (CICP value 9).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -79,7 +97,7 @@
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System BG color primaries, associated with legacy PAL and SECAM television (CICP value 5).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -96,7 +114,7 @@
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.470 System M color primaries, associated with legacy NTSC television (CICP value 4).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -113,7 +131,7 @@
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.601 color primaries for standard-definition digital television (CICP value 6).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -130,7 +148,7 @@
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>ITU-R BT.709 color primaries, used for standard-definition and high-definition television (CICP value 1).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteEg4321">
@@ -147,7 +165,7 @@
       </ReturnValue>
       <MemberValue>12</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE EG 432-1 color primaries, also known as Display P3 (CICP value 12).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteRp4312">
@@ -164,7 +182,7 @@
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE RP 431-2 color primaries, also known as DCI-P3 with a specific white point (CICP value 11).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -181,7 +199,7 @@
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 240 color primaries, used in early HDTV production (CICP value 7).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -198,7 +216,7 @@
       </ReturnValue>
       <MemberValue>10</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>SMPTE ST 428-1 color primaries for digital cinema (CICP value 10).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -215,7 +233,7 @@
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>An unspecified or unknown set of color primaries (CICP value 0).</summary>
       </Docs>
     </Member>
   </Members>
