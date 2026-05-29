@@ -15,8 +15,28 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies a design coordinate value for a single font variation axis.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFontVariationPositionCoordinate` pairs a variation axis tag with a specific design coordinate
+value, used to position a variable font along a single axis. A collection of these coordinates is
+passed through <xref:SkiaSharp.SKFontArguments.VariationDesignPosition> when cloning a typeface.
+
+`SKFontVariationPositionCoordinate` is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+var coords = new SKFontVariationPositionCoordinate[]
+{
+    new SKFontVariationPositionCoordinate { Axis = SKFourByteTag.Parse("wght"), Value = 700f },
+    new SKFontVariationPositionCoordinate { Axis = SKFourByteTag.Parse("ital"), Value = 1f  },
+};
+var args = new SKFontArguments { VariationDesignPosition = coords };
+using var italic700 = typeface.Clone(args);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Axis">
@@ -37,9 +57,9 @@
         <ReturnType>SkiaSharp.SKFourByteTag</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the four-byte tag identifying the variation axis.</summary>
+        <value>An <see cref="T:SkiaSharp.SKFourByteTag" /> such as <c>wght</c> or <c>ital</c>.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -66,10 +86,10 @@
         <Parameter Name="obj" Type="SkiaSharp.SKFontVariationPositionCoordinate" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> to compare with the current instance.</param>
+        <summary>Determines whether this instance is equal to another <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" />.</summary>
+        <returns><see langword="true" /> if the axis and value are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -93,10 +113,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether this instance is equal to the specified object.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is an <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> with the same values; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -118,9 +138,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the hash code for this instance.</summary>
+        <returns>A hash code for the current <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -140,11 +160,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFontVariationPositionCoordinate" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values are equal.</summary>
+        <returns><see langword="true" /> if both axis and value are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -164,11 +184,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFontVariationPositionCoordinate" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values are not equal.</summary>
+        <returns><see langword="true" /> if the axis or value differs; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -189,9 +209,9 @@
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the design coordinate value along the variation axis.</summary>
+        <value>The design-space value for the axis identified by <see cref="P:SkiaSharp.SKFontVariationPositionCoordinate.Axis" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
