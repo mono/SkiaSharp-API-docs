@@ -11,8 +11,21 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a single frame in an animated WebP encoding operation.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKWebpEncoderFrame` represents a single frame in an animated WebP sequence.
+Each frame wraps a <xref:SkiaSharp.SKPixmap> and a display duration in milliseconds.
+
+Create an instance from an <xref:SkiaSharp.SKBitmap>, an <xref:SkiaSharp.SKImage>,
+or directly from an <xref:SkiaSharp.SKPixmap>. When the frame is no longer needed,
+dispose of it to release any internally managed resources.
+
+Pass a span of frames to one of the
+<xref:SkiaSharp.SKWebpEncoder.EncodeAnimated*> overloads to produce an animated
+WebP file.
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -93,9 +106,9 @@
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the display duration of this frame.</summary>
+        <value>The duration in milliseconds for which this frame is displayed.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Pixmap">
@@ -116,9 +129,9 @@
         <ReturnType>SkiaSharp.SKPixmap</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the pixel data for this frame.</summary>
+        <value>The <see cref="T:SkiaSharp.SKPixmap" /> that supplies the pixel data for this frame.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

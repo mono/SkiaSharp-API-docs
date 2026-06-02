@@ -4,6 +4,7 @@
     <Assembly Name="SkiaSharp.Views.Blazor" Version="3.119.0.0" />
     <Assembly Name="SkiaSharp.Views.Desktop.Common" Version="3.119.0.0" />
     <Assembly Name="SkiaSharp.Views.Gtk3" Version="3.119.0.0" />
+    <Assembly Name="SkiaSharp.Views.Gtk4" Version="3.119.0.0" />
     <Assembly Name="SkiaSharp.Views.iOS" Version="3.119.0.0" />
     <Assembly Name="SkiaSharp.Views.Mac" Version="3.119.0.0" />
     <Assembly Name="SkiaSharp.Views.Tizen" Version="3.119.0.0" />
@@ -174,7 +175,7 @@
   <Namespace Name="SkiaSharp.Views.Blazor">
     <Type Name="SkiaSharp.Views.Blazor._Imports" Id="T:SkiaSharp.Views.Blazor._Imports">
       <Member Id="M:SkiaSharp.Views.Blazor._Imports.#ctor" />
-      <Member Id="M:SkiaSharp.Views.Blazor._Imports.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)" />
+      <Member Id="M:SkiaSharp.Views.Blazor._Imports.Execute" />
     </Type>
     <Type Name="SkiaSharp.Views.Blazor.SKCanvasView" Id="T:SkiaSharp.Views.Blazor.SKCanvasView">
       <Member Id="M:SkiaSharp.Views.Blazor.SKCanvasView.#ctor" />
@@ -218,16 +219,6 @@
       <Member Id="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.Info" />
       <Member Id="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.RawInfo" />
       <Member Id="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.Surface" />
-    </Type>
-  </Namespace>
-  <Namespace Name="SkiaSharp.Views.Blazor.Internal">
-    <Type Name="SkiaSharp.Views.Blazor.Internal.ActionHelper" Id="T:SkiaSharp.Views.Blazor.Internal.ActionHelper">
-      <Member Id="M:SkiaSharp.Views.Blazor.Internal.ActionHelper.#ctor(System.Action)" />
-      <Member Id="M:SkiaSharp.Views.Blazor.Internal.ActionHelper.Invoke" />
-    </Type>
-    <Type Name="SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper" Id="T:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper">
-      <Member Id="M:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper.#ctor(System.Action{System.Single,System.Single})" />
-      <Member Id="M:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper.Invoke(System.Single,System.Single)" />
     </Type>
   </Namespace>
   <Namespace Name="SkiaSharp.Views.Desktop">
@@ -295,6 +286,13 @@
   <Namespace Name="SkiaSharp.Views.Gtk">
     <Type Name="SkiaSharp.Views.Gtk.GTKExtensions" Id="T:SkiaSharp.Views.Gtk.GTKExtensions">
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToColor(SkiaSharp.SKColor)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToGdkRectangle(SkiaSharp.SKRectI)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToGdkRGBA(SkiaSharp.SKColor)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToGdkRGBA(SkiaSharp.SKColorF)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToGraphenePoint(SkiaSharp.SKPoint)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToGraphenePoint3D(SkiaSharp.SKPoint3)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToGrapheneRect(SkiaSharp.SKRect)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToGrapheneSize(SkiaSharp.SKSize)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToPixbuf(SkiaSharp.SKBitmap)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToPixbuf(SkiaSharp.SKImage)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToPixbuf(SkiaSharp.SKPicture,SkiaSharp.SKSizeI)" />
@@ -304,15 +302,22 @@
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSize(SkiaSharp.SKSizeI)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKBitmap(Gdk.Pixbuf)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKColor(Gdk.Color)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKColor(Gdk.RGBA)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKColorF(Gdk.RGBA)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKImage(Gdk.Pixbuf)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKPixmap(Gdk.Pixbuf,SkiaSharp.SKPixmap)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKPoint(Graphene.Point)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKPoint3(Graphene.Point3D)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKPointI(Gdk.Point)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKRect(Graphene.Rect)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKRectI(Gdk.Rectangle)" />
+      <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKSize(Graphene.Size)" />
       <Member Id="M:SkiaSharp.Views.Gtk.GTKExtensions.ToSKSizeI(Gdk.Size)" />
     </Type>
     <Type Name="SkiaSharp.Views.Gtk.SKDrawingArea" Id="T:SkiaSharp.Views.Gtk.SKDrawingArea">
       <Member Id="E:SkiaSharp.Views.Gtk.SKDrawingArea.PaintSurface" />
       <Member Id="M:SkiaSharp.Views.Gtk.SKDrawingArea.#ctor" />
+      <Member Id="M:SkiaSharp.Views.Gtk.SKDrawingArea.Dispose" />
       <Member Id="M:SkiaSharp.Views.Gtk.SKDrawingArea.Dispose(System.Boolean)" />
       <Member Id="M:SkiaSharp.Views.Gtk.SKDrawingArea.OnDrawn(Cairo.Context)" />
       <Member Id="M:SkiaSharp.Views.Gtk.SKDrawingArea.OnPaintSurface(SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs)" />
