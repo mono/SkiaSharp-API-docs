@@ -20,8 +20,34 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a four-byte OpenType tag encoded as a packed 32-bit unsigned integer.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFourByteTag` wraps a 32-bit unsigned integer that encodes four ASCII characters, one per
+byte (most significant byte first). This layout matches the OpenType tag format used throughout
+font technology — for example, `wght` for weight, `wdth` for width, or `ital` for italic.
+
+The value is stored as `(byte)c1 << 24 | (byte)c2 << 16 | (byte)c3 << 8 | (byte)c4`.
+
+`SKFourByteTag` is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+// Construct from four characters
+var wght = new SKFourByteTag('w', 'g', 'h', 't');
+
+// Construct by parsing a string (pads with spaces if shorter than 4 chars)
+var tag = SKFourByteTag.Parse("wdth");
+
+// Implicit conversion from uint
+SKFourByteTag fromUint = 0x77676874u; // 'wght'
+
+// Convert back to string
+string str = tag.ToString(); // "wdth"
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -37,9 +63,9 @@
         <Parameter Name="value" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="value">The packed tag value with characters encoded as <c>(byte)c1 &lt;&lt; 24 | (byte)c2 &lt;&lt; 16 | (byte)c3 &lt;&lt; 8 | (byte)c4</c>.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKFourByteTag" /> struct from a raw packed value.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -58,12 +84,12 @@
         <Parameter Name="c4" Type="System.Char" />
       </Parameters>
       <Docs>
-        <param name="c1">To be added.</param>
-        <param name="c2">To be added.</param>
-        <param name="c3">To be added.</param>
-        <param name="c4">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="c1">The first character (most significant byte).</param>
+        <param name="c2">The second character.</param>
+        <param name="c3">The third character.</param>
+        <param name="c4">The fourth character (least significant byte).</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKFourByteTag" /> struct from four ASCII characters.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -85,14 +111,14 @@
         <Parameter Name="other" Type="SkiaSharp.SKFourByteTag" />
       </Parameters>
       <Docs>
-        <param name="other">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="other">The <see cref="T:SkiaSharp.SKFourByteTag" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:SkiaSharp.SKFourByteTag" /> is equal to the current instance.</summary>
+        <returns><see langword="true" /> if both tags have the same packed value; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="C#" Value="public override bool Equals (object? obj);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.Equals(System.Object)" />
       <MemberType>Method</MemberType>
@@ -102,7 +128,7 @@
       </AssemblyInfo>
       <Attributes>
         <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>
@@ -112,10 +138,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is a <see cref="T:SkiaSharp.SKFourByteTag" /> with the same packed value; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -132,9 +158,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the hash code for the current instance.</summary>
+        <returns>A hash code for the current <see cref="T:SkiaSharp.SKFourByteTag" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -154,11 +180,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFourByteTag" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first tag to compare.</param>
+        <param name="right">The second tag to compare.</param>
+        <summary>Returns a value indicating whether two <see cref="T:SkiaSharp.SKFourByteTag" /> instances are equal.</summary>
+        <returns><see langword="true" /> if both tags have the same packed value; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -177,10 +203,10 @@
         <Parameter Name="tag" Type="SkiaSharp.SKFourByteTag" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tag">The tag to convert.</param>
+        <summary>Implicitly converts an <see cref="T:SkiaSharp.SKFourByteTag" /> to its raw unsigned integer representation.</summary>
+        <returns>The packed 32-bit unsigned integer representation of the tag.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -199,10 +225,10 @@
         <Parameter Name="tag" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tag">The packed 32-bit unsigned integer to convert.</param>
+        <summary>Implicitly converts a raw unsigned integer to an <see cref="T:SkiaSharp.SKFourByteTag" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKFourByteTag" /> whose packed value equals <paramref name="tag" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -222,11 +248,11 @@
         <Parameter Name="right" Type="SkiaSharp.SKFourByteTag" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first tag to compare.</param>
+        <param name="right">The second tag to compare.</param>
+        <summary>Returns a value indicating whether two <see cref="T:SkiaSharp.SKFourByteTag" /> instances are not equal.</summary>
+        <returns><see langword="true" /> if the tags differ; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Parse">
@@ -250,10 +276,10 @@
         <Parameter Name="tag" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="tag">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="tag">The string to parse. If <see langword="null" /> or empty, a zero tag is returned. Only the first four characters are used; shorter strings are right-padded with spaces.</param>
+        <summary>Parses a string of up to four ASCII characters into an <see cref="T:SkiaSharp.SKFourByteTag" />, padding with spaces if necessary.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKFourByteTag" /> whose characters correspond to the first four characters of <paramref name="tag" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -275,9 +301,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the four-character string representation of the tag.</summary>
+        <returns>A four-character string with each character corresponding to one byte of the packed value.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
