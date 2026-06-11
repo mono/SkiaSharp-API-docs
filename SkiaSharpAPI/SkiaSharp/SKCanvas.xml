@@ -570,10 +570,10 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.119;skiasharp-4.147">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.119;skiasharp-4.147">
           <AttributeName Language="C#">[get: System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
         </Attribute>
       </Attributes>
@@ -3000,12 +3000,12 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The surface to draw.</param>
+        <param name="p">The point at which to draw the upper-left corner of the surface.</param>
+        <param name="sampling">The sampling options used when scaling or filtering the surface.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> to use default settings.</param>
+        <summary>Draws the surface at the specified point using the given sampling options and optional paint.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
@@ -3059,13 +3059,13 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-4.147" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The surface to draw.</param>
+        <param name="x">The x-coordinate at which to draw the upper-left corner of the surface.</param>
+        <param name="y">The y-coordinate at which to draw the upper-left corner of the surface.</param>
+        <param name="sampling">The sampling options used when scaling or filtering the surface.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> to use default settings.</param>
+        <summary>Draws the surface at the specified coordinates using the given sampling options and optional paint.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <MemberGroup MemberName="DrawText">
@@ -3172,7 +3172,7 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">
           <AttributeName Language="C#">[System.Obsolete("Use DrawText(string text, SKPoint p, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.")]</AttributeName>
         </Attribute>
       </Attributes>
@@ -3180,9 +3180,9 @@ using (var surface = SKSurface.Create(info)) {
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="p" Type="SkiaSharp.SKPoint" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="p" Type="SkiaSharp.SKPoint" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
@@ -3338,7 +3338,7 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">
           <AttributeName Language="C#">[System.Obsolete("Use DrawText(string text, float x, float y, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.")]</AttributeName>
         </Attribute>
       </Attributes>
@@ -3346,10 +3346,10 @@ using (var surface = SKSurface.Create(info)) {
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="x" Type="System.Single" />
-        <Parameter Name="y" Type="System.Single" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="x" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="y" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
@@ -3446,11 +3446,11 @@ using (var surface = SKSurface.Create(info)) {
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="x" Type="System.Single" />
-        <Parameter Name="y" Type="System.Single" />
-        <Parameter Name="font" Type="SkiaSharp.SKFont" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="x" Type="System.Single" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="y" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="font" Type="SkiaSharp.SKFont" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
@@ -3545,7 +3545,7 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">
           <AttributeName Language="C#">[System.Obsolete("Use DrawTextOnPath(string text, SKPath path, float hOffset, float vOffset, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.")]</AttributeName>
         </Attribute>
       </Attributes>
@@ -3553,10 +3553,10 @@ using (var surface = SKSurface.Create(info)) {
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="path" Type="SkiaSharp.SKPath" />
-        <Parameter Name="offset" Type="SkiaSharp.SKPoint" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offset" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
@@ -3688,7 +3688,7 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">
           <AttributeName Language="C#">[System.Obsolete("Use DrawTextOnPath(string text, SKPath path, SKPoint offset, bool warpGlyphs, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.")]</AttributeName>
         </Attribute>
       </Attributes>
@@ -3696,11 +3696,11 @@ using (var surface = SKSurface.Create(info)) {
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="path" Type="SkiaSharp.SKPath" />
-        <Parameter Name="offset" Type="SkiaSharp.SKPoint" />
-        <Parameter Name="warpGlyphs" Type="System.Boolean" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="offset" Type="SkiaSharp.SKPoint" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="warpGlyphs" Type="System.Boolean" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
@@ -3726,7 +3726,7 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119;skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.116;skiasharp-3.119">
           <AttributeName Language="C#">[System.Obsolete("Use DrawTextOnPath(string text, SKPath path, float hOffset, float vOffset, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.")]</AttributeName>
         </Attribute>
       </Attributes>
@@ -3734,11 +3734,11 @@ using (var surface = SKSurface.Create(info)) {
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="path" Type="SkiaSharp.SKPath" />
-        <Parameter Name="hOffset" Type="System.Single" />
-        <Parameter Name="vOffset" Type="System.Single" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
+        <Parameter Name="text" Type="System.String" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="path" Type="SkiaSharp.SKPath" Index="1" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="hOffset" Type="System.Single" Index="2" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="vOffset" Type="System.Single" Index="3" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
+        <Parameter Name="paint" Type="SkiaSharp.SKPaint" Index="4" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88;skiasharp-3.116;skiasharp-3.119" />
       </Parameters>
       <Docs>
         <param name="text">The text to draw.</param>
@@ -4677,7 +4677,7 @@ safely ignored.
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.119;skiasharp-4.147">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
         </Attribute>
       </Attributes>
@@ -4709,7 +4709,7 @@ safely ignored.
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.119;skiasharp-4.147">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
         </Attribute>
       </Attributes>
@@ -4851,6 +4851,28 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="SetMatrix">
+      <MemberSignature Language="C#" Value="public void SetMatrix (SkiaSharp.SKMatrix matrix);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>2.80.0.0</AssemblyVersion>
+        <AssemblyVersion>2.88.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
+      </Parameters>
+      <Docs>
+        <param name="matrix">The matrix that will be copied into the current matrix.</param>
+        <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SetMatrix">
       <MemberSignature Language="C#" Value="public void SetMatrix (in SkiaSharp.SKMatrix matrix);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix([in]valuetype SkiaSharp.SKMatrix&amp; matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix@)" />
@@ -4875,28 +4897,6 @@ guaranteed to happen. If exact clipping is desired, use
       </Parameters>
       <Docs>
         <param name="matrix">The matrix to set as the current transformation matrix.</param>
-        <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
-        <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="SetMatrix">
-      <MemberSignature Language="C#" Value="public void SetMatrix (SkiaSharp.SKMatrix matrix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" Index="0" FrameworkAlternate="skiasharp-2.80;skiasharp-2.88" />
-      </Parameters>
-      <Docs>
-        <param name="matrix">The matrix that will be copied into the current matrix.</param>
         <summary>Replaces the current matrix with a copy of the specified matrix.</summary>
         <remarks />
       </Docs>
@@ -4993,10 +4993,10 @@ guaranteed to happen. If exact clipping is desired, use
         <AssemblyVersion>4.147.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.119;skiasharp-4.147">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
         </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-4.147">
+        <Attribute FrameworkAlternate="skiasharp-3.119;skiasharp-4.147">
           <AttributeName Language="C#">[get: System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
         </Attribute>
       </Attributes>
