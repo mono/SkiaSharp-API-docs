@@ -109,6 +109,7 @@
     <Type Name="SkiaSharp.Views.Android.SKGLSurfaceViewRenderer" Id="T:SkiaSharp.Views.Android.SKGLSurfaceViewRenderer">
       <Member Id="M:SkiaSharp.Views.Android.SKGLSurfaceViewRenderer.#ctor" />
       <Member Id="M:SkiaSharp.Views.Android.SKGLSurfaceViewRenderer.Dispose(System.Boolean)" />
+      <Member Id="M:SkiaSharp.Views.Android.SKGLSurfaceViewRenderer.Java#Interop#IJavaPeerable#UnregisterFromRuntime" />
       <Member Id="M:SkiaSharp.Views.Android.SKGLSurfaceViewRenderer.OnDrawFrame(Javax.Microedition.Khronos.Opengles.IGL10)" />
       <Member Id="M:SkiaSharp.Views.Android.SKGLSurfaceViewRenderer.OnPaintSurface(SkiaSharp.Views.Android.SKPaintGLSurfaceEventArgs)" />
       <Member Id="M:SkiaSharp.Views.Android.SKGLSurfaceViewRenderer.OnSurfaceChanged(Javax.Microedition.Khronos.Opengles.IGL10,System.Int32,System.Int32)" />
@@ -221,16 +222,6 @@
       <Member Id="P:SkiaSharp.Views.Blazor.SKPaintSurfaceEventArgs.Surface" />
     </Type>
   </Namespace>
-  <Namespace Name="SkiaSharp.Views.Blazor.Internal">
-    <Type Name="SkiaSharp.Views.Blazor.Internal.ActionHelper" Id="T:SkiaSharp.Views.Blazor.Internal.ActionHelper">
-      <Member Id="M:SkiaSharp.Views.Blazor.Internal.ActionHelper.#ctor(System.Action)" />
-      <Member Id="M:SkiaSharp.Views.Blazor.Internal.ActionHelper.Invoke" />
-    </Type>
-    <Type Name="SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper" Id="T:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper">
-      <Member Id="M:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper.#ctor(System.Action{System.Single,System.Single})" />
-      <Member Id="M:SkiaSharp.Views.Blazor.Internal.FloatFloatActionHelper.Invoke(System.Single,System.Single)" />
-    </Type>
-  </Namespace>
   <Namespace Name="SkiaSharp.Views.Desktop">
     <Type Name="SkiaSharp.Views.Desktop.Extensions" Id="T:SkiaSharp.Views.Desktop.Extensions">
       <Member Id="M:SkiaSharp.Views.Desktop.Extensions.ToBitmap(SkiaSharp.SKBitmap)" />
@@ -266,7 +257,8 @@
     <Type Name="SkiaSharp.Views.Desktop.SKGLControl" Id="T:SkiaSharp.Views.Desktop.SKGLControl">
       <Member Id="E:SkiaSharp.Views.Desktop.SKGLControl.PaintSurface" />
       <Member Id="M:SkiaSharp.Views.Desktop.SKGLControl.#ctor" />
-      <Member Id="M:SkiaSharp.Views.Desktop.SKGLControl.#ctor(OpenTK.GLControl.GLControlSettings)" />
+      <Member Id="M:SkiaSharp.Views.Desktop.SKGLControl.#ctor(OpenTK.Graphics.GraphicsMode)" />
+      <Member Id="M:SkiaSharp.Views.Desktop.SKGLControl.#ctor(OpenTK.Graphics.GraphicsMode,System.Int32,System.Int32,OpenTK.Graphics.GraphicsContextFlags)" />
       <Member Id="M:SkiaSharp.Views.Desktop.SKGLControl.Dispose(System.Boolean)" />
       <Member Id="M:SkiaSharp.Views.Desktop.SKGLControl.OnPaint(System.Windows.Forms.PaintEventArgs)" />
       <Member Id="M:SkiaSharp.Views.Desktop.SKGLControl.OnPaintSurface(SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs)" />
