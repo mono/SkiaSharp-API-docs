@@ -11,8 +11,23 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides methods for encoding images and animations into WebP format.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+<xref:T:SkiaSharp.SKWebpEncoder> is a static class that encodes single frames and animated image sequences to WebP format.
+
+## Examples
+
+```csharp
+// Encode a single image
+using var pixmap = bitmap.PeekPixels();
+var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossy, 80);
+using var data = SKWebpEncoder.Encode(pixmap, options);
+if (data != null)
+    File.WriteAllBytes("output.webp", data.ToArray());
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="Encode">
@@ -42,11 +57,11 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The source pixmap to encode.</param>
+        <param name="options">The encoding options.</param>
+        <summary>Encodes the specified pixmap as a single-frame WebP image.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKData" /> containing the encoded WebP data, or <see langword="null" /> if encoding failed.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Encode">
@@ -72,12 +87,12 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The destination stream.</param>
+        <param name="src">The source pixmap to encode.</param>
+        <param name="options">The encoding options.</param>
+        <summary>Encodes the specified pixmap as a single-frame WebP image and writes it to the stream.</summary>
+        <returns>true if encoding succeeded; otherwise, false.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Encode">
@@ -103,12 +118,12 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The destination managed stream.</param>
+        <param name="src">The source pixmap to encode.</param>
+        <param name="options">The encoding options.</param>
+        <summary>Encodes the specified pixmap as a single-frame WebP image and writes it to the managed stream.</summary>
+        <returns>true if encoding succeeded; otherwise, false.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -133,11 +148,11 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="frames">The frames to encode.</param>
+        <param name="options">The encoding options.</param>
+        <summary>Encodes the specified frames as an animated WebP image.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKData" /> containing the encoded animated WebP data, or <see langword="null" /> if encoding failed.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -164,12 +179,12 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The destination stream.</param>
+        <param name="frames">The frames to encode.</param>
+        <param name="options">The encoding options.</param>
+        <summary>Encodes the specified frames as an animated WebP image and writes it to the stream.</summary>
+        <returns>true if encoding succeeded; otherwise, false.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -196,12 +211,12 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The destination managed stream.</param>
+        <param name="frames">The frames to encode.</param>
+        <param name="options">The encoding options.</param>
+        <summary>Encodes the specified frames as an animated WebP image and writes it to the managed stream.</summary>
+        <returns>true if encoding succeeded; otherwise, false.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
