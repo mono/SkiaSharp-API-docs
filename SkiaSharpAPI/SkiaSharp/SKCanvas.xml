@@ -525,14 +525,6 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
-        </Attribute>
-        <Attribute>
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRRecordingContext</ReturnType>
       </ReturnValue>
@@ -976,12 +968,12 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> to draw.</param>
+        <param name="p">The top-left position on the canvas where the bitmap is drawn.</param>
+        <param name="sampling">The sampling options controlling how pixels are filtered.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
+        <summary>Draws the bitmap onto the canvas at the specified coordinates.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1035,12 +1027,12 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="dest">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> to draw.</param>
+        <param name="dest">The destination rectangle on the canvas.</param>
+        <param name="sampling">The sampling options controlling how pixels are filtered during scaling.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
+        <summary>Draws the bitmap onto the canvas, scaling it to fit the specified destination rectangle.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1095,13 +1087,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="source">To be added.</param>
-        <param name="dest">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> to draw.</param>
+        <param name="source">The rectangle within <paramref name="bitmap" /> to draw.</param>
+        <param name="dest">The destination rectangle on the canvas.</param>
+        <param name="sampling">The sampling options controlling how pixels are filtered during scaling.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
+        <summary>Draws a portion of the bitmap onto the canvas, sampling the source rectangle and scaling it to fit the destination rectangle.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1124,13 +1116,13 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="bitmap">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> to draw.</param>
+        <param name="x">The x-coordinate of the top-left corner.</param>
+        <param name="y">The y-coordinate of the top-left corner.</param>
+        <param name="sampling">The sampling options controlling how pixels are filtered.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
+        <summary>Draws the bitmap onto the canvas at the specified coordinates.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapLattice">
@@ -2743,12 +2735,12 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The <see cref="T:SkiaSharp.SKSurface" /> to draw.</param>
+        <param name="p">The top-left position on the canvas where the surface is drawn.</param>
+        <param name="sampling">The sampling options controlling how pixels are filtered.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
+        <summary>Draws the contents of the surface onto the canvas at the specified coordinates.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
@@ -2798,13 +2790,13 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="surface">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="sampling">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="surface">The <see cref="T:SkiaSharp.SKSurface" /> to draw.</param>
+        <param name="x">The x-coordinate of the top-left corner.</param>
+        <param name="y">The y-coordinate of the top-left corner.</param>
+        <param name="sampling">The sampling options controlling how pixels are filtered.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
+        <summary>Draws the contents of the surface onto the canvas at the specified coordinates.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <MemberGroup MemberName="DrawText">
@@ -2864,36 +2856,6 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </MemberGroup>
     <Member MemberName="DrawText">
-      <MemberSignature Language="C#" Value="public void DrawText (string text, SkiaSharp.SKPoint p, SkiaSharp.SKPaint paint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(string text, valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("Use DrawText(string text, SKPoint p, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.", true)]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="p" Type="SkiaSharp.SKPoint" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
-      </Parameters>
-      <Docs>
-        <param name="text">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DrawText">
       <MemberSignature Language="C#" Value="public void DrawText (SkiaSharp.SKTextBlob text, float x, float y, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(class SkiaSharp.SKTextBlob text, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(SkiaSharp.SKTextBlob,System.Single,System.Single,SkiaSharp.SKPaint)" />
@@ -2918,70 +2880,6 @@ using (var surface = SKSurface.Create(info)) {
         <param name="paint">The paint to use when drawing the text.</param>
         <summary>Draws a text blob on the canvas at the specified coordinates.</summary>
         <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="DrawText">
-      <MemberSignature Language="C#" Value="public void DrawText (string text, SkiaSharp.SKPoint p, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(string text, valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,SkiaSharp.SKPoint,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("Use DrawText(string text, SKPoint p, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.", true)]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="p" Type="SkiaSharp.SKPoint" />
-        <Parameter Name="font" Type="SkiaSharp.SKFont" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
-      </Parameters>
-      <Docs>
-        <param name="text">To be added.</param>
-        <param name="p">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DrawText">
-      <MemberSignature Language="C#" Value="public void DrawText (string text, float x, float y, SkiaSharp.SKPaint paint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(string text, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,System.Single,System.Single,SkiaSharp.SKPaint)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("Use DrawText(string text, float x, float y, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.", true)]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="x" Type="System.Single" />
-        <Parameter Name="y" Type="System.Single" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
-      </Parameters>
-      <Docs>
-        <param name="text">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -3011,40 +2909,6 @@ using (var surface = SKSurface.Create(info)) {
         <param name="paint">The paint used to draw the text.</param>
         <summary>Draws text at the specified point with alignment.</summary>
         <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="DrawText">
-      <MemberSignature Language="C#" Value="public void DrawText (string text, float x, float y, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(string text, float32 x, float32 y, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,System.Single,System.Single,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("Use DrawText(string text, float x, float y, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.", true)]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="x" Type="System.Single" />
-        <Parameter Name="y" Type="System.Single" />
-        <Parameter Name="font" Type="SkiaSharp.SKFont" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
-      </Parameters>
-      <Docs>
-        <param name="text">To be added.</param>
-        <param name="x">To be added.</param>
-        <param name="y">To be added.</param>
-        <param name="font">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -3079,38 +2943,6 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
-      <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, SkiaSharp.SKPoint offset, SkiaSharp.SKPaint paint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKPoint offset, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("Use DrawTextOnPath(string text, SKPath path, float hOffset, float vOffset, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.", true)]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="path" Type="SkiaSharp.SKPath" />
-        <Parameter Name="offset" Type="SkiaSharp.SKPoint" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
-      </Parameters>
-      <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DrawTextOnPath">
       <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, SkiaSharp.SKPoint offset, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKPoint offset, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
@@ -3142,74 +2974,6 @@ using (var surface = SKSurface.Create(info)) {
         <param name="paint">The paint used to draw the text.</param>
         <summary>Draws text along a path using the specified font.</summary>
         <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="DrawTextOnPath">
-      <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, SkiaSharp.SKPoint offset, bool warpGlyphs, SkiaSharp.SKPaint paint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKPoint offset, bool warpGlyphs, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,System.Boolean,SkiaSharp.SKPaint)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("Use DrawTextOnPath(string text, SKPath path, SKPoint offset, bool warpGlyphs, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.", true)]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="path" Type="SkiaSharp.SKPath" />
-        <Parameter Name="offset" Type="SkiaSharp.SKPoint" />
-        <Parameter Name="warpGlyphs" Type="System.Boolean" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
-      </Parameters>
-      <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="offset">To be added.</param>
-        <param name="warpGlyphs">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DrawTextOnPath">
-      <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, float hOffset, float vOffset, SkiaSharp.SKPaint paint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, float32 hOffset, float32 vOffset, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKPaint)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("Use DrawTextOnPath(string text, SKPath path, float hOffset, float vOffset, SKTextAlign textAlign, SKFont font, SKPaint paint) instead.", true)]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="text" Type="System.String" />
-        <Parameter Name="path" Type="SkiaSharp.SKPath" />
-        <Parameter Name="hOffset" Type="System.Single" />
-        <Parameter Name="vOffset" Type="System.Single" />
-        <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
-      </Parameters>
-      <Docs>
-        <param name="text">To be added.</param>
-        <param name="path">To be added.</param>
-        <param name="hOffset">To be added.</param>
-        <param name="vOffset">To be added.</param>
-        <param name="paint">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
@@ -3990,11 +3754,6 @@ safely ignored.
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -4017,11 +3776,6 @@ safely ignored.
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -4144,32 +3898,6 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="SetMatrix">
-      <MemberSignature Language="C#" Value="public void SetMatrix (SkiaSharp.SKMatrix matrix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix(valuetype SkiaSharp.SKMatrix matrix) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("Use SetMatrix(in SKMatrix) instead.", true)]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
-      </Parameters>
-      <Docs>
-        <param name="matrix">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="SetMatrix">
       <MemberSignature Language="C#" Value="public void SetMatrix (in SkiaSharp.SKMatrix matrix);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix([in]valuetype SkiaSharp.SKMatrix&amp; matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix@)" />
@@ -4276,14 +4004,6 @@ guaranteed to happen. If exact clipping is desired, use
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
-        </Attribute>
-        <Attribute>
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>

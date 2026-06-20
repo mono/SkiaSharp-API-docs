@@ -11,8 +11,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides methods for encoding images in WebP format, including animated WebP.</summary>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName="Encode">
@@ -24,29 +24,19 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKData</ReturnType>
-        <Attributes>
-          <Attribute>
-            <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
-          </Attribute>
-        </Attributes>
       </ReturnValue>
       <Parameters>
         <Parameter Name="src" Type="SkiaSharp.SKPixmap" />
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="src">The <see cref="T:SkiaSharp.SKPixmap" /> containing the pixel data to encode.</param>
+        <param name="options">The encoding options controlling quality, method, and other WebP parameters.</param>
+        <summary>Encodes the provided pixmap as a WebP image and returns the result as <see cref="T:SkiaSharp.SKData" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKData" /> containing the encoded WebP, or <see langword="null" /> on failure.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Encode">
@@ -58,11 +48,6 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -72,12 +57,12 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The <see cref="T:SkiaSharp.SKWStream" /> to which the encoded WebP data is written.</param>
+        <param name="src">The <see cref="T:SkiaSharp.SKPixmap" /> containing the pixel data to encode.</param>
+        <param name="options">The encoding options controlling quality, method, and other WebP parameters.</param>
+        <summary>Encodes the provided pixmap as a WebP image and writes the result to the specified Skia write stream.</summary>
+        <returns><see langword="true" /> if encoding succeeded; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Encode">
@@ -89,11 +74,6 @@
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
-        </Attribute>
-      </Attributes>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -103,12 +83,12 @@
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="src">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The <see cref="T:System.IO.Stream" /> to which the encoded WebP data is written.</param>
+        <param name="src">The <see cref="T:SkiaSharp.SKPixmap" /> containing the pixel data to encode.</param>
+        <param name="options">The encoding options controlling quality, method, and other WebP parameters.</param>
+        <summary>Encodes the provided pixmap as a WebP image and writes the result to the specified managed stream.</summary>
+        <returns><see langword="true" /> if encoding succeeded; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -122,22 +102,17 @@
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKData</ReturnType>
-        <Attributes>
-          <Attribute>
-            <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
-          </Attribute>
-        </Attributes>
       </ReturnValue>
       <Parameters>
         <Parameter Name="frames" Type="System.ReadOnlySpan&lt;SkiaSharp.SKWebpEncoderFrame&gt;" />
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="frames">The sequence of <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> values that define each animation frame.</param>
+        <param name="options">The encoding options controlling quality, method, and other WebP parameters.</param>
+        <summary>Encodes the provided frames as an animated WebP image and returns the result as <see cref="T:SkiaSharp.SKData" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKData" /> containing the encoded animated WebP, or <see langword="null" /> on failure.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -153,23 +128,17 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dst" Type="SkiaSharp.SKWStream">
-          <Attributes>
-            <Attribute>
-              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(1)]</AttributeName>
-            </Attribute>
-          </Attributes>
-        </Parameter>
+        <Parameter Name="dst" Type="SkiaSharp.SKWStream" />
         <Parameter Name="frames" Type="System.ReadOnlySpan&lt;SkiaSharp.SKWebpEncoderFrame&gt;" />
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The <see cref="T:SkiaSharp.SKWStream" /> to which the encoded WebP data is written.</param>
+        <param name="frames">The sequence of <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> values that define each animation frame.</param>
+        <param name="options">The encoding options controlling quality, method, and other WebP parameters.</param>
+        <summary>Encodes the provided frames as an animated WebP image and writes the result to the specified Skia write stream.</summary>
+        <returns><see langword="true" /> if encoding succeeded; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="EncodeAnimated">
@@ -185,23 +154,17 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dst" Type="System.IO.Stream">
-          <Attributes>
-            <Attribute>
-              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(1)]</AttributeName>
-            </Attribute>
-          </Attributes>
-        </Parameter>
+        <Parameter Name="dst" Type="System.IO.Stream" />
         <Parameter Name="frames" Type="System.ReadOnlySpan&lt;SkiaSharp.SKWebpEncoderFrame&gt;" />
         <Parameter Name="options" Type="SkiaSharp.SKWebpEncoderOptions" />
       </Parameters>
       <Docs>
-        <param name="dst">To be added.</param>
-        <param name="frames">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="dst">The <see cref="T:System.IO.Stream" /> to which the encoded WebP data is written.</param>
+        <param name="frames">The sequence of <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> values that define each animation frame.</param>
+        <param name="options">The encoding options controlling quality, method, and other WebP parameters.</param>
+        <summary>Encodes the provided frames as an animated WebP image and writes the result to the specified managed stream.</summary>
+        <returns><see langword="true" /> if encoding succeeded; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
