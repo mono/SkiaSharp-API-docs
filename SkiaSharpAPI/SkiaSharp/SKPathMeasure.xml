@@ -297,12 +297,12 @@
         <Parameter Name="startWithMoveTo" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="start">The distance along the path at which to start the segment.</param>
-        <param name="stop">The distance along the path at which to end the segment.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> to which the extracted segment is appended.</param>
-        <param name="startWithMoveTo"><see langword="true" /> to prepend a move-to command at the start of the extracted segment; <see langword="false" /> to omit it.</param>
-        <summary>Extracts the path segment between two distances along the measured path and appends it to the destination builder.</summary>
-        <returns><see langword="true" /> if a non-empty segment was extracted and appended to <paramref name="dst" />; otherwise, <see langword="false" />.</returns>
+        <param name="start">The starting distance along the path.</param>
+        <param name="stop">The ending distance along the path.</param>
+        <param name="dst">The <see cref="SkiaSharp.SKPathBuilder" /> to append the segment to.</param>
+        <param name="startWithMoveTo"><see langword="true" /> to start the segment with a move-to operation; otherwise, <see langword="false" />.</param>
+        <summary>Extracts a segment of this path and appends it to the specified path builder.</summary>
+        <returns><see langword="true" /> if the segment was successfully extracted; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>

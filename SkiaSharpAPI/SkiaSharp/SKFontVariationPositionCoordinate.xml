@@ -15,14 +15,21 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>Represents a single variation axis coordinate in a font's variation design space.</summary>
+    <summary>Specifies a value for a single variation axis when positioning a variable font.</summary>
     <remarks><format type="text/markdown"><![CDATA[
 ## Remarks
 
-`SKFontVariationPositionCoordinate` associates a variation axis tag with a design-space value,
-defining a single coordinate in a font's variation design space. Pass an array or span of these
-coordinates to <xref:SkiaSharp.SKTypeface.Clone*> to produce a typeface with specific axis
-settings.
+`SKFontVariationPositionCoordinate` pairs a four-byte axis tag with a design-space value, forming one component of a variation design position. An array of these coordinates is used with <xref:SkiaSharp.SKTypeface.Clone*> or <xref:SkiaSharp.SKTypeface.VariationDesignPosition> to specify or retrieve the variation settings of a typeface.
+
+## Examples
+
+```csharp
+var coords = new SKFontVariationPositionCoordinate[]
+{
+    new SKFontVariationPositionCoordinate { Axis = new SKFourByteTag('w','g','h','t'), Value = 700f }
+};
+using var bold = typeface.Clone(coords.AsSpan());
+```
 ]]></format></remarks>
   </Docs>
   <Members>
@@ -45,7 +52,7 @@ settings.
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the four-byte tag identifying the variation axis.</summary>
-        <value>An <see cref="T:SkiaSharp.SKFourByteTag" /> such as <c>'wght'</c> for weight or <c>'wdth'</c> for width.</value>
+        <value>The four-byte tag identifying the variation axis.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -73,9 +80,9 @@ settings.
         <Parameter Name="obj" Type="SkiaSharp.SKFontVariationPositionCoordinate" />
       </Parameters>
       <Docs>
-        <param name="obj">The object to compare with this instance.</param>
-        <summary>Determines whether this instance and the specified object are equal.</summary>
-        <returns><see langword="true" /> if <paramref name="obj" /> is an <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> with the same field values; otherwise, <see langword="false" />.</returns>
+        <param name="obj">The <see cref="SKFontVariationPositionCoordinate" /> to compare.</param>
+        <summary>Returns a value indicating whether this instance is equal to the specified <see cref="SKFontVariationPositionCoordinate" />.</summary>
+        <returns><see langword="true" /> if equal; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -100,9 +107,9 @@ settings.
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">The object to compare with this instance.</param>
-        <summary>Determines whether this instance and the specified object are equal.</summary>
-        <returns><see langword="true" /> if <paramref name="obj" /> is an <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> with the same field values; otherwise, <see langword="false" />.</returns>
+        <param name="obj">The object to compare.</param>
+        <summary>Returns a value indicating whether this instance is equal to the specified object.</summary>
+        <returns><see langword="true" /> if equal; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -125,7 +132,7 @@ settings.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Returns the hash code for this instance.</summary>
+        <summary>Returns a hash code for this instance.</summary>
         <returns>A 32-bit signed integer hash code.</returns>
         <remarks></remarks>
       </Docs>
@@ -147,10 +154,10 @@ settings.
         <Parameter Name="right" Type="SkiaSharp.SKFontVariationPositionCoordinate" />
       </Parameters>
       <Docs>
-        <param name="left">The first instance to compare.</param>
-        <param name="right">The second instance to compare.</param>
-        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> instances have the same values.</summary>
-        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
+        <param name="left">The first value.</param>
+        <param name="right">The second value.</param>
+        <summary>Returns a value indicating whether two <see cref="SKFontVariationPositionCoordinate" /> instances are equal.</summary>
+        <returns><see langword="true" /> if equal; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -171,10 +178,10 @@ settings.
         <Parameter Name="right" Type="SkiaSharp.SKFontVariationPositionCoordinate" />
       </Parameters>
       <Docs>
-        <param name="left">The first instance to compare.</param>
-        <param name="right">The second instance to compare.</param>
-        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> instances have different values.</summary>
-        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> differ; otherwise, <see langword="false" />.</returns>
+        <param name="left">The first value.</param>
+        <param name="right">The second value.</param>
+        <summary>Returns a value indicating whether two <see cref="SKFontVariationPositionCoordinate" /> instances are not equal.</summary>
+        <returns><see langword="true" /> if not equal; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -197,7 +204,7 @@ settings.
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the design-space value for the variation axis.</summary>
-        <value>A floating-point value within the allowed range defined by the corresponding <see cref="T:SkiaSharp.SKFontVariationAxis" />.</value>
+        <value>The design-space value for the variation axis.</value>
         <remarks></remarks>
       </Docs>
     </Member>

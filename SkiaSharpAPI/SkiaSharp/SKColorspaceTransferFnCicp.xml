@@ -10,23 +10,18 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>Specifies CICP (ITU-T H.273) transfer characteristics for creating a color space.</summary>
+    <summary>Identifies the transfer function of a color space using CICP (Coding-Independent Code Points) as defined by ITU-T H.273.</summary>
     <remarks><format type="text/markdown"><![CDATA[
 ## Remarks
 
-`SKColorspaceTransferFnCicp` enumerates the CICP (Coding Independent Code Points, ITU-T H.273)
-transfer characteristic values supported by Skia. The transfer function describes the opto-electronic
-conversion (the gamma curve) used to encode pixel values.
-
-Use this enumeration with <xref:SkiaSharp.SKColorSpace.CreateCicp*> to create a color space
-from a CICP primaries and transfer function pair.
+`SKColorspaceTransferFnCicp` specifies the opto-electronic or electro-optical transfer function (gamma curve) of a color space using the standardized numeric codes defined in ITU-T H.273 (Coding-Independent Code Points). Use with <xref:SkiaSharp.SKColorSpace.CreateCicp*> alongside <xref:SkiaSharp.SKColorspacePrimariesCicp>.
 
 ## Examples
 
 ```csharp
-var colorSpace = SKColorSpace.CreateCicp(
+var cs = SKColorSpace.CreateCicp(
     SKColorspacePrimariesCicp.Rec2020,
-    SKColorspaceTransferFnCicp.Hlg);
+    SKColorspaceTransferFnCicp.Pq);
 ```
 ]]></format></remarks>
   </Docs>
@@ -45,7 +40,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>18</MemberValue>
       <Docs>
-        <summary>ITU-R BT.2100 hybrid log-gamma (HLG) transfer function for HDR (CICP value 18).</summary>
+        <summary>ITU-R BT.2100-2 Hybrid Log-Gamma (HLG) HDR transfer function (code point 18).</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196621">
@@ -62,7 +57,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>13</MemberValue>
       <Docs>
-        <summary>IEC 61966-2-1 (sRGB or sYCC) transfer characteristics (CICP value 13).</summary>
+        <summary>IEC 61966-2-1 (sRGB/sYCC) transfer function (code point 13).</summary>
       </Docs>
     </Member>
     <Member MemberName="Iec6196624">
@@ -79,7 +74,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>IEC 61966-2-4 (xvYCC) transfer characteristics (CICP value 11).</summary>
+        <summary>IEC 61966-2-4 (xvYCC) transfer function (code point 11).</summary>
       </Docs>
     </Member>
     <Member MemberName="Linear">
@@ -96,7 +91,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>Linear transfer characteristics with no gamma encoding (CICP value 8).</summary>
+        <summary>Linear transfer function with no gamma encoding (code point 8).</summary>
       </Docs>
     </Member>
     <Member MemberName="Pq">
@@ -113,7 +108,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>16</MemberValue>
       <Docs>
-        <summary>SMPTE ST 2084 perceptual quantizer (PQ) transfer function for HDR (CICP value 16).</summary>
+        <summary>SMPTE ST 2084 (Perceptual Quantizer) HDR transfer function (code point 16).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202010bit">
@@ -130,7 +125,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>14</MemberValue>
       <Docs>
-        <summary>ITU-R BT.2020 transfer characteristics for 10-bit content (CICP value 14).</summary>
+        <summary>ITU-R BT.2020 10-bit system transfer function (code point 14).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec202012bit">
@@ -147,7 +142,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>15</MemberValue>
       <Docs>
-        <summary>ITU-R BT.2020 transfer characteristics for 12-bit content (CICP value 15).</summary>
+        <summary>ITU-R BT.2020 12-bit system transfer function (code point 15).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -164,7 +159,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>ITU-R BT.470 System B/G assumed display gamma transfer characteristics (CICP value 5).</summary>
+        <summary>ITU-R BT.470 System B/G transfer function (code point 5).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -181,7 +176,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>ITU-R BT.470 System M assumed display gamma transfer characteristics (CICP value 4).</summary>
+        <summary>ITU-R BT.470 System M transfer function (code point 4).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -198,7 +193,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>ITU-R BT.601 transfer characteristics, used for standard-definition video (CICP value 6).</summary>
+        <summary>ITU-R BT.601 transfer function (code point 6).</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -215,7 +210,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>ITU-R BT.709 transfer characteristics, used for HDTV (CICP value 1).</summary>
+        <summary>ITU-R BT.709 transfer function, used by sRGB and HDTV (code point 1).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -232,7 +227,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>SMPTE ST 240 transfer characteristics (CICP value 7).</summary>
+        <summary>SMPTE ST 240 transfer function (code point 7).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -249,7 +244,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>17</MemberValue>
       <Docs>
-        <summary>SMPTE ST 428-1 transfer characteristics (CICP value 17).</summary>
+        <summary>SMPTE ST 428-1 transfer function (code point 17).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -266,7 +261,7 @@ var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>Reserved or unknown transfer characteristics (CICP value 0).</summary>
+        <summary>Unknown or unspecified transfer function (code point 0).</summary>
       </Docs>
     </Member>
   </Members>

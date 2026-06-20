@@ -11,30 +11,22 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Represents a single frame of an animated WebP image, combining pixel data with a display duration.</summary>
+    <summary>Represents a single frame of an animated WebP image, consisting of a pixmap and a display duration.</summary>
     <remarks><format type="text/markdown"><![CDATA[
 ## Remarks
 
-`SKWebpEncoderFrame` pairs pixel data with a display duration to define one frame of an
-animated WebP image. Pass a sequence of frames to
-<xref:SkiaSharp.SKWebpEncoder.Encode*> to produce the animated file.
-
-The frame holds an <xref:SkiaSharp.SKPixmap> internally. When constructing from an
-<xref:SkiaSharp.SKBitmap> or <xref:SkiaSharp.SKImage>, `PeekPixels()` is called to obtain
-the pixmap; the source object must remain alive for the lifetime of the frame, and the
-underlying image must be raster-backed (not GPU-only).
+`SKWebpEncoderFrame` pairs an <xref:SkiaSharp.SKPixmap> (the pixel data) with a <xref:System.TimeSpan> (how long the frame is displayed) for use with <xref:SkiaSharp.SKWebpEncoder.EncodeAnimated*>. Convenience constructors accept an <xref:SkiaSharp.SKBitmap> or <xref:SkiaSharp.SKImage> and peek the pixel data automatically.
 
 ## Examples
 
 ```csharp
-using var bitmap1 = /* first frame */ SKBitmap.Decode("frame1.png");
-using var bitmap2 = /* second frame */ SKBitmap.Decode("frame2.png");
-var frames = new SKWebpEncoderFrame[]
+var frames = new[]
 {
-    new(bitmap1, TimeSpan.FromMilliseconds(100)),
-    new(bitmap2, TimeSpan.FromMilliseconds(100)),
+    new SKWebpEncoderFrame(bitmap1, TimeSpan.FromMilliseconds(100)),
+    new SKWebpEncoderFrame(bitmap2, TimeSpan.FromMilliseconds(100)),
 };
-var encoded = SKWebpEncoder.Encode(frames, new SKWebpEncoderOptions());
+var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossy, 85f);
+using var data = SKWebpEncoder.EncodeAnimated(frames, options);
 ```
 ]]></format></remarks>
   </Docs>
@@ -53,9 +45,9 @@ var encoded = SKWebpEncoder.Encode(frames, new SKWebpEncoderOptions());
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> whose pixels are used for this frame. The bitmap must remain alive for the lifetime of this frame.</param>
-        <param name="duration">The length of time this frame is displayed.</param>
-        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from a bitmap and a display duration.</summary>
+        <param name="bitmap">The bitmap containing the frame's pixel data.</param>
+        <param name="duration">The display duration for this frame.</param>
+        <summary>Initializes a new instance of <see cref="SKWebpEncoderFrame" /> from the specified bitmap and duration.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -73,9 +65,9 @@ var encoded = SKWebpEncoder.Encode(frames, new SKWebpEncoderOptions());
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="image">The <see cref="T:SkiaSharp.SKImage" /> whose pixels are used for this frame. The image must be raster-backed and remain alive for the lifetime of this frame.</param>
-        <param name="duration">The length of time this frame is displayed.</param>
-        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from a raster-backed image and a display duration.</summary>
+        <param name="image">The raster-backed image containing the frame's pixel data.</param>
+        <param name="duration">The display duration for this frame.</param>
+        <summary>Initializes a new instance of <see cref="SKWebpEncoderFrame" /> from the specified image and duration.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -93,9 +85,9 @@ var encoded = SKWebpEncoder.Encode(frames, new SKWebpEncoderOptions());
         <Parameter Name="duration" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="pixmap">The <see cref="T:SkiaSharp.SKPixmap" /> containing the pixel data for this frame.</param>
-        <param name="duration">The length of time this frame is displayed.</param>
-        <summary>Initializes a new <see cref="T:SkiaSharp.SKWebpEncoderFrame" /> from a pixmap and a display duration.</summary>
+        <param name="pixmap">The pixmap containing the frame's pixel data.</param>
+        <param name="duration">The display duration for this frame.</param>
+        <summary>Initializes a new instance of <see cref="SKWebpEncoderFrame" /> from the specified pixmap and duration.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -117,8 +109,8 @@ var encoded = SKWebpEncoder.Encode(frames, new SKWebpEncoderOptions());
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the display duration of this frame.</summary>
-        <value>The <see cref="T:System.TimeSpan" /> specifying how long this frame is shown in the animated WebP.</value>
+        <summary>Gets or sets the display duration for this frame.</summary>
+        <value>The amount of time this frame is displayed.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -140,8 +132,8 @@ var encoded = SKWebpEncoder.Encode(frames, new SKWebpEncoderOptions());
         <ReturnType>SkiaSharp.SKPixmap</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the pixel data for this frame.</summary>
-        <value>The <see cref="T:SkiaSharp.SKPixmap" /> containing the pixel data used when encoding this frame.</value>
+        <summary>Gets or sets the pixmap containing this frame's pixel data.</summary>
+        <value>The pixel data for this frame.</value>
         <remarks></remarks>
       </Docs>
     </Member>

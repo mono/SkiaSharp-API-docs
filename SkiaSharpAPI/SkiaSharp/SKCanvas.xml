@@ -525,6 +525,14 @@ using (var surface = SKSurface.Create(info)) {
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRRecordingContext</ReturnType>
       </ReturnValue>
@@ -968,11 +976,11 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> to draw.</param>
-        <param name="p">The top-left position on the canvas where the bitmap is drawn.</param>
-        <param name="sampling">The sampling options controlling how pixels are filtered.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws the bitmap onto the canvas at the specified coordinates.</summary>
+        <param name="bitmap">The bitmap to draw.</param>
+        <param name="p">The point at which to draw the upper-left corner of the bitmap.</param>
+        <param name="sampling">The sampling options to use when scaling or transforming the bitmap.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> for default paint.</param>
+        <summary>Draws the bitmap at the specified point using the specified sampling options.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1027,11 +1035,11 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> to draw.</param>
-        <param name="dest">The destination rectangle on the canvas.</param>
-        <param name="sampling">The sampling options controlling how pixels are filtered during scaling.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws the bitmap onto the canvas, scaling it to fit the specified destination rectangle.</summary>
+        <param name="bitmap">The bitmap to draw.</param>
+        <param name="dest">The destination rectangle to fill.</param>
+        <param name="sampling">The sampling options to use when scaling or transforming the bitmap.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> for default paint.</param>
+        <summary>Draws the bitmap scaled to fit the specified destination rectangle using the specified sampling options.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1087,12 +1095,12 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> to draw.</param>
-        <param name="source">The rectangle within <paramref name="bitmap" /> to draw.</param>
-        <param name="dest">The destination rectangle on the canvas.</param>
-        <param name="sampling">The sampling options controlling how pixels are filtered during scaling.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws a portion of the bitmap onto the canvas, sampling the source rectangle and scaling it to fit the destination rectangle.</summary>
+        <param name="bitmap">The bitmap to draw.</param>
+        <param name="source">The source region within the bitmap.</param>
+        <param name="dest">The destination rectangle to fill.</param>
+        <param name="sampling">The sampling options to use when scaling or transforming the bitmap.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> for default paint.</param>
+        <summary>Draws a region of the bitmap scaled to fit the specified destination rectangle using the specified sampling options.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1116,12 +1124,12 @@ this information.
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="bitmap">The <see cref="T:SkiaSharp.SKBitmap" /> to draw.</param>
-        <param name="x">The x-coordinate of the top-left corner.</param>
-        <param name="y">The y-coordinate of the top-left corner.</param>
-        <param name="sampling">The sampling options controlling how pixels are filtered.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws the bitmap onto the canvas at the specified coordinates.</summary>
+        <param name="bitmap">The bitmap to draw.</param>
+        <param name="x">The x-coordinate of the upper-left corner.</param>
+        <param name="y">The y-coordinate of the upper-left corner.</param>
+        <param name="sampling">The sampling options to use when scaling or transforming the bitmap.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> for default paint.</param>
+        <summary>Draws the bitmap at the specified coordinates using the specified sampling options.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -2735,11 +2743,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="surface">The <see cref="T:SkiaSharp.SKSurface" /> to draw.</param>
-        <param name="p">The top-left position on the canvas where the surface is drawn.</param>
-        <param name="sampling">The sampling options controlling how pixels are filtered.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws the contents of the surface onto the canvas at the specified coordinates.</summary>
+        <param name="surface">The surface to draw.</param>
+        <param name="p">The point at which to draw the upper-left corner of the surface.</param>
+        <param name="sampling">The sampling options to use when scaling or transforming the surface.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> for default paint.</param>
+        <summary>Draws the surface at the specified point using the specified sampling options.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -2790,12 +2798,12 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="surface">The <see cref="T:SkiaSharp.SKSurface" /> to draw.</param>
-        <param name="x">The x-coordinate of the top-left corner.</param>
-        <param name="y">The y-coordinate of the top-left corner.</param>
-        <param name="sampling">The sampling options controlling how pixels are filtered.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws the contents of the surface onto the canvas at the specified coordinates.</summary>
+        <param name="surface">The surface to draw.</param>
+        <param name="x">The x-coordinate of the upper-left corner.</param>
+        <param name="y">The y-coordinate of the upper-left corner.</param>
+        <param name="sampling">The sampling options to use when scaling or transforming the surface.</param>
+        <param name="paint">The paint to apply, or <see langword="null" /> for default paint.</param>
+        <summary>Draws the surface at the specified coordinates using the specified sampling options.</summary>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -3754,6 +3762,11 @@ safely ignored.
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -3776,6 +3789,11 @@ safely ignored.
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -4004,6 +4022,14 @@ guaranteed to happen. If exact clipping is desired, use
         <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>

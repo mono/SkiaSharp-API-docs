@@ -394,10 +394,10 @@ The example above produces the following:
         <Parameter Name="dst" Type="SkiaSharp.SKPathBuilder" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> that receives the filled path.</param>
-        <summary>Applies the paint's fill settings to <paramref name="src" /> and writes the result into the destination path builder.</summary>
-        <returns><see langword="true" /> if the resulting fill path is non-empty; otherwise, <see langword="false" />.</returns>
+        <param name="src">The source path to convert.</param>
+        <param name="dst">The <see cref="SkiaSharp.SKPathBuilder" /> to receive the fill path.</param>
+        <summary>Fills the specified path builder with the fill path of the given source path using default scale.</summary>
+        <returns><see langword="true" /> if the path has a non-empty fill; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -563,11 +563,11 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> that receives the filled path.</param>
-        <param name="matrix">A transformation matrix applied when computing the fill path.</param>
-        <summary>Applies the paint's fill settings to <paramref name="src" /> and writes the result into the destination path builder.</summary>
-        <returns><see langword="true" /> if the resulting fill path is non-empty; otherwise, <see langword="false" />.</returns>
+        <param name="src">The source path to convert.</param>
+        <param name="dst">The <see cref="SkiaSharp.SKPathBuilder" /> to receive the fill path.</param>
+        <param name="matrix">The transformation matrix to apply.</param>
+        <summary>Fills the specified path builder with the fill path of the given source path, transformed by the specified matrix.</summary>
+        <returns><see langword="true" /> if the path has a non-empty fill; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -589,11 +589,11 @@ The example above produces the following:
         <Parameter Name="cullRect" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> that receives the filled path.</param>
-        <param name="cullRect">An optional rectangle used to cull distant path segments and improve performance.</param>
-        <summary>Applies the paint's fill settings to <paramref name="src" /> and writes the result into the destination path builder.</summary>
-        <returns><see langword="true" /> if the resulting fill path is non-empty; otherwise, <see langword="false" />.</returns>
+        <param name="src">The source path to convert.</param>
+        <param name="dst">The <see cref="SkiaSharp.SKPathBuilder" /> to receive the fill path.</param>
+        <param name="cullRect">The rectangle used to cull path elements that fall outside the region of interest.</param>
+        <summary>Fills the specified path builder with the fill path of the given source path, clipped to the specified cull rectangle.</summary>
+        <returns><see langword="true" /> if the path has a non-empty fill; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -615,11 +615,11 @@ The example above produces the following:
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> that receives the filled path.</param>
-        <param name="resScale">A scaling factor used to determine how finely curved segments are approximated. Use 1.0 for screen resolution.</param>
-        <summary>Applies the paint's fill settings to <paramref name="src" /> and writes the result into the destination path builder.</summary>
-        <returns><see langword="true" /> if the resulting fill path is non-empty; otherwise, <see langword="false" />.</returns>
+        <param name="src">The source path to convert.</param>
+        <param name="dst">The <see cref="SkiaSharp.SKPathBuilder" /> to receive the fill path.</param>
+        <param name="resScale">The resolution scale factor. Larger values produce more detail in curved segments.</param>
+        <summary>Fills the specified path builder with the fill path of the given source path at the specified resolution scale.</summary>
+        <returns><see langword="true" /> if the path has a non-empty fill; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -762,12 +762,12 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> that receives the filled path.</param>
-        <param name="cullRect">An optional rectangle used to cull distant path segments and improve performance.</param>
-        <param name="matrix">A transformation matrix applied when computing the fill path.</param>
-        <summary>Applies the paint's fill settings to <paramref name="src" /> and writes the result into the destination path builder.</summary>
-        <returns><see langword="true" /> if the resulting fill path is non-empty; otherwise, <see langword="false" />.</returns>
+        <param name="src">The source path to convert.</param>
+        <param name="dst">The <see cref="SkiaSharp.SKPathBuilder" /> to receive the fill path.</param>
+        <param name="cullRect">The rectangle used to cull path elements outside the region of interest.</param>
+        <param name="matrix">The transformation matrix to apply.</param>
+        <summary>Fills the specified path builder with the fill path of the given source path, clipped to the specified cull rectangle and transformed by the specified matrix.</summary>
+        <returns><see langword="true" /> if the path has a non-empty fill; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -790,12 +790,12 @@ The example above produces the following:
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> that receives the filled path.</param>
-        <param name="cullRect">An optional rectangle used to cull distant path segments and improve performance.</param>
-        <param name="resScale">A scaling factor used to determine how finely curved segments are approximated. Use 1.0 for screen resolution.</param>
-        <summary>Applies the paint's fill settings to <paramref name="src" /> and writes the result into the destination path builder.</summary>
-        <returns><see langword="true" /> if the resulting fill path is non-empty; otherwise, <see langword="false" />.</returns>
+        <param name="src">The source path to convert.</param>
+        <param name="dst">The <see cref="SkiaSharp.SKPathBuilder" /> to receive the fill path.</param>
+        <param name="cullRect">The rectangle used to cull path elements outside the region of interest.</param>
+        <param name="resScale">The resolution scale factor. Larger values produce more detail in curved segments.</param>
+        <summary>Fills the specified path builder with the fill path of the given source path, clipped to the cull rectangle at the specified resolution scale.</summary>
+        <returns><see langword="true" /> if the path has a non-empty fill; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>

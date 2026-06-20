@@ -19,13 +19,15 @@
     <remarks><format type="text/markdown"><![CDATA[
 ## Remarks
 
-`SKFontVariationAxis` describes a single variation axis defined by an OpenType variable font.
-Use <xref:SkiaSharp.SKTypeface.VariationDesignParameters> or
-<xref:SkiaSharp.SKTypeface.GetVariationDesignParameters*> to retrieve the axes for a typeface.
+`SKFontVariationAxis` describes the range and default value of a single named axis in an OpenType variable font's `fvar` table. Retrieve axis information from a typeface using <xref:SkiaSharp.SKTypeface.VariationDesignParameters>.
 
-To set a variation axis value, create an <xref:SkiaSharp.SKFontVariationPositionCoordinate>
-with the axis <see cref="P:SkiaSharp.SKFontVariationAxis.Tag" /> and the desired value, then
-pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
+## Examples
+
+```csharp
+var axes = typeface.VariationDesignParameters;
+foreach (var axis in axes)
+    Console.WriteLine($"{axis.Tag}: {axis.Min}–{axis.Max}, default={axis.Default}");
+```
 ]]></format></remarks>
   </Docs>
   <Members>
@@ -47,8 +49,8 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the default value of this variation axis.</summary>
-        <value>The default design-space value applied when no override is specified for this axis.</value>
+        <summary>Gets or sets the default value of the variation axis.</summary>
+        <value>The default value of the axis.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -76,9 +78,9 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <Parameter Name="obj" Type="SkiaSharp.SKFontVariationAxis" />
       </Parameters>
       <Docs>
-        <param name="obj">The object to compare with this instance.</param>
-        <summary>Determines whether this instance and the specified object are equal.</summary>
-        <returns><see langword="true" /> if <paramref name="obj" /> is an <see cref="T:SkiaSharp.SKFontVariationAxis" /> with the same field values; otherwise, <see langword="false" />.</returns>
+        <param name="obj">The <see cref="SKFontVariationAxis" /> to compare.</param>
+        <summary>Returns a value indicating whether this instance is equal to the specified <see cref="SKFontVariationAxis" />.</summary>
+        <returns><see langword="true" /> if equal; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -103,9 +105,9 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">The object to compare with this instance.</param>
-        <summary>Determines whether this instance and the specified object are equal.</summary>
-        <returns><see langword="true" /> if <paramref name="obj" /> is an <see cref="T:SkiaSharp.SKFontVariationAxis" /> with the same field values; otherwise, <see langword="false" />.</returns>
+        <param name="obj">The object to compare.</param>
+        <summary>Returns a value indicating whether this instance is equal to the specified object.</summary>
+        <returns><see langword="true" /> if equal; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -128,7 +130,7 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Returns the hash code for this instance.</summary>
+        <summary>Returns a hash code for this instance.</summary>
         <returns>A 32-bit signed integer hash code.</returns>
         <remarks></remarks>
       </Docs>
@@ -151,8 +153,8 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating whether this axis is hidden from user interfaces.</summary>
-        <value><see langword="true" /> if the axis is tagged as hidden in the font; otherwise, <see langword="false" />.</value>
+        <summary>Gets or sets a value indicating whether this variation axis is hidden from the user interface.</summary>
+        <value>Whether this axis is hidden from user interfaces.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -174,8 +176,8 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the maximum allowed value for this variation axis.</summary>
-        <value>The upper bound of the design-space range for this axis.</value>
+        <summary>Gets or sets the maximum value of the variation axis.</summary>
+        <value>The maximum allowed value for the axis.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -197,8 +199,8 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the minimum allowed value for this variation axis.</summary>
-        <value>The lower bound of the design-space range for this axis.</value>
+        <summary>Gets or sets the minimum value of the variation axis.</summary>
+        <value>The minimum allowed value for the axis.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -219,10 +221,10 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <Parameter Name="right" Type="SkiaSharp.SKFontVariationAxis" />
       </Parameters>
       <Docs>
-        <param name="left">The first instance to compare.</param>
-        <param name="right">The second instance to compare.</param>
-        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontVariationAxis" /> instances have the same values.</summary>
-        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
+        <param name="left">The first value.</param>
+        <param name="right">The second value.</param>
+        <summary>Returns a value indicating whether two <see cref="SKFontVariationAxis" /> instances are equal.</summary>
+        <returns><see langword="true" /> if equal; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -243,10 +245,10 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <Parameter Name="right" Type="SkiaSharp.SKFontVariationAxis" />
       </Parameters>
       <Docs>
-        <param name="left">The first instance to compare.</param>
-        <param name="right">The second instance to compare.</param>
-        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontVariationAxis" /> instances have different values.</summary>
-        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> differ; otherwise, <see langword="false" />.</returns>
+        <param name="left">The first value.</param>
+        <param name="right">The second value.</param>
+        <summary>Returns a value indicating whether two <see cref="SKFontVariationAxis" /> instances are not equal.</summary>
+        <returns><see langword="true" /> if not equal; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -268,8 +270,8 @@ pass the coordinates to <xref:SkiaSharp.SKTypeface.Clone*>.
         <ReturnType>SkiaSharp.SKFourByteTag</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the four-byte tag identifying this variation axis.</summary>
-        <value>An <see cref="T:SkiaSharp.SKFourByteTag" /> such as <c>'wght'</c> for weight or <c>'ital'</c> for italic.</value>
+        <summary>Gets or sets the four-byte tag identifying the variation axis.</summary>
+        <value>The four-byte tag identifying the variation axis.</value>
         <remarks></remarks>
       </Docs>
     </Member>

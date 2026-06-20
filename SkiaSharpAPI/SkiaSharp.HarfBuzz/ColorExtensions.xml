@@ -11,8 +11,21 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Provides extension methods for converting between <see cref="T:SkiaSharp.SKColor" /> / <see cref="T:SkiaSharp.SKColorF" /> and <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
-    <remarks></remarks>
+    <summary>Provides extension methods for converting between <see cref="HarfBuzzSharp.HBColor" /> and SkiaSharp color types.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`ColorExtensions` adds conversion methods to <xref:HarfBuzzSharp.HBColor>, <xref:SkiaSharp.SKColor>, and <xref:SkiaSharp.SKColorF> so that colors can be round-tripped between HarfBuzz and SkiaSharp. Channel values are clamped to the 0–255 range when converting from `SKColorF`.
+
+## Examples
+
+```csharp
+// Convert an SKColor to HBColor and back
+SKColor skColor = SKColors.Red;
+HBColor hbColor = skColor.ToHBColor();
+SKColor roundTripped = hbColor.ToSKColor();
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="ToHBColor">
@@ -31,9 +44,9 @@
         <Parameter Name="color" Type="SkiaSharp.SKColor" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="color">The <see cref="T:SkiaSharp.SKColor" /> (ARGB) to convert.</param>
-        <summary>Converts an <see cref="T:SkiaSharp.SKColor" /> to an <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
-        <returns>An <see cref="T:HarfBuzzSharp.HBColor" /> representing the same color.</returns>
+        <param name="color">The <see cref="SkiaSharp.SKColor" /> to convert.</param>
+        <summary>Converts an <see cref="SkiaSharp.SKColor" /> to an <see cref="HarfBuzzSharp.HBColor" />.</summary>
+        <returns>An <see cref="HarfBuzzSharp.HBColor" /> with the same RGBA components.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -53,9 +66,9 @@
         <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="color">The <see cref="T:SkiaSharp.SKColorF" /> (float ARGB) to convert.</param>
-        <summary>Converts an <see cref="T:SkiaSharp.SKColorF" /> to an <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
-        <returns>An <see cref="T:HarfBuzzSharp.HBColor" /> representing the same color with components clamped to [0, 255].</returns>
+        <param name="color">The <see cref="SkiaSharp.SKColorF" /> to convert.</param>
+        <summary>Converts an <see cref="SkiaSharp.SKColorF" /> to an <see cref="HarfBuzzSharp.HBColor" />, clamping channels to the 0–255 range.</summary>
+        <returns>An <see cref="HarfBuzzSharp.HBColor" /> with channels scaled from the normalized 0.0–1.0 range.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -75,9 +88,9 @@
         <Parameter Name="hbColor" Type="HarfBuzzSharp.HBColor" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="hbColor">The <see cref="T:HarfBuzzSharp.HBColor" /> to convert.</param>
-        <summary>Converts an <see cref="T:HarfBuzzSharp.HBColor" /> to an <see cref="T:SkiaSharp.SKColor" />.</summary>
-        <returns>An <see cref="T:SkiaSharp.SKColor" /> representing the same color.</returns>
+        <param name="hbColor">The <see cref="HarfBuzzSharp.HBColor" /> to convert.</param>
+        <summary>Converts an <see cref="HarfBuzzSharp.HBColor" /> to an <see cref="SkiaSharp.SKColor" />.</summary>
+        <returns>An <see cref="SkiaSharp.SKColor" /> with the same RGBA components.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -97,9 +110,9 @@
         <Parameter Name="hbColor" Type="HarfBuzzSharp.HBColor" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="hbColor">The <see cref="T:HarfBuzzSharp.HBColor" /> to convert.</param>
-        <summary>Converts an <see cref="T:HarfBuzzSharp.HBColor" /> to an <see cref="T:SkiaSharp.SKColor" />.</summary>
-        <returns>An <see cref="T:SkiaSharp.SKColor" /> representing the same color.</returns>
+        <param name="hbColor">The <see cref="HarfBuzzSharp.HBColor" /> to convert.</param>
+        <summary>Converts an <see cref="HarfBuzzSharp.HBColor" /> to an <see cref="SkiaSharp.SKColorF" /> with normalized 0.0–1.0 channels.</summary>
+        <returns>An <see cref="SkiaSharp.SKColorF" /> with channels scaled from the 0–255 range.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -119,9 +132,9 @@
         <Parameter Name="hbColors" Type="HarfBuzzSharp.HBColor[]" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="hbColors">The array of <see cref="T:HarfBuzzSharp.HBColor" /> values to convert.</param>
-        <summary>Converts an <see cref="T:HarfBuzzSharp.HBColor" /> to an <see cref="T:SkiaSharp.SKColor" />.</summary>
-        <returns>An <see cref="T:SkiaSharp.SKColor" /> representing the same color.</returns>
+        <param name="hbColors">The array of <see cref="HarfBuzzSharp.HBColor" /> values to convert.</param>
+        <summary>Converts an array of <see cref="HarfBuzzSharp.HBColor" /> values to an array of <see cref="SkiaSharp.SKColor" />.</summary>
+        <returns>An array of <see cref="SkiaSharp.SKColor" /> values, or <see langword="null" /> if <paramref name="hbColors" /> is <see langword="null" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>

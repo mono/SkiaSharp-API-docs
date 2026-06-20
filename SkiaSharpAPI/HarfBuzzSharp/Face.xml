@@ -168,8 +168,8 @@
       </Parameters>
       <Docs>
         <param name="instanceIndex">The zero-based index of the named instance.</param>
-        <summary>Returns the design coordinates for the specified named instance.</summary>
-        <returns>An array containing the design-space coordinates for each variation axis of the named instance.</returns>
+        <summary>Gets all variation design coordinates for the named instance at the specified index.</summary>
+        <returns>An array of design-space coordinates for the named instance.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -191,8 +191,8 @@
       </Parameters>
       <Docs>
         <param name="instanceIndex">The zero-based index of the named instance.</param>
-        <param name="coords">The span to fill with the design-space coordinates for each variation axis.</param>
-        <summary>Fills the provided span with the design coordinates for the specified named instance.</summary>
+        <param name="coords">The span to fill with design-space coordinate values.</param>
+        <summary>Fills a span with variation design coordinates for the named instance at the specified index.</summary>
         <returns>The number of coordinates written into <paramref name="coords" />.</returns>
         <remarks></remarks>
       </Docs>
@@ -214,8 +214,8 @@
       </Parameters>
       <Docs>
         <param name="instanceIndex">The zero-based index of the named instance.</param>
-        <summary>Returns the number of design coordinates for the specified named instance.</summary>
-        <returns>The total number of design-space coordinates (one per variation axis) for the named instance.</returns>
+        <summary>Gets the number of variation design coordinates for the named instance at the specified index.</summary>
+        <returns>The number of design coordinates.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -236,8 +236,8 @@
       </Parameters>
       <Docs>
         <param name="instanceIndex">The zero-based index of the named instance.</param>
-        <summary>Returns the OpenType name identifier for the PostScript name of the specified named instance.</summary>
-        <returns>The <see cref="T:HarfBuzzSharp.OpenTypeNameId" /> for the PostScript name of the named instance.</returns>
+        <summary>Gets the OpenType name ID for the PostScript name of the named instance at the specified index.</summary>
+        <returns>The <see cref="OpenTypeNameId" /> for the PostScript name of the named instance.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -258,8 +258,8 @@
       </Parameters>
       <Docs>
         <param name="instanceIndex">The zero-based index of the named instance.</param>
-        <summary>Returns the OpenType name identifier for the subfamily name of the specified named instance.</summary>
-        <returns>The <see cref="T:HarfBuzzSharp.OpenTypeNameId" /> for the subfamily name of the named instance.</returns>
+        <summary>Gets the OpenType name ID for the subfamily name of the named instance at the specified index.</summary>
+        <returns>The <see cref="OpenTypeNameId" /> for the subfamily name of the named instance.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -279,9 +279,9 @@
         <Parameter Name="colorIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="colorIndex">The zero-based index of the color entry within a palette.</param>
-        <summary>Returns the OpenType name identifier for the specified palette color entry.</summary>
-        <returns>The <see cref="T:HarfBuzzSharp.OpenTypeNameId" /> that names the color entry.</returns>
+        <param name="colorIndex">The zero-based index of the color within the palette.</param>
+        <summary>Gets the OpenType name ID for the color at the specified index in the font's CPAL color table.</summary>
+        <returns>The <see cref="OpenTypeNameId" /> for the palette color entry.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -302,8 +302,8 @@
       </Parameters>
       <Docs>
         <param name="paletteIndex">The zero-based index of the palette.</param>
-        <summary>Returns all colors in the specified color palette.</summary>
-        <returns>An array of <see cref="T:HarfBuzzSharp.HBColor" /> values representing each color in the palette.</returns>
+        <summary>Gets all colors in the palette at the specified index.</summary>
+        <returns>An array of <see cref="HBColor" /> values for the palette.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -325,9 +325,9 @@
       </Parameters>
       <Docs>
         <param name="paletteIndex">The zero-based index of the palette.</param>
-        <param name="colors">The span to fill with the palette colors.</param>
-        <summary>Fills the provided span with the colors from the specified color palette.</summary>
-        <returns>The number of color values written into <paramref name="colors" />.</returns>
+        <param name="colors">The span to fill with palette color values.</param>
+        <summary>Fills a span with colors from the palette at the specified index.</summary>
+        <returns>The number of colors written into <paramref name="colors" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -348,8 +348,8 @@
       </Parameters>
       <Docs>
         <param name="paletteIndex">The zero-based index of the palette.</param>
-        <summary>Returns the flags that describe the intended usage of the specified color palette.</summary>
-        <returns>One of the <see cref="T:HarfBuzzSharp.OpenTypeColorPaletteFlags" /> values.</returns>
+        <summary>Gets the flags for the palette at the specified index.</summary>
+        <returns>The <see cref="OpenTypeColorPaletteFlags" /> for the specified palette.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -370,8 +370,8 @@
       </Parameters>
       <Docs>
         <param name="paletteIndex">The zero-based index of the palette.</param>
-        <summary>Returns the OpenType name identifier for the specified color palette.</summary>
-        <returns>The <see cref="T:HarfBuzzSharp.OpenTypeNameId" /> that names the palette.</returns>
+        <summary>Gets the OpenType name ID for the palette at the specified index.</summary>
+        <returns>The <see cref="OpenTypeNameId" /> for the palette.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -391,9 +391,9 @@
         <Parameter Name="axes" Type="System.Span&lt;HarfBuzzSharp.OpenTypeVarAxisInfo&gt;" />
       </Parameters>
       <Docs>
-        <param name="axes">The span to fill with the variation axis information.</param>
-        <summary>Fills the provided span with information about the variation axes defined in the font.</summary>
-        <returns>The number of <see cref="T:HarfBuzzSharp.OpenTypeVarAxisInfo" /> values written into <paramref name="axes" />.</returns>
+        <param name="axes">The span to fill with variation axis information.</param>
+        <summary>Fills a span with information about the font's OpenType variation axes.</summary>
+        <returns>The number of axis entries written into <paramref name="axes" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -428,8 +428,8 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets a value indicating whether the font face contains color glyph layers (COLR table).</summary>
-        <value><see langword="true" /> if the font face has a COLR table with color layers; otherwise, <see langword="false" />.</value>
+        <summary>Gets a value indicating whether the font has COLR color layer data.</summary>
+        <value><see langword="true" /> if the font has COLR color layer data; otherwise, <see langword="false" />.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -446,8 +446,8 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets a value indicating whether the font face contains PNG color glyphs (CBDT/CBLC tables).</summary>
-        <value><see langword="true" /> if the font face has embedded PNG color glyphs; otherwise, <see langword="false" />.</value>
+        <summary>Gets a value indicating whether the font has embedded PNG color images for glyphs.</summary>
+        <value><see langword="true" /> if the font has embedded PNG color images for glyphs; otherwise, <see langword="false" />.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -464,8 +464,8 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets a value indicating whether the font face contains SVG color glyphs (SVG table).</summary>
-        <value><see langword="true" /> if the font face has an SVG table; otherwise, <see langword="false" />.</value>
+        <summary>Gets a value indicating whether the font has embedded SVG color images for glyphs.</summary>
+        <value><see langword="true" /> if the font has embedded SVG color images for glyphs; otherwise, <see langword="false" />.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -482,8 +482,8 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets a value indicating whether the font face contains color palettes (CPAL table).</summary>
-        <value><see langword="true" /> if the font face has a CPAL table; otherwise, <see langword="false" />.</value>
+        <summary>Gets a value indicating whether the font has a CPAL color palette table.</summary>
+        <value><see langword="true" /> if the font has a CPAL color palette table; otherwise, <see langword="false" />.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -500,8 +500,8 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets a value indicating whether the font face contains OpenType variation data (fvar table).</summary>
-        <value><see langword="true" /> if the font face has variation axis data; otherwise, <see langword="false" />.</value>
+        <summary>Gets a value indicating whether the font has OpenType variation data.</summary>
+        <value><see langword="true" /> if the font has OpenType variation data; otherwise, <see langword="false" />.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -573,8 +573,8 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the number of named instances defined in the font.</summary>
-        <value>The number of named instances in the font's variation table.</value>
+        <summary>Gets the number of named instances defined in the font's variation table.</summary>
+        <value>The number of named instances defined in the font's variation table.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -591,8 +591,8 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the number of color palettes defined in the font.</summary>
-        <value>The number of palettes in the font's CPAL table.</value>
+        <summary>Gets the number of color palettes defined in the font's CPAL table.</summary>
+        <value>The number of color palettes defined in the font's CPAL table.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -654,8 +654,8 @@
       </Parameters>
       <Docs>
         <param name="tag">The four-byte tag identifying the variation axis.</param>
-        <param name="axisInfo">When this method returns, contains the axis information if found. This parameter is treated as uninitialized.</param>
-        <summary>Attempts to find a variation axis by its four-byte tag.</summary>
+        <param name="axisInfo">When this method returns, contains the <see cref="OpenTypeVarAxisInfo" /> for the axis, if found.</param>
+        <summary>Attempts to find the variation axis with the specified tag.</summary>
         <returns><see langword="true" /> if the axis was found; otherwise, <see langword="false" />.</returns>
         <remarks></remarks>
       </Docs>
@@ -691,8 +691,8 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the number of variation axes defined in the font.</summary>
-        <value>The number of variation axes in the font's variation table.</value>
+        <summary>Gets the number of variation axes defined in the font's fvar table.</summary>
+        <value>The number of variation axes defined in the font's fvar table.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -709,8 +709,8 @@
         <ReturnType>HarfBuzzSharp.OpenTypeVarAxisInfo[]</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets an array containing information about all variation axes defined in the font.</summary>
-        <value>An array of <see cref="T:HarfBuzzSharp.OpenTypeVarAxisInfo" /> values, one per variation axis.</value>
+        <summary>Gets an array of information about all variation axes in the font.</summary>
+        <value>An array of <see cref="OpenTypeVarAxisInfo" /> objects describing all variation axes in the font.</value>
         <remarks></remarks>
       </Docs>
     </Member>

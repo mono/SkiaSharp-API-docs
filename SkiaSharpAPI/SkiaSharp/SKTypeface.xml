@@ -44,9 +44,9 @@ Typeface objects are immutable, and so they can be shared between threads.
         <Parameter Name="args" Type="SkiaSharp.SKFontArguments" />
       </Parameters>
       <Docs>
-        <param name="args">A <see cref="T:SkiaSharp.SKFontArguments" /> ref struct specifying the variation position, collection index, palette index, and palette color overrides.</param>
-        <summary>Creates a new <see cref="T:SkiaSharp.SKTypeface" /> from this typeface with the variation position, collection index, palette, and palette overrides specified by the font arguments.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKTypeface" /> instance with the specified arguments applied.</returns>
+        <param name="args">The font arguments specifying the variation position, collection index, palette index, and palette overrides.</param>
+        <summary>Creates a copy of this typeface with the variation settings, collection index, and palette specified in the given <see cref="SkiaSharp.SKFontArguments" />.</summary>
+        <returns>A new <see cref="SkiaSharp.SKTypeface" /> with the specified font arguments applied.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -66,9 +66,9 @@ Typeface objects are immutable, and so they can be shared between threads.
         <Parameter Name="paletteIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="paletteIndex">The zero-based index of the color palette to use.</param>
-        <summary>Creates a new <see cref="T:SkiaSharp.SKTypeface" /> from this typeface with the specified palette index.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKTypeface" /> instance using the specified color palette.</returns>
+        <param name="paletteIndex">The zero-based index of the color palette to use from the font's CPAL table.</param>
+        <summary>Creates a copy of this typeface using the specified color palette.</summary>
+        <returns>A new <see cref="SkiaSharp.SKTypeface" /> configured to use the specified palette.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -88,9 +88,9 @@ Typeface objects are immutable, and so they can be shared between threads.
         <Parameter Name="position" Type="System.ReadOnlySpan&lt;SkiaSharp.SKFontVariationPositionCoordinate&gt;" />
       </Parameters>
       <Docs>
-        <param name="position">The variation design coordinates to apply, one per axis.</param>
-        <summary>Creates a new <see cref="T:SkiaSharp.SKTypeface" /> from this typeface with the specified variation design position.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKTypeface" /> instance with the variation axes set to the given design coordinates.</returns>
+        <param name="position">The variation design coordinates to apply.</param>
+        <summary>Creates a copy of this typeface with the specified variation design position.</summary>
+        <returns>A new <see cref="SkiaSharp.SKTypeface" /> with the specified variation coordinates applied.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -477,8 +477,8 @@ Typeface objects are immutable, and so they can be shared between threads.
         <ReturnType>SkiaSharp.SKTypeface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the empty typeface singleton, which contains no glyphs.</summary>
-        <value>The shared empty <see cref="T:SkiaSharp.SKTypeface" /> instance. This object is immortal and must not be disposed.</value>
+        <summary>Gets a shared empty typeface instance with no glyphs.</summary>
+        <value>A shared immortal <see cref="SkiaSharp.SKTypeface" /> instance with no glyphs.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1076,9 +1076,9 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="axes" Type="System.Span&lt;SkiaSharp.SKFontVariationAxis&gt;" />
       </Parameters>
       <Docs>
-        <param name="axes">The span to fill with variation axis information.</param>
-        <summary>Fills the provided span with the variation axis parameters defined by this typeface.</summary>
-        <returns>The number of <see cref="T:SkiaSharp.SKFontVariationAxis" /> values written into <paramref name="parameters" />.</returns>
+        <param name="axes">The span to fill with <see cref="SkiaSharp.SKFontVariationAxis" /> entries.</param>
+        <summary>Fills the specified span with the variation axis descriptors for this typeface.</summary>
+        <returns>The number of axes written into <paramref name="axes" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1098,9 +1098,9 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="coordinates" Type="System.Span&lt;SkiaSharp.SKFontVariationPositionCoordinate&gt;" />
       </Parameters>
       <Docs>
-        <param name="coordinates">The span to fill with the current design coordinates, one per variation axis.</param>
-        <summary>Fills the provided span with the current variation design coordinates for this typeface.</summary>
-        <returns>The number of <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values written into <paramref name="coordinates" />.</returns>
+        <param name="coordinates">The span to fill with <see cref="SkiaSharp.SKFontVariationPositionCoordinate" /> entries.</param>
+        <summary>Fills the specified span with the current variation design coordinates for this typeface.</summary>
+        <returns>The number of coordinates written into <paramref name="coordinates" />.</returns>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1179,8 +1179,8 @@ A typeface is understood to be bold when the weight is greater than or equal to
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets a value indicating whether this typeface contains no glyphs.</summary>
-        <value><see langword="true" /> if the typeface has a glyph count of zero; otherwise, <see langword="false" />.</value>
+        <summary>Gets a value indicating whether this typeface has no glyphs.</summary>
+        <value>Whether this typeface has no glyphs (glyph count is zero).</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1467,8 +1467,8 @@ A typeface is understood to be italic when it has a slant of either
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the number of variation axes defined by this typeface.</summary>
-        <value>The number of variation axes available in the typeface, or 0 if the typeface has no variation data.</value>
+        <summary>Gets the number of variation axes defined in this typeface.</summary>
+        <value>The number of variation axes.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1485,8 +1485,8 @@ A typeface is understood to be italic when it has a slant of either
         <ReturnType>SkiaSharp.SKFontVariationAxis[]</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets an array describing all variation axes defined by this typeface.</summary>
-        <value>An array of <see cref="T:SkiaSharp.SKFontVariationAxis" /> values, one per variation axis.</value>
+        <summary>Gets an array of descriptors for all variation axes defined in this typeface.</summary>
+        <value>An array of <see cref="SkiaSharp.SKFontVariationAxis" /> entries describing the typeface's variation axes.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1503,8 +1503,8 @@ A typeface is understood to be italic when it has a slant of either
         <ReturnType>SkiaSharp.SKFontVariationPositionCoordinate[]</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets an array containing the current variation design coordinates for this typeface.</summary>
-        <value>An array of <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values representing the current axis settings.</value>
+        <summary>Gets the current variation design position for all axes of this typeface.</summary>
+        <value>An array of <see cref="SkiaSharp.SKFontVariationPositionCoordinate" /> entries representing the current variation settings.</value>
         <remarks></remarks>
       </Docs>
     </Member>
@@ -1521,8 +1521,8 @@ A typeface is understood to be italic when it has a slant of either
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the number of variation design coordinates currently set for this typeface.</summary>
-        <value>The number of variation axes for which a design coordinate is defined.</value>
+        <summary>Gets the number of variation axes whose design positions are available for this typeface.</summary>
+        <value>The number of variation design position coordinates.</value>
         <remarks></remarks>
       </Docs>
     </Member>
