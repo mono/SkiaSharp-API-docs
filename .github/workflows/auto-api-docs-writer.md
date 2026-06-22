@@ -21,11 +21,16 @@ on:
         type: string
 
 # -- Custom jobs -------------------------------------------------------
-# Stub regeneration requires Windows (mdoc.exe is .NET Framework).
-# Checks out SkiaSharp (public), runs mdoc, uploads result as artifact.
+# Stub regeneration runs mdoc to produce the XML reference stubs. mdoc.exe is a
+# .NET Framework tool, so on Linux it runs under Mono (docs.cake invokes it via mono);
+# this lets the job run on ubuntu-latest instead of windows-latest. The managed GTK#
+# reference assemblies mdoc needs are supplied from NuGet by the cake comparer (as --lib
+# paths), so no system GTK# install is required — mono is the only extra dependency.
+# Checks out SkiaSharp (public), runs scripts/infra/docs/generate-api-docs.sh, uploads
+# the result as an artifact.
 jobs:
   regenerate-stubs:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout SkiaSharp
         uses: actions/checkout@v4
@@ -44,32 +49,18 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          global-json-file: global.json
+      - name: Setup Mono (runs mdoc.exe on Linux)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends mono-complete
       - name: Cache NuGet global packages
         uses: actions/cache@v4
         with:
-          path: ${{ env.USERPROFILE }}\.nuget\packages
+          path: ~/.nuget/packages
           key: nuget-global-${{ hashFiles('scripts/VERSIONS.txt', 'scripts/infra/shared/shared.cake') }}
           restore-keys: |
             nuget-global-
-      - name: Cache GTK# installer
-        id: cache-gtk
-        uses: actions/cache@v4
-        with:
-          path: ${{ runner.temp }}\gtk-sharp.msi
-          key: gtk-sharp-2.12.45
-      - name: Download GTK# 2
-        if: steps.cache-gtk.outputs.cache-hit != 'true'
-        shell: pwsh
-        run: |
-          $msiUrl = "https://github.com/mono/gtk-sharp/releases/download/2.12.45/gtk-sharp-2.12.45.msi"
-          Invoke-WebRequest -Uri $msiUrl -OutFile "$env:RUNNER_TEMP\gtk-sharp.msi"
-      - name: Install GTK# 2
-        shell: pwsh
-        run: |
-          Start-Process msiexec.exe -ArgumentList "/i", "$env:RUNNER_TEMP\gtk-sharp.msi", "/quiet", "/norestart" -Wait -NoNewWindow
-      - name: Restore tools
-        run: dotnet tool restore
       - name: Cache NuGet package_cache
         uses: actions/cache@v4
         with:
@@ -77,10 +68,8 @@ jobs:
           key: docs-package-cache-${{ hashFiles('scripts/VERSIONS.txt', 'scripts/infra/shared/shared.cake') }}
           restore-keys: |
             docs-package-cache-
-      - name: Download latest NuGet packages
-        run: dotnet cake --target=docs-download-output
       - name: Regenerate API docs
-        run: dotnet cake --target=update-docs
+        run: bash scripts/infra/docs/generate-api-docs.sh
       - name: Extract placeholders and manifest
         shell: pwsh
         run: |
