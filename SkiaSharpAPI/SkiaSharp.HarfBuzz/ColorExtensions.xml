@@ -11,8 +11,14 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Provides extension methods for converting between SkiaSharp and HarfBuzz color types.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`ColorExtensions` provides extension methods for converting between the SkiaSharp color types (<xref:SkiaSharp.SKColor> and <xref:SkiaSharp.SKColorF>) and the HarfBuzz color type (<xref:HarfBuzzSharp.HBColor>).
+
+Note that `SKColor` uses ARGB byte ordering (`0xAARRGGBB`) while `HBColor` uses BGRA byte ordering (`0xBBGGRRAA`). These extension methods handle the channel reordering automatically.
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="ToHBColor">
@@ -31,10 +37,10 @@
         <Parameter Name="color" Type="SkiaSharp.SKColor" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="color">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="color">The <see cref="T:SkiaSharp.SKColor" /> to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKColor" /> to an <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
+        <returns>An <see cref="T:HarfBuzzSharp.HBColor" /> with the same channel values as <paramref name="color" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ToHBColor">
@@ -53,10 +59,10 @@
         <Parameter Name="color" Type="SkiaSharp.SKColorF" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="color">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="color">The <see cref="T:SkiaSharp.SKColorF" /> to convert.</param>
+        <summary>Converts an <see cref="T:SkiaSharp.SKColorF" /> to an <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
+        <returns>An <see cref="T:HarfBuzzSharp.HBColor" /> with channel values derived from <paramref name="color" />, clamped to the range 0–255.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ToSKColor">
@@ -75,10 +81,10 @@
         <Parameter Name="hbColor" Type="HarfBuzzSharp.HBColor" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="hbColor">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="hbColor">The <see cref="T:HarfBuzzSharp.HBColor" /> to convert.</param>
+        <summary>Converts an <see cref="T:HarfBuzzSharp.HBColor" /> to an <see cref="T:SkiaSharp.SKColor" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKColor" /> with the same channel values as <paramref name="hbColor" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ToSKColorF">
@@ -97,10 +103,10 @@
         <Parameter Name="hbColor" Type="HarfBuzzSharp.HBColor" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="hbColor">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="hbColor">The <see cref="T:HarfBuzzSharp.HBColor" /> to convert.</param>
+        <summary>Converts an <see cref="T:HarfBuzzSharp.HBColor" /> to an <see cref="T:SkiaSharp.SKColorF" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKColorF" /> with channel values in the range 0.0–1.0 derived from <paramref name="hbColor" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ToSKColors">
@@ -119,10 +125,10 @@
         <Parameter Name="hbColors" Type="HarfBuzzSharp.HBColor[]" RefType="this" />
       </Parameters>
       <Docs>
-        <param name="hbColors">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="hbColors">The array of <see cref="T:HarfBuzzSharp.HBColor" /> values to convert.</param>
+        <summary>Converts an array of <see cref="T:HarfBuzzSharp.HBColor" /> values to an array of <see cref="T:SkiaSharp.SKColor" /> values.</summary>
+        <returns>A new array of <see cref="T:SkiaSharp.SKColor" /> values converted from <paramref name="hbColors" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

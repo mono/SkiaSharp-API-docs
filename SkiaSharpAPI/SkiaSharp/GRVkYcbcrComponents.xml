@@ -15,8 +15,14 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Specifies the Vulkan component swizzle mapping used for YCbCr color conversion.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`GRVkYcbcrComponents` specifies the Vulkan component swizzle mapping for each color channel (R, G, B, A) used during YCbCr conversion. Each property holds a `VkComponentSwizzle` value that controls how the corresponding channel is sourced from the image data.
+
+This struct maps directly to `VkComponentMapping` in the Vulkan API and is used as part of <xref:SkiaSharp.GRVkYcbcrConversionInfo> when creating a Vulkan YCbCr sampler conversion.
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="A">
@@ -37,9 +43,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the component swizzle for the alpha channel.</summary>
+        <value>A <c>VkComponentSwizzle</c> value specifying how the alpha channel is mapped.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="B">
@@ -60,9 +66,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the component swizzle for the blue channel.</summary>
+        <value>A <c>VkComponentSwizzle</c> value specifying how the blue channel is mapped.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -89,10 +95,10 @@
         <Parameter Name="obj" Type="SkiaSharp.GRVkYcbcrComponents" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The value to compare to the current instance.</param>
+        <summary>Determines whether the current instance is equal to another <see cref="T:SkiaSharp.GRVkYcbcrComponents" />.</summary>
+        <returns><see langword="true" /> if both instances have the same component swizzle values; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -116,10 +122,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare to the current instance.</param>
+        <summary>Determines whether the current instance is equal to the specified object.</summary>
+        <returns><see langword="true" /> if <paramref name="obj" /> is a <see cref="T:SkiaSharp.GRVkYcbcrComponents" /> with the same component values; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="G">
@@ -140,9 +146,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the component swizzle for the green channel.</summary>
+        <value>A <c>VkComponentSwizzle</c> value specifying how the green channel is mapped.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -164,9 +170,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns a hash code for this instance.</summary>
+        <returns>A hash code for the current instance.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -186,11 +192,11 @@
         <Parameter Name="right" Type="SkiaSharp.GRVkYcbcrComponents" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Returns a value indicating whether two <see cref="T:SkiaSharp.GRVkYcbcrComponents" /> instances are equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -210,11 +216,11 @@
         <Parameter Name="right" Type="SkiaSharp.GRVkYcbcrComponents" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Returns a value indicating whether two <see cref="T:SkiaSharp.GRVkYcbcrComponents" /> instances are not equal.</summary>
+        <returns><see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="R">
@@ -235,9 +241,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the component swizzle for the red channel.</summary>
+        <value>A <c>VkComponentSwizzle</c> value specifying how the red channel is mapped.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
