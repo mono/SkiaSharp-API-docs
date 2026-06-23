@@ -14,9 +14,40 @@
       <InterfaceName>System.IEquatable&lt;HarfBuzzSharp.HBColor&gt;</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Represents a HarfBuzz color value with BGRA byte ordering.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`HBColor` represents a HarfBuzz `hb_color_t` value — a 32-bit packed color with **BGRA** byte
+ordering: `0xBBGGRRAA` (blue in the high byte, alpha in the low byte). This differs from
+<xref:SkiaSharp.SKColor>, which uses ARGB ordering (`0xAARRGGBB`).
+
+Use the named properties (<xref:HarfBuzzSharp.HBColor.Red>, <xref:HarfBuzzSharp.HBColor.Green>,
+<xref:HarfBuzzSharp.HBColor.Blue>, <xref:HarfBuzzSharp.HBColor.Alpha>) to read individual
+channels safely without needing to know the byte layout. Use the component constructor
+`HBColor(byte red, byte green, byte blue, byte alpha)` to create a value from individual channels.
+
+This type is a value type and does not require disposal.
+
+## Examples
+
+```csharp
+// Create an opaque red color and read its components.
+var red = new HBColor(255, 0, 0, 255);
+Console.WriteLine($"R={red.Red} G={red.Green} B={red.Blue} A={red.Alpha}");
+
+// Convert to and from a raw uint value.
+uint packed = (uint)red;
+var same = (HBColor)packed;
+Console.WriteLine(same == red); // True
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -32,9 +63,9 @@
         <Parameter Name="value" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="value">The packed color value in BGRA byte order (<c>0xBBGGRRAA</c>).</param>
+        <summary>Initializes a new instance of the <see cref="T:HarfBuzzSharp.HBColor" /> struct from a packed BGRA value.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -53,12 +84,12 @@
         <Parameter Name="alpha" Type="System.Byte" />
       </Parameters>
       <Docs>
-        <param name="red">To be added.</param>
-        <param name="green">To be added.</param>
-        <param name="blue">To be added.</param>
-        <param name="alpha">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
+        <param name="red">The red channel value (0–255).</param>
+        <param name="green">The green channel value (0–255).</param>
+        <param name="blue">The blue channel value (0–255).</param>
+        <param name="alpha">The alpha channel value (0–255), where 0 is fully transparent and 255 is fully opaque.</param>
+        <summary>Initializes a new instance of the <see cref="T:HarfBuzzSharp.HBColor" /> struct with the specified color channel values.</summary>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Alpha">
@@ -74,9 +105,9 @@
         <ReturnType>System.Byte</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the alpha channel value.</summary>
+        <value>The alpha component (0–255), where 0 is fully transparent and 255 is fully opaque.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Blue">
@@ -92,9 +123,9 @@
         <ReturnType>System.Byte</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the blue channel value.</summary>
+        <value>The blue component (0–255).</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -116,10 +147,10 @@
         <Parameter Name="other" Type="HarfBuzzSharp.HBColor" />
       </Parameters>
       <Docs>
-        <param name="other">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="other">The <see cref="T:HarfBuzzSharp.HBColor" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:HarfBuzzSharp.HBColor" /> is equal to the current instance.</summary>
+        <returns><see langword="true" /> if the specified value is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -138,10 +169,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current <see cref="T:HarfBuzzSharp.HBColor" /> instance.</summary>
+        <returns><see langword="true" /> if the specified object is an <see cref="T:HarfBuzzSharp.HBColor" /> equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -158,9 +189,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns a hash code for the current <see cref="T:HarfBuzzSharp.HBColor" /> instance.</summary>
+        <returns>A hash code for the current instance.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Green">
@@ -176,9 +207,9 @@
         <ReturnType>System.Byte</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the green channel value.</summary>
+        <value>The green component (0–255).</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -198,11 +229,11 @@
         <Parameter Name="right" Type="HarfBuzzSharp.HBColor" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:HarfBuzzSharp.HBColor" /> values are equal.</summary>
+        <returns><see langword="true" /> if the two values are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
@@ -221,10 +252,10 @@
         <Parameter Name="value" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="value">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="value">The packed color value in BGRA byte order (<c>0xBBGGRRAA</c>).</param>
+        <summary>Explicitly converts a packed BGRA <see cref="T:System.UInt32" /> value to an <see cref="T:HarfBuzzSharp.HBColor" />.</summary>
+        <returns>An <see cref="T:HarfBuzzSharp.HBColor" /> whose raw value equals <paramref name="value" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
@@ -243,10 +274,10 @@
         <Parameter Name="color" Type="HarfBuzzSharp.HBColor" />
       </Parameters>
       <Docs>
-        <param name="color">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="color">The <see cref="T:HarfBuzzSharp.HBColor" /> to convert.</param>
+        <summary>Implicitly converts an <see cref="T:HarfBuzzSharp.HBColor" /> to its packed BGRA <see cref="T:System.UInt32" /> value.</summary>
+        <returns>The packed BGRA value of <paramref name="color" /> in <c>0xBBGGRRAA</c> byte order.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -266,11 +297,11 @@
         <Parameter Name="right" Type="HarfBuzzSharp.HBColor" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first value to compare.</param>
+        <param name="right">The second value to compare.</param>
+        <summary>Determines whether two <see cref="T:HarfBuzzSharp.HBColor" /> values are not equal.</summary>
+        <returns><see langword="true" /> if the two values are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Red">
@@ -286,9 +317,9 @@
         <ReturnType>System.Byte</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the red channel value.</summary>
+        <value>The red component (0–255).</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -305,9 +336,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the string representation of the color in <c>#AARRGGBB</c> hexadecimal format.</summary>
+        <returns>A string of the form <c>#AARRGGBB</c> where each pair of hex digits represents the alpha, red, green, and blue channel values respectively.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -323,9 +354,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets the raw packed BGRA value.</summary>
+        <value>The packed color value in <c>0xBBGGRRAA</c> byte order.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

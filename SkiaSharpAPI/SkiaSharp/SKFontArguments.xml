@@ -19,8 +19,31 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>Describes arguments used to select and customize a font from a typeface.</summary>
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKFontArguments` is a `ref struct` that describes how to select and customize a font from a
+typeface. It specifies the face index within a TTC collection, the color palette to use, color
+palette overrides, and a variation design position.
+
+Pass an `SKFontArguments` to
+<xref:SkiaSharp.SKTypeface.CreateTypeface(SkiaSharp.SKFontArguments)> to create a typeface
+configured with the specified arguments.
+
+## Examples
+
+```csharp
+// Select the second face in a TTC collection and apply the bold named instance.
+using var typeface = SKTypeface.FromFile("NotoSansCJK.ttc");
+var args = new SKFontArguments
+{
+    CollectionIndex = 1,
+    PaletteIndex = 0,
+};
+using var customFace = typeface.CreateTypeface(args);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="CollectionIndex">
@@ -41,9 +64,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the zero-based index of the face to use within a font collection (TTC) file.</summary>
+        <value>The zero-based face index. The default is <c>0</c> (the first face).</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="PaletteIndex">
@@ -64,9 +87,9 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the zero-based index of the color palette to use.</summary>
+        <value>The zero-based palette index. The default is <c>0</c>.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="PaletteOverrides">
@@ -87,9 +110,9 @@
         <ReturnType>System.ReadOnlySpan&lt;SkiaSharp.SKFontPaletteOverride&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the color palette overrides to apply.</summary>
+        <value>A <see cref="T:System.ReadOnlySpan`1" /> of <see cref="T:SkiaSharp.SKFontPaletteOverride" /> values. The default is empty.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="VariationDesignPosition">
@@ -110,9 +133,9 @@
         <ReturnType>System.ReadOnlySpan&lt;SkiaSharp.SKFontVariationPositionCoordinate&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the variation design position specifying axis coordinates.</summary>
+        <value>A <see cref="T:System.ReadOnlySpan`1" /> of <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values defining the design-space location. The default is empty.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>
