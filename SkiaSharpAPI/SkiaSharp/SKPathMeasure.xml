@@ -268,14 +268,13 @@
         <Parameter Name="startWithMoveTo" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="start">The starting offset of the segment.</param>
-        <param name="stop">The end offset of the segment.</param>
-        <param name="dst">The path to hold the new segment.</param>
-        <param name="startWithMoveTo">If true, begin the path segment with a <see cref="M:SkiaSharp.SKPath.MoveTo(SkiaSharp.SKPoint)" />.</param>
-        <summary>Given a start and stop distance, update the destination path with the intervening segment(s).</summary>
-        <returns>
-          <see langword="false" /> if the segment is zero-length, otherwise returns <see langword="true" />.</returns>
-        <remarks>The start and stop parameters are pinned to 0..<see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
+        <param name="start">The distance along the path at which the segment begins.</param>
+        <param name="stop">The distance along the path at which the segment ends.</param>
+        <param name="dst">The <see cref="T:SkiaSharp.SKPath" /> to which the extracted segment contour is appended.</param>
+        <param name="startWithMoveTo"><see langword="true" /> to prepend a move-to verb at the start position of the segment; otherwise, <see langword="false" />.</param>
+        <summary>Extracts a contour segment of the path between two distances and appends it to the destination path.</summary>
+        <returns><see langword="true" /> if the segment was successfully extracted; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetSegment">
