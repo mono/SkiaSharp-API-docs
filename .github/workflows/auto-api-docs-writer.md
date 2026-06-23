@@ -9,9 +9,10 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/auto-api-docs-writer*"
-  pull_request:
-    paths:
-      - ".github/workflows/auto-api-docs-writer*"
+  # No pull_request trigger: the writer runs the full agentic pipeline and
+  # opens a PR via safe-outputs. On a PR that edits this workflow, that PR
+  # creation is blocked (protected workflow files), which red-flags the check.
+  # The push-to-main trigger above still validates workflow changes after merge.
   workflow_dispatch:
     inputs:
       skiasharp_branch:
