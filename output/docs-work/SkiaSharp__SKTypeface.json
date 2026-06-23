@@ -1,0 +1,202 @@
+{
+  "typeName": "SkiaSharp.SKTypeface",
+  "file": "D:\\a\\SkiaSharp-API-docs\\SkiaSharp-API-docs\\docs\\SkiaSharpAPI\\SkiaSharp\\SKTypeface.xml",
+  "entries": [
+    {
+      "fields": {
+        "returns": "A new <see cref=\"T:SkiaSharp.SKTypeface\" /> configured with the specified arguments, or <see langword=\"null\" /> if the arguments are not compatible with this typeface.",
+        "remarks": "",
+        "summary": "Creates a new typeface that applies the specified font arguments to this typeface.",
+        "_extractedKeys": [
+          "returns",
+          "remarks",
+          "summary",
+          "params.args"
+        ],
+        "params": {
+          "args": "The <see cref=\"T:SkiaSharp.SKFontArguments\" /> specifying the collection index, palette, palette overrides, and variation design position."
+        }
+      },
+      "signature": "public SkiaSharp.SKTypeface Clone (SkiaSharp.SKFontArguments args);",
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKTypeface.Clone(SkiaSharp.SKFontArguments)",
+      "memberName": "Clone"
+    },
+    {
+      "fields": {
+        "returns": "A new <see cref=\"T:SkiaSharp.SKTypeface\" /> using the specified palette, or <see langword=\"null\" /> if the palette index is out of range.",
+        "remarks": "",
+        "summary": "Creates a new typeface that uses the specified color palette.",
+        "_extractedKeys": [
+          "returns",
+          "remarks",
+          "summary",
+          "params.paletteIndex"
+        ],
+        "params": {
+          "paletteIndex": "The zero-based index of the color palette to use."
+        }
+      },
+      "signature": "public SkiaSharp.SKTypeface Clone (int paletteIndex);",
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKTypeface.Clone(System.Int32)",
+      "memberName": "Clone"
+    },
+    {
+      "fields": {
+        "returns": "A new <see cref=\"T:SkiaSharp.SKTypeface\" /> positioned at the specified variation design position, or <see langword=\"null\" /> if the typeface has no variation data.",
+        "remarks": "",
+        "summary": "Creates a new typeface positioned at the specified location in the variation design space.",
+        "_extractedKeys": [
+          "returns",
+          "remarks",
+          "summary",
+          "params.position"
+        ],
+        "params": {
+          "position": "A read-only span of <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> values specifying the desired axis coordinates."
+        }
+      },
+      "signature": "public SkiaSharp.SKTypeface Clone (ReadOnlySpan<SkiaSharp.SKFontVariationPositionCoordinate> position);",
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKTypeface.Clone(System.ReadOnlySpan{SkiaSharp.SKFontVariationPositionCoordinate})",
+      "memberName": "Clone"
+    },
+    {
+      "fields": {
+        "value": "A shared <see cref=\"T:SkiaSharp.SKTypeface\" /> instance that is empty (has zero glyphs). This instance is managed internally by Skia and must not be disposed.",
+        "_extractedKeys": [
+          "value",
+          "remarks",
+          "summary"
+        ],
+        "remarks": "",
+        "summary": "Gets an empty typeface that contains no glyphs."
+      },
+      "signature": "public static SkiaSharp.SKTypeface Empty { get; }",
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKTypeface.Empty",
+      "memberName": "Empty"
+    },
+    {
+      "fields": {
+        "returns": "The number of variation axis entries written into <paramref name=\"axes\" />.",
+        "remarks": "",
+        "summary": "Fills a span with the variation axis parameters for this typeface.",
+        "_extractedKeys": [
+          "returns",
+          "remarks",
+          "summary",
+          "params.axes"
+        ],
+        "params": {
+          "axes": "A span to receive the variation axis information."
+        }
+      },
+      "signature": "public int GetVariationDesignParameters (Span<SkiaSharp.SKFontVariationAxis> axes);",
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKTypeface.GetVariationDesignParameters(System.Span{SkiaSharp.SKFontVariationAxis})",
+      "memberName": "GetVariationDesignParameters"
+    },
+    {
+      "fields": {
+        "returns": "The number of coordinate entries written into <paramref name=\"coordinates\" />.",
+        "remarks": "",
+        "summary": "Fills a span with the current variation design position of the typeface.",
+        "_extractedKeys": [
+          "returns",
+          "remarks",
+          "summary",
+          "params.coordinates"
+        ],
+        "params": {
+          "coordinates": "A span to receive the current axis coordinates."
+        }
+      },
+      "signature": "public int GetVariationDesignPosition (Span<SkiaSharp.SKFontVariationPositionCoordinate> coordinates);",
+      "memberType": "Method",
+      "docId": "M:SkiaSharp.SKTypeface.GetVariationDesignPosition(System.Span{SkiaSharp.SKFontVariationPositionCoordinate})",
+      "memberName": "GetVariationDesignPosition"
+    },
+    {
+      "fields": {
+        "value": "<see langword=\"true\" /> if <see cref=\"P:SkiaSharp.SKTypeface.GlyphCount\" /> is zero; otherwise, <see langword=\"false\" />.",
+        "_extractedKeys": [
+          "value",
+          "remarks",
+          "summary"
+        ],
+        "remarks": "",
+        "summary": "Gets a value indicating whether the typeface contains no glyphs."
+      },
+      "signature": "public bool IsEmpty { get; }",
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKTypeface.IsEmpty",
+      "memberName": "IsEmpty"
+    },
+    {
+      "fields": {
+        "value": "The total number of variation axes, or <c>0</c> if the typeface has no variation data.",
+        "_extractedKeys": [
+          "value",
+          "remarks",
+          "summary"
+        ],
+        "remarks": "",
+        "summary": "Gets the number of variation axes supported by the typeface."
+      },
+      "signature": "public int VariationDesignParameterCount { get; }",
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKTypeface.VariationDesignParameterCount",
+      "memberName": "VariationDesignParameterCount"
+    },
+    {
+      "fields": {
+        "value": "An array of <see cref=\"T:SkiaSharp.SKFontVariationAxis\" /> values describing each axis, or an empty array if the typeface has no variation data.",
+        "_extractedKeys": [
+          "value",
+          "remarks",
+          "summary"
+        ],
+        "remarks": "",
+        "summary": "Gets information about all variation axes supported by the typeface."
+      },
+      "signature": "public SkiaSharp.SKFontVariationAxis[] VariationDesignParameters { get; }",
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKTypeface.VariationDesignParameters",
+      "memberName": "VariationDesignParameters"
+    },
+    {
+      "fields": {
+        "value": "An array of <see cref=\"T:SkiaSharp.SKFontVariationPositionCoordinate\" /> values representing the current axis coordinates, or an empty array if the typeface has no variation data.",
+        "_extractedKeys": [
+          "value",
+          "remarks",
+          "summary"
+        ],
+        "remarks": "",
+        "summary": "Gets the current variation design position of the typeface."
+      },
+      "signature": "public SkiaSharp.SKFontVariationPositionCoordinate[] VariationDesignPosition { get; }",
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKTypeface.VariationDesignPosition",
+      "memberName": "VariationDesignPosition"
+    },
+    {
+      "fields": {
+        "value": "The number of axis coordinates in the current variation design position, or <c>0</c> if no coordinates are set.",
+        "_extractedKeys": [
+          "value",
+          "remarks",
+          "summary"
+        ],
+        "remarks": "",
+        "summary": "Gets the number of variation axes with explicitly set coordinates."
+      },
+      "signature": "public int VariationDesignPositionCount { get; }",
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKTypeface.VariationDesignPositionCount",
+      "memberName": "VariationDesignPositionCount"
+    }
+  ]
+}

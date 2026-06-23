@@ -1,0 +1,112 @@
+{
+  "typeName": "SkiaSharp.SKWebpEncoderFrame",
+  "file": "D:\\a\\SkiaSharp-API-docs\\SkiaSharp-API-docs\\docs\\SkiaSharpAPI\\SkiaSharp\\SKWebpEncoderFrame.xml",
+  "entries": [
+    {
+      "signature": "public struct SKWebpEncoderFrame",
+      "memberType": "type",
+      "docId": null,
+      "fields": {
+        "_extractedKeys": [
+          "remarks",
+          "summary"
+        ],
+        "remarks": "<format type=\"text/markdown\"><![CDATA[\n## Remarks\n\n`SKWebpEncoderFrame` represents a single frame in an animated WebP sequence. Each frame\ncombines pixel data (as an <xref:SkiaSharp.SKPixmap>) with a display duration.\n\nUse one of the constructors to create a frame from an <xref:SkiaSharp.SKBitmap>,\n<xref:SkiaSharp.SKImage>, or <xref:SkiaSharp.SKPixmap>. The bitmap or image must remain\nalive and unmodified for the duration of the encoding operation.\n\nPass an array or span of frames to\n<xref:SkiaSharp.SKWebpEncoder.EncodeAnimated(System.ReadOnlySpan{SkiaSharp.SKWebpEncoderFrame},SkiaSharp.SKWebpEncoderOptions)>\nto produce an animated WebP file.\n]]></format>",
+        "summary": "Represents a single frame in an animated WebP image, combining pixel data with a display duration.",
+        "remarksRequired": true
+      }
+    },
+    {
+      "fields": {
+        "_extractedKeys": [
+          "remarks",
+          "summary",
+          "params.duration",
+          "params.bitmap"
+        ],
+        "remarks": "",
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> struct from a bitmap and a duration.",
+        "params": {
+          "duration": "The length of time this frame is displayed.",
+          "bitmap": "The source bitmap. Cannot be <see langword=\"null\" /> and must support pixel access."
+        }
+      },
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKBitmap bitmap, TimeSpan duration);",
+      "memberType": "Constructor",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKBitmap,System.TimeSpan)",
+      "memberName": ".ctor"
+    },
+    {
+      "fields": {
+        "_extractedKeys": [
+          "remarks",
+          "summary",
+          "params.duration",
+          "params.image"
+        ],
+        "remarks": "",
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> struct from a raster-backed image and a duration.",
+        "params": {
+          "duration": "The length of time this frame is displayed.",
+          "image": "The source image. Cannot be <see langword=\"null\" /> and must be raster-backed."
+        }
+      },
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKImage image, TimeSpan duration);",
+      "memberType": "Constructor",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKImage,System.TimeSpan)",
+      "memberName": ".ctor"
+    },
+    {
+      "fields": {
+        "_extractedKeys": [
+          "remarks",
+          "summary",
+          "params.pixmap",
+          "params.duration"
+        ],
+        "remarks": "",
+        "summary": "Initializes a new instance of the <see cref=\"T:SkiaSharp.SKWebpEncoderFrame\" /> struct from a pixmap and a duration.",
+        "params": {
+          "pixmap": "The source pixmap. Cannot be <see langword=\"null\" />.",
+          "duration": "The length of time this frame is displayed."
+        }
+      },
+      "signature": "public SKWebpEncoderFrame (SkiaSharp.SKPixmap pixmap, TimeSpan duration);",
+      "memberType": "Constructor",
+      "docId": "M:SkiaSharp.SKWebpEncoderFrame.#ctor(SkiaSharp.SKPixmap,System.TimeSpan)",
+      "memberName": ".ctor"
+    },
+    {
+      "fields": {
+        "value": "A <see cref=\"T:System.TimeSpan\" /> representing how long this frame is shown before advancing to the next frame.",
+        "_extractedKeys": [
+          "value",
+          "remarks",
+          "summary"
+        ],
+        "remarks": "",
+        "summary": "Gets or sets the display duration of this frame."
+      },
+      "signature": "public TimeSpan Duration { get; set; }",
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKWebpEncoderFrame.Duration",
+      "memberName": "Duration"
+    },
+    {
+      "fields": {
+        "value": "The <see cref=\"T:SkiaSharp.SKPixmap\" /> containing the frame's pixel data.",
+        "_extractedKeys": [
+          "value",
+          "remarks",
+          "summary"
+        ],
+        "remarks": "",
+        "summary": "Gets or sets the pixel data for this frame."
+      },
+      "signature": "public SkiaSharp.SKPixmap Pixmap { get; set; }",
+      "memberType": "Property",
+      "docId": "P:SkiaSharp.SKWebpEncoderFrame.Pixmap",
+      "memberName": "Pixmap"
+    }
+  ]
+}
