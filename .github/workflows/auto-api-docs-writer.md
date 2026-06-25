@@ -87,6 +87,16 @@ concurrency:
   group: auto-api-docs-writer
   cancel-in-progress: true
 
+# -- Engine (pin the run model) ---------------------------------------
+# Per-role model routing is cosmetic in the gh-aw sandbox: the task tool's
+# `model` param is not plumbed through to the actual API call (verified via the
+# api-proxy token-usage log — every call was claude-sonnet-4.6 regardless of the
+# requested per-agent model). So pin one good model for the whole run — the
+# orchestrator and every sub-agent — rather than pretend to route per role.
+engine:
+  id: copilot
+  model: claude-sonnet-4.6
+
 # -- Agent tools -------------------------------------------------------
 tools:
   github:
@@ -171,7 +181,8 @@ a scope of **existing** docs. Read these first, then drive the phases below:
 
 - `skiasharp/.agents/skills/api-docs/SKILL.md` — the router.
 - `skiasharp/.agents/skills/api-docs/workflows/add.md` — the direct-XML add pipeline (pass A).
-- `skiasharp/.agents/skills/api-docs/workflows/review.md` — the review pipeline (pass R) **and the per-role model table**.
+- `skiasharp/.agents/skills/api-docs/workflows/review.md` — the review pipeline (pass R). Its per-role model
+  table is **local-only**; on CI ignore it and run every role on the pinned `engine.model` (see Model routing).
 - `skiasharp/.agents/skills/api-docs/workflows/scope-resolution.md` — how a scope selector resolves to files.
 - `skiasharp/.agents/skills/api-docs/workflows/validation.md` — the post-edit gates.
 
@@ -181,16 +192,16 @@ and **edit the mdoc XML directly**; safety comes from the structural validator, 
 
 ## Model routing
 
-You run on the default `engine.model` (cheap orchestrator). You do **not** write docs yourself. Launch every
-sub-agent **via the `task` tool with an explicit `model`**, reading the per-role value from the table in
-`workflows/review.md` and each agent file's `Model:` header (writer + examples → `claude-opus-4.6`;
-factual → `gpt-5.5` per the eval bake-off; quality + synthesizer → `claude-sonnet-4.6`). If the sandbox does
-not honor per-sub-agent `model` (the parent overrides it), proceed on `engine.model` for all roles and note
-it in the PR body — do not abort.
+The orchestrator **and** every sub-agent run on the single run model (`engine.model`, pinned to
+`claude-sonnet-4.6`). Launch sub-agents via the `task` tool **without** a per-role `model` parameter — they
+inherit the run model. You delegate **bulk** writing (pass-A placeholder fill) and all reviewing to
+sub-agents, but you perform the **terminal** fixes, validation, commit, and PR **yourself** (see Critical
+rules).
 
-**This run is also a routing eval.** It is the first CI exercise of per-sub-agent routing, so you MUST emit a
-**Routing report** (see the Execution order) recording, per role, the model you requested and whether the
-`task` tool honored it — to stdout always, and in the PR body when you open one.
+> Per-role model routing (premium models for writer/factual/examples) is a **skill feature that only takes
+> effect on hosts that honor the `task` tool's `model` parameter** (e.g. the local Copilot CLI). The gh-aw CI
+> sandbox does **not** plumb per-sub-agent models to the actual API call, so passing them here is cosmetic and
+> only adds risk. Do not pass per-role models, and do not emit a routing report on CI.
 
 ## Scope environment
 
@@ -215,16 +226,19 @@ A1. **Discover (lightweight).** Resolve the placeholder files into an explicit l
      pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope new && cd ..
    ```
 
-A2. **Write (per batch).** For each batch, launch the **writer** sub-agent (`agents/writer.md`, model from its
-   header) with the resolved file list. It reads the C# source, fills only the empty/`To be added.` fields,
-   and edits the XML in place. A type it cannot document with certainty keeps its placeholder (a `DEFERRED`
-   line) so the next run re-detects it.
+A2. **Write (per batch).** For each batch, launch the **writer** sub-agent (`agents/writer.md`) as a
+   background `task` (no per-role model) with the resolved file list, and await it with
+   `read_agent(wait: true)`. It reads the C# source, fills only the empty/`To be added.` fields, and edits the
+   XML in place. A type it cannot document with certainty keeps its placeholder (a `DEFERRED` line) so the
+   next run re-detects it.
 
-A3. **Review the written batch.** Run the deterministic linter, then launch the **three** reviewers in parallel
-   (`reviewer-factual`, `reviewer-examples`, `reviewer-quality`), each on the batch's files with its assigned
-   model. Feed all findings to `review-synthesizer`.
+A3. **Review the written batch.** Run the deterministic linter, then launch the **three** reviewers as
+   background `task`s in parallel (`reviewer-factual`, `reviewer-examples`, `reviewer-quality`) on the
+   batch's files (no per-role model), awaiting them per the anti-termination rule. **You** synthesize their
+   findings — there is no synthesizer sub-agent.
 
-A4. **Fix CRITICAL findings** by editing the XML directly. Skip MINOR/style for the automated run.
+A4. **Fix CRITICAL findings yourself** — **you (the orchestrator) edit the XML directly** in the foreground.
+   Do **not** launch a sub-agent for these fixes. Skip MINOR/style for the automated run.
 
 > If `resolve-scope new` returns **no** placeholder files (the common case once docs are filled), pass A is a
 > no-op — skip straight to pass R.
@@ -248,16 +262,17 @@ R2. **Lint** the scope (deterministic, no model):
      pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 lint "$SCOPE" && cd ..
    ```
 
-R3. **Review (three reviewers in parallel)** on the resolved file list, each via the `task` tool with its
-   assigned model; they report only. Feed the linter output + all three reviewers' findings to
-   `review-synthesizer`.
+R3. **Review (three reviewers in parallel)** on the resolved file list as background `task`s (no per-role
+   model), awaiting them per the anti-termination rule; they report only. **You** synthesize the linter
+   output + all three reviewers' findings yourself — there is no synthesizer sub-agent.
 
-R4. **Fix (gated)** by editing the XML directly, in priority order: (a) all **CRITICAL** findings, (b)
-   **obsolete-in-example** findings (the text/font slice has legacy `paint.TextSize` / `TextAlign` /
-   `DrawText(string,x,y,paint)` examples — migrate them to `SKFont`), (c) where a central type is example-poor
-   (`SKFont`, `SKTypeface`, `SKPaint`), add one correct, **compiling** example, porting the `SKCanvas`/`SKShader`
-   quality bar. Use the **writer** sub-agent for the edits. **Budget:** if you pass ~60 minutes total, stop
-   fixing, validate what you have, and open the PR — a smaller validated PR beats none.
+R4. **Fix (gated) yourself** — **you (the orchestrator) edit the XML directly** in the foreground; do **not**
+   launch a sub-agent. Priority order: (a) all **CRITICAL** findings, (b) **obsolete-in-example** findings (the
+   text/font slice has legacy `paint.TextSize` / `TextAlign` / `DrawText(string,x,y,paint)` examples — migrate
+   them to `SKFont`), (c) where a central type is example-poor (`SKFont`, `SKTypeface`, `SKPaint`), add one
+   correct, **compiling** example, porting the `SKCanvas`/`SKShader` quality bar. **Budget:** once the
+   reviewers report, timebox fixing to ~10 minutes — then stop, validate what you have, and open the PR. A
+   smaller validated PR beats none.
 
 ### Finalize
 
@@ -271,21 +286,6 @@ V. **Validate (replaces merge).** This gate makes direct editing safe — it mus
    each is well-formed, has unchanged signature counts, and changed **only** inside `<Docs>`. Do **not** run
    `docs-format-docs` — formatting runs automatically as a post-step.
 
-ROUTING. **Routing report (ALWAYS).** Print to stdout a block delimited exactly like this, filled in from what
-   the `task` tool actually did, so the routing eval is auditable even if no edits were made:
-   ```
-   === ROUTING REPORT ===
-   reviewer-factual    | requested: gpt-5.5          | honored: <yes|no|fallback> | note: ...
-   reviewer-examples   | requested: claude-opus-4.6  | honored: <yes|no|fallback> | note: ...
-   reviewer-quality    | requested: claude-sonnet-4.6| honored: <yes|no|fallback> | note: ...
-   review-synthesizer  | requested: claude-sonnet-4.6| honored: <yes|no|fallback> | note: ...
-   writer              | requested: claude-opus-4.6  | honored: <yes|no|fallback> | note: ...
-   === END ROUTING REPORT ===
-   ```
-   Base "honored" on observable evidence: whether the `task` call accepted the `model` parameter, any
-   model-not-supported error the sandbox surfaced, and any self-reported model from the sub-agent. If you fell
-   back to a single model for all roles, say so explicitly.
-
 C. **Commit and PR.** If any pass produced edits:
    ```bash
    git checkout -b automation/write-api-docs
@@ -295,12 +295,12 @@ C. **Commit and PR.** If any pass produced edits:
    Then use the `create_pull_request` tool:
    - Branch: `automation/write-api-docs`
    - Title: `Fill and review API documentation`
-   - Body: include (a) what pass A filled (file count) and what pass R reviewed (scope + file count), (b) the
-     **Routing report** block verbatim, (c) a short **Findings summary** (counts by severity + the synthesizer's
-     machine `FINDING |` block), and (d) what you fixed vs deferred.
+   - Body: include (a) what pass A filled (file count) and what pass R reviewed (scope + file count), (b) a
+     short **Findings summary** (counts by severity + the machine `FINDING |` block), and (c) what you fixed
+     vs deferred.
 
 If there are no documentation changes after validation, call the `noop` tool instead — but still print the
-Routing report and Findings summary to stdout first so the routing eval is observable in the run logs.
+Findings summary to stdout first.
 
 ## Critical rules
 
@@ -314,10 +314,15 @@ Routing report and Findings summary to stdout first so the routing eval is obser
 - **Every code example you add or change must compile** against the real `SkiaSharp.dll` (bootstrapped in a
   pre-step) and use **no obsolete members** (see `references/obsolete-api-map.md`). A non-compiling example is
   worse than none.
+- **No terminal background agent.** The only sub-agents you launch are the pass-A **writer** (bulk placeholder
+  fill) and the **reviewers**. ALL fixing, synthesis, validation, committing, and PR creation is **your own
+  foreground work** — never delegate the terminal fix/validate/PR to a sub-agent. The failure mode this avoids:
+  backgrounding a "fixer" sub-agent and then ending your turn before it (and the PR) complete, which kills the
+  session with no PR.
 - **Budget awareness:** Prioritize reaching validate + PR. Pass A (add) is usually a no-op now, so spend the
-  budget on pass R. Do not re-run reviewers unnecessarily. **If you pass ~60 minutes total and haven't reached
-  step V, stop fixing, validate what you have, and open the PR.** A smaller validated PR beats none — but never
-  skip step V, and always print the Routing report.
+  budget on pass R. Do not re-run reviewers unnecessarily. **Once the reviewers report, timebox your fixing to
+  ~10 minutes; if you exceed it, stop fixing, validate what you have, and open the PR.** A smaller validated PR
+  beats none — but never skip step V.
 - **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent, you
   MUST call `read_agent` with `wait: true` in the SAME response. Outputting "waiting" and ending the turn
   terminates the session and loses all work.
@@ -325,8 +330,9 @@ Routing report and Findings summary to stdout first so the routing eval is obser
   - **Multiple agents:** launch all, then `read_agent` the first with `wait: true`; when it returns, read the
     next, and so on. Keep an active `read_agent` call at all times until all agents complete.
   - **FORBIDDEN:** launching agents → "Waiting for them to complete" → ending the turn. This KILLS the session.
-- **COMPLETION GATE:** Your session is NOT complete until you have printed the **Routing report** AND called
-  `create_pull_request` or `noop`. If you think you're done but did neither, retrace your steps and finish.
+- **COMPLETION GATE:** Your session is NOT complete until **you** have called `create_pull_request` or `noop`
+  yourself. If you think you're done but did neither, retrace your steps and finish. Reaching this gate is your
+  own job, not a sub-agent's.
 
 ## Path differences from SKILL.md
 
