@@ -286,12 +286,17 @@ V. **Validate (replaces merge).** This gate makes direct editing safe — it mus
    each is well-formed, has unchanged signature counts, and changed **only** inside `<Docs>`. Do **not** run
    `docs-format-docs` — formatting runs automatically as a post-step.
 
-C. **Commit and PR.** If any pass produced edits:
+C. **Commit and PR.** If any pass produced edits, **always move to the dedicated `automation/write-api-docs`
+   branch first** — use `-B` so it works whether or not the branch exists, and stage **only** `SkiaSharpAPI/`:
    ```bash
-   git checkout -b automation/write-api-docs
+   git checkout -B automation/write-api-docs
    git add SkiaSharpAPI/
    git commit -m "Fill and review API documentation"
    ```
+   **Do this even if you are already on a feature branch that is ahead of `main`.** Never commit doc changes
+   onto the branch the workflow was dispatched from: that branch may be the workflow's own source branch, and
+   `safe-outputs` (`recreate_ref: true`) force-overwrites the PR head ref — committing on the dispatch ref
+   would destroy the workflow source. Staging only `SkiaSharpAPI/` also keeps any workflow files out of the PR.
    Then use the `create_pull_request` tool:
    - Branch: `automation/write-api-docs`
    - Title: `Fill and review API documentation`
@@ -330,6 +335,11 @@ Findings summary to stdout first.
   - **Multiple agents:** launch all, then `read_agent` the first with `wait: true`; when it returns, read the
     next, and so on. Keep an active `read_agent` call at all times until all agents complete.
   - **FORBIDDEN:** launching agents → "Waiting for them to complete" → ending the turn. This KILLS the session.
+- **Always commit on the dedicated `automation/write-api-docs` branch (`git checkout -B`), never on the branch
+  you were dispatched from.** `safe-outputs` preserves the branch you commit on and force-overwrites it
+  (`recreate_ref: true`). If you commit on the dispatch ref (which can be the workflow's own source branch),
+  that branch is destroyed. Switch branches before committing even when already on a feature branch ahead of
+  `main`, and stage only `SkiaSharpAPI/`.
 - **COMPLETION GATE:** Your session is NOT complete until **you** have called `create_pull_request` or `noop`
   yourself. If you think you're done but did neither, retrace your steps and finish. Reaching this gate is your
   own job, not a sub-agent's.
