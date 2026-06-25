@@ -12,7 +12,31 @@
   <Interfaces />
   <Docs>
     <summary>Represents a type that can be used to calculate the length of, and segments of, a path.</summary>
-    <remarks />
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKPathMeasure` computes the arc length of a path and can sample the position, tangent, and transformation matrix at any distance along it. It supports multi-contour paths: after measuring one contour, call <xref:SkiaSharp.SKPathMeasure.NextContour> to advance to the next.
+
+Create an instance with a path, then use <xref:SkiaSharp.SKPathMeasure.Length> to get the contour length and methods such as <xref:SkiaSharp.SKPathMeasure.GetPositionAndTangent(System.Single,SkiaSharp.SKPoint@,SkiaSharp.SKPoint@)> to sample the path at a specific distance. Call <xref:SkiaSharp.SKPathMeasure.SetPath(SkiaSharp.SKPath,System.Boolean)> to reuse the object with a different path.
+
+This type wraps a native Skia resource and implements `IDisposable`. Always dispose of it when done.
+
+## Examples
+
+```csharp
+using var path = new SKPath();
+path.MoveTo(0, 0);
+path.LineTo(100, 0);
+path.LineTo(100, 100);
+
+using var measure = new SKPathMeasure(path);
+float length = measure.Length;
+if (measure.GetPositionAndTangent(length / 2, out SKPoint pos, out SKPoint tan))
+{
+    Console.WriteLine($"Midpoint: {pos}");
+}
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -276,7 +300,7 @@
         <summary>Extracts a contour segment of the path between two distances and appends it to the destination path.</summary>
         <returns>
           <see langword="true" /> if the segment was successfully extracted; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetSegment">
@@ -301,10 +325,12 @@
         <param name="start">The starting distance along the contour for the segment.</param>
         <param name="stop">The ending distance along the contour for the segment.</param>
         <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> to receive the extracted path segment.</param>
-        <param name="startWithMoveTo"><see langword="true" /> to start the segment with a move-to command; otherwise, <see langword="false" />.</param>
+        <param name="startWithMoveTo">
+          <see langword="true" /> to start the segment with a move-to command; otherwise, <see langword="false" />.</param>
         <summary>Copies a segment of the path contour, between the specified distances, into the specified path builder.</summary>
-        <returns><see langword="true" /> if a valid segment was extracted; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+        <returns>
+          <see langword="true" /> if a valid segment was extracted; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetTangent">

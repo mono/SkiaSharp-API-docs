@@ -20,7 +20,29 @@
   </Attributes>
   <Docs>
     <summary>Image filters for use with the <see cref="P:SkiaSharp.SKPaint.ImageFilter" /> property of a <see cref="T:SkiaSharp.SKPaint" />.</summary>
-    <remarks />
+    <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`SKImageFilter` provides image processing effects that can be applied to drawing operations via the <xref:SkiaSharp.SKPaint.ImageFilter> property of <xref:SkiaSharp.SKPaint>. Effects include blurring, drop shadows, color transformations, lighting, morphology, and many more.
+
+Instances are created exclusively through static factory methods such as <xref:SkiaSharp.SKImageFilter.CreateBlur(System.Single,System.Single)>, <xref:SkiaSharp.SKImageFilter.CreateDropShadow(System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKColor)>, and <xref:SkiaSharp.SKImageFilter.CreateColorFilter(SkiaSharp.SKColorFilter)>. Filters can be chained using <xref:SkiaSharp.SKImageFilter.CreateCompose(SkiaSharp.SKImageFilter,SkiaSharp.SKImageFilter)>, and most factory methods accept an optional `input` filter to compose effects inline.
+
+This type wraps a native Skia resource and implements `IDisposable`. Always dispose of it when done, using a `using` statement or by calling `Dispose()` directly.
+
+## Examples
+
+```csharp
+using var bitmap = new SKBitmap(200, 200);
+using var canvas = new SKCanvas(bitmap);
+using var blurFilter = SKImageFilter.CreateBlur(4, 4);
+using var paint = new SKPaint
+{
+    Color = SKColors.CornflowerBlue,
+    ImageFilter = blurFilter,
+};
+canvas.DrawRect(SKRect.Create(50, 50, 100, 100), paint);
+```
+]]></format></remarks>
   </Docs>
   <Members>
     <Member MemberName="CreateArithmetic">
@@ -1272,6 +1294,25 @@
         <param name="cropRect">The rectangle to which the output processing will be limited.</param>
         <summary>Creates an image filter that draws only the drop shadow without the source image.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or <see langword="null" /> on error.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateEmpty">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKImageFilter CreateEmpty ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImageFilter CreateEmpty() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageFilter.CreateEmpty" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageFilter</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates an image filter that always produces a transparent black output, ignoring its input.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKImageFilter" /> that outputs transparent black.</returns>
         <remarks />
       </Docs>
     </Member>
