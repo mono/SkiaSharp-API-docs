@@ -32,6 +32,10 @@ on:
 jobs:
   regenerate-stubs:
     runs-on: ubuntu-latest
+    outputs:
+      # 'true' only when the extract produced at least one type JSON with
+      # 'To be added.' placeholders. Used to gate (skip) the agent job.
+      has_placeholders: ${{ steps.extract.outputs.has_placeholders }}
     steps:
       - name: Checkout SkiaSharp
         uses: actions/checkout@v4
@@ -72,10 +76,20 @@ jobs:
       - name: Regenerate API docs
         run: bash scripts/infra/docs/generate-api-docs.sh
       - name: Extract placeholders and manifest
+        id: extract
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Path output/docs-work -Force | Out-Null
           & .agents/skills/api-docs/scripts/docs-tool.ps1 extract docs/SkiaSharpAPI/ -Output output/docs-work/
+          # Signal downstream whether there is any work for the agent. The extract
+          # writes one JSON per type that still has 'To be added.' placeholders (plus
+          # manifest.json); zero such files means every API is already documented and
+          # the agent job can be skipped entirely.
+          $work = @(Get-ChildItem -Path output/docs-work -Filter *.json |
+            Where-Object { $_.Name -ne 'manifest.json' })
+          $hasPlaceholders = if ($work.Count -gt 0) { 'true' } else { 'false' }
+          Write-Host "has_placeholders=$hasPlaceholders ($($work.Count) file(s) with placeholders)"
+          "has_placeholders=$hasPlaceholders" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
       - name: Upload regenerated docs
         uses: actions/upload-artifact@v4
         with:
@@ -88,6 +102,15 @@ jobs:
           name: docs-extracted
           path: output/docs-work/
           retention-days: 7
+
+# -- Agent gating ------------------------------------------------------
+# Skip the agentic writer entirely when stub regeneration found no
+# 'To be added.' placeholders. Without this gate the agent job still spins
+# up (runner + Copilot CLI + sandbox containers) only to discover there is
+# nothing to document and no-op. This top-level `if:` is applied to the
+# agent job, which already depends on (needs) the regenerate-stubs job, so
+# its `has_placeholders` output is available here.
+if: ${{ needs.regenerate-stubs.outputs.has_placeholders == 'true' }}
 
 # -- Checkout ----------------------------------------------------------
 # Primary: this docs repo only. SkiaSharp is cloned in pre-agent-steps.
