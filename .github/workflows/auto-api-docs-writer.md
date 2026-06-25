@@ -1,5 +1,5 @@
 ---
-description: "Daily API documentation pipeline — regenerates XML stubs from CI NuGets, then AI fills 'To be added.' placeholders."
+description: "Daily API documentation pipeline — regenerates XML stubs from CI NuGets, then AI fills 'To be added.' placeholders by editing the mdoc XML directly."
 
 # -- Triggers ----------------------------------------------------------
 on:
@@ -71,23 +71,12 @@ jobs:
             docs-package-cache-
       - name: Regenerate API docs
         run: bash scripts/infra/docs/generate-api-docs.sh
-      - name: Extract placeholders and manifest
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Path output/docs-work -Force | Out-Null
-          & .agents/skills/api-docs/scripts/docs-tool.ps1 extract docs/SkiaSharpAPI/ -Output output/docs-work/
       - name: Upload regenerated docs
         uses: actions/upload-artifact@v4
         with:
           name: docs-regenerated
           path: docs/SkiaSharpAPI/
           retention-days: 1
-      - name: Upload extracted JSON (immutable baseline)
-        uses: actions/upload-artifact@v4
-        with:
-          name: docs-extracted
-          path: output/docs-work/
-          retention-days: 7
 
 # -- Checkout ----------------------------------------------------------
 # Primary: this docs repo only. SkiaSharp is cloned in pre-agent-steps.
@@ -134,12 +123,6 @@ pre-agent-steps:
       name: docs-regenerated
       path: SkiaSharpAPI/
 
-  - name: Download pre-extracted JSON
-    uses: actions/download-artifact@v4
-    with:
-      name: docs-extracted
-      path: output/docs-work/
-
   - name: Clone SkiaSharp (shallow, with submodules)
     env:
       SKIASHARP_BRANCH: ${{ inputs.skiasharp_branch || 'main' }}
@@ -151,56 +134,91 @@ pre-agent-steps:
       ln -sfn "$(pwd)/SkiaSharpAPI" skiasharp/docs/SkiaSharpAPI
       cd skiasharp && dotnet tool restore
 
-  - name: Save original JSON to agent artifact cache
+  # Build the managed binding so the example reviewer can compile-check snippets
+  # against a real SkiaSharp.dll. C#-only — externals-download fetches prebuilt
+  # natives (no native changes here). Non-fatal: a build hiccup must not sink the
+  # whole docs run, since reviewers also verify examples by reading source.
+  - name: Bootstrap SkiaSharp binding for snippet checks
+    continue-on-error: true
     run: |
-      mkdir -p /tmp/gh-aw/agent/docs-work-original
-      cp -r output/docs-work/* /tmp/gh-aw/agent/docs-work-original/
+      cd skiasharp
+      dotnet cake --target=externals-download
+      dotnet build binding/SkiaSharp/SkiaSharp.csproj -c Release
 
 # -- Post-agent steps (host) ------------------------------------------
-# Format docs AFTER the agent merges JSON→XML. Runs on host outside the
+# Format docs AFTER the agent edits the XML in place. Runs on host outside the
 # sandbox so it has full access to the SkiaSharp cake scripts.
 post-steps:
-  - name: Save final JSON to agent artifact cache
-    run: |
-      mkdir -p /tmp/gh-aw/agent/docs-work-final
-      cp -r output/docs-work/* /tmp/gh-aw/agent/docs-work-final/
-
   - name: Format docs
     run: cd skiasharp && dotnet cake --target=docs-format-docs
 ---
 
 # Auto API Docs Writer
 
-**Read `skiasharp/.agents/skills/api-docs/SKILL.md` for reference.** Follow the phases below — this workflow pre-computes Phases 1–2, so start at Phase 3.
+You are the **orchestrator** for the `add` workflow. Read these first, then drive the phases below:
+
+- `skiasharp/.agents/skills/api-docs/SKILL.md` — the router.
+- `skiasharp/.agents/skills/api-docs/workflows/add.md` — the direct-XML add pipeline you are running.
+- `skiasharp/.agents/skills/api-docs/workflows/review.md` — the review pass **and the per-role model table**.
+- `skiasharp/.agents/skills/api-docs/workflows/validation.md` — the post-edit gates.
+
+The stub regeneration (mdoc) already ran as a pre-step, so the placeholder `*.xml` files are present in
+`SkiaSharpAPI/` as uncommitted working-tree changes. There is **no extract/merge JSON step** — agents read
+and **edit the mdoc XML directly**; safety comes from the structural validator, not a merge guard.
+
+## Model routing
+
+You run on the default `engine.model` (cheap orchestrator). You do **not** write docs yourself. Launch every
+sub-agent **via the `task` tool with an explicit `model`**, reading the per-role value from the table in
+`workflows/review.md` and each agent file's `Model:` header (writer + factual + examples → `claude-opus-4.6`;
+quality + synthesizer → `claude-sonnet-4.6`). If the sandbox does not honor per-sub-agent `model` (the parent
+overrides it), proceed on `engine.model` for all roles and note it in the PR body — do not abort.
+
+## Scope environment
+
+`docs-tool.ps1` lives in the SkiaSharp clone, so by default it would look for docs under
+`skiasharp/docs`. In this workflow the **docs repo is the primary checkout** and the regenerated XML is
+in `SkiaSharpAPI/` at the workspace root. Point the tool at it by exporting these on every
+`docs-tool.ps1` call (they make `resolve-scope new`, `lint`, and `validate` use the docs repo for git
+baselines/diffs while source lookups still use the SkiaSharp clone):
+
+```bash
+DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI"
+```
 
 ## Execution order
 
-1. **Phase 3 (Discover — lightweight)** — you are an **orchestrator**, not a writer. Read ONLY:
-   - `output/docs-work/manifest.json` — file list and field counts
-   - `skiasharp/.agents/skills/api-docs/references/patterns.md` — formatting rules
-   - `skiasharp/.agents/skills/api-docs/references/skia-patterns.md` — domain knowledge
-   
-   **Do NOT pre-read JSON files or source code.** The writer agent handles its own discovery. Move to Phase 4 immediately after reading the manifest and references.
-
-2. **Phase 4 (Write — 1 agent)** — launch **1** background `general-purpose` agent:
-   - Use the writer prompt from SKILL.md Phase 4
-   - The single writer reads ALL JSON files + corresponding C# source and fills documentation
-   - Wait for the writer to complete before Phase 5
-
-3. **Phase 5 (Review — 3 independent agents)** — launch **three** background `general-purpose` agents in parallel as described in SKILL.md Phase 5:
-   - **Factual Claim Verifier** — reads source FIRST, then challenges every factual claim
-   - **Code Example Verifier** — verifies every code example uses real APIs
-   - **Quality Reviewer** — checks style, completeness, and patterns
-   
-   Wait for all three to complete, then fix all CRITICAL issues directly in the JSON files.
-
-4. **Phase 6 (Merge)** — this is the critical step. Run:
+1. **Discover (lightweight).** Resolve the placeholder files into an explicit list and shard it into
+   ~25–40-file batches. Do **not** pre-read source or XML — the writer does its own discovery.
    ```bash
-   cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && cd ..
+   cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope new && cd ..
    ```
-   Do NOT run `docs-format-docs` — it runs automatically as a post-step after the agent finishes.
 
-5. **Commit and PR** — commit the XML changes and create a pull request:
+2. **Write (per batch).** For each batch, launch the **writer** sub-agent (`agents/writer.md`, model from its
+   header) with the resolved file list. It reads the C# source, fills only the empty/`To be added.` fields,
+   and edits the XML in place. A type it cannot document with certainty keeps its placeholder (a `DEFERRED`
+   line) so the next run re-detects it.
+
+3. **Review (per batch).** Run the deterministic linter, then launch the **three** reviewers in parallel
+   (`reviewer-factual`, `reviewer-examples`, `reviewer-quality`), each on the batch's files with its assigned
+   model. Feed all findings to `review-synthesizer`.
+   ```bash
+   cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 lint new && cd ..
+   ```
+
+4. **Fix CRITICAL findings** by editing the XML directly. Skip MINOR/style for the automated run.
+
+5. **Validate (replaces merge).** This is the gate that makes direct editing safe — it must pass before the PR:
+   ```bash
+   cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 validate new && cd ..
+   ```
+   It asserts each changed file is well-formed, has unchanged signature counts, and changed **only** inside
+   `<Docs>`. Do **not** run `docs-format-docs` — formatting runs automatically as a post-step.
+
+6. **Commit and PR.** Commit the XML changes and open a pull request:
    ```bash
    git checkout -b automation/write-api-docs
    git add SkiaSharpAPI/
@@ -211,20 +229,29 @@ post-steps:
    - Title: `Fill API documentation placeholders`
    - Body: `Automated AI-generated documentation for XML API docs with 'To be added.' placeholders.`
 
-If there are no documentation changes after merging, call the `noop` tool instead.
+If there are no documentation changes after validation, call the `noop` tool instead.
 
 ## Critical rules
 
-- **Sub-agents must NOT spawn their own sub-agents.** Each agent (writer and reviewers) must do all its work directly. Nested sub-agents hit the depth limit and cause timeouts.
-- **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
-- **Phase 6 MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
+- **Edit the mdoc XML directly.** There is no JSON round-trip. Touch only `<Docs>` content — never
+  `MemberSignature`/`TypeSignature`, attributes, or generated files (`index.xml`, `ns-*.xml`, `_filter.xml`,
+  `FrameworksIndex/`). The structural validator enforces this; a failure means you edited outside `<Docs>`.
+- **Step 5 (validate) MUST pass before the PR.** If you skip it, a malformed or surface-changing edit can ship.
+- **Sub-agents must NOT spawn their own sub-agents.** Each agent does all its work directly — nested sub-agents
+  hit the depth limit and time out.
 - **Do NOT run `docs-format-docs`** — formatting runs automatically as a post-step.
-- **Budget awareness:** After the writer completes and reviewers report, fix CRITICAL issues and proceed to merge+PR immediately. Do not re-run reviewers unless absolutely necessary. **If you're past 10 minutes and haven't merged yet, skip Phase 5 (review) entirely and go straight to Phase 6 (merge) + PR. A PR without review is better than no PR.**
-- **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent, you MUST call `read_agent` with `wait: true` in the SAME response. Do NOT output text saying "waiting" and end your turn — the session WILL terminate and all work is lost.
+- **Budget awareness:** Fix CRITICAL findings and proceed to validate + PR promptly. Do not re-run reviewers
+  unless necessary. **If you're past 10 minutes and haven't reached step 5, skip review (step 3) entirely and
+  go straight to validate + PR.** A validated PR without review beats no PR — but never skip step 5.
+- **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent, you
+  MUST call `read_agent` with `wait: true` in the SAME response. Outputting "waiting" and ending the turn
+  terminates the session and loses all work.
   - **Single agent:** `task(background)` + `read_agent(id, wait=true)` in the same response.
-  - **Multiple agents:** Launch all agents, then call `read_agent` for THE FIRST ONE with `wait: true`. When it returns, call `read_agent` for the next, and so on. You MUST have an active `read_agent` call at all times until all agents complete.
-  - **FORBIDDEN pattern:** Launching agents → saying "Waiting for them to complete" → ending turn. This KILLS the session.
-- **COMPLETION GATE:** Your session is NOT complete until you have called `create_pull_request` or `noop`. If you reach a point where you think you're done but haven't called either, something went wrong — retrace your steps and complete the remaining phases.
+  - **Multiple agents:** launch all, then `read_agent` the first with `wait: true`; when it returns, read the
+    next, and so on. Keep an active `read_agent` call at all times until all agents complete.
+  - **FORBIDDEN:** launching agents → "Waiting for them to complete" → ending the turn. This KILLS the session.
+- **COMPLETION GATE:** Your session is NOT complete until you have called `create_pull_request` or `noop`. If
+  you think you're done but called neither, retrace your steps and finish the remaining phases.
 
 ## Path differences from SKILL.md
 
