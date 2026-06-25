@@ -174,7 +174,7 @@ var canvas = SKSvgCanvas.Create(SKRect.Create(256, 256), writer);
 
 #### Constructing a Picture
 
-The XPS backend uses <xref:SkiaSharp.SKPictureRecorder> instead of
+The Picture backend uses <xref:SkiaSharp.SKPictureRecorder> instead of
 <xref:SkiaSharp.SKSurface>.
 
 ```csharp
@@ -2819,41 +2819,26 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
 ```csharp
 var info = new SKImageInfo(512, 256);
 using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
+    var canvas = surface.Canvas;
     canvas.Clear(SKColors.White);
 
-    // draw left-aligned text, solid
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x42, 0x81, 0xA4);
-        paint.IsStroke = false;
+    using var typeface = SKTypeface.FromFamilyName("Arial");
+    using var font = new SKFont(typeface, 64);
 
-        canvas.DrawText("Skia", info.Width / 2f, 64.0f, paint);
+    // draw left-aligned text, solid fill
+    using (var paint = new SKPaint { IsAntialias = true, Color = new SKColor(0x42, 0x81, 0xA4) }) {
+        canvas.DrawText("Skia", info.Width / 2f, 64f, SKTextAlign.Left, font, paint);
     }
 
     // draw centered text, stroked
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
-        paint.IsStroke = true;
-        paint.StrokeWidth = 3;
-        paint.TextAlign = SKTextAlign.Center;
-
-        canvas.DrawText("Skia", info.Width / 2f, 144.0f, paint);
+    using (var paint = new SKPaint { IsAntialias = true, Color = new SKColor(0x9C, 0xAF, 0xB7), IsStroke = true, StrokeWidth = 3 }) {
+        canvas.DrawText("Skia", info.Width / 2f, 144f, SKTextAlign.Center, font, paint);
     }
 
     // draw right-aligned text, scaled
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
-        paint.TextScaleX = 1.5f;
-        paint.TextAlign = SKTextAlign.Right;
-
-        canvas.DrawText("Skia", info.Width / 2f, 224.0f, paint);
+    using var scaledFont = new SKFont(typeface, 64) { ScaleX = 1.5f };
+    using (var paint = new SKPaint { IsAntialias = true, Color = new SKColor(0xE6, 0xB8, 0x9C) }) {
+        canvas.DrawText("Skia", info.Width / 2f, 224f, SKTextAlign.Right, scaledFont, paint);
     }
 }
 ```
@@ -3843,7 +3828,7 @@ safely ignored.
         <param name="paint">This is copied, and is applied to the offscreen when <see cref="M:SkiaSharp.SKCanvas.Restore" /> is called.</param>
         <summary>Saves the canvas state and allocates an offscreen bitmap.</summary>
         <returns>The value to pass to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to balance this save.</returns>
-        <remarks>This behaves the same as <see cref="M:SkiaSharp.SKCanvas.Save" /> but in addition it allocates an offscreen bitmap. All drawing calls are directed there, and only when the balancing call to <see cref="M:SkiaSharp.SKCanvas.Restore" /> is made is that offscreen transfered to the canvas (or the previous layer).</remarks>
+        <remarks>This behaves the same as <see cref="M:SkiaSharp.SKCanvas.Save" /> but in addition it allocates an offscreen bitmap. All drawing calls are directed there, and only when the balancing call to <see cref="M:SkiaSharp.SKCanvas.Restore" /> is made is that offscreen transferred to the canvas (or the previous layer).</remarks>
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
@@ -3879,7 +3864,7 @@ safely ignored.
 This behaves the same as <xref:SkiaSharp.SKCanvas.Save> but in addition it
 allocates an offscreen bitmap. All drawing calls are directed there, and only
 when the balancing call to <xref:SkiaSharp.SKCanvas.Restore> is made is that
-offscreen transfered to the canvas (or the previous layer).
+offscreen transferred to the canvas (or the previous layer).
 
 The limit rectangle, is used as a hint to limit the size of the offscreen
 bitmap, and thus drawing may be clipped to it, though that clipping is not

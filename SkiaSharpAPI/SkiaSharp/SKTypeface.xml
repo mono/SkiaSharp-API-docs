@@ -16,12 +16,9 @@
       <format type="text/markdown"><![CDATA[
 ## Remarks
 
-This is used in the paint, along with optionally algorithmic settings like
-<xref:SkiaSharp.SKPaint.TextSize?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKPaint.TextSkewX?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKPaint.TextScaleX?displayProperty=nameWithType>, and 
-<xref:SkiaSharp.SKPaint.FakeBoldText?displayProperty=nameWithType>
-to specify how text appears when drawn (and measured).
+This is used with <xref:SkiaSharp.SKFont> to specify how text appears when drawn and measured.
+A typeface represents the intrinsic style (family, weight, slant) of a font, while
+<xref:SkiaSharp.SKFont> provides size, scale, and rendering parameters.
 
 Typeface objects are immutable, and so they can be shared between threads.
 ]]></format>
@@ -710,21 +707,14 @@ Typeface objects are immutable, and so they can be shared between threads.
 ```csharp
 var info = new SKImageInfo(256, 256);
 using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
+    var canvas = surface.Canvas;
     canvas.Clear(SKColors.White);
 
-    // load the typeface
-    var tf = SKTypeface.FromFile("myfont.ttf");
+    using var typeface = SKTypeface.FromFile("myfont.ttf");
+    using var font = new SKFont(typeface, 50);
+    using var paint = new SKPaint { IsAntialias = true, Color = SKColors.Black };
 
-    // set the paint's typeface
-    var paint = new SKPaint {
-        TextSize = 50,
-        Typeface = tf
-    };
-
-    // draw text using the typeface
-    canvas.DrawText("SkiaSharp", 50, 100, paint);
+    canvas.DrawText("SkiaSharp", 50, 100, SKTextAlign.Left, font, paint);
 }
 ```
 ]]></format>
@@ -1205,7 +1195,7 @@ A typeface is understood to be bold when the weight is greater than or equal to
           <format type="text/markdown"><![CDATA[
 ## Remarks
 
-This does not guarentee that the advance widths will not vary as this is a
+This does not guarantee that the advance widths will not vary as this is a
 style bit on the typeface.
 ]]></format>
         </remarks>
