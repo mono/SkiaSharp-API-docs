@@ -170,9 +170,10 @@ and **edit the mdoc XML directly**; safety comes from the structural validator, 
 
 You run on the default `engine.model` (cheap orchestrator). You do **not** write docs yourself. Launch every
 sub-agent **via the `task` tool with an explicit `model`**, reading the per-role value from the table in
-`workflows/review.md` and each agent file's `Model:` header (writer + factual + examples → `claude-opus-4.6`;
-quality + synthesizer → `claude-sonnet-4.6`). If the sandbox does not honor per-sub-agent `model` (the parent
-overrides it), proceed on `engine.model` for all roles and note it in the PR body — do not abort.
+`workflows/review.md` and each agent file's `Model:` header (writer + examples → `claude-opus-4.6`;
+factual → `gpt-5.5` per the eval bake-off; quality + synthesizer → `claude-sonnet-4.6`). If the sandbox does
+not honor per-sub-agent `model` (the parent overrides it), proceed on `engine.model` for all roles and note
+it in the PR body — do not abort.
 
 ## Scope environment
 
