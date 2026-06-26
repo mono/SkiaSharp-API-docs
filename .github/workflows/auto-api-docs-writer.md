@@ -127,6 +127,18 @@ safe-outputs:
 
 # -- Pre-agent steps (host) -------------------------------------------
 pre-agent-steps:
+  # gh-aw's checkout step makes the dispatch ref the working branch. If the agent
+  # commits there, safe-outputs (recreate_ref) force-overwrites that ref — which
+  # destroys the workflow's own source branch when the run is dispatched from a
+  # feature branch (e.g. a dev/* branch under review). Rename the working branch
+  # up-front so every commit and the PR head land on a throwaway branch, no matter
+  # which ref triggered the run. This is the host-side guarantee that backs up the
+  # "always commit on automation/write-api-docs" rule in the prompt.
+  - name: Use a dedicated PR branch (never the dispatch ref)
+    run: |
+      git checkout -B automation/write-api-docs
+      echo "Working branch: $(git branch --show-current)"
+
   - name: Download regenerated docs
     uses: actions/download-artifact@v4
     with:
