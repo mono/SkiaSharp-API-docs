@@ -20,6 +20,16 @@ on:
         required: false
         default: "main"
         type: string
+      docs_base_branch:
+        description: "Docs branch the PR targets and stubs align to (default main). Point at an older branch to demo add-at-scale."
+        required: false
+        default: "main"
+        type: string
+      docs_head_branch:
+        description: "Throwaway PR head branch the agent commits to (force-recreated each run)."
+        required: false
+        default: "automation/write-api-docs"
+        type: string
 
 # -- Custom jobs -------------------------------------------------------
 # Stub regeneration runs mdoc to produce the XML reference stubs. mdoc.exe is a
@@ -40,12 +50,14 @@ jobs:
           ref: ${{ inputs.skiasharp_branch || 'main' }}
           fetch-depth: 1
           submodules: recursive
-      - name: Align docs to latest main
+      - name: Align docs to base branch
         shell: bash
+        env:
+          DOCS_BASE_BRANCH: ${{ inputs.docs_base_branch || 'main' }}
         run: |
           cd docs
-          git fetch origin main
-          git checkout -B automation/write-api-docs origin/main
+          git fetch origin "$DOCS_BASE_BRANCH"
+          git checkout -B stub-base "origin/$DOCS_BASE_BRANCH"
           cd ..
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -121,7 +133,7 @@ permissions:
 safe-outputs:
   create-pull-request:
     draft: false
-    base-branch: main
+    base-branch: ${{ inputs.docs_base_branch || 'main' }}
     preserve-branch-name: true
     recreate-ref: true
 
@@ -132,11 +144,14 @@ pre-agent-steps:
   # destroys the workflow's own source branch when the run is dispatched from a
   # feature branch (e.g. a dev/* branch under review). Rename the working branch
   # up-front so every commit and the PR head land on a throwaway branch, no matter
-  # which ref triggered the run. This is the host-side guarantee that backs up the
-  # "always commit on automation/write-api-docs" rule in the prompt.
+  # which ref triggered the run. The branch name is the `docs_head_branch` input
+  # (default automation/write-api-docs). This is the host-side guarantee that backs
+  # up the "commit on the branch you're already on" rule in the prompt.
   - name: Use a dedicated PR branch (never the dispatch ref)
+    env:
+      DOCS_HEAD_BRANCH: ${{ inputs.docs_head_branch || 'automation/write-api-docs' }}
     run: |
-      git checkout -B automation/write-api-docs
+      git checkout -B "$DOCS_HEAD_BRANCH"
       echo "Working branch: $(git branch --show-current)"
 
   - name: Download regenerated docs
@@ -298,19 +313,19 @@ V. **Validate (replaces merge).** This gate makes direct editing safe — it mus
    each is well-formed, has unchanged signature counts, and changed **only** inside `<Docs>`. Do **not** run
    `docs-format-docs` — formatting runs automatically as a post-step.
 
-C. **Commit and PR.** If any pass produced edits, **always move to the dedicated `automation/write-api-docs`
-   branch first** — use `-B` so it works whether or not the branch exists, and stage **only** `SkiaSharpAPI/`:
+C. **Commit and PR.** If any pass produced edits, **commit on the branch you are already on** — the host
+   prepared a dedicated throwaway PR branch for you before you started (it is **not** the dispatch ref). Do
+   **not** switch or create another branch. Stage **only** `SkiaSharpAPI/`:
    ```bash
-   git checkout -B automation/write-api-docs
    git add SkiaSharpAPI/
    git commit -m "Fill and review API documentation"
    ```
-   **Do this even if you are already on a feature branch that is ahead of `main`.** Never commit doc changes
-   onto the branch the workflow was dispatched from: that branch may be the workflow's own source branch, and
-   `safe-outputs` (`recreate_ref: true`) force-overwrites the PR head ref — committing on the dispatch ref
-   would destroy the workflow source. Staging only `SkiaSharpAPI/` also keeps any workflow files out of the PR.
-   Then use the `create_pull_request` tool:
-   - Branch: `automation/write-api-docs`
+   **Never `git checkout` the branch the workflow was dispatched from.** That branch may be the workflow's own
+   source branch, and `safe-outputs` (`recreate_ref: true`) force-overwrites the PR head ref — committing on the
+   dispatch ref would destroy the workflow source. Staging only `SkiaSharpAPI/` also keeps any workflow files out
+   of the PR. Then use the `create_pull_request` tool:
+   - Branch: the current working branch (leave the `create_pull_request` branch to the host default — do not
+     hardcode a name)
    - Title: `Fill and review API documentation`
    - Body: include (a) what pass A filled (file count) and what pass R reviewed (scope + file count), (b) a
      short **Findings summary** (counts by severity + the machine `FINDING |` block), and (c) what you fixed
@@ -347,11 +362,11 @@ Findings summary to stdout first.
   - **Multiple agents:** launch all, then `read_agent` the first with `wait: true`; when it returns, read the
     next, and so on. Keep an active `read_agent` call at all times until all agents complete.
   - **FORBIDDEN:** launching agents → "Waiting for them to complete" → ending the turn. This KILLS the session.
-- **Always commit on the dedicated `automation/write-api-docs` branch (`git checkout -B`), never on the branch
-  you were dispatched from.** `safe-outputs` preserves the branch you commit on and force-overwrites it
-  (`recreate_ref: true`). If you commit on the dispatch ref (which can be the workflow's own source branch),
-  that branch is destroyed. Switch branches before committing even when already on a feature branch ahead of
-  `main`, and stage only `SkiaSharpAPI/`.
+- **Always commit on the branch you are already on** (the host prepared a dedicated throwaway PR branch before
+  you started) and **never `git checkout` the branch you were dispatched from.** `safe-outputs` preserves the
+  branch you commit on and force-overwrites it (`recreate_ref: true`). If you commit on the dispatch ref (which
+  can be the workflow's own source branch), that branch is destroyed. Do not switch or create another branch
+  even when the current branch looks like a feature branch ahead of `main`, and stage only `SkiaSharpAPI/`.
 - **COMPLETION GATE:** Your session is NOT complete until **you** have called `create_pull_request` or `noop`
   yourself. If you think you're done but did neither, retrace your steps and finish. Reaching this gate is your
   own job, not a sub-agent's.
