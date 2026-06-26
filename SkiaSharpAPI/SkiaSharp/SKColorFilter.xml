@@ -284,6 +284,79 @@
         <remarks />
       </Docs>
     </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (SkiaSharp.SKColor[] colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype SkiaSharp.SKColor[] colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(SkiaSharp.SKColor[])" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="SkiaSharp.SKColor[]" />
+      </Parameters>
+      <Docs>
+        <param name="colors">An array of exactly 6 <see cref="T:SkiaSharp.SKColor" /> values representing overdraw depths 0 through 5 or more.</param>
+        <summary>Creates a color filter that visualizes overdraw by mapping draw counts to the specified colors.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKColorFilter" /> that maps each pixel to a color based on its overdraw depth.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (ReadOnlySpan&lt;SkiaSharp.SKColor&gt; colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKColor&gt; colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(System.ReadOnlySpan{SkiaSharp.SKColor})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="System.ReadOnlySpan&lt;SkiaSharp.SKColor&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="colors">A span of exactly 6 <see cref="T:SkiaSharp.SKColor" /> values representing overdraw depths 0 through 5 or more.</param>
+        <summary>Creates a color filter that visualizes overdraw by mapping draw counts to the specified colors.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKColorFilter" /> that maps each pixel to a color based on its overdraw depth.</returns>
+        <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+`CreateOverdraw` creates a color filter for overdraw visualization. It accepts exactly 6 colors
+corresponding to overdraw depths 0 (not drawn) through 5 or more (heavily overdrawn). Each pixel's
+color is mapped to one of these 6 colors depending on how many times that pixel has been drawn over,
+making it easy to spot performance hotspots in a scene.
+
+Assign the resulting filter to <xref:SkiaSharp.SKPaint.ColorFilter> when rendering to visualize
+overdraw on the painted content.
+
+## Examples
+
+```csharp
+ReadOnlySpan<SKColor> overdrawColors = new SKColor[]
+{
+    new SKColor(0x00, 0x00, 0x00, 0x00), // 0x: not drawn (transparent)
+    new SKColor(0x00, 0x00, 0xFF, 0x80), // 1x: blue
+    new SKColor(0x00, 0xFF, 0x00, 0x80), // 2x: green
+    new SKColor(0xFF, 0xFF, 0x00, 0x80), // 3x: yellow
+    new SKColor(0xFF, 0x80, 0x00, 0x80), // 4x: orange
+    new SKColor(0xFF, 0x00, 0x00, 0x80), // 5x+: red
+};
+using var filter = SKColorFilter.CreateOverdraw(overdrawColors);
+using var paint = new SKPaint { ColorFilter = filter };
+using var surface = SKSurface.Create(new SKImageInfo(300, 300));
+var canvas = surface.Canvas;
+canvas.DrawRect(new SKRect(0, 0, 200, 200), paint);
+```
+]]></format></remarks>
+      </Docs>
+    </Member>
     <Member MemberName="CreateSrgbToLinearGamma">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateSrgbToLinearGamma ();" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateSrgbToLinearGamma() cil managed" />
