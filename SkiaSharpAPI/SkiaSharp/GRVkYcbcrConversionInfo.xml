@@ -15,32 +15,8 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>Describes the parameters for Vulkan YCbCr sampler conversion.</summary>
-    <remarks><![CDATA[
-## Remarks
-
-`GRVkYcbcrConversionInfo` provides the Vulkan-specific parameters required to create a `VkSamplerYcbcrConversion` object. It is used when creating GPU-backed surfaces or images that use a YCbCr color model, such as Android hardware buffers with YUV formats.
-
-The properties map directly to fields in `VkSamplerYcbcrConversionCreateInfo`.
-
-## Examples
-
-Creating a basic YCbCr conversion info for a Vulkan YUV420 image:
-
-```csharp
-var conversionInfo = new GRVkYcbcrConversionInfo
-{
-    Format = 1000156003, // VK_FORMAT_G8_B8R8_2PLANE_420_UNORM
-    ExternalFormat = 0,
-    YcbcrModel = 1,      // VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709
-    YcbcrRange = 0,      // VK_SAMPLER_YCBCR_RANGE_ITU_FULL
-    ChromaFilter = 1,    // VK_FILTER_LINEAR
-    XChromaOffset = 0,
-    YChromaOffset = 0,
-    ForceExplicitReconstruction = 0,
-};
-```
-]]></remarks>
+    <summary>Represents the parameters for a Vulkan YCbCr image conversion.</summary>
+    <remarks>This struct corresponds to the parameters used when creating a <c>VkSamplerYcbcrConversion</c>.</remarks>
   </Docs>
   <Members>
     <Member MemberName="ChromaFilter">
@@ -61,12 +37,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the chroma filter used when reconstructing YCbCr chroma values.</summary>
-        <value>A raw <c>VkFilter</c> value specifying the filter applied when reconstructing chroma.</value>
-        <remarks></remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Components">
+        <summary>Gets or sets the Vulkan filter to use for chroma reconstruction.</summary>
+        <value>A <c>VkFilter</c> value specifying the chroma filter.</value>
+        <remarks />
       <MemberSignature Language="C#" Value="public SkiaSharp.GRVkYcbcrComponents Components { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.GRVkYcbcrComponents Components" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.Components" />
@@ -84,9 +57,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>SkiaSharp.GRVkYcbcrComponents</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the component mapping for this YCbCr conversion.</summary>
-        <value>A <see cref="T:SkiaSharp.GRVkYcbcrComponents" /> describing the channel swizzle mapping for this conversion.</value>
-        <remarks></remarks>
+        <summary>Gets or sets the component swizzle mapping for this YCbCr conversion.</summary>
+        <value>A <see cref="T:SkiaSharp.GRVkYcbcrComponents" /> describing the component swizzle mapping.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -113,11 +86,11 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <Parameter Name="obj" Type="SkiaSharp.GRVkYcbcrConversionInfo" />
       </Parameters>
       <Docs>
-        <param name="obj">The <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare with this instance.</param>
-        <summary>Indicates whether this conversion info is equal to another <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" />.</summary>
+        <param name="obj">The <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> is equal to the current instance.</summary>
         <returns>
-          <see langword="true" /> if both instances have identical conversion parameters; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+          <see langword="true" /> if the specified value is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -141,11 +114,11 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">The object to compare with this instance.</param>
-        <summary>Indicates whether this conversion info is equal to the specified object.</summary>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
         <returns>
-          <see langword="true" /> if <paramref name="obj" /> is a <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> with identical conversion parameters; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+          <see langword="true" /> if the specified object is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ExternalFormat">
@@ -166,9 +139,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.UInt64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the Vulkan external format for this YCbCr conversion.</summary>
-        <value>The Vulkan external format identifier, or <c>0</c> if no external format is used.</value>
-        <remarks></remarks>
+        <summary>Gets or sets the external format handle for platform-specific image formats.</summary>
+        <value>A platform-specific external format identifier, or <c>0</c> if not used.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ForceExplicitReconstruction">
@@ -189,10 +162,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets whether explicit chroma reconstruction is required.</summary>
-        <value>
-          <c>1</c> to require explicit chroma reconstruction; <c>0</c> to allow implicit reconstruction.</value>
-        <remarks></remarks>
+        <summary>Gets or sets a value indicating whether explicit chroma sample position reconstruction should be forced.</summary>
+        <value>A non-zero value to force explicit chroma sample position reconstruction; otherwise, <c>0</c>.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Format">
@@ -213,9 +185,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the Vulkan image format for this YCbCr conversion.</summary>
-        <value>A raw <c>VkFormat</c> value identifying the Vulkan image format used by this conversion.</value>
-        <remarks></remarks>
+        <summary>Gets or sets the Vulkan format of the image.</summary>
+        <value>A <c>VkFormat</c> value describing the image format.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -237,9 +209,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Returns a hash code for this conversion info.</summary>
-        <returns>A hash code for this <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> instance.</returns>
-        <remarks></remarks>
+        <summary>Returns the hash code for this instance.</summary>
+        <returns>A 32-bit signed integer hash code.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -261,10 +233,10 @@ var conversionInfo = new GRVkYcbcrConversionInfo
       <Docs>
         <param name="left">The first <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare.</param>
         <param name="right">The second <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare.</param>
-        <summary>Determines whether two <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> values are equal.</summary>
+        <summary>Determines whether two <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> instances are equal.</summary>
         <returns>
-          <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+          <see langword="true" /> if the two instances are equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -286,10 +258,10 @@ var conversionInfo = new GRVkYcbcrConversionInfo
       <Docs>
         <param name="left">The first <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare.</param>
         <param name="right">The second <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare.</param>
-        <summary>Determines whether two <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> values are not equal.</summary>
+        <summary>Determines whether two <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> instances are not equal.</summary>
         <returns>
-          <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+          <see langword="true" /> if the two instances are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SamplerFilterMustMatchChromaFilter">
@@ -310,10 +282,10 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets whether the sampler filter must match the chroma reconstruction filter.</summary>
+        <summary>Gets or sets a value indicating whether the sampler filter must match the chroma filter.</summary>
         <value>
           <see langword="true" /> if the sampler filter must match the chroma filter; otherwise, <see langword="false" />.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SupportsLinearFilter">
@@ -334,10 +306,10 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets whether linear filtering is supported for this YCbCr conversion.</summary>
+        <summary>Gets or sets a value indicating whether the image supports linear filtering.</summary>
         <value>
-          <see langword="true" /> if linear filtering is supported for this YCbCr conversion; otherwise, <see langword="false" />.</value>
-        <remarks></remarks>
+          <see langword="true" /> if linear filtering is supported; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="XChromaOffset">
@@ -358,9 +330,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the horizontal chroma sample location offset.</summary>
-        <value>A raw <c>VkChromaLocation</c> value for the horizontal chroma sample position.</value>
-        <remarks></remarks>
+        <summary>Gets or sets the chroma offset in the X direction.</summary>
+        <value>A <c>VkChromaLocation</c> value for the horizontal chroma sample offset.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="YcbcrModel">
@@ -382,8 +354,8 @@ var conversionInfo = new GRVkYcbcrConversionInfo
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the YCbCr color model conversion.</summary>
-        <value>A raw <c>VkSamplerYcbcrModelConversion</c> value identifying the YCbCr color model.</value>
-        <remarks></remarks>
+        <value>A <c>VkSamplerYcbcrModelConversion</c> value specifying the color model.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="YcbcrRange">
@@ -404,9 +376,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the quantization range of the encoded YCbCr values.</summary>
-        <value>A raw <c>VkSamplerYcbcrRange</c> value indicating whether the data uses full or narrow/ITU range.</value>
-        <remarks></remarks>
+        <summary>Gets or sets the YCbCr color range.</summary>
+        <value>A <c>VkSamplerYcbcrRange</c> value specifying the numeric range of the YCbCr data.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="YChromaOffset">
@@ -427,9 +399,9 @@ var conversionInfo = new GRVkYcbcrConversionInfo
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the vertical chroma sample location offset.</summary>
-        <value>A raw <c>VkChromaLocation</c> value for the vertical chroma sample position.</value>
-        <remarks></remarks>
+        <summary>Gets or sets the chroma offset in the Y direction.</summary>
+        <value>A <c>VkChromaLocation</c> value for the vertical chroma sample offset.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

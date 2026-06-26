@@ -10,26 +10,8 @@
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
   <Docs>
-    <summary>Identifies color primaries using ITU-T H.273 / ISO 23001-8 Coding-Independent Code Points (CICP) values.</summary>
-    <remarks><![CDATA[
-## Remarks
-
-`SKColorspacePrimariesCicp` enumerates the standard color primaries defined by the ITU-T H.273 and ISO/IEC 23001-8 specifications. These values are used as parameters when calling <xref:SkiaSharp.SKColorSpace.CreateCicp*> to create a CICP-specified color space.
-
-Each member's numeric value corresponds directly to the "Colour primaries" code point in Table 2 of ITU-T H.273.
-
-## Examples
-
-Creating a BT.2020 wide-gamut color space:
-
-```csharp
-using var colorSpace = SKColorSpace.CreateCicp(
-    SKColorspacePrimariesCicp.Rec2020,
-    SKColorspaceTransferFnCicp.Pq,
-    SKColorspaceMatrixCoefficients.Identity,
-    SKColorspaceRange.Full);
-```
-]]></remarks>
+    <summary>Specifies the color primaries defined by the ITU-T H.273 CICP standard.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName="GenericFilm">
@@ -46,7 +28,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>8</MemberValue>
       <Docs>
-        <summary>Generic film color primaries (code point 8), based on D65 white point and C-illuminant.</summary>
+        <summary>Generic film color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="ItuTH273Value22">
@@ -63,7 +45,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>22</MemberValue>
       <Docs>
-        <summary>ITU-T H.273 value 22 color primaries (code point 22), intended for EBU Tech 3213-E and related consumer electronics standards.</summary>
+        <summary>EBU Tech. 3213-E color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec2020">
@@ -80,7 +62,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>9</MemberValue>
       <Docs>
-        <summary>ITU-R BT.2020 color primaries (code point 9), used for ultra-high-definition television with a wide color gamut.</summary>
+        <summary>ITU-R BT.2020 color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemBg">
@@ -97,7 +79,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>5</MemberValue>
       <Docs>
-        <summary>ITU-R BT.470 System B/G color primaries (code point 5), used for PAL and SECAM analog television.</summary>
+        <summary>ITU-R BT.470 System B/G color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec470SystemM">
@@ -114,7 +96,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>4</MemberValue>
       <Docs>
-        <summary>ITU-R BT.470 System M color primaries (code point 4), used for NTSC analog television.</summary>
+        <summary>ITU-R BT.470 System M color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec601">
@@ -131,7 +113,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>6</MemberValue>
       <Docs>
-        <summary>ITU-R BT.601 color primaries (code point 6), used for standard-definition television.</summary>
+        <summary>ITU-R BT.601 (SMPTE ST 170) color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="Rec709">
@@ -148,7 +130,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>1</MemberValue>
       <Docs>
-        <summary>ITU-R BT.709 color primaries (code point 1), used for HDTV and sRGB.</summary>
+        <summary>ITU-R BT.709 color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteEg4321">
@@ -165,7 +147,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>12</MemberValue>
       <Docs>
-        <summary>SMPTE EG 432-1 color primaries (code point 12), defining the Display P3 (P3-D65) gamut used on Apple displays.</summary>
+        <summary>SMPTE EG 432-1 color primaries (P3-D65).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteRp4312">
@@ -182,7 +164,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>11</MemberValue>
       <Docs>
-        <summary>SMPTE RP 431-2 color primaries (code point 11), defining the DCI-P3 gamut used in digital cinema.</summary>
+        <summary>SMPTE RP 431-2 color primaries (P3-DCI).</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt240">
@@ -199,7 +181,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>7</MemberValue>
       <Docs>
-        <summary>SMPTE ST 240 color primaries (code point 7), used for early HDTV production.</summary>
+        <summary>SMPTE ST 240 color primaries.</summary>
       </Docs>
     </Member>
     <Member MemberName="SmpteSt4281">
@@ -216,7 +198,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>10</MemberValue>
       <Docs>
-        <summary>SMPTE ST 428-1 color primaries (code point 10), using CIE XYZ with a D50 white point.</summary>
+        <summary>SMPTE ST 428-1 color primaries (CIE 1931 XYZ).</summary>
       </Docs>
     </Member>
     <Member MemberName="Unknown">
@@ -233,7 +215,7 @@ using var colorSpace = SKColorSpace.CreateCicp(
       </ReturnValue>
       <MemberValue>0</MemberValue>
       <Docs>
-        <summary>Unknown or unspecified color primaries (code point 0).</summary>
+        <summary>Unknown or unspecified color primaries.</summary>
       </Docs>
     </Member>
   </Members>

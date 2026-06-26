@@ -15,27 +15,8 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>Overrides a single color entry in a font color palette.</summary>
-    <remarks><![CDATA[
-## Remarks
-
-`SKFontPaletteOverride` specifies a replacement <xref:SkiaSharp.SKColor> for a specific zero-based index within the palette selected by <xref:SkiaSharp.SKFontArguments.PaletteIndex>. An array of overrides is assigned to <xref:SkiaSharp.SKFontArguments.PaletteOverrides> before passing the arguments to <xref:SkiaSharp.SKTypeface.Clone*>.
-
-The `Color` property stores a packed `0xAARRGGBB` value (same format as <xref:SkiaSharp.SKColor>).
-
-## Examples
-
-Overriding the first palette entry to red:
-
-```csharp
-var overrides = new[]
-{
-    new SKFontPaletteOverride { Index = 0, Color = (uint)SKColors.Red },
-};
-var args = new SKFontArguments { PaletteOverrides = overrides };
-using var typeface = original.Clone(args);
-```
-]]></remarks>
+    <summary>Represents a color override for a single entry in a font color palette.</summary>
+    <remarks />
   </Docs>
   <Members>
     <Member MemberName="Color">
@@ -56,9 +37,9 @@ using var typeface = original.Clone(args);
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the replacement color for the overridden palette entry.</summary>
-        <value>The replacement color for the palette entry, stored as a packed <c>0xAARRGGBB</c> value.</value>
-        <remarks></remarks>
+        <summary>Gets or sets the override color as a packed ARGB value.</summary>
+        <value>The packed ARGB color value.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -85,11 +66,11 @@ using var typeface = original.Clone(args);
         <Parameter Name="obj" Type="SkiaSharp.SKFontPaletteOverride" />
       </Parameters>
       <Docs>
-        <param name="obj">The <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare with this instance.</param>
-        <summary>Indicates whether this palette override is equal to another <see cref="T:SkiaSharp.SKFontPaletteOverride" />.</summary>
+        <param name="obj">The <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:SkiaSharp.SKFontPaletteOverride" /> is equal to the current instance.</summary>
         <returns>
-          <see langword="true" /> if both instances have the same index and color; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+          <see langword="true" /> if the specified value is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -113,11 +94,11 @@ using var typeface = original.Clone(args);
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">The object to compare with this instance.</param>
-        <summary>Indicates whether this palette override is equal to the specified object.</summary>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
         <returns>
-          <see langword="true" /> if <paramref name="obj" /> is a <see cref="T:SkiaSharp.SKFontPaletteOverride" /> with the same index and color; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+          <see langword="true" /> if the specified object is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -139,9 +120,9 @@ using var typeface = original.Clone(args);
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Returns a hash code for this palette override.</summary>
-        <returns>A hash code for this <see cref="T:SkiaSharp.SKFontPaletteOverride" /> instance.</returns>
-        <remarks></remarks>
+        <summary>Returns the hash code for this instance.</summary>
+        <returns>A 32-bit signed integer hash code.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Index">
@@ -162,9 +143,9 @@ using var typeface = original.Clone(args);
         <ReturnType>System.UInt16</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the index of the palette color entry to override.</summary>
-        <value>The zero-based index of the color entry within the palette to override.</value>
-        <remarks></remarks>
+        <summary>Gets or sets the zero-based index of the palette entry to override.</summary>
+        <value>The zero-based palette entry index.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -186,10 +167,10 @@ using var typeface = original.Clone(args);
       <Docs>
         <param name="left">The first <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare.</param>
         <param name="right">The second <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare.</param>
-        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontPaletteOverride" /> values are equal.</summary>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontPaletteOverride" /> instances are equal.</summary>
         <returns>
-          <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+          <see langword="true" /> if the two instances are equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -211,10 +192,10 @@ using var typeface = original.Clone(args);
       <Docs>
         <param name="left">The first <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare.</param>
         <param name="right">The second <see cref="T:SkiaSharp.SKFontPaletteOverride" /> to compare.</param>
-        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontPaletteOverride" /> values are not equal.</summary>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFontPaletteOverride" /> instances are not equal.</summary>
         <returns>
-          <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+          <see langword="true" /> if the two instances are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
   </Members>
