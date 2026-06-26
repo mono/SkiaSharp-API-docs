@@ -30,6 +30,11 @@ on:
         required: false
         default: "automation/write-api-docs"
         type: string
+      review_scope:
+        description: "Scope selector for the review pass (e.g. group:text, group:image, ns:HarfBuzzSharp, all)."
+        required: false
+        default: "group:text"
+        type: string
 
 # -- Custom jobs -------------------------------------------------------
 # Stub regeneration runs mdoc to produce the XML reference stubs. mdoc.exe is a
@@ -166,8 +171,10 @@ pre-agent-steps:
   # validates inputs against the default branch). For the daily common path this is
   # the high-value text/font slice; change to `changed` to review just-touched docs.
   - name: Record review scope
+    env:
+      REVIEW_SCOPE: ${{ inputs.review_scope || 'group:text' }}
     run: |
-      printf '%s' "group:text" > review-scope.txt
+      printf '%s' "$REVIEW_SCOPE" > review-scope.txt
       echo "Review scope (existing docs): $(cat review-scope.txt)"
 
   - name: Clone SkiaSharp (shallow, with submodules)
@@ -315,9 +322,11 @@ V. **Validate (replaces merge).** This gate makes direct editing safe — it mus
 
 C. **Commit and PR.** If any pass produced edits, **commit on the branch you are already on** — the host
    prepared a dedicated throwaway PR branch for you before you started (it is **not** the dispatch ref). Do
-   **not** switch or create another branch. Stage **only** `SkiaSharpAPI/`:
+   **not** switch or create another branch. Stage **only** hand-edited type docs under `SkiaSharpAPI/`, and
+   **unstage the generated files** (stub regeneration rewrites them; they must never appear in the PR):
    ```bash
    git add SkiaSharpAPI/
+   git reset -q -- SkiaSharpAPI/index.xml 'SkiaSharpAPI/ns-*.xml' SkiaSharpAPI/_filter.xml SkiaSharpAPI/FrameworksIndex/
    git commit -m "Fill and review API documentation"
    ```
    **Never `git checkout` the branch the workflow was dispatched from.** That branch may be the workflow's own
