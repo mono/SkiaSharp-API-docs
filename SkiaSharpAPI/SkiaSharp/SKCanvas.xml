@@ -977,11 +977,11 @@ this information.
       </Parameters>
       <Docs>
         <param name="bitmap">The bitmap to draw.</param>
-        <param name="p">The location at which to draw the upper-left corner of the bitmap.</param>
-        <param name="sampling">The sampling options to apply when scaling or filtering the bitmap.</param>
-        <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" /> for default rendering.</param>
-        <summary>Draws a bitmap at the specified location using the given sampling options and paint.</summary>
-        <remarks></remarks>
+        <param name="p">The destination point for the top-left corner of the bitmap.</param>
+        <param name="sampling">The sampling options to use when scaling the bitmap.</param>
+        <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" />.</param>
+        <summary>Draws the specified bitmap at the specified point using the given sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1036,15 +1036,11 @@ this information.
       </Parameters>
       <Docs>
         <param name="bitmap">The bitmap to draw.</param>
-        <param name="dest">The destination rectangle on the canvas.</param>
+        <param name="dest">The destination rectangle to scale and draw the bitmap into.</param>
         <param name="sampling">The sampling options to use when scaling the bitmap.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws the specified bitmap into the destination rectangle using the given sampling options.</summary>
-        <remarks></remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="DrawBitmap">
-      <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, float x, float y, SkiaSharp.SKPaint paint = default);" />
+        <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" />.</param>
+        <summary>Draws the specified bitmap scaled into the destination rectangle using the given sampling options.</summary>
+        <remarks />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
@@ -1096,12 +1092,12 @@ this information.
       </Parameters>
       <Docs>
         <param name="bitmap">The bitmap to draw.</param>
-        <param name="source">The source rectangle within the bitmap.</param>
-        <param name="dest">The destination rectangle on the canvas.</param>
+        <param name="source">The subset of the bitmap to draw.</param>
+        <param name="dest">The destination rectangle to scale and draw the bitmap into.</param>
         <param name="sampling">The sampling options to use when scaling the bitmap.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws a portion of the specified bitmap into the destination rectangle using the given sampling options.</summary>
-        <remarks></remarks>
+        <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" />.</param>
+        <summary>Draws a subset of the specified bitmap scaled into the destination rectangle using the given sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1125,12 +1121,12 @@ this information.
       </Parameters>
       <Docs>
         <param name="bitmap">The bitmap to draw.</param>
-        <param name="x">The x-coordinate of the left edge of the bitmap.</param>
-        <param name="y">The y-coordinate of the top edge of the bitmap.</param>
-        <param name="sampling">The sampling options to apply when scaling or filtering the bitmap.</param>
-        <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" /> for default rendering.</param>
-        <summary>Draws a bitmap at the specified coordinates using the given sampling options and paint.</summary>
-        <remarks></remarks>
+        <param name="x">The x-coordinate of the top-left corner where the bitmap is drawn.</param>
+        <param name="y">The y-coordinate of the top-left corner where the bitmap is drawn.</param>
+        <param name="sampling">The sampling options to use when scaling the bitmap.</param>
+        <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" />.</param>
+        <summary>Draws the specified bitmap at the specified coordinates using the given sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapLattice">
@@ -2744,11 +2740,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Parameters>
       <Docs>
         <param name="surface">The surface to draw.</param>
-        <param name="p">The location at which to draw the upper-left corner of the surface.</param>
-        <param name="sampling">The sampling options to use when drawing the surface.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws the specified surface onto the canvas at the given point using the given sampling options.</summary>
-        <remarks></remarks>
+        <param name="p">The destination point for the top-left corner of the surface.</param>
+        <param name="sampling">The sampling options to use when scaling the surface.</param>
+        <param name="paint">The paint to use when drawing the surface, or <see langword="null" />.</param>
+        <summary>Draws the contents of the specified surface at the specified point using the given sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
@@ -2799,12 +2795,12 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Parameters>
       <Docs>
         <param name="surface">The surface to draw.</param>
-        <param name="x">The x-coordinate of the destination position on the canvas.</param>
-        <param name="y">The y-coordinate of the destination position on the canvas.</param>
-        <param name="sampling">The sampling options to use when drawing the surface.</param>
-        <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws the specified surface onto the canvas at the given position using the given sampling options.</summary>
-        <remarks></remarks>
+        <param name="x">The x-coordinate of the top-left corner where the surface is drawn.</param>
+        <param name="y">The y-coordinate of the top-left corner where the surface is drawn.</param>
+        <param name="sampling">The sampling options to use when scaling the surface.</param>
+        <param name="paint">The paint to use when drawing the surface, or <see langword="null" />.</param>
+        <summary>Draws the contents of the specified surface at the specified coordinates using the given sampling options.</summary>
+        <remarks />
       </Docs>
     </Member>
     <MemberGroup MemberName="DrawText">
@@ -2914,12 +2910,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="text">The text string to draw.</param>
-        <param name="p">The origin point of the text baseline.</param>
-        <param name="font">The font to use for rendering the text.</param>
-        <param name="paint">The paint to apply when drawing.</param>
-        <summary>Draws the specified text at the given point using the font and paint.</summary>
-        <remarks></remarks>
+        <param name="text">The text to draw.</param>
+        <param name="p">The point at which to draw the text, using the default left alignment.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text at the specified point using left alignment.</summary>
+        <remarks>This overload is obsolete. Use <c>DrawText(string, SKPoint, SKTextAlign, SKFont, SKPaint)</c> instead to specify text alignment.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -2942,12 +2938,12 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="text">The text string to draw.</param>
-        <param name="p">The origin point relative to which the text is aligned.</param>
-        <param name="textAlign">The horizontal alignment of the text relative to the origin point.</param>
-        <param name="font">The font to use for rendering the text.</param>
-        <param name="paint">The paint to apply when drawing.</param>
-        <summary>Draws the specified text aligned around the given point using the font and paint.</summary>
+        <param name="text">The text to draw.</param>
+        <param name="p">The point at which to draw the text.</param>
+        <param name="textAlign">The text alignment relative to the point.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text at the specified point with alignment.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -2976,13 +2972,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="text">The text string to draw.</param>
-        <param name="x">The x-coordinate of the text baseline origin.</param>
-        <param name="y">The y-coordinate of the text baseline origin.</param>
-        <param name="font">The font to use for rendering the text.</param>
-        <param name="paint">The paint to apply when drawing.</param>
-        <summary>Draws the specified text at the given coordinates using the font and paint.</summary>
-        <remarks></remarks>
+        <param name="text">The text to draw.</param>
+        <param name="x">The x-coordinate at which to draw the text, using the default left alignment.</param>
+        <param name="y">The y-coordinate of the text baseline.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text at the specified coordinates using left alignment.</summary>
+        <remarks>This overload is obsolete. Use <c>DrawText(string, float, float, SKTextAlign, SKFont, SKPaint)</c> instead to specify text alignment.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -3006,13 +3002,13 @@ using (var surface = SKSurface.Create(info)) {
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="text">The text string to draw.</param>
-        <param name="x">The x-coordinate of the origin relative to which the text is aligned.</param>
-        <param name="y">The y-coordinate of the origin relative to which the text is aligned.</param>
-        <param name="textAlign">The horizontal alignment of the text relative to the origin.</param>
-        <param name="font">The font to use for rendering the text.</param>
-        <param name="paint">The paint to apply when drawing.</param>
-        <summary>Draws the specified text aligned around the given coordinates using the font and paint.</summary>
+        <param name="text">The text to draw.</param>
+        <param name="x">The x-coordinate of the text origin.</param>
+        <param name="y">The y-coordinate of the text origin.</param>
+        <param name="textAlign">The text alignment relative to the coordinates.</param>
+        <param name="font">The font used to render the text.</param>
+        <param name="paint">The paint used to draw the text.</param>
+        <summary>Draws text at the specified coordinates with alignment.</summary>
         <remarks />
       </Docs>
     </Member>

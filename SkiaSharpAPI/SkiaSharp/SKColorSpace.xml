@@ -32,11 +32,11 @@
         <Parameter Name="transferCharacteristics" Type="SkiaSharp.SKColorspaceTransferFnCicp" />
       </Parameters>
       <Docs>
-        <param name="colorPrimaries">One of the enumeration values that specifies the CICP color primaries.</param>
-        <param name="transferCharacteristics">One of the enumeration values that specifies the CICP transfer function.</param>
-        <summary>Creates a new color space from the specified CICP color primaries and transfer function.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKColorSpace" />, or <see langword="null" /> if the specified CICP parameters do not define a supported color space.</returns>
-        <remarks></remarks>
+        <param name="colorPrimaries">The CICP color primaries value identifying the color gamut.</param>
+        <param name="transferCharacteristics">The CICP transfer characteristics value identifying the transfer function.</param>
+        <summary>Creates a color space from CICP (Coding-Independent Code Points) color primaries and transfer characteristics.</summary>
+        <returns>Returns a new <see cref="T:SkiaSharp.SKColorSpace" />, or <see langword="null" /> if the CICP values are not supported.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="CreateIcc">
@@ -336,7 +336,7 @@
       <Parameters />
       <Docs>
         <summary>Returns the transfer function for this color space.</summary>
-        <returns>The <see cref="T:SkiaSharp.SKColorSpaceTransferFn" />, or <see cref="F:SkiaSharp.SKColorSpaceTransferFn.Empty" /> if the transfer function cannot be represented numerically.</returns>
+        <returns>The <see cref="T:SkiaSharp.SKColorSpaceTransferFn" />, or <see cref="P:SkiaSharp.SKColorSpaceTransferFn.Empty" /> if the transfer function cannot be represented numerically.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -415,7 +415,7 @@
       <Parameters />
       <Docs>
         <summary>Returns the XYZ D50 transformation matrix for this color space.</summary>
-        <returns>The <see cref="T:SkiaSharp.SKColorSpaceXyz" />, or <see cref="F:SkiaSharp.SKColorSpaceXyz.Empty" /> if the transformation cannot be computed.</returns>
+        <returns>The <see cref="T:SkiaSharp.SKColorSpaceXyz" />, or <see cref="P:SkiaSharp.SKColorSpaceXyz.Empty" /> if the transformation cannot be computed.</returns>
         <remarks />
       </Docs>
     </Member>
