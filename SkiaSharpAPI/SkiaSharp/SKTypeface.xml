@@ -16,11 +16,11 @@
       <format type="text/markdown"><![CDATA[
 ## Remarks
 
-This is used in the paint, along with optionally algorithmic settings like
-<xref:SkiaSharp.SKPaint.TextSize?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKPaint.TextSkewX?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKPaint.TextScaleX?displayProperty=nameWithType>, and 
-<xref:SkiaSharp.SKPaint.FakeBoldText?displayProperty=nameWithType>
+This is used in an <xref:SkiaSharp.SKFont>, along with algorithmic settings like
+<xref:SkiaSharp.SKFont.Size?displayProperty=nameWithType>,
+<xref:SkiaSharp.SKFont.SkewX?displayProperty=nameWithType>,
+<xref:SkiaSharp.SKFont.ScaleX?displayProperty=nameWithType>, and
+<xref:SkiaSharp.SKFont.Embolden?displayProperty=nameWithType>
 to specify how text appears when drawn (and measured).
 
 Typeface objects are immutable, and so they can be shared between threads.
@@ -614,7 +614,7 @@ Typeface objects are immutable, and so they can be shared between threads.
       <Docs>
         <param name="familyName">The name of the font family. May be <see langword="null" />.</param>
         <summary>Returns a new instance to a typeface that most closely matches the requested family name and style.</summary>
-        <returns>Returns to the closest-matching typeface.</returns>
+        <returns>The closest-matching typeface, or a default typeface if no match is found.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -638,7 +638,7 @@ Typeface objects are immutable, and so they can be shared between threads.
         <param name="familyName">The name of the font family. May be <see langword="null" />.</param>
         <param name="style">The style (normal, bold, italic) of the typeface.</param>
         <summary>Returns a new instance to a typeface that most closely matches the requested family name and style.</summary>
-        <returns>Returns to the closest-matching typeface.</returns>
+        <returns>The closest-matching typeface, or a default typeface if no match is found.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -666,7 +666,7 @@ Typeface objects are immutable, and so they can be shared between threads.
         <param name="width">The width of the typeface.</param>
         <param name="slant">The slant of the typeface.</param>
         <summary>Returns a new instance to a typeface that most closely matches the requested family name and style.</summary>
-        <returns>Returns to the closest-matching typeface.</returns>
+        <returns>The closest-matching typeface, or a default typeface if no match is found.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -694,7 +694,7 @@ Typeface objects are immutable, and so they can be shared between threads.
         <param name="width">The width of the typeface.</param>
         <param name="slant">The slant of the typeface.</param>
         <summary>Returns a new instance to a typeface that most closely matches the requested family name and style.</summary>
-        <returns>Returns to the closest-matching typeface.</returns>
+        <returns>The closest-matching typeface, or a default typeface if no match is found.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -715,16 +715,12 @@ using (var surface = SKSurface.Create(info)) {
     canvas.Clear(SKColors.White);
 
     // load the typeface
-    var tf = SKTypeface.FromFile("myfont.ttf");
-
-    // set the paint's typeface
-    var paint = new SKPaint {
-        TextSize = 50,
-        Typeface = tf
-    };
+    using var tf = SKTypeface.FromFile("myfont.ttf");
 
     // draw text using the typeface
-    canvas.DrawText("SkiaSharp", 50, 100, paint);
+    using var font = new SKFont(tf ?? SKTypeface.Default, 50);
+    using var paint = new SKPaint { IsAntialias = true, Color = SKColors.Black };
+    canvas.DrawText("SkiaSharp", 50, 100, SKTextAlign.Left, font, paint);
 }
 ```
 ]]></format>
@@ -1136,7 +1132,7 @@ using (var surface = SKSurface.Create(info)) {
       </ReturnValue>
       <Docs>
         <summary>Gets a value indicating whether this typeface supports retrieving kerning pair adjustments.</summary>
-        <value>Returns <see langword="true" /> if kerning pair adjustments can be retrieved; otherwise, <see langword="false" />.</value>
+        <value><see langword="true" /> if kerning pair adjustments can be retrieved; otherwise, <see langword="false" />.</value>
         <remarks />
       </Docs>
     </Member>
