@@ -57,7 +57,7 @@ jobs:
         run: |
           cd docs
           git fetch origin "$DOCS_BASE_BRANCH"
-          git checkout -B stub-base "origin/$DOCS_BASE_BRANCH"
+          git checkout -B stub-base FETCH_HEAD
           cd ..
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
