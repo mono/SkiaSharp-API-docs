@@ -11,8 +11,30 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Provides a mutable builder for constructing <see cref="T:SkiaSharp.SKPath" /> objects incrementally by adding contours, line segments, curves, arcs, and geometric shapes.</summary>
-    <remarks />
+    <summary>A mutable builder for constructing <see cref="T:SkiaSharp.SKPath" /> objects incrementally.</summary>
+    <remarks><![CDATA[
+## Remarks
+
+`SKPathBuilder` provides a mutable API for assembling path contours before producing an <xref:SkiaSharp.SKPath>. Unlike `SKPath`, which is a sealed, immutable representation, `SKPathBuilder` is designed for incremental construction.
+
+Use <xref:SkiaSharp.SKPathBuilder.Snapshot> to obtain a read-only copy of the current path without resetting the builder, or <xref:SkiaSharp.SKPathBuilder.Detach> to transfer ownership of the path to the caller and reset the builder.
+
+`SKPathBuilder` extends <xref:SkiaSharp.SKObject> and must be disposed when no longer needed.
+
+## Examples
+
+Building a triangle path:
+
+```csharp
+using var builder = new SKPathBuilder();
+builder.MoveTo(0, 0);
+builder.LineTo(100, 0);
+builder.LineTo(50, 100);
+builder.Close();
+using var path = builder.Detach();
+```
+]]></remarks>
+  </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SKPathBuilder ();" />
@@ -27,6 +49,10 @@
       <Docs>
         <summary>Initializes a new, empty instance of the <see cref="T:SkiaSharp.SKPathBuilder" /> class.</summary>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SKPathBuilder (SkiaSharp.SKPath path);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class SkiaSharp.SKPath path) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.#ctor(SkiaSharp.SKPath)" />
       <MemberType>Constructor</MemberType>
@@ -116,6 +142,10 @@
         <param name="direction">The direction in which to wind the oval contour.</param>
         <summary>Appends an oval (ellipse) contour inscribed within the specified rectangle to the path.</summary>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="AddPath">
+      <MemberSignature Language="C#" Value="public void AddPath (SkiaSharp.SKPath other, SkiaSharp.SKPathAddMode mode = SkiaSharp.SKPathAddMode.Append);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddPath(class SkiaSharp.SKPath other, valuetype SkiaSharp.SKPathAddMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.AddPath(SkiaSharp.SKPath,SkiaSharp.SKPathAddMode)" />
       <MemberType>Method</MemberType>
@@ -652,6 +682,9 @@
         <summary>Returns the path built so far as an <see cref="T:SkiaSharp.SKPath" /> and resets this builder to an empty state.</summary>
         <returns>A new <see cref="T:SkiaSharp.SKPath" /> containing all contours added to this builder.</returns>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPathBuilder.Dispose(System.Boolean)" />
@@ -689,6 +722,9 @@
       <Docs>
         <summary>Releases the native (unmanaged) resources held by this <see cref="T:SkiaSharp.SKPathBuilder" />.</summary>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="FillType">
       <MemberSignature Language="C#" Value="public SkiaSharp.SKPathFillType FillType { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKPathFillType FillType" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPathBuilder.FillType" />

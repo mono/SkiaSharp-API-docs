@@ -1041,6 +1041,10 @@ this information.
         <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" />.</param>
         <summary>Draws the specified bitmap scaled into the destination rectangle using the given sampling options.</summary>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="DrawBitmap">
+      <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, float x, float y, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
@@ -2808,54 +2812,13 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <AssemblyName>SkiaSharp</AssemblyName>
       </AssemblyInfo>
       <Docs>
+        <summary>Draws text on the canvas at the specified position.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Examples
-
-```csharp
-var info = new SKImageInfo(512, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // draw left-aligned text, solid
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x42, 0x81, 0xA4);
-        paint.IsStroke = false;
-
-        canvas.DrawText("Skia", info.Width / 2f, 64.0f, paint);
-    }
-
-    // draw centered text, stroked
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
-        paint.IsStroke = true;
-        paint.StrokeWidth = 3;
-        paint.TextAlign = SKTextAlign.Center;
-
-        canvas.DrawText("Skia", info.Width / 2f, 144.0f, paint);
-    }
-
-    // draw right-aligned text, scaled
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
-        paint.TextScaleX = 1.5f;
-        paint.TextAlign = SKTextAlign.Right;
-
-        canvas.DrawText("Skia", info.Width / 2f, 224.0f, paint);
-    }
-}
-```
-
-
-]]></format>
+Use <xref:SkiaSharp.SKFont> with an <xref:SkiaSharp.SKPaint> to draw text. The modern overloads
+accept an <xref:SkiaSharp.SKTextAlign> parameter to control horizontal alignment relative to the
+origin point.
+          ]]></format>
         </remarks>
       </Docs>
     </MemberGroup>

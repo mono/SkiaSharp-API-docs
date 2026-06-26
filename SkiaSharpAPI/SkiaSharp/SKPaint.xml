@@ -59,41 +59,34 @@ them as is, or modifying them as the drawing proceeds.
 var info = new SKImageInfo(256, 256);
 using (var surface = SKSurface.Create(info)) {
     SKCanvas canvas = surface.Canvas;
-
     canvas.Clear(SKColors.White);
 
+    // solid filled shape
     var paint1 = new SKPaint {
-        TextSize = 64.0f,
         IsAntialias = true,
         Color = new SKColor(255, 0, 0),
         Style = SKPaintStyle.Fill
     };
 
+    // stroked outline
     var paint2 = new SKPaint {
-        TextSize = 64.0f,
         IsAntialias = true,
         Color = new SKColor(0, 136, 0),
         Style = SKPaintStyle.Stroke,
         StrokeWidth = 3
     };
 
+    // semi-transparent fill
     var paint3 = new SKPaint {
-        TextSize = 64.0f,
         IsAntialias = true,
-        Color = new SKColor(136, 136, 136),
-        TextScaleX = 1.5f
+        Color = new SKColor(136, 136, 136, 128)
     };
 
-    var text = "Skia!";
-    canvas.DrawText(text, 20.0f, 64.0f, paint1);
-    canvas.DrawText(text, 20.0f, 144.0f, paint2);
-    canvas.DrawText(text, 20.0f, 224.0f, paint3);
+    canvas.DrawCircle(64, 64, 50, paint1);
+    canvas.DrawCircle(128, 128, 50, paint2);
+    canvas.DrawCircle(192, 192, 50, paint3);
 }
 ```
-
-The example above produces the following:
-
-![SKPaint and Text](~/images/SKPaintText.png "SKPaint and Text")
 
 ### Effects Example
 
@@ -400,6 +393,10 @@ The example above produces the following:
         <returns>
           <see langword="true" /> if the path should be filled; <see langword="false" /> if it should be drawn with a hairline.</returns>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetFillPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetFillPath (SkiaSharp.SKPath src, SkiaSharp.SKRect cullRect);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src, valuetype SkiaSharp.SKRect cullRect) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
@@ -594,6 +591,10 @@ The example above produces the following:
         <returns>
           <see langword="true" /> if the path should be filled; <see langword="false" /> if it should be drawn with a hairline.</returns>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetFillPath">
+      <MemberSignature Language="C#" Value="public bool GetFillPath (SkiaSharp.SKPath src, SkiaSharp.SKPathBuilder dst, float resScale);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPathBuilder dst, float32 resScale) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPathBuilder,System.Single)" />
       <MemberType>Method</MemberType>
@@ -617,6 +618,10 @@ The example above produces the following:
         <returns>
           <see langword="true" /> if the path should be filled; <see langword="false" /> if it should be drawn with a hairline.</returns>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetFillPath">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetFillPath (SkiaSharp.SKPath src, SkiaSharp.SKRect cullRect, SkiaSharp.SKMatrix matrix);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src, valuetype SkiaSharp.SKRect cullRect, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKRect,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
@@ -864,7 +869,7 @@ The example above produces the following:
       <Docs>
         <summary>Gets or sets a value indicating whether to paint a stroke or the fill.</summary>
         <value>
-          <see langword="true" /> to stroke; <see langword="false" /> to fill.</value>
+          <see langword="true" /> if the style is stroke; <see langword="false" /> if the style is fill.</value>
         <remarks>This is a shortcut way to set <see cref="P:SkiaSharp.SKPaint.Style" /> to either <see cref="F:SkiaSharp.SKPaintStyle.Stroke" /> or <see cref="F:SkiaSharp.SKPaintStyle.Fill" />.</remarks>
       </Docs>
     </Member>

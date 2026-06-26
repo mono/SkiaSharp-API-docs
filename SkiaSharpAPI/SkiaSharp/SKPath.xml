@@ -160,7 +160,7 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">The path containing the elements to be added to the current path.</param>
+        <param name="other">The source path whose contours will be appended to this path.</param>
         <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
         <summary>Extends the current path with the path elements from another path, using the specified extension mode.</summary>
         <remarks />
@@ -195,7 +195,7 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">The path containing the elements to be added to the current path.</param>
+        <param name="other">The source path whose contours will be appended to this path.</param>
         <param name="matrix">Transformation matrix applied to the <paramref name="other" /> path.</param>
         <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
         <summary>Extends the current path with the path elements from another path, by applying the specified transformation matrix, using the specified extension mode.</summary>
@@ -226,7 +226,7 @@
         <Parameter Name="mode" Type="SkiaSharp.SKPathAddMode" />
       </Parameters>
       <Docs>
-        <param name="other">The path containing the elements to be added to the current path.</param>
+        <param name="other">The source path whose contours will be appended to this path.</param>
         <param name="dx">The amount to translate the path in X as it is added.</param>
         <param name="dy">The amount to translate the path in Y as it is added.</param>
         <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
@@ -255,7 +255,7 @@
         <Parameter Name="other" Type="SkiaSharp.SKPath" />
       </Parameters>
       <Docs>
-        <param name="other">The path containing the elements to be added to the current path.</param>
+        <param name="other">The source path whose contours will be appended to this path in reverse order.</param>
         <summary>Extends the current path with the path elements from another path in reverse order.</summary>
         <remarks />
       </Docs>
@@ -916,7 +916,7 @@ the first point is automatically set to (0, 0).
         <ReturnType>SkiaSharp.SKPathConvexity</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the path's convexity.</summary>
+        <summary>Gets the path's convexity.</summary>
         <value>One of the enumeration values that specifies the path's convexity.</value>
         <remarks>If it is currently unknown, then this function will attempt to compute the convexity (and cache the result).</remarks>
       </Docs>

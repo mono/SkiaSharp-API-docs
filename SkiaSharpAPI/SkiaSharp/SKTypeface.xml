@@ -16,11 +16,11 @@
       <format type="text/markdown"><![CDATA[
 ## Remarks
 
-This is used in the paint, along with optionally algorithmic settings like
-<xref:SkiaSharp.SKPaint.TextSize?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKPaint.TextSkewX?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKPaint.TextScaleX?displayProperty=nameWithType>, and 
-<xref:SkiaSharp.SKPaint.FakeBoldText?displayProperty=nameWithType>
+This is used in the font, along with optionally algorithmic settings like
+<xref:SkiaSharp.SKFont.Size?displayProperty=nameWithType>,
+<xref:SkiaSharp.SKFont.SkewX?displayProperty=nameWithType>,
+<xref:SkiaSharp.SKFont.ScaleX?displayProperty=nameWithType>, and 
+<xref:SkiaSharp.SKFont.Embolden?displayProperty=nameWithType>
 to specify how text appears when drawn (and measured).
 
 Typeface objects are immutable, and so they can be shared between threads.
@@ -480,6 +480,9 @@ Typeface objects are immutable, and so they can be shared between threads.
         <summary>Gets the default empty typeface.</summary>
         <value>The default empty <see cref="T:SkiaSharp.SKTypeface" />.</value>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="FamilyName">
       <MemberSignature Language="C#" Value="public string FamilyName { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance string FamilyName" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKTypeface.FamilyName" />
@@ -700,33 +703,22 @@ Typeface objects are immutable, and so they can be shared between threads.
         <AssemblyName>SkiaSharp</AssemblyName>
       </AssemblyInfo>
       <Docs>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Examples
+    <summary>Represents a specific typeface and intrinsic style of a font.</summary>
+    <remarks>
+      <format type="text/markdown"><![CDATA[
+## Remarks
 
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
+This is used in the font, along with optionally algorithmic settings like
+<xref:SkiaSharp.SKFont.Size?displayProperty=nameWithType>,
+<xref:SkiaSharp.SKFont.SkewX?displayProperty=nameWithType>,
+<xref:SkiaSharp.SKFont.ScaleX?displayProperty=nameWithType>, and 
+<xref:SkiaSharp.SKFont.Embolden?displayProperty=nameWithType>
+to specify how text appears when drawn (and measured).
 
-    canvas.Clear(SKColors.White);
-
-    // load the typeface
-    var tf = SKTypeface.FromFile("myfont.ttf");
-
-    // set the paint's typeface
-    var paint = new SKPaint {
-        TextSize = 50,
-        Typeface = tf
-    };
-
-    // draw text using the typeface
-    canvas.DrawText("SkiaSharp", 50, 100, paint);
-}
-```
+Typeface objects are immutable, and so they can be shared between threads.
 ]]></format>
-        </remarks>
-      </Docs>
+    </remarks>
+  </Docs>
     </MemberGroup>
     <Member MemberName="FromFile">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKTypeface FromFile (string path, int index = 0);" />
@@ -1133,7 +1125,7 @@ using (var surface = SKSurface.Create(info)) {
       </ReturnValue>
       <Docs>
         <summary>Gets a value indicating whether this typeface supports retrieving kerning pair adjustments.</summary>
-        <value>Returns <see langword="true" /> if kerning pair adjustments can be retrieved; otherwise, <see langword="false" />.</value>
+        <value><see langword="true" /> if kerning pair adjustments can be retrieved; otherwise, <see langword="false" />.</value>
         <remarks />
       </Docs>
     </Member>
@@ -1180,6 +1172,9 @@ A typeface is understood to be bold when the weight is greater than or equal to
         <value>
           <see langword="true" /> if this is the empty typeface; otherwise, <see langword="false" />.</value>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="IsFixedPitch">
       <MemberSignature Language="C#" Value="public bool IsFixedPitch { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool IsFixedPitch" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKTypeface.IsFixedPitch" />
@@ -1199,7 +1194,7 @@ A typeface is understood to be bold when the weight is greater than or equal to
           <format type="text/markdown"><![CDATA[
 ## Remarks
 
-This does not guarentee that the advance widths will not vary as this is a
+This does not guarantee that the advance widths will not vary as this is a
 style bit on the typeface.
 ]]></format>
         </remarks>
@@ -1465,6 +1460,10 @@ A typeface is understood to be italic when it has a slant of either
         <summary>Gets the number of variation design parameters (axes) supported by this typeface.</summary>
         <value>The number of variation design axes.</value>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="VariationDesignParameters">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKFontVariationAxis[] VariationDesignParameters { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKFontVariationAxis[] VariationDesignParameters" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKTypeface.VariationDesignParameters" />
       <MemberType>Property</MemberType>
@@ -1479,6 +1478,10 @@ A typeface is understood to be italic when it has a slant of either
         <summary>Gets the variation design parameters (axes) supported by this typeface.</summary>
         <value>An array of <see cref="T:SkiaSharp.SKFontVariationAxis" /> describing each axis.</value>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="VariationDesignPosition">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKFontVariationPositionCoordinate[] VariationDesignPosition { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKFontVariationPositionCoordinate[] VariationDesignPosition" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKTypeface.VariationDesignPosition" />
       <MemberType>Property</MemberType>
@@ -1493,6 +1496,10 @@ A typeface is understood to be italic when it has a slant of either
         <summary>Gets the current variation design position coordinates for this typeface.</summary>
         <value>An array of <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> representing the current axis values.</value>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="VariationDesignPositionCount">
+      <MemberSignature Language="C#" Value="public int VariationDesignPositionCount { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance int32 VariationDesignPositionCount" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKTypeface.VariationDesignPositionCount" />
       <MemberType>Property</MemberType>
@@ -1504,6 +1511,10 @@ A typeface is understood to be italic when it has a slant of either
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the number of variation design position coordinates for this typeface.</summary>
-        <value>The number of variation design position coordinates.</value>
-        <remarks />
+        <summary>Gets the number of axes in the current variation design position of this typeface.</summary>
+        <value>The number of variation axes for which the typeface has a current design-space position.</value>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
