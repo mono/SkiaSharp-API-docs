@@ -1,5 +1,5 @@
 ---
-description: "Daily API documentation pipeline — regenerates XML stubs from CI NuGets, then AI fills 'To be added.' placeholders."
+description: "Daily API documentation pipeline — regenerates XML stubs from CI NuGets, then AI (1) fills 'To be added.' placeholders [add] and (2) reviews & improves a scope of existing docs [review], editing the mdoc XML directly."
 
 # -- Triggers ----------------------------------------------------------
 on:
@@ -19,6 +19,21 @@ on:
         description: "SkiaSharp branch to use for scripts and references"
         required: false
         default: "main"
+        type: string
+      docs_base_branch:
+        description: "Docs branch the PR targets and stubs align to (default main). Point at an older branch to demo add-at-scale."
+        required: false
+        default: "main"
+        type: string
+      docs_head_branch:
+        description: "Throwaway PR head branch the agent commits to (force-recreated each run)."
+        required: false
+        default: "automation/write-api-docs"
+        type: string
+      review_scope:
+        description: "Scope selector for the review pass (e.g. group:text, group:image, ns:HarfBuzzSharp, all)."
+        required: false
+        default: "group:text"
         type: string
 
 # -- Custom jobs -------------------------------------------------------
@@ -40,12 +55,14 @@ jobs:
           ref: ${{ inputs.skiasharp_branch || 'main' }}
           fetch-depth: 1
           submodules: recursive
-      - name: Align docs to latest main
+      - name: Align docs to base branch
         shell: bash
+        env:
+          DOCS_BASE_BRANCH: ${{ inputs.docs_base_branch || 'main' }}
         run: |
           cd docs
-          git fetch origin main
-          git checkout -B automation/write-api-docs origin/main
+          git fetch origin "$DOCS_BASE_BRANCH"
+          git checkout -B stub-base FETCH_HEAD
           cd ..
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -71,23 +88,12 @@ jobs:
             docs-package-cache-
       - name: Regenerate API docs
         run: bash scripts/infra/docs/generate-api-docs.sh
-      - name: Extract placeholders and manifest
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Path output/docs-work -Force | Out-Null
-          & .agents/skills/api-docs/scripts/docs-tool.ps1 extract docs/SkiaSharpAPI/ -Output output/docs-work/
       - name: Upload regenerated docs
         uses: actions/upload-artifact@v4
         with:
           name: docs-regenerated
           path: docs/SkiaSharpAPI/
           retention-days: 1
-      - name: Upload extracted JSON (immutable baseline)
-        uses: actions/upload-artifact@v4
-        with:
-          name: docs-extracted
-          path: output/docs-work/
-          retention-days: 7
 
 # -- Checkout ----------------------------------------------------------
 # Primary: this docs repo only. SkiaSharp is cloned in pre-agent-steps.
@@ -97,6 +103,16 @@ timeout-minutes: 120
 concurrency:
   group: auto-api-docs-writer
   cancel-in-progress: true
+
+# -- Engine (pin the run model) ---------------------------------------
+# Per-role model routing is cosmetic in the gh-aw sandbox: the task tool's
+# `model` param is not plumbed through to the actual API call (verified via the
+# api-proxy token-usage log — every call was claude-sonnet-4.6 regardless of the
+# requested per-agent model). So pin one good model for the whole run — the
+# orchestrator and every sub-agent — rather than pretend to route per role.
+engine:
+  id: copilot
+  model: claude-sonnet-4.6
 
 # -- Agent tools -------------------------------------------------------
 tools:
@@ -122,23 +138,44 @@ permissions:
 safe-outputs:
   create-pull-request:
     draft: false
-    base-branch: main
+    base-branch: ${{ inputs.docs_base_branch || 'main' }}
     preserve-branch-name: true
     recreate-ref: true
 
 # -- Pre-agent steps (host) -------------------------------------------
 pre-agent-steps:
+  # gh-aw's checkout step makes the dispatch ref the working branch. If the agent
+  # commits there, safe-outputs (recreate_ref) force-overwrites that ref — which
+  # destroys the workflow's own source branch when the run is dispatched from a
+  # feature branch (e.g. a dev/* branch under review). Rename the working branch
+  # up-front so every commit and the PR head land on a throwaway branch, no matter
+  # which ref triggered the run. The branch name is the `docs_head_branch` input
+  # (default automation/write-api-docs). This is the host-side guarantee that backs
+  # up the "commit on the branch you're already on" rule in the prompt.
+  - name: Use a dedicated PR branch (never the dispatch ref)
+    env:
+      DOCS_HEAD_BRANCH: ${{ inputs.docs_head_branch || 'automation/write-api-docs' }}
+    run: |
+      git checkout -B "$DOCS_HEAD_BRANCH"
+      echo "Working branch: $(git branch --show-current)"
+
   - name: Download regenerated docs
     uses: actions/download-artifact@v4
     with:
       name: docs-regenerated
       path: SkiaSharpAPI/
 
-  - name: Download pre-extracted JSON
-    uses: actions/download-artifact@v4
-    with:
-      name: docs-extracted
-      path: output/docs-work/
+  # The review half of the pipeline audits a scope of EXISTING docs (not just the
+  # newly-filled placeholders). The scope is baked here rather than as a dispatch
+  # input so the workflow stays dispatchable on a feature branch (workflow_dispatch
+  # validates inputs against the default branch). For the daily common path this is
+  # the high-value text/font slice; change to `changed` to review just-touched docs.
+  - name: Record review scope
+    env:
+      REVIEW_SCOPE: ${{ inputs.review_scope || 'group:text' }}
+    run: |
+      printf '%s' "$REVIEW_SCOPE" > review-scope.txt
+      echo "Review scope (existing docs): $(cat review-scope.txt)"
 
   - name: Clone SkiaSharp (shallow, with submodules)
     env:
@@ -151,80 +188,197 @@ pre-agent-steps:
       ln -sfn "$(pwd)/SkiaSharpAPI" skiasharp/docs/SkiaSharpAPI
       cd skiasharp && dotnet tool restore
 
-  - name: Save original JSON to agent artifact cache
+  # Build the managed binding so the example reviewer can compile-check snippets
+  # against a real SkiaSharp.dll. C#-only — externals-download fetches prebuilt
+  # natives (no native changes here). Non-fatal: a build hiccup must not sink the
+  # whole docs run, since reviewers also verify examples by reading source.
+  - name: Bootstrap SkiaSharp binding for snippet checks
+    continue-on-error: true
     run: |
-      mkdir -p /tmp/gh-aw/agent/docs-work-original
-      cp -r output/docs-work/* /tmp/gh-aw/agent/docs-work-original/
+      cd skiasharp
+      dotnet cake --target=externals-download
+      dotnet build binding/SkiaSharp/SkiaSharp.csproj -c Release
 
 # -- Post-agent steps (host) ------------------------------------------
-# Format docs AFTER the agent merges JSON→XML. Runs on host outside the
+# Format docs AFTER the agent edits the XML in place. Runs on host outside the
 # sandbox so it has full access to the SkiaSharp cake scripts.
 post-steps:
-  - name: Save final JSON to agent artifact cache
-    run: |
-      mkdir -p /tmp/gh-aw/agent/docs-work-final
-      cp -r output/docs-work/* /tmp/gh-aw/agent/docs-work-final/
-
   - name: Format docs
     run: cd skiasharp && dotnet cake --target=docs-format-docs
 ---
 
 # Auto API Docs Writer
 
-**Read `skiasharp/.agents/skills/api-docs/SKILL.md` for reference.** Follow the phases below — this workflow pre-computes Phases 1–2, so start at Phase 3.
+You are the **orchestrator** for the unified `add` + `review` pipeline. You run **two passes** in one job:
+**(A) Add** — fill `To be added.` placeholders on newly-regenerated stubs; **(R) Review** — audit and improve
+a scope of **existing** docs. Read these first, then drive the phases below:
+
+- `skiasharp/.agents/skills/api-docs/SKILL.md` — the router.
+- `skiasharp/.agents/skills/api-docs/workflows/add.md` — the direct-XML add pipeline (pass A).
+- `skiasharp/.agents/skills/api-docs/workflows/review.md` — the review pipeline (pass R). Its per-role model
+  table is **local-only**; on CI ignore it and run every role on the pinned `engine.model` (see Model routing).
+- `skiasharp/.agents/skills/api-docs/workflows/scope-resolution.md` — how a scope selector resolves to files.
+- `skiasharp/.agents/skills/api-docs/workflows/validation.md` — the post-edit gates.
+
+The stub regeneration (mdoc) already ran as a pre-step, so the placeholder `*.xml` files are present in
+`SkiaSharpAPI/` as uncommitted working-tree changes. There is **no extract/merge JSON step** — agents read
+and **edit the mdoc XML directly**; safety comes from the structural validator, not a merge guard.
+
+## Model routing
+
+The orchestrator **and** every sub-agent run on the single run model (`engine.model`, pinned to
+`claude-sonnet-4.6`). Launch sub-agents via the `task` tool **without** a per-role `model` parameter — they
+inherit the run model. You delegate **bulk** writing (pass-A placeholder fill) and all reviewing to
+sub-agents, but you perform the **terminal** fixes, validation, commit, and PR **yourself** (see Critical
+rules).
+
+> Per-role model routing (premium models for writer/factual/examples) is a **skill feature that only takes
+> effect on hosts that honor the `task` tool's `model` parameter** (e.g. the local Copilot CLI). The gh-aw CI
+> sandbox does **not** plumb per-sub-agent models to the actual API call, so passing them here is cosmetic and
+> only adds risk. Do not pass per-role models, and do not emit a routing report on CI.
+
+## Scope environment
+
+`docs-tool.ps1` lives in the SkiaSharp clone, so by default it would look for docs under
+`skiasharp/docs`. In this workflow the **docs repo is the primary checkout** and the regenerated XML is
+in `SkiaSharpAPI/` at the workspace root. Point the tool at it by exporting these on every
+`docs-tool.ps1` call (they make `resolve-scope new`, `lint`, and `validate` use the docs repo for git
+baselines/diffs while source lookups still use the SkiaSharp clone):
+
+```bash
+DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI"
+```
 
 ## Execution order
 
-1. **Phase 3 (Discover — lightweight)** — you are an **orchestrator**, not a writer. Read ONLY:
-   - `output/docs-work/manifest.json` — file list and field counts
-   - `skiasharp/.agents/skills/api-docs/references/patterns.md` — formatting rules
-   - `skiasharp/.agents/skills/api-docs/references/skia-patterns.md` — domain knowledge
-   
-   **Do NOT pre-read JSON files or source code.** The writer agent handles its own discovery. Move to Phase 4 immediately after reading the manifest and references.
+### Pass A — Add (fill placeholders)
 
-2. **Phase 4 (Write — 1 agent)** — launch **1** background `general-purpose` agent:
-   - Use the writer prompt from SKILL.md Phase 4
-   - The single writer reads ALL JSON files + corresponding C# source and fills documentation
-   - Wait for the writer to complete before Phase 5
-
-3. **Phase 5 (Review — 3 independent agents)** — launch **three** background `general-purpose` agents in parallel as described in SKILL.md Phase 5:
-   - **Factual Claim Verifier** — reads source FIRST, then challenges every factual claim
-   - **Code Example Verifier** — verifies every code example uses real APIs
-   - **Quality Reviewer** — checks style, completeness, and patterns
-   
-   Wait for all three to complete, then fix all CRITICAL issues directly in the JSON files.
-
-4. **Phase 6 (Merge)** — this is the critical step. Run:
+A1. **Discover (lightweight).** Resolve the placeholder files into an explicit list and shard it into
+   ~25–40-file batches. Do **not** pre-read source or XML — the writer does its own discovery.
    ```bash
-   cd skiasharp && pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 merge ../output/docs-work/ && cd ..
+   cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope new && cd ..
    ```
-   Do NOT run `docs-format-docs` — it runs automatically as a post-step after the agent finishes.
 
-5. **Commit and PR** — commit the XML changes and create a pull request:
+A2. **Write (per batch).** For each batch, launch the **writer** sub-agent (`agents/writer.md`) as a
+   background `task` (no per-role model) with the resolved file list, and await it with
+   `read_agent(wait: true)`. It reads the C# source, fills only the empty/`To be added.` fields, and edits the
+   XML in place. A type it cannot document with certainty keeps its placeholder (a `DEFERRED` line) so the
+   next run re-detects it.
+
+A3. **Review the written batch.** Run the deterministic linter, then launch the **three** reviewers as
+   background `task`s in parallel (`reviewer-factual`, `reviewer-examples`, `reviewer-quality`) on the
+   batch's files (no per-role model), awaiting them per the anti-termination rule. **You** synthesize their
+   findings — there is no synthesizer sub-agent.
+
+A4. **Fix CRITICAL findings yourself** — **you (the orchestrator) edit the XML directly** in the foreground.
+   Do **not** launch a sub-agent for these fixes. Skip MINOR/style for the automated run.
+
+> If `resolve-scope new` returns **no** placeholder files (the common case once docs are filled), pass A is a
+> no-op — skip straight to pass R.
+
+### Pass R — Review existing docs (a scope, not just placeholders)
+
+The review scope is in `review-scope.txt` at the workspace root (a selector like `group:text`). This audits
+docs that are **already filled**, which is where freshness/accuracy/example problems live.
+
+R1. **Resolve the review scope** (fuzzy selectors need `-Confirm:$false` in CI):
    ```bash
-   git checkout -b automation/write-api-docs
+   SCOPE="$(cat review-scope.txt)"
+   cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope "$SCOPE" -Confirm:$false && cd ..
+   ```
+   Shard >40 files into batches; the text/font slice is ~16 files (one batch).
+
+R2. **Lint** the scope (deterministic, no model):
+   ```bash
+   cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 lint "$SCOPE" && cd ..
+   ```
+
+R3. **Review (three reviewers in parallel)** on the resolved file list as background `task`s (no per-role
+   model), awaiting them per the anti-termination rule; they report only. **You** synthesize the linter
+   output + all three reviewers' findings yourself — there is no synthesizer sub-agent.
+
+R4. **Fix (gated) yourself** — **you (the orchestrator) edit the XML directly** in the foreground; do **not**
+   launch a sub-agent. Priority order: (a) all **CRITICAL** findings, (b) **obsolete-in-example** findings (the
+   text/font slice has legacy `paint.TextSize` / `TextAlign` / `DrawText(string,x,y,paint)` examples — migrate
+   them to `SKFont`), (c) where a central type is example-poor (`SKFont`, `SKTypeface`, `SKPaint`), add one
+   correct, **compiling** example, porting the `SKCanvas`/`SKShader` quality bar. **Budget:** once the
+   reviewers report, timebox fixing to ~10 minutes — then stop, validate what you have, and open the PR. A
+   smaller validated PR beats none.
+
+### Finalize
+
+V. **Validate (replaces merge).** This gate makes direct editing safe — it must pass before the PR, and it
+   covers **all** edits from both passes:
+   ```bash
+   cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 validate new && cd ..
+   ```
+   `new` resolves to every changed `.xml` (placeholders + reviewed files) via the working-tree diff. It asserts
+   each is well-formed, has unchanged signature counts, and changed **only** inside `<Docs>`. Do **not** run
+   `docs-format-docs` — formatting runs automatically as a post-step.
+
+C. **Commit and PR.** If any pass produced edits, **commit on the branch you are already on** — the host
+   prepared a dedicated throwaway PR branch for you before you started (it is **not** the dispatch ref). Do
+   **not** switch or create another branch. Stage **only** hand-edited type docs under `SkiaSharpAPI/`, and
+   **unstage the generated files** (stub regeneration rewrites them; they must never appear in the PR):
+   ```bash
    git add SkiaSharpAPI/
-   git commit -m "Fill API documentation placeholders"
+   git reset -q -- SkiaSharpAPI/index.xml 'SkiaSharpAPI/ns-*.xml' SkiaSharpAPI/_filter.xml SkiaSharpAPI/FrameworksIndex/
+   git commit -m "Fill and review API documentation"
    ```
-   Then use the `create_pull_request` tool:
-   - Branch: `automation/write-api-docs`
-   - Title: `Fill API documentation placeholders`
-   - Body: `Automated AI-generated documentation for XML API docs with 'To be added.' placeholders.`
+   **Never `git checkout` the branch the workflow was dispatched from.** That branch may be the workflow's own
+   source branch, and `safe-outputs` (`recreate_ref: true`) force-overwrites the PR head ref — committing on the
+   dispatch ref would destroy the workflow source. Staging only `SkiaSharpAPI/` also keeps any workflow files out
+   of the PR. Then use the `create_pull_request` tool:
+   - Branch: the current working branch (leave the `create_pull_request` branch to the host default — do not
+     hardcode a name)
+   - Title: `Fill and review API documentation`
+   - Body: include (a) what pass A filled (file count) and what pass R reviewed (scope + file count), (b) a
+     short **Findings summary** (counts by severity + the machine `FINDING |` block), and (c) what you fixed
+     vs deferred.
 
-If there are no documentation changes after merging, call the `noop` tool instead.
+If there are no documentation changes after validation, call the `noop` tool instead — but still print the
+Findings summary to stdout first.
 
 ## Critical rules
 
-- **Sub-agents must NOT spawn their own sub-agents.** Each agent (writer and reviewers) must do all its work directly. Nested sub-agents hit the depth limit and cause timeouts.
-- **Do NOT edit XML files directly** — edit only the JSON files in `output/docs-work/`.
-- **Phase 6 MUST run.** If you skip the merge, no PR is created and the entire run is wasted.
+- **Edit the mdoc XML directly.** There is no JSON round-trip. Touch only `<Docs>` content — never
+  `MemberSignature`/`TypeSignature`, attributes, or generated files (`index.xml`, `ns-*.xml`, `_filter.xml`,
+  `FrameworksIndex/`). The structural validator enforces this; a failure means you edited outside `<Docs>`.
+- **The validate gate (step V) MUST pass before the PR.** If you skip it, a malformed or surface-changing edit can ship.
+- **Sub-agents must NOT spawn their own sub-agents.** Each agent does all its work directly — nested sub-agents
+  hit the depth limit and time out.
 - **Do NOT run `docs-format-docs`** — formatting runs automatically as a post-step.
-- **Budget awareness:** After the writer completes and reviewers report, fix CRITICAL issues and proceed to merge+PR immediately. Do not re-run reviewers unless absolutely necessary. **If you're past 10 minutes and haven't merged yet, skip Phase 5 (review) entirely and go straight to Phase 6 (merge) + PR. A PR without review is better than no PR.**
-- **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent, you MUST call `read_agent` with `wait: true` in the SAME response. Do NOT output text saying "waiting" and end your turn — the session WILL terminate and all work is lost.
+- **Every code example you add or change must compile** against the real `SkiaSharp.dll` (bootstrapped in a
+  pre-step) and use **no obsolete members** (see `references/obsolete-api-map.md`). A non-compiling example is
+  worse than none.
+- **No terminal background agent.** The only sub-agents you launch are the pass-A **writer** (bulk placeholder
+  fill) and the **reviewers**. ALL fixing, synthesis, validation, committing, and PR creation is **your own
+  foreground work** — never delegate the terminal fix/validate/PR to a sub-agent. The failure mode this avoids:
+  backgrounding a "fixer" sub-agent and then ending your turn before it (and the PR) complete, which kills the
+  session with no PR.
+- **Budget awareness:** Prioritize reaching validate + PR. Pass A (add) is usually a no-op now, so spend the
+  budget on pass R. Do not re-run reviewers unnecessarily. **Once the reviewers report, timebox your fixing to
+  ~10 minutes; if you exceed it, stop fixing, validate what you have, and open the PR.** A smaller validated PR
+  beats none — but never skip step V.
+- **NEVER end a turn without a tool call while waiting for agents.** When you launch a background agent, you
+  MUST call `read_agent` with `wait: true` in the SAME response. Outputting "waiting" and ending the turn
+  terminates the session and loses all work.
   - **Single agent:** `task(background)` + `read_agent(id, wait=true)` in the same response.
-  - **Multiple agents:** Launch all agents, then call `read_agent` for THE FIRST ONE with `wait: true`. When it returns, call `read_agent` for the next, and so on. You MUST have an active `read_agent` call at all times until all agents complete.
-  - **FORBIDDEN pattern:** Launching agents → saying "Waiting for them to complete" → ending turn. This KILLS the session.
-- **COMPLETION GATE:** Your session is NOT complete until you have called `create_pull_request` or `noop`. If you reach a point where you think you're done but haven't called either, something went wrong — retrace your steps and complete the remaining phases.
+  - **Multiple agents:** launch all, then `read_agent` the first with `wait: true`; when it returns, read the
+    next, and so on. Keep an active `read_agent` call at all times until all agents complete.
+  - **FORBIDDEN:** launching agents → "Waiting for them to complete" → ending the turn. This KILLS the session.
+- **Always commit on the branch you are already on** (the host prepared a dedicated throwaway PR branch before
+  you started) and **never `git checkout` the branch you were dispatched from.** `safe-outputs` preserves the
+  branch you commit on and force-overwrites it (`recreate_ref: true`). If you commit on the dispatch ref (which
+  can be the workflow's own source branch), that branch is destroyed. Do not switch or create another branch
+  even when the current branch looks like a feature branch ahead of `main`, and stage only `SkiaSharpAPI/`.
+- **COMPLETION GATE:** Your session is NOT complete until **you** have called `create_pull_request` or `noop`
+  yourself. If you think you're done but did neither, retrace your steps and finish. Reaching this gate is your
+  own job, not a sub-agent's.
 
 ## Path differences from SKILL.md
 
