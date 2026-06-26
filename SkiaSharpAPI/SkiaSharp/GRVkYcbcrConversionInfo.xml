@@ -15,8 +15,8 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>Configuration information for Vulkan YCbCr color space conversion.</summary>
-    <remarks />
+    <summary>Represents the parameters for a Vulkan YCbCr image conversion.</summary>
+    <remarks>This struct corresponds to the parameters used when creating a <c>VkSamplerYcbcrConversion</c>.</remarks>
   </Docs>
   <Members>
     <Member MemberName="ChromaFilter">
@@ -37,8 +37,8 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the chroma filter mode used for upsampling chroma components.</summary>
-        <value>The VkFilter value for chroma filtering.</value>
+        <summary>Gets or sets the Vulkan filter to use for chroma reconstruction.</summary>
+        <value>A <c>VkFilter</c> value specifying the chroma filter.</value>
         <remarks />
       </Docs>
     </Member>
@@ -60,9 +60,9 @@
         <ReturnType>SkiaSharp.GRVkYcbcrComponents</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets the component swizzle mapping for this YCbCr conversion.</summary>
+        <value>A <see cref="T:SkiaSharp.GRVkYcbcrComponents" /> describing the component swizzle mapping.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -89,10 +89,11 @@
         <Parameter Name="obj" Type="SkiaSharp.GRVkYcbcrConversionInfo" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> is equal to the current instance.</summary>
+        <returns>
+          <see langword="true" /> if the specified value is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -116,10 +117,11 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="obj">The object to compare with the current instance.</param>
+        <summary>Determines whether the specified object is equal to the current instance.</summary>
+        <returns>
+          <see langword="true" /> if the specified object is equal to the current instance; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ExternalFormat">
@@ -140,8 +142,8 @@
         <ReturnType>System.UInt64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the external format when using VK_ANDROID_external_memory_android_hardware_buffer.</summary>
-        <value>The external format value, or 0 if not using an external format.</value>
+        <summary>Gets or sets the external format handle for platform-specific image formats.</summary>
+        <value>A platform-specific external format identifier, or <c>0</c> if not used.</value>
         <remarks />
       </Docs>
     </Member>
@@ -163,8 +165,8 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating whether to force explicit chroma reconstruction.</summary>
-        <value>Non-zero to force explicit reconstruction.</value>
+        <summary>Gets or sets a value indicating whether explicit chroma sample position reconstruction should be forced.</summary>
+        <value>A non-zero value to force explicit chroma sample position reconstruction; otherwise, <c>0</c>.</value>
         <remarks />
       </Docs>
     </Member>
@@ -187,7 +189,7 @@
       </ReturnValue>
       <Docs>
         <summary>Gets or sets the Vulkan format of the image.</summary>
-        <value>The VkFormat value.</value>
+        <value>A <c>VkFormat</c> value describing the image format.</value>
         <remarks />
       </Docs>
     </Member>
@@ -210,9 +212,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <summary>Returns the hash code for this instance.</summary>
+        <returns>A 32-bit signed integer hash code.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -232,11 +234,12 @@
         <Parameter Name="right" Type="SkiaSharp.GRVkYcbcrConversionInfo" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> instances are equal.</summary>
+        <returns>
+          <see langword="true" /> if the two instances are equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -256,11 +259,12 @@
         <Parameter Name="right" Type="SkiaSharp.GRVkYcbcrConversionInfo" />
       </Parameters>
       <Docs>
-        <param name="left">To be added.</param>
-        <param name="right">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <param name="left">The first <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> instances are not equal.</summary>
+        <returns>
+          <see langword="true" /> if the two instances are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SamplerFilterMustMatchChromaFilter">
@@ -281,9 +285,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the sampler filter must match the chroma filter.</summary>
+        <value>
+          <see langword="true" /> if the sampler filter must match the chroma filter; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="SupportsLinearFilter">
@@ -304,9 +309,10 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <summary>Gets or sets a value indicating whether the image supports linear filtering.</summary>
+        <value>
+          <see langword="true" /> if linear filtering is supported; otherwise, <see langword="false" />.</value>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="XChromaOffset">
@@ -327,8 +333,8 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the X chroma offset for downsampled chroma channels.</summary>
-        <value>The VkChromaLocation value for the X offset.</value>
+        <summary>Gets or sets the chroma offset in the X direction.</summary>
+        <value>A <c>VkChromaLocation</c> value for the horizontal chroma sample offset.</value>
         <remarks />
       </Docs>
     </Member>
@@ -350,8 +356,8 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the YCbCr model used for color conversion.</summary>
-        <value>The VkSamplerYcbcrModelConversion value.</value>
+        <summary>Gets or sets the YCbCr color model conversion.</summary>
+        <value>A <c>VkSamplerYcbcrModelConversion</c> value specifying the color model.</value>
         <remarks />
       </Docs>
     </Member>
@@ -373,8 +379,8 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the YCbCr range for color conversion.</summary>
-        <value>The VkSamplerYcbcrRange value.</value>
+        <summary>Gets or sets the YCbCr color range.</summary>
+        <value>A <c>VkSamplerYcbcrRange</c> value specifying the numeric range of the YCbCr data.</value>
         <remarks />
       </Docs>
     </Member>
@@ -396,8 +402,8 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the Y chroma offset for downsampled chroma channels.</summary>
-        <value>The VkChromaLocation value for the Y offset.</value>
+        <summary>Gets or sets the chroma offset in the Y direction.</summary>
+        <value>A <c>VkChromaLocation</c> value for the vertical chroma sample offset.</value>
         <remarks />
       </Docs>
     </Member>

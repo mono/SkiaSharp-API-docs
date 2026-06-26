@@ -26,7 +26,7 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>Creates a new <see cref="T:SkiaSharp.SKFont" /> with the default typeface and size.</summary>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKFont" /> class with the default typeface and size.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -50,7 +50,7 @@
         <param name="size">The font size in points. The default is 12.</param>
         <param name="scaleX">The horizontal scale factor. The default is 1.</param>
         <param name="skewX">The horizontal skew factor for oblique/italic effect. The default is 0.</param>
-        <summary>Creates a new <see cref="T:SkiaSharp.SKFont" /> with the specified typeface and settings.</summary>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKFont" /> class with the specified typeface and settings.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -2288,7 +2288,7 @@
       <Docs>
         <summary>Gets or sets a value indicating whether metrics should ignore hinting for improved precision.</summary>
         <value>
-          <see langword="true" /> to use linear metrics; otherwise, <see langword="false" />.</value>
+          <see langword="true" /> if linear metrics are used; otherwise, <see langword="false" />.</value>
         <remarks />
       </Docs>
     </Member>
@@ -2311,8 +2311,8 @@
       <Docs>
         <param name="text">The text to process.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2335,8 +2335,8 @@
       <Docs>
         <param name="glyphs">The array of glyph IDs.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2359,8 +2359,8 @@
       <Docs>
         <param name="text">The text to process.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2385,8 +2385,8 @@
         <param name="text">The text to process.</param>
         <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2409,10 +2409,10 @@
       </Parameters>
       <Docs>
         <param name="text">The text to process.</param>
-        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="bounds">When this method returns, contains the tight bounding box for the entire text run.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text and returns the bounding box.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2435,10 +2435,10 @@
       </Parameters>
       <Docs>
         <param name="glyphs">The array of glyph IDs.</param>
-        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="bounds">When this method returns, contains the tight bounding box for the entire text run.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text and returns the bounding box.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2461,10 +2461,10 @@
       </Parameters>
       <Docs>
         <param name="text">The text to process.</param>
-        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="bounds">When this method returns, contains the tight bounding box for the entire text run.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text and returns the bounding box.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2491,8 +2491,8 @@
         <param name="length">The number of bytes in the text buffer.</param>
         <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2517,10 +2517,10 @@
       <Docs>
         <param name="text">The text to process.</param>
         <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
-        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="bounds">When this method returns, contains the tight bounding box for the entire text run.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text and returns the bounding box.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
@@ -2547,10 +2547,10 @@
         <param name="text">A pointer to the text buffer.</param>
         <param name="length">The number of bytes in the text buffer.</param>
         <param name="encoding">The <see cref="T:SkiaSharp.SKTextEncoding" /> of the text.</param>
-        <param name="bounds">When this method returns, contains the bounding rectangles for each glyph.</param>
+        <param name="bounds">When this method returns, contains the tight bounding box for the entire text run.</param>
         <param name="paint">An optional <see cref="T:SkiaSharp.SKPaint" /> for additional text effects.</param>
-        <summary>Gets the advance widths for the glyphs.</summary>
-        <returns>An array of advance widths for each glyph.</returns>
+        <summary>Measures the advance width of the specified text and returns the bounding box.</summary>
+        <returns>The total advance width of the text.</returns>
         <remarks />
       </Docs>
     </Member>
