@@ -284,6 +284,74 @@
         <remarks />
       </Docs>
     </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (SkiaSharp.SKColor[] colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype SkiaSharp.SKColor[] colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(SkiaSharp.SKColor[])" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="SkiaSharp.SKColor[]" />
+      </Parameters>
+      <Docs>
+        <param name="colors">An array of exactly 6 colors corresponding to draw counts of 0 (undrawn), 1, 2, 3, 4, and 5 or more.</param>
+        <summary>Creates a color filter that visually represents overdraw by coloring pixels based on how many times they were drawn.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKColorFilter" /> that assigns a color based on how many times each pixel was rendered.</returns>
+        <remarks><format type="text/markdown"><![CDATA[
+## Remarks
+
+Each element in `colors` corresponds to a draw count: `colors[0]` is applied to pixels
+that were never drawn, `colors[1]` to pixels drawn exactly once, through `colors[5]`,
+which applies to pixels drawn five or more times.
+
+This filter is typically combined with <xref:SkiaSharp.SKOverdrawCanvas> to produce an
+overdraw heat-map that highlights rendering hotspots.
+
+## Examples
+
+```csharp
+var colors = new SKColor[]
+{
+    new SKColor(0, 0, 0, 0),         // 0: undrawn (transparent)
+    new SKColor(0, 128, 0, 180),     // 1: drawn once
+    new SKColor(128, 200, 0, 180),   // 2: drawn twice
+    new SKColor(200, 200, 0, 180),   // 3: drawn three times
+    new SKColor(200, 100, 0, 180),   // 4: drawn four times
+    new SKColor(200, 0, 0, 220),     // 5+: overdraw hotspot
+};
+using var filter = SKColorFilter.CreateOverdraw(colors);
+```
+]]></format></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (ReadOnlySpan&lt;SkiaSharp.SKColor&gt; colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKColor&gt; colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(System.ReadOnlySpan{SkiaSharp.SKColor})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="System.ReadOnlySpan&lt;SkiaSharp.SKColor&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="colors">A read-only span of exactly 6 colors corresponding to draw counts of 0 (undrawn), 1, 2, 3, 4, and 5 or more.</param>
+        <summary>Creates a color filter that visually represents overdraw by coloring pixels based on how many times they were drawn.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKColorFilter" /> that assigns a color based on how many times each pixel was rendered.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
     <Member MemberName="CreateSrgbToLinearGamma">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateSrgbToLinearGamma ();" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateSrgbToLinearGamma() cil managed" />
