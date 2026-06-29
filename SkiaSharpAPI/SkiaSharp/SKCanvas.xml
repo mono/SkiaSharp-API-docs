@@ -2823,37 +2823,35 @@ using (var surface = SKSurface.Create(info)) {
 
     canvas.Clear(SKColors.White);
 
-    // draw left-aligned text, solid
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x42, 0x81, 0xA4);
-        paint.IsStroke = false;
+    using var typeface = SKTypeface.FromFamilyName("Arial");
+    using var font = new SKFont(typeface, 64.0f);
 
-        canvas.DrawText("Skia", info.Width / 2f, 64.0f, paint);
+    // draw left-aligned text, solid
+    using (var paint = new SKPaint {
+        IsAntialias = true,
+        Color = new SKColor(0x42, 0x81, 0xA4),
+        Style = SKPaintStyle.Fill,
+    }) {
+        canvas.DrawText("Skia", info.Width / 2f, 64.0f, SKTextAlign.Left, font, paint);
     }
 
     // draw centered text, stroked
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
-        paint.IsStroke = true;
-        paint.StrokeWidth = 3;
-        paint.TextAlign = SKTextAlign.Center;
-
-        canvas.DrawText("Skia", info.Width / 2f, 144.0f, paint);
+    using (var paint = new SKPaint {
+        IsAntialias = true,
+        Color = new SKColor(0x9C, 0xAF, 0xB7),
+        Style = SKPaintStyle.Stroke,
+        StrokeWidth = 3,
+    }) {
+        canvas.DrawText("Skia", info.Width / 2f, 144.0f, SKTextAlign.Center, font, paint);
     }
 
-    // draw right-aligned text, scaled
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
-        paint.TextScaleX = 1.5f;
-        paint.TextAlign = SKTextAlign.Right;
-
-        canvas.DrawText("Skia", info.Width / 2f, 224.0f, paint);
+    // draw right-aligned text, horizontally scaled
+    using var scaledFont = new SKFont(typeface, 64.0f, scaleX: 1.5f);
+    using (var paint = new SKPaint {
+        IsAntialias = true,
+        Color = new SKColor(0xE6, 0xB8, 0x9C),
+    }) {
+        canvas.DrawText("Skia", info.Width / 2f, 224.0f, SKTextAlign.Right, scaledFont, paint);
     }
 }
 ```
