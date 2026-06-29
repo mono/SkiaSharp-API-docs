@@ -275,10 +275,9 @@ R1. **Turn the review scope into a concrete file list.**
      cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
        pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope "$SCOPE" && cd ..
      ```
-   - Otherwise `$SCOPE` is a **plain-English theme** (e.g. `text`). There is no selector grammar — list
-     `all`, then select the files whose type/namespace fits the theme yourself (see
-     `references/scope-resolution.md`). For `text` that is the `SKFont*` / `SKTextBlob*` / `SKFontMetrics` /
-     `SKPaint` / `SKCanvas` text APIs (~16 files, one batch).
+   - Otherwise `$SCOPE` is a **plain-English theme** (e.g. `text`). List `all`, then select the files whose
+     type/namespace fits the theme yourself (see `references/scope-resolution.md`). For `text` that is the
+     `SKFont*` / `SKTextBlob*` / `SKFontMetrics` / `SKPaint` / `SKCanvas` text APIs (~16 files, one batch).
 
    Shard >40 files into batches and process them one at a time.
 
@@ -338,7 +337,7 @@ Findings summary to stdout first.
 
 ## Critical rules
 
-- **Edit the mdoc XML directly.** There is no JSON round-trip. Touch only `<Docs>` content — never
+- **Edit the mdoc XML directly.** Touch only `<Docs>` content — never
   `MemberSignature`/`TypeSignature`, attributes, or generated files (`index.xml`, `ns-*.xml`, `_filter.xml`,
   `FrameworksIndex/`). The structural validator enforces this; a failure means you edited outside `<Docs>`.
 - **The validate gate (step V) MUST pass before the PR.** If you skip it, a malformed or surface-changing edit can ship.
