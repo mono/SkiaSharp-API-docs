@@ -16,12 +16,13 @@
       <format type="text/markdown"><![CDATA[
 ## Remarks
 
-This is used in the paint, along with optionally algorithmic settings like
-<xref:SkiaSharp.SKPaint.TextSize?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKPaint.TextSkewX?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKPaint.TextScaleX?displayProperty=nameWithType>, and 
-<xref:SkiaSharp.SKPaint.FakeBoldText?displayProperty=nameWithType>
-to specify how text appears when drawn (and measured).
+A typeface identifies the underlying font (family, weight, slant, width). To
+draw or measure text, pair it with an <xref:SkiaSharp.SKFont>, which adds the
+sizing and rasterization settings such as
+<xref:SkiaSharp.SKFont.Size?displayProperty=nameWithType>,
+<xref:SkiaSharp.SKFont.SkewX?displayProperty=nameWithType>,
+<xref:SkiaSharp.SKFont.ScaleX?displayProperty=nameWithType>, and
+<xref:SkiaSharp.SKFont.Embolden?displayProperty=nameWithType>.
 
 Typeface objects are immutable, and so they can be shared between threads.
 ]]></format>
@@ -709,23 +710,22 @@ Typeface objects are immutable, and so they can be shared between threads.
 
 ```csharp
 var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
+using var surface = SKSurface.Create(info);
+var canvas = surface.Canvas;
 
-    canvas.Clear(SKColors.White);
+canvas.Clear(SKColors.White);
 
-    // load the typeface
-    var tf = SKTypeface.FromFile("myfont.ttf");
+// load the typeface
+using var tf = SKTypeface.FromFile("myfont.ttf");
 
-    // set the paint's typeface
-    var paint = new SKPaint {
-        TextSize = 50,
-        Typeface = tf
-    };
+// create a font from the typeface
+using var font = new SKFont(tf, 50);
 
-    // draw text using the typeface
-    canvas.DrawText("SkiaSharp", 50, 100, paint);
-}
+// configure the paint
+using var paint = new SKPaint { Color = SKColors.Black, IsAntialias = true };
+
+// draw text using the typeface
+canvas.DrawText("SkiaSharp", 50, 100, SKTextAlign.Left, font, paint);
 ```
 ]]></format>
         </remarks>

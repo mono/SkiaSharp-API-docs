@@ -2818,43 +2818,43 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
 
 ```csharp
 var info = new SKImageInfo(512, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
+using var surface = SKSurface.Create(info);
+var canvas = surface.Canvas;
 
-    canvas.Clear(SKColors.White);
+canvas.Clear(SKColors.White);
 
-    // draw left-aligned text, solid
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x42, 0x81, 0xA4);
-        paint.IsStroke = false;
+using var typeface = SKTypeface.FromFamilyName("Arial");
+using var font = new SKFont(typeface, 64.0f);
 
-        canvas.DrawText("Skia", info.Width / 2f, 64.0f, paint);
-    }
+// draw left-aligned text, solid
+using (var paint = new SKPaint())
+{
+    paint.IsAntialias = true;
+    paint.Color = new SKColor(0x42, 0x81, 0xA4);
+    paint.Style = SKPaintStyle.Fill;
 
-    // draw centered text, stroked
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
-        paint.IsStroke = true;
-        paint.StrokeWidth = 3;
-        paint.TextAlign = SKTextAlign.Center;
+    canvas.DrawText("Skia", info.Width / 2f, 64.0f, SKTextAlign.Left, font, paint);
+}
 
-        canvas.DrawText("Skia", info.Width / 2f, 144.0f, paint);
-    }
+// draw centered text, stroked
+using (var paint = new SKPaint())
+{
+    paint.IsAntialias = true;
+    paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
+    paint.Style = SKPaintStyle.Stroke;
+    paint.StrokeWidth = 3;
 
-    // draw right-aligned text, scaled
-    using (var paint = new SKPaint()) {
-        paint.TextSize = 64.0f;
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
-        paint.TextScaleX = 1.5f;
-        paint.TextAlign = SKTextAlign.Right;
+    canvas.DrawText("Skia", info.Width / 2f, 144.0f, SKTextAlign.Center, font, paint);
+}
 
-        canvas.DrawText("Skia", info.Width / 2f, 224.0f, paint);
-    }
+// draw right-aligned text, solid
+using (var paint = new SKPaint())
+{
+    paint.IsAntialias = true;
+    paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
+    paint.Style = SKPaintStyle.Fill;
+
+    canvas.DrawText("Skia", info.Width / 2f, 224.0f, SKTextAlign.Right, font, paint);
 }
 ```
 
