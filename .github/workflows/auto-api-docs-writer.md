@@ -31,9 +31,9 @@ on:
         default: "automation/write-api-docs"
         type: string
       review_scope:
-        description: "Scope selector for the review pass (e.g. group:text, group:image, ns:HarfBuzzSharp, all)."
+        description: "Review-pass scope: a docs-tool selector (type:/ns:/match:/changed/all) or a plain-English theme the agent resolves (e.g. text, image filters)."
         required: false
-        default: "group:text"
+        default: "text"
         type: string
 
 # -- Custom jobs -------------------------------------------------------
@@ -168,11 +168,12 @@ pre-agent-steps:
   # The review half of the pipeline audits a scope of EXISTING docs (not just the
   # newly-filled placeholders). The scope is baked here rather than as a dispatch
   # input so the workflow stays dispatchable on a feature branch (workflow_dispatch
-  # validates inputs against the default branch). For the daily common path this is
-  # the high-value text/font slice; change to `changed` to review just-touched docs.
+  # validates inputs against the default branch). It can be a docs-tool selector
+  # (type:/ns:/match:/changed/all) or a plain-English theme the agent resolves; the
+  # daily default is the high-value `text` theme. Use `changed` to review just-touched docs.
   - name: Record review scope
     env:
-      REVIEW_SCOPE: ${{ inputs.review_scope || 'group:text' }}
+      REVIEW_SCOPE: ${{ inputs.review_scope || 'text' }}
     run: |
       printf '%s' "$REVIEW_SCOPE" > review-scope.txt
       echo "Review scope (existing docs): $(cat review-scope.txt)"
@@ -261,29 +262,41 @@ A4. **Fix CRITICAL findings yourself** by editing the XML directly. Skip MINOR/s
 
 ### Pass R — Review existing docs (a scope, not just placeholders)
 
-The review scope is in `review-scope.txt` at the workspace root (a selector like `group:text`). This audits
-docs that are **already filled**, which is where freshness/accuracy/example problems live.
+The review scope is in `review-scope.txt` at the workspace root — either a docs-tool selector
+(`type:`/`ns:`/`match:`/`changed`/`all`) or a plain-English theme. This audits docs that are **already
+filled**, which is where freshness/accuracy/example problems live.
 
-R1. **Resolve the review scope** (fuzzy selectors need `-Confirm:$false` in CI):
+R1. **Resolve the review scope into a concrete file list.**
    ```bash
    SCOPE="$(cat review-scope.txt)"
-   cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
-     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope "$SCOPE" -Confirm:$false && cd ..
    ```
-   Shard >40 files into batches and process them one at a time; the text/font slice is ~16 files (one batch).
+   - If `$SCOPE` is a **docs-tool selector** (`file:` / `type:` / `ns:` / `match:` / `new` / `changed` / `all`),
+     resolve it directly (fuzzy `match:` needs `-Confirm:$false` in CI):
+     ```bash
+     cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
+       pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope "$SCOPE" -Confirm:$false && cd ..
+     ```
+   - Otherwise `$SCOPE` is a **plain-English theme** (e.g. `text`). There is no curated group — resolve `all`,
+     then select the files whose type/namespace fits the theme yourself (see `references/scope-resolution.md`).
+     For `text` that is the `SKFont*` / `SKTextBlob*` / `SKFontMetrics` / `SKPaint` / `SKCanvas` text APIs
+     (~16 files, one batch).
 
-R2. **Lint** the scope (deterministic, no model):
+   Shard >40 files into batches and process them one at a time.
+
+R2. **Lint** the resolved files (deterministic, no model). For a selector, lint it directly; for a theme,
+   lint each chosen file via a `file:` selector:
    ```bash
    cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
-     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 lint "$SCOPE" && cd ..
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 lint "$SELECTOR" && cd ..
    ```
+   (where `$SELECTOR` is `$SCOPE` for a selector, or `file:<path>` for each theme-selected file).
 
 R3. **Review, yourself.** For each file in the resolved list, follow `references/reviewing.md`: read the C#
    source first, then run the factual / example / quality checks against the `<Docs>` blocks. Collect the
    linter output plus your findings into one deduped list.
 
 R4. **Fix (gated) yourself** by editing the XML directly. Priority order: (a) all **CRITICAL** findings,
-   (b) **obsolete-in-example** findings (the text/font slice has legacy `paint.TextSize` / `TextAlign` /
+   (b) **obsolete-in-example** findings (text APIs often carry legacy `paint.TextSize` / `TextAlign` /
    `DrawText(string,x,y,paint)` examples — migrate them to `SKFont`), (c) where a central type is example-poor
    (`SKFont`, `SKTypeface`, `SKPaint`), add one correct, **compiling** example, porting the `SKCanvas`/
    `SKShader` quality bar. **Budget:** timebox fixing to ~10 minutes — then stop, validate what you have, and
