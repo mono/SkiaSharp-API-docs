@@ -218,12 +218,11 @@ first, then drive the phases below:
 - `skiasharp/.agents/skills/api-docs/SKILL.md` — the router.
 - `skiasharp/.agents/skills/api-docs/references/adding.md` — the direct-XML add procedure (pass A).
 - `skiasharp/.agents/skills/api-docs/references/reviewing.md` — the review procedure + checks (pass R).
-- `skiasharp/.agents/skills/api-docs/references/scope-resolution.md` — how a scope selector resolves to files.
 - `skiasharp/.agents/skills/api-docs/references/validation.md` — the post-edit gates.
 
 The stub regeneration (mdoc) already ran as a pre-step, so the placeholder `*.xml` files are present in
-`SkiaSharpAPI/` as uncommitted working-tree changes. There is **no extract/merge JSON step** — you read
-and **edit the mdoc XML directly**; safety comes from the structural validator, not a merge guard.
+`SkiaSharpAPI/` as uncommitted working-tree changes. You read and **edit the mdoc XML directly**; safety
+comes from the structural validator, not a merge guard.
 
 ## Scope environment
 
@@ -276,8 +275,8 @@ R1. **Turn the review scope into a concrete file list.**
        pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope "$SCOPE" && cd ..
      ```
    - Otherwise `$SCOPE` is a **plain-English theme** (e.g. `text`). List `all`, then select the files whose
-     type/namespace fits the theme yourself (see `references/scope-resolution.md`). For `text` that is the
-     `SKFont*` / `SKTextBlob*` / `SKFontMetrics` / `SKPaint` / `SKCanvas` text APIs (~16 files, one batch).
+     type/namespace fits the theme yourself. For `text` that is the `SKFont*` / `SKTextBlob*` /
+     `SKFontMetrics` / `SKPaint` / `SKCanvas` text APIs (~16 files, one batch).
 
    Shard >40 files into batches and process them one at a time.
 
