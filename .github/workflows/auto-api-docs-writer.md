@@ -226,11 +226,12 @@ comes from the structural validator, not a merge guard.
 
 ## Scope environment
 
-`docs-tool.ps1` lives in the SkiaSharp clone, so by default it would look for docs under
-`skiasharp/docs`. In this workflow the **docs repo is the primary checkout** and the regenerated XML is
-in `SkiaSharpAPI/` at the workspace root. Point the tool at it by exporting these on every
-`docs-tool.ps1` call (they make `resolve-scope new`, `lint`, and `validate` use the docs repo for git
-baselines/diffs while source lookups still use the SkiaSharp clone):
+The docs QA gates are Cake targets in the SkiaSharp clone (`scripts/infra/docs/docs.cake`), so by default
+they look for docs under `skiasharp/docs`. In this workflow the **docs repo is the primary checkout** and
+the regenerated XML is in `SkiaSharpAPI/` at the workspace root. Point the targets at it by exporting these
+on every `dotnet cake --target=docs-*` call (they make `docs-resolve-scope`, `docs-lint`, and
+`docs-validate` use the docs repo for git baselines/diffs while source lookups still use the SkiaSharp
+clone):
 
 ```bash
 DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI"
@@ -243,7 +244,7 @@ DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI"
 A1. **Discover.** Resolve the placeholder files into an explicit list and shard it into ~25–40-file batches.
    ```bash
    cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
-     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope new && cd ..
+     dotnet cake --target=docs-resolve-scope --scope=new && cd ..
    ```
 
 A2. **Write (per batch), yourself.** Following `references/adding.md`, for each file read the C# source first,
@@ -256,8 +257,8 @@ A3. **Review the written batch.** Run the deterministic linter, then review the 
 
 A4. **Fix CRITICAL findings yourself** by editing the XML directly. Skip MINOR/style for the automated run.
 
-> If `resolve-scope new` returns **no** placeholder files (the common case once docs are filled), pass A is a
-> no-op — skip straight to pass R.
+> If `docs-resolve-scope --scope=new` returns **no** placeholder files (the common case once docs are filled),
+> pass A is a no-op — skip straight to pass R.
 
 ### Pass R — Review existing docs (a scope, not just placeholders)
 
@@ -272,7 +273,7 @@ R1. **Turn the review scope into a concrete file list.**
    - If `$SCOPE` is an **inventory mode** (`all` / `new` / `changed` / `file:PATH`), list it directly:
      ```bash
      cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
-       pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope "$SCOPE" && cd ..
+       dotnet cake --target=docs-resolve-scope --scope="$SCOPE" && cd ..
      ```
    - Otherwise `$SCOPE` is a **plain-English theme** (e.g. `text`). List `all`, then select the files whose
      type/namespace fits the theme yourself. For `text` that is the `SKFont*` / `SKTextBlob*` /
@@ -284,7 +285,7 @@ R2. **Lint** the resolved files (deterministic, no model). For an inventory mode
    theme, lint each chosen file via a `file:` path:
    ```bash
    cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
-     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 lint "$TARGET" && cd ..
+     dotnet cake --target=docs-lint --scope="$TARGET" && cd ..
    ```
    (where `$TARGET` is `$SCOPE` for an inventory mode, or `file:<path>` for each theme-selected file).
 
@@ -305,7 +306,7 @@ V. **Validate (replaces merge).** This gate makes direct editing safe — it mus
    covers **all** edits from both passes:
    ```bash
    cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
-     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 validate new && cd ..
+     dotnet cake --target=docs-validate --scope=new && cd ..
    ```
    `new` resolves to every changed `.xml` (placeholders + reviewed files) via the working-tree diff. It asserts
    each is well-formed, has unchanged signature counts, and changed **only** inside `<Docs>`. Do **not** run
