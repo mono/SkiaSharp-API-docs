@@ -299,9 +299,10 @@ R4. **Fix (gated) yourself** by editing the XML directly. Priority order: (a) al
 ### Finalize
 
 V. **The validation gate is automatic.** The host post-step runs `docs-format-docs`, which formats every doc
-   and **fails the run on broken XML/CDATA** (`malformed-xml` / `broken-cdata`) — so a malformed edit can
-   never ship a PR. You do **not** run it as your final step. Just make sure every file you touched stays
-   well-formed and you changed only `<Docs>` content (signatures are owned by mdoc regeneration).
+   and **fails the run on broken XML** — unparseable XML throws when it is loaded, and a destroyed CDATA block
+   logs a `broken-cdata` error — so a malformed edit can never ship a PR. You do **not** run it as your final
+   step. Just make sure every file you touched stays well-formed and you changed only `<Docs>` content
+   (signatures are owned by mdoc regeneration).
 
 C. **Commit and PR.** If any pass produced edits, **commit on the branch you are already on** — the host
    prepared a dedicated throwaway PR branch for you before you started (it is **not** the dispatch ref). Do
@@ -331,7 +332,7 @@ to stdout first.
 - **Edit the mdoc XML directly.** Touch only `<Docs>` content — never
   `MemberSignature`/`TypeSignature`, attributes, or generated files (`index.xml`, `ns-*.xml`, `_filter.xml`,
   `FrameworksIndex/`). Signatures are owned by mdoc regeneration and are visible in the PR diff.
-- **The post-step `docs-format-docs` gate MUST pass.** Any `malformed-xml` / `broken-cdata` error fails the
+- **The post-step `docs-format-docs` gate MUST pass.** Unparseable XML or a `broken-cdata` error fails the
   run and blocks the PR, so keep every edit well-formed.
 - **You need not run `docs-format-docs` yourself** — formatting and the deterministic checks run automatically
   as the post-step. You *may* run it mid-pass to read its findings (it is idempotent), but never rely on it as
