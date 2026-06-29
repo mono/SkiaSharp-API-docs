@@ -284,6 +284,69 @@
         <remarks />
       </Docs>
     </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (SkiaSharp.SKColor[] colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype SkiaSharp.SKColor[] colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(SkiaSharp.SKColor[])" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="SkiaSharp.SKColor[]" />
+      </Parameters>
+      <Docs>
+        <param name="colors">An array of exactly six colors that map to source alpha values 0 through 5 (or larger), used to visualize overdraw.</param>
+        <summary>Creates a new color filter that maps each source pixel to one of six colors based on its alpha value, useful for visualizing overdraw.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks>
+          <format type="text/markdown"><![CDATA[
+## Remarks
+
+The filter inspects the source alpha and selects a color from <paramref name="colors" />:
+an alpha of `0` produces `colors[0]`, an alpha of `1` produces `colors[1]`, and so on, with
+any alpha of `5` or larger producing `colors[5]`. This makes the filter a convenient way to
+visualize overdraw when the same pixel has been touched by multiple draw operations.
+
+The array must contain exactly six entries.
+]]></format>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (ReadOnlySpan&lt;SkiaSharp.SKColor&gt; colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKColor&gt; colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(System.ReadOnlySpan{SkiaSharp.SKColor})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="System.ReadOnlySpan&lt;SkiaSharp.SKColor&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="colors">A span of exactly six colors that map to source alpha values 0 through 5 (or larger), used to visualize overdraw.</param>
+        <summary>Creates a new color filter that maps each source pixel to one of six colors based on its alpha value, useful for visualizing overdraw.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks>
+          <format type="text/markdown"><![CDATA[
+## Remarks
+
+The filter inspects the source alpha and selects a color from <paramref name="colors" />:
+an alpha of `0` produces `colors[0]`, an alpha of `1` produces `colors[1]`, and so on, with
+any alpha of `5` or larger producing `colors[5]`. The span must contain exactly six entries.
+]]></format>
+        </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="CreateSrgbToLinearGamma">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateSrgbToLinearGamma ();" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateSrgbToLinearGamma() cil managed" />
