@@ -31,7 +31,7 @@ on:
         default: "automation/write-api-docs"
         type: string
       review_scope:
-        description: "Review-pass scope: a docs-tool selector (type:/ns:/match:/changed/all) or a plain-English theme the agent resolves (e.g. text, image filters)."
+        description: "Review-pass scope: an inventory mode (all/new/changed/file:PATH) or a plain-English theme the agent resolves (e.g. text, image filters)."
         required: false
         default: "text"
         type: string
@@ -168,8 +168,8 @@ pre-agent-steps:
   # The review half of the pipeline audits a scope of EXISTING docs (not just the
   # newly-filled placeholders). The scope is baked here rather than as a dispatch
   # input so the workflow stays dispatchable on a feature branch (workflow_dispatch
-  # validates inputs against the default branch). It can be a docs-tool selector
-  # (type:/ns:/match:/changed/all) or a plain-English theme the agent resolves; the
+  # validates inputs against the default branch). It can be an inventory mode
+  # (all/new/changed/file:PATH) or a plain-English theme the agent resolves; the
   # daily default is the high-value `text` theme. Use `changed` to review just-touched docs.
   - name: Record review scope
     env:
@@ -262,34 +262,33 @@ A4. **Fix CRITICAL findings yourself** by editing the XML directly. Skip MINOR/s
 
 ### Pass R — Review existing docs (a scope, not just placeholders)
 
-The review scope is in `review-scope.txt` at the workspace root — either a docs-tool selector
-(`type:`/`ns:`/`match:`/`changed`/`all`) or a plain-English theme. This audits docs that are **already
-filled**, which is where freshness/accuracy/example problems live.
+The review scope is in `review-scope.txt` at the workspace root — either an inventory mode (`all` /
+`new` / `changed` / `file:PATH`) or a plain-English theme. This audits docs that are **already filled**,
+which is where freshness/accuracy/example problems live.
 
-R1. **Resolve the review scope into a concrete file list.**
+R1. **Turn the review scope into a concrete file list.**
    ```bash
    SCOPE="$(cat review-scope.txt)"
    ```
-   - If `$SCOPE` is a **docs-tool selector** (`file:` / `type:` / `ns:` / `match:` / `new` / `changed` / `all`),
-     resolve it directly (fuzzy `match:` needs `-Confirm:$false` in CI):
+   - If `$SCOPE` is an **inventory mode** (`all` / `new` / `changed` / `file:PATH`), list it directly:
      ```bash
      cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
-       pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope "$SCOPE" -Confirm:$false && cd ..
+       pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 resolve-scope "$SCOPE" && cd ..
      ```
-   - Otherwise `$SCOPE` is a **plain-English theme** (e.g. `text`). There is no curated group — resolve `all`,
-     then select the files whose type/namespace fits the theme yourself (see `references/scope-resolution.md`).
-     For `text` that is the `SKFont*` / `SKTextBlob*` / `SKFontMetrics` / `SKPaint` / `SKCanvas` text APIs
-     (~16 files, one batch).
+   - Otherwise `$SCOPE` is a **plain-English theme** (e.g. `text`). There is no selector grammar — list
+     `all`, then select the files whose type/namespace fits the theme yourself (see
+     `references/scope-resolution.md`). For `text` that is the `SKFont*` / `SKTextBlob*` / `SKFontMetrics` /
+     `SKPaint` / `SKCanvas` text APIs (~16 files, one batch).
 
    Shard >40 files into batches and process them one at a time.
 
-R2. **Lint** the resolved files (deterministic, no model). For a selector, lint it directly; for a theme,
-   lint each chosen file via a `file:` selector:
+R2. **Lint** the resolved files (deterministic, no model). For an inventory mode, lint it directly; for a
+   theme, lint each chosen file via a `file:` path:
    ```bash
    cd skiasharp && DOCS_GIT_ROOT="$GITHUB_WORKSPACE" DOCS_DIR="$GITHUB_WORKSPACE/SkiaSharpAPI" \
-     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 lint "$SELECTOR" && cd ..
+     pwsh .agents/skills/api-docs/scripts/docs-tool.ps1 lint "$TARGET" && cd ..
    ```
-   (where `$SELECTOR` is `$SCOPE` for a selector, or `file:<path>` for each theme-selected file).
+   (where `$TARGET` is `$SCOPE` for an inventory mode, or `file:<path>` for each theme-selected file).
 
 R3. **Review, yourself.** For each file in the resolved list, follow `references/reviewing.md`: read the C#
    source first, then run the factual / example / quality checks against the `<Docs>` blocks. Collect the
