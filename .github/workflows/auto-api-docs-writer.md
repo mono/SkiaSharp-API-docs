@@ -155,6 +155,12 @@ pre-agent-steps:
     env:
       DOCS_HEAD_BRANCH: ${{ inputs.docs_head_branch || 'automation/write-api-docs' }}
     run: |
+      # Unattended runs must never block on an interactive git pager or a
+      # detached-HEAD advice prompt.
+      git config --global core.pager cat
+      git config --global advice.detachedHead false
+      echo "GIT_PAGER=cat" >> "$GITHUB_ENV"
+      echo "PAGER=cat" >> "$GITHUB_ENV"
       git checkout -B "$DOCS_HEAD_BRANCH"
       echo "Working branch: $(git branch --show-current)"
 
@@ -164,15 +170,31 @@ pre-agent-steps:
       name: docs-regenerated
       path: SkiaSharpAPI/
 
-  - name: Clone SkiaSharp (shallow, with submodules)
+  - name: Clone SkiaSharp (shallow, no submodules) and link the docs tree
     env:
       SKIASHARP_BRANCH: ${{ inputs.skiasharp_branch || 'main' }}
     run: |
-      git clone --depth 1 --branch "$SKIASHARP_BRANCH" \
-        --recurse-submodules --shallow-submodules \
+      # --no-recurse-submodules on purpose: the docs format/lint pass only reads
+      # in-tree files (binding/, scripts/infra/docs/, .agents/skills/api-docs/).
+      # Recursing would (a) needlessly clone the huge externals/skia submodule and
+      # (b) check the docs submodule out at skiasharp/docs/SkiaSharpAPI as a REAL
+      # directory, which collides with the symlink below — the format glob
+      # (skiasharp/docs/**/*.xml) would then walk both copies and double-count every
+      # finding (~404 files reported as ~812).
+      git clone --depth 1 --branch "$SKIASHARP_BRANCH" --no-recurse-submodules \
         https://github.com/mono/SkiaSharp.git skiasharp
+      echo "SkiaSharp HEAD: $(git -C skiasharp rev-parse HEAD)"
+      # Point the clone's docs dir at THIS workspace's regenerated docs via a single
+      # clean symlink (remove anything that might already be there first).
+      rm -rf skiasharp/docs/SkiaSharpAPI
       mkdir -p skiasharp/docs
       ln -sfn "$(pwd)/SkiaSharpAPI" skiasharp/docs/SkiaSharpAPI
+      # Fail fast if the docs tree is duplicated: the linked view must contain exactly
+      # the same number of XML files as the workspace (one copy, no nesting).
+      ws=$(find -L SkiaSharpAPI -name '*.xml' | wc -l | tr -d ' ')
+      lk=$(find -L skiasharp/docs/SkiaSharpAPI -name '*.xml' | wc -l | tr -d ' ')
+      echo "docs xml — workspace=$ws linked=$lk"
+      test "$ws" = "$lk" || { echo "::error::docs tree duplicated ($ws vs $lk)"; exit 1; }
       cd skiasharp && dotnet tool restore
 
 # -- Post-agent steps (host) ------------------------------------------
