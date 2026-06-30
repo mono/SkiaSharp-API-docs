@@ -301,6 +301,31 @@ The example above produces the following:
         <remarks />
       </Docs>
     </Member>
+    <Member MemberName="GetFastBounds">
+      <MemberSignature Language="C#" Value="public bool GetFastBounds (SkiaSharp.SKRect bounds, out SkiaSharp.SKRect fastBounds);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFastBounds(valuetype SkiaSharp.SKRect bounds, [out] valuetype SkiaSharp.SKRect&amp; fastBounds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFastBounds(SkiaSharp.SKRect,SkiaSharp.SKRect@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" />
+        <Parameter Name="fastBounds" Type="SkiaSharp.SKRect" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="bounds">The geometry bounding rectangle to expand.</param>
+        <param name="fastBounds">When this method returns <see langword="true" />, contains <paramref name="bounds" /> expanded to include the effects of the paint's stroke width, mask filter, and image filter; otherwise, contains <see cref="F:SkiaSharp.SKRect.Empty" />.</param>
+        <summary>Computes a conservative bounding rectangle that covers the result of drawing the geometry described by <paramref name="bounds" /> with this paint.</summary>
+        <returns>
+          <see langword="true" /> if a conservative bounding rectangle could be computed; otherwise, <see langword="false" /> (for example, when the paint contains effects whose bounds cannot be determined cheaply).</returns>
+        <remarks>The returned rectangle is intended for fast culling and may be larger than the actual drawn region; it should not be used to compute exact pixel coverage.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="GetFillPath">
       <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetFillPath (SkiaSharp.SKPath src);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src) cil managed" />

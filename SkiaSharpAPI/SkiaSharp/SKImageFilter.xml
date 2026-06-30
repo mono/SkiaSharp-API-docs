@@ -657,6 +657,84 @@
         <remarks />
       </Docs>
     </Member>
+    <Member MemberName="CreateCrop">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKImageFilter CreateCrop (SkiaSharp.SKRect rect);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImageFilter CreateCrop(valuetype SkiaSharp.SKRect rect) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageFilter.CreateCrop(SkiaSharp.SKRect)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rect" Type="SkiaSharp.SKRect" />
+      </Parameters>
+      <Docs>
+        <param name="rect">The crop rectangle, in the local coordinate space.</param>
+        <summary>Creates an image filter that crops its input to the specified rectangle, leaving pixels outside the rectangle transparent.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or <see langword="null" /> on error.</returns>
+        <remarks>This overload uses <see cref="F:SkiaSharp.SKShaderTileMode.Decal" /> for the tile mode and takes its input from the implicit filter source.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateCrop">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKImageFilter CreateCrop (SkiaSharp.SKRect rect, SkiaSharp.SKShaderTileMode tileMode);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImageFilter CreateCrop(valuetype SkiaSharp.SKRect rect, valuetype SkiaSharp.SKShaderTileMode tileMode) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageFilter.CreateCrop(SkiaSharp.SKRect,SkiaSharp.SKShaderTileMode)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rect" Type="SkiaSharp.SKRect" />
+        <Parameter Name="tileMode" Type="SkiaSharp.SKShaderTileMode" />
+      </Parameters>
+      <Docs>
+        <param name="rect">The crop rectangle, in the local coordinate space.</param>
+        <param name="tileMode">The tile mode that determines how pixels outside <paramref name="rect" /> are produced.</param>
+        <summary>Creates an image filter that crops its input to the specified rectangle, filling pixels outside the rectangle according to <paramref name="tileMode" />.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or <see langword="null" /> on error.</returns>
+        <remarks>This overload takes its input from the implicit filter source.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateCrop">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKImageFilter CreateCrop (SkiaSharp.SKRect rect, SkiaSharp.SKShaderTileMode tileMode, SkiaSharp.SKImageFilter? input);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImageFilter CreateCrop(valuetype SkiaSharp.SKRect rect, valuetype SkiaSharp.SKShaderTileMode tileMode, class SkiaSharp.SKImageFilter input) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageFilter.CreateCrop(SkiaSharp.SKRect,SkiaSharp.SKShaderTileMode,SkiaSharp.SKImageFilter)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="rect" Type="SkiaSharp.SKRect" />
+        <Parameter Name="tileMode" Type="SkiaSharp.SKShaderTileMode" />
+        <Parameter Name="input" Type="SkiaSharp.SKImageFilter">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="rect">The crop rectangle, in the local coordinate space.</param>
+        <param name="tileMode">The tile mode that determines how pixels outside <paramref name="rect" /> are produced.</param>
+        <param name="input">The input filter to crop, or <see langword="null" /> to use the implicit filter source.</param>
+        <summary>Creates an image filter that crops the output of <paramref name="input" /> to the specified rectangle, filling pixels outside the rectangle according to <paramref name="tileMode" />.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or <see langword="null" /> on error.</returns>
+        <remarks />
+      </Docs>
+    </Member>
     <Member MemberName="CreateDilate">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKImageFilter CreateDilate (float radiusX, float radiusY);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImageFilter CreateDilate(float32 radiusX, float32 radiusY) cil managed" />
@@ -1273,6 +1351,25 @@
         <summary>Creates an image filter that draws only the drop shadow without the source image.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or <see langword="null" /> on error.</returns>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateEmpty">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKImageFilter CreateEmpty ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImageFilter CreateEmpty() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageFilter.CreateEmpty" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageFilter</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a new "empty" image filter that produces no output.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />.</returns>
+        <remarks>An empty image filter discards its input and is useful as a placeholder or to suppress a layer's contents.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateErode">
