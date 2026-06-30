@@ -51,7 +51,7 @@
       </Parameters>
       <Docs>
         <param name="c">The source color used with the specified mode.</param>
-        <param name="mode">The blend mode mode that is applied to each color.</param>
+        <param name="mode">The blend mode that is applied to each color.</param>
         <summary>Creates a new color filter that uses the specified color and mode.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />, or <see langword="null" /> if the mode will have no effect.</returns>
         <remarks>If the <paramref name="mode" /> is <see cref="F:SkiaSharp.SKBlendMode.Dst" />, this function will return <see langword="null" /> (since that mode will have no effect on the result).</remarks>
@@ -282,6 +282,62 @@
         <summary>Creates a new luminance-to-alpha color filter.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (SkiaSharp.SKColor[] colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype SkiaSharp.SKColor[] colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(SkiaSharp.SKColor[])" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="SkiaSharp.SKColor[]" />
+      </Parameters>
+      <Docs>
+        <param name="colors">An array of six colors that map to overdraw counts of 0, 1, 2, 3, 4, and 5 or more.</param>
+        <summary>Creates a new color filter that visualizes overdraw by mapping the overdraw count of each pixel to one of six colors.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks>
+          <format type="text/markdown"><![CDATA[
+This filter is intended for debugging overdraw. It should be combined with a canvas that records overdraw counts so that the alpha channel of each pixel contains the overdraw count. The filter then replaces the pixel color according to the count.
+
+The <paramref name="colors" /> array must contain exactly six entries, one for each overdraw count from 0 up to 5 or more.
+]]></format>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (ReadOnlySpan&lt;SkiaSharp.SKColor&gt; colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKColor&gt; colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(System.ReadOnlySpan{SkiaSharp.SKColor})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="System.ReadOnlySpan&lt;SkiaSharp.SKColor&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="colors">A span of six colors that map to overdraw counts of 0, 1, 2, 3, 4, and 5 or more.</param>
+        <summary>Creates a new color filter that visualizes overdraw by mapping the overdraw count of each pixel to one of six colors.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks>
+          <format type="text/markdown"><![CDATA[
+This filter is intended for debugging overdraw. It should be combined with a canvas that records overdraw counts so that the alpha channel of each pixel contains the overdraw count. The filter then replaces the pixel color according to the count.
+
+The <paramref name="colors" /> span must contain exactly six entries, one for each overdraw count from 0 up to 5 or more.
+]]></format>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSrgbToLinearGamma">

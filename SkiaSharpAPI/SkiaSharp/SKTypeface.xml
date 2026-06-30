@@ -708,24 +708,12 @@ Typeface objects are immutable, and so they can be shared between threads.
 ## Examples
 
 ```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
+// load a typeface from a font file
+using var tf = SKTypeface.FromFile("myfont.ttf");
 
-    canvas.Clear(SKColors.White);
-
-    // load the typeface
-    var tf = SKTypeface.FromFile("myfont.ttf");
-
-    // set the paint's typeface
-    var paint = new SKPaint {
-        TextSize = 50,
-        Typeface = tf
-    };
-
-    // draw text using the typeface
-    canvas.DrawText("SkiaSharp", 50, 100, paint);
-}
+// create a font from the typeface; the font can then be used
+// with the SKCanvas text-drawing and measuring APIs
+using var font = new SKFont(tf, 50);
 ```
 ]]></format>
         </remarks>

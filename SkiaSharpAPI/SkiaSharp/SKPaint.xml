@@ -62,32 +62,29 @@ using (var surface = SKSurface.Create(info)) {
 
     canvas.Clear(SKColors.White);
 
-    var paint1 = new SKPaint {
-        TextSize = 64.0f,
+    using var paint1 = new SKPaint {
         IsAntialias = true,
         Color = new SKColor(255, 0, 0),
         Style = SKPaintStyle.Fill
     };
 
-    var paint2 = new SKPaint {
-        TextSize = 64.0f,
+    using var paint2 = new SKPaint {
         IsAntialias = true,
         Color = new SKColor(0, 136, 0),
         Style = SKPaintStyle.Stroke,
         StrokeWidth = 3
     };
 
-    var paint3 = new SKPaint {
-        TextSize = 64.0f,
+    using var paint3 = new SKPaint {
         IsAntialias = true,
         Color = new SKColor(136, 136, 136),
-        TextScaleX = 1.5f
+        Style = SKPaintStyle.StrokeAndFill,
+        StrokeWidth = 2
     };
 
-    var text = "Skia!";
-    canvas.DrawText(text, 20.0f, 64.0f, paint1);
-    canvas.DrawText(text, 20.0f, 144.0f, paint2);
-    canvas.DrawText(text, 20.0f, 224.0f, paint3);
+    canvas.DrawRect(20, 20, 100, 50, paint1);
+    canvas.DrawRect(20, 100, 100, 50, paint2);
+    canvas.DrawRect(20, 180, 100, 50, paint3);
 }
 ```
 
