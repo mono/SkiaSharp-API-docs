@@ -30,11 +30,6 @@ on:
         required: false
         default: "automation/write-api-docs"
         type: string
-      review_scope:
-        description: "Review-pass scope: an inventory mode (all/new/changed/file:PATH) or a plain-English theme the agent resolves (e.g. text, image filters)."
-        required: false
-        default: "text"
-        type: string
 
 # -- Custom jobs -------------------------------------------------------
 # Stub regeneration runs mdoc to produce the XML reference stubs. mdoc.exe is a
@@ -96,9 +91,14 @@ jobs:
           retention-days: 1
 
 # -- Checkout ----------------------------------------------------------
-# Primary: this docs repo only. SkiaSharp is cloned in pre-agent-steps.
+# Primary: this docs repo only, pinned to docs_base_branch — NOT the dispatch ref.
+# The stubs are regenerated against docs_base_branch and the PR targets it too, so
+# checking the working tree out at the same ref keeps all three in agreement; without
+# this pin, dispatching on a feature branch would review the wrong base and produce a
+# polluted diff. SkiaSharp is cloned separately in pre-agent-steps.
 checkout:
   - fetch-depth: 1
+    ref: ${{ inputs.docs_base_branch || 'main' }}
 timeout-minutes: 120
 concurrency:
   group: auto-api-docs-writer
@@ -144,14 +144,13 @@ safe-outputs:
 
 # -- Pre-agent steps (host) -------------------------------------------
 pre-agent-steps:
-  # gh-aw's checkout step makes the dispatch ref the working branch. If the agent
-  # commits there, safe-outputs (recreate_ref) force-overwrites that ref — which
-  # destroys the workflow's own source branch when the run is dispatched from a
-  # feature branch (e.g. a dev/* branch under review). Rename the working branch
-  # up-front so every commit and the PR head land on a throwaway branch, no matter
-  # which ref triggered the run. The branch name is the `docs_head_branch` input
-  # (default automation/write-api-docs). This is the host-side guarantee that backs
-  # up the "commit on the branch you're already on" rule in the prompt.
+  # The primary checkout already put the working tree on docs_base_branch (see the
+  # checkout block). gh-aw leaves that on the dispatch ref's branch name, and the
+  # agent will commit there; safe-outputs (recreate_ref) then force-overwrites that
+  # ref. If that branch were the workflow's own source (a dev/* branch under review),
+  # the force-push would destroy it. So move onto a throwaway head branch up-front —
+  # every commit and the PR head land there, never on the dispatch ref. The base
+  # content is unchanged (still docs_base_branch); only the branch name changes.
   - name: Use a dedicated PR branch (never the dispatch ref)
     env:
       DOCS_HEAD_BRANCH: ${{ inputs.docs_head_branch || 'automation/write-api-docs' }}
@@ -165,19 +164,6 @@ pre-agent-steps:
       name: docs-regenerated
       path: SkiaSharpAPI/
 
-  # The review half of the pipeline audits a scope of EXISTING docs (not just the
-  # newly-filled placeholders). The scope is baked here rather than as a dispatch
-  # input so the workflow stays dispatchable on a feature branch (workflow_dispatch
-  # validates inputs against the default branch). It can be an inventory mode
-  # (all/new/changed/file:PATH) or a plain-English theme the agent resolves; the
-  # daily default is the high-value `text` theme. Use `changed` to review just-touched docs.
-  - name: Record review scope
-    env:
-      REVIEW_SCOPE: ${{ inputs.review_scope || 'text' }}
-    run: |
-      printf '%s' "$REVIEW_SCOPE" > review-scope.txt
-      echo "Review scope (existing docs): $(cat review-scope.txt)"
-
   - name: Clone SkiaSharp (shallow, with submodules)
     env:
       SKIASHARP_BRANCH: ${{ inputs.skiasharp_branch || 'main' }}
@@ -189,17 +175,6 @@ pre-agent-steps:
       ln -sfn "$(pwd)/SkiaSharpAPI" skiasharp/docs/SkiaSharpAPI
       cd skiasharp && dotnet tool restore
 
-  # Build the managed binding so the example reviewer can compile-check snippets
-  # against a real SkiaSharp.dll. C#-only — externals-download fetches prebuilt
-  # natives (no native changes here). Non-fatal: a build hiccup must not sink the
-  # whole docs run, since reviewers also verify examples by reading source.
-  - name: Bootstrap SkiaSharp binding for snippet checks
-    continue-on-error: true
-    run: |
-      cd skiasharp
-      dotnet cake --target=externals-download
-      dotnet build binding/SkiaSharp/SkiaSharp.csproj -c Release
-
 # -- Post-agent steps (host) ------------------------------------------
 # Format docs AFTER the agent edits the XML in place. Runs on host outside the
 # sandbox so it has full access to the SkiaSharp cake scripts.
@@ -210,159 +185,66 @@ post-steps:
 
 # Auto API Docs Writer
 
-You are the agent for the unified `add` + `review` pipeline. You run **two passes** in one job:
-**(A) Add** — fill `To be added.` placeholders on newly-regenerated stubs; **(R) Review** — audit and improve
-a scope of **existing** docs. You do the whole job yourself — there is **no sub-agent fan-out**. Read these
-first, then drive the phases below:
+This workflow is a **trigger** for the SkiaSharp **api-docs** skill, run daily as a two-pass pipeline.
+**Load the skill and let it drive** — it is the single source of truth for *how* to add and review docs.
+Do the whole job yourself in the foreground; do **not** launch sub-agents.
 
-- `skiasharp/.agents/skills/api-docs/SKILL.md` — the router.
-- `skiasharp/.agents/skills/api-docs/references/adding.md` — the direct-XML add procedure (pass A).
-- `skiasharp/.agents/skills/api-docs/references/reviewing.md` — the review procedure + checks (pass R).
-- `skiasharp/.agents/skills/api-docs/references/validation.md` — the post-edit gates.
+**Read first:** `skiasharp/.agents/skills/api-docs/SKILL.md` (the router). It points to
+`references/adding.md` (add pass), `references/reviewing.md` (review pass), and the fact tables. Follow
+those procedures — everything below is only the run-specific wiring the skill does not cover.
 
-The stub regeneration (mdoc) already ran as a pre-step, so the placeholder `*.xml` files are present in
-`SkiaSharpAPI/` as uncommitted working-tree changes. You read and **edit the mdoc XML directly**; safety
-comes from the post-step `docs-format-docs` gate (it fails the run on broken XML), not a merge guard.
+## This run: format → work → format
 
-## Where the files are
+The deterministic gate `docs-format-docs` is **also your work-finder**: it lints every type file and prints a
+`[docs] <class> | file | docId | message` line per fixable defect. Run it **first** to collect the to-do
+list, **work** the files, then run it **again** to validate. It is **only the lint layer** — the real
+correctness work is the three reviewers in `references/reviewing.md`, which it cannot do.
 
-The docs repo is the **primary checkout** at the workspace root; the regenerated and edited mdoc XML lives
-under `SkiaSharpAPI/`. The SkiaSharp clone (cake scripts + skill + `binding/` source) is at `skiasharp/`,
-and `skiasharp/docs/SkiaSharpAPI` is symlinked to the workspace `SkiaSharpAPI/`, so the post-step
-`docs-format-docs` gate checks your edits directly. Discover files with plain `git`/`find` against the
-workspace checkout — there is no scope/lint cake target to call.
+1. **Collect.** `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` — capture its `[docs]`
+   findings (obsolete-in-example, accessor-verb, spelling, repeated-word, …). Those, plus any newly-introduced
+   `To be added.` placeholders (uncommitted stub changes under `SkiaSharpAPI/`) and the files changed vs the
+   base, are your work set. The run also reformats in place (idempotent, harmless).
 
-## Execution order
+2. **Work, source-first, per the skill.** For each file in the set:
+   - **Add** — fill `To be added.` placeholders per `references/adding.md` (read the C# source first).
+   - **Review** — run all three correctness reviewers from `references/reviewing.md`: **A. Factual** (claims
+     vs source, cite `path:line`), **B. Examples** (every snippet compiles, real APIs, **no obsolete
+     members**), **C. Quality** (.NET conventions, completeness, style). The deterministic findings only seed
+     this — the factual/example/quality errors are yours to find and are where the real problems hide.
+   - **Fix** CRITICAL findings (and every obsolete-in-example) by editing the XML directly; where a central
+     type is example-poor, add one correct, non-obsolete example. Touch only `<Docs>` content.
+   Work in batches of ~25–40 files. **Timebox fixing to ~10 minutes**, then stop — a smaller PR beats none.
 
-### Pass A — Add (fill placeholders)
+3. **Validate.** Re-run `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` and fix anything it
+   still reports. It **fails the run on broken XML/CDATA**, so every file you touched must stay well-formed.
+   (The host re-runs it after you as a backstop, but you own getting it green.)
 
-A1. **Discover.** The regenerated stubs are uncommitted working-tree changes. List the changed type docs
-   that still hold a `To be added.` placeholder (excluding generated files), and shard into ~25–40-file
-   batches:
-   ```bash
-   git status --porcelain -- SkiaSharpAPI/ | awk '{print $2}' \
-     | grep -E '\.xml$' | grep -vE '(^|/)(index|_filter|ns-[^/]*)\.xml$|/FrameworksIndex/' \
-     | xargs -r grep -l 'To be added\.'
-   ```
+## Paths in this workflow
 
-A2. **Write (per batch), yourself.** Following `references/adding.md`, for each file read the C# source first,
-   then fill only the empty/`To be added.` fields and edit the XML in place. A type you cannot document with
-   certainty keeps its placeholder (note it as a `DEFERRED` line) so the next run re-detects it. Process the
-   batches one at a time so each stays in working memory.
+The **docs repo is the workspace root**; the SkiaSharp clone (skill, cake scripts, `binding/` source) is at
+`skiasharp/`, with `skiasharp/docs/SkiaSharpAPI` symlinked to the workspace `SkiaSharpAPI/`. Translate
+SKILL.md paths accordingly:
 
-A3. **Review the written batch.** Review the batch's files against the checks in `references/reviewing.md`
-   and note the findings. To surface the deterministic findings (`obsolete-in-example`, accessor-verb,
-   spelling, …) you may run `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` — it prints
-   `[docs] <class> | …` lines and also formats (harmless, idempotent).
+| SKILL.md reference | Here |
+|---|---|
+| `docs/SkiaSharpAPI/` | `SkiaSharpAPI/` (workspace root) |
+| `.agents/skills/api-docs/` | `skiasharp/.agents/skills/api-docs/` |
+| `binding/SkiaSharp/`, `binding/HarfBuzzSharp/` | `skiasharp/binding/...` |
 
-A4. **Fix CRITICAL findings yourself** by editing the XML directly. Skip MINOR/style for the automated run.
+## Commit and open the PR
 
-> If no changed `*.xml` still contains `To be added.` (the common case once docs are filled), pass A is a
-> no-op — skip straight to pass R.
-
-### Pass R — Review existing docs (a scope, not just placeholders)
-
-The review scope is in `review-scope.txt` at the workspace root — either an inventory mode (`all` /
-`new` / `changed` / `file:PATH`) or a plain-English theme. This audits docs that are **already filled**,
-which is where freshness/accuracy/example problems live.
-
-R1. **Turn the review scope into a concrete file list** with plain `git`/`find` against the workspace docs
-   (always drop generated files: `index.xml`, `ns-*.xml`, `_filter.xml`, `FrameworksIndex/`).
-   ```bash
-   SCOPE="$(cat review-scope.txt)"
-   ```
-   - `changed` / `new`: the working-tree diff — `git status --porcelain -- SkiaSharpAPI/ | awk '{print $2}'`.
-   - `all`: every non-generated type doc — `find SkiaSharpAPI -name '*.xml'`.
-   - `file:PATH`: that one path.
-   - Otherwise `$SCOPE` is a **plain-English theme** (e.g. `text`). List `all`, then select the files whose
-     type/namespace fits the theme yourself. For `text` that is the `SKFont*` / `SKTextBlob*` /
-     `SKFontMetrics` / `SKPaint` / `SKCanvas` text APIs (~16 files, one batch).
-
-   Shard >40 files into batches and process them one at a time.
-
-R2. **(Optional) Surface deterministic findings.** Run `cd skiasharp && dotnet cake --target=docs-format-docs
-   && cd ..` to print the `[docs] <class> | …` findings (obsolete-in-example, accessor-verb, spelling,
-   repeated word, …) across the tree. This is the same deterministic check the post-step gate runs; it also
-   formats (harmless). Fold its output into your own review below.
-
-R3. **Review, yourself.** For each file in the resolved list, follow `references/reviewing.md`: read the C#
-   source first, then run the factual / example / quality checks against the `<Docs>` blocks. Collect the
-   deterministic findings plus your own into one deduped list.
-
-R4. **Fix (gated) yourself** by editing the XML directly. Priority order: (a) all **CRITICAL** findings,
-   (b) **obsolete-in-example** findings (text APIs often carry legacy `paint.TextSize` / `TextAlign` /
-   `DrawText(string,x,y,paint)` examples — migrate them to `SKFont`), (c) where a central type is example-poor
-   (`SKFont`, `SKTypeface`, `SKPaint`), add one correct, **compiling** example, porting the `SKCanvas`/
-   `SKShader` quality bar. **Budget:** timebox fixing to ~10 minutes — then stop and open the PR. A smaller
-   PR beats none.
-
-### Finalize
-
-V. **The validation gate is automatic.** The host post-step runs `docs-format-docs`, which formats every doc
-   and **fails the run on broken XML** — unparseable XML throws when it is loaded, and a destroyed CDATA block
-   logs a `broken-cdata` error — so a malformed edit can never ship a PR. You do **not** run it as your final
-   step. Just make sure every file you touched stays well-formed and you changed only `<Docs>` content
-   (signatures are owned by mdoc regeneration).
-
-C. **Commit and PR.** If any pass produced edits, **commit on the branch you are already on** — the host
-   prepared a dedicated throwaway PR branch for you before you started (it is **not** the dispatch ref). Do
-   **not** switch or create another branch. Stage **only** hand-edited type docs under `SkiaSharpAPI/`, and
-   **unstage the generated files** (stub regeneration rewrites them; they must never appear in the PR):
+1. **Commit on the branch you are already on** — the host prepared a dedicated throwaway PR branch before you
+   started; it is **not** the dispatch ref. Do **not** `git checkout` or create another branch: safe-outputs
+   force-overwrites the branch you commit on, so committing on the dispatch ref would destroy the workflow
+   source. Stage only hand-edited type docs and drop the generated files:
    ```bash
    git add SkiaSharpAPI/
    git reset -q -- SkiaSharpAPI/index.xml 'SkiaSharpAPI/ns-*.xml' SkiaSharpAPI/_filter.xml SkiaSharpAPI/FrameworksIndex/
    git commit -m "Fill and review API documentation"
    ```
-   **Never `git checkout` the branch the workflow was dispatched from.** That branch may be the workflow's own
-   source branch, and `safe-outputs` (`recreate_ref: true`) force-overwrites the PR head ref — committing on the
-   dispatch ref would destroy the workflow source. Staging only `SkiaSharpAPI/` also keeps any workflow files out
-   of the PR. Then use the `create_pull_request` tool:
-   - Branch: the current working branch (leave the `create_pull_request` branch to the host default — do not
-     hardcode a name)
-   - Title: `Fill and review API documentation`
-   - Body: include (a) what pass A filled (file count) and what pass R reviewed (scope + file count), (b) a
-     short **Findings summary** (counts by severity + the machine `FINDING |` block), and (c) what you fixed
-     vs deferred.
+2. **Open the PR** with the `create_pull_request` tool — title `Fill and review API documentation`; body:
+   what you filled (file count), what you reviewed (file count), a **Findings summary** (counts by severity +
+   the machine `FINDING |` block from `references/reviewing.md`), and what you fixed vs deferred. If there are
+   no changes, call `noop` instead — but print the Findings summary first.
 
-If there are no documentation changes, call the `noop` tool instead — but still print the Findings summary
-to stdout first.
-
-## Critical rules
-
-- **Edit the mdoc XML directly.** Touch only `<Docs>` content — never
-  `MemberSignature`/`TypeSignature`, attributes, or generated files (`index.xml`, `ns-*.xml`, `_filter.xml`,
-  `FrameworksIndex/`). Signatures are owned by mdoc regeneration and are visible in the PR diff.
-- **The post-step `docs-format-docs` gate MUST pass.** Unparseable XML or a `broken-cdata` error fails the
-  run and blocks the PR, so keep every edit well-formed.
-- **You need not run `docs-format-docs` yourself** — formatting and the deterministic checks run automatically
-  as the post-step. You *may* run it mid-pass to read its findings (it is idempotent), but never rely on it as
-  your final step.
-- **Every code example you add or change must compile** against the real `SkiaSharp.dll` (bootstrapped in a
-  pre-step) and use **no obsolete members** (see `references/obsolete-api-map.md`). A non-compiling example is
-  worse than none.
-- **Do everything yourself, in the foreground.** Do **not** launch sub-agents — discovery, writing, review,
-  fixing, committing, and PR creation are all your own work. The gh-aw sandbox does not honor
-  per-sub-agent models, and backgrounding a terminal agent and then ending your turn before the PR is created
-  kills the session with no PR.
-- **Budget awareness:** Prioritize reaching the PR. Pass A (add) is usually a no-op now, so spend the budget
-  on pass R. **Timebox your fixing to ~10 minutes; if you exceed it, stop fixing and open the PR.** A smaller
-  PR beats none — the post-step gate still validates whatever you ship.
-- **Always commit on the branch you are already on** (the host prepared a dedicated throwaway PR branch before
-  you started) and **never `git checkout` the branch you were dispatched from.** `safe-outputs` preserves the
-  branch you commit on and force-overwrites it (`recreate_ref: true`). If you commit on the dispatch ref (which
-  can be the workflow's own source branch), that branch is destroyed. Do not switch or create another branch
-  even when the current branch looks like a feature branch ahead of `main`, and stage only `SkiaSharpAPI/`.
-- **COMPLETION GATE:** Your session is NOT complete until you have called `create_pull_request` or `noop`.
-  If you think you're done but did neither, retrace your steps and finish.
-
-## Path differences from SKILL.md
-
-Because this workflow runs from the docs repo (not SkiaSharp), paths differ:
-
-| SKILL.md reference | Actual path in this workflow |
-|---|---|
-| `docs/SkiaSharpAPI/` | `SkiaSharpAPI/` (repo root) |
-| `.agents/skills/api-docs/` | `skiasharp/.agents/skills/api-docs/` |
-| `binding/SkiaSharp/` | `skiasharp/binding/SkiaSharp/` |
-| `binding/HarfBuzzSharp/` | `skiasharp/binding/HarfBuzzSharp/` |
-| `samples/Gallery/Shared/Samples/` | `skiasharp/samples/Gallery/Shared/Samples/` |
+**COMPLETION GATE:** the run is not done until you have called `create_pull_request` or `noop`.
