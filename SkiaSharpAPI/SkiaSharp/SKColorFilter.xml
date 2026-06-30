@@ -51,7 +51,7 @@
       </Parameters>
       <Docs>
         <param name="c">The source color used with the specified mode.</param>
-        <param name="mode">The blend mode mode that is applied to each color.</param>
+        <param name="mode">The blend mode that is applied to each color.</param>
         <summary>Creates a new color filter that uses the specified color and mode.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />, or <see langword="null" /> if the mode will have no effect.</returns>
         <remarks>If the <paramref name="mode" /> is <see cref="F:SkiaSharp.SKBlendMode.Dst" />, this function will return <see langword="null" /> (since that mode will have no effect on the result).</remarks>
@@ -281,6 +281,50 @@
       <Docs>
         <summary>Creates a new luminance-to-alpha color filter.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (SkiaSharp.SKColor[] colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype SkiaSharp.SKColor[] colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(SkiaSharp.SKColor[])" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="SkiaSharp.SKColor[]" />
+      </Parameters>
+      <Docs>
+        <param name="colors">The palette of colors used to visualize overdraw levels.</param>
+        <summary>Creates a color filter that maps each source alpha value to a color from the specified palette, used to visualize overdraw when drawing.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />, or <see langword="null" /> on error.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (ReadOnlySpan&lt;SkiaSharp.SKColor&gt; colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKColor&gt; colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(System.ReadOnlySpan{SkiaSharp.SKColor})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="System.ReadOnlySpan&lt;SkiaSharp.SKColor&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="colors">The palette of colors used to visualize overdraw levels.</param>
+        <summary>Creates a color filter that maps each source alpha value to a color from the specified palette, used to visualize overdraw when drawing.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />, or <see langword="null" /> on error.</returns>
         <remarks />
       </Docs>
     </Member>
