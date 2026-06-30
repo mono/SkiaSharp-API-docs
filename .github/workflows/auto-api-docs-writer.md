@@ -223,7 +223,7 @@ list, **work** the files, then run it **again** to validate. It is **only the li
 correctness work is the three reviewers in `references/reviewing.md`, which it cannot do.
 
 1. **Collect.** `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` — capture its `[docs]`
-   findings (obsolete-in-example, accessor-verb, spelling, repeated-word, …). Those, plus any newly-introduced
+   findings (accessor-verb, spelling, repeated-word, missing-docs, …). Those, plus any newly-introduced
    `To be added.` placeholders (uncommitted stub changes under `SkiaSharpAPI/`) and the files changed vs the
    base, are your work set. The run also reformats in place (idempotent, harmless).
 
@@ -233,8 +233,9 @@ correctness work is the three reviewers in `references/reviewing.md`, which it c
      vs source, cite `path:line`), **B. Examples** (every snippet compiles, real APIs, **no obsolete
      members**), **C. Quality** (.NET conventions, completeness, style). The deterministic findings only seed
      this — the factual/example/quality errors are yours to find and are where the real problems hide.
-   - **Fix** CRITICAL findings (and every obsolete-in-example) by editing the XML directly; where a central
-     type is example-poor, add one correct, non-obsolete example. Touch only `<Docs>` content.
+   - **Fix** CRITICAL findings by editing the XML directly; obsolete members in examples are caught by
+     reviewer B (the linter does not flag them — `obsolete-api-map.md` explains why). Where a central type
+     is example-poor, add one correct, non-obsolete example. Touch only `<Docs>` content.
    Work in batches of ~25–40 files. **Timebox fixing to ~10 minutes**, then stop — a smaller PR beats none.
 
 3. **Validate.** Re-run `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` and fix anything it
