@@ -4,10 +4,7 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Mac.SKGLLayer" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-    <AssemblyVersion>2.80.0.0</AssemblyVersion>
-    <AssemblyVersion>2.88.0.0</AssemblyVersion>
-    <AssemblyVersion>3.116.0.0</AssemblyVersion>
-    <AssemblyVersion>3.119.0.0</AssemblyVersion>
+    <AssemblyVersion>4.150.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>CoreAnimation.CAOpenGLLayer</BaseTypeName>
@@ -25,10 +22,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -43,10 +37,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSize</ReturnType>
@@ -64,10 +55,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -87,77 +75,6 @@
         <remarks />
       </Docs>
     </Member>
-    <Member MemberName="DrawInSurface">
-      <MemberSignature Language="C#" Value="public virtual void DrawInSurface (SkiaSharp.SKSurface surface, SkiaSharp.GRBackendRenderTargetDesc renderTarget);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DrawInSurface(class SkiaSharp.SKSurface surface, valuetype SkiaSharp.GRBackendRenderTargetDesc renderTarget) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Mac.SKGLLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88">
-          <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
-        </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88">
-          <AttributeName Language="C#">[System.Obsolete("Use OnPaintSurface(SKPaintGLSurfaceEventArgs) instead.")]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="surface" Type="SkiaSharp.SKSurface" Index="0" FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88" />
-        <Parameter Name="renderTarget" Type="SkiaSharp.GRBackendRenderTargetDesc" Index="1" FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88" />
-      </Parameters>
-      <Docs>
-        <param name="surface">The surface to draw on.</param>
-        <param name="renderTarget">The render target that is currently being drawn.</param>
-        <summary>Implement this to draw on the canvas.</summary>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-There are two ways to draw on this surface: by overriding the
-<xref:SkiaSharp.Views.Mac.SKGLLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)>
-method, or by attaching a handler to the
-<xref:SkiaSharp.Views.Mac.SKGLLayer.PaintSurface>
-event.
-
-> [!IMPORTANT]
-> If this method is overridden, then the base must be called, otherwise the
-> event may not be fired.
-
-> [!NOTE]
-> If SkiaSharp version v1.68.x or greater is being used, then the
-> <xref:SkiaSharp.Views.Mac.SKGLLayer.OnPaintSurface(SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs)>
-> method should be overridden instead of
-> <xref:SkiaSharp.Views.Mac.SKGLLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)>.
-
-## Examples
-
-```csharp
-public override void DrawInSurface (SKSurface surface, SKBackendRenderTargetDesc renderTarget)
-{
-    // call the base method
-    base.DrawInSurface (surface, renderTarget);
-
-    var surfaceWidth = renderTarget.Width;
-    var surfaceHeight = renderTarget.Height;
-
-    var canvas = surface.Canvas;
-
-    // draw on the canvas
-
-    canvas.Flush ();
-}
-```
-]]></format>
-        </remarks>
-      </Docs>
-    </Member>
     <Member MemberName="GRContext">
       <MemberSignature Language="C#" Value="public SkiaSharp.GRContext GRContext { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.GRContext GRContext" />
@@ -165,10 +82,7 @@ public override void DrawInSurface (SKSurface surface, SKBackendRenderTargetDesc
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRContext</ReturnType>
@@ -186,10 +100,7 @@ public override void DrawInSurface (SKSurface surface, SKBackendRenderTargetDesc
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -213,12 +124,6 @@ event.
 > [!IMPORTANT]
 > If this method is overridden, then the base must be called, otherwise the
 > event will not be fired.
-
-> [!NOTE]
-> If a version of SkiaSharp prior to version v1.68.x is being used, then the
-> <xref:SkiaSharp.Views.Mac.SKGLLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)>
-> method should be overridden instead of
-> <xref:SkiaSharp.Views.Mac.SKGLLayer.OnPaintSurface(SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs)>.
 
 ## Examples
 
@@ -250,10 +155,7 @@ protected override void OnPaintSurface (SKPaintGLSurfaceEventArgs e)
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs&gt;</ReturnType>
@@ -269,12 +171,6 @@ There are two ways to draw on this surface: by overriding the
 method, or by attaching a handler to the
 <xref:SkiaSharp.Views.Mac.SKGLLayer.PaintSurface>
 event.
-
-> [!NOTE]
-> If a version of SkiaSharp prior to version v1.68.x is being used, then the
-> <xref:SkiaSharp.Views.Mac.SKGLLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.GRBackendRenderTargetDesc)>
-> method should be overridden instead of
-> <xref:SkiaSharp.Views.Mac.SKGLLayer.OnPaintSurface(SkiaSharp.Views.Mac.SKPaintGLSurfaceEventArgs)>.
 
 ## Examples
 
@@ -302,10 +198,7 @@ myLayer.PaintSurface += (sender, e) => {
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -316,33 +209,6 @@ myLayer.PaintSurface += (sender, e) => {
       <Docs>
         <param name="glContext">The rendering context to release.</param>
         <summary>Releases the specified rendering context.</summary>
-        <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="SKDelegate">
-      <MemberSignature Language="C#" Value="public SkiaSharp.Views.Mac.ISKGLLayerDelegate SKDelegate { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.Views.Mac.ISKGLLayerDelegate SKDelegate" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Mac.SKGLLayer.SKDelegate" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88">
-          <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
-        </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88">
-          <AttributeName Language="C#">[System.Obsolete("Use PaintSurface instead.")]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>SkiaSharp.Views.Mac.ISKGLLayerDelegate</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets the layer's delegate object.</summary>
-        <value>The layer's delegate object.</value>
         <remarks />
       </Docs>
     </Member>

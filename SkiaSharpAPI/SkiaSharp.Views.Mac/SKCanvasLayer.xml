@@ -4,10 +4,7 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Mac.SKCanvasLayer" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-    <AssemblyVersion>2.80.0.0</AssemblyVersion>
-    <AssemblyVersion>2.88.0.0</AssemblyVersion>
-    <AssemblyVersion>3.116.0.0</AssemblyVersion>
-    <AssemblyVersion>3.119.0.0</AssemblyVersion>
+    <AssemblyVersion>4.150.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>CoreAnimation.CALayer</BaseTypeName>
@@ -25,10 +22,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -43,10 +37,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSize</ReturnType>
@@ -64,10 +55,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -89,10 +77,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -106,77 +91,6 @@
         <remarks />
       </Docs>
     </Member>
-    <Member MemberName="DrawInSurface">
-      <MemberSignature Language="C#" Value="public virtual void DrawInSurface (SkiaSharp.SKSurface surface, SkiaSharp.SKImageInfo info);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DrawInSurface(class SkiaSharp.SKSurface surface, valuetype SkiaSharp.SKImageInfo info) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.Views.Mac.SKCanvasLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88">
-          <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
-        </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88">
-          <AttributeName Language="C#">[System.Obsolete("Use OnPaintSurface(SKPaintSurfaceEventArgs) instead.")]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="surface" Type="SkiaSharp.SKSurface" Index="0" FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88" />
-        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" Index="1" FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88" />
-      </Parameters>
-      <Docs>
-        <param name="surface">The surface to draw on.</param>
-        <param name="info">The information about the surface.</param>
-        <summary>Implement this to draw on the canvas.</summary>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-There are two ways to draw on this surface: by overriding the
-<xref:SkiaSharp.Views.Mac.SKCanvasLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)>
-method, or by attaching a handler to the
-<xref:SkiaSharp.Views.Mac.SKCanvasLayer.PaintSurface>
-event.
-
-> [!IMPORTANT]
-> If this method is overridden, then the base must be called, otherwise the
-> event may not be fired.
-
-> [!NOTE]
-> If SkiaSharp version v1.68.x or greater is being used, then the
-> <xref:SkiaSharp.Views.Mac.SKCanvasLayer.OnPaintSurface(SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs)>
-> method should be overridden instead of
-> <xref:SkiaSharp.Views.Mac.SKCanvasLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)>.
-
-## Examples
-
-```csharp
-public override void DrawInSurface (SKSurface surface, SKImageInfo info)
-{
-    // call the base method
-    base.DrawInSurface (surface, info);
-
-    var surfaceWidth = info.Width;
-    var surfaceHeight = info.Height;
-
-    var canvas = surface.Canvas;
-
-    // draw on the canvas
-
-    canvas.Flush ();
-}
-```
-]]></format>
-        </remarks>
-      </Docs>
-    </Member>
     <Member MemberName="IgnorePixelScaling">
       <MemberSignature Language="C#" Value="public bool IgnorePixelScaling { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool IgnorePixelScaling" />
@@ -184,10 +98,7 @@ public override void DrawInSurface (SKSurface surface, SKImageInfo info)
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -206,10 +117,7 @@ public override void DrawInSurface (SKSurface surface, SKImageInfo info)
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -233,12 +141,6 @@ event.
 > [!IMPORTANT]
 > If this method is overridden, then the base must be called, otherwise the
 > event will not be fired.
-
-> [!NOTE]
-> If a version of SkiaSharp prior to version v1.68.x is being used, then the
-> <xref:SkiaSharp.Views.Mac.SKCanvasLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)>
-> method should be overridden instead of
-> <xref:SkiaSharp.Views.Mac.SKCanvasLayer.OnPaintSurface(SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs)>.
 
 ## Examples
 
@@ -270,10 +172,7 @@ protected override void OnPaintSurface (SKPaintSurfaceEventArgs e)
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-        <AssemblyVersion>3.116.0.0</AssemblyVersion>
-        <AssemblyVersion>3.119.0.0</AssemblyVersion>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs&gt;</ReturnType>
@@ -289,12 +188,6 @@ There are two ways to draw on this surface: by overriding the
 method, or by attaching a handler to the
 <xref:SkiaSharp.Views.Mac.SKCanvasLayer.PaintSurface>
 event.
-
-> [!NOTE]
-> If a version of SkiaSharp prior to version v1.68.x is being used, then the
-> <xref:SkiaSharp.Views.Mac.SKCanvasLayer.DrawInSurface(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo)>
-> method should be overridden instead of
-> <xref:SkiaSharp.Views.Mac.SKCanvasLayer.OnPaintSurface(SkiaSharp.Views.Mac.SKPaintSurfaceEventArgs)>.
 
 ## Examples
 
@@ -313,33 +206,6 @@ myLayer.PaintSurface += (sender, e) => {
 ```
 ]]></format>
         </remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="SKDelegate">
-      <MemberSignature Language="C#" Value="public SkiaSharp.Views.Mac.ISKCanvasLayerDelegate SKDelegate { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.Views.Mac.ISKCanvasLayerDelegate SKDelegate" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Mac.SKCanvasLayer.SKDelegate" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
-        <AssemblyVersion>2.80.0.0</AssemblyVersion>
-        <AssemblyVersion>2.88.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88">
-          <AttributeName Language="C#">[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]</AttributeName>
-        </Attribute>
-        <Attribute FrameworkAlternate="skiasharp-views-2.80;skiasharp-views-2.88">
-          <AttributeName Language="C#">[System.Obsolete("Use PaintSurface instead.")]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>SkiaSharp.Views.Mac.ISKCanvasLayerDelegate</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets the layer's delegate object.</summary>
-        <value>The layer's delegate object.</value>
-        <remarks />
       </Docs>
     </Member>
   </Members>

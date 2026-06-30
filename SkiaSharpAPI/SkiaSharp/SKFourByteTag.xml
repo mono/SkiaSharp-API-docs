@@ -1,0 +1,309 @@
+<Type Name="SKFourByteTag" FullName="SkiaSharp.SKFourByteTag">
+  <TypeSignature Language="C#" Value="public readonly struct SKFourByteTag : IEquatable&lt;SkiaSharp.SKFourByteTag&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKFourByteTag extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.SKFourByteTag&gt;" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKFourByteTag" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp</AssemblyName>
+    <AssemblyVersion>4.150.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.ValueType</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.SKFourByteTag&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Represents a four-byte OpenType tag used to identify tables, axes, and scripts.</summary>
+    <remarks><![CDATA[
+## Remarks
+
+`SKFourByteTag` is a read-only struct that wraps a 32-bit unsigned integer whose four bytes correspond to four ASCII characters. This matches the `SkFourByteTag` representation used throughout the Skia/OpenType APIs for table identifiers (e.g., `cmap`, `GSUB`) and variation axis tags (e.g., `wght`, `wdth`).
+
+When constructed from four `char` values, the first character (`c1`) occupies the high byte and the last (`c4`) the low byte: `(c1 << 24) | (c2 << 16) | (c3 << 8) | c4`.
+
+`Parse` accepts a string of 1–4 ASCII characters, right-padding with spaces if shorter than 4 characters.
+
+`ToString` returns the four-character ASCII string representation.
+
+## Examples
+
+Creating a tag from a string and from individual characters:
+
+```csharp
+var wghtFromString = SKFourByteTag.Parse("wght");
+var wghtFromChars  = new SKFourByteTag('w', 'g', 'h', 't');
+Console.WriteLine(wghtFromString == wghtFromChars); // True
+Console.WriteLine(wghtFromString);                  // wght
+```
+]]></remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SKFourByteTag (uint value);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int32 value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.#ctor(System.UInt32)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="value" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="value">The raw 32-bit packed tag value.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKFourByteTag" /> struct from a raw 32-bit value.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SKFourByteTag (char c1, char c2, char c3, char c4);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(char c1, char c2, char c3, char c4) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.#ctor(System.Char,System.Char,System.Char,System.Char)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="c1" Type="System.Char" />
+        <Parameter Name="c2" Type="System.Char" />
+        <Parameter Name="c3" Type="System.Char" />
+        <Parameter Name="c4" Type="System.Char" />
+      </Parameters>
+      <Docs>
+        <param name="c1">The first (most significant) character of the tag.</param>
+        <param name="c2">The second character of the tag.</param>
+        <param name="c3">The third character of the tag.</param>
+        <param name="c4">The fourth (least significant) character of the tag.</param>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKFourByteTag" /> struct from four ASCII characters.</summary>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.SKFourByteTag other);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.SKFourByteTag other) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.Equals(SkiaSharp.SKFourByteTag)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IEquatable`1.Equals(`0)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="other" Type="SkiaSharp.SKFourByteTag" />
+      </Parameters>
+      <Docs>
+        <param name="other">The <see cref="T:SkiaSharp.SKFourByteTag" /> to compare with this instance.</param>
+        <summary>Indicates whether this tag is equal to another <see cref="T:SkiaSharp.SKFourByteTag" />.</summary>
+        <returns>
+          <see langword="true" /> if both tags have the same packed value; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object? obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="obj">The object to compare with this instance.</param>
+        <summary>Indicates whether this tag is equal to the specified object.</summary>
+        <returns>
+          <see langword="true" /> if <paramref name="obj" /> is an <see cref="T:SkiaSharp.SKFourByteTag" /> with the same packed value; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns a hash code for this tag.</summary>
+        <returns>A hash code for this <see cref="T:SkiaSharp.SKFourByteTag" /> instance.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.SKFourByteTag left, SkiaSharp.SKFourByteTag right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.SKFourByteTag left, valuetype SkiaSharp.SKFourByteTag right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.op_Equality(SkiaSharp.SKFourByteTag,SkiaSharp.SKFourByteTag)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKFourByteTag" />
+        <Parameter Name="right" Type="SkiaSharp.SKFourByteTag" />
+      </Parameters>
+      <Docs>
+        <param name="left">The first <see cref="T:SkiaSharp.SKFourByteTag" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.SKFourByteTag" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFourByteTag" /> values are equal.</summary>
+        <returns>
+          <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator uint (SkiaSharp.SKFourByteTag tag);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname unsigned int32 op_Implicit(valuetype SkiaSharp.SKFourByteTag tag) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.op_Implicit(SkiaSharp.SKFourByteTag)~System.UInt32" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.UInt32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tag" Type="SkiaSharp.SKFourByteTag" />
+      </Parameters>
+      <Docs>
+        <param name="tag">The <see cref="T:SkiaSharp.SKFourByteTag" /> to convert.</param>
+        <summary>Implicitly converts an <see cref="T:SkiaSharp.SKFourByteTag" /> to its underlying 32-bit unsigned integer value.</summary>
+        <returns>The underlying 32-bit packed value of the tag.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Implicit">
+      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.SKFourByteTag (uint tag);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.SKFourByteTag op_Implicit(unsigned int32 tag) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.op_Implicit(System.UInt32)~SkiaSharp.SKFourByteTag" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKFourByteTag</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tag" Type="System.UInt32" />
+      </Parameters>
+      <Docs>
+        <param name="tag">The raw 32-bit packed value to store.</param>
+        <summary>Implicitly converts a 32-bit unsigned integer to an <see cref="T:SkiaSharp.SKFourByteTag" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKFourByteTag" /> wrapping the specified value.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.SKFourByteTag left, SkiaSharp.SKFourByteTag right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.SKFourByteTag left, valuetype SkiaSharp.SKFourByteTag right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.op_Inequality(SkiaSharp.SKFourByteTag,SkiaSharp.SKFourByteTag)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.SKFourByteTag" />
+        <Parameter Name="right" Type="SkiaSharp.SKFourByteTag" />
+      </Parameters>
+      <Docs>
+        <param name="left">The first <see cref="T:SkiaSharp.SKFourByteTag" /> to compare.</param>
+        <param name="right">The second <see cref="T:SkiaSharp.SKFourByteTag" /> to compare.</param>
+        <summary>Determines whether two <see cref="T:SkiaSharp.SKFourByteTag" /> values are not equal.</summary>
+        <returns>
+          <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, <see langword="false" />.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Parse">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKFourByteTag Parse (string? tag);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.SKFourByteTag Parse(string tag) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.Parse(System.String)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKFourByteTag</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="tag" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="tag">A string of up to four ASCII characters. Shorter strings are padded with spaces on the right; longer strings are truncated.</param>
+        <summary>Parses a string of up to four ASCII characters into an <see cref="T:SkiaSharp.SKFourByteTag" />.</summary>
+        <returns>An <see cref="T:SkiaSharp.SKFourByteTag" /> representing the four-byte packed tag.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKFourByteTag.ToString" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns the four-character ASCII string representation of this tag.</summary>
+        <returns>A four-character ASCII string representation of this tag.</returns>
+        <remarks></remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
