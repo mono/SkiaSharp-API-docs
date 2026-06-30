@@ -301,6 +301,33 @@ The example above produces the following:
         <remarks />
       </Docs>
     </Member>
+    <Member MemberName="GetFastBounds">
+      <MemberSignature Language="C#" Value="public bool GetFastBounds (SkiaSharp.SKRect bounds, out SkiaSharp.SKRect fastBounds);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFastBounds(valuetype SkiaSharp.SKRect bounds, [out] valuetype SkiaSharp.SKRect&amp; fastBounds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFastBounds(SkiaSharp.SKRect,SkiaSharp.SKRect@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" />
+        <Parameter Name="fastBounds" Type="SkiaSharp.SKRect" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="bounds">The original bounds of the geometry to be drawn, before any paint effects are considered.</param>
+        <param name="fastBounds">When this method returns, contains a conservative bounding rectangle that includes any stroke width, mask filter, image filter, or other effects on this paint applied to <paramref name="bounds" />; otherwise, <see cref="F:SkiaSharp.SKRect.Empty" /> if the bounds cannot be computed. This parameter is treated as uninitialized.</param>
+        <summary>Attempts to compute a conservative bounding rectangle that contains the result of drawing the supplied bounds with this paint.</summary>
+        <returns>
+          <see langword="true" /> if a conservative bounding rectangle could be computed and was written to <paramref name="fastBounds" />; otherwise, <see langword="false" />.</returns>
+        <remarks>
+          <para>The returned bounds are conservative: they may be larger than the actual affected pixels, but they are guaranteed to enclose them. This is useful for quickly culling draws that fall outside a clip without performing the full draw.</para>
+        </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="GetFillPath">
       <MemberSignature Language="C#" Value="public SkiaSharp.SKPath GetFillPath (SkiaSharp.SKPath src);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src) cil managed" />

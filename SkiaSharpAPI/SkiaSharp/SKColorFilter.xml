@@ -51,7 +51,7 @@
       </Parameters>
       <Docs>
         <param name="c">The source color used with the specified mode.</param>
-        <param name="mode">The blend mode mode that is applied to each color.</param>
+        <param name="mode">The blend mode that is applied to each color.</param>
         <summary>Creates a new color filter that uses the specified color and mode.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />, or <see langword="null" /> if the mode will have no effect.</returns>
         <remarks>If the <paramref name="mode" /> is <see cref="F:SkiaSharp.SKBlendMode.Dst" />, this function will return <see langword="null" /> (since that mode will have no effect on the result).</remarks>
@@ -282,6 +282,60 @@
         <summary>Creates a new luminance-to-alpha color filter.</summary>
         <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
         <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (SkiaSharp.SKColor[] colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype SkiaSharp.SKColor[] colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(SkiaSharp.SKColor[])" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="SkiaSharp.SKColor[]" />
+      </Parameters>
+      <Docs>
+        <param name="colors">An array of exactly six colors that map to overdraw counts: index 0 is used where no draw occurs, indexes 1 through 4 correspond to one through four overlapping draws, and index 5 is used for five or more overlapping draws.</param>
+        <summary>Creates a color filter that visualizes overdraw by mapping the number of times each pixel has been drawn to one of the specified colors.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks>
+          <para>This is the same operation used by Skia's overdraw debug visualizer to highlight regions that are painted multiple times.</para>
+        </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="colors" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="colors" /> does not contain exactly six entries.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateOverdraw">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKColorFilter CreateOverdraw (ReadOnlySpan&lt;SkiaSharp.SKColor&gt; colors);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKColorFilter CreateOverdraw(valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKColor&gt; colors) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKColorFilter.CreateOverdraw(System.ReadOnlySpan{SkiaSharp.SKColor})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="colors" Type="System.ReadOnlySpan&lt;SkiaSharp.SKColor&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="colors">A span of exactly six colors that map to overdraw counts: index 0 is used where no draw occurs, indexes 1 through 4 correspond to one through four overlapping draws, and index 5 is used for five or more overlapping draws.</param>
+        <summary>Creates a color filter that visualizes overdraw by mapping the number of times each pixel has been drawn to one of the specified colors.</summary>
+        <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
+        <remarks>
+          <para>This is the same operation used by Skia's overdraw debug visualizer to highlight regions that are painted multiple times.</para>
+        </remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="colors" /> does not contain exactly six entries.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreateSrgbToLinearGamma">
