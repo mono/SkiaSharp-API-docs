@@ -62,15 +62,17 @@ using (var surface = SKSurface.Create(info)) {
 
     canvas.Clear(SKColors.White);
 
+    using var typeface = SKTypeface.FromFamilyName(null);
+    using var font = new SKFont(typeface, 64.0f);
+    using var fontWide = new SKFont(typeface, 64.0f) { ScaleX = 1.5f };
+
     var paint1 = new SKPaint {
-        TextSize = 64.0f,
         IsAntialias = true,
         Color = new SKColor(255, 0, 0),
         Style = SKPaintStyle.Fill
     };
 
     var paint2 = new SKPaint {
-        TextSize = 64.0f,
         IsAntialias = true,
         Color = new SKColor(0, 136, 0),
         Style = SKPaintStyle.Stroke,
@@ -78,16 +80,14 @@ using (var surface = SKSurface.Create(info)) {
     };
 
     var paint3 = new SKPaint {
-        TextSize = 64.0f,
         IsAntialias = true,
-        Color = new SKColor(136, 136, 136),
-        TextScaleX = 1.5f
+        Color = new SKColor(136, 136, 136)
     };
 
     var text = "Skia!";
-    canvas.DrawText(text, 20.0f, 64.0f, paint1);
-    canvas.DrawText(text, 20.0f, 144.0f, paint2);
-    canvas.DrawText(text, 20.0f, 224.0f, paint3);
+    canvas.DrawText(text, 20.0f, 64.0f, SKTextAlign.Left, font, paint1);
+    canvas.DrawText(text, 20.0f, 144.0f, SKTextAlign.Left, font, paint2);
+    canvas.DrawText(text, 20.0f, 224.0f, SKTextAlign.Left, fontWide, paint3);
 }
 ```
 
@@ -298,6 +298,31 @@ The example above produces the following:
       <Parameters />
       <Docs>
         <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to destroy any native objects.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetFastBounds">
+      <MemberSignature Language="C#" Value="public bool GetFastBounds (SkiaSharp.SKRect bounds, out SkiaSharp.SKRect fastBounds);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFastBounds(valuetype SkiaSharp.SKRect bounds, [out] valuetype SkiaSharp.SKRect&amp; fastBounds) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFastBounds(SkiaSharp.SKRect,SkiaSharp.SKRect@)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.150.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="bounds" Type="SkiaSharp.SKRect" />
+        <Parameter Name="fastBounds" Type="SkiaSharp.SKRect" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="bounds">The source bounds before paint effects are applied.</param>
+        <param name="fastBounds">When this method returns, contains the conservative bounding rectangle that includes <paramref name="bounds" /> expanded by any effects this paint applies (such as stroke width, mask filter, or image filter).</param>
+        <summary>Computes a conservative bounding rectangle that contains the result of drawing inside <paramref name="bounds" /> with this paint.</summary>
+        <returns>
+          <see langword="true" /> if a fast bounds could be computed for this paint; otherwise, <see langword="false" />.</returns>
         <remarks />
       </Docs>
     </Member>
