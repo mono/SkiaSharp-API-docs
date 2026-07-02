@@ -715,16 +715,16 @@ using (var surface = SKSurface.Create(info)) {
     canvas.Clear(SKColors.White);
 
     // load the typeface
-    var tf = SKTypeface.FromFile("myfont.ttf");
+    using var tf = SKTypeface.FromFile("myfont.ttf");
 
-    // set the paint's typeface
-    var paint = new SKPaint {
-        TextSize = 50,
-        Typeface = tf
-    };
+    // create a font from the typeface
+    using var font = new SKFont(tf, size: 50);
 
-    // draw text using the typeface
-    canvas.DrawText("SkiaSharp", 50, 100, paint);
+    // create the paint
+    using var paint = new SKPaint { IsAntialias = true };
+
+    // draw text using the font
+    canvas.DrawText("SkiaSharp", 50, 100, SKTextAlign.Left, font, paint);
 }
 ```
 ]]></format>
