@@ -31,7 +31,7 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
     using (var resource = assembly.GetManifestResourceStream ("embedded.png"))
     using (var stream = new SKManagedStream(resource))
     using (var source = SKBitmap.Decode (stream)) {
-        var matrix = SKMatrix.MakeRotation (30.0f);
+        var matrix = SKMatrix.CreateRotationDegrees (30.0f);
         using (var shader = SKShader.CreateBitmap (source, SKShaderTileMode.Repeat, SKShaderTileMode.Repeat, matrix))
         using (var paint = new SKPaint ()) {
             paint.IsAntialias = true;

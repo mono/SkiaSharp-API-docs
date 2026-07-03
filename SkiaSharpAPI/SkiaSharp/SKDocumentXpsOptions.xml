@@ -31,7 +31,7 @@ Creating an XPS document at 96 DPI:
 using var stream = File.OpenWrite("output.xps");
 var opts = new SKDocumentXpsOptions { Dpi = 96f };
 using var doc = SKDocument.CreateXps(stream, opts);
-using var page = doc.BeginPage(800, 600);
+var page = doc.BeginPage(800, 600);
 // ... draw ...
 doc.EndPage();
 doc.Close();

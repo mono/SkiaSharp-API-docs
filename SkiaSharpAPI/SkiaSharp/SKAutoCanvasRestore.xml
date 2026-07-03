@@ -36,8 +36,8 @@ using (new SKAutoCanvasRestore(canvas)) {
     canvas.RotateDegrees(45);
 
     // draw as usual
-    var paint = new SKPaint ();
-    canavs.DrawRect (10, 10, 100, 100, paint);
+    using var paint = new SKPaint ();
+    canvas.DrawRect (10, 10, 100, 100, paint);
 
     // automatically restore to original transform
 }

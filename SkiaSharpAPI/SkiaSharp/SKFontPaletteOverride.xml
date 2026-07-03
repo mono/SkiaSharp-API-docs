@@ -28,6 +28,8 @@ The `Color` property stores a packed `0xAARRGGBB` value (same format as <xref:Sk
 Overriding the first palette entry to red:
 
 ```csharp
+using var original = SKTypeface.FromFile("MyColorFont.ttf");
+
 var overrides = new[]
 {
     new SKFontPaletteOverride { Index = 0, Color = (uint)SKColors.Red },
