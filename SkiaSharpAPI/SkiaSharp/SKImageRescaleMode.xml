@@ -1,0 +1,86 @@
+<Type Name="SKImageRescaleMode" FullName="SkiaSharp.SKImageRescaleMode">
+  <TypeSignature Language="C#" Value="public enum SKImageRescaleMode" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SKImageRescaleMode extends System.Enum" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKImageRescaleMode" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp</AssemblyName>
+    <AssemblyVersion>4.151.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Enum</BaseTypeName>
+  </Base>
+  <Docs>
+    <summary>Specifies the resampling algorithm used by asynchronous rescale-and-read operations to scale the source region into the destination image.</summary>
+    <remarks>Passed to <see cref="M:SkiaSharp.SKImage.RequestReadPixels(SkiaSharp.SKImageInfo,SkiaSharp.SKRectI,SkiaSharp.SKImageRescaleGamma,SkiaSharp.SKImageRescaleMode,System.Action{SkiaSharp.SKImageReadPixelsResult})" /> and the matching overload on <see cref="T:SkiaSharp.SKSurface" /> to trade filtering quality against cost.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Linear">
+      <MemberSignature Language="C#" Value="Linear" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype SkiaSharp.SKImageRescaleMode Linear = int32(1)" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.SKImageRescaleMode.Linear" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageRescaleMode</ReturnType>
+      </ReturnValue>
+      <MemberValue>1</MemberValue>
+      <Docs>
+        <summary>Single-pass bilinear filtering; a good balance of quality and cost for modest rescales.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="Nearest">
+      <MemberSignature Language="C#" Value="Nearest" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype SkiaSharp.SKImageRescaleMode Nearest = int32(0)" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.SKImageRescaleMode.Nearest" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageRescaleMode</ReturnType>
+      </ReturnValue>
+      <MemberValue>0</MemberValue>
+      <Docs>
+        <summary>Nearest-neighbor sampling; the fastest option and typically the lowest quality.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="RepeatedCubic">
+      <MemberSignature Language="C#" Value="RepeatedCubic" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype SkiaSharp.SKImageRescaleMode RepeatedCubic = int32(3)" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.SKImageRescaleMode.RepeatedCubic" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageRescaleMode</ReturnType>
+      </ReturnValue>
+      <MemberValue>3</MemberValue>
+      <Docs>
+        <summary>Repeated bicubic filtering; iteratively halves the source before the final resample to produce high-quality results even for large downscales.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="RepeatedLinear">
+      <MemberSignature Language="C#" Value="RepeatedLinear" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype SkiaSharp.SKImageRescaleMode RepeatedLinear = int32(2)" />
+      <MemberSignature Language="DocId" Value="F:SkiaSharp.SKImageRescaleMode.RepeatedLinear" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImageRescaleMode</ReturnType>
+      </ReturnValue>
+      <MemberValue>2</MemberValue>
+      <Docs>
+        <summary>Repeated bilinear filtering; iteratively halves the source before the final resample to avoid aliasing on large downscales.</summary>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
