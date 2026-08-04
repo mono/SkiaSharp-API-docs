@@ -1,0 +1,193 @@
+<Type Name="SKImageReadPixelsResult" FullName="SkiaSharp.SKImageReadPixelsResult">
+  <TypeSignature Language="C#" Value="public sealed class SKImageReadPixelsResult : IDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SKImageReadPixelsResult extends System.Object implements class System.IDisposable" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKImageReadPixelsResult" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp</AssemblyName>
+    <AssemblyVersion>4.151.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Represents the pixel data produced by an asynchronous read-pixels request, exposing the read-back planes to a callback.</summary>
+    <remarks><![CDATA[
+## Remarks
+
+An instance of this type is only valid for the duration of the callback that receives it. Do not retain a reference to it or access its data after the callback returns; doing so throws an <see cref="T:SkiaSharp.System.ObjectDisposedException" />. To keep the data, copy it out with <see cref="T:SkiaSharp.SKImageReadPixelsResult" />.<c>ToArray</c>, <c>CopyPlaneTo</c>, <c>ToBitmap</c>, or <c>ToImage</c>.
+    ]]></remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CopyPlaneTo">
+      <MemberSignature Language="C#" Value="public void CopyPlaneTo (int planeIndex, Span&lt;byte&gt; destination);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CopyPlaneTo(int32 planeIndex, valuetype System.Span`1&lt;unsigned int8&gt; destination) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.CopyPlaneTo(System.Int32,System.Span{System.Byte})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="planeIndex" Type="System.Int32" />
+        <Parameter Name="destination" Type="System.Span&lt;System.Byte&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="planeIndex">The zero-based index of the plane to copy.</param>
+        <param name="destination">The destination buffer that receives the plane data. It must be large enough to hold the plane.</param>
+        <summary>Copies the pixel data of the specified plane into the provided destination buffer.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.Dispose" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Releases all resources used by the <see cref="T:SkiaSharp.SKImageReadPixelsResult" />.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetPlaneData">
+      <MemberSignature Language="C#" Value="public ReadOnlySpan&lt;byte&gt; GetPlaneData (int planeIndex);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; GetPlaneData(int32 planeIndex) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.GetPlaneData(System.Int32)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ReadOnlySpan&lt;System.Byte&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="planeIndex" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="planeIndex">The zero-based index of the plane to read.</param>
+        <summary>Gets a read-only view over the pixel data of the specified plane.</summary>
+        <returns>A read-only span over the pixel data of the specified plane. The span is only valid for the duration of the callback.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetPlaneRowBytes">
+      <MemberSignature Language="C#" Value="public int GetPlaneRowBytes (int planeIndex);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetPlaneRowBytes(int32 planeIndex) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.GetPlaneRowBytes(System.Int32)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="planeIndex" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="planeIndex">The zero-based index of the plane.</param>
+        <summary>Gets the number of bytes per row of the specified plane.</summary>
+        <returns>The number of bytes per row of the specified plane.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="PlaneCount">
+      <MemberSignature Language="C#" Value="public int PlaneCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 PlaneCount" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKImageReadPixelsResult.PlaneCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of pixel planes in the result.</summary>
+        <value>The number of pixel planes.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToArray">
+      <MemberSignature Language="C#" Value="public byte[] ToArray (int planeIndex = 0);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] ToArray(int32 planeIndex) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.ToArray(System.Int32)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="planeIndex" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="planeIndex">The zero-based index of the plane to copy.</param>
+        <summary>Copies the pixel data of the specified plane into a new byte array.</summary>
+        <returns>A new byte array containing the pixel data of the specified plane.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToBitmap">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKBitmap ToBitmap ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKBitmap ToBitmap() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.ToBitmap" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKBitmap</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a new <see cref="T:SkiaSharp.SKBitmap" /> from the single-plane result.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKBitmap" /> containing the read-back pixels.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="ToImage">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKImage ToImage ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKImage ToImage() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.ToImage" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImage</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Creates a new <see cref="T:SkiaSharp.SKImage" /> from the single-plane result.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKImage" /> containing the read-back pixels.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+  </Members>
+</Type>
