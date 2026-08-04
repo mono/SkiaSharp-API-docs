@@ -112,7 +112,7 @@ concurrency:
 # run: add + review + fix + PR.
 engine:
   id: copilot
-  model: claude-opus-4.7
+  model: claude-opus-4.8
 
 # -- Agent tools -------------------------------------------------------
 tools:
