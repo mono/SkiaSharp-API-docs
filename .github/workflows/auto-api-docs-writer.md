@@ -140,7 +140,7 @@ safe-outputs:
     draft: false
     base-branch: ${{ inputs.docs_base_branch || 'main' }}
     max-patch-files: 500
-    max-patch-size: 2048
+    max-patch-size: 6144
     preserve-branch-name: true
     recreate-ref: true
 
