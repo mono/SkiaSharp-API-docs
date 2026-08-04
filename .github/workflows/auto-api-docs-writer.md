@@ -274,7 +274,8 @@ SKILL.md paths accordingly:
 2. **Open the PR** with the `create_pull_request` tool — title `Fill and review API documentation`; body:
    separately list/count (a) structural regenerated-only type XML files and (b) files with hand-authored
    `<Docs>` changes; say what you filled and reviewed (file counts), include a **Findings summary** (counts by
-   severity + the machine `FINDING |` block from `references/reviewing.md`), and state what you fixed vs
-   deferred. If there are no changes, call `noop` instead — but print the Findings summary first.
+   severity + the exact `SEVERITY | class | file | docId | message` machine-readable lines from
+   `references/reviewing.md`), and state what you fixed vs deferred. If there are no changes, call `noop`
+   instead — but print the Findings summary first.
 
 **COMPLETION GATE:** the run is not done until you have called `create_pull_request` or `noop`.
