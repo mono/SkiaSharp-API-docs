@@ -233,6 +233,11 @@ correctness work is the three reviewers in `references/reviewing.md`, which it c
 
 2. **Work, source-first, per the skill.** For each file in the set:
    - **Add** — fill `To be added.` placeholders per `references/adding.md` (read the C# source first).
+   - **Native evidence, only when needed** — if managed code delegates status, ownership, or callback
+     semantics and the C# source is insufficient, do not infer. Lazily initialize only the exact pinned Skia
+     source with `git -C skiasharp submodule update --init --depth 1 externals/skia`, then cite the relevant
+     native declaration/implementation. Do not initialize it for ordinary managed-only facts or recurse into
+     every submodule.
    - **Review** — run all three correctness reviewers from `references/reviewing.md`: **A. Factual** (claims
      vs source, cite `path:line`), **B. Examples** (every snippet compiles, real APIs, **no obsolete
      members**), **C. Quality** (.NET conventions, completeness, style). The deterministic findings only seed
