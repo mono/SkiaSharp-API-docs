@@ -139,6 +139,8 @@ safe-outputs:
   create-pull-request:
     draft: false
     base-branch: ${{ inputs.docs_base_branch || 'main' }}
+    max-patch-files: 500
+    max-patch-size: 1024
     preserve-branch-name: true
     recreate-ref: true
 
@@ -211,9 +213,11 @@ This workflow is a **trigger** for the SkiaSharp **api-docs** skill, run daily a
 **Load the skill and let it drive** — it is the single source of truth for *how* to add and review docs.
 Do the whole job yourself in the foreground; do **not** launch sub-agents.
 
-**Read first:** `skiasharp/.agents/skills/api-docs/SKILL.md` (the router). It points to
-`references/adding.md` (add pass), `references/reviewing.md` (review pass), and the fact tables. Follow
-those procedures — everything below is only the run-specific wiring the skill does not cover.
+**Read first:** `skiasharp/.agents/skills/api-docs/SKILL.md` (the router), then explicitly select the
+**API-reference** add and review routes: `references/adding.md` (add pass) and
+`references/reviewing.md` (review pass), plus the fact tables those routes require. Stay on those two
+API-reference routes for the entire run. Do not load or apply conceptual-doc templates or procedures to
+the mdoc XML. Everything below is only the run-specific wiring the API-reference routes do not cover.
 
 ## This run: format → work → format
 
@@ -259,15 +263,18 @@ SKILL.md paths accordingly:
 1. **Commit on the branch you are already on** — the host prepared a dedicated throwaway PR branch before you
    started; it is **not** the dispatch ref. Do **not** `git checkout` or create another branch: safe-outputs
    force-overwrites the branch you commit on, so committing on the dispatch ref would destroy the workflow
-   source. Stage only hand-edited type docs and drop the generated files:
+   source. Stage the regenerated type XML together with your hand-edited `<Docs>` content. Exclude
+   generated indexes, `_filter.xml`, and `FrameworksIndex`; do not discard legitimate structural type XML
+   changes produced by stub regeneration:
    ```bash
    git add SkiaSharpAPI/
    git reset -q -- SkiaSharpAPI/index.xml 'SkiaSharpAPI/ns-*.xml' SkiaSharpAPI/_filter.xml SkiaSharpAPI/FrameworksIndex/
    git commit -m "Fill and review API documentation"
    ```
 2. **Open the PR** with the `create_pull_request` tool — title `Fill and review API documentation`; body:
-   what you filled (file count), what you reviewed (file count), a **Findings summary** (counts by severity +
-   the machine `FINDING |` block from `references/reviewing.md`), and what you fixed vs deferred. If there are
-   no changes, call `noop` instead — but print the Findings summary first.
+   separately list/count (a) structural regenerated-only type XML files and (b) files with hand-authored
+   `<Docs>` changes; say what you filled and reviewed (file counts), include a **Findings summary** (counts by
+   severity + the machine `FINDING |` block from `references/reviewing.md`), and state what you fixed vs
+   deferred. If there are no changes, call `noop` instead — but print the Findings summary first.
 
 **COMPLETION GATE:** the run is not done until you have called `create_pull_request` or `noop`.
