@@ -1,0 +1,225 @@
+<Type Name="SKImageReadPixelsResult" FullName="SkiaSharp.SKImageReadPixelsResult">
+  <TypeSignature Language="C#" Value="public sealed class SKImageReadPixelsResult : IDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SKImageReadPixelsResult extends System.Object implements class System.IDisposable" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKImageReadPixelsResult" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp</AssemblyName>
+    <AssemblyVersion>4.151.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Contains the pixel data produced by an asynchronous rescale-and-read operation.</summary>
+    <remarks>
+      <para>An instance is passed to the callback supplied to <see cref="M:SkiaSharp.SKImage.RequestReadPixels(SkiaSharp.SKImageInfo,SkiaSharp.SKRectI,SkiaSharp.SKImageRescaleGamma,SkiaSharp.SKImageRescaleMode,System.Action{SkiaSharp.SKImageReadPixelsResult})" /> when a read completes. On failure the callback receives <see langword="null" /> instead.</para>
+      <para>The result and the pixel data it exposes are only valid for the duration of the callback. To keep the pixels beyond the callback, copy them out with <see cref="M:SkiaSharp.SKImageReadPixelsResult.ToArray(System.Int32)" />, <see cref="M:SkiaSharp.SKImageReadPixelsResult.CopyPlaneTo(System.Int32,System.Span{System.Byte})" />, <see cref="M:SkiaSharp.SKImageReadPixelsResult.ToBitmap" />, or <see cref="M:SkiaSharp.SKImageReadPixelsResult.ToImage" />. Do not store the instance or a span returned by <see cref="M:SkiaSharp.SKImageReadPixelsResult.GetPlaneData(System.Int32)" /> for later use.</para>
+      <example>
+        <code lang="csharp"><![CDATA[
+// requestReadPixels invokes the callback with a result that is only valid
+// for the duration of the callback, so copy the data out before returning.
+SKBitmap captured = null;
+image.RequestReadPixels(info, srcRect, result => {
+    if (result == null)
+        return; // the asynchronous read failed
+    // ToBitmap makes an owned copy that outlives the callback.
+    captured = result.ToBitmap();
+});
+]]></code>
+      </example>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CopyPlaneTo">
+      <MemberSignature Language="C#" Value="public void CopyPlaneTo (int planeIndex, Span&lt;byte&gt; destination);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CopyPlaneTo(int32 planeIndex, valuetype System.Span`1&lt;unsigned int8&gt; destination) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.CopyPlaneTo(System.Int32,System.Span{System.Byte})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="planeIndex" Type="System.Int32" />
+        <Parameter Name="destination" Type="System.Span&lt;System.Byte&gt;" />
+      </Parameters>
+      <Docs>
+        <summary>Copies the single-plane result into a new <see cref="T:SkiaSharp.SKImage" /> that outlives the callback.</summary>
+        <returns>A new image containing a copy of the pixel data.</returns>
+        <remarks>This method is only supported for single-plane (interleaved) results. The caller owns the returned image and is responsible for disposing it.</remarks>
+        <exception cref="T:System.ObjectDisposedException">The result has been disposed.</exception>
+        <exception cref="T:System.InvalidOperationException">The result contains more than one plane, or the plane data is unavailable.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.Dispose" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Releases the reference to the underlying asynchronous read result.</summary>
+        <remarks>After disposal the pixel data is no longer accessible and the members of this instance throw <see cref="T:System.ObjectDisposedException" />.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPlaneData">
+      <MemberSignature Language="C#" Value="public ReadOnlySpan&lt;byte&gt; GetPlaneData (int planeIndex);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; GetPlaneData(int32 planeIndex) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.GetPlaneData(System.Int32)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ReadOnlySpan&lt;System.Byte&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="planeIndex" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="planeIndex">The zero-based index of the plane.</param>
+        <summary>Gets a read-only view over the raw pixel data of the specified plane, exactly as it was laid out by the read, including any per-row padding.</summary>
+        <returns>A read-only span over the plane data, or an empty span if the plane has no data.</returns>
+        <remarks>
+          <para>The returned span is only valid for the duration of the callback that received this result; do not retain it. Rows are separated by the stride reported by <see cref="M:SkiaSharp.SKImageReadPixelsResult.GetPlaneRowBytes(System.Int32)" />, which may exceed the packed row width. To obtain a copy that outlives the callback, use <see cref="M:SkiaSharp.SKImageReadPixelsResult.CopyPlaneTo(System.Int32,System.Span{System.Byte})" /> or <see cref="M:SkiaSharp.SKImageReadPixelsResult.ToArray(System.Int32)" />.</para>
+        </remarks>
+        <exception cref="T:System.ObjectDisposedException">The result has been disposed.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">
+          <paramref name="planeIndex" /> is negative or is greater than or equal to <see cref="P:SkiaSharp.SKImageReadPixelsResult.PlaneCount" />.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetPlaneRowBytes">
+      <MemberSignature Language="C#" Value="public int GetPlaneRowBytes (int planeIndex);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 GetPlaneRowBytes(int32 planeIndex) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.GetPlaneRowBytes(System.Int32)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="planeIndex" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="planeIndex">The zero-based index of the plane.</param>
+        <summary>Gets the number of bytes in a single row of the specified plane, including any per-row padding.</summary>
+        <returns>The stride of the plane, in bytes.</returns>
+        <remarks>Use this value as the row stride when interpreting the data returned by <see cref="M:SkiaSharp.SKImageReadPixelsResult.GetPlaneData(System.Int32)" />, because it may be larger than the tightly-packed row width.</remarks>
+        <exception cref="T:System.ObjectDisposedException">The result has been disposed.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">
+          <paramref name="planeIndex" /> is negative or is greater than or equal to <see cref="P:SkiaSharp.SKImageReadPixelsResult.PlaneCount" />.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="PlaneCount">
+      <MemberSignature Language="C#" Value="public int PlaneCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 PlaneCount" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKImageReadPixelsResult.PlaneCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of planes of pixel data in this result.</summary>
+        <value>The number of planes. Interleaved reads produce a single plane.</value>
+        <remarks>
+          <para>Accessing this property throws an <see cref="T:System.ObjectDisposedException" /> if the result has been disposed.</para>
+        </remarks>
+        <exception cref="T:System.ObjectDisposedException">The result has been disposed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ToArray">
+      <MemberSignature Language="C#" Value="public byte[] ToArray (int planeIndex = 0);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] ToArray(int32 planeIndex) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.ToArray(System.Int32)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="planeIndex" Type="System.Int32" />
+      </Parameters>
+      <Docs>
+        <param name="planeIndex">The zero-based index of the plane. The default is the first plane.</param>
+        <summary>Returns a new, tightly-packed byte array containing a copy of the specified plane.</summary>
+        <returns>A byte array holding the packed plane data. The array outlives the callback.</returns>
+        <remarks>Any per-row transfer padding is removed, so the returned array uses the packed row stride of the requested image info.</remarks>
+        <exception cref="T:System.ObjectDisposedException">The result has been disposed.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">
+          <paramref name="planeIndex" /> is negative or is greater than or equal to <see cref="P:SkiaSharp.SKImageReadPixelsResult.PlaneCount" />.</exception>
+        <exception cref="T:System.InvalidOperationException">The plane data is unavailable.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ToBitmap">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKBitmap ToBitmap ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKBitmap ToBitmap() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.ToBitmap" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKBitmap</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Copies the single-plane result into a new <see cref="T:SkiaSharp.SKBitmap" /> that outlives the callback.</summary>
+        <returns>A new bitmap containing a copy of the pixel data.</returns>
+        <remarks>This method is only supported for single-plane (interleaved) results. The caller owns the returned bitmap and is responsible for disposing it.</remarks>
+        <exception cref="T:System.ObjectDisposedException">The result has been disposed.</exception>
+        <exception cref="T:System.InvalidOperationException">The result contains more than one plane.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ToImage">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKImage ToImage ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKImage ToImage() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKImageReadPixelsResult.ToImage" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.151.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImage</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Copies the single-plane result into a new <see cref="T:SkiaSharp.SKImage" /> that outlives the callback.</summary>
+        <returns>A new image containing a copy of the pixel data.</returns>
+        <remarks>This method is only supported for single-plane (interleaved) results. The caller owns the returned image and is responsible for disposing it.</remarks>
+        <exception cref="T:System.ObjectDisposedException">The result has been disposed.</exception>
+        <exception cref="T:System.InvalidOperationException">The result contains more than one plane, or the plane data is unavailable.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
