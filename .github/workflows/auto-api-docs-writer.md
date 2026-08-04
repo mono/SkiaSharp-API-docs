@@ -209,47 +209,30 @@ post-steps:
 
 # Auto API Docs Writer
 
-This workflow is a **trigger** for the SkiaSharp **api-docs** skill, run daily as a two-pass pipeline.
-**Load the skill and let it drive** — it is the single source of truth for *how* to add and review docs.
-Do the whole job yourself in the foreground; do **not** launch sub-agents.
+This workflow is a **trigger** for the SkiaSharp **api-docs** skill. The skill is the single source of
+truth for authoring, review, fact-checking, and validation policy. Run its selected routes end to end
+with one agent.
 
 **Read first:** `skiasharp/.agents/skills/api-docs/SKILL.md` (the router), then explicitly select the
 **API-reference** add and review routes: `references/adding.md` (add pass) and
-`references/reviewing.md` (review pass), plus the fact tables those routes require. Stay on those two
-API-reference routes for the entire run. Do not load or apply conceptual-doc templates or procedures to
-the mdoc XML. Everything below is only the run-specific wiring the API-reference routes do not cover.
+`references/reviewing.md` (review pass), plus every reference they require. Stay on those two
+API-reference routes for the entire run; never load or apply the conceptual route to mdoc XML.
 
-## This run: format → work → format
+## Run-specific orchestration
 
-The deterministic gate `docs-format-docs` is **also your work-finder**: it lints every type file and prints a
-`[docs] <class> | file | docId | message` line per fixable defect. Run it **first** to collect the to-do
-list, **work** the files, then run it **again** to validate. It is **only the lint layer** — the real
-correctness work is the three reviewers in `references/reviewing.md`, which it cannot do.
-
-1. **Collect.** `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` — capture its `[docs]`
-   findings (accessor-verb, spelling, repeated-word, missing-docs, …). Those, plus any newly-introduced
-   `To be added.` placeholders (uncommitted stub changes under `SkiaSharpAPI/`) and the files changed vs the
-   base, are your work set. The run also reformats in place (idempotent, harmless).
-
-2. **Work, source-first, per the skill.** For each file in the set:
-   - **Add** — fill `To be added.` placeholders per `references/adding.md` (read the C# source first).
-   - **Native evidence, only when needed** — if managed code delegates status, ownership, or callback
-     semantics and the C# source is insufficient, do not infer. Lazily initialize only the exact pinned Skia
-     source with `git -C skiasharp submodule update --init --depth 1 externals/skia`, then cite the relevant
-     native declaration/implementation. Do not initialize it for ordinary managed-only facts or recurse into
-     every submodule.
-   - **Review** — run all three correctness reviewers from `references/reviewing.md`: **A. Factual** (claims
-     vs source, cite `path:line`), **B. Examples** (every snippet compiles, real APIs, **no obsolete
-     members**), **C. Quality** (.NET conventions, completeness, style). The deterministic findings only seed
-     this — the factual/example/quality errors are yours to find and are where the real problems hide.
-   - **Fix** CRITICAL findings by editing the XML directly; obsolete members in examples are caught by
-     reviewer B (the linter does not flag them — `obsolete-api-map.md` explains why). Where a central type
-     is example-poor, add one correct, non-obsolete example. Touch only `<Docs>` content.
-   Work in batches of ~25–40 files. **Timebox fixing to ~10 minutes**, then stop — a smaller PR beats none.
-
-3. **Validate.** Re-run `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..` and fix anything it
-   still reports. It **fails the run on broken XML/CDATA**, so every file you touched must stay well-formed.
-   (The host re-runs it after you as a backstop, but you own getting it green.)
+1. **Discover the CI work set.** Run
+   `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..`, capture its `[docs]` output, and combine
+   those files with regenerated XML changed from the base and newly introduced placeholders under
+   `SkiaSharpAPI/`. Apply `adding.md` to in-scope placeholders and `reviewing.md` to this work set.
+2. **Fetch native evidence only on demand.** When the selected API-reference procedures require native
+   declaration or implementation evidence and the shallow clone does not contain it, run exactly
+   `git -C skiasharp submodule update --init --depth 1 externals/skia`. Do not initialize it for
+   managed-only work and do not recursively initialize other submodules.
+3. **Fix authorization and timebox.** This run explicitly authorizes the gated fix step in
+   `reviewing.md` for CRITICAL findings. Timebox fixes to about 10 minutes, then stop; a smaller PR is
+   better than no PR.
+4. **Validate.** Follow `references/validation.md` after edits, using the translated paths below. The host
+   runs the same Cake target once more as a backstop.
 
 ## Paths in this workflow
 
@@ -278,9 +261,10 @@ SKILL.md paths accordingly:
    ```
 2. **Open the PR** with the `create_pull_request` tool — title `Fill and review API documentation`; body:
    separately list/count (a) structural regenerated-only type XML files and (b) files with hand-authored
-   `<Docs>` changes; say what you filled and reviewed (file counts), include a **Findings summary** (counts by
-   severity + the exact `SEVERITY | class | file | docId | message` machine-readable lines from
-   `references/reviewing.md`), and state what you fixed vs deferred. If there are no changes, call `noop`
-   instead — but print the Findings summary first.
+   `<Docs>` changes; say what you filled and reviewed (file counts); include the `WROTE` and `DEFERRED`
+   manifests required by `adding.md` and the review summary, `SEVERITY | class | file | docId | message`
+   findings (if any), and `TRACE` lines required by `reviewing.md`; and state what you fixed vs deferred.
+   Do not invent a finding when there are none. If there are no changes, emit the required route outputs,
+   then call `noop`.
 
 **COMPLETION GATE:** the run is not done until you have called `create_pull_request` or `noop`.
