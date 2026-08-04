@@ -199,6 +199,31 @@ pre-agent-steps:
       test "$ws" = "$lk" || { echo "::error::docs tree duplicated ($ws vs $lk)"; exit 1; }
       cd skiasharp && dotnet tool restore
 
+  - name: Initialize pinned native source for native-sensitive placeholders
+    shell: bash
+    run: |
+      native_workset="$(
+        {
+          git diff --name-only --diff-filter=ACM -- SkiaSharpAPI/
+          git ls-files --others --exclude-standard -- SkiaSharpAPI/
+        } | sort -u |
+          while IFS= read -r file; do
+            test -f "$file" || continue
+            grep -q 'To be added\.' "$file" || continue
+            if grep -Eqi 'Graphite|Backend|Texture|Recording|Recorder|Context|Callback|Delegate|Release|Vulkan|Metal|Dawn' "$file"; then
+              printf '%s\n' "$file"
+            fi
+          done
+      )"
+      if test -n "$native_workset"; then
+        echo "Native-sensitive placeholder work set:"
+        printf '%s\n' "$native_workset"
+        git -C skiasharp submodule update --init --depth 1 externals/skia
+        echo "Pinned Skia native SHA: $(git -C skiasharp/externals/skia rev-parse HEAD)"
+      else
+        echo "No native-sensitive regenerated placeholders; leaving externals/skia uninitialized."
+      fi
+
 # -- Post-agent steps (host) ------------------------------------------
 # Format docs AFTER the agent edits the XML in place. Runs on host outside the
 # sandbox so it has full access to the SkiaSharp cake scripts.
@@ -223,14 +248,20 @@ API-reference routes for the entire run; never load or apply the conceptual rout
 1. **Discover the CI work set.** Run
    `cd skiasharp && dotnet cake --target=docs-format-docs && cd ..`, capture its `[docs]` output, and combine
    those files with regenerated XML changed from the base and newly introduced placeholders under
-   `SkiaSharpAPI/`. Apply `adding.md` to in-scope placeholders and `reviewing.md` to this work set.
-2. **Fetch native evidence only on demand.** When the selected API-reference procedures require native
-   declaration or implementation evidence and the shallow clone does not contain it, run exactly
-   `git -C skiasharp submodule update --init --depth 1 externals/skia`. Do not initialize it for
-   managed-only work and do not recursively initialize other submodules.
+   `SkiaSharpAPI/`. Select one coherent authoring wave using the skill limit: at most 10 files and 60
+   placeholder-bearing type/member DocIds, whichever comes first, and smaller for native-heavy work.
+   Leave all placeholders outside the selected wave unchanged and report them with `UNSELECTED` rows; do
+   not attempt the entire regenerated work set. Apply `adding.md` and `reviewing.md` only to the selected
+   wave, reserving meaningful time for the adversarial review pass.
+2. **Native-source fallback.** The host initializes pinned `externals/skia` when the regenerated
+   placeholder work set is native-sensitive. If a selected `NATIVE` item still lacks initialized source,
+   run exactly `git -C skiasharp submodule update --init --depth 1 externals/skia`. Do not recursively
+   initialize other submodules.
 3. **Fix authorization and timebox.** This run explicitly authorizes the gated fix step in
-   `reviewing.md` for CRITICAL findings. Timebox fixes to about 10 minutes, then stop; a smaller PR is
-   better than no PR.
+   `reviewing.md` for every self-introduced CRITICAL and IMPORTANT finding in the selected wave. If one
+   cannot be verified and fixed, restore the affected field to its original placeholder and emit
+   `DEFERRED`. Timebox authoring and fixes to about 10 minutes, while preserving enough time to complete
+   the selected wave's adversarial review.
 4. **Validate.** Follow `references/validation.md` after edits, using the translated paths below. The host
    runs the same Cake target once more as a backstop.
 
@@ -261,10 +292,10 @@ SKILL.md paths accordingly:
    ```
 2. **Open the PR** with the `create_pull_request` tool — title `Fill and review API documentation`; body:
    separately list/count (a) structural regenerated-only type XML files and (b) files with hand-authored
-   `<Docs>` changes; say what you filled and reviewed (file counts); include the `WROTE` and `DEFERRED`
-   manifests required by `adding.md` and the review summary, `SEVERITY | class | file | docId | message`
-   findings (if any), and `TRACE` lines required by `reviewing.md`; and state what you fixed vs deferred.
-   Do not invent a finding when there are none. If there are no changes, emit the required route outputs,
-   then call `noop`.
+   `<Docs>` changes; say what you selected, filled, and reviewed (file and DocId counts); include every
+   `WROTE`, `DEFERRED`, `UNSELECTED`, per-DocId `EVIDENCE`, `NATIVE`, and `TRACE` row required by the
+   selected routes, plus the review summary and exact `SEVERITY | class | file | docId | message` findings
+   (if any); and state what you fixed vs deferred. Do not invent a finding when there are none. If there
+   are no changes, emit the required route outputs, then call `noop`.
 
 **COMPLETION GATE:** the run is not done until you have called `create_pull_request` or `noop`.
