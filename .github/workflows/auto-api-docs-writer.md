@@ -211,9 +211,10 @@ pre-agent-steps:
       rm -f "$host_context" "$agent_context"
 
       python skiasharp/.agents/skills/api-docs/scripts/fetch-approved-context.py \
+        --repository mono/SkiaSharp-API-docs \
+        --label approved-for-context \
         --output "$RUNNER_TEMP/api-docs-approved-context.json" \
         --max-issues 50 \
-        --max-comments-per-issue 500 \
         --max-bytes 1048576
 
       test -s "$host_context" || {
