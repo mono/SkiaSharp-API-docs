@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout SkiaSharp
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
         with:
           repository: mono/SkiaSharp
           ref: ${{ inputs.skiasharp_branch || 'main' }}
@@ -60,7 +60,7 @@ jobs:
           git checkout -B stub-base FETCH_HEAD
           cd ..
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6.0.0
         with:
           global-json-file: global.json
       - name: Setup Mono (runs mdoc.exe on Linux)
@@ -68,14 +68,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends mono-complete
       - name: Cache NuGet global packages
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         with:
           path: ~/.nuget/packages
           key: nuget-global-${{ hashFiles('scripts/VERSIONS.txt', 'scripts/infra/shared/shared.cake') }}
           restore-keys: |
             nuget-global-
       - name: Cache NuGet package_cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         with:
           path: externals/package_cache
           key: docs-package-cache-${{ hashFiles('scripts/VERSIONS.txt', 'scripts/infra/shared/shared.cake') }}
@@ -84,7 +84,7 @@ jobs:
       - name: Regenerate API docs
         run: bash scripts/infra/docs/generate-api-docs.sh
       - name: Upload regenerated docs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: docs-regenerated
           path: docs/SkiaSharpAPI/
@@ -110,10 +110,9 @@ concurrency:
 # actual API call — verified via the api-proxy token-usage log), so there is no
 # point fanning out into per-role sub-agents. One capable model does the whole
 # run: add + review + fix + PR.
+model: claude-opus-4.8
 engine:
   id: copilot
-  model: claude-opus-4.7
-
 # -- Agent tools -------------------------------------------------------
 tools:
   github:
@@ -141,6 +140,8 @@ safe-outputs:
     base-branch: ${{ inputs.docs_base_branch || 'main' }}
     preserve-branch-name: true
     recreate-ref: true
+    max-patch-files: 500
+    max-patch-size: 7168
 
 # -- Pre-agent steps (host) -------------------------------------------
 pre-agent-steps:
@@ -165,7 +166,7 @@ pre-agent-steps:
       echo "Working branch: $(git branch --show-current)"
 
   - name: Download regenerated docs
-    uses: actions/download-artifact@v4
+    uses: actions/download-artifact@v8.0.1
     with:
       name: docs-regenerated
       path: SkiaSharpAPI/
