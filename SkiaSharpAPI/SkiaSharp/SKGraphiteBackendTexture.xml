@@ -1,0 +1,180 @@
+<Type Name="SKGraphiteBackendTexture" FullName="SkiaSharp.SKGraphiteBackendTexture">
+  <TypeSignature Language="C#" Value="public class SKGraphiteBackendTexture : SkiaSharp.SKObject" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGraphiteBackendTexture extends SkiaSharp.SKObject" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKGraphiteBackendTexture" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp</AssemblyName>
+    <AssemblyVersion>4.152.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Wraps an existing platform GPU texture so that it can be used as a Graphite render target or sampling source.</summary>
+    <remarks>
+      <format type="text/markdown"><![CDATA[
+## Remarks
+
+Create an instance from a platform texture handle using one of the backend-specific factory methods (<xref:SkiaSharp.SKGraphiteBackendTexture.CreateVulkan(System.Int32,System.Int32,SkiaSharp.SKGraphiteVkTextureInfo,System.Int32,System.UInt32,System.IntPtr)>, <xref:SkiaSharp.SKGraphiteBackendTexture.CreateMetal(System.Int32,System.Int32,System.IntPtr)>, or <xref:SkiaSharp.SKGraphiteBackendTexture.CreateDawn(System.IntPtr)>). The caller retains ownership of the underlying platform texture; disposing this wrapper does not destroy it.
+
+This type wraps a native Skia resource and implements `IDisposable`. Dispose it when it is no longer needed.
+]]></format>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Backend">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKGraphiteBackend Backend { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKGraphiteBackend Backend" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteBackendTexture.Backend" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.152.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteBackend</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the graphics backend that this texture belongs to.</summary>
+        <value>One of the enumeration values that indicates the backend.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateDawn">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteBackendTexture CreateDawn (IntPtr wgpuTexture);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteBackendTexture CreateDawn(native int wgpuTexture) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteBackendTexture.CreateDawn(System.IntPtr)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.152.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteBackendTexture</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="wgpuTexture" Type="System.IntPtr" />
+      </Parameters>
+      <Docs>
+        <param name="wgpuTexture">A handle to the WebGPU texture to wrap.</param>
+        <summary>Wraps an existing Dawn (WebGPU) texture as a Graphite backend texture.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteBackendTexture" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateMetal">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteBackendTexture CreateMetal (int width, int height, IntPtr mtlTexture);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteBackendTexture CreateMetal(int32 width, int32 height, native int mtlTexture) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteBackendTexture.CreateMetal(System.Int32,System.Int32,System.IntPtr)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.152.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteBackendTexture</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
+        <Parameter Name="mtlTexture" Type="System.IntPtr" />
+      </Parameters>
+      <Docs>
+        <param name="width">The width of the texture, in pixels.</param>
+        <param name="height">The height of the texture, in pixels.</param>
+        <param name="mtlTexture">A handle to the Metal texture to wrap.</param>
+        <summary>Wraps an existing Metal texture as a Graphite backend texture.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteBackendTexture" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateVulkan">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteBackendTexture CreateVulkan (int width, int height, SkiaSharp.SKGraphiteVkTextureInfo info, int imageLayout, uint queueFamilyIndex, IntPtr vkImage);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteBackendTexture CreateVulkan(int32 width, int32 height, valuetype SkiaSharp.SKGraphiteVkTextureInfo info, int32 imageLayout, unsigned int32 queueFamilyIndex, native int vkImage) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteBackendTexture.CreateVulkan(System.Int32,System.Int32,SkiaSharp.SKGraphiteVkTextureInfo,System.Int32,System.UInt32,System.IntPtr)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.152.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteBackendTexture</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="width" Type="System.Int32" />
+        <Parameter Name="height" Type="System.Int32" />
+        <Parameter Name="info" Type="SkiaSharp.SKGraphiteVkTextureInfo" />
+        <Parameter Name="imageLayout" Type="System.Int32" />
+        <Parameter Name="queueFamilyIndex" Type="System.UInt32" />
+        <Parameter Name="vkImage" Type="System.IntPtr" />
+      </Parameters>
+      <Docs>
+        <param name="width">The width of the texture, in pixels.</param>
+        <param name="height">The height of the texture, in pixels.</param>
+        <param name="info">The Vulkan texture descriptor.</param>
+        <param name="imageLayout">The current Vulkan image layout of the texture.</param>
+        <param name="queueFamilyIndex">The index of the Vulkan queue family that owns the image.</param>
+        <param name="vkImage">A handle to the Vulkan image to wrap.</param>
+        <summary>Wraps an existing Vulkan image as a Graphite backend texture.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteBackendTexture" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Dimensions">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKSizeI Dimensions { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKSizeI Dimensions" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteBackendTexture.Dimensions" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.152.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSizeI</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the dimensions of the texture, in pixels.</summary>
+        <value>The width and height of the texture.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeNative">
+      <MemberSignature Language="C#" Value="protected override void DisposeNative ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeNative() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteBackendTexture.DisposeNative" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.152.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Releases the native resources used by the backend texture wrapper.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="IsValid">
+      <MemberSignature Language="C#" Value="public bool IsValid { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsValid" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteBackendTexture.IsValid" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.152.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether the wrapper references a valid texture.</summary>
+        <value>
+          <see langword="true" /> if the backend texture is valid; otherwise, <see langword="false" />.</value>
+        <remarks />
+      </Docs>
+    </Member>
+  </Members>
+</Type>
