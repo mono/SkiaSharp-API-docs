@@ -113,6 +113,7 @@ $restoreProject = Join-Path $workRoot 'PackageSet.csproj'
     <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.1.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Windows.SDK.NET" Version="10.0.18362.6-preview" PrivateAssets="all" />
     <PackageReference Include="OpenTK.GLWpfControl" Version="4.2.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.0" PrivateAssets="all" />
     <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[10.0.0]" />
     <PackageDownload Include="Microsoft.WindowsDesktop.App.Ref" Version="[10.0.0]" />
   </ItemGroup>
