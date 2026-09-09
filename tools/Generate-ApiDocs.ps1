@@ -15,6 +15,7 @@ $apiRoot = Join-Path $repositoryRoot 'SkiaSharpAPI'
 $workRoot = Join-Path $repositoryRoot '.artifacts/api-docs'
 $packagesPath = Join-Path $workRoot 'packages'
 $extractedPackagesPath = Join-Path $workRoot 'extracted-packages'
+$dependencyLibrariesPath = Join-Path $workRoot 'dependency-libraries'
 $stagingPath = Join-Path $workRoot 'staging'
 $mdocPath = Join-Path $workRoot 'mdoc'
 $dotnetRoot = Join-Path $repositoryRoot '.artifacts/dotnet-sdk'
@@ -93,7 +94,7 @@ if ($null -eq $dotnetSdk) {
     throw 'The .NET SDK is required to run mdoc.'
 }
 Remove-Item -Recurse -Force $workRoot -ErrorAction Ignore
-New-Item -ItemType Directory -Force -Path $packagesPath, $extractedPackagesPath, $stagingPath, $mdocPath | Out-Null
+New-Item -ItemType Directory -Force -Path $packagesPath, $extractedPackagesPath, $dependencyLibrariesPath, $stagingPath, $mdocPath | Out-Null
 
 $mdocFlatContainer = Get-ServiceResource $MdocPackageSource 'PackageBaseAddress'
 $metaPackageVersion = if ($PackageVersion) { $PackageVersion } else { '*-*' }
@@ -242,11 +243,16 @@ $platformReferencePaths = Get-ChildItem -Path (Join-Path $dotnetRoot 'packs') -D
 foreach ($directory in $platformReferencePaths) {
     $libraryArguments += @('--lib', $directory)
 }
-$packageReferencePaths = Get-ChildItem -Path $packagesPath -Filter '*.dll' -Recurse |
-    ForEach-Object DirectoryName |
-    Sort-Object -Unique
-foreach ($directory in $packageReferencePaths) {
-    $libraryArguments += @('--lib', $directory)
+Get-ChildItem -Path $packagesPath -Filter '*.dll' -Recurse |
+    Sort-Object FullName |
+    ForEach-Object {
+        $destination = Join-Path $dependencyLibrariesPath $_.Name
+        if (-not (Test-Path $destination)) {
+            Copy-Item -Force $_.FullName $destination
+        }
+    }
+if ((Get-ChildItem -Path $dependencyLibrariesPath -Filter '*.dll').Count -gt 0) {
+    $libraryArguments += @('--lib', $dependencyLibrariesPath)
 }
 foreach ($directory in $AdditionalReferencePath | Where-Object { Test-Path $_ }) {
     $libraryArguments += @('--lib', $directory)
