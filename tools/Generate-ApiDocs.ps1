@@ -225,10 +225,11 @@ $requiredWorkloadPacks = @(
     'Microsoft.iOS.Ref.net10.0_26.0',
     'Microsoft.MacCatalyst.Ref.net10.0_26.0',
     'Microsoft.macOS.Ref.net10.0_26.0',
-    'Microsoft.tvOS.Ref.net10.0_26.0'
+    'Microsoft.tvOS.Ref.net10.0_26.0',
+    'Microsoft.Maui.Controls.Ref.net10.0_10.0'
 )
 if ($requiredWorkloadPacks | Where-Object { -not (Test-Path (Join-Path $dotnetRoot "packs/$_")) }) {
-    & $dotnetRuntime workload install android ios maccatalyst macos tvos --skip-manifest-update `
+    & $dotnetRuntime workload install android ios maccatalyst macos tvos maui --skip-manifest-update `
         --configfile (Join-Path $repositoryRoot 'NuGet.Config')
     if ($LASTEXITCODE -ne 0) {
         throw "Installing .NET 10 platform reference packs failed with exit code $LASTEXITCODE."
