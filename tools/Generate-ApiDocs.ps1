@@ -230,9 +230,15 @@ if ($requiredWorkloadPacks | Where-Object { -not (Test-Path (Join-Path $dotnetRo
         throw "Installing .NET 10 platform reference packs failed with exit code $LASTEXITCODE."
     }
 }
-$platformReferencePaths = Get-ChildItem -Path (Join-Path $dotnetRoot 'packs') -Filter '*.dll' -Recurse |
-    ForEach-Object DirectoryName |
-    Sort-Object -Unique
+$platformReferencePaths = Get-ChildItem -Path (Join-Path $dotnetRoot 'packs') -Directory |
+    ForEach-Object { Get-ChildItem -Path $_.FullName -Directory } |
+    ForEach-Object {
+        $referenceRoot = Join-Path $_.FullName 'ref'
+        if (Test-Path $referenceRoot) {
+            Get-ChildItem -Path $referenceRoot -Directory
+        }
+    } |
+    Select-Object -ExpandProperty FullName -Unique
 foreach ($directory in $platformReferencePaths) {
     $libraryArguments += @('--lib', $directory)
 }
