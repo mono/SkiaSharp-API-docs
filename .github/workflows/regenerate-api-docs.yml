@@ -1,6 +1,14 @@
 name: Regenerate API docs
 
 on:
+  push:
+    branches-ignore:
+      - main
+      - live
+    paths:
+      - .github/workflows/regenerate-api-docs.yml
+      - NuGet.Config
+      - tools/Generate-ApiDocs.ps1
   workflow_dispatch:
     inputs:
       branch:
@@ -18,12 +26,14 @@ permissions:
 
 jobs:
   generate:
-    if: inputs.branch != 'main' && inputs.branch != 'live'
+    if: github.actor != 'github-actions[bot]' && ((github.event_name == 'workflow_dispatch' && inputs.branch != 'main' && inputs.branch != 'live') || (github.event_name == 'push' && github.ref_name != 'main' && github.ref_name != 'live'))
     runs-on: windows-latest
+    env:
+      TARGET_BRANCH: ${{ inputs.branch || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.branch }}
+          ref: ${{ env.TARGET_BRANCH }}
           fetch-depth: 0
 
       - uses: actions/setup-dotnet@v4
@@ -66,4 +76,4 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Regenerate API docs from _NuGets'
-          git push origin HEAD:${{ inputs.branch }}
+          git push origin HEAD:$env:TARGET_BRANCH
