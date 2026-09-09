@@ -4,136 +4,14 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKPaint" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>4.150.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Holds the style and color information about how to draw geometries, text and bitmaps.</summary>
-    <remarks>
-      <format type="text/markdown"><![CDATA[
-## Remarks
-
-Anytime you draw something in SkiaSharp, and want to specify what color it is,
-or how it blends with the background, or what style or font to draw it in, you
-specify those attributes in a paint.
-
-Unlike <xref:SkiaSharp.SKCanvas>, an paint object does not maintain an
-internal stack of state. That is, there is no save/restore on a paint.
-However, paint objects are relatively light-weight, so the client may create
-and maintain any number of paint objects, each set up for a particular use.
-
-Factoring all of these color and stylistic attributes out of the canvas state,
-and into (multiple) paint objects, allows the save and restore operations on
-the <xref:SkiaSharp.SKCanvas> to be that much more efficient, as all they have
-to do is maintain the stack of matrix and clip settings.
-
-### Effects
-
-Beyond simple attributes such as color, strokes, and text values, paints
-support effects. These are subclasses of different aspects of the drawing
-pipeline, that when referenced by a paint, are called to override some part
-of the drawing pipeline.
-
-There are five types of effects that can be assigned to an paint object:
-
-| Effect        | Details                                                                                        |
-|---------------|------------------------------------------------------------------------------------------------|
-| Blend Mode    | Blend modes and Duff-Porter transfer modes.                                                    |
-| Color Filter  | Modification of the source colors before applying the blend mode.                              |
-| Mask Filter   | Modification of the alpha mask before it is colorized and drawn (for example, blur).           |
-| Path Effect   | Modification of the geometry (path) before the alpha mask is generated (for example, dashing). |
-| Shader        | Gradients and bitmap patterns.                                                                 |
-
-## Examples
-
-### Simple Example
-
-The following example shows three different paints, each set up to draw in a
-different style. The caller can intermix these paints freely, either using
-them as is, or modifying them as the drawing proceeds.
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    using var font = new SKFont { Size = 64.0f };
-    using var scaledFont = new SKFont { Size = 64.0f, ScaleX = 1.5f };
-
-    using var paint1 = new SKPaint {
-        IsAntialias = true,
-        Color = new SKColor(255, 0, 0),
-        Style = SKPaintStyle.Fill
-    };
-
-    using var paint2 = new SKPaint {
-        IsAntialias = true,
-        Color = new SKColor(0, 136, 0),
-        Style = SKPaintStyle.Stroke,
-        StrokeWidth = 3
-    };
-
-    using var paint3 = new SKPaint {
-        IsAntialias = true,
-        Color = new SKColor(136, 136, 136)
-    };
-
-    var text = "Skia!";
-    canvas.DrawText(text, 20.0f, 64.0f, SKTextAlign.Left, font, paint1);
-    canvas.DrawText(text, 20.0f, 144.0f, SKTextAlign.Left, font, paint2);
-    canvas.DrawText(text, 20.0f, 224.0f, SKTextAlign.Left, scaledFont, paint3);
-}
-```
-
-The example above produces the following:
-
-![SKPaint and Text](~/images/SKPaintText.png "SKPaint and Text")
-
-### Effects Example
-
-The following example draws using a gradient instead of a single color. To do,
-this a `SKShader` is assigned to the paint. Anything drawn with that paint
-will be drawn with the gradient specified in the call to
-`SKShader.CreateLinearGradient`.
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create a gradient
-    var colors = new[] {
-        SKColors.Blue,
-        SKColors.Yellow
-    };
-    var shader = SKShader.CreateLinearGradient(
-        new SKPoint(0.0f, 0.0f),
-        new SKPoint(256.0f, 256.0f),
-        colors,
-        null,
-        SKShaderTileMode.Clamp);
-
-    // assign the gradient to the paint
-    var paint = new SKPaint {
-        Shader = shader
-    };
-
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![SKPaint and SKShader](~/images/gradient.png "SKPaint and SKShader")
-]]></format>
-    </remarks>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -141,14 +19,10 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.#ctor" />
       <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKPaint" /> class with the default settings.</summary>
-        <remarks />
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Blender">
@@ -156,17 +30,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKBlender Blender" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.Blender" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKBlender</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the custom <see cref="T:SkiaSharp.SKBlender" /> for compositing.</summary>
-        <value>The custom blender, or <see langword="null" /> to use the default <see cref="P:SkiaSharp.SKPaint.BlendMode" />.</value>
-        <remarks>When set, the blender overrides the <see cref="P:SkiaSharp.SKPaint.BlendMode" /> property.</remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="BlendMode">
@@ -174,17 +44,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKBlendMode BlendMode" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.BlendMode" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKBlendMode</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the blend mode.</summary>
-        <value>The blend mode used for combining source and destination colors during drawing operations.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -192,18 +58,14 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPaint Clone() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.Clone" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPaint</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Creates a copy of the current paint.</summary>
-        <returns>Returns the copy.</returns>
-        <remarks>The copy is a shallow copy, all references will still point to the same objects.</remarks>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Color">
@@ -211,17 +73,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKColor Color" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.Color" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKColor</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the paint's foreground color.</summary>
-        <value>The paint's foreground color as a 32-bit ARGB value.</value>
-        <remarks>The color is a 32-bit value containing ARGB. This 32-bit value is not premultiplied, meaning that its alpha can be any value, regardless of the values of R, G and B.</remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ColorF">
@@ -229,17 +87,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKColorF ColorF" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.ColorF" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKColorF</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the paint's color as an <see cref="T:SkiaSharp.SKColorF" /> (floating-point RGBA).</summary>
-        <value>The color in floating-point representation.</value>
-        <remarks>This property provides higher precision color values than the <see cref="P:SkiaSharp.SKPaint.Color" /> property.</remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ColorFilter">
@@ -247,17 +101,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKColorFilter ColorFilter" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.ColorFilter" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKColorFilter</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the paint's color filter.</summary>
-        <value>The color filter applied to source colors before drawing, or <see langword="null" /> if no filter is applied.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -265,10 +115,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.Dispose(System.Boolean)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -276,10 +122,9 @@ The example above produces the following:
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">
-          <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
-        <summary>Releases the unmanaged resources used by the <see cref="T:SkiaSharp.SKPaint" /> and optionally releases the managed resources.</summary>
-        <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKPaint" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
+        <param name="disposing">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DisposeNative">
@@ -287,17 +132,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeNative() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.DisposeNative" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKObject" /> types to destroy any native objects.</summary>
-        <remarks />
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFastBounds">
@@ -305,10 +146,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFastBounds(valuetype SkiaSharp.SKRect bounds, [out] valuetype SkiaSharp.SKRect&amp; fastBounds) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFastBounds(SkiaSharp.SKRect,SkiaSharp.SKRect@)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -317,14 +154,11 @@ The example above produces the following:
         <Parameter Name="fastBounds" Type="SkiaSharp.SKRect" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="bounds">The original bounds of the geometry to be drawn, before any paint effects are considered.</param>
-        <param name="fastBounds">When this method returns, contains a conservative bounding rectangle that includes any stroke width, mask filter, image filter, or other effects on this paint applied to <paramref name="bounds" />; otherwise, <see cref="F:SkiaSharp.SKRect.Empty" /> if the bounds cannot be computed. This parameter is treated as uninitialized.</param>
-        <summary>Attempts to compute a conservative bounding rectangle that contains the result of drawing the supplied bounds with this paint.</summary>
-        <returns>
-          <see langword="true" /> if a conservative bounding rectangle could be computed and was written to <paramref name="fastBounds" />; otherwise, <see langword="false" />.</returns>
-        <remarks>
-          <para>The returned bounds are conservative: they may be larger than the actual affected pixels, but they are guaranteed to enclose them. This is useful for quickly culling draws that fall outside a clip without performing the full draw.</para>
-        </remarks>
+        <param name="bounds">To be added.</param>
+        <param name="fastBounds">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -332,10 +166,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPath</ReturnType>
       </ReturnValue>
@@ -343,10 +173,10 @@ The example above produces the following:
         <Parameter Name="src" Type="SkiaSharp.SKPath" />
       </Parameters>
       <Docs>
-        <param name="src">The source path.</param>
-        <summary>Creates a new path from the result of applying any and all effects to a source path.</summary>
-        <returns>Returns the resulting fill path, or <see langword="null" /> if the source path should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -354,10 +184,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPath</ReturnType>
       </ReturnValue>
@@ -366,11 +192,11 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to transform.</param>
-        <param name="matrix">The transformation matrix to apply.</param>
-        <summary>Creates a new path from the result of applying any and all effects to a source path with a transformation matrix.</summary>
-        <returns>Returns the resulting fill path, or <see langword="null" /> if the source path should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="matrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -378,10 +204,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPath dst) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPath)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Obsolete("Use the SKPathBuilder overload instead.")]</AttributeName>
@@ -395,12 +217,11 @@ The example above produces the following:
         <Parameter Name="dst" Type="SkiaSharp.SKPath" />
       </Parameters>
       <Docs>
-        <param name="src">The input path.</param>
-        <param name="dst">The output path.</param>
-        <summary>Applies any and all effects to a source path, returning the result in the destination.</summary>
-        <returns>
-          <see langword="true" /> if the path should be filled, or false if it should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -408,10 +229,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPathBuilder dst) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPathBuilder)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -420,12 +237,11 @@ The example above produces the following:
         <Parameter Name="dst" Type="SkiaSharp.SKPathBuilder" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> to which the filled path is written.</param>
-        <summary>Computes the filled geometry of the source path using this paint's style and writes the result to the destination path builder.</summary>
-        <returns>
-          <see langword="true" /> if the fill path was successfully computed; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -433,10 +249,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src, valuetype SkiaSharp.SKRect cullRect) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPath</ReturnType>
       </ReturnValue>
@@ -445,11 +257,11 @@ The example above produces the following:
         <Parameter Name="cullRect" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="src">The source path.</param>
-        <param name="cullRect">The limit to be passed to the path effect.</param>
-        <summary>Creates a new path from the result of applying any and all effects to a source path.</summary>
-        <returns>Returns the resulting fill path, or <see langword="null" /> if the source path should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -457,10 +269,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src, float32 resScale) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPath</ReturnType>
       </ReturnValue>
@@ -469,11 +277,11 @@ The example above produces the following:
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="src">The source path.</param>
-        <param name="resScale">If &gt; 1, increase precision, else if (0 &lt; res &lt; 1) reduce precision in favor of speed/size.</param>
-        <summary>Creates a new path from the result of applying any and all effects to a source path.</summary>
-        <returns>Returns the resulting fill path, or <see langword="null" /> if the source path should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="resScale">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -481,10 +289,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPath dst, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPath,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Obsolete("Use the SKPathBuilder overload instead.")]</AttributeName>
@@ -499,13 +303,12 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to transform.</param>
-        <param name="dst">The destination path to receive the result.</param>
-        <param name="matrix">The transformation matrix to apply.</param>
-        <summary>Applies any and all effects to a source path with a transformation matrix, writing the result to the destination.</summary>
-        <returns>
-          <see langword="true" /> if the path should be filled; <see langword="false" /> if it should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="matrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -513,10 +316,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPath dst, valuetype SkiaSharp.SKRect cullRect) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPath,SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Obsolete("Use the SKPathBuilder overload instead.")]</AttributeName>
@@ -531,13 +330,12 @@ The example above produces the following:
         <Parameter Name="cullRect" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="src">The source path.</param>
-        <param name="dst">The output path.</param>
-        <param name="cullRect">The limit to be passed to the path effect.</param>
-        <summary>Applies any and all effects to a source path, returning the result in the destination.</summary>
-        <returns>
-          <see langword="true" /> if the path should be filled, or false if it should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -545,10 +343,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPath dst, float32 resScale) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPath,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Obsolete("Use the SKPathBuilder overload instead.")]</AttributeName>
@@ -563,13 +357,12 @@ The example above produces the following:
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="src">The input path.</param>
-        <param name="dst">The output path.</param>
-        <param name="resScale">If &gt; 1, increase precision, else if (0 &lt; res &lt; 1) reduce precision in favor of speed/size.</param>
-        <summary>Applies any and all effects to a source path, returning the result in the destination.</summary>
-        <returns>
-          <see langword="true" /> if the path should be filled, or false if it should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="resScale">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -577,10 +370,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPathBuilder dst, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPathBuilder,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -590,13 +379,12 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> to which the filled path is written.</param>
-        <param name="matrix">The transformation matrix to apply before computing the fill.</param>
-        <summary>Computes the filled geometry of the source path after applying a transformation matrix and writes the result to the destination path builder.</summary>
-        <returns>
-          <see langword="true" /> if the fill path was successfully computed; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="matrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -604,10 +392,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPathBuilder dst, valuetype SkiaSharp.SKRect cullRect) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPathBuilder,SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -617,13 +401,12 @@ The example above produces the following:
         <Parameter Name="cullRect" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> to which the filled path is written.</param>
-        <param name="cullRect">A rectangle used to cull path elements that lie entirely outside its bounds.</param>
-        <summary>Computes the filled geometry of the source path within the cull rectangle and writes the result to the destination path builder.</summary>
-        <returns>
-          <see langword="true" /> if the fill path was successfully computed; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -631,10 +414,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPathBuilder dst, float32 resScale) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPathBuilder,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -644,13 +423,12 @@ The example above produces the following:
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> to which the filled path is written.</param>
-        <param name="resScale">The scale factor used to determine resolution-dependent path simplification.</param>
-        <summary>Computes the filled geometry of the source path at the specified resolution scale and writes the result to the destination path builder.</summary>
-        <returns>
-          <see langword="true" /> if the fill path was successfully computed; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="resScale">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -658,10 +436,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src, valuetype SkiaSharp.SKRect cullRect, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKRect,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPath</ReturnType>
       </ReturnValue>
@@ -671,12 +445,12 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to transform.</param>
-        <param name="cullRect">The culling rectangle to limit the path effect.</param>
-        <param name="matrix">The transformation matrix to apply.</param>
-        <summary>Creates a new path from the result of applying effects to a source path with culling and transformation.</summary>
-        <returns>Returns the resulting fill path, or <see langword="null" /> if the source path should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <param name="matrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -684,10 +458,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPath GetFillPath(class SkiaSharp.SKPath src, valuetype SkiaSharp.SKRect cullRect, float32 resScale) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKRect,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPath</ReturnType>
       </ReturnValue>
@@ -697,12 +467,12 @@ The example above produces the following:
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="src">The source path.</param>
-        <param name="cullRect">The limit to be passed to the path effect.</param>
-        <param name="resScale">If &gt; 1, increase precision, else if (0 &lt; res &lt; 1) reduce precision in favor of speed/size.</param>
-        <summary>Creates a new path from the result of applying any and all effects to a source path.</summary>
-        <returns>Returns the resulting fill path, or <see langword="null" /> if the source path should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <param name="resScale">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -710,10 +480,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPath dst, valuetype SkiaSharp.SKRect cullRect, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPath,SkiaSharp.SKRect,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Obsolete("Use the SKPathBuilder overload instead.")]</AttributeName>
@@ -729,14 +495,13 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to transform.</param>
-        <param name="dst">The destination path to receive the result.</param>
-        <param name="cullRect">The culling rectangle to limit the path effect.</param>
-        <param name="matrix">The transformation matrix to apply.</param>
-        <summary>Applies any and all effects to a source path with culling and transformation, writing the result to the destination.</summary>
-        <returns>
-          <see langword="true" /> if the path should be filled; <see langword="false" /> if it should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <param name="matrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -744,10 +509,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPath dst, valuetype SkiaSharp.SKRect cullRect, float32 resScale) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPath,SkiaSharp.SKRect,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Obsolete("Use the SKPathBuilder overload instead.")]</AttributeName>
@@ -763,14 +524,13 @@ The example above produces the following:
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="src">The input path.</param>
-        <param name="dst">The output path.</param>
-        <param name="cullRect">The destination path may be culled to this rectangle.</param>
-        <param name="resScale">If &gt; 1, increase precision, else if (0 &lt; res &lt; 1) reduce precision in favor of speed/size.</param>
-        <summary>Applies any and all effects to a source path, returning the result in the destination.</summary>
-        <returns>
-          <see langword="true" /> if the path should be filled, or false if it should be drawn with a hairline.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <param name="resScale">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -778,10 +538,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPathBuilder dst, valuetype SkiaSharp.SKRect cullRect, valuetype SkiaSharp.SKMatrix matrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPathBuilder,SkiaSharp.SKRect,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -792,14 +548,13 @@ The example above produces the following:
         <Parameter Name="matrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> to which the filled path is written.</param>
-        <param name="cullRect">A rectangle used to cull path elements that lie entirely outside its bounds.</param>
-        <param name="matrix">The transformation matrix to apply before computing the fill.</param>
-        <summary>Computes the filled geometry of the source path within the cull rectangle after applying a transformation matrix, and writes the result to the destination path builder.</summary>
-        <returns>
-          <see langword="true" /> if the fill path was successfully computed; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <param name="matrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetFillPath">
@@ -807,10 +562,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetFillPath(class SkiaSharp.SKPath src, class SkiaSharp.SKPathBuilder dst, valuetype SkiaSharp.SKRect cullRect, float32 resScale) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.GetFillPath(SkiaSharp.SKPath,SkiaSharp.SKPathBuilder,SkiaSharp.SKRect,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -821,14 +572,13 @@ The example above produces the following:
         <Parameter Name="resScale" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="src">The source path to fill.</param>
-        <param name="dst">The <see cref="T:SkiaSharp.SKPathBuilder" /> to which the filled path is written.</param>
-        <param name="cullRect">A rectangle used to cull path elements that lie entirely outside its bounds.</param>
-        <param name="resScale">The scale factor used to determine resolution-dependent path simplification.</param>
-        <summary>Computes the filled geometry of the source path within the cull rectangle at the specified resolution scale, and writes the result to the destination path builder.</summary>
-        <returns>
-          <see langword="true" /> if the fill path was successfully computed; otherwise, <see langword="false" />.</returns>
-        <remarks></remarks>
+        <param name="src">To be added.</param>
+        <param name="dst">To be added.</param>
+        <param name="cullRect">To be added.</param>
+        <param name="resScale">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ImageFilter">
@@ -836,17 +586,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKImageFilter ImageFilter" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.ImageFilter" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKImageFilter</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the image filter.</summary>
-        <value>The image filter, or <see langword="null" /> if none is set.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsAntialias">
@@ -854,18 +600,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance bool IsAntialias" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.IsAntialias" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating whether anti-aliasing is enabled.</summary>
-        <value>
-          <see langword="true" /> if anti-aliasing is enabled; otherwise, <see langword="false" />.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsDither">
@@ -873,18 +614,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance bool IsDither" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.IsDither" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating whether dithering is enabled.</summary>
-        <value>
-          <see langword="true" /> if dithering is enabled; otherwise, <see langword="false" />.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsStroke">
@@ -892,18 +628,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance bool IsStroke" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.IsStroke" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating whether to paint a stroke or the fill.</summary>
-        <value>
-          <see langword="true" /> to stroke; <see langword="false" /> to fill.</value>
-        <remarks>This is a shortcut way to set <see cref="P:SkiaSharp.SKPaint.Style" /> to either <see cref="F:SkiaSharp.SKPaintStyle.Stroke" /> or <see cref="F:SkiaSharp.SKPaintStyle.Fill" />.</remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="MaskFilter">
@@ -911,17 +642,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKMaskFilter MaskFilter" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.MaskFilter" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKMaskFilter</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the mask filter to use when painting.</summary>
-        <value>The mask filter, or <see langword="null" /> if none is set.</value>
-        <remarks>Mask filters control the transformations on the alpha channel before primitives are drawn. Examples are blur or emboss.</remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PathEffect">
@@ -929,17 +656,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKPathEffect PathEffect" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.PathEffect" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPathEffect</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the path effect to use when painting.</summary>
-        <value>The path effect, or <see langword="null" /> if none is set.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -947,17 +670,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Reset() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.Reset" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Resets all the paint properties to their defaults.</summary>
-        <remarks />
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SetColor">
@@ -965,10 +684,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetColor(valuetype SkiaSharp.SKColorF color, class SkiaSharp.SKColorSpace colorspace) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKPaint.SetColor(SkiaSharp.SKColorF,SkiaSharp.SKColorSpace)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -977,10 +692,10 @@ The example above produces the following:
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" />
       </Parameters>
       <Docs>
-        <param name="color">The color value as an <see cref="T:SkiaSharp.SKColorF" />.</param>
-        <param name="colorspace">The <see cref="T:SkiaSharp.SKColorSpace" /> for interpreting the color.</param>
-        <summary>Sets the paint's color using a floating-point color value in the specified color space.</summary>
-        <remarks />
+        <param name="color">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Shader">
@@ -988,17 +703,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKShader Shader" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.Shader" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the shader to use when painting.</summary>
-        <value>The shader, or <see langword="null" /> if none is set.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="StrokeCap">
@@ -1006,17 +717,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKStrokeCap StrokeCap" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.StrokeCap" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKStrokeCap</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating how the start and end of stroked lines and paths are treated.</summary>
-        <value>One of the enumeration values that specifies how the start and end of stroked lines and paths are treated.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="StrokeJoin">
@@ -1024,17 +731,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKStrokeJoin StrokeJoin" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.StrokeJoin" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKStrokeJoin</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the path's join type.</summary>
-        <value>One of the enumeration values that specifies the join type.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="StrokeMiter">
@@ -1042,17 +745,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance float32 StrokeMiter" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.StrokeMiter" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the paint's miter limit.</summary>
-        <value>The miter limit value.</value>
-        <remarks>This is used whenever the <see cref="P:SkiaSharp.SKPaint.Style" /> is <see cref="F:SkiaSharp.SKPaintStyle.Stroke" /> or <see cref="F:SkiaSharp.SKPaintStyle.StrokeAndFill" /> to control the behavior of miter joins when the joins' angle is sharp.</remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="StrokeWidth">
@@ -1060,17 +759,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance float32 StrokeWidth" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.StrokeWidth" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Single</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the paint's stroke width.</summary>
-        <value>The stroke width in pixels.</value>
-        <remarks>This is used whenever the <see cref="P:SkiaSharp.SKPaint.Style" /> is <see cref="F:SkiaSharp.SKPaintStyle.Stroke" /> or <see cref="F:SkiaSharp.SKPaintStyle.StrokeAndFill" />. The value of zero is the special hairline mode. Hairlines always draw with a width of 1 pixel, regardless of the transformation matrix.</remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Style">
@@ -1078,17 +773,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKPaintStyle Style" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKPaint.Style" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPaintStyle</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the painting style.</summary>
-        <value>One of the enumeration values that specifies the painting style.</value>
-        <remarks>Can also be set using <see cref="P:SkiaSharp.SKPaint.IsStroke" />.</remarks>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
   </Members>

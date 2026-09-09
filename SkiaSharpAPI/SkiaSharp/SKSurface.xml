@@ -4,64 +4,14 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKSurface" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>4.150.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Represents the backend/results of drawing to a canvas.</summary>
-    <remarks>
-      <format type="text/markdown"><![CDATA[
-## Remarks
-
-The surface represents the backend/results of drawing to a canvas. For raster
-drawing, the surface will be pixels, but (for example) when drawing into a
-PDF or <xref:SkiaSharp.SKPicture> canvas, the surface stores the recorded
-commands.
-
-The surface always has non-zero dimensions. If there is a request for a new
-surface, and either of the requested dimensions are zero, then <see langword="null" /> will
-be returned.
-
-Once you create a surface with one of its <xref:SkiaSharp.SKSurface.Create%2A>
-methods, you can draw into the canvas returned by the
-<xref:SkiaSharp.SKSurface.Canvas> property. Once the drawing is complete, you
-can retrieve an <xref:SkiaSharp.SKImage> by calling the
-<xref:SkiaSharp.SKSurface.Snapshot%2A> method.
-
-## Examples
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // configure our brush
-    var redBrush = new SKPaint {
-        Color = new SKColor(0xff, 0, 0),
-        IsStroke = true
-    };
-    var blueBrush = new SKPaint {
-        Color = new SKColor(0, 0, 0xff),
-        IsStroke = true
-    };
-
-    for (int i = 0; i < 64; i += 8) {
-        var rect = new SKRect(i, i, 256 - i - 1, 256 - i - 1);
-        canvas.DrawRect(rect, (i % 16 == 0) ? redBrush : blueBrush);
-    }
-}
-```
-
-The example above produces the following:
-
-![SKSurface](~/images/surface-rects.png "SKSurface")
-]]></format>
-    </remarks>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName="Canvas">
@@ -69,17 +19,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKCanvas Canvas" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKSurface.Canvas" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKCanvas</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the canvas for this surface which can be used for drawing into it.</summary>
-        <value>The canvas for this surface.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Context">
@@ -87,17 +33,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.GRRecordingContext Context" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKSurface.Context" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.GRRecordingContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the GPU recording context associated with this surface.</summary>
-        <value>The GPU recording context, or <see langword="null" /> if not GPU-accelerated.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -105,10 +47,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -116,10 +54,10 @@ The example above produces the following:
         <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="info">Contains the image configuration parameters.</param>
-        <summary>Creates a new surface with the specified image parameters.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer with the parameters specified in <paramref name="info" />.</remarks>
+        <param name="info">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -127,10 +65,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKPixmap pixmap) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKPixmap)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -138,10 +72,30 @@ The example above produces the following:
         <Parameter Name="pixmap" Type="SkiaSharp.SKPixmap" />
       </Parameters>
       <Docs>
-        <param name="pixmap">The pixmap.</param>
-        <summary>Creates a new surface with the specified pixmap.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="pixmap">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSurface Create (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKImageInfo info);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKGraphiteRecorder recorder, valuetype SkiaSharp.SKImageInfo info) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKImageInfo)" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSurface</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">To be added.</param>
+        <param name="info">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -149,10 +103,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -161,11 +111,11 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Creates a new surface from the specified image parameters and surface properties.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer with the parameters specified in <paramref name="info&amp;nbsp;" />and the properties specified in <paramref name="props" />.</remarks>
+        <param name="info">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -173,10 +123,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, int32 rowBytes) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.Int32)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -185,11 +131,11 @@ The example above produces the following:
         <Parameter Name="rowBytes" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="rowBytes">The number of bytes per row in the pixel buffer.</param>
-        <summary>Creates a new surface from the specified image parameters.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer with the parameters specified in <paramref name="info&amp;nbsp;" />.</remarks>
+        <param name="info">To be added.</param>
+        <param name="rowBytes">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -197,10 +143,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, native int pixels) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -209,11 +151,11 @@ The example above produces the following:
         <Parameter Name="pixels" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="pixels">The pointer to an in memory-buffer that can hold the image as specified.</param>
-        <summary>Creates a new surface with the specified image parameters using a provided buffer.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="info">To be added.</param>
+        <param name="pixels">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -221,10 +163,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKPixmap pixmap, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKPixmap,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -233,11 +171,11 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="pixmap">The pixmap.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Creates a new surface with the specified pixmap and surface properties.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="pixmap">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -245,10 +183,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -258,12 +192,12 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="renderTarget">The description of the existing render target.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <summary>Wraps a pre-existing 3D API render target as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -271,10 +205,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -284,12 +214,12 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="texture">The description of the existing texture.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <summary>Wraps a pre-existing 3D API texture as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -297,10 +227,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,System.Boolean,SkiaSharp.SKImageInfo)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -310,12 +236,12 @@ The example above produces the following:
         <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="budgeted">Whether an allocation should count against a cache budget.</param>
-        <param name="info">The image configuration parameters.</param>
-        <summary>Creates a new surface whose contents will be drawn to an offscreen render target, allocated by the surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -323,10 +249,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -336,12 +258,12 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="renderTarget">The backend render target to wrap.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <summary>Creates a surface that wraps a GPU backend render target.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -349,10 +271,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -362,12 +280,12 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="texture">The backend texture to wrap.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <summary>Creates a surface that wraps a GPU backend texture.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -375,10 +293,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -388,12 +302,78 @@ The example above produces the following:
         <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
-        <param name="info">The image info describing the surface dimensions and format.</param>
-        <summary>Creates a GPU-accelerated surface with the specified image info.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSurface Create (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKGraphiteBackendTexture backendTexture, SkiaSharp.SKColorType colorType);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKGraphiteRecorder recorder, class SkiaSharp.SKGraphiteBackendTexture backendTexture, valuetype SkiaSharp.SKColorType colorType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKGraphiteBackendTexture,SkiaSharp.SKColorType)" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSurface</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="backendTexture" Type="SkiaSharp.SKGraphiteBackendTexture" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">To be added.</param>
+        <param name="backendTexture">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSurface Create (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKImageInfo info, SkiaSharp.SKSurfaceProperties props);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKGraphiteRecorder recorder, valuetype SkiaSharp.SKImageInfo info, class SkiaSharp.SKSurfaceProperties props) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKImageInfo,SkiaSharp.SKSurfaceProperties)" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSurface</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
+        <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSurface Create (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKImageInfo info, bool mipmapped);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKGraphiteRecorder recorder, valuetype SkiaSharp.SKImageInfo info, bool mipmapped) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKImageInfo,System.Boolean)" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSurface</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
+        <Parameter Name="mipmapped" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="mipmapped">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -401,10 +381,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, int32 rowBytes, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -414,12 +390,12 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="rowBytes">The number of bytes per row in the pixel buffer.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Creates a new surface from the specified image parameters and surface properties.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer with the parameters specified in <paramref name="info" />and the properties specified in <paramref name="props" />.</remarks>
+        <param name="info">To be added.</param>
+        <param name="rowBytes">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -427,10 +403,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, native int pixels, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -440,12 +412,12 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="pixels">The pointer to an in memory-buffer that can hold the image as specified.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Creates a new surface from the specified image parameters and surface properties.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer with the parameters specified in <paramref name="info" />and the properties specified in <paramref name="props" />.</remarks>
+        <param name="info">To be added.</param>
+        <param name="pixels">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -453,10 +425,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, native int pixels, int32 rowBytes) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr,System.Int32)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -466,12 +434,12 @@ The example above produces the following:
         <Parameter Name="rowBytes" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="pixels">The pointer to an in memory-buffer that can hold the image as specified.</param>
-        <param name="rowBytes">The number of bytes per row in the pixel buffer.</param>
-        <summary>Creates a new surface with the specified image parameters using a provided buffer.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer that will be backend by the in-memory buffer provided in <paramref name="pixels" />.</remarks>
+        <param name="info">To be added.</param>
+        <param name="pixels">To be added.</param>
+        <param name="rowBytes">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -479,10 +447,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -493,13 +457,13 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="renderTarget">The description of the existing render target.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <summary>Wraps a pre-existing backend 3D API render target as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -507,10 +471,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -521,13 +481,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="renderTarget">The description of the existing render target.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Wraps a pre-existing backend 3D API render target as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -535,10 +495,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -549,13 +505,13 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="texture">The description of the existing texture.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <summary>Wraps a pre-existing backend 3D API texture as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -563,10 +519,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -577,13 +529,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="texture">The description of the existing texture.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Wraps a pre-existing backend 3D API texture as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -591,10 +543,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,System.Boolean,SkiaSharp.SKImageInfo,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -605,13 +553,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="budgeted">Whether an allocation should count against a cache budget.</param>
-        <param name="info">The image configuration parameters.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Creates a new surface whose contents will be drawn to an offscreen render target, allocated by the surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -619,10 +567,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, int32 sampleCount) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -633,13 +577,13 @@ The example above produces the following:
         <Parameter Name="sampleCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="budgeted">Whether an allocation should count against a cache budget.</param>
-        <param name="info">The image configuration parameters.</param>
-        <param name="sampleCount">The number of samples.</param>
-        <summary>Creates a new surface whose contents will be drawn to an offscreen render target, allocated by the surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -647,10 +591,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -661,13 +601,13 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="renderTarget">The backend render target to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <summary>Creates a surface that wraps a GPU backend render target with the specified origin.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -675,10 +615,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -689,13 +625,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="renderTarget">The backend render target to wrap.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a surface that wraps a GPU backend render target with surface properties.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -703,10 +639,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -717,13 +649,13 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="texture">The backend texture to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <summary>Creates a surface that wraps a GPU backend texture with the specified origin.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -731,10 +663,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -745,13 +673,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="texture">The backend texture to wrap.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a surface that wraps a GPU backend texture with surface properties.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -759,10 +687,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -773,13 +697,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
-        <param name="info">The image info describing the surface dimensions and format.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a GPU-accelerated surface with the specified image info and properties.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -787,10 +711,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, int32 sampleCount) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -801,13 +721,61 @@ The example above produces the following:
         <Parameter Name="sampleCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
-        <param name="info">The image info describing the surface dimensions and format.</param>
-        <param name="sampleCount">The number of samples for MSAA rendering.</param>
-        <summary>Creates a GPU-accelerated surface with multisampling support.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSurface Create (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKGraphiteBackendTexture backendTexture, SkiaSharp.SKColorType colorType, SkiaSharp.SKColorSpace colorSpace);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKGraphiteRecorder recorder, class SkiaSharp.SKGraphiteBackendTexture backendTexture, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorSpace) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKGraphiteBackendTexture,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace)" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSurface</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="backendTexture" Type="SkiaSharp.SKGraphiteBackendTexture" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
+        <Parameter Name="colorSpace" Type="SkiaSharp.SKColorSpace" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">To be added.</param>
+        <param name="backendTexture">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorSpace">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSurface Create (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKImageInfo info, bool mipmapped, SkiaSharp.SKSurfaceProperties props);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKGraphiteRecorder recorder, valuetype SkiaSharp.SKImageInfo info, bool mipmapped, class SkiaSharp.SKSurfaceProperties props) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKImageInfo,System.Boolean,SkiaSharp.SKSurfaceProperties)" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSurface</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
+        <Parameter Name="mipmapped" Type="System.Boolean" />
+        <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="mipmapped">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -815,10 +783,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, native int pixels, int32 rowBytes, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr,System.Int32,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -829,13 +793,13 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="pixels">The pointer to an in memory-buffer that can hold the image as specified.</param>
-        <param name="rowBytes">The number of bytes per row in the pixel buffer.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Creates a new surface from the specified image parameters, the provided buffer and surface properties.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer that will be backend by the in-memory buffer provided in <paramref name="pixels" />.</remarks>
+        <param name="info">To be added.</param>
+        <param name="pixels">To be added.</param>
+        <param name="rowBytes">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -843,10 +807,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorspace) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -858,14 +818,14 @@ The example above produces the following:
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="renderTarget">The description of the existing render target.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="colorspace">The colorspace to use for the surface.</param>
-        <summary>Wraps a pre-existing backend 3D API render target as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -873,10 +833,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -888,14 +844,14 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="renderTarget">The description of the existing render target.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Wraps a pre-existing backend 3D API render target as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -903,10 +859,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -918,14 +870,14 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="texture">The description of the existing texture.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Wraps a pre-existing backend 3D API texture as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -933,10 +885,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, int32 sampleCount, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -948,14 +896,14 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="texture">The description of the existing texture.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="sampleCount">The number of samples per pixel.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <summary>Wraps a pre-existing backend 3D API texture as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -963,10 +911,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, int32 sampleCount, valuetype SkiaSharp.GRSurfaceOrigin origin) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.GRSurfaceOrigin)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -978,14 +922,14 @@ The example above produces the following:
         <Parameter Name="origin" Type="SkiaSharp.GRSurfaceOrigin" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="budgeted">Whether an allocation should count against a cache budget.</param>
-        <param name="info">The image configuration parameters.</param>
-        <param name="sampleCount">The number of samples per pixel.</param>
-        <param name="origin">The origin of the texture.</param>
-        <summary>Creates a new surface whose contents will be drawn to an offscreen render target, allocated by the surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="origin">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -993,10 +937,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, int32 sampleCount, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1008,14 +948,14 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="budgeted">Whether an allocation should count against a cache budget.</param>
-        <param name="info">The image configuration parameters.</param>
-        <param name="sampleCount">The number of samples.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Creates a new surface whose contents will be drawn to an offscreen render target, allocated by the surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1023,10 +963,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorspace) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1038,14 +974,14 @@ The example above produces the following:
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="renderTarget">The backend render target to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="colorspace">The color space of the surface.</param>
-        <summary>Creates a surface that wraps a GPU backend render target with color space.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1053,10 +989,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1068,14 +1000,14 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="renderTarget">The backend render target to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a surface that wraps a GPU backend render target with origin and properties.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1083,10 +1015,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1098,14 +1026,14 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="texture">The backend texture to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a surface that wraps a GPU backend texture with origin and properties.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1113,10 +1041,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, int32 sampleCount, valuetype SkiaSharp.SKColorType colorType) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1128,14 +1052,14 @@ The example above produces the following:
         <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="texture">The backend texture to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="sampleCount">The number of samples for MSAA rendering.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <summary>Creates a surface that wraps a GPU backend texture with multisampling.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1143,10 +1067,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, int32 sampleCount, valuetype SkiaSharp.GRSurfaceOrigin origin) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.GRSurfaceOrigin)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1158,14 +1078,14 @@ The example above produces the following:
         <Parameter Name="origin" Type="SkiaSharp.GRSurfaceOrigin" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
-        <param name="info">The image info describing the surface dimensions and format.</param>
-        <param name="sampleCount">The number of samples for MSAA rendering.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <summary>Creates a GPU-accelerated surface with multisampling and specified origin.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="origin">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1173,10 +1093,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, int32 sampleCount, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1188,14 +1104,40 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
-        <param name="info">The image info describing the surface dimensions and format.</param>
-        <param name="sampleCount">The number of samples for MSAA rendering.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a GPU-accelerated surface with multisampling and properties.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSurface Create (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKGraphiteBackendTexture backendTexture, SkiaSharp.SKColorType colorType, SkiaSharp.SKColorSpace colorSpace, SkiaSharp.SKSurfaceProperties props);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKGraphiteRecorder recorder, class SkiaSharp.SKGraphiteBackendTexture backendTexture, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorSpace, class SkiaSharp.SKSurfaceProperties props) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKGraphiteBackendTexture,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace,SkiaSharp.SKSurfaceProperties)" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSurface</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="backendTexture" Type="SkiaSharp.SKGraphiteBackendTexture" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
+        <Parameter Name="colorSpace" Type="SkiaSharp.SKColorSpace" />
+        <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">To be added.</param>
+        <param name="backendTexture">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorSpace">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1203,10 +1145,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, native int pixels, int32 rowBytes, class SkiaSharp.SKSurfaceReleaseDelegate releaseProc, object context) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr,System.Int32,SkiaSharp.SKSurfaceReleaseDelegate,System.Object)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1218,14 +1156,14 @@ The example above produces the following:
         <Parameter Name="context" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="pixels">The pointer to an in memory-buffer that can hold the image as specified.</param>
-        <param name="rowBytes">The number of bytes per row in the pixel buffer.</param>
-        <param name="releaseProc">The delegate to invoke when the surface is about to be disposed.</param>
-        <param name="context">The user data to use when invoking the delegate.</param>
-        <summary>Creates a new surface with the specified image parameters using a provided buffer.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="info">To be added.</param>
+        <param name="pixels">To be added.</param>
+        <param name="rowBytes">To be added.</param>
+        <param name="releaseProc">To be added.</param>
+        <param name="context">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1233,10 +1171,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorspace, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1249,15 +1183,15 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="renderTarget">The description of the existing render target.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="colorspace">The colorspace to use for the surface.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Wraps a pre-existing backend 3D API render target as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1265,10 +1199,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, int32 sampleCount, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorspace) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1281,15 +1211,15 @@ The example above produces the following:
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="texture">The description of the existing texture.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="sampleCount">The number of samples per pixel.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="colorspace">The colorspace to use for the surface.</param>
-        <summary>Wraps a pre-existing backend 3D API texture as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1297,10 +1227,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, int32 sampleCount, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1313,15 +1239,15 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="texture">The description of the existing texture.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="sampleCount">The number of samples per pixel.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Wraps a pre-existing backend 3D API texture as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1329,10 +1255,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendRenderTarget renderTarget, valuetype SkiaSharp.GRSurfaceOrigin origin, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorspace, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1345,15 +1267,15 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="renderTarget">The backend render target to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="colorspace">The color space of the surface.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a surface that wraps a GPU backend render target with color space and properties.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="renderTarget">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1361,10 +1283,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, int32 sampleCount, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorspace) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1377,15 +1295,15 @@ The example above produces the following:
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="texture">The backend texture to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="sampleCount">The number of samples for MSAA rendering.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="colorspace">The color space of the surface.</param>
-        <summary>Creates a surface that wraps a GPU backend texture with multisampling and color space.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1393,10 +1311,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, int32 sampleCount, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1409,15 +1323,43 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="texture">The backend texture to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="sampleCount">The number of samples for MSAA rendering.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a surface that wraps a GPU backend texture with multisampling and properties.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKSurface Create (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKGraphiteBackendTexture backendTexture, SkiaSharp.SKColorType colorType, SkiaSharp.SKColorSpace colorSpace, SkiaSharp.SKSurfaceProperties props, SkiaSharp.SKGraphiteReleaseDelegate releaseProc);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.SKGraphiteRecorder recorder, class SkiaSharp.SKGraphiteBackendTexture backendTexture, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorSpace, class SkiaSharp.SKSurfaceProperties props, class SkiaSharp.SKGraphiteReleaseDelegate releaseProc) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKGraphiteBackendTexture,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace,SkiaSharp.SKSurfaceProperties,SkiaSharp.SKGraphiteReleaseDelegate)" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKSurface</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="backendTexture" Type="SkiaSharp.SKGraphiteBackendTexture" />
+        <Parameter Name="colorType" Type="SkiaSharp.SKColorType" />
+        <Parameter Name="colorSpace" Type="SkiaSharp.SKColorSpace" />
+        <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
+        <Parameter Name="releaseProc" Type="SkiaSharp.SKGraphiteReleaseDelegate" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">To be added.</param>
+        <param name="backendTexture">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorSpace">To be added.</param>
+        <param name="props">To be added.</param>
+        <param name="releaseProc">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1425,10 +1367,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(valuetype SkiaSharp.SKImageInfo info, native int pixels, int32 rowBytes, class SkiaSharp.SKSurfaceReleaseDelegate releaseProc, object context, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr,System.Int32,SkiaSharp.SKSurfaceReleaseDelegate,System.Object,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1441,15 +1379,15 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="info">The image configuration parameters.</param>
-        <param name="pixels">The pointer to an in memory-buffer that can hold the image as specified.</param>
-        <param name="rowBytes">The number of bytes per row in the pixel buffer.</param>
-        <param name="releaseProc">The delegate to invoke when the surface is about to be disposed.</param>
-        <param name="context">The user data to use when invoking the delegate.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Creates a new surface with the specified image parameters using a provided buffer.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="info">To be added.</param>
+        <param name="pixels">To be added.</param>
+        <param name="rowBytes">To be added.</param>
+        <param name="releaseProc">To be added.</param>
+        <param name="context">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1457,10 +1395,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, int32 sampleCount, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorspace, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1474,16 +1408,16 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="texture">The description of the existing texture.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="sampleCount">The number of samples per pixel.</param>
-        <param name="colorType">The color type to use for the surface.</param>
-        <param name="colorspace">The colorspace to use for the surface.</param>
-        <param name="props">The surface property configuration.</param>
-        <summary>Wraps a pre-existing backend 3D API texture as a surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1491,10 +1425,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, int32 sampleCount, valuetype SkiaSharp.GRSurfaceOrigin origin, class SkiaSharp.SKSurfaceProperties props, bool shouldCreateWithMips) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKSurfaceProperties,System.Boolean)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1508,16 +1438,16 @@ The example above produces the following:
         <Parameter Name="shouldCreateWithMips" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="context">The graphics context.</param>
-        <param name="budgeted">Whether an allocation should count against a cache budget.</param>
-        <param name="info">The image configuration parameters.</param>
-        <param name="sampleCount">The number of samples per pixel.</param>
-        <param name="origin">The origin of the texture.</param>
-        <param name="props">The surface property configuration.</param>
-        <param name="shouldCreateWithMips">A hint that the surface will host mip map images.</param>
-        <summary>Creates a new surface whose contents will be drawn to an offscreen render target, allocated by the surface.</summary>
-        <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="props">To be added.</param>
+        <param name="shouldCreateWithMips">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1525,10 +1455,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, class SkiaSharp.GRBackendTexture texture, valuetype SkiaSharp.GRSurfaceOrigin origin, int32 sampleCount, valuetype SkiaSharp.SKColorType colorType, class SkiaSharp.SKColorSpace colorspace, class SkiaSharp.SKSurfaceProperties props) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace,SkiaSharp.SKSurfaceProperties)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1542,16 +1468,16 @@ The example above produces the following:
         <Parameter Name="props" Type="SkiaSharp.SKSurfaceProperties" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="texture">The backend texture to wrap.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="sampleCount">The number of samples for MSAA rendering.</param>
-        <param name="colorType">The color type of the surface.</param>
-        <param name="colorspace">The color space of the surface.</param>
-        <param name="props">The surface properties.</param>
-        <summary>Creates a surface that wraps a GPU backend texture with all options.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="texture">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="colorType">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="props">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1559,10 +1485,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface Create(class SkiaSharp.GRRecordingContext context, bool budgeted, valuetype SkiaSharp.SKImageInfo info, int32 sampleCount, valuetype SkiaSharp.GRSurfaceOrigin origin, class SkiaSharp.SKSurfaceProperties props, bool shouldCreateWithMips) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKSurfaceProperties,System.Boolean)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1576,16 +1498,16 @@ The example above produces the following:
         <Parameter Name="shouldCreateWithMips" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="context">The GPU recording context.</param>
-        <param name="budgeted">Whether the surface should count against the GPU resource budget.</param>
-        <param name="info">The image info describing the surface dimensions and format.</param>
-        <param name="sampleCount">The number of samples for MSAA rendering.</param>
-        <param name="origin">The origin of the surface texture.</param>
-        <param name="props">The surface properties.</param>
-        <param name="shouldCreateWithMips">Whether to create mipmaps.</param>
-        <summary>Creates a GPU-accelerated surface with all options including mipmap support.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKSurface" />, or <see langword="null" /> on failure.</returns>
-        <remarks />
+        <param name="context">To be added.</param>
+        <param name="budgeted">To be added.</param>
+        <param name="info">To be added.</param>
+        <param name="sampleCount">To be added.</param>
+        <param name="origin">To be added.</param>
+        <param name="props">To be added.</param>
+        <param name="shouldCreateWithMips">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateNull">
@@ -1593,10 +1515,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKSurface CreateNull(int32 width, int32 height) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.CreateNull(System.Int32,System.Int32)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurface</ReturnType>
       </ReturnValue>
@@ -1605,11 +1523,11 @@ The example above produces the following:
         <Parameter Name="height" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="width">The desired width for the surface.</param>
-        <param name="height">The desired height for the surface.</param>
-        <summary>Creates a new surface without any backing pixels.</summary>
-        <returns>Returns the new surface if it could be created, otherwise <see langword="null" />.</returns>
-        <remarks>Drawing to the <see cref="T:SkiaSharp.SKCanvas" /> returned from <see cref="P:SkiaSharp.SKSurface.Canvas" /> has no effect. Calling <see cref="M:SkiaSharp.SKSurface.Snapshot" /> on the returned <see cref="T:SkiaSharp.SKSurface" /> returns <see langword="null" />.</remarks>
+        <param name="width">To be added.</param>
+        <param name="height">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -1617,10 +1535,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Dispose(System.Boolean)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -1628,10 +1542,9 @@ The example above produces the following:
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">
-          <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
-        <summary>Releases the unmanaged resources used by the <see cref="T:SkiaSharp.SKSurface" /> and optionally releases the managed resources.</summary>
-        <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKSurface" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
+        <param name="disposing">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DisposeManaged">
@@ -1639,17 +1552,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeManaged() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.DisposeManaged" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Releases managed resources.</summary>
-        <remarks />
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Draw">
@@ -1657,10 +1566,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Draw(class SkiaSharp.SKCanvas canvas, valuetype SkiaSharp.SKPoint p, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Draw(SkiaSharp.SKCanvas,SkiaSharp.SKPoint,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -1671,12 +1576,12 @@ The example above produces the following:
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="canvas">The canvas onto which to draw the surface.</param>
-        <param name="p">The location at which to draw the upper-left corner of the surface.</param>
-        <param name="sampling">The sampling options to apply when scaling or filtering the surface.</param>
-        <param name="paint">The paint to use when drawing the surface, or <see langword="null" /> for default rendering.</param>
-        <summary>Draws the surface onto the specified canvas at the given location using the specified sampling options and paint.</summary>
-        <remarks></remarks>
+        <param name="canvas">To be added.</param>
+        <param name="p">To be added.</param>
+        <param name="sampling">To be added.</param>
+        <param name="paint">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Draw">
@@ -1684,10 +1589,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Draw(class SkiaSharp.SKCanvas canvas, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Draw(SkiaSharp.SKCanvas,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -1698,12 +1599,12 @@ The example above produces the following:
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="canvas">The canvas onto which this surface is drawn.</param>
-        <param name="x">The x-coordinate of the destination position.</param>
-        <param name="y">The y-coordinate of the destination position.</param>
-        <param name="paint">The paint to apply when drawing, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws this surface onto the specified canvas at the given position.</summary>
-        <remarks />
+        <param name="canvas">To be added.</param>
+        <param name="x">To be added.</param>
+        <param name="y">To be added.</param>
+        <param name="paint">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Draw">
@@ -1711,10 +1612,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Draw(class SkiaSharp.SKCanvas canvas, float32 x, float32 y, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Draw(SkiaSharp.SKCanvas,System.Single,System.Single,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -1726,13 +1623,13 @@ The example above produces the following:
         <Parameter Name="paint" Type="SkiaSharp.SKPaint" />
       </Parameters>
       <Docs>
-        <param name="canvas">The canvas onto which this surface is drawn.</param>
-        <param name="x">The x-coordinate of the destination position.</param>
-        <param name="y">The y-coordinate of the destination position.</param>
-        <param name="sampling">The sampling options to use when drawing.</param>
-        <param name="paint">The paint to apply when drawing, or <see langword="null" /> to use default paint settings.</param>
-        <summary>Draws this surface onto the specified canvas at the given position.</summary>
-        <remarks></remarks>
+        <param name="canvas">To be added.</param>
+        <param name="x">To be added.</param>
+        <param name="y">To be added.</param>
+        <param name="sampling">To be added.</param>
+        <param name="paint">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -1740,17 +1637,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Flush() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Flush" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Ensures all pending draw operations are submitted to the GPU.</summary>
-        <remarks />
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -1758,10 +1651,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Flush(bool submit, bool synchronous) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Flush(System.Boolean,System.Boolean)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -1770,10 +1659,10 @@ The example above produces the following:
         <Parameter Name="synchronous" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="submit">Whether to submit the commands to the GPU.</param>
-        <param name="synchronous">Whether to wait for the GPU to finish processing.</param>
-        <summary>Ensures all pending draw operations are submitted to the GPU with specified options.</summary>
-        <remarks />
+        <param name="submit">To be added.</param>
+        <param name="synchronous">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PeekPixels">
@@ -1781,18 +1670,14 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKPixmap PeekPixels() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.PeekPixels" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKPixmap</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Returns the pixels, if they are available.</summary>
-        <returns>Returns the pixels, if they are available, otherwise <see langword="null" />.</returns>
-        <remarks>If the pixels are available, then the surface is only valid until the surface changes in any way, in which case the pixmap becomes invalid.</remarks>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PeekPixels">
@@ -1800,10 +1685,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool PeekPixels(class SkiaSharp.SKPixmap pixmap) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.PeekPixels(SkiaSharp.SKPixmap)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -1811,10 +1692,10 @@ The example above produces the following:
         <Parameter Name="pixmap" Type="SkiaSharp.SKPixmap" />
       </Parameters>
       <Docs>
-        <param name="pixmap">The pixmap to receive the pixel information.</param>
-        <summary>Returns the pixmap of the surface.</summary>
-        <returns>Returns <see langword="true" /> on success, or <see langword="false" /> if the surface does not have access to pixel data.</returns>
-        <remarks />
+        <param name="pixmap">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ReadPixels">
@@ -1822,10 +1703,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ReadPixels(valuetype SkiaSharp.SKImageInfo dstInfo, native int dstPixels, int32 dstRowBytes, int32 srcX, int32 srcY) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.ReadPixels(SkiaSharp.SKImageInfo,System.IntPtr,System.Int32,System.Int32,System.Int32)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -1837,14 +1714,60 @@ The example above produces the following:
         <Parameter Name="srcY" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="dstInfo">The image information describing the destination pixel buffer.</param>
-        <param name="dstPixels">The pixel buffer to read the pixel data into.</param>
-        <param name="dstRowBytes">The number of bytes in each row of in the destination buffer.</param>
-        <param name="srcX">The source x-coordinate to start reading from.</param>
-        <param name="srcY">The source y-coordinate to start reading from.</param>
-        <summary>Copies the pixels from the surface into the specified buffer.</summary>
-        <returns>Returns <see langword="true" /> if the pixels were read, or <see langword="false" /> if there was an error.</returns>
-        <remarks>This method may return <see langword="false" /> if the source rectangle [<paramref name="srcX" />, <paramref name="srcY" />, dstInfo.Width, dstInfo.Height] does not intersect the surface, or if the color type/alpha type could not be converted to the destination types.</remarks>
+        <param name="dstInfo">To be added.</param>
+        <param name="dstPixels">To be added.</param>
+        <param name="dstRowBytes">To be added.</param>
+        <param name="srcX">To be added.</param>
+        <param name="srcY">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequestReadPixels">
+      <MemberSignature Language="C#" Value="public void RequestReadPixels (SkiaSharp.SKImageInfo info, SkiaSharp.SKRectI srcRect, Action&lt;SkiaSharp.SKImageReadPixelsResult&gt; callback);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RequestReadPixels(valuetype SkiaSharp.SKImageInfo info, valuetype SkiaSharp.SKRectI srcRect, class System.Action`1&lt;class SkiaSharp.SKImageReadPixelsResult&gt; callback) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.RequestReadPixels(SkiaSharp.SKImageInfo,SkiaSharp.SKRectI,System.Action{SkiaSharp.SKImageReadPixelsResult})" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
+        <Parameter Name="srcRect" Type="SkiaSharp.SKRectI" />
+        <Parameter Name="callback" Type="System.Action&lt;SkiaSharp.SKImageReadPixelsResult&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="info">To be added.</param>
+        <param name="srcRect">To be added.</param>
+        <param name="callback">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequestReadPixels">
+      <MemberSignature Language="C#" Value="public void RequestReadPixels (SkiaSharp.SKImageInfo info, SkiaSharp.SKRectI srcRect, SkiaSharp.SKImageRescaleGamma rescaleGamma, SkiaSharp.SKImageRescaleMode rescaleMode, Action&lt;SkiaSharp.SKImageReadPixelsResult&gt; callback);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RequestReadPixels(valuetype SkiaSharp.SKImageInfo info, valuetype SkiaSharp.SKRectI srcRect, valuetype SkiaSharp.SKImageRescaleGamma rescaleGamma, valuetype SkiaSharp.SKImageRescaleMode rescaleMode, class System.Action`1&lt;class SkiaSharp.SKImageReadPixelsResult&gt; callback) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.RequestReadPixels(SkiaSharp.SKImageInfo,SkiaSharp.SKRectI,SkiaSharp.SKImageRescaleGamma,SkiaSharp.SKImageRescaleMode,System.Action{SkiaSharp.SKImageReadPixelsResult})" />
+      <MemberType>Method</MemberType>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="info" Type="SkiaSharp.SKImageInfo" />
+        <Parameter Name="srcRect" Type="SkiaSharp.SKRectI" />
+        <Parameter Name="rescaleGamma" Type="SkiaSharp.SKImageRescaleGamma" />
+        <Parameter Name="rescaleMode" Type="SkiaSharp.SKImageRescaleMode" />
+        <Parameter Name="callback" Type="System.Action&lt;SkiaSharp.SKImageReadPixelsResult&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="info">To be added.</param>
+        <param name="srcRect">To be added.</param>
+        <param name="rescaleGamma">To be added.</param>
+        <param name="rescaleMode">To be added.</param>
+        <param name="callback">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Snapshot">
@@ -1852,18 +1775,14 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKImage Snapshot() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Snapshot" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKImage</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Takes a snapshot of the surface and returns it as an image.</summary>
-        <returns>An <see cref="T:SkiaSharp.SKImage" /> that contains a snapshot of the current image.</returns>
-        <remarks>You can use this method to take an <see cref="T:SkiaSharp.SKImage" /> snapshot of the current state of the surface.</remarks>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Snapshot">
@@ -1871,10 +1790,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKImage Snapshot(valuetype SkiaSharp.SKRectI bounds) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKSurface.Snapshot(SkiaSharp.SKRectI)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKImage</ReturnType>
       </ReturnValue>
@@ -1882,10 +1797,10 @@ The example above produces the following:
         <Parameter Name="bounds" Type="SkiaSharp.SKRectI" />
       </Parameters>
       <Docs>
-        <param name="bounds">The bounds of the area to capture.</param>
-        <summary>Creates an image from the specified area of the surface.</summary>
-        <returns>A new <see cref="T:SkiaSharp.SKImage" /> containing the captured area.</returns>
-        <remarks />
+        <param name="bounds">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SurfaceProperties">
@@ -1893,17 +1808,13 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKSurfaceProperties SurfaceProperties" />
       <MemberSignature Language="DocId" Value="P:SkiaSharp.SKSurface.SurfaceProperties" />
       <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSurfaceProperties</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the surface property configuration.</summary>
-        <value>The surface property configuration.</value>
-        <remarks />
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
   </Members>

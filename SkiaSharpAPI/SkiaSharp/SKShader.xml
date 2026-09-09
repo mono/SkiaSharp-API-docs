@@ -4,249 +4,14 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKShader" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>4.150.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Shaders specify the source color(s) for what is being drawn in the <see cref="T:SkiaSharp.SKPaint" />.</summary>
-    <remarks>
-      <format type="text/markdown"><![CDATA[
-## Remarks
-
-Shaders specify the source colors for what is being drawn. If a paint has no
-shader, then the paint's color is used. If the paint has a shader, then the
-shader's colors are used instead, but they are modulated by the paint's alpha.
-
-This makes it easy to create a shader once (for example, bitmap tiling or
-gradient) and then change its transparency without having to modify the
-original shader, only the paint's alpha needs to be modified.
-
-Shaders are created by calling one of the static "Create" methods.
-
-## Examples
-
-### Linear Gradient Shader Example
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the shader
-    var colors = new SKColor[] {
-        new SKColor(0, 0, 255),
-        new SKColor(0, 255, 0)
-    };
-    var shader = SKShader.CreateLinearGradient(
-        new SKPoint(0, 0),
-        new SKPoint(255, 255),
-        colors,
-        null,
-        SKShaderTileMode.Clamp);
-
-    // use the shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Linear Gradient](~/images/linear.png "Linear Gradient")
-
-### Radial Gradient Shader Example
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the shader
-    var colors = new SKColor[] {
-        new SKColor(0, 0, 255),
-        new SKColor(0, 255, 0)
-    };
-    var shader = SKShader.CreateRadialGradient(
-        new SKPoint(128, 128),
-        180,
-        colors,
-        null,
-        SKShaderTileMode.Clamp);
-
-    // use the shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Radial Gradient](~/images/radial.png "Radial Gradient")
-
-### Two-point Conical Gradient Shader Example
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the shader
-    var colors = new SKColor[] {
-        new SKColor(0, 0, 255),
-        new SKColor(0, 255, 0)
-    };
-    var shader = SKShader.CreateTwoPointConicalGradient(
-        new SKPoint(128, 128),
-        128,
-        new SKPoint(128, 16),
-        16,
-        colors,
-        null,
-        SKShaderTileMode.Clamp);
-
-    // use the shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Two-point Conical Gradient](~/images/twopoint.png "Two-point Conical Gradient")
-
-### Sweep Gradient Shader Example
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the shader
-    var colors = new SKColor[] {
-        new SKColor(0, 255, 255),
-        new SKColor(255, 0, 255),
-        new SKColor(255, 255, 0),
-        new SKColor(0, 255, 255)
-    };
-    var shader = SKShader.CreateSweepGradient(
-        new SKPoint(128, 128),
-        colors,
-        null);
-
-    // use the shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Sweep Gradient](~/images/sweep.png "Sweep Gradient")
-
-### Fractal Perlin Noise Shader Example
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the shader
-    var shader = SKShader.CreatePerlinNoiseFractalNoise(0.5f, 0.5f, 4, 0);
-
-    // use the shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Fractal Perlin Noise](~/images/fractal-perlin-noise.png "Fractal Perlin Noise")
-
-### Perlin Noise Turbulence Shader Example
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the shader
-    var shader = SKShader.CreatePerlinNoiseTurbulence(0.05f, 0.05f, 4, 0);
-
-    // use the shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Fractal Perlin Noise](~/images/perlin-noise-turbulence.png "Fractal Perlin Noise")
-
-### Compose Shader Example
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the first shader
-    var colors = new SKColor[] {
-        new SKColor(0, 255, 255),
-        new SKColor(255, 0, 255),
-        new SKColor(255, 255, 0),
-        new SKColor(0, 255, 255)
-    };
-    var sweep = SKShader.CreateSweepGradient(new SKPoint(128, 128), colors, null);
-
-    // create the second shader
-    var turbulence = SKShader.CreatePerlinNoiseTurbulence(0.05f, 0.05f, 4, 0);
-
-    // create the compose shader
-    var shader = SKShader.CreateCompose(sweep, turbulence, SKBlendMode.SrcOver);
-
-    // use the compose shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Compose Shader](~/images/compose.png "Compose Shader")
-]]></format>
-    </remarks>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName="CreateBitmap">
@@ -254,10 +19,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateBitmap(class SkiaSharp.SKBitmap src) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateBitmap(SkiaSharp.SKBitmap)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -265,19 +26,10 @@ The example above produces the following:
         <Parameter Name="src" Type="SkiaSharp.SKBitmap" />
       </Parameters>
       <Docs>
-        <param name="src">The bitmap to use inside the shader.</param>
-        <summary>Creates a new shader that will draw with the specified bitmap.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-If the bitmap cannot be used (has no pixels, or its dimensions exceed
-implementation limits) then an empty shader may be returned. If the source
-bitmap's color type is <xref:SkiaSharp.SKColorType.Alpha8> then that mask will
-be colorized using the color on the paint.
-]]></format>
-        </remarks>
+        <param name="src">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateBitmap">
@@ -285,10 +37,6 @@ be colorized using the color on the paint.
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateBitmap(class SkiaSharp.SKBitmap src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -298,21 +46,12 @@ be colorized using the color on the paint.
         <Parameter Name="tmy" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="src">The bitmap to use inside the shader.</param>
-        <param name="tmx">The tiling mode to use when sampling the bitmap in the x-direction.</param>
-        <param name="tmy">The tiling mode to use when sampling the bitmap in the y-direction.</param>
-        <summary>Creates a new shader that will draw with the specified bitmap.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-If the bitmap cannot be used (has no pixels, or its dimensions exceed
-implementation limits) then an empty shader may be returned. If the source
-bitmap's color type is <xref:SkiaSharp.SKColorType.Alpha8> then that mask will
-be colorized using the color on the paint.
-]]></format>
-        </remarks>
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateBitmap">
@@ -320,10 +59,6 @@ be colorized using the color on the paint.
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateBitmap(class SkiaSharp.SKBitmap src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -334,22 +69,13 @@ be colorized using the color on the paint.
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The bitmap to use inside the shader.</param>
-        <param name="tmx">The tiling mode to use when sampling the bitmap in the x-direction.</param>
-        <param name="tmy">The tiling mode to use when sampling the bitmap in the y-direction.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a new shader that will draw with the specified bitmap.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-If the bitmap cannot be used (has no pixels, or its dimensions exceed
-implementation limits) then an empty shader may be returned. If the source
-bitmap's color type is <xref:SkiaSharp.SKColorType.Alpha8> then that mask will
-be colorized using the color on the paint.
-]]></format>
-        </remarks>
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateBlend">
@@ -357,10 +83,6 @@ be colorized using the color on the paint.
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateBlend(class SkiaSharp.SKBlender blender, class SkiaSharp.SKShader shaderA, class SkiaSharp.SKShader shaderB) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateBlend(SkiaSharp.SKBlender,SkiaSharp.SKShader,SkiaSharp.SKShader)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -370,12 +92,12 @@ be colorized using the color on the paint.
         <Parameter Name="shaderB" Type="SkiaSharp.SKShader" />
       </Parameters>
       <Docs>
-        <param name="blender">The <see cref="T:SkiaSharp.SKBlender" /> to use for combining the shaders.</param>
-        <param name="shaderA">The first shader to blend.</param>
-        <param name="shaderB">The second shader to blend.</param>
-        <summary>Creates a new shader that blends two shaders together using a custom blender.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="blender">To be added.</param>
+        <param name="shaderA">To be added.</param>
+        <param name="shaderB">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateBlend">
@@ -383,10 +105,6 @@ be colorized using the color on the paint.
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateBlend(valuetype SkiaSharp.SKBlendMode mode, class SkiaSharp.SKShader shaderA, class SkiaSharp.SKShader shaderB) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateBlend(SkiaSharp.SKBlendMode,SkiaSharp.SKShader,SkiaSharp.SKShader)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -396,12 +114,12 @@ be colorized using the color on the paint.
         <Parameter Name="shaderB" Type="SkiaSharp.SKShader" />
       </Parameters>
       <Docs>
-        <param name="mode">The <see cref="T:SkiaSharp.SKBlendMode" /> to use for combining the shaders.</param>
-        <param name="shaderA">The first shader to blend.</param>
-        <param name="shaderB">The second shader to blend.</param>
-        <summary>Creates a new shader that blends two shaders together using a blend mode.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="mode">To be added.</param>
+        <param name="shaderA">To be added.</param>
+        <param name="shaderB">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateColor">
@@ -409,10 +127,6 @@ be colorized using the color on the paint.
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateColor(valuetype SkiaSharp.SKColor color) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateColor(SkiaSharp.SKColor)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -420,10 +134,10 @@ be colorized using the color on the paint.
         <Parameter Name="color" Type="SkiaSharp.SKColor" />
       </Parameters>
       <Docs>
-        <param name="color">The color to paint.</param>
-        <summary>Creates a new shader that just draws the specified color.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="color">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateColor">
@@ -431,10 +145,6 @@ be colorized using the color on the paint.
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateColor(valuetype SkiaSharp.SKColorF color, class SkiaSharp.SKColorSpace colorspace) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateColor(SkiaSharp.SKColorF,SkiaSharp.SKColorSpace)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -443,11 +153,11 @@ be colorized using the color on the paint.
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" />
       </Parameters>
       <Docs>
-        <param name="color">The color to paint.</param>
-        <param name="colorspace">The colorspace to use.</param>
-        <summary>Creates a new shader that just draws the specified color.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="color">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateColorFilter">
@@ -455,10 +165,6 @@ be colorized using the color on the paint.
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateColorFilter(class SkiaSharp.SKShader shader, class SkiaSharp.SKColorFilter filter) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateColorFilter(SkiaSharp.SKShader,SkiaSharp.SKColorFilter)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -467,72 +173,18 @@ be colorized using the color on the paint.
         <Parameter Name="filter" Type="SkiaSharp.SKColorFilter" />
       </Parameters>
       <Docs>
-        <param name="shader">The shader to apply.</param>
-        <param name="filter">The color filter to apply.</param>
-        <summary>Creates a new shader that produces the same colors as invoking this shader and then applying the color filter.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="shader">To be added.</param>
+        <param name="filter">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <MemberGroup MemberName="CreateCompose">
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-      </AssemblyInfo>
-      <Docs>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-Create a new compose shader, which combines two shaders by a blend mode.
-
-## Examples
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the first shader
-    var colors = new SKColor[] {
-        new SKColor(0, 255, 255),
-        new SKColor(255, 0, 255),
-        new SKColor(255, 255, 0),
-        new SKColor(0, 255, 255)
-    };
-    var sweep = SKShader.CreateSweepGradient(new SKPoint(128, 128), colors, null);
-
-    // create the second shader
-    var turbulence = SKShader.CreatePerlinNoiseTurbulence(0.05f, 0.05f, 4, 0);
-
-    // create the compose shader
-    var shader = SKShader.CreateCompose(sweep, turbulence, SKBlendMode.SrcOver);
-
-    // use the compose shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Compose Shader](~/images/compose.png "Compose Shader")
-]]></format>
-        </remarks>
-      </Docs>
-    </MemberGroup>
     <Member MemberName="CreateCompose">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKShader CreateCompose (SkiaSharp.SKShader shaderA, SkiaSharp.SKShader shaderB);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateCompose(class SkiaSharp.SKShader shaderA, class SkiaSharp.SKShader shaderB) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateCompose(SkiaSharp.SKShader,SkiaSharp.SKShader)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -541,11 +193,11 @@ The example above produces the following:
         <Parameter Name="shaderB" Type="SkiaSharp.SKShader" />
       </Parameters>
       <Docs>
-        <param name="shaderA">The colors from this shader are seen as the destination by the blend mode.</param>
-        <param name="shaderB">The colors from this shader are seen as the source by the blend mode.</param>
-        <summary>Create a new compose shader, which combines two shaders by the <see cref="F:SkiaSharp.SKBlendMode.SrcOver" /> blend mode.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="shaderA">To be added.</param>
+        <param name="shaderB">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateCompose">
@@ -553,10 +205,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateCompose(class SkiaSharp.SKShader shaderA, class SkiaSharp.SKShader shaderB, valuetype SkiaSharp.SKBlendMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateCompose(SkiaSharp.SKShader,SkiaSharp.SKShader,SkiaSharp.SKBlendMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -566,12 +214,12 @@ The example above produces the following:
         <Parameter Name="mode" Type="SkiaSharp.SKBlendMode" />
       </Parameters>
       <Docs>
-        <param name="shaderA">The colors from this shader are seen as the destination by the blend mode.</param>
-        <param name="shaderB">The colors from this shader are seen as the source by the blend mode.</param>
-        <param name="mode">The blend mode that combines the two shaders.</param>
-        <summary>Create a new compose shader, which combines two shaders by a blend mode.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="shaderA">To be added.</param>
+        <param name="shaderB">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateEmpty">
@@ -579,18 +227,14 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateEmpty() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateEmpty" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Creates a new "empty" shader that will not draw anything.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -598,10 +242,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateImage(class SkiaSharp.SKImage src) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateImage(SkiaSharp.SKImage)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -609,10 +249,10 @@ The example above produces the following:
         <Parameter Name="src" Type="SkiaSharp.SKImage" />
       </Parameters>
       <Docs>
-        <param name="src">The source image to use for the shader.</param>
-        <summary>Creates a new shader that draws an image.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -620,10 +260,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateImage(class SkiaSharp.SKImage src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateImage(SkiaSharp.SKImage,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -633,12 +269,12 @@ The example above produces the following:
         <Parameter Name="tmy" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="src">The source image to use for the shader.</param>
-        <param name="tmx">The tile mode in the X direction.</param>
-        <param name="tmy">The tile mode in the Y direction.</param>
-        <summary>Creates a new shader that draws an image with specified tile modes.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -646,10 +282,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateImage(class SkiaSharp.SKImage src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateImage(SkiaSharp.SKImage,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -660,13 +292,13 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source image to use for the shader.</param>
-        <param name="tmx">The tile mode in the X direction.</param>
-        <param name="tmy">The tile mode in the Y direction.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a new shader that draws an image with specified tile modes and transformation matrix.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -674,10 +306,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateImage(class SkiaSharp.SKImage src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKSamplingOptions sampling) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateImage(SkiaSharp.SKImage,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKSamplingOptions)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -688,13 +316,13 @@ The example above produces the following:
         <Parameter Name="sampling" Type="SkiaSharp.SKSamplingOptions" />
       </Parameters>
       <Docs>
-        <param name="src">The source image to use for the shader.</param>
-        <param name="tmx">The tile mode in the X direction.</param>
-        <param name="tmy">The tile mode in the Y direction.</param>
-        <param name="sampling">The sampling options to use when sampling the image.</param>
-        <summary>Creates a new shader that draws an image with specified tile modes and sampling options.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="sampling">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateImage">
@@ -702,10 +330,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateImage(class SkiaSharp.SKImage src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKSamplingOptions sampling, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateImage(SkiaSharp.SKImage,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKSamplingOptions,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -717,73 +341,21 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="src">The source image to use for the shader.</param>
-        <param name="tmx">The tile mode in the X direction.</param>
-        <param name="tmy">The tile mode in the Y direction.</param>
-        <param name="sampling">The sampling options to use when sampling the image.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a new shader that draws an image with specified tile modes, sampling options, and transformation matrix.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="sampling">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <MemberGroup MemberName="CreateLinearGradient">
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-      </AssemblyInfo>
-      <Docs>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-Creates a shader that generates a linear gradient between the two specified
-points.
-
-## Examples
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // create the shader
-    var colors = new SKColor[] {
-        new SKColor(0, 0, 255),
-        new SKColor(0, 255, 0)
-    };
-    var shader = SKShader.CreateLinearGradient(
-        new SKPoint(0, 0),
-        new SKPoint(255, 255),
-        colors,
-        null,
-        SKShaderTileMode.Clamp);
-
-    // use the shader
-    var paint = new SKPaint {
-        Shader = shader
-    };
-    canvas.DrawPaint(paint);
-}
-```
-
-The example above produces the following:
-
-![Linear Gradient](~/images/linear.png "Linear Gradient")
-]]></format>
-        </remarks>
-      </Docs>
-    </MemberGroup>
     <Member MemberName="CreateLinearGradient">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKShader CreateLinearGradient (SkiaSharp.SKPoint start, SkiaSharp.SKPoint end, SkiaSharp.SKColor[] colors, SkiaSharp.SKShaderTileMode mode);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateLinearGradient(valuetype SkiaSharp.SKPoint start, valuetype SkiaSharp.SKPoint end, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColor[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -794,13 +366,13 @@ The example above produces the following:
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="start">The start point for the gradient.</param>
-        <param name="end">The end point for the gradient.</param>
-        <param name="colors">The array colors to be distributed between the two points.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a linear gradient between the two specified points.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateLinearGradient">
@@ -808,10 +380,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateLinearGradient(valuetype SkiaSharp.SKPoint start, valuetype SkiaSharp.SKPoint end, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -823,14 +391,14 @@ The example above produces the following:
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="start">The start point for the gradient.</param>
-        <param name="end">The end point for the gradient.</param>
-        <param name="colors">The array colors to be distributed between the two points.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a linear gradient between the two specified points.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateLinearGradient">
@@ -838,10 +406,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateLinearGradient(valuetype SkiaSharp.SKPoint start, valuetype SkiaSharp.SKPoint end, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -853,14 +417,14 @@ The example above produces the following:
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="start">The start point for the gradient.</param>
-        <param name="end">The end point for the gradient.</param>
-        <param name="colors">The array of colors to be distributed between the two points.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a linear gradient between the two specified points in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateLinearGradient">
@@ -868,10 +432,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateLinearGradient(valuetype SkiaSharp.SKPoint start, valuetype SkiaSharp.SKPoint end, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -884,15 +444,15 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="start">The start point for the gradient.</param>
-        <param name="end">The end point for the gradient.</param>
-        <param name="colors">The array colors to be distributed between the two points.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a linear gradient between the two specified points.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateLinearGradient">
@@ -900,10 +460,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateLinearGradient(valuetype SkiaSharp.SKPoint start, valuetype SkiaSharp.SKPoint end, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -916,15 +472,15 @@ The example above produces the following:
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="start">The start point for the gradient.</param>
-        <param name="end">The end point for the gradient.</param>
-        <param name="colors">The array of colors to be distributed between the two points.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a linear gradient between the two specified points in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateLinearGradient">
@@ -932,10 +488,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateLinearGradient(valuetype SkiaSharp.SKPoint start, valuetype SkiaSharp.SKPoint end, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateLinearGradient(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -949,16 +501,16 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="start">The start point for the gradient.</param>
-        <param name="end">The end point for the gradient.</param>
-        <param name="colors">The array of colors to be distributed between the two points.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a linear gradient between the two specified points in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateLocalMatrix">
@@ -966,10 +518,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateLocalMatrix(class SkiaSharp.SKShader shader, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateLocalMatrix(SkiaSharp.SKShader,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -978,11 +526,11 @@ The example above produces the following:
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="shader">The shader to apply.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that first applies the specified matrix and then applies the shader.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or <see langword="null" /> on error.</returns>
-        <remarks />
+        <param name="shader">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePerlinNoiseFractalNoise">
@@ -990,10 +538,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePerlinNoiseFractalNoise(float32 baseFrequencyX, float32 baseFrequencyY, int32 numOctaves, float32 seed) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePerlinNoiseFractalNoise(System.Single,System.Single,System.Int32,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1004,13 +548,13 @@ The example above produces the following:
         <Parameter Name="seed" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">The frequency in the x-direction in the range of 0..1.</param>
-        <param name="baseFrequencyY">The frequency in the y-direction in the range of 0..1.</param>
-        <param name="numOctaves">The number of octaves, usually fairly small.</param>
-        <param name="seed">The randomization seed.</param>
-        <summary>Creates a new shader that draws Perlin fractal noise.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="baseFrequencyX">To be added.</param>
+        <param name="baseFrequencyY">To be added.</param>
+        <param name="numOctaves">To be added.</param>
+        <param name="seed">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePerlinNoiseFractalNoise">
@@ -1018,10 +562,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePerlinNoiseFractalNoise(float32 baseFrequencyX, float32 baseFrequencyY, int32 numOctaves, float32 seed, valuetype SkiaSharp.SKPointI tileSize) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePerlinNoiseFractalNoise(System.Single,System.Single,System.Int32,System.Single,SkiaSharp.SKPointI)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1033,14 +573,14 @@ The example above produces the following:
         <Parameter Name="tileSize" Type="SkiaSharp.SKPointI" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">The frequency in the x-direction in the range of 0..1.</param>
-        <param name="baseFrequencyY">The frequency in the y-direction in the range of 0..1.</param>
-        <param name="numOctaves">The number of octaves, usually fairly small.</param>
-        <param name="seed">The randomization seed.</param>
-        <param name="tileSize">The tile size used to modify the frequencies so that the noise will be tileable for the given size.</param>
-        <summary>Creates a new shader that draws Perlin fractal noise.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="baseFrequencyX">To be added.</param>
+        <param name="baseFrequencyY">To be added.</param>
+        <param name="numOctaves">To be added.</param>
+        <param name="seed">To be added.</param>
+        <param name="tileSize">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePerlinNoiseFractalNoise">
@@ -1048,10 +588,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePerlinNoiseFractalNoise(float32 baseFrequencyX, float32 baseFrequencyY, int32 numOctaves, float32 seed, valuetype SkiaSharp.SKSizeI tileSize) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePerlinNoiseFractalNoise(System.Single,System.Single,System.Int32,System.Single,SkiaSharp.SKSizeI)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1063,14 +599,14 @@ The example above produces the following:
         <Parameter Name="tileSize" Type="SkiaSharp.SKSizeI" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">The base frequency in the X direction.</param>
-        <param name="baseFrequencyY">The base frequency in the Y direction.</param>
-        <param name="numOctaves">The number of octaves, usually a value between 1 and 10.</param>
-        <param name="seed">The seed value used to initialize the random number generator.</param>
-        <param name="tileSize">The tile size used to modify the frequencies for tiling.</param>
-        <summary>Creates a new shader that produces fractal Perlin noise with a specified tile size.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="baseFrequencyX">To be added.</param>
+        <param name="baseFrequencyY">To be added.</param>
+        <param name="numOctaves">To be added.</param>
+        <param name="seed">To be added.</param>
+        <param name="tileSize">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePerlinNoiseTurbulence">
@@ -1078,10 +614,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePerlinNoiseTurbulence(float32 baseFrequencyX, float32 baseFrequencyY, int32 numOctaves, float32 seed) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePerlinNoiseTurbulence(System.Single,System.Single,System.Int32,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1092,13 +624,13 @@ The example above produces the following:
         <Parameter Name="seed" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">The frequency in the x-direction in the range of 0..1.</param>
-        <param name="baseFrequencyY">The frequency in the y-direction in the range of 0..1.</param>
-        <param name="numOctaves">The number of octaves, usually fairly small.</param>
-        <param name="seed">The randomization seed.</param>
-        <summary>Creates a new shader that draws Perlin turbulence noise.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="baseFrequencyX">To be added.</param>
+        <param name="baseFrequencyY">To be added.</param>
+        <param name="numOctaves">To be added.</param>
+        <param name="seed">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePerlinNoiseTurbulence">
@@ -1106,10 +638,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePerlinNoiseTurbulence(float32 baseFrequencyX, float32 baseFrequencyY, int32 numOctaves, float32 seed, valuetype SkiaSharp.SKPointI tileSize) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePerlinNoiseTurbulence(System.Single,System.Single,System.Int32,System.Single,SkiaSharp.SKPointI)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1121,14 +649,14 @@ The example above produces the following:
         <Parameter Name="tileSize" Type="SkiaSharp.SKPointI" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">The frequency in the x-direction in the range of 0..1.</param>
-        <param name="baseFrequencyY">The frequency in the y-direction in the range of 0..1.</param>
-        <param name="numOctaves">The number of octaves, usually fairly small.</param>
-        <param name="seed">The randomization seed.</param>
-        <param name="tileSize">The tile size used to modify the frequencies so that the noise will be tileable for the given size.</param>
-        <summary>Creates a new shader that draws Perlin turbulence noise.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="baseFrequencyX">To be added.</param>
+        <param name="baseFrequencyY">To be added.</param>
+        <param name="numOctaves">To be added.</param>
+        <param name="seed">To be added.</param>
+        <param name="tileSize">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePerlinNoiseTurbulence">
@@ -1136,10 +664,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePerlinNoiseTurbulence(float32 baseFrequencyX, float32 baseFrequencyY, int32 numOctaves, float32 seed, valuetype SkiaSharp.SKSizeI tileSize) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePerlinNoiseTurbulence(System.Single,System.Single,System.Int32,System.Single,SkiaSharp.SKSizeI)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1151,14 +675,14 @@ The example above produces the following:
         <Parameter Name="tileSize" Type="SkiaSharp.SKSizeI" />
       </Parameters>
       <Docs>
-        <param name="baseFrequencyX">The base frequency in the X direction.</param>
-        <param name="baseFrequencyY">The base frequency in the Y direction.</param>
-        <param name="numOctaves">The number of octaves, usually a value between 1 and 10.</param>
-        <param name="seed">The seed value used to initialize the random number generator.</param>
-        <param name="tileSize">The tile size used to modify the frequencies for tiling.</param>
-        <summary>Creates a new shader that produces Perlin noise turbulence with a specified tile size.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="baseFrequencyX">To be added.</param>
+        <param name="baseFrequencyY">To be added.</param>
+        <param name="numOctaves">To be added.</param>
+        <param name="seed">To be added.</param>
+        <param name="tileSize">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1166,10 +690,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePicture(class SkiaSharp.SKPicture src) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1177,10 +697,10 @@ The example above produces the following:
         <Parameter Name="src" Type="SkiaSharp.SKPicture" />
       </Parameters>
       <Docs>
-        <param name="src">The picture to use inside the shader.</param>
-        <summary>Creates a new shader that will draw with the specified picture.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1188,10 +708,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePicture(class SkiaSharp.SKPicture src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1201,12 +717,12 @@ The example above produces the following:
         <Parameter Name="tmy" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="src">The picture to use inside the shader.</param>
-        <param name="tmx">The tiling mode to use when sampling the picture in the x-direction.</param>
-        <param name="tmy">The tiling mode to use when sampling the picture in the y-direction.</param>
-        <summary>Creates a new shader that will draw with the specified picture.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1214,10 +730,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePicture(class SkiaSharp.SKPicture src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKFilterMode filterMode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKFilterMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1228,13 +740,13 @@ The example above produces the following:
         <Parameter Name="filterMode" Type="SkiaSharp.SKFilterMode" />
       </Parameters>
       <Docs>
-        <param name="src">The picture to use inside the shader.</param>
-        <param name="tmx">The tile mode in the X direction.</param>
-        <param name="tmy">The tile mode in the Y direction.</param>
-        <param name="filterMode">The filter mode to use when sampling the picture.</param>
-        <summary>Creates a new shader that will draw with the specified picture and filter mode.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="filterMode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1242,10 +754,6 @@ The example above produces the following:
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePicture(class SkiaSharp.SKPicture src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKRect tile) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1256,20 +764,13 @@ The example above produces the following:
         <Parameter Name="tile" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="src">The picture to use inside the shader.</param>
-        <param name="tmx">The tiling mode to use when sampling the picture in the x-direction.</param>
-        <param name="tmy">The tiling mode to use when sampling the picture in the y-direction.</param>
-        <param name="tile">The tile rectangle in picture coordinates.</param>
-        <summary>Creates a new shader that will draw with the specified picture.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-The tile rectangle represents the subset (or superset) of the picture used when building a tile. It is not affected by
-the local matrix and does not imply scaling (only translation and cropping).
-]]></format>
-        </remarks>
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="tile">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1277,10 +778,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePicture(class SkiaSharp.SKPicture src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKFilterMode filterMode, valuetype SkiaSharp.SKRect tile) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKFilterMode,SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1292,14 +789,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="tile" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="src">The picture to use inside the shader.</param>
-        <param name="tmx">The tile mode in the X direction.</param>
-        <param name="tmy">The tile mode in the Y direction.</param>
-        <param name="filterMode">The filter mode to use when sampling the picture.</param>
-        <param name="tile">The tile rectangle in picture coordinates.</param>
-        <summary>Creates a new shader that will draw with the specified picture, filter mode, and tile rectangle.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="filterMode">To be added.</param>
+        <param name="tile">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1307,10 +804,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePicture(class SkiaSharp.SKPicture src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKMatrix localMatrix, valuetype SkiaSharp.SKRect tile) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix,SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1322,21 +815,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="tile" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="src">The picture to use inside the shader.</param>
-        <param name="tmx">The tiling mode to use when sampling the picture in the x-direction.</param>
-        <param name="tmy">The tiling mode to use when sampling the picture in the y-direction.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <param name="tile">The tile rectangle in picture coordinates.</param>
-        <summary>Creates a new shader that will draw with the specified picture.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Remarks
-
-The tile rectangle represents the subset (or superset) of the picture used when building a tile. It is not affected by
-the local matrix and does not imply scaling (only translation and cropping).
-]]></format>
-        </remarks>
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <param name="tile">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreatePicture">
@@ -1344,10 +830,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreatePicture(class SkiaSharp.SKPicture src, valuetype SkiaSharp.SKShaderTileMode tmx, valuetype SkiaSharp.SKShaderTileMode tmy, valuetype SkiaSharp.SKFilterMode filterMode, valuetype SkiaSharp.SKMatrix localMatrix, valuetype SkiaSharp.SKRect tile) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreatePicture(SkiaSharp.SKPicture,SkiaSharp.SKShaderTileMode,SkiaSharp.SKShaderTileMode,SkiaSharp.SKFilterMode,SkiaSharp.SKMatrix,SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1360,15 +842,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="tile" Type="SkiaSharp.SKRect" />
       </Parameters>
       <Docs>
-        <param name="src">The picture to use inside the shader.</param>
-        <param name="tmx">The tile mode in the X direction.</param>
-        <param name="tmy">The tile mode in the Y direction.</param>
-        <param name="filterMode">The filter mode to use when sampling the picture.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <param name="tile">The tile rectangle in picture coordinates.</param>
-        <summary>Creates a new shader that will draw with the specified picture, filter mode, transformation matrix, and tile rectangle.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="src">To be added.</param>
+        <param name="tmx">To be added.</param>
+        <param name="tmy">To be added.</param>
+        <param name="filterMode">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <param name="tile">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1376,10 +858,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateRadialGradient(valuetype SkiaSharp.SKPoint center, float32 radius, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1390,13 +868,13 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="center">The center of the circle for this gradient.</param>
-        <param name="radius">The positive radius of the circle for this gradient.</param>
-        <param name="colors">The array colors to be distributed between the center and edge of the circle.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a radial gradient given the center and radius.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="radius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1404,10 +882,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateRadialGradient(valuetype SkiaSharp.SKPoint center, float32 radius, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1419,14 +893,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="center">The center of the circle for this gradient.</param>
-        <param name="radius">The positive radius of the circle for this gradient.</param>
-        <param name="colors">The array colors to be distributed between the center and edge of the circle.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a radial gradient given the center and radius.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="radius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1434,10 +908,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateRadialGradient(valuetype SkiaSharp.SKPoint center, float32 radius, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1449,14 +919,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="center">The center of the circle for this gradient.</param>
-        <param name="radius">The positive radius of the circle for this gradient.</param>
-        <param name="colors">The array of colors to be distributed between the center and edge of the circle.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a radial gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="radius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1464,10 +934,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateRadialGradient(valuetype SkiaSharp.SKPoint center, float32 radius, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1480,15 +946,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="center">The center of the circle for this gradient.</param>
-        <param name="radius">The positive radius of the circle for this gradient.</param>
-        <param name="colors">The array colors to be distributed between the center and edge of the circle.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a radial gradient given the center and radius.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="radius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1496,10 +962,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateRadialGradient(valuetype SkiaSharp.SKPoint center, float32 radius, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1512,15 +974,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="center">The center of the circle for this gradient.</param>
-        <param name="radius">The positive radius of the circle for this gradient.</param>
-        <param name="colors">The array of colors to be distributed between the center and edge of the circle.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a radial gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="radius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateRadialGradient">
@@ -1528,10 +990,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateRadialGradient(valuetype SkiaSharp.SKPoint center, float32 radius, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateRadialGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1545,16 +1003,16 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="center">The center of the circle for this gradient.</param>
-        <param name="radius">The positive radius of the circle for this gradient.</param>
-        <param name="colors">The array of colors to be distributed between the center and edge of the circle.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a radial gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="radius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1562,10 +1020,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColor[] colors) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[])" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1574,11 +1028,11 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="colors" Type="SkiaSharp.SKColor[]" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array colors to be distributed around the center.</param>
-        <summary>Creates a shader that generates a sweep gradient given a center.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1586,10 +1040,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[])" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1599,12 +1049,12 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="colorPos" Type="System.Single[]" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array colors to be distributed around the center.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <summary>Creates a shader that generates a sweep gradient given a center.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1612,10 +1062,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1625,12 +1071,12 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="colorspace" Type="SkiaSharp.SKColorSpace" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array of colors to be distributed around the center.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <summary>Creates a shader that generates a sweep gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1638,10 +1084,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1652,13 +1094,13 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array colors to be distributed around the center.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a sweep gradient given a center.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1666,10 +1108,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[])" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1680,13 +1118,13 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="colorPos" Type="System.Single[]" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array of colors to be distributed around the center.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <summary>Creates a shader that generates a sweep gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1694,10 +1132,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKShaderTileMode tileMode, float32 startAngle, float32 endAngle) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],SkiaSharp.SKShaderTileMode,System.Single,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1709,14 +1143,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="endAngle" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array colors to be distributed around the center.</param>
-        <param name="tileMode">The tiling mode.</param>
-        <param name="startAngle">The start of the angular range.</param>
-        <param name="endAngle">The end of the angular range.</param>
-        <summary>Creates a shader that generates a sweep gradient given a center.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="tileMode">To be added.</param>
+        <param name="startAngle">To be added.</param>
+        <param name="endAngle">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1724,10 +1158,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1739,14 +1169,14 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array of colors to be distributed around the center.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a sweep gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1754,10 +1184,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode tileMode, float32 startAngle, float32 endAngle) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,System.Single,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1770,15 +1196,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="endAngle" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array colors to be distributed around the center.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="tileMode">The tiling mode.</param>
-        <param name="startAngle">The start of the angular range.</param>
-        <param name="endAngle">The end of the angular range.</param>
-        <summary>Creates a shader that generates a sweep gradient given a center.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="tileMode">To be added.</param>
+        <param name="startAngle">To be added.</param>
+        <param name="endAngle">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1786,10 +1212,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, valuetype SkiaSharp.SKShaderTileMode tileMode, float32 startAngle, float32 endAngle) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,SkiaSharp.SKShaderTileMode,System.Single,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1802,15 +1224,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="endAngle" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array of colors to be distributed around the center.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="tileMode">The tiling mode.</param>
-        <param name="startAngle">The start of the angular range.</param>
-        <param name="endAngle">The end of the angular range.</param>
-        <summary>Creates a shader that generates a sweep gradient with angular range in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="tileMode">To be added.</param>
+        <param name="startAngle">To be added.</param>
+        <param name="endAngle">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1818,10 +1240,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode tileMode, float32 startAngle, float32 endAngle, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,System.Single,System.Single,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1835,16 +1253,16 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array colors to be distributed around the center.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="tileMode">The tiling mode.</param>
-        <param name="startAngle">The start of the angular range.</param>
-        <param name="endAngle">The end of the angular range.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a sweep gradient given a center.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="tileMode">To be added.</param>
+        <param name="startAngle">To be added.</param>
+        <param name="endAngle">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1852,10 +1270,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode tileMode, float32 startAngle, float32 endAngle) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKShaderTileMode,System.Single,System.Single)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1869,16 +1283,16 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="endAngle" Type="System.Single" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array of colors to be distributed around the center.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="tileMode">The tiling mode.</param>
-        <param name="startAngle">The start of the angular range.</param>
-        <param name="endAngle">The end of the angular range.</param>
-        <summary>Creates a shader that generates a sweep gradient with angular range in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="tileMode">To be added.</param>
+        <param name="startAngle">To be added.</param>
+        <param name="endAngle">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateSweepGradient">
@@ -1886,10 +1300,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateSweepGradient(valuetype SkiaSharp.SKPoint center, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode tileMode, float32 startAngle, float32 endAngle, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateSweepGradient(SkiaSharp.SKPoint,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKShaderTileMode,System.Single,System.Single,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1904,17 +1314,17 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="center">The coordinates of the center of the sweep.</param>
-        <param name="colors">The array of colors to be distributed around the center.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="tileMode">The tiling mode.</param>
-        <param name="startAngle">The start of the angular range.</param>
-        <param name="endAngle">The end of the angular range.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a sweep gradient with angular range in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="center">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="tileMode">To be added.</param>
+        <param name="startAngle">To be added.</param>
+        <param name="endAngle">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -1922,10 +1332,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateTwoPointConicalGradient(valuetype SkiaSharp.SKPoint start, float32 startRadius, valuetype SkiaSharp.SKPoint end, float32 endRadius, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1938,15 +1344,15 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="start">The coordinates for the starting point.</param>
-        <param name="startRadius">The radius at the starting point.</param>
-        <param name="end">The coordinates for the end point.</param>
-        <param name="endRadius">The radius at the end point.</param>
-        <param name="colors">The array colors to be distributed between the two points.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a conical gradient given two circles.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or <see langword="null" /> on error.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="startRadius">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="endRadius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -1954,10 +1360,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateTwoPointConicalGradient(valuetype SkiaSharp.SKPoint start, float32 startRadius, valuetype SkiaSharp.SKPoint end, float32 endRadius, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -1971,16 +1373,16 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="start">The coordinates for the starting point.</param>
-        <param name="startRadius">The radius at the starting point.</param>
-        <param name="end">The coordinates for the end point.</param>
-        <param name="endRadius">The radius at the end point.</param>
-        <param name="colors">The array colors to be distributed between the two points.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a conical gradient given two circles.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or <see langword="null" /> on error.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="startRadius">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="endRadius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -1988,10 +1390,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateTwoPointConicalGradient(valuetype SkiaSharp.SKPoint start, float32 startRadius, valuetype SkiaSharp.SKPoint end, float32 endRadius, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -2005,16 +1403,16 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="start">The coordinates for the starting point.</param>
-        <param name="startRadius">The radius at the starting point.</param>
-        <param name="end">The coordinates for the end point.</param>
-        <param name="endRadius">The radius at the end point.</param>
-        <param name="colors">The array of colors to be distributed between the two points.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a conical gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="startRadius">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="endRadius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -2022,10 +1420,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateTwoPointConicalGradient(valuetype SkiaSharp.SKPoint start, float32 startRadius, valuetype SkiaSharp.SKPoint end, float32 endRadius, valuetype SkiaSharp.SKColor[] colors, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColor[],System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -2040,17 +1434,17 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="start">The coordinates for the starting point.</param>
-        <param name="startRadius">The radius at the starting point.</param>
-        <param name="end">The coordinates for the end point.</param>
-        <param name="endRadius">The radius at the end point.</param>
-        <param name="colors">The array colors to be distributed between the two points.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a conical gradient given two circles.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. Never returns <see langword="null" />.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="startRadius">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="endRadius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -2058,10 +1452,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateTwoPointConicalGradient(valuetype SkiaSharp.SKPoint start, float32 startRadius, valuetype SkiaSharp.SKPoint end, float32 endRadius, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKShaderTileMode)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -2076,17 +1466,17 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="mode" Type="SkiaSharp.SKShaderTileMode" />
       </Parameters>
       <Docs>
-        <param name="start">The coordinates for the starting point.</param>
-        <param name="startRadius">The radius at the starting point.</param>
-        <param name="end">The coordinates for the end point.</param>
-        <param name="endRadius">The radius at the end point.</param>
-        <param name="colors">The array of colors to be distributed between the two points.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <summary>Creates a shader that generates a conical gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="startRadius">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="endRadius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateTwoPointConicalGradient">
@@ -2094,10 +1484,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKShader CreateTwoPointConicalGradient(valuetype SkiaSharp.SKPoint start, float32 startRadius, valuetype SkiaSharp.SKPoint end, float32 endRadius, valuetype SkiaSharp.SKColorF[] colors, class SkiaSharp.SKColorSpace colorspace, float32[] colorPos, valuetype SkiaSharp.SKShaderTileMode mode, valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.CreateTwoPointConicalGradient(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPoint,System.Single,SkiaSharp.SKColorF[],SkiaSharp.SKColorSpace,System.Single[],SkiaSharp.SKShaderTileMode,SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -2113,18 +1499,18 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="start">The coordinates for the starting point.</param>
-        <param name="startRadius">The radius at the starting point.</param>
-        <param name="end">The coordinates for the end point.</param>
-        <param name="endRadius">The radius at the end point.</param>
-        <param name="colors">The array of colors to be distributed between the two points.</param>
-        <param name="colorspace">The color space for the gradient colors.</param>
-        <param name="colorPos">The positions (in the range of 0..1) of each corresponding color, or <see langword="null" /> to evenly distribute the colors.</param>
-        <param name="mode">The tiling mode.</param>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Creates a shader that generates a conical gradient in a specified color space.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error.</returns>
-        <remarks />
+        <param name="start">To be added.</param>
+        <param name="startRadius">To be added.</param>
+        <param name="end">To be added.</param>
+        <param name="endRadius">To be added.</param>
+        <param name="colors">To be added.</param>
+        <param name="colorspace">To be added.</param>
+        <param name="colorPos">To be added.</param>
+        <param name="mode">To be added.</param>
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -2132,10 +1518,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.Dispose(System.Boolean)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -2143,10 +1525,9 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">
-          <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
-        <summary>Releases the unmanaged resources used by the <see cref="T:SkiaSharp.SKShader" /> and optionally releases the managed resources.</summary>
-        <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKShader" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
+        <param name="disposing">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="WithColorFilter">
@@ -2154,10 +1535,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKShader WithColorFilter(class SkiaSharp.SKColorFilter filter) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.WithColorFilter(SkiaSharp.SKColorFilter)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -2165,10 +1542,10 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="filter" Type="SkiaSharp.SKColorFilter" />
       </Parameters>
       <Docs>
-        <param name="filter">The <see cref="T:SkiaSharp.SKColorFilter" /> to apply to this shader's output.</param>
-        <summary>Returns a new shader that produces the same colors as this shader but with the specified color filter applied.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="filter">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="WithLocalMatrix">
@@ -2176,10 +1553,6 @@ the local matrix and does not imply scaling (only translation and cropping).
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKShader WithLocalMatrix(valuetype SkiaSharp.SKMatrix localMatrix) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKShader.WithLocalMatrix(SkiaSharp.SKMatrix)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKShader</ReturnType>
       </ReturnValue>
@@ -2187,10 +1560,10 @@ the local matrix and does not imply scaling (only translation and cropping).
         <Parameter Name="localMatrix" Type="SkiaSharp.SKMatrix" />
       </Parameters>
       <Docs>
-        <param name="localMatrix">The matrix to apply before applying the shader.</param>
-        <summary>Returns a new shader that produces the same colors as this shader but with the specified transformation matrix applied.</summary>
-        <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />.</returns>
-        <remarks />
+        <param name="localMatrix">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
   </Members>

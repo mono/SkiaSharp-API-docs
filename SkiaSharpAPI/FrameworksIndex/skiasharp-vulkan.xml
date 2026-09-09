@@ -1,6 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Framework Name="skiasharp-vulkan">
   <Assemblies>
-    <Assembly Name="SkiaSharp.Vulkan.SharpVk" Version="4.150.0.0" />
+    <Assembly Name="SkiaSharp.Vulkan.SharpVk" Version="4.154.0.0" />
+    <Assembly Name="SkiaSharp.Vulkan.Silk.NET" Version="4.154.0.0" />
   </Assemblies>
   <Namespace Name="SkiaSharp">
     <Type Name="SkiaSharp.GRSharpVkBackendContext" Id="T:SkiaSharp.GRSharpVkBackendContext">
@@ -14,9 +16,24 @@
       <Member Id="P:SkiaSharp.GRSharpVkBackendContext.VkQueue" />
     </Type>
     <Type Name="SkiaSharp.GRSharpVkGetProcedureAddressDelegate" Id="T:SkiaSharp.GRSharpVkGetProcedureAddressDelegate" />
+    <Type Name="SkiaSharp.GRSilkNetBackendContext" Id="T:SkiaSharp.GRSilkNetBackendContext">
+      <Member Id="M:SkiaSharp.GRSilkNetBackendContext.#ctor" />
+      <Member Id="M:SkiaSharp.GRSilkNetBackendContext.Dispose(System.Boolean)" />
+      <Member Id="P:SkiaSharp.GRSilkNetBackendContext.GetProcedureAddress" />
+      <Member Id="P:SkiaSharp.GRSilkNetBackendContext.VkDevice" />
+      <Member Id="P:SkiaSharp.GRSilkNetBackendContext.VkInstance" />
+      <Member Id="P:SkiaSharp.GRSilkNetBackendContext.VkPhysicalDevice" />
+      <Member Id="P:SkiaSharp.GRSilkNetBackendContext.VkPhysicalDeviceFeatures" />
+      <Member Id="P:SkiaSharp.GRSilkNetBackendContext.VkQueue" />
+    </Type>
+    <Type Name="SkiaSharp.GRSilkNetGetProcedureAddressDelegate" Id="T:SkiaSharp.GRSilkNetGetProcedureAddressDelegate" />
     <Type Name="SkiaSharp.GRVkExtensionsSharpVkExtensions" Id="T:SkiaSharp.GRVkExtensionsSharpVkExtensions">
-      <Member Id="M:SkiaSharp.GRVkExtensionsSharpVkExtensions.Initialize(SkiaSharp.GRVkExtensions,SkiaSharp.GRSharpVkGetProcedureAddressDelegate,SharpVk.Instance,SharpVk.PhysicalDevice)" />
       <Member Id="M:SkiaSharp.GRVkExtensionsSharpVkExtensions.Initialize(SkiaSharp.GRVkExtensions,SkiaSharp.GRSharpVkGetProcedureAddressDelegate,SharpVk.Instance,SharpVk.PhysicalDevice,System.String[],System.String[])" />
+      <Member Id="M:SkiaSharp.GRVkExtensionsSharpVkExtensions.Initialize(SkiaSharp.GRVkExtensions,SkiaSharp.GRSharpVkGetProcedureAddressDelegate,SharpVk.Instance,SharpVk.PhysicalDevice)" />
+    </Type>
+    <Type Name="SkiaSharp.GRVkExtensionsSilkNetExtensions" Id="T:SkiaSharp.GRVkExtensionsSilkNetExtensions">
+      <Member Id="M:SkiaSharp.GRVkExtensionsSilkNetExtensions.Initialize(SkiaSharp.GRVkExtensions,SkiaSharp.GRSilkNetGetProcedureAddressDelegate,Silk.NET.Vulkan.Instance,Silk.NET.Vulkan.PhysicalDevice,System.String[],System.String[])" />
+      <Member Id="M:SkiaSharp.GRVkExtensionsSilkNetExtensions.Initialize(SkiaSharp.GRVkExtensions,SkiaSharp.GRSilkNetGetProcedureAddressDelegate,Silk.NET.Vulkan.Instance,Silk.NET.Vulkan.PhysicalDevice)" />
     </Type>
   </Namespace>
 </Framework>

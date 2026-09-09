@@ -4,48 +4,14 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.SKManagedStream" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
-    <AssemblyVersion>4.150.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>SkiaSharp.SKAbstractManagedStream</BaseTypeName>
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Wraps a <see cref="T:System.IO.Stream" /> into a <see cref="T:SkiaSharp.SKStreamAsset" /> (a seekable, rewindable Skia stream)</summary>
-    <remarks>
-      <format type="text/markdown"><![CDATA[
-## Remarks
-
-The following example shows how to wrap a <xref:System.IO.Stream> that
-represents a stream into an embedded resource in an assembly and use it with
-SkiaSharp APIs that use resources:
-
-## Examples
-
-```csharp
-public static void BitmapShader (SKCanvas canvas, int width, int height)
-{
-    var assembly = typeof(Demos).GetTypeInfo ().Assembly;
-
-    // load the image from the embedded resource stream
-    using (var resource = assembly.GetManifestResourceStream ("embedded.png"))
-    using (var stream = new SKManagedStream(resource))
-    using (var source = SKBitmap.Decode (stream)) {
-        var matrix = SKMatrix.MakeRotation (30.0f);
-        using (var shader = SKShader.CreateBitmap (source, SKShaderTileMode.Repeat, SKShaderTileMode.Repeat, matrix))
-        using (var paint = new SKPaint ()) {
-            paint.IsAntialias = true;
-            paint.Shader = shader;
-
-            // tile the bitmap
-            canvas.Clear (SKColors.White);
-            canvas.DrawPaint (paint);
-        }
-    }
-}
-```
-]]></format>
-    </remarks>
+    <summary>To be added.</summary>
+    <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -53,17 +19,13 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream managedStream) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.#ctor(System.IO.Stream)" />
       <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Parameters>
         <Parameter Name="managedStream" Type="System.IO.Stream" />
       </Parameters>
       <Docs>
-        <param name="managedStream">The managed stream.</param>
-        <summary>Creates a new read-only stream from a <see cref="T:System.IO.Stream" />.</summary>
-        <remarks>The underlying stream is not disposed when this object is disposed.</remarks>
+        <param name="managedStream">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -71,19 +33,15 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream managedStream, bool disposeManagedStream) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.#ctor(System.IO.Stream,System.Boolean)" />
       <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <Parameters>
         <Parameter Name="managedStream" Type="System.IO.Stream" />
         <Parameter Name="disposeManagedStream" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="managedStream">The managed stream.</param>
-        <param name="disposeManagedStream">If this is set to <see langword="true" />, the provided <see langword="managedStream" /> will be disposed when this instance is disposed.</param>
-        <summary>Creates a new read-only stream from a <see cref="T:System.IO.Stream" />, can optionally dispose the provided stream when this stream is disposed.</summary>
-        <remarks />
+        <param name="managedStream">To be added.</param>
+        <param name="disposeManagedStream">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -91,10 +49,6 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 CopyTo(class SkiaSharp.SKWStream destination) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.CopyTo(SkiaSharp.SKWStream)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
@@ -102,10 +56,10 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
         <Parameter Name="destination" Type="SkiaSharp.SKWStream" />
       </Parameters>
       <Docs>
-        <param name="destination">The destination stream.</param>
-        <summary>Copy the contents of this stream into the destination stream.</summary>
-        <returns>Returns the number of bytes that were copied.</returns>
-        <remarks />
+        <param name="destination">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -113,10 +67,6 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.Dispose(System.Boolean)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
@@ -124,10 +74,9 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">
-          <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
-        <summary>Releases the unmanaged resources used by the <see cref="T:SkiaSharp.SKManagedStream" /> and optionally releases the managed resources.</summary>
-        <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKManagedStream" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
+        <param name="disposing">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="DisposeManaged">
@@ -135,17 +84,13 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeManaged() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.DisposeManaged" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKNativeObject" /> types to destroy any managed objects.</summary>
-        <remarks />
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnCreateNew">
@@ -153,18 +98,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance native int OnCreateNew() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnCreateNew" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to copy the current stream.</summary>
-        <returns>Returns a pointer to the new <see cref="T:SkiaSharp.SKStreamAsset" /> instance.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnDuplicate">
@@ -172,18 +113,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance native int OnDuplicate() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnDuplicate" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to duplicate the current stream.</summary>
-        <returns>Returns a pointer to the new <see cref="T:SkiaSharp.SKStreamAsset" /> instance.</returns>
-        <remarks>After the stream has been duplicated, the new stream must set its position to the start.</remarks>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnFork">
@@ -191,18 +128,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance native int OnFork() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnFork" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to fork the current stream.</summary>
-        <returns>Returns a pointer to the new <see cref="T:SkiaSharp.SKStreamAsset" /> instance.</returns>
-        <remarks>After the stream has been duplicated, the new stream must set its position to the same as this stream.</remarks>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnGetLength">
@@ -210,18 +143,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance native int OnGetLength() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnGetLength" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to return the total length of the stream.</summary>
-        <returns>Returns the total length of the stream.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnGetPosition">
@@ -229,18 +158,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance native int OnGetPosition() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnGetPosition" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to get the current position in the stream.</summary>
-        <returns>Returns the current position in the stream.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnHasLength">
@@ -248,18 +173,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance bool OnHasLength() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnHasLength" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to indicate whether this stream can report its total length.</summary>
-        <returns>Returns a value indicating whether this stream can report its total length.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnHasPosition">
@@ -267,18 +188,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance bool OnHasPosition() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnHasPosition" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to indicate whether this stream can report its current position.</summary>
-        <returns>Returns a value indicating whether this stream can report its current position.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnIsAtEnd">
@@ -286,18 +203,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance bool OnIsAtEnd() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnIsAtEnd" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to indicate whether all the bytes in the stream have been read.</summary>
-        <returns>Returns a value indicating whether all the bytes in the stream have been read.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnMove">
@@ -305,10 +218,6 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance bool OnMove(int32 offset) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnMove(System.Int32)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -316,10 +225,10 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
         <Parameter Name="offset" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="offset">The relative offset.</param>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to seek to a relative offset.</summary>
-        <returns>Returns <see langword="true" /> if seeking is supported and the seek was successful, otherwise <see langword="false" />.</returns>
-        <remarks>If an attempt is made to move to a position outside the stream, the position must be set to the closest point within the stream (beginning or end).</remarks>
+        <param name="offset">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnPeek">
@@ -327,10 +236,6 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance native int OnPeek(native int buffer, native int size) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnPeek(System.IntPtr,System.IntPtr)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
@@ -339,11 +244,11 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
         <Parameter Name="size" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="buffer">The buffer to read into.</param>
-        <param name="size">The number of bytes to read.</param>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to copy the specified number of bytes into the specified buffer.</summary>
-        <returns>Returns the number of bytes actually peeked/copied.</returns>
-        <remarks>The stream's cursor must be returned to the position before this method was called.</remarks>
+        <param name="buffer">To be added.</param>
+        <param name="size">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnRead">
@@ -351,10 +256,6 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance native int OnRead(native int buffer, native int size) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnRead(System.IntPtr,System.IntPtr)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
@@ -363,11 +264,11 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
         <Parameter Name="size" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="buffer">The buffer to read into.</param>
-        <param name="size">The number of bytes to read.</param>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to copy the specified number of bytes into the specified buffer.</summary>
-        <returns>Returns the number of bytes actually read.</returns>
-        <remarks />
+        <param name="buffer">To be added.</param>
+        <param name="size">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnRewind">
@@ -375,18 +276,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance bool OnRewind() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnRewind" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to rewind the current stream.</summary>
-        <returns>Returns <see langword="true" /> if the stream is known to be at the beginning after this call returns.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnSeek">
@@ -394,10 +291,6 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance bool OnSeek(native int position) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.OnSeek(System.IntPtr)" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -405,10 +298,10 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
         <Parameter Name="position" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="position">The absolute position.</param>
-        <summary>Implemented by derived <see cref="T:SkiaSharp.SKAbstractManagedStream" /> types to seek to an absolute position.</summary>
-        <returns>Returns <see langword="true" /> if seeking is supported and the seek was successful, otherwise <see langword="false" />.</returns>
-        <remarks>If an attempt is made to move to a position outside the stream, the position must be set to the closest point within the stream (beginning or end).</remarks>
+        <param name="position">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ToMemoryStream">
@@ -416,18 +309,14 @@ public static void BitmapShader (SKCanvas canvas, int width, int height)
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKStreamAsset ToMemoryStream() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.SKManagedStream.ToMemoryStream" />
       <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-        <AssemblyVersion>4.150.0.0</AssemblyVersion>
-      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKStreamAsset</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Copies the contents of this stream into a new memory stream.</summary>
-        <returns>Returns the new memory stream.</returns>
-        <remarks />
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
   </Members>
