@@ -17,6 +17,7 @@ jobs:
     # The script requires BOTH to be present before proceeding.
     if: |
       github.event.state == 'success' &&
+      !contains(github.event.branches.*.name, 'automation/csharp-docs-canonical') &&
       (github.event.context == 'OpenPublishing.Build' ||
        github.event.context == 'PoliCheck Scan') &&
       contains(github.event.branches.*.name, 'automation/write-api-docs')
