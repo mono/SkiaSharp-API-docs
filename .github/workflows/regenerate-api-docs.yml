@@ -1,0 +1,69 @@
+name: Regenerate API docs
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Feature branch to receive the generated ECMA XML
+        required: true
+        default: mattleibow-generated-api-docs
+        type: string
+      package_version:
+        description: Optional _NuGets package version (latest prerelease when empty)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: inputs.branch != 'main' && inputs.branch != 'live'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Find Windows SDK references
+        id: windows-sdk
+        shell: pwsh
+        run: |
+          $references = Get-ChildItem 'C:\Program Files (x86)\Windows Kits\10' -Recurse -Filter Microsoft.Windows.SDK.NET.dll -ErrorAction SilentlyContinue |
+            Select-Object -ExpandProperty DirectoryName -Unique
+          if (-not $references) {
+            throw 'Microsoft.Windows.SDK.NET.dll was not found in the installed Windows SDK.'
+          }
+          "paths=$($references -join ';')" >> $env:GITHUB_OUTPUT
+
+      - name: Generate clean ECMA XML
+        shell: pwsh
+        env:
+          PACKAGE_VERSION: ${{ inputs.package_version }}
+          WINDOWS_SDK_REFERENCES: ${{ steps.windows-sdk.outputs.paths }}
+        run: |
+          $arguments = @{
+            AdditionalReferencePath = $env:WINDOWS_SDK_REFERENCES -split ';'
+          }
+          if ($env:PACKAGE_VERSION) {
+            $arguments.PackageVersion = $env:PACKAGE_VERSION
+          }
+          ./tools/Generate-ApiDocs.ps1 @arguments
+
+      - name: Commit generated output
+        shell: pwsh
+        run: |
+          git add SkiaSharpAPI .openpublishing.publish.config.json
+          if (git diff --cached --quiet) {
+            Write-Host 'The generated API tree is already current.'
+            exit 0
+          }
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Regenerate API docs from _NuGets'
+          git push origin HEAD:${{ inputs.branch }}
