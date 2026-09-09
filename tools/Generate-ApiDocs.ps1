@@ -110,6 +110,7 @@ $restoreProject = Join-Path $workRoot 'PackageSet.csproj'
     <PackageReference Include="Tizen.NET" Version="12.0.0.18510" PrivateAssets="all" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.1.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Windows.SDK.NET" Version="10.0.18362.6-preview" PrivateAssets="all" />
     <PackageDownload Include="Microsoft.NETCore.App.Ref" Version="[10.0.0]" />
     <PackageDownload Include="Microsoft.WindowsDesktop.App.Ref" Version="[10.0.0]" />
   </ItemGroup>

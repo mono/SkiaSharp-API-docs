@@ -40,26 +40,12 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Find Windows SDK references
-        id: windows-sdk
-        shell: pwsh
-        run: |
-          $references = Get-ChildItem 'C:\Program Files (x86)\Windows Kits\10' -Recurse -Filter Microsoft.Windows.SDK.NET.dll -ErrorAction SilentlyContinue |
-            Select-Object -ExpandProperty DirectoryName -Unique
-          if (-not $references) {
-            throw 'Microsoft.Windows.SDK.NET.dll was not found in the installed Windows SDK.'
-          }
-          "paths=$($references -join ';')" >> $env:GITHUB_OUTPUT
-
       - name: Generate clean ECMA XML
         shell: pwsh
         env:
           PACKAGE_VERSION: ${{ inputs.package_version }}
-          WINDOWS_SDK_REFERENCES: ${{ steps.windows-sdk.outputs.paths }}
         run: |
-          $arguments = @{
-            AdditionalReferencePath = $env:WINDOWS_SDK_REFERENCES -split ';'
-          }
+          $arguments = @{}
           if ($env:PACKAGE_VERSION) {
             $arguments.PackageVersion = $env:PACKAGE_VERSION
           }
