@@ -1,6 +1,8 @@
 # SkiaSharp and HarfBuzzSharp API Docs
 
-This repository contains the XML-based API documentation for [SkiaSharp and HarfBuzzSharp](https://github.com/mono/SkiaSharp).
+This repository is the generated staging input for Microsoft Learn/OpenPublishing API reference content for [SkiaSharp and HarfBuzzSharp](https://github.com/mono/SkiaSharp). The ECMA XML is regenerated from the published NuGet package set; it does not require a SkiaSharp checkout or submodule.
+
+Run `pwsh ./tools/Generate-ApiDocs.ps1` to replace the generated API tree from a clean staging directory. The script keeps OpenPublishing infrastructure (`docfx.json`, filters, images, and breadcrumbs) and regenerates the framework moniker indexes. The promoted ECMA XML is the unmodified mdoc output; source comments supply prose in a later phase.
 
 The docs are available online for:
  - [SkiaSharp](https://docs.microsoft.com/dotnet/api/skiasharp)
