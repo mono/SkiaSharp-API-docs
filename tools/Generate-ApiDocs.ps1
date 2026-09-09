@@ -209,7 +209,9 @@ if ($monikerDirectories.Count -eq 0) {
 
 $frameworksPath = Join-Path $workRoot 'frameworks/frameworks.xml'
 $frameworks.Save($frameworksPath)
-Copy-Item -Recurse -Force (Join-Path $apiRoot 'xml') (Join-Path $stagingPath 'xml')
+$stagingXmlPath = Join-Path $stagingPath 'xml'
+New-Item -ItemType Directory -Force -Path $stagingXmlPath | Out-Null
+Copy-Item -Force (Join-Path $apiRoot 'xml/_filter.xml') $stagingXmlPath
 Copy-Item -Force (Join-Path $apiRoot '_filter.xml') $stagingPath
 
 $libraryArguments = @('--lib', $referencePath)
@@ -259,7 +261,7 @@ foreach ($directory in $AdditionalReferencePath | Where-Object { Test-Path $_ })
 }
 Push-Location (Split-Path -Parent $frameworksPath)
 try {
-    & $dotnetRuntime $mdocDll.FullName update --delete --fno-assembly-versions `
+    & $dotnetRuntime $mdocDll.FullName update --debug --delete --fno-assembly-versions `
         --fignore-missing-types `
         --lang DocId `
         --frameworks $frameworksPath `
