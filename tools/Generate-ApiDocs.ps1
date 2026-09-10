@@ -43,20 +43,20 @@ function Get-LatestPackageVersion([string] $flatContainer, [string] $packageId) 
         throw "No stable version of '$packageId' is available from '$PackageSource'."
     }
 
-    function Get-LatestMainPackageVersion([string] $flatContainer, [string] $packageId) {
-        $versions = (Invoke-RestMethod -Uri "$flatContainer/$($packageId.ToLowerInvariant())/index.json").versions
-        $mainVersions = $versions | Where-Object { $_ -match '-branch\.main\.' }
-        if ($mainVersions.Count -eq 0) {
-            throw "No main branch version of '$packageId' is available from '$PackageSource'."
-        }
-
-        return $mainVersions |
-            Sort-Object { [int](($_ -split '\.')[-1]) } -Descending |
-            Select-Object -First 1
-    }
-
     return $stableVersions |
         Sort-Object { [version](($_ -split '-')[0]) } -Descending |
+        Select-Object -First 1
+}
+
+function Get-LatestMainPackageVersion([string] $flatContainer, [string] $packageId) {
+    $versions = (Invoke-RestMethod -Uri "$flatContainer/$($packageId.ToLowerInvariant())/index.json").versions
+    $mainVersions = $versions | Where-Object { $_ -match '-branch\.main\.' }
+    if ($mainVersions.Count -eq 0) {
+        throw "No main branch version of '$packageId' is available from '$PackageSource'."
+    }
+
+    return $mainVersions |
+        Sort-Object { [int](($_ -split '\.')[-1]) } -Descending |
         Select-Object -First 1
 }
 
