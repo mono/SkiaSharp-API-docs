@@ -1,5 +1,7 @@
 [CmdletBinding()]
 param(
+    [string] $TransportPackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json',
+    [string] $PublicPackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json',
     [string] $PackageSource,
     [string] $PackageVersion,
     [string] $DocsMediaPackageVersion,
@@ -19,26 +21,24 @@ Remove-Item -Recurse -Force $PackageRoot -ErrorAction Ignore
 New-Item -ItemType Directory -Force -Path $PackageRoot | Out-Null
 
 foreach ($package in @(
-    @{ Id = '_NuGets'; Version = $PackageVersion },
-    @{ Id = '_DocsMedia'; Version = $DocsMediaPackageVersion },
-    @{ Id = 'mdoc'; Version = $MdocPackageVersion }
+    @{ Id = '_NuGets'; Version = $PackageVersion; Source = $TransportPackageSource },
+    @{ Id = '_DocsMedia'; Version = $DocsMediaPackageVersion; Source = $TransportPackageSource },
+    @{ Id = 'mdoc'; Version = $MdocPackageVersion; Source = $PublicPackageSource }
 )) {
+    $source = if ($PackageSource) { $PackageSource } else { $package.Source }
     $arguments = @(
         'package', 'download', $package.Id, '--prerelease',
         '--output', $PackageRoot,
-        '--configfile', (Join-Path $repositoryRoot 'NuGet.Config')
+        '--configfile', (Join-Path $repositoryRoot 'NuGet.Config'),
+        '--source', $source
     )
-    if ($PackageSource) {
-        $arguments += @('--source', $PackageSource)
-    }
     if ($package.Version) {
         $arguments += @('--version', $package.Version)
     }
 
     & dotnet @arguments
     if ($LASTEXITCODE -ne 0) {
-        $sourceDescription = if ($PackageSource) { $PackageSource } else { 'the configured dnceng feeds' }
-        throw "Downloading $($package.Id) from $sourceDescription failed with exit code $LASTEXITCODE."
+        throw "Downloading $($package.Id) from '$source' failed with exit code $LASTEXITCODE."
     }
 }
 
