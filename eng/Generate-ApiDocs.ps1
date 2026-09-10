@@ -133,6 +133,7 @@ $nuGetsExtractionPath = Join-Path $workRoot 'nugets'
 $mediaExtractionPath = Join-Path $workRoot 'media'
 $frameworksRoot = Join-Path $workRoot 'frameworks'
 $stagingPath = Join-Path $workRoot 'staging'
+$compilerDocumentationPath = Join-Path $workRoot 'compiler-documentation.xml'
 
 Remove-Item -Recurse -Force $workRoot -ErrorAction Ignore
 New-Item -ItemType Directory -Force -Path $packageRoot, $nuGetsExtractionPath, $mediaExtractionPath, $frameworksRoot, $stagingPath | Out-Null
@@ -180,6 +181,17 @@ if (-not $mdocPath) {
 $frameworks = New-Object System.Xml.XmlDocument
 $frameworkRoot = $frameworks.CreateElement('Frameworks')
 [void] $frameworks.AppendChild($frameworkRoot)
+$compilerDocumentation = New-Object System.Xml.XmlDocument
+$compilerDocumentationRoot = $compilerDocumentation.CreateElement('doc')
+[void] $compilerDocumentation.AppendChild($compilerDocumentationRoot)
+$compilerDocumentationAssembly = $compilerDocumentation.CreateElement('assembly')
+$compilerDocumentationName = $compilerDocumentation.CreateElement('name')
+$compilerDocumentationName.InnerText = 'SkiaSharp API packages'
+[void] $compilerDocumentationAssembly.AppendChild($compilerDocumentationName)
+[void] $compilerDocumentationRoot.AppendChild($compilerDocumentationAssembly)
+$compilerDocumentationMembers = $compilerDocumentation.CreateElement('members')
+[void] $compilerDocumentationRoot.AppendChild($compilerDocumentationMembers)
+$compilerDocumentationIds = @{}
 $monikerDirectories = @()
 foreach ($packagePath in $nuGetsPackages) {
     $packageId = Get-PackageId $packagePath
@@ -188,6 +200,17 @@ foreach ($packagePath in $nuGetsPackages) {
         $packageId -match '^SkiaSharp\.Views\.Uno' -or
         $packageId -match 'NativeAssets') {
         continue
+    }
+
+    Get-ChildItem -Path $packagePath -Filter '*.xml' -File -Recurse | ForEach-Object {
+        [xml] $documentation = Get-Content -Raw -Path $_.FullName
+        foreach ($member in $documentation.SelectNodes('/doc/members/member')) {
+            $documentationId = $member.GetAttribute('name')
+            if ($documentationId -and -not $compilerDocumentationIds.ContainsKey($documentationId)) {
+                [void] $compilerDocumentationMembers.AppendChild($compilerDocumentation.ImportNode($member, $true))
+                $compilerDocumentationIds[$documentationId] = $true
+            }
+        }
     }
 
     $referenceAssemblies = Get-ChildItem -Path (Join-Path $packagePath 'ref') -Filter '*.dll' -Recurse -ErrorAction Ignore
@@ -217,6 +240,9 @@ foreach ($packagePath in $nuGetsPackages) {
 }
 if ($monikerDirectories.Count -eq 0) {
     throw 'The downloaded _NuGets package set contains no managed SkiaSharp or HarfBuzzSharp assemblies.'
+}
+if ($compilerDocumentationIds.Count -eq 0) {
+    throw 'The downloaded _NuGets package set contains no compiler XML documentation.'
 }
 
 $stagingXmlPath = Join-Path $stagingPath 'xml'
@@ -250,6 +276,7 @@ if (-not (Get-ChildItem -Path $stagingMediaPath -File -Recurse | Where-Object Le
 
 $frameworksPath = Join-Path $frameworksRoot 'frameworks.xml'
 $frameworks.Save($frameworksPath)
+$compilerDocumentation.Save($compilerDocumentationPath)
 $libraryArguments = @()
 foreach ($path in @(Get-ReferencePaths (Get-DotnetRoot) $nuGetsExtractionPath) + $monikerDirectories | Select-Object -Unique) {
     $libraryArguments += @('--lib', $path)
@@ -258,6 +285,7 @@ foreach ($path in @(Get-ReferencePaths (Get-DotnetRoot) $nuGetsExtractionPath) +
 Push-Location $frameworksRoot
 try {
     & dotnet $mdocPath update --delete --fno-assembly-versions --fignore-missing-types `
+        --import $compilerDocumentationPath `
         --lang DocId --frameworks $frameworksPath --out $stagingPath @libraryArguments
     if ($LASTEXITCODE -ne 0) {
         throw "mdoc failed with exit code $LASTEXITCODE."
