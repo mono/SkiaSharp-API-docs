@@ -3,6 +3,7 @@ param(
     [string] $PackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json',
     [string] $MdocPackageSource = 'https://api.nuget.org/v3/index.json',
     [string] $PackageVersion,
+    [string] $DocsMediaPackageVersion,
     [string[]] $AdditionalReferencePath = @(),
     [switch] $KeepStaging
 )
@@ -17,6 +18,7 @@ $packagesPath = Join-Path $workRoot 'packages'
 $extractedPackagesPath = Join-Path $workRoot 'extracted-packages'
 $dependencyLibrariesPath = Join-Path $workRoot 'dependency-libraries'
 $stagingPath = Join-Path $workRoot 'staging'
+$stagingMediaPath = Join-Path $stagingPath 'images'
 $mdocPath = Join-Path $workRoot 'mdoc'
 $dotnetRoot = Join-Path $repositoryRoot '.artifacts/dotnet-sdk'
 $dotnetRuntime = Join-Path $dotnetRoot ($(if ($IsWindows) { 'dotnet.exe' } else { 'dotnet' }))
@@ -39,6 +41,18 @@ function Get-LatestPackageVersion([string] $flatContainer, [string] $packageId) 
     $stableVersions = $versions | Where-Object { $_ -notmatch '-' }
     if ($stableVersions.Count -eq 0) {
         throw "No stable version of '$packageId' is available from '$PackageSource'."
+    }
+
+    function Get-LatestMainPackageVersion([string] $flatContainer, [string] $packageId) {
+        $versions = (Invoke-RestMethod -Uri "$flatContainer/$($packageId.ToLowerInvariant())/index.json").versions
+        $mainVersions = $versions | Where-Object { $_ -match '-branch\.main\.' }
+        if ($mainVersions.Count -eq 0) {
+            throw "No main branch version of '$packageId' is available from '$PackageSource'."
+        }
+
+        return $mainVersions |
+            Sort-Object { [int](($_ -split '\.')[-1]) } -Descending |
+            Select-Object -First 1
     }
 
     return $stableVersions |
@@ -97,7 +111,9 @@ Remove-Item -Recurse -Force $workRoot -ErrorAction Ignore
 New-Item -ItemType Directory -Force -Path $packagesPath, $extractedPackagesPath, $dependencyLibrariesPath, $stagingPath, $mdocPath | Out-Null
 
 $mdocFlatContainer = Get-ServiceResource $MdocPackageSource 'PackageBaseAddress'
-$metaPackageVersion = if ($PackageVersion) { $PackageVersion } else { '*-*' }
+$packageFlatContainer = Get-ServiceResource $PackageSource 'PackageBaseAddress'
+$metaPackageVersion = if ($PackageVersion) { $PackageVersion } else { Get-LatestMainPackageVersion $packageFlatContainer '_NuGets' }
+$docsMediaVersion = if ($DocsMediaPackageVersion) { $DocsMediaPackageVersion } else { Get-LatestMainPackageVersion $packageFlatContainer '_DocsMedia' }
 $restoreProject = Join-Path $workRoot 'PackageSet.csproj'
 @"
 <Project Sdk="Microsoft.NET.Sdk">
@@ -106,6 +122,7 @@ $restoreProject = Join-Path $workRoot 'PackageSet.csproj'
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="_NuGets" Version="$metaPackageVersion" />
+    <PackageReference Include="_DocsMedia" Version="$docsMediaVersion" />
     <PackageReference Include="GirCore.Gtk-4.0" Version="0.7.0" PrivateAssets="all" />
     <PackageReference Include="GtkSharp" Version="3.24.24.95" PrivateAssets="all" />
     <PackageReference Include="Tizen.NET" Version="12.0.0.18510" PrivateAssets="all" />
@@ -120,7 +137,7 @@ $restoreProject = Join-Path $workRoot 'PackageSet.csproj'
 </Project>
 "@ | Set-Content -NoNewline -Path $restoreProject
 
-Write-Host "Restoring the _NuGets package set from $PackageSource"
+Write-Host "Restoring _NuGets $metaPackageVersion and _DocsMedia $docsMediaVersion from $PackageSource"
 & $dotnetSdk.Source restore $restoreProject `
     --configfile (Join-Path $repositoryRoot 'NuGet.Config') `
     --packages $packagesPath `
@@ -216,6 +233,38 @@ New-Item -ItemType Directory -Force -Path $stagingXmlPath | Out-Null
 Copy-Item -Force (Join-Path $apiRoot 'xml/_filter.xml') $stagingXmlPath
 Copy-Item -Force (Join-Path $apiRoot '_filter.xml') $stagingPath
 
+$mediaPackageRoots = Get-ChildItem -Path $packagesPath -Directory |
+    Where-Object { $_.Name -like '_docsmedia*' }
+if (-not $mediaPackageRoots) {
+    throw '_DocsMedia did not restore any package content.'
+}
+
+$mediaFiles = $mediaPackageRoots |
+    ForEach-Object { Get-ChildItem -Path $_.FullName -File -Recurse } |
+    Where-Object { $_.Extension -match '^\.(gif|jpe?g|png|svg|webp)$' }
+if (-not $mediaFiles) {
+    throw '_DocsMedia restored successfully but did not contain supported media files.'
+}
+
+New-Item -ItemType Directory -Force -Path $stagingMediaPath | Out-Null
+foreach ($mediaFile in $mediaFiles) {
+    $imagesRoot = $mediaFile.Directory
+    while ($imagesRoot -and $imagesRoot.Name -ne 'images') {
+        $imagesRoot = $imagesRoot.Parent
+    }
+    if ($null -eq $imagesRoot) {
+        throw "Unable to determine the images root for '$($mediaFile.FullName)'."
+    }
+
+    $relativePath = [IO.Path]::GetRelativePath($imagesRoot.FullName, $mediaFile.FullName)
+    $destination = Join-Path $stagingMediaPath $relativePath
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination) | Out-Null
+    Copy-Item -Force $mediaFile.FullName $destination
+}
+if (-not (Get-ChildItem -Path $stagingMediaPath -File -Recurse | Where-Object Length -GT 0)) {
+    throw '_DocsMedia did not produce usable media content.'
+}
+
 $libraryArguments = @('--lib', $referencePath)
 foreach ($directory in $monikerDirectories) {
     $libraryArguments += @('--lib', $directory)
@@ -278,12 +327,12 @@ finally {
     Pop-Location
 }
 
-$preservedItems = @('docfx.json', 'SkiaSharpAPI-breadcrumb', 'images', 'xml')
+$preservedItems = @('docfx.json', 'SkiaSharpAPI-breadcrumb', 'xml')
 Get-ChildItem -Path $apiRoot -Force | Where-Object { $_.Name -notin $preservedItems } | Remove-Item -Recurse -Force
 Get-ChildItem -Path $stagingPath -Force | Where-Object { $_.Name -ne 'xml' } |
     Copy-Item -Destination $apiRoot -Recurse -Force
 
-Write-Host "Replaced generated ECMA XML in $apiRoot from clean staging."
+Write-Host "Replaced generated ECMA XML and media in $apiRoot from clean staging."
 if (-not $KeepStaging) {
     Remove-Item -Recurse -Force $workRoot
 }

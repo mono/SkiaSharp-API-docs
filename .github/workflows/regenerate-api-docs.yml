@@ -1,15 +1,20 @@
 name: Regenerate API docs
 
 on:
+  schedule:
+    - cron: '17 3 * * *'
   workflow_dispatch:
     inputs:
       branch:
-        description: Feature branch to receive the generated ECMA XML
-        required: true
-        default: mattleibow-generated-api-docs
+        description: Branch to receive the generated API XML and media
+        required: false
         type: string
       package_version:
-        description: Optional _NuGets package version (latest prerelease when empty)
+        description: Optional _NuGets main package version
+        required: false
+        type: string
+      docs_media_package_version:
+        description: Optional _DocsMedia main package version
         required: false
         type: string
 
@@ -18,12 +23,14 @@ permissions:
 
 jobs:
   generate:
-    if: inputs.branch != 'main' && inputs.branch != 'live'
+    if: github.actor != 'github-actions[bot]'
     runs-on: windows-latest
+    env:
+      TARGET_BRANCH: ${{ inputs.branch || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.branch }}
+          ref: ${{ env.TARGET_BRANCH }}
           fetch-depth: 0
 
       - uses: actions/setup-dotnet@v4
@@ -34,10 +41,14 @@ jobs:
         shell: pwsh
         env:
           PACKAGE_VERSION: ${{ inputs.package_version }}
+          DOCS_MEDIA_PACKAGE_VERSION: ${{ inputs.docs_media_package_version }}
         run: |
           $arguments = @{}
           if ($env:PACKAGE_VERSION) {
             $arguments.PackageVersion = $env:PACKAGE_VERSION
+          }
+          if ($env:DOCS_MEDIA_PACKAGE_VERSION) {
+            $arguments.DocsMediaPackageVersion = $env:DOCS_MEDIA_PACKAGE_VERSION
           }
           ./tools/Generate-ApiDocs.ps1 @arguments
 
@@ -51,5 +62,5 @@ jobs:
           }
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Regenerate API docs from _NuGets'
-          git push origin HEAD:${{ inputs.branch }}
+          git commit -m 'Regenerate API docs and media from packages'
+          git push origin HEAD:$env:TARGET_BRANCH
