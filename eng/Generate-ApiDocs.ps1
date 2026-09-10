@@ -1,10 +1,6 @@
 [CmdletBinding()]
 param(
-    [string] $PackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json',
-    [string] $PackageVersion,
-    [string] $DocsMediaPackageVersion,
-    [string] $MdocPackageVersion,
-    [string] $PackageOutputPath,
+    [string] $PackageRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) '.artifacts/api-docs/packages'),
     [string] $OutputRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'SkiaSharpAPI'),
     [switch] $KeepStaging
 )
@@ -120,51 +116,34 @@ function Get-ReferencePaths([string] $dotnetRoot, [string] $packageExtractionPat
 }
 
 if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) {
-    throw 'The .NET 10 SDK is required. Install it before running this script.'
+    throw 'The .NET SDK required to run mdoc is not available.'
 }
 if (-not (Test-Path $OutputRoot)) {
     throw "Output root '$OutputRoot' does not exist."
 }
+if (-not (Test-Path $PackageRoot)) {
+    throw "Prepared package root '$PackageRoot' does not exist. Run eng/Setup-ApiDocs.ps1 first."
+}
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $workRoot = Join-Path $repositoryRoot '.artifacts/api-docs'
-$packageRoot = if ($PackageOutputPath) { $PackageOutputPath } else { Join-Path $workRoot 'packages' }
-$nuGetsExtractionPath = Join-Path $workRoot 'nugets'
-$mediaExtractionPath = Join-Path $workRoot 'media'
-$frameworksRoot = Join-Path $workRoot 'frameworks'
-$stagingPath = Join-Path $workRoot 'staging'
-$compilerDocumentationPath = Join-Path $workRoot 'compiler-documentation.xml'
+$conversionRoot = Join-Path $workRoot 'conversion'
+$nuGetsExtractionPath = Join-Path $conversionRoot 'nugets'
+$mediaExtractionPath = Join-Path $conversionRoot 'media'
+$frameworksRoot = Join-Path $conversionRoot 'frameworks'
+$stagingPath = Join-Path $conversionRoot 'staging'
+$compilerDocumentationPath = Join-Path $conversionRoot 'compiler-documentation.xml'
 
-Remove-Item -Recurse -Force $workRoot -ErrorAction Ignore
-New-Item -ItemType Directory -Force -Path $packageRoot, $nuGetsExtractionPath, $mediaExtractionPath, $frameworksRoot, $stagingPath | Out-Null
-
-foreach ($package in @(
-    @{ Id = '_NuGets'; Version = $PackageVersion },
-    @{ Id = '_DocsMedia'; Version = $DocsMediaPackageVersion },
-    @{ Id = 'mdoc'; Version = $MdocPackageVersion }
-)) {
-    $downloadArguments = @(
-        'package', 'download', $package.Id, '--prerelease',
-        '--output', $packageRoot,
-        '--configfile', (Join-Path $repositoryRoot 'NuGet.Config'),
-        '--source', $PackageSource
-    )
-    if ($package.Version) {
-        $downloadArguments += @('--version', $package.Version)
-    }
-    & dotnet @downloadArguments
-    if ($LASTEXITCODE -ne 0) {
-        throw "Downloading $($package.Id) from '$PackageSource' failed with exit code $LASTEXITCODE."
-    }
-}
+Remove-Item -Recurse -Force $conversionRoot -ErrorAction Ignore
+New-Item -ItemType Directory -Force -Path $nuGetsExtractionPath, $mediaExtractionPath, $frameworksRoot, $stagingPath | Out-Null
 
 $nuGetsArchives = Get-ChildItem -Path $packageRoot -Filter '_nugets*.nupkg' -File -Recurse
 $mediaArchives = Get-ChildItem -Path $packageRoot -Filter '_docsmedia*.nupkg' -File -Recurse
 if (-not $nuGetsArchives) {
-    throw "Package source '$PackageSource' did not provide _NuGets."
+    throw "Prepared package root '$PackageRoot' does not contain _NuGets."
 }
 if (-not $mediaArchives) {
-    throw "Package source '$PackageSource' did not provide _DocsMedia."
+    throw "Prepared package root '$PackageRoot' does not contain _DocsMedia."
 }
 
 $allPackages = Expand-PackageArchives $packageRoot (Join-Path $workRoot 'packages-expanded')
@@ -175,7 +154,7 @@ $mdocPath = $allPackages |
     Where-Object { $_.FullName -match '[\\/]tools[\\/]net6\.0[\\/]' } |
     Select-Object -First 1 -ExpandProperty FullName
 if (-not $mdocPath) {
-    throw "Package source '$PackageSource' did not provide mdoc tools/net6.0/mdoc.dll."
+    throw "Prepared package root '$PackageRoot' does not contain mdoc tools/net6.0/mdoc.dll."
 }
 
 $frameworks = New-Object System.Xml.XmlDocument
@@ -301,5 +280,5 @@ Get-ChildItem -Path $stagingPath -Force | Where-Object { $_.Name -ne 'xml' } | C
 
 Write-Host "Replaced generated ECMA XML and media in $OutputRoot from blank staging."
 if (-not $KeepStaging) {
-    Remove-Item -Recurse -Force $workRoot
+    Remove-Item -Recurse -Force $conversionRoot
 }

@@ -25,6 +25,10 @@ jobs:
         shell: pwsh
         run: dotnet workload install android ios maccatalyst macos tvos maui --version 10.0.400 --configfile NuGet.Config
 
+      - name: Set up API documentation packages
+        shell: pwsh
+        run: ./eng/Setup-ApiDocs.ps1
+
       - name: Generate clean ECMA XML and media
         shell: pwsh
         run: |
