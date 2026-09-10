@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string] $PackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json',
+    [string] $PackageSource,
     [string] $PackageVersion,
     [string] $DocsMediaPackageVersion,
     [string] $MdocPackageVersion,
@@ -26,16 +26,19 @@ foreach ($package in @(
     $arguments = @(
         'package', 'download', $package.Id, '--prerelease',
         '--output', $PackageRoot,
-        '--configfile', (Join-Path $repositoryRoot 'NuGet.Config'),
-        '--source', $PackageSource
+        '--configfile', (Join-Path $repositoryRoot 'NuGet.Config')
     )
+    if ($PackageSource) {
+        $arguments += @('--source', $PackageSource)
+    }
     if ($package.Version) {
         $arguments += @('--version', $package.Version)
     }
 
     & dotnet @arguments
     if ($LASTEXITCODE -ne 0) {
-        throw "Downloading $($package.Id) from '$PackageSource' failed with exit code $LASTEXITCODE."
+        $sourceDescription = if ($PackageSource) { $PackageSource } else { 'the configured dnceng feeds' }
+        throw "Downloading $($package.Id) from $sourceDescription failed with exit code $LASTEXITCODE."
     }
 }
 
