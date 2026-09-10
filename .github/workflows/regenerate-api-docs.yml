@@ -4,19 +4,6 @@ on:
   schedule:
     - cron: '17 3 * * *'
   workflow_dispatch:
-    inputs:
-      branch:
-        description: Branch to receive the generated API XML and media
-        required: false
-        type: string
-      package_version:
-        description: Optional _NuGets main package version
-        required: false
-        type: string
-      docs_media_package_version:
-        description: Optional _DocsMedia main package version
-        required: false
-        type: string
 
 permissions:
   contents: write
@@ -25,32 +12,78 @@ jobs:
   generate:
     if: github.actor != 'github-actions[bot]'
     runs-on: windows-latest
-    env:
-      TARGET_BRANCH: ${{ inputs.branch || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.TARGET_BRANCH }}
           fetch-depth: 0
 
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
 
-      - name: Generate clean ECMA XML
+      - name: Download generation packages
         shell: pwsh
-        env:
-          PACKAGE_VERSION: ${{ inputs.package_version }}
-          DOCS_MEDIA_PACKAGE_VERSION: ${{ inputs.docs_media_package_version }}
         run: |
-          $arguments = @{}
-          if ($env:PACKAGE_VERSION) {
-            $arguments.PackageVersion = $env:PACKAGE_VERSION
+          dotnet package download _NuGets _DocsMedia mdoc --prerelease `
+            --output .artifacts/api-docs/packages `
+            --configfile NuGet.Config `
+            --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json
+
+      - name: Install platform reference packs
+        shell: pwsh
+        run: |
+          dotnet workload install android ios maccatalyst macos tvos maui `
+            --skip-manifest-update `
+            --configfile NuGet.Config
+
+      - name: Generate clean ECMA XML and media
+        shell: pwsh
+        run: |
+          $packageRoot = Join-Path $PWD '.artifacts/api-docs/packages'
+          $referencesRoot = Join-Path $PWD '.artifacts/api-docs/references'
+          New-Item -ItemType Directory -Force -Path $referencesRoot | Out-Null
+
+          Get-ChildItem -Path $packageRoot -Filter '*.dll' -Recurse | Sort-Object FullName | ForEach-Object {
+            $destination = Join-Path $referencesRoot $_.Name
+            if (-not (Test-Path $destination)) {
+              Copy-Item -Force $_.FullName $destination
+            }
           }
-          if ($env:DOCS_MEDIA_PACKAGE_VERSION) {
-            $arguments.DocsMediaPackageVersion = $env:DOCS_MEDIA_PACKAGE_VERSION
+
+          $referencePaths = @($referencesRoot)
+          $packNames = @(
+            'Microsoft.NETCore.App.Ref',
+            'Microsoft.WindowsDesktop.App.Ref',
+            'Microsoft.Android.Ref',
+            'Microsoft.iOS.Ref',
+            'Microsoft.MacCatalyst.Ref',
+            'Microsoft.macOS.Ref',
+            'Microsoft.tvOS.Ref',
+            'Microsoft.Maui.Controls.Ref'
+          )
+          foreach ($packName in $packNames) {
+            $packPath = Join-Path $env:DOTNET_ROOT "packs/$packName"
+            if (-not (Test-Path $packPath)) {
+              continue
+            }
+            $referencePaths += Get-ChildItem -Path $packPath -Directory | ForEach-Object {
+              Get-ChildItem -Path (Join-Path $_.FullName 'ref') -Directory -ErrorAction SilentlyContinue
+            } | Select-Object -ExpandProperty FullName
           }
-          ./tools/Generate-ApiDocs.ps1 @arguments
+
+          $mdocPath = Get-ChildItem -Path $packageRoot -Filter mdoc.dll -Recurse |
+            Where-Object { $_.FullName -match '[\\/]tools[\\/]net6\.0[\\/]' } |
+            Select-Object -First 1 -ExpandProperty FullName
+          if (-not $mdocPath) {
+            throw 'The transport feed did not provide mdoc tools/net6.0/mdoc.dll.'
+          }
+
+          ./eng/Generate-ApiDocs.ps1 `
+            -NuGetsPath $packageRoot `
+            -DocsMediaPath $packageRoot `
+            -MdocPath $mdocPath `
+            -ReferencePath $referencePaths `
+            -OutputRoot (Join-Path $PWD 'SkiaSharpAPI')
 
       - name: Commit generated output
         shell: pwsh
@@ -63,4 +96,4 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Regenerate API docs and media from packages'
-          git push origin HEAD:$env:TARGET_BRANCH
+          git push origin HEAD:${{ github.ref_name }}
