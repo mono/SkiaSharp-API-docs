@@ -36,8 +36,7 @@ jobs:
 
       - name: Generate clean ECMA XML and media
         shell: pwsh
-        run: |
-          ./eng/Generate-ApiDocs.ps1
+        run: ./eng/Generate-ApiDocs.ps1
 
       - name: Commit generated output
         if: github.event_name != 'pull_request'
