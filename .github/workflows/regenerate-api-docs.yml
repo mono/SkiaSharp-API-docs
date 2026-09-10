@@ -1,6 +1,7 @@
 name: Regenerate API docs
 
 on:
+  pull_request:
   schedule:
     - cron: '17 3 * * *'
   workflow_dispatch:
@@ -39,6 +40,7 @@ jobs:
           ./eng/Generate-ApiDocs.ps1
 
       - name: Commit generated output
+        if: github.event_name != 'pull_request'
         shell: pwsh
         run: |
           git add SkiaSharpAPI .openpublishing.publish.config.json
