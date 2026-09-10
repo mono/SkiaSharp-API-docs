@@ -41,9 +41,33 @@ jobs:
         run: |
           $packageRoot = Join-Path $PWD '.artifacts/api-docs/packages'
           $referencesRoot = Join-Path $PWD '.artifacts/api-docs/references'
+          $expandedPackagesRoot = Join-Path $PWD '.artifacts/api-docs/expanded-packages'
           New-Item -ItemType Directory -Force -Path $referencesRoot | Out-Null
+          New-Item -ItemType Directory -Force -Path $expandedPackagesRoot | Out-Null
+          $nuGetsPackages = Get-ChildItem -Path $packageRoot -Filter '_nugets*.nupkg' -File -Recurse
+          $docsMediaPackages = Get-ChildItem -Path $packageRoot -Filter '_docsmedia*.nupkg' -File -Recurse
+          if (-not $nuGetsPackages) {
+            throw 'The transport feed did not provide the requested _NuGets package.'
+          }
+          if (-not $docsMediaPackages) {
+            throw 'The transport feed did not provide the requested _DocsMedia package.'
+          }
 
-          Get-ChildItem -Path $packageRoot -Filter '*.dll' -Recurse | Sort-Object FullName | ForEach-Object {
+          $archives = @(Get-ChildItem -Path $packageRoot -Filter '*.nupkg' -File -Recurse)
+          $expandedArchives = @{}
+          while ($archives.Count -gt 0) {
+            $archive = $archives[0]
+            $archives = @($archives | Select-Object -Skip 1)
+            if ($expandedArchives.ContainsKey($archive.FullName)) {
+              continue
+            }
+            $expandedArchives[$archive.FullName] = $true
+            $destination = Join-Path $expandedPackagesRoot ([IO.Path]::GetFileNameWithoutExtension($archive.Name))
+            Expand-Archive -Path $archive.FullName -DestinationPath $destination -Force
+            $archives += Get-ChildItem -Path $destination -Filter '*.nupkg' -File -Recurse
+          }
+
+          Get-ChildItem -Path $expandedPackagesRoot -Filter '*.dll' -Recurse | Sort-Object FullName | ForEach-Object {
             $destination = Join-Path $referencesRoot $_.Name
             if (-not (Test-Path $destination)) {
               Copy-Item -Force $_.FullName $destination
@@ -71,7 +95,7 @@ jobs:
             } | Select-Object -ExpandProperty FullName
           }
 
-          $mdocPath = Get-ChildItem -Path $packageRoot -Filter mdoc.dll -Recurse |
+          $mdocPath = Get-ChildItem -Path $expandedPackagesRoot -Filter mdoc.dll -Recurse |
             Where-Object { $_.FullName -match '[\\/]tools[\\/]net6\.0[\\/]' } |
             Select-Object -First 1 -ExpandProperty FullName
           if (-not $mdocPath) {
@@ -79,8 +103,8 @@ jobs:
           }
 
           ./eng/Generate-ApiDocs.ps1 `
-            -NuGetsPath $packageRoot `
-            -DocsMediaPath $packageRoot `
+            -NuGetsPath $nuGetsPackages.FullName `
+            -DocsMediaPath $docsMediaPackages.FullName `
             -MdocPath $mdocPath `
             -ReferencePath $referencePaths `
             -OutputRoot (Join-Path $PWD 'SkiaSharpAPI')
