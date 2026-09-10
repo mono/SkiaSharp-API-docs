@@ -22,6 +22,10 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - name: Verify mdoc
+        shell: pwsh
+        run: ./eng/MDoc.ps1 --version
+
       - name: Install platform workloads
         shell: pwsh
         run: dotnet workload install android ios maccatalyst macos tvos maui --version 10.0.400 --configfile NuGet.Config
@@ -29,10 +33,6 @@ jobs:
       - name: Set up API documentation packages
         shell: pwsh
         run: ./eng/Setup-ApiDocs.ps1
-
-      - name: Verify mdoc
-        shell: pwsh
-        run: ./eng/MDoc.ps1 --version
 
       - name: Generate clean ECMA XML and media
         shell: pwsh
