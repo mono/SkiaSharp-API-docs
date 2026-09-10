@@ -2,7 +2,7 @@
 
 This repository is the generated staging input for Microsoft Learn/OpenPublishing API reference content for [SkiaSharp and HarfBuzzSharp](https://github.com/mono/SkiaSharp). The ECMA XML is regenerated from the published NuGet package set; it does not require a SkiaSharp checkout or submodule.
 
-The nightly workflow acquires the latest `_NuGets` and `_DocsMedia` packages from the transport feed and invokes `pwsh ./eng/Generate-ApiDocs.ps1` to replace the generated API tree and media from blank staging. The conversion script receives pre-acquired packages, mdoc, and reference paths; it does not restore packages or bootstrap SDK workloads. It keeps only OpenPublishing infrastructure (`docfx.json`, filters, and breadcrumbs), and regenerates framework moniker indexes. The promoted ECMA XML is the unmodified mdoc output with package-supplied media; source comments supply prose in a later phase.
+Run `pwsh ./eng/Generate-ApiDocs.ps1` to acquire the latest `_NuGets`, `_DocsMedia`, and mdoc packages and replace the generated API tree and media from blank staging. By default it uses the transport feed; pass `-PackageSource <local-NuGet-folder>` to validate a downloaded package set locally. The CI helper `eng/Invoke-ApiDocsCi.ps1` installs the required workloads and then invokes the same generator. The generator keeps only OpenPublishing infrastructure (`docfx.json`, filters, and breadcrumbs), and regenerates framework moniker indexes. The promoted ECMA XML is the unmodified mdoc output with package-supplied media; source comments supply prose in a later phase.
 
 The docs are available online for:
  - [SkiaSharp](https://docs.microsoft.com/dotnet/api/skiasharp)

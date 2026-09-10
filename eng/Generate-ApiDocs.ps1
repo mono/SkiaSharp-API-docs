@@ -1,34 +1,31 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)]
-    [string[]] $NuGetsPath,
-    [Parameter(Mandatory)]
-    [string[]] $DocsMediaPath,
-    [Parameter(Mandatory)]
-    [string] $MdocPath,
-    [Parameter(Mandatory)]
-    [string[]] $ReferencePath,
+    [string] $PackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json',
+    [string] $PackageVersion,
+    [string] $DocsMediaPackageVersion,
+    [string] $MdocPackageVersion,
+    [string] $PackageOutputPath,
     [string] $OutputRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'SkiaSharpAPI'),
-    [string] $DotnetPath = 'dotnet',
     [switch] $KeepStaging
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
-function Expand-PackageArchives([string] $inputPath, [string] $destinationRoot) {
-    if (-not (Test-Path $inputPath)) {
-        throw "Package input '$inputPath' does not exist."
-    }
-
+function Expand-PackageArchives([string[]] $inputPaths, [string] $destinationRoot) {
     New-Item -ItemType Directory -Force -Path $destinationRoot | Out-Null
-    $archives = if ((Get-Item $inputPath).PSIsContainer) {
-        Get-ChildItem -Path $inputPath -Filter '*.nupkg' -File -Recurse
-    } else {
-        Get-Item $inputPath
+    $archives = foreach ($inputPath in $inputPaths) {
+        if (-not (Test-Path $inputPath)) {
+            throw "Package input '$inputPath' does not exist."
+        }
+        if ((Get-Item $inputPath).PSIsContainer) {
+            Get-ChildItem -Path $inputPath -Filter '*.nupkg' -File -Recurse
+        } else {
+            Get-Item $inputPath
+        }
     }
     if (-not $archives) {
-        throw "Package input '$inputPath' does not contain any .nupkg files."
+        throw 'The supplied package input did not contain any .nupkg files.'
     }
 
     $expandedPaths = @()
@@ -39,6 +36,7 @@ function Expand-PackageArchives([string] $inputPath, [string] $destinationRoot) 
         if ($processedArchives.ContainsKey($archive.FullName)) {
             continue
         }
+
         $processedArchives[$archive.FullName] = $true
         $expandedPath = Join-Path $destinationRoot ([IO.Path]::GetFileNameWithoutExtension($archive.Name))
         Expand-Archive -Path $archive.FullName -DestinationPath $expandedPath -Force
@@ -75,38 +73,114 @@ function Get-Moniker([string] $packageId) {
     return $packageId.ToLowerInvariant().Replace('.', '-')
 }
 
-if (-not (Test-Path $MdocPath)) {
-    throw "mdoc '$MdocPath' does not exist."
+function Get-DotnetRoot {
+    if ($env:DOTNET_ROOT -and (Test-Path $env:DOTNET_ROOT)) {
+        return $env:DOTNET_ROOT
+    }
+
+    $sdkDirectory = (& dotnet --list-sdks | Select-Object -Last 1) -replace '^.+ \[(.+)[\\/]sdk\]$', '$1'
+    if (-not $sdkDirectory -or -not (Test-Path $sdkDirectory)) {
+        throw 'Unable to locate the installed .NET SDK root. Set DOTNET_ROOT explicitly.'
+    }
+    return $sdkDirectory
+}
+
+function Get-ReferencePaths([string] $dotnetRoot, [string] $packageExtractionPath) {
+    $referencesRoot = Join-Path $workRoot 'references'
+    New-Item -ItemType Directory -Force -Path $referencesRoot | Out-Null
+    Get-ChildItem -Path $packageExtractionPath -Filter '*.dll' -File -Recurse |
+        Sort-Object FullName |
+        ForEach-Object {
+            $destination = Join-Path $referencesRoot $_.Name
+            if (-not (Test-Path $destination)) {
+                Copy-Item -Force $_.FullName $destination
+            }
+        }
+
+    $packNames = @(
+        'Microsoft.NETCore.App.Ref',
+        'Microsoft.WindowsDesktop.App.Ref',
+        'Microsoft.Android.Ref',
+        'Microsoft.iOS.Ref',
+        'Microsoft.MacCatalyst.Ref',
+        'Microsoft.macOS.Ref',
+        'Microsoft.tvOS.Ref',
+        'Microsoft.Maui.Controls.Ref'
+    )
+    $paths = @($referencesRoot)
+    foreach ($packName in $packNames) {
+        $packPath = Join-Path $dotnetRoot "packs/$packName"
+        if (Test-Path $packPath) {
+            $paths += Get-ChildItem -Path $packPath -Directory | ForEach-Object {
+                Get-ChildItem -Path (Join-Path $_.FullName 'ref') -Directory -ErrorAction SilentlyContinue
+            } | Select-Object -ExpandProperty FullName
+        }
+    }
+    return $paths | Select-Object -Unique
+}
+
+if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) {
+    throw 'The .NET 10 SDK is required. Install it before running this script.'
 }
 if (-not (Test-Path $OutputRoot)) {
     throw "Output root '$OutputRoot' does not exist."
 }
-if ($ReferencePath | Where-Object { -not (Test-Path $_) }) {
-    throw 'One or more supplied reference paths do not exist.'
-}
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $workRoot = Join-Path $repositoryRoot '.artifacts/api-docs'
+$packageRoot = if ($PackageOutputPath) { $PackageOutputPath } else { Join-Path $workRoot 'packages' }
 $nuGetsExtractionPath = Join-Path $workRoot 'nugets'
 $mediaExtractionPath = Join-Path $workRoot 'media'
 $frameworksRoot = Join-Path $workRoot 'frameworks'
 $stagingPath = Join-Path $workRoot 'staging'
 
 Remove-Item -Recurse -Force $workRoot -ErrorAction Ignore
-New-Item -ItemType Directory -Force -Path $nuGetsExtractionPath, $mediaExtractionPath, $frameworksRoot, $stagingPath | Out-Null
+New-Item -ItemType Directory -Force -Path $packageRoot, $nuGetsExtractionPath, $mediaExtractionPath, $frameworksRoot, $stagingPath | Out-Null
 
-$nuGetsPackages = foreach ($path in $NuGetsPath) {
-    Expand-PackageArchives $path $nuGetsExtractionPath
+foreach ($package in @(
+    @{ Id = '_NuGets'; Version = $PackageVersion },
+    @{ Id = '_DocsMedia'; Version = $DocsMediaPackageVersion },
+    @{ Id = 'mdoc'; Version = $MdocPackageVersion }
+)) {
+    $downloadArguments = @(
+        'package', 'download', $package.Id, '--prerelease',
+        '--output', $packageRoot,
+        '--configfile', (Join-Path $repositoryRoot 'NuGet.Config'),
+        '--source', $PackageSource
+    )
+    if ($package.Version) {
+        $downloadArguments += @('--version', $package.Version)
+    }
+    & dotnet @downloadArguments
+    if ($LASTEXITCODE -ne 0) {
+        throw "Downloading $($package.Id) from '$PackageSource' failed with exit code $LASTEXITCODE."
+    }
 }
-$mediaPackages = foreach ($path in $DocsMediaPath) {
-    Expand-PackageArchives $path $mediaExtractionPath
+
+$nuGetsArchives = Get-ChildItem -Path $packageRoot -Filter '_nugets*.nupkg' -File -Recurse
+$mediaArchives = Get-ChildItem -Path $packageRoot -Filter '_docsmedia*.nupkg' -File -Recurse
+if (-not $nuGetsArchives) {
+    throw "Package source '$PackageSource' did not provide _NuGets."
+}
+if (-not $mediaArchives) {
+    throw "Package source '$PackageSource' did not provide _DocsMedia."
+}
+
+$allPackages = Expand-PackageArchives $packageRoot (Join-Path $workRoot 'packages-expanded')
+$nuGetsPackages = Expand-PackageArchives $nuGetsArchives.FullName $nuGetsExtractionPath
+$mediaPackages = Expand-PackageArchives $mediaArchives.FullName $mediaExtractionPath
+$mdocPath = $allPackages |
+    ForEach-Object { Get-ChildItem -Path $_ -Filter mdoc.dll -Recurse } |
+    Where-Object { $_.FullName -match '[\\/]tools[\\/]net6\.0[\\/]' } |
+    Select-Object -First 1 -ExpandProperty FullName
+if (-not $mdocPath) {
+    throw "Package source '$PackageSource' did not provide mdoc tools/net6.0/mdoc.dll."
 }
 
 $frameworks = New-Object System.Xml.XmlDocument
 $frameworkRoot = $frameworks.CreateElement('Frameworks')
 [void] $frameworks.AppendChild($frameworkRoot)
 $monikerDirectories = @()
-
 foreach ($packagePath in $nuGetsPackages) {
     $packageId = Get-PackageId $packagePath
     if ($null -eq $packageId -or
@@ -117,9 +191,7 @@ foreach ($packagePath in $nuGetsPackages) {
     }
 
     $referenceAssemblies = Get-ChildItem -Path (Join-Path $packagePath 'ref') -Filter '*.dll' -Recurse -ErrorAction Ignore
-    $assemblies = if ($referenceAssemblies) {
-        $referenceAssemblies
-    } else {
+    $assemblies = if ($referenceAssemblies) { $referenceAssemblies } else {
         Get-ChildItem -Path (Join-Path $packagePath 'lib') -Filter '*.dll' -Recurse -ErrorAction Ignore
     }
     if (-not $assemblies) {
@@ -136,7 +208,6 @@ foreach ($packagePath in $nuGetsPackages) {
         [void] $frameworkRoot.AppendChild($frameworkNode)
         $monikerDirectories += $monikerPath
     }
-
     foreach ($assembly in $assemblies | Sort-Object FullName) {
         $destination = Join-Path $monikerPath $assembly.Name
         if (-not (Test-Path $destination)) {
@@ -145,7 +216,7 @@ foreach ($packagePath in $nuGetsPackages) {
     }
 }
 if ($monikerDirectories.Count -eq 0) {
-    throw 'The supplied _NuGets input contains no managed SkiaSharp or HarfBuzzSharp assemblies.'
+    throw 'The downloaded _NuGets package set contains no managed SkiaSharp or HarfBuzzSharp assemblies.'
 }
 
 $stagingXmlPath = Join-Path $stagingPath 'xml'
@@ -157,7 +228,7 @@ $mediaFiles = $mediaPackages |
     ForEach-Object { Get-ChildItem -Path $_ -File -Recurse } |
     Where-Object { $_.Extension -match '^\.(gif|jpe?g|png|svg|webp)$' }
 if (-not $mediaFiles) {
-    throw 'The supplied _DocsMedia input contains no supported media files.'
+    throw 'The downloaded _DocsMedia package contains no supported media files.'
 }
 
 $stagingMediaPath = Join-Path $stagingPath 'images'
@@ -169,25 +240,24 @@ foreach ($mediaFile in $mediaFiles) {
     if ($null -eq $imagesRoot) {
         throw "Unable to determine the images root for '$($mediaFile.FullName)'."
     }
-
     $destination = Join-Path $stagingMediaPath ([IO.Path]::GetRelativePath($imagesRoot.FullName, $mediaFile.FullName))
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination) | Out-Null
     Copy-Item -Force $mediaFile.FullName $destination
 }
 if (-not (Get-ChildItem -Path $stagingMediaPath -File -Recurse | Where-Object Length -GT 0)) {
-    throw 'The supplied _DocsMedia input did not produce usable media.'
+    throw 'The downloaded _DocsMedia package did not produce usable media.'
 }
 
 $frameworksPath = Join-Path $frameworksRoot 'frameworks.xml'
 $frameworks.Save($frameworksPath)
 $libraryArguments = @()
-foreach ($path in @($ReferencePath) + $monikerDirectories | Select-Object -Unique) {
+foreach ($path in @(Get-ReferencePaths (Get-DotnetRoot) $nuGetsExtractionPath) + $monikerDirectories | Select-Object -Unique) {
     $libraryArguments += @('--lib', $path)
 }
 
 Push-Location $frameworksRoot
 try {
-    & $DotnetPath $MdocPath update --delete --fno-assembly-versions --fignore-missing-types `
+    & dotnet $mdocPath update --delete --fno-assembly-versions --fignore-missing-types `
         --lang DocId --frameworks $frameworksPath --out $stagingPath @libraryArguments
     if ($LASTEXITCODE -ne 0) {
         throw "mdoc failed with exit code $LASTEXITCODE."
