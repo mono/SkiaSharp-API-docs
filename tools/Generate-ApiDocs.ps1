@@ -168,11 +168,15 @@ $frameworkRoot = $frameworks.CreateElement('Frameworks')
 [void] $frameworks.AppendChild($frameworkRoot)
 $monikerDirectories = @()
 $downloadedPackages = @()
+$docsMediaExtractionPaths = @()
 $packageArchives = Get-ChildItem -Path $packagesPath -Filter '*.nupkg' -Recurse |
     Where-Object { $_.DirectoryName -match '[\\/]tools$' }
 foreach ($packageArchive in $packageArchives) {
     $extractPath = Join-Path $extractedPackagesPath ([IO.Path]::GetFileNameWithoutExtension($packageArchive.Name))
     Expand-Archive -Path $packageArchive.FullName -DestinationPath $extractPath -Force
+    if ($packageArchive.FullName -match '[\\/]_docsmedia(?:\.|[\\/])') {
+        $docsMediaExtractionPaths += $extractPath
+    }
     $nuspec = Get-ChildItem -Path $extractPath -Filter '*.nuspec' | Select-Object -First 1
     [xml] $metadata = Get-Content -Raw -Path $nuspec.FullName
     $packageId = $metadata.package.metadata.id
@@ -233,8 +237,10 @@ New-Item -ItemType Directory -Force -Path $stagingXmlPath | Out-Null
 Copy-Item -Force (Join-Path $apiRoot 'xml/_filter.xml') $stagingXmlPath
 Copy-Item -Force (Join-Path $apiRoot '_filter.xml') $stagingPath
 
-$mediaPackageRoots = Get-ChildItem -Path $packagesPath -Directory |
-    Where-Object { $_.Name -like '_docsmedia*' }
+$mediaPackageRoots = @(
+    Get-ChildItem -Path $packagesPath -Directory | Where-Object { $_.Name -like '_docsmedia*' }
+    $docsMediaExtractionPaths | Get-Item
+)
 if (-not $mediaPackageRoots) {
     throw '_DocsMedia did not restore any package content.'
 }
