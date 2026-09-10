@@ -2,7 +2,7 @@
 param(
     [string] $PackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json',
     [string] $PackageVersion,
-    [string] $ToolsPath = (Join-Path (Split-Path -Parent $PSScriptRoot) '.artifacts/api-docs/tools'),
+    [string] $ToolsPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/tools'),
     [Parameter(ValueFromRemainingArguments)]
     [string[]] $MdocArguments
 )

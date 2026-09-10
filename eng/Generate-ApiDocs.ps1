@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string] $PackageRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) '.artifacts/api-docs/packages'),
+    [string] $PackageRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/packages'),
     [string] $OutputRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'SkiaSharpAPI'),
     [switch] $KeepStaging
 )
@@ -126,7 +126,7 @@ if (-not (Test-Path $PackageRoot)) {
 }
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
-$workRoot = Join-Path $repositoryRoot '.artifacts/api-docs'
+$workRoot = Join-Path $repositoryRoot 'artifacts/api-docs'
 $conversionRoot = Join-Path $workRoot 'conversion'
 $nuGetsExtractionPath = Join-Path $conversionRoot 'nugets'
 $mediaExtractionPath = Join-Path $conversionRoot 'media'

@@ -4,7 +4,7 @@ param(
     [string] $PackageSource,
     [string] $PackageVersion,
     [string] $DocsMediaPackageVersion,
-    [string] $PackageRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) '.artifacts/api-docs/packages')
+    [string] $PackageRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/packages')
 )
 
 $ErrorActionPreference = 'Stop'
