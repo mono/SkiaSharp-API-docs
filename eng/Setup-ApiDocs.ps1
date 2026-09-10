@@ -1,11 +1,9 @@
 [CmdletBinding()]
 param(
     [string] $TransportPackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json',
-    [string] $PublicPackageSource = 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json',
     [string] $PackageSource,
     [string] $PackageVersion,
     [string] $DocsMediaPackageVersion,
-    [string] $MdocPackageVersion,
     [string] $PackageRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) '.artifacts/api-docs/packages')
 )
 
@@ -22,8 +20,7 @@ New-Item -ItemType Directory -Force -Path $PackageRoot | Out-Null
 
 foreach ($package in @(
     @{ Id = '_NuGets'; Version = $PackageVersion; Source = $TransportPackageSource },
-    @{ Id = '_DocsMedia'; Version = $DocsMediaPackageVersion; Source = $TransportPackageSource },
-    @{ Id = 'mdoc'; Version = $MdocPackageVersion; Source = $PublicPackageSource }
+    @{ Id = '_DocsMedia'; Version = $DocsMediaPackageVersion; Source = $TransportPackageSource }
 )) {
     $source = if ($PackageSource) { $PackageSource } else { $package.Source }
     $arguments = @(

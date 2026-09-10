@@ -146,16 +146,8 @@ if (-not $mediaArchives) {
     throw "Prepared package root '$PackageRoot' does not contain _DocsMedia."
 }
 
-$allPackages = Expand-PackageArchives $packageRoot (Join-Path $workRoot 'packages-expanded')
 $nuGetsPackages = Expand-PackageArchives $nuGetsArchives.FullName $nuGetsExtractionPath
 $mediaPackages = Expand-PackageArchives $mediaArchives.FullName $mediaExtractionPath
-$mdocPath = $allPackages |
-    ForEach-Object { Get-ChildItem -Path $_ -Filter mdoc.dll -Recurse } |
-    Where-Object { $_.FullName -match '[\\/]tools[\\/]net6\.0[\\/]' } |
-    Select-Object -First 1 -ExpandProperty FullName
-if (-not $mdocPath) {
-    throw "Prepared package root '$PackageRoot' does not contain mdoc tools/net6.0/mdoc.dll."
-}
 
 $frameworks = New-Object System.Xml.XmlDocument
 $frameworkRoot = $frameworks.CreateElement('Frameworks')
@@ -263,7 +255,7 @@ foreach ($path in @(Get-ReferencePaths (Get-DotnetRoot) $nuGetsExtractionPath) +
 
 Push-Location $frameworksRoot
 try {
-    & dotnet $mdocPath update --delete --fno-assembly-versions --fignore-missing-types `
+    & (Join-Path $PSScriptRoot 'MDoc.ps1') update --delete --fno-assembly-versions --fignore-missing-types `
         --import $compilerDocumentationPath `
         --lang DocId --frameworks $frameworksPath --out $stagingPath @libraryArguments
     if ($LASTEXITCODE -ne 0) {
