@@ -1,0 +1,202 @@
+<Type Name="GRSilkNetBackendContext" FullName="SkiaSharp.GRSilkNetBackendContext">
+  <TypeSignature Language="C#" Value="public class GRSilkNetBackendContext : SkiaSharp.GRVkBackendContext" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GRSilkNetBackendContext extends SkiaSharp.GRVkBackendContext" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.GRSilkNetBackendContext" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+    <AssemblyVersion>4.154.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>SkiaSharp.GRVkBackendContext</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>A Vulkan backend context that uses Silk.NET types for Vulkan interoperability.</summary>
+    <remarks>
+      <format type="text/markdown"><![CDATA[
+## Remarks
+
+Use this type to pass Vulkan objects created with Silk.NET to <xref:SkiaSharp.GRContext.CreateVulkan(SkiaSharp.GRVkBackendContext)>. The typed properties update the corresponding native handles on the base Vulkan backend context. The context does not own the Vulkan instance, physical device, logical device, or queue.
+
+## Examples
+
+```csharp
+static GRContext CreateContext(
+    Silk.NET.Vulkan.Instance instance,
+    Silk.NET.Vulkan.PhysicalDevice physicalDevice,
+    Silk.NET.Vulkan.Device device,
+    Silk.NET.Vulkan.Queue queue,
+    uint graphicsQueueIndex,
+    Silk.NET.Vulkan.PhysicalDeviceFeatures features,
+    GRSilkNetGetProcedureAddressDelegate getProc)
+{
+    using var extensions = new GRVkExtensions();
+    extensions.Initialize(getProc, instance, physicalDevice);
+
+    using var backendContext = new GRSilkNetBackendContext
+    {
+        VkInstance = instance,
+        VkPhysicalDevice = physicalDevice,
+        VkDevice = device,
+        VkQueue = queue,
+        GraphicsQueueIndex = graphicsQueueIndex,
+        Extensions = extensions,
+        GetProcedureAddress = getProc,
+        VkPhysicalDeviceFeatures = features,
+    };
+
+    return GRContext.CreateVulkan(backendContext)
+        ?? throw new System.InvalidOperationException("Unable to create the Vulkan context.");
+}
+```
+]]></format>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public GRSilkNetBackendContext ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRSilkNetBackendContext.#ctor" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.GRSilkNetBackendContext" /> class.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRSilkNetBackendContext.Dispose(System.Boolean)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="disposing" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="disposing">
+          <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+        <summary>Releases the unmanaged resources used by the object and optionally releases the managed resources.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="GetProcedureAddress">
+      <MemberSignature Language="C#" Value="public SkiaSharp.GRSilkNetGetProcedureAddressDelegate GetProcedureAddress { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.GRSilkNetGetProcedureAddressDelegate GetProcedureAddress" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.GetProcedureAddress" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.GRSilkNetGetProcedureAddressDelegate</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the delegate for resolving Vulkan function addresses.</summary>
+        <value>The delegate for resolving Vulkan function addresses.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="VkDevice">
+      <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.Device VkDevice { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Silk.NET.Vulkan.Device VkDevice" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkDevice" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Silk.NET.Vulkan.Device</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Vulkan logical device.</summary>
+        <value>The Silk.NET Vulkan logical device.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="VkInstance">
+      <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.Instance VkInstance { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Silk.NET.Vulkan.Instance VkInstance" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkInstance" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Silk.NET.Vulkan.Instance</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Vulkan instance.</summary>
+        <value>The Silk.NET Vulkan instance.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="VkPhysicalDevice">
+      <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.PhysicalDevice VkPhysicalDevice { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Silk.NET.Vulkan.PhysicalDevice VkPhysicalDevice" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkPhysicalDevice" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Silk.NET.Vulkan.PhysicalDevice</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Vulkan physical device.</summary>
+        <value>The Silk.NET Vulkan physical device.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="VkPhysicalDeviceFeatures">
+      <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.PhysicalDeviceFeatures? VkPhysicalDeviceFeatures { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Silk.NET.Vulkan.PhysicalDeviceFeatures&gt; VkPhysicalDeviceFeatures" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkPhysicalDeviceFeatures" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;Silk.NET.Vulkan.PhysicalDeviceFeatures&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the optional Vulkan physical device features.</summary>
+        <value>The Silk.NET Vulkan physical device features, or <see langword="null" />.</value>
+        <remarks>The assigned value is pinned until it is replaced or the backend context is disposed.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="VkQueue">
+      <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.Queue VkQueue { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype Silk.NET.Vulkan.Queue VkQueue" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkQueue" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Silk.NET.Vulkan.Queue</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the Vulkan queue.</summary>
+        <value>The Silk.NET Vulkan queue.</value>
+        <remarks />
+      </Docs>
+    </Member>
+  </Members>
+</Type>
