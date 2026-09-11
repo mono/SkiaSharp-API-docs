@@ -111,9 +111,8 @@ jobs:
           IGNORED_STATUSES: Auto-merge docs
           PR_NUMBER: ${{ steps.pr.outputs.number }}
           REQUIRED_STATUSES: OpenPublishing.Build,PoliCheck Scan,Learn warnings
-          STATUS_ONLY: true
           VALIDATED_SHA: ${{ steps.pr.outputs.head_sha }}
-        run: python3 .github/scripts/check-learn-build.py
+        run: python3 .github/scripts/check-pr-statuses.py
 
       - name: Merge PR
         id: merge

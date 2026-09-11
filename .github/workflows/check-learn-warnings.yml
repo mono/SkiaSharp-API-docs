@@ -58,9 +58,5 @@ jobs:
       - name: Compare Learn warnings
         if: steps.pr.outputs.found == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ steps.pr.outputs.number }}
-          REQUIRE_ALL_STATUSES: false
-          REQUIRED_STATUSES: OpenPublishing.Build
-          VALIDATED_SHA: ${{ steps.pr.outputs.head_sha }}
-        run: python3 .github/scripts/check-learn-build.py
+          BUILD_REPORT_URL: ${{ github.event.target_url }}
+        run: python3 .github/scripts/check-learn-warnings.py
