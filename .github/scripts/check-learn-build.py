@@ -20,6 +20,8 @@ Environment variables:
   VALIDATED_SHA  - The commit SHA from the status event (TOCTOU pin)
   REQUIRED_STATUSES - Optional comma-separated status names
   REQUIRE_ALL_STATUSES - Set to false to ignore unrelated checks
+  IGNORED_STATUSES - Optional comma-separated status names to ignore
+  STATUS_ONLY     - Set to true to skip Learn log and warning validation
   GITHUB_OUTPUT  - GitHub Actions output file
 """
 
@@ -73,13 +75,17 @@ def validate_url(url, label="URL"):
         )
 
 
-def check_statuses(checks):
+def check_statuses(checks, ignored_statuses=None):
     """Collect statuses and identify checks that are not green."""
     failures = []
     status_map = {}
+    ignored_statuses = ignored_statuses or set()
 
     for check in checks:
         name = check.get("context") or check.get("name") or "unknown"
+        if name in ignored_statuses:
+            continue
+
         state = check.get("state", "")
         status = check.get("status", "")
         conclusion = check.get("conclusion", "")
@@ -284,6 +290,12 @@ def main():
     require_all_statuses = (
         os.environ.get("REQUIRE_ALL_STATUSES", "true").lower() != "false"
     )
+    ignored_statuses = {
+        status.strip()
+        for status in os.environ.get("IGNORED_STATUSES", "").split(",")
+        if status.strip()
+    }
+    status_only = os.environ.get("STATUS_ONLY", "").lower() == "true"
 
     # Get PR info
     print(f"Checking PR #{pr_number}...")
@@ -311,7 +323,7 @@ def main():
         set_output("reason", "No status checks found")
         sys.exit(0)
 
-    all_green, failures, status_map = check_statuses(checks)
+    all_green, failures, status_map = check_statuses(checks, ignored_statuses)
     print(f"  Status checks ({len(checks)}):")
     for name, info in sorted(status_map.items()):
         print(f"    {name}: {info['state']}")
@@ -346,6 +358,12 @@ def main():
         sys.exit(1)
 
     print("  All required status checks are green")
+
+    if status_only:
+        print("  ✅ All PR status checks passed")
+        set_output("should_merge", "true")
+        set_output("reason", "All checks passed")
+        sys.exit(0)
 
     # Get the OpenPublishing.Build report URL from the status targetUrl
     build_status = status_map.get("OpenPublishing.Build")
