@@ -87,17 +87,32 @@ jobs:
           echo "Timed out waiting for required Learn checks"
           exit 1
 
-      # Pin the trusted baseline and checker to main's resolved commit, not the PR.
-      - name: Checkout baseline from main
+      # The executable checker is trusted code pinned to main.
+      - name: Checkout checker from main
         if: steps.pr.outputs.found == 'true'
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.pr.outputs.baseline_sha }}
 
-      - name: Compare Learn warnings
+      # The PR owns the warning inventory, but the trusted checker requires it
+      # to match the Learn Build output exactly.
+      - name: Download PR warning baseline
         if: steps.pr.outputs.found == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          gh api "repos/$REPOSITORY/contents/.github/known-warnings.csv?ref=$HEAD_SHA" \
+            -H "Accept: application/vnd.github.raw+json" \
+            > "$RUNNER_TEMP/known-warnings.csv"
+
+      - name: Compare Learn warnings
+        if: steps.pr.outputs.found == 'true'
+        env:
+          BASELINE_PATH: ${{ runner.temp }}/known-warnings.csv
+          GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.pr.outputs.number }}
+          REQUIRE_EXACT_BASELINE: true
           VALIDATED_SHA: ${{ steps.pr.outputs.head_sha }}
         run: python3 .github/scripts/check-learn-build.py

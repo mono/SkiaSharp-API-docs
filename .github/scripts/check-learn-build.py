@@ -18,6 +18,8 @@ Environment variables:
   GH_TOKEN       - GitHub token for API access
   PR_NUMBER      - Pull request number
   VALIDATED_SHA  - The commit SHA from the status event (TOCTOU pin)
+  BASELINE_PATH  - Optional path to the warning baseline CSV
+  REQUIRE_EXACT_BASELINE - Fail when baseline warnings are also removed
   GITHUB_OUTPUT  - GitHub Actions output file
 """
 
@@ -253,9 +255,12 @@ def main():
 
     validated_sha = os.environ.get("VALIDATED_SHA", "")
 
-    baseline_path = os.path.join(
+    baseline_path = os.environ.get("BASELINE_PATH") or os.path.join(
         os.environ.get("GITHUB_WORKSPACE", "."),
         ".github", "known-warnings.csv",
+    )
+    require_exact_baseline = (
+        os.environ.get("REQUIRE_EXACT_BASELINE", "").lower() == "true"
     )
 
     # Get PR info
@@ -352,7 +357,12 @@ def main():
     )
 
     if removed_warnings:
-        print(f"  {len(removed_warnings)} warning(s) were resolved (good!):")
+        description = (
+            "must be removed from the baseline"
+            if require_exact_baseline
+            else "were resolved (good!)"
+        )
+        print(f"  {len(removed_warnings)} warning(s) {description}:")
         for w in removed_warnings[:5]:
             print(f"    - {w}")
         if len(removed_warnings) > 5:
@@ -367,6 +377,13 @@ def main():
         set_output("should_merge", "false")
         set_output("reason", summary)
         set_output("new_warnings", json.dumps(new_warnings))
+        sys.exit(1)
+
+    if require_exact_baseline and removed_warnings:
+        summary = f"{len(removed_warnings)} stale warning(s) in baseline"
+        set_output("should_merge", "false")
+        set_output("reason", summary)
+        set_output("removed_warnings", json.dumps(removed_warnings))
         sys.exit(1)
 
     print("  ✅ Learn Build warning validation passed")
