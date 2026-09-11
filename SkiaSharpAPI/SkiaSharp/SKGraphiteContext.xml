@@ -1,0 +1,602 @@
+<Type Name="SKGraphiteContext" FullName="SkiaSharp.SKGraphiteContext">
+  <TypeSignature Language="C#" Value="public class SKGraphiteContext : SkiaSharp.SKObject" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKGraphiteContext extends SkiaSharp.SKObject" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKGraphiteContext" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp</AssemblyName>
+    <AssemblyVersion>4.154.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>SkiaSharp.SKObject</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>Represents a Graphite GPU context that owns backend resources and executes recordings against a Dawn, Metal, or Vulkan backend.</summary>
+    <remarks>
+      <format type="text/markdown"><![CDATA[
+## Remarks
+
+Create a context from a backend-specific backend context, for example <xref:SkiaSharp.SKGraphiteContext.CreateVulkan(SkiaSharp.SKGraphiteVkBackendContext)>, <xref:SkiaSharp.SKGraphiteContext.CreateMetal(SkiaSharp.SKGraphiteMtlBackendContext)>, or <xref:SkiaSharp.SKGraphiteContext.CreateDawn(SkiaSharp.SKGraphiteDawnBackendContext)>. Create one or more recorders with <xref:SkiaSharp.SKGraphiteContext.CreateRecorder(System.Int64)>, draw into Graphite-backed surfaces, snap the work into recordings, insert them into the context, and submit.
+
+This type wraps a native Skia resource and implements `IDisposable`. Dispose it after all its recorders and surfaces have been disposed.
+
+## Examples
+
+```csharp
+using var context = SKGraphiteContext.CreateMetal(backendContext);
+using var recorder = context.CreateRecorder();
+
+var info = new SKImageInfo(256, 256);
+using var surface = SKSurface.Create(recorder, info);
+surface.Canvas.Clear(SKColors.CornflowerBlue);
+
+using var recording = recorder.Snap();
+context.InsertRecording(recording);
+context.Submit();
+```
+]]></format>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Backend">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKGraphiteBackend Backend { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKGraphiteBackend Backend" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteContext.Backend" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteBackend</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the graphics backend that this context uses.</summary>
+        <value>One of the enumeration values that indicates the backend.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CheckAsyncWorkCompletion">
+      <MemberSignature Language="C#" Value="public void CheckAsyncWorkCompletion ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CheckAsyncWorkCompletion() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CheckAsyncWorkCompletion" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Checks for and processes any completed asynchronous GPU work, invoking pending callbacks.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateDawn">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteContext CreateDawn (SkiaSharp.SKGraphiteDawnBackendContext backendContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteContext CreateDawn(class SkiaSharp.SKGraphiteDawnBackendContext backendContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CreateDawn(SkiaSharp.SKGraphiteDawnBackendContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteContext</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendContext" Type="SkiaSharp.SKGraphiteDawnBackendContext" />
+      </Parameters>
+      <Docs>
+        <param name="backendContext">The Dawn backend context that supplies the instance, device, and queue.</param>
+        <summary>Creates a Dawn (WebGPU) backed Graphite context using the default options.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteContext" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateDawn">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteContext CreateDawn (SkiaSharp.SKGraphiteDawnBackendContext backendContext, SkiaSharp.SKGraphiteContextOptions options);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteContext CreateDawn(class SkiaSharp.SKGraphiteDawnBackendContext backendContext, valuetype SkiaSharp.SKGraphiteContextOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CreateDawn(SkiaSharp.SKGraphiteDawnBackendContext,SkiaSharp.SKGraphiteContextOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteContext</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendContext" Type="SkiaSharp.SKGraphiteDawnBackendContext" />
+        <Parameter Name="options" Type="SkiaSharp.SKGraphiteContextOptions" />
+      </Parameters>
+      <Docs>
+        <param name="backendContext">The Dawn backend context that supplies the instance, device, and queue.</param>
+        <param name="options">The options that configure the context.</param>
+        <summary>Creates a Dawn (WebGPU) backed Graphite context using the specified options.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteContext" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateMetal">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteContext CreateMetal (SkiaSharp.SKGraphiteMtlBackendContext backendContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteContext CreateMetal(class SkiaSharp.SKGraphiteMtlBackendContext backendContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CreateMetal(SkiaSharp.SKGraphiteMtlBackendContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteContext</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendContext" Type="SkiaSharp.SKGraphiteMtlBackendContext" />
+      </Parameters>
+      <Docs>
+        <param name="backendContext">The Metal backend context that supplies the device and queue.</param>
+        <summary>Creates a Metal-backed Graphite context using the default options.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteContext" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateMetal">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteContext CreateMetal (SkiaSharp.SKGraphiteMtlBackendContext backendContext, SkiaSharp.SKGraphiteContextOptions options);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteContext CreateMetal(class SkiaSharp.SKGraphiteMtlBackendContext backendContext, valuetype SkiaSharp.SKGraphiteContextOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CreateMetal(SkiaSharp.SKGraphiteMtlBackendContext,SkiaSharp.SKGraphiteContextOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteContext</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendContext" Type="SkiaSharp.SKGraphiteMtlBackendContext" />
+        <Parameter Name="options" Type="SkiaSharp.SKGraphiteContextOptions" />
+      </Parameters>
+      <Docs>
+        <param name="backendContext">The Metal backend context that supplies the device and queue.</param>
+        <param name="options">The options that configure the context.</param>
+        <summary>Creates a Metal-backed Graphite context using the specified options.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteContext" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateRecorder">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKGraphiteRecorder CreateRecorder (long recorderBudgetBytes = -1);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKGraphiteRecorder CreateRecorder(int64 recorderBudgetBytes) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CreateRecorder(System.Int64)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteRecorder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorderBudgetBytes" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="recorderBudgetBytes">The GPU memory budget for the recorder, in bytes, or -1 to use the Skia default.</param>
+        <summary>Creates a new recorder owned by this context.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteRecorder" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateRecorder">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKGraphiteRecorder CreateRecorder (long recorderBudgetBytes, SkiaSharp.SKGraphiteFindOrCreateImageDelegate findOrCreate, Action findOrCreateDispose = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKGraphiteRecorder CreateRecorder(int64 recorderBudgetBytes, class SkiaSharp.SKGraphiteFindOrCreateImageDelegate findOrCreate, class System.Action findOrCreateDispose) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CreateRecorder(System.Int64,SkiaSharp.SKGraphiteFindOrCreateImageDelegate,System.Action)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteRecorder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorderBudgetBytes" Type="System.Int64" />
+        <Parameter Name="findOrCreate" Type="SkiaSharp.SKGraphiteFindOrCreateImageDelegate" />
+        <Parameter Name="findOrCreateDispose" Type="System.Action" />
+      </Parameters>
+      <Docs>
+        <param name="recorderBudgetBytes">The GPU memory budget for the recorder, in bytes, or -1 to use the Skia default.</param>
+        <param name="findOrCreate">The callback that finds or uploads a Graphite-backed image for a source image, or <see langword="null" /> for none.</param>
+        <param name="findOrCreateDispose">An optional cleanup action invoked before the recorder is destroyed, or <see langword="null" /> for none.</param>
+        <summary>Creates a new recorder owned by this context, using the specified callback to provide Graphite-backed images.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteRecorder" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateVulkan">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteContext CreateVulkan (SkiaSharp.SKGraphiteVkBackendContext backendContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteContext CreateVulkan(class SkiaSharp.SKGraphiteVkBackendContext backendContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CreateVulkan(SkiaSharp.SKGraphiteVkBackendContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteContext</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendContext" Type="SkiaSharp.SKGraphiteVkBackendContext" />
+      </Parameters>
+      <Docs>
+        <param name="backendContext">The Vulkan backend context that supplies the device and function loader.</param>
+        <summary>Creates a Vulkan-backed Graphite context using the default options.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteContext" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CreateVulkan">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKGraphiteContext CreateVulkan (SkiaSharp.SKGraphiteVkBackendContext backendContext, SkiaSharp.SKGraphiteContextOptions options);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKGraphiteContext CreateVulkan(class SkiaSharp.SKGraphiteVkBackendContext backendContext, valuetype SkiaSharp.SKGraphiteContextOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.CreateVulkan(SkiaSharp.SKGraphiteVkBackendContext,SkiaSharp.SKGraphiteContextOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteContext</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendContext" Type="SkiaSharp.SKGraphiteVkBackendContext" />
+        <Parameter Name="options" Type="SkiaSharp.SKGraphiteContextOptions" />
+      </Parameters>
+      <Docs>
+        <param name="backendContext">The Vulkan backend context that supplies the device and function loader.</param>
+        <param name="options">The options that configure the context.</param>
+        <summary>Creates a Vulkan-backed Graphite context using the specified options.</summary>
+        <returns>A new <see cref="T:SkiaSharp.SKGraphiteContext" />, or <see langword="null" /> if it could not be created.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="CurrentBudgetedBytes">
+      <MemberSignature Language="C#" Value="public long CurrentBudgetedBytes { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 CurrentBudgetedBytes" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteContext.CurrentBudgetedBytes" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the number of bytes of GPU memory currently used by budgeted resources.</summary>
+        <value>The current budgeted GPU memory usage, in bytes.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteBackendTexture">
+      <MemberSignature Language="C#" Value="public void DeleteBackendTexture (SkiaSharp.SKGraphiteBackendTexture backendTexture);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DeleteBackendTexture(class SkiaSharp.SKGraphiteBackendTexture backendTexture) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.DeleteBackendTexture(SkiaSharp.SKGraphiteBackendTexture)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backendTexture" Type="SkiaSharp.SKGraphiteBackendTexture" />
+      </Parameters>
+      <Docs>
+        <param name="backendTexture">The backend texture to delete.</param>
+        <summary>Deletes a backend texture that was created by this context.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeNative">
+      <MemberSignature Language="C#" Value="protected override void DisposeNative ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeNative() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.DisposeNative" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Releases the native resources used by the context.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="FreeGpuResources">
+      <MemberSignature Language="C#" Value="public void FreeGpuResources ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void FreeGpuResources() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.FreeGpuResources" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Frees GPU resources held by the context's resource cache.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="InsertRecording">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKGraphiteInsertStatus InsertRecording (SkiaSharp.SKGraphiteInsertRecordingInfo info);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKGraphiteInsertStatus InsertRecording(valuetype SkiaSharp.SKGraphiteInsertRecordingInfo info) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.InsertRecording(SkiaSharp.SKGraphiteInsertRecordingInfo)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteInsertStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="info" Type="SkiaSharp.SKGraphiteInsertRecordingInfo" />
+      </Parameters>
+      <Docs>
+        <param name="info">The parameters that describe the recording to insert and where to place it.</param>
+        <summary>Inserts a recording into the context using the specified insertion parameters.</summary>
+        <returns>One of the enumeration values that indicates the result of the insertion.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="InsertRecording">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKGraphiteInsertStatus InsertRecording (SkiaSharp.SKGraphiteRecording recording);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype SkiaSharp.SKGraphiteInsertStatus InsertRecording(class SkiaSharp.SKGraphiteRecording recording) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.InsertRecording(SkiaSharp.SKGraphiteRecording)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKGraphiteInsertStatus</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recording" Type="SkiaSharp.SKGraphiteRecording" />
+      </Parameters>
+      <Docs>
+        <param name="recording">The recording to insert.</param>
+        <summary>Inserts a recording into the context so its commands are executed on the next submit.</summary>
+        <returns>One of the enumeration values that indicates the result of the insertion.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="IsBackendAvailable">
+      <MemberSignature Language="C#" Value="public static bool IsBackendAvailable (SkiaSharp.SKGraphiteBackend backend);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsBackendAvailable(valuetype SkiaSharp.SKGraphiteBackend backend) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.IsBackendAvailable(SkiaSharp.SKGraphiteBackend)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="backend" Type="SkiaSharp.SKGraphiteBackend" />
+      </Parameters>
+      <Docs>
+        <param name="backend">One of the enumeration values that specifies the backend to check.</param>
+        <summary>Determines whether the specified Graphite backend is available in this build of SkiaSharp.</summary>
+        <returns>
+          <see langword="true" /> if the backend is available; otherwise, <see langword="false" />.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="IsDeviceLost">
+      <MemberSignature Language="C#" Value="public bool IsDeviceLost { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsDeviceLost" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteContext.IsDeviceLost" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether the underlying GPU device has been lost.</summary>
+        <value>
+          <see langword="true" /> if the device has been lost; otherwise, <see langword="false" />.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MaxBudgetedBytes">
+      <MemberSignature Language="C#" Value="public long MaxBudgetedBytes { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 MaxBudgetedBytes" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteContext.MaxBudgetedBytes" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the maximum number of bytes of GPU memory the resource cache may use.</summary>
+        <value>The maximum budgeted GPU memory, in bytes.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="MaxTextureSize">
+      <MemberSignature Language="C#" Value="public int MaxTextureSize { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxTextureSize" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteContext.MaxTextureSize" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the maximum texture dimension supported by the context's backend, in pixels.</summary>
+        <value>The maximum texture size, in pixels.</value>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="PerformDeferredCleanup">
+      <MemberSignature Language="C#" Value="public void PerformDeferredCleanup (TimeSpan duration);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void PerformDeferredCleanup(valuetype System.TimeSpan duration) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.PerformDeferredCleanup(System.TimeSpan)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="duration" Type="System.TimeSpan" />
+      </Parameters>
+      <Docs>
+        <param name="duration">The minimum time a resource must have been unused before it is purged.</param>
+        <summary>Purges GPU resources that have not been used for at least the specified duration.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="RequestReadPixels">
+      <MemberSignature Language="C#" Value="public void RequestReadPixels (SkiaSharp.SKSurface surface, SkiaSharp.SKImageInfo dstInfo, SkiaSharp.SKRectI srcRect, Action&lt;SkiaSharp.SKImageReadPixelsResult&gt; callback);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RequestReadPixels(class SkiaSharp.SKSurface surface, valuetype SkiaSharp.SKImageInfo dstInfo, valuetype SkiaSharp.SKRectI srcRect, class System.Action`1&lt;class SkiaSharp.SKImageReadPixelsResult&gt; callback) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.RequestReadPixels(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKRectI,System.Action{SkiaSharp.SKImageReadPixelsResult})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="surface" Type="SkiaSharp.SKSurface" />
+        <Parameter Name="dstInfo" Type="SkiaSharp.SKImageInfo" />
+        <Parameter Name="srcRect" Type="SkiaSharp.SKRectI" />
+        <Parameter Name="callback" Type="System.Action&lt;SkiaSharp.SKImageReadPixelsResult&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="surface">The surface to read pixels from.</param>
+        <param name="dstInfo">The image info describing the desired size and format of the result.</param>
+        <param name="srcRect">The rectangle of the surface to read, in pixels.</param>
+        <param name="callback">The callback invoked with the read result, which is valid only for the duration of the call.</param>
+        <summary>Asynchronously reads pixels from the specified surface into a result delivered to a callback, using nearest sampling.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="RequestReadPixels">
+      <MemberSignature Language="C#" Value="public void RequestReadPixels (SkiaSharp.SKSurface surface, SkiaSharp.SKImageInfo dstInfo, SkiaSharp.SKRectI srcRect, SkiaSharp.SKImageRescaleGamma rescaleGamma, SkiaSharp.SKImageRescaleMode rescaleMode, Action&lt;SkiaSharp.SKImageReadPixelsResult&gt; callback);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RequestReadPixels(class SkiaSharp.SKSurface surface, valuetype SkiaSharp.SKImageInfo dstInfo, valuetype SkiaSharp.SKRectI srcRect, valuetype SkiaSharp.SKImageRescaleGamma rescaleGamma, valuetype SkiaSharp.SKImageRescaleMode rescaleMode, class System.Action`1&lt;class SkiaSharp.SKImageReadPixelsResult&gt; callback) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.RequestReadPixels(SkiaSharp.SKSurface,SkiaSharp.SKImageInfo,SkiaSharp.SKRectI,SkiaSharp.SKImageRescaleGamma,SkiaSharp.SKImageRescaleMode,System.Action{SkiaSharp.SKImageReadPixelsResult})" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="surface" Type="SkiaSharp.SKSurface" />
+        <Parameter Name="dstInfo" Type="SkiaSharp.SKImageInfo" />
+        <Parameter Name="srcRect" Type="SkiaSharp.SKRectI" />
+        <Parameter Name="rescaleGamma" Type="SkiaSharp.SKImageRescaleGamma" />
+        <Parameter Name="rescaleMode" Type="SkiaSharp.SKImageRescaleMode" />
+        <Parameter Name="callback" Type="System.Action&lt;SkiaSharp.SKImageReadPixelsResult&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="surface">The surface to read pixels from.</param>
+        <param name="dstInfo">The image info describing the desired size and format of the result.</param>
+        <param name="srcRect">The rectangle of the surface to read, in pixels.</param>
+        <param name="rescaleGamma">One of the enumeration values that specifies the gamma space used for rescaling.</param>
+        <param name="rescaleMode">One of the enumeration values that specifies the sampling algorithm used for rescaling.</param>
+        <param name="callback">The callback invoked with the read result, which is valid only for the duration of the call.</param>
+        <summary>Asynchronously reads and rescales pixels from the specified surface into a result delivered to a callback.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Submit">
+      <MemberSignature Language="C#" Value="public bool Submit ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Submit() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.Submit" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Submits all inserted recordings to the GPU without waiting for completion.</summary>
+        <returns>
+          <see langword="true" /> if the work was submitted successfully; otherwise, <see langword="false" />.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Submit">
+      <MemberSignature Language="C#" Value="public bool Submit (SkiaSharp.SKGraphiteSubmitInfo submitInfo);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Submit(valuetype SkiaSharp.SKGraphiteSubmitInfo submitInfo) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteContext.Submit(SkiaSharp.SKGraphiteSubmitInfo)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="submitInfo" Type="SkiaSharp.SKGraphiteSubmitInfo" />
+      </Parameters>
+      <Docs>
+        <param name="submitInfo">The options that control how the work is submitted.</param>
+        <summary>Submits all inserted recordings to the GPU using the specified submission options.</summary>
+        <returns>
+          <see langword="true" /> if the work was submitted successfully; otherwise, <see langword="false" />.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="SupportsProtectedContent">
+      <MemberSignature Language="C#" Value="public bool SupportsProtectedContent { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsProtectedContent" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKGraphiteContext.SupportsProtectedContent" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets a value indicating whether the context supports protected content.</summary>
+        <value>
+          <see langword="true" /> if protected content is supported; otherwise, <see langword="false" />.</value>
+        <remarks />
+      </Docs>
+    </Member>
+  </Members>
+</Type>

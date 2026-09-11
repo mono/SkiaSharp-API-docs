@@ -1,0 +1,94 @@
+<Type Name="SKGraphiteImageCache" FullName="SkiaSharp.SKGraphiteImageCache">
+  <TypeSignature Language="C#" Value="public sealed class SKGraphiteImageCache : IDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SKGraphiteImageCache extends System.Object implements class System.IDisposable" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKGraphiteImageCache" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp</AssemblyName>
+    <AssemblyVersion>4.154.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>Provides a bounded, least-recently-used cache of Graphite-backed textures keyed by source image, for reuse across recordings.</summary>
+    <remarks>
+      <format type="text/markdown"><![CDATA[
+## Remarks
+
+Use this cache as the callback body for <xref:SkiaSharp.SKGraphiteContext.CreateRecorder(System.Int64,SkiaSharp.SKGraphiteFindOrCreateImageDelegate,System.Action)> so that repeatedly drawn images are uploaded to the GPU only once. The cache holds a reference to each cached texture until the entry is evicted or the cache is disposed.
+
+This type implements `IDisposable`. Dispose it while its owning recorder is still alive so the cached textures can be released safely.
+]]></format>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public SKGraphiteImageCache ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteImageCache.#ctor" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.SKGraphiteImageCache" /> class.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteImageCache.Dispose" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Releases all cached textures held by the cache.</summary>
+        <remarks />
+      </Docs>
+    </Member>
+    <Member MemberName="FindOrCreate">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKImage FindOrCreate (SkiaSharp.SKGraphiteRecorder recorder, SkiaSharp.SKImage image, bool mipmapped);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKImage FindOrCreate(class SkiaSharp.SKGraphiteRecorder recorder, class SkiaSharp.SKImage image, bool mipmapped) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKGraphiteImageCache.FindOrCreate(SkiaSharp.SKGraphiteRecorder,SkiaSharp.SKImage,System.Boolean)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="recorder" Type="SkiaSharp.SKGraphiteRecorder" />
+        <Parameter Name="image" Type="SkiaSharp.SKImage" />
+        <Parameter Name="mipmapped" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="recorder">The recorder to upload the image to on a cache miss.</param>
+        <param name="image">The source image to find or upload.</param>
+        <param name="mipmapped">
+          <see langword="true" /> to create the texture with mipmaps; otherwise, <see langword="false" />.</param>
+        <summary>Returns the cached Graphite-backed texture for the specified image, uploading and caching it on the recorder if it is not already present.</summary>
+        <returns>A Graphite-backed image, or <see langword="null" /> if the image could not be uploaded.</returns>
+        <remarks />
+      </Docs>
+    </Member>
+  </Members>
+</Type>
