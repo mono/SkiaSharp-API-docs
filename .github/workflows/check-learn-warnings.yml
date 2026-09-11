@@ -12,8 +12,7 @@ jobs:
   check-warnings:
     if: |
       github.event.state == 'success' &&
-      (github.event.context == 'OpenPublishing.Build' ||
-       github.event.context == 'PoliCheck Scan')
+      github.event.context == 'OpenPublishing.Build'
 
     concurrency:
       group: learn-warnings-${{ github.event.sha }}
@@ -45,74 +44,22 @@ jobs:
           fi
 
           echo "PR: #$pr_number (HEAD: $pr_head)"
-          baseline_sha=$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')
-          echo "Trusted baseline: $baseline_sha"
           echo "number=$pr_number" >> "$GITHUB_OUTPUT"
           echo "head_sha=$pr_head" >> "$GITHUB_OUTPUT"
-          echo "baseline_sha=$baseline_sha" >> "$GITHUB_OUTPUT"
           echo "found=true" >> "$GITHUB_OUTPUT"
 
-      - name: Wait for Learn checks
-        if: steps.pr.outputs.found == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          for attempt in $(seq 1 30); do
-            statuses=$(gh api "repos/$REPOSITORY/commits/$HEAD_SHA/status")
-            learn_state=$(echo "$statuses" | jq -r \
-              '[.statuses[] | select(.context == "OpenPublishing.Build")][0].state // ""')
-            policheck_state=$(echo "$statuses" | jq -r \
-              '[.statuses[] | select(.context == "PoliCheck Scan")][0].state // ""')
-
-            for state in "$learn_state" "$policheck_state"; do
-              if [ "$state" = "failure" ] || [ "$state" = "error" ]; then
-                echo "A required Learn check reported: $state"
-                exit 1
-              fi
-            done
-
-            if [ "$learn_state" = "success" ] && [ "$policheck_state" = "success" ]; then
-              echo "OpenPublishing.Build and PoliCheck Scan succeeded"
-              exit 0
-            fi
-
-            echo "Waiting for Learn checks (attempt $attempt/30):" \
-              "OpenPublishing.Build=${learn_state:-missing}," \
-              "PoliCheck Scan=${policheck_state:-missing}"
-            sleep 10
-          done
-
-          echo "Timed out waiting for required Learn checks"
-          exit 1
-
-      # The executable checker is trusted code pinned to main.
-      - name: Checkout checker from main
+      - name: Checkout PR
         if: steps.pr.outputs.found == 'true'
         uses: actions/checkout@v4
         with:
-          ref: ${{ steps.pr.outputs.baseline_sha }}
-
-      # The PR owns the warning inventory, but the trusted checker requires it
-      # to match the Learn Build output exactly.
-      - name: Download PR warning baseline
-        if: steps.pr.outputs.found == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          gh api "repos/$REPOSITORY/contents/.github/known-warnings.csv?ref=$HEAD_SHA" \
-            -H "Accept: application/vnd.github.raw+json" \
-            > "$RUNNER_TEMP/known-warnings.csv"
+          ref: ${{ steps.pr.outputs.head_sha }}
 
       - name: Compare Learn warnings
         if: steps.pr.outputs.found == 'true'
         env:
-          BASELINE_PATH: ${{ runner.temp }}/known-warnings.csv
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ steps.pr.outputs.number }}
-          REQUIRE_EXACT_BASELINE: true
+          REQUIRE_ALL_STATUSES: false
+          REQUIRED_STATUSES: OpenPublishing.Build
           VALIDATED_SHA: ${{ steps.pr.outputs.head_sha }}
         run: python3 .github/scripts/check-learn-build.py

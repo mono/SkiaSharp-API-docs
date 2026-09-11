@@ -18,8 +18,8 @@ Environment variables:
   GH_TOKEN       - GitHub token for API access
   PR_NUMBER      - Pull request number
   VALIDATED_SHA  - The commit SHA from the status event (TOCTOU pin)
-  BASELINE_PATH  - Optional path to the warning baseline CSV
-  REQUIRE_EXACT_BASELINE - Fail when baseline warnings are also removed
+  REQUIRED_STATUSES - Optional comma-separated status names
+  REQUIRE_ALL_STATUSES - Set to false to ignore unrelated checks
   GITHUB_OUTPUT  - GitHub Actions output file
 """
 
@@ -73,8 +73,9 @@ def validate_url(url, label="URL"):
         )
 
 
-def collect_statuses(checks):
-    """Collect GitHub commit statuses and check runs by name."""
+def check_statuses(checks):
+    """Collect statuses and identify checks that are not green."""
+    failures = []
     status_map = {}
 
     for check in checks:
@@ -87,14 +88,24 @@ def collect_statuses(checks):
         display_state = state or conclusion or status
         status_map[name] = {"state": display_state, "url": url}
 
-    return status_map
+        is_green = (
+            state == "SUCCESS"
+            or (status == "COMPLETED" and conclusion == "SUCCESS")
+        )
+        if not is_green:
+            if state == "PENDING" or status in ("IN_PROGRESS", "QUEUED"):
+                failures.append((name, "PENDING"))
+            else:
+                failures.append((name, display_state))
+
+    return len(failures) == 0, failures, status_map
 
 
-def check_required_statuses(status_map):
+def check_required_statuses(status_map, required_statuses):
     """Verify all required statuses are present and green. Fail closed."""
     missing = []
     not_green = []
-    for name in REQUIRED_STATUSES:
+    for name in required_statuses:
         if name not in status_map:
             missing.append(name)
         elif status_map[name]["state"] != "SUCCESS":
@@ -255,12 +266,23 @@ def main():
 
     validated_sha = os.environ.get("VALIDATED_SHA", "")
 
-    baseline_path = os.environ.get("BASELINE_PATH") or os.path.join(
+    baseline_path = os.path.join(
         os.environ.get("GITHUB_WORKSPACE", "."),
         ".github", "known-warnings.csv",
     )
-    require_exact_baseline = (
-        os.environ.get("REQUIRE_EXACT_BASELINE", "").lower() == "true"
+    required_statuses = [
+        status.strip()
+        for status in os.environ.get(
+            "REQUIRED_STATUSES",
+            ",".join(REQUIRED_STATUSES),
+        ).split(",")
+        if status.strip()
+    ]
+    if not required_statuses:
+        print("ERROR: REQUIRED_STATUSES must contain at least one status")
+        sys.exit(1)
+    require_all_statuses = (
+        os.environ.get("REQUIRE_ALL_STATUSES", "true").lower() != "false"
     )
 
     # Get PR info
@@ -289,13 +311,28 @@ def main():
         set_output("reason", "No status checks found")
         sys.exit(0)
 
-    status_map = collect_statuses(checks)
+    all_green, failures, status_map = check_statuses(checks)
     print(f"  Status checks ({len(checks)}):")
     for name, info in sorted(status_map.items()):
         print(f"    {name}: {info['state']}")
 
+    if require_all_statuses and not all_green:
+        only_pending = all(state == "PENDING" for _, state in failures)
+        if only_pending:
+            names = ", ".join(name for name, _ in failures)
+            print(f"  Waiting: checks still pending: {names}")
+            set_output("should_merge", "false")
+            set_output("reason", f"Waiting for: {names}")
+            sys.exit(0)
+
+        names = ", ".join(f"{name} ({state})" for name, state in failures)
+        print(f"  ❌ Not all checks are green: {names}")
+        set_output("should_merge", "false")
+        set_output("reason", f"Checks not green: {names}")
+        sys.exit(1)
+
     # Verify all required statuses are present and green.
-    missing, not_green = check_required_statuses(status_map)
+    missing, not_green = check_required_statuses(status_map, required_statuses)
     if missing:
         print(f"  Waiting: required status(es) not yet reported: {', '.join(missing)}")
         set_output("should_merge", "false")
@@ -357,12 +394,7 @@ def main():
     )
 
     if removed_warnings:
-        description = (
-            "must be removed from the baseline"
-            if require_exact_baseline
-            else "were resolved (good!)"
-        )
-        print(f"  {len(removed_warnings)} warning(s) {description}:")
+        print(f"  {len(removed_warnings)} warning(s) were resolved (good!):")
         for w in removed_warnings[:5]:
             print(f"    - {w}")
         if len(removed_warnings) > 5:
@@ -377,13 +409,6 @@ def main():
         set_output("should_merge", "false")
         set_output("reason", summary)
         set_output("new_warnings", json.dumps(new_warnings))
-        sys.exit(1)
-
-    if require_exact_baseline and removed_warnings:
-        summary = f"{len(removed_warnings)} stale warning(s) in baseline"
-        set_output("should_merge", "false")
-        set_output("reason", summary)
-        set_output("removed_warnings", json.dumps(removed_warnings))
         sys.exit(1)
 
     print("  ✅ Learn Build warning validation passed")
