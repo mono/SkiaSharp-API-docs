@@ -1,0 +1,28 @@
+<Type Name="GRSilkNetGetProcedureAddressDelegate" FullName="SkiaSharp.GRSilkNetGetProcedureAddressDelegate">
+  <TypeSignature Language="C#" Value="public delegate IntPtr GRSilkNetGetProcedureAddressDelegate(string name, Instance instance, Device device);" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed GRSilkNetGetProcedureAddressDelegate extends System.MulticastDelegate" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.GRSilkNetGetProcedureAddressDelegate" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
+    <AssemblyVersion>4.154.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Delegate</BaseTypeName>
+  </Base>
+  <Parameters>
+    <Parameter Name="name" Type="System.String" />
+    <Parameter Name="instance" Type="Silk.NET.Vulkan.Instance" />
+    <Parameter Name="device" Type="Silk.NET.Vulkan.Device" />
+  </Parameters>
+  <ReturnValue>
+    <ReturnType>System.IntPtr</ReturnType>
+  </ReturnValue>
+  <Docs>
+    <param name="name">The name of the Vulkan procedure to resolve.</param>
+    <param name="instance">The Vulkan instance associated with the procedure, or the default value when it is not instance-specific.</param>
+    <param name="device">The Vulkan device associated with the procedure, or the default value when it is not device-specific.</param>
+    <summary>Resolves a Vulkan procedure address for a Silk.NET Vulkan instance or device.</summary>
+    <returns>The address of the requested procedure, or <see cref="F:System.IntPtr.Zero" /> when it is unavailable.</returns>
+    <remarks>Assign this delegate to <see cref="P:SkiaSharp.GRSilkNetBackendContext.GetProcedureAddress" /> before creating a Vulkan rendering context.</remarks>
+  </Docs>
+</Type>
