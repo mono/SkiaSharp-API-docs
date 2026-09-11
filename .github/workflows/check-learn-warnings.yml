@@ -1,0 +1,103 @@
+name: Check Learn warnings
+
+on:
+  status:
+
+permissions:
+  contents: read
+  pull-requests: read
+  statuses: read
+
+jobs:
+  check-warnings:
+    if: |
+      github.event.state == 'success' &&
+      (github.event.context == 'OpenPublishing.Build' ||
+       github.event.context == 'PoliCheck Scan')
+
+    concurrency:
+      group: learn-warnings-${{ github.event.sha }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Find PR for commit
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_SHA: ${{ github.event.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          pr_json=$(gh api "repos/$REPOSITORY/commits/$EVENT_SHA/pulls" \
+            --jq '[.[] | select(.state == "open" and .base.ref == "main")][0]')
+          if [ -z "$pr_json" ] || [ "$pr_json" = "null" ]; then
+            echo "No open PR targeting main found for commit $EVENT_SHA"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          pr_number=$(echo "$pr_json" | jq -r '.number')
+          pr_head=$(echo "$pr_json" | jq -r '.head.sha')
+          if [ "$EVENT_SHA" != "$pr_head" ]; then
+            echo "Status event SHA ($EVENT_SHA) does not match PR HEAD ($pr_head)"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "PR: #$pr_number (HEAD: $pr_head)"
+          baseline_sha=$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')
+          echo "Trusted baseline: $baseline_sha"
+          echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+          echo "head_sha=$pr_head" >> "$GITHUB_OUTPUT"
+          echo "baseline_sha=$baseline_sha" >> "$GITHUB_OUTPUT"
+          echo "found=true" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for Learn checks
+        if: steps.pr.outputs.found == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          for attempt in $(seq 1 30); do
+            statuses=$(gh api "repos/$REPOSITORY/commits/$HEAD_SHA/status")
+            learn_state=$(echo "$statuses" | jq -r \
+              '[.statuses[] | select(.context == "OpenPublishing.Build")][0].state // ""')
+            policheck_state=$(echo "$statuses" | jq -r \
+              '[.statuses[] | select(.context == "PoliCheck Scan")][0].state // ""')
+
+            for state in "$learn_state" "$policheck_state"; do
+              if [ "$state" = "failure" ] || [ "$state" = "error" ]; then
+                echo "A required Learn check reported: $state"
+                exit 1
+              fi
+            done
+
+            if [ "$learn_state" = "success" ] && [ "$policheck_state" = "success" ]; then
+              echo "OpenPublishing.Build and PoliCheck Scan succeeded"
+              exit 0
+            fi
+
+            echo "Waiting for Learn checks (attempt $attempt/30):" \
+              "OpenPublishing.Build=${learn_state:-missing}," \
+              "PoliCheck Scan=${policheck_state:-missing}"
+            sleep 10
+          done
+
+          echo "Timed out waiting for required Learn checks"
+          exit 1
+
+      # Pin the trusted baseline and checker to main's resolved commit, not the PR.
+      - name: Checkout baseline from main
+        if: steps.pr.outputs.found == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.pr.outputs.baseline_sha }}
+
+      - name: Compare Learn warnings
+        if: steps.pr.outputs.found == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          VALIDATED_SHA: ${{ steps.pr.outputs.head_sha }}
+        run: python3 .github/scripts/check-learn-build.py
