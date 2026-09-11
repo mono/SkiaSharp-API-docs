@@ -1,0 +1,66 @@
+name: Check Learn warnings
+
+on:
+  status:
+
+permissions:
+  contents: read
+  pull-requests: read
+  statuses: read
+
+jobs:
+  check-warnings:
+    name: Learn warnings
+    if: |
+      github.event.state == 'success' &&
+      github.event.context == 'OpenPublishing.Build'
+
+    concurrency:
+      group: learn-warnings-${{ github.event.sha }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Find PR for commit
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_SHA: ${{ github.event.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          pr_json=$(gh api "repos/$REPOSITORY/commits/$EVENT_SHA/pulls" \
+            --jq '[.[] | select(.state == "open" and .base.ref == "main")][0]')
+          if [ -z "$pr_json" ] || [ "$pr_json" = "null" ]; then
+            echo "No open PR targeting main found for commit $EVENT_SHA"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          pr_number=$(echo "$pr_json" | jq -r '.number')
+          pr_head=$(echo "$pr_json" | jq -r '.head.sha')
+          if [ "$EVENT_SHA" != "$pr_head" ]; then
+            echo "Status event SHA ($EVENT_SHA) does not match PR HEAD ($pr_head)"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "PR: #$pr_number (HEAD: $pr_head)"
+          echo "number=$pr_number" >> "$GITHUB_OUTPUT"
+          echo "head_sha=$pr_head" >> "$GITHUB_OUTPUT"
+          echo "found=true" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout PR
+        if: steps.pr.outputs.found == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.pr.outputs.head_sha }}
+
+      - name: Compare Learn warnings
+        if: steps.pr.outputs.found == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          REQUIRE_ALL_STATUSES: false
+          REQUIRED_STATUSES: OpenPublishing.Build
+          VALIDATED_SHA: ${{ steps.pr.outputs.head_sha }}
+        run: python3 .github/scripts/check-learn-build.py
