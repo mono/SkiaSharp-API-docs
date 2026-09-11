@@ -16,12 +16,7 @@ DEFAULT_REQUIRED_STATUSES = [
 
 def gh(*args):
     """Run a gh CLI command and return stdout."""
-    result = subprocess.run(
-        ["gh", *args],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
+    result = subprocess.run(["gh", *args], capture_output=True, text=True, check=True)
     return result.stdout.strip()
 
 
@@ -35,11 +30,7 @@ def set_output(name, value):
 
 def parse_list(name, default=""):
     """Parse a comma-separated environment variable."""
-    return [
-        value.strip()
-        for value in os.environ.get(name, default).split(",")
-        if value.strip()
-    ]
+    return [value.strip() for value in os.environ.get(name, default).split(",") if value.strip()]
 
 
 def collect_statuses(checks, ignored_statuses):
@@ -56,10 +47,7 @@ def collect_statuses(checks, ignored_statuses):
         status = check.get("status", "")
         conclusion = check.get("conclusion", "")
         display_state = state or conclusion or status
-        is_green = (
-            state == "SUCCESS"
-            or (status == "COMPLETED" and conclusion == "SUCCESS")
-        )
+        is_green = state == "SUCCESS" or (status == "COMPLETED" and conclusion == "SUCCESS")
 
         status_map[name] = display_state
         if not is_green:
@@ -76,19 +64,10 @@ def main():
         sys.exit(1)
 
     validated_sha = os.environ.get("VALIDATED_SHA", "")
-    required_statuses = parse_list(
-        "REQUIRED_STATUSES",
-        ",".join(DEFAULT_REQUIRED_STATUSES),
-    )
+    required_statuses = parse_list("REQUIRED_STATUSES", ",".join(DEFAULT_REQUIRED_STATUSES))
     ignored_statuses = set(parse_list("IGNORED_STATUSES"))
 
-    raw = gh(
-        "pr",
-        "view",
-        pr_number,
-        "--json",
-        "headRefName,headRefOid,statusCheckRollup",
-    )
+    raw = gh("pr", "view", pr_number, "--json", "headRefName,headRefOid,statusCheckRollup")
     pr_data = json.loads(raw)
     head_sha = pr_data["headRefOid"]
 
@@ -96,10 +75,7 @@ def main():
     print(f"  PR HEAD: {head_sha[:12]}")
 
     if validated_sha and head_sha != validated_sha:
-        print(
-            f"  PR HEAD ({head_sha[:12]}) does not match "
-            f"event SHA ({validated_sha[:12]})"
-        )
+        print(f"  PR HEAD ({head_sha[:12]}) does not match event SHA ({validated_sha[:12]})")
         set_output("should_merge", "false")
         set_output("reason", "PR HEAD changed since event")
         sys.exit(1)

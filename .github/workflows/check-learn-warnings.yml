@@ -5,7 +5,7 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
+  pull-requests: write
   statuses: read
 
 jobs:
@@ -53,10 +53,48 @@ jobs:
         if: steps.pr.outputs.found == 'true'
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           ref: ${{ steps.pr.outputs.head_sha }}
 
       - name: Compare Learn warnings
         if: steps.pr.outputs.found == 'true'
+        id: check
+        continue-on-error: true
         env:
           BUILD_REPORT_URL: ${{ github.event.target_url }}
+          REPORT_PATH: ${{ runner.temp }}/learn-warning-report.md
         run: python3 .github/scripts/check-learn-warnings.py
+
+      - name: Post Learn warning report
+        if: |
+          always() &&
+          steps.pr.outputs.found == 'true' &&
+          steps.check.outcome != 'skipped'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          REPORT_PATH: ${{ runner.temp }}/learn-warning-report.md
+          REPOSITORY: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ ! -s "$REPORT_PATH" ]; then
+            printf '## Learn Build warning report\n\nThe warning checker failed before producing a report.\n' \
+              > "$REPORT_PATH"
+          fi
+
+          printf '\n[Workflow run](%s)\n\n<!-- learn-warning-check -->\n' "$RUN_URL" \
+            >> "$REPORT_PATH"
+
+          comment_id=$(gh api "repos/$REPOSITORY/issues/$PR_NUMBER/comments?per_page=100" \
+            --jq 'map(select(.body | contains("<!-- learn-warning-check -->"))) | last | .id // empty')
+
+          if [ -n "$comment_id" ]; then
+            gh api --method PATCH "repos/$REPOSITORY/issues/comments/$comment_id" \
+              --raw-field body="$(cat "$REPORT_PATH")" > /dev/null
+          else
+            gh pr comment "$PR_NUMBER" --repo "$REPOSITORY" --body-file "$REPORT_PATH"
+          fi
+
+      - name: Fail for Learn Build findings
+        if: steps.check.outcome == 'failure'
+        run: exit 1

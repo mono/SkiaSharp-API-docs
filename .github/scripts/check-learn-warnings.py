@@ -23,9 +23,7 @@ def validate_url(url, label):
     if parsed.scheme != "https":
         raise ValueError(f"{label} must be HTTPS, got: {parsed.scheme}")
     if parsed.hostname not in ALLOWED_HOSTS:
-        raise ValueError(
-            f"{label} host '{parsed.hostname}' not in allowed list: {ALLOWED_HOSTS}"
-        )
+        raise ValueError(f"{label} host '{parsed.hostname}' not in allowed list: {ALLOWED_HOSTS}")
 
 
 def extract_build_log_url(report_url):
@@ -53,9 +51,7 @@ def fetch_build_log(build_log_url):
 
     items = data.get("build_log_error_items")
     if not isinstance(items, list):
-        raise ValueError(
-            "Build log JSON is missing a build_log_error_items list"
-        )
+        raise ValueError("Build log JSON is missing a build_log_error_items list")
 
     warnings = []
     errors = []
@@ -100,9 +96,7 @@ def load_baseline(path):
             try:
                 baseline[entry] = int(row["count"])
             except ValueError as error:
-                raise ValueError(
-                    f"Invalid count '{row['count']}' for: {entry}"
-                ) from error
+                raise ValueError(f"Invalid count '{row['count']}' for: {entry}") from error
 
     return baseline
 
@@ -122,51 +116,81 @@ def compare_warnings(current, baseline):
     return new_warnings, removed_warnings
 
 
+def write_report(path, warning_count, baseline_count, errors, new, removed):
+    """Write the complete Learn warning comparison as Markdown."""
+    if not path:
+        return
+
+    lines = [
+        "## Learn Build warning report",
+        "",
+        f"- Build errors: **{len(errors)}**",
+        f"- Build warnings: **{warning_count}**",
+        f"- Recorded baseline warnings: **{baseline_count}**",
+    ]
+
+    sections = [
+        ("Build errors", errors),
+        ("Unrecorded warnings", new),
+        ("Warnings no longer produced", removed),
+    ]
+    for title, entries in sections:
+        if not entries:
+            continue
+        lines.extend(["", f"### {title}", "", "```text"])
+        lines.extend(entries)
+        lines.append("```")
+
+    if not errors and not new:
+        lines.extend(["", "No unrecorded warnings or build errors were found."])
+
+    with open(path, "w") as report:
+        report.write("\n".join(lines))
+        report.write("\n")
+
+
 def main():
     report_url = os.environ.get("BUILD_REPORT_URL")
     if not report_url:
         print("ERROR: BUILD_REPORT_URL environment variable not set")
         sys.exit(1)
 
-    baseline_path = os.path.join(
-        os.environ.get("GITHUB_WORKSPACE", "."),
-        ".github",
-        "known-warnings.csv",
-    )
+    baseline_path = os.path.join(os.environ.get("GITHUB_WORKSPACE", "."), ".github", "known-warnings.csv")
+    report_path = os.environ.get("REPORT_PATH")
+    baseline = load_baseline(baseline_path)
+    baseline_total = sum(baseline.values())
 
     print("Fetching structured Learn Build log...")
     build_log_url = extract_build_log_url(report_url)
     current_warnings, current_errors = fetch_build_log(build_log_url)
 
     if current_errors:
+        write_report(report_path, len(current_warnings), baseline_total, current_errors, [], [])
         print(f"{len(current_errors)} Learn Build error(s) found:")
         for error in current_errors:
             print(f"  ! {error}")
         sys.exit(1)
 
-    baseline = load_baseline(baseline_path)
-    baseline_total = sum(baseline.values())
     print(
-        f"Found {len(current_warnings)} warnings; "
-        f"baseline has {len(baseline)} unique warnings ({baseline_total} total)"
+        f"Found {len(current_warnings)} warnings; baseline has {len(baseline)} unique warnings "
+        f"({baseline_total} total)"
     )
 
-    new_warnings, removed_warnings = compare_warnings(
-        current_warnings,
-        baseline,
-    )
+    new_warnings, removed_warnings = compare_warnings(current_warnings, baseline)
 
     if removed_warnings:
         print(f"{len(removed_warnings)} warning(s) are no longer produced:")
-        for warning in removed_warnings[:5]:
+        for warning in removed_warnings:
             print(f"  - {warning}")
-        if len(removed_warnings) > 5:
-            print(f"  ... and {len(removed_warnings) - 5} more")
 
     if new_warnings:
         print(f"{len(new_warnings)} unrecorded warning(s) found:")
         for warning in new_warnings:
             print(f"  + {warning}")
+
+    write_report(report_path, len(current_warnings), baseline_total, [], new_warnings, removed_warnings)
+
+    if new_warnings:
         sys.exit(1)
 
     print("Learn Build warnings match the recorded baseline")
