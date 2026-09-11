@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
-  statuses: read
+  statuses: write
 
 jobs:
   check-warnings:
@@ -94,6 +94,29 @@ jobs:
           else
             gh pr comment "$PR_NUMBER" --repo "$REPOSITORY" --body-file "$REPORT_PATH"
           fi
+
+      - name: Publish Learn warning status
+        if: always() && steps.pr.outputs.found == 'true'
+        env:
+          CHECK_OUTCOME: ${{ steps.check.outcome }}
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ steps.pr.outputs.head_sha }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ "$CHECK_OUTCOME" = "success" ]; then
+            state=success
+            description="No unrecorded Learn Build warnings"
+          else
+            state=failure
+            description="Learn Build errors or unrecorded warnings found"
+          fi
+
+          gh api --method POST "repos/$REPOSITORY/statuses/$HEAD_SHA" \
+            --raw-field state="$state" \
+            --raw-field context="Learn warnings" \
+            --raw-field description="$description" \
+            --raw-field target_url="$RUN_URL" > /dev/null
 
       - name: Fail for Learn Build findings
         if: steps.check.outcome == 'failure'

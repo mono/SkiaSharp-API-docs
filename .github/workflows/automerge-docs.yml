@@ -4,9 +4,6 @@ on:
   status:
   check_run:
     types: [completed]
-  workflow_run:
-    workflows: [Check Learn warnings]
-    types: [completed]
 
 env:
   DRY_RUN: false
@@ -25,19 +22,17 @@ jobs:
     if: |
       (github.event_name == 'status' &&
        github.event.state == 'success' &&
-       github.event.context == 'PoliCheck Scan' &&
+       (github.event.context == 'PoliCheck Scan' ||
+        github.event.context == 'Learn warnings') &&
        contains(github.event.branches.*.name, 'automation/write-api-docs')) ||
       (github.event_name == 'check_run' &&
        github.event.check_run.conclusion == 'success' &&
        github.event.check_run.name != 'Auto-merge docs' &&
-       github.event.check_run.check_suite.head_branch == 'automation/write-api-docs') ||
-      (github.event_name == 'workflow_run' &&
-       github.event.workflow_run.conclusion == 'success' &&
-       github.event.workflow_run.head_branch == 'automation/write-api-docs')
+       github.event.check_run.check_suite.head_branch == 'automation/write-api-docs')
 
     # Only one run at a time per PR commit.
     concurrency:
-      group: automerge-${{ github.event.workflow_run.head_sha || github.event.check_run.head_sha || github.event.sha }}
+      group: automerge-${{ github.event.check_run.head_sha || github.event.sha }}
       cancel-in-progress: false
     runs-on: ubuntu-latest
 
@@ -50,15 +45,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           STATUS_BRANCHES_JSON: ${{ toJSON(github.event.branches.*.name) }}
           STATUS_SHA: ${{ github.event.sha }}
-          WORKFLOW_BRANCH: ${{ github.event.workflow_run.head_branch }}
-          WORKFLOW_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           if [ "$GITHUB_EVENT_NAME" = "check_run" ]; then
             branch="$CHECK_BRANCH"
             event_sha="$CHECK_SHA"
-          elif [ "$GITHUB_EVENT_NAME" = "workflow_run" ]; then
-            branch="$WORKFLOW_BRANCH"
-            event_sha="$WORKFLOW_SHA"
           else
             branch=$(printf '%s' "$STATUS_BRANCHES_JSON" |
               jq -r '.[] | select(. == "automation/write-api-docs")' |
