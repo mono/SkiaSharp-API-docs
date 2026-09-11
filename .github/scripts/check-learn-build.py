@@ -1,27 +1,23 @@
 #!/usr/bin/env python3
-"""Check Learn Build PR statuses and warnings against the accepted baseline.
+"""Check Learn Build PR statuses and decide if auto-merge is safe.
 
 This script reads GitHub commit statuses (not PR comments) to determine
-whether a docs PR introduced new Learn Build warnings. The OpenPublishing.Build
-status has a targetUrl pointing to a build report, which links to a JSON log.
+if a docs PR can be auto-merged. The two Learn Build statuses each have
+a targetUrl pointing to a build report, which links to a JSON build log.
 
 Flow:
 1. Get PR status checks via gh CLI
-2. Verify the required Learn Build checks are present and green
+2. Verify all required checks are present and green
 3. Validate the PR HEAD matches the event SHA (TOCTOU protection)
 4. Find the OpenPublishing.Build targetUrl → build report → JSON build log
 5. Extract warnings/errors from the JSON log (fail closed on schema changes)
 6. Compare warnings against the known-warnings.csv baseline (from main)
-7. Exit 0 if validation passes, 1 if it fails
+7. Exit 0 if safe to merge, 1 if not
 
 Environment variables:
   GH_TOKEN       - GitHub token for API access
   PR_NUMBER      - Pull request number
   VALIDATED_SHA  - The commit SHA from the status event (TOCTOU pin)
-  REQUIRED_STATUSES - Optional comma-separated status names
-  REQUIRE_ALL_STATUSES - Set to false to ignore unrelated checks
-  IGNORED_STATUSES - Optional comma-separated status names to ignore
-  STATUS_ONLY     - Set to true to skip Learn log and warning validation
   GITHUB_OUTPUT  - GitHub Actions output file
 """
 
@@ -75,29 +71,30 @@ def validate_url(url, label="URL"):
         )
 
 
-def check_statuses(checks, ignored_statuses=None):
-    """Collect statuses and identify checks that are not green."""
+def check_statuses(checks):
+    """Verify all GitHub commit statuses and check runs are green.
+
+    Returns (all_green, failures, status_map).
+    - failures is a list of (name, state) tuples for non-green checks.
+    - status_map is a dict of name -> {state, url} for all checks.
+    """
     failures = []
     status_map = {}
-    ignored_statuses = ignored_statuses or set()
 
     for check in checks:
         name = check.get("context") or check.get("name") or "unknown"
-        if name in ignored_statuses:
-            continue
-
         state = check.get("state", "")
         status = check.get("status", "")
         conclusion = check.get("conclusion", "")
         url = check.get("targetUrl") or check.get("detailsUrl") or ""
 
-        display_state = state or conclusion or status
-        status_map[name] = {"state": display_state, "url": url}
-
         is_green = (
             state == "SUCCESS"
             or (status == "COMPLETED" and conclusion == "SUCCESS")
         )
+        display_state = state or conclusion or status
+        status_map[name] = {"state": display_state, "url": url}
+
         if not is_green:
             if state == "PENDING" or status in ("IN_PROGRESS", "QUEUED"):
                 failures.append((name, "PENDING"))
@@ -107,11 +104,11 @@ def check_statuses(checks, ignored_statuses=None):
     return len(failures) == 0, failures, status_map
 
 
-def check_required_statuses(status_map, required_statuses):
+def check_required_statuses(status_map):
     """Verify all required statuses are present and green. Fail closed."""
     missing = []
     not_green = []
-    for name in required_statuses:
+    for name in REQUIRED_STATUSES:
         if name not in status_map:
             missing.append(name)
         elif status_map[name]["state"] != "SUCCESS":
@@ -276,26 +273,6 @@ def main():
         os.environ.get("GITHUB_WORKSPACE", "."),
         ".github", "known-warnings.csv",
     )
-    required_statuses = [
-        status.strip()
-        for status in os.environ.get(
-            "REQUIRED_STATUSES",
-            ",".join(REQUIRED_STATUSES),
-        ).split(",")
-        if status.strip()
-    ]
-    if not required_statuses:
-        print("ERROR: REQUIRED_STATUSES must contain at least one status")
-        sys.exit(1)
-    require_all_statuses = (
-        os.environ.get("REQUIRE_ALL_STATUSES", "true").lower() != "false"
-    )
-    ignored_statuses = {
-        status.strip()
-        for status in os.environ.get("IGNORED_STATUSES", "").split(",")
-        if status.strip()
-    }
-    status_only = os.environ.get("STATUS_ONLY", "").lower() == "true"
 
     # Get PR info
     print(f"Checking PR #{pr_number}...")
@@ -314,8 +291,7 @@ def main():
         set_output("reason", "PR HEAD changed since status event")
         sys.exit(1)
 
-    # Collect statuses, then evaluate only the required external checks.
-    # Unrelated checks include this workflow while it is still in progress.
+    # Check all GitHub statuses are green
     checks = pr_data.get("statusCheckRollup", [])
     if not checks:
         print("  Waiting: no status checks found yet")
@@ -323,28 +299,29 @@ def main():
         set_output("reason", "No status checks found")
         sys.exit(0)
 
-    all_green, failures, status_map = check_statuses(checks, ignored_statuses)
+    all_green, failures, status_map = check_statuses(checks)
     print(f"  Status checks ({len(checks)}):")
     for name, info in sorted(status_map.items()):
         print(f"    {name}: {info['state']}")
 
-    if require_all_statuses and not all_green:
-        only_pending = all(state == "PENDING" for _, state in failures)
+    if not all_green:
+        # Distinguish "still pending" from "actually failed"
+        only_pending = all(s == "PENDING" for _, s in failures)
         if only_pending:
-            names = ", ".join(name for name, _ in failures)
+            names = ", ".join(n for n, _ in failures)
             print(f"  Waiting: checks still pending: {names}")
             set_output("should_merge", "false")
             set_output("reason", f"Waiting for: {names}")
             sys.exit(0)
+        else:
+            names = ", ".join(f"{n} ({s})" for n, s in failures)
+            print(f"  ❌ Not all checks are green: {names}")
+            set_output("should_merge", "false")
+            set_output("reason", f"Checks not green: {names}")
+            sys.exit(1)
 
-        names = ", ".join(f"{name} ({state})" for name, state in failures)
-        print(f"  ❌ Not all checks are green: {names}")
-        set_output("should_merge", "false")
-        set_output("reason", f"Checks not green: {names}")
-        sys.exit(1)
-
-    # Verify all required statuses are present and green.
-    missing, not_green = check_required_statuses(status_map, required_statuses)
+    # Verify all required statuses are present
+    missing, not_green = check_required_statuses(status_map)
     if missing:
         print(f"  Waiting: required status(es) not yet reported: {', '.join(missing)}")
         set_output("should_merge", "false")
@@ -358,12 +335,6 @@ def main():
         sys.exit(1)
 
     print("  All required status checks are green")
-
-    if status_only:
-        print("  ✅ All PR status checks passed")
-        set_output("should_merge", "true")
-        set_output("reason", "All checks passed")
-        sys.exit(0)
 
     # Get the OpenPublishing.Build report URL from the status targetUrl
     build_status = status_map.get("OpenPublishing.Build")
@@ -429,7 +400,7 @@ def main():
         set_output("new_warnings", json.dumps(new_warnings))
         sys.exit(1)
 
-    print("  ✅ Learn Build warning validation passed")
+    print("  ✅ All checks passed - safe to merge!")
     set_output("should_merge", "true")
     set_output("reason", "All checks passed")
     sys.exit(0)
