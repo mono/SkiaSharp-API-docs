@@ -274,6 +274,9 @@ if ($missingCompilerDocumentation) {
 }
 $importedDocIds = @(Import-CompilerXmlDocumentation $stagingPath $compilerDocumentation)
 $importedDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'compiler-xml-imports.json')
+$stagedAssemblies = Get-ChildItem -Path $monikerDirectories -Filter '*.dll' -File -Recurse
+$filteredDocIds = @(Remove-UndocumentedPrivateExplicitInterfaceMembers $stagingPath $stagedAssemblies.FullName $importedDocIds)
+$filteredDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'filtered-private-explicit-interface-members.json')
 
 Remove-WhitespaceOnlyLines $stagingPath
 

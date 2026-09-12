@@ -101,6 +101,12 @@ $selected = Select-LatestMainTransportPackageVersion @(
 )
 Assert-Equal $selected '0.0.0-branch.main.172' 'Main package version selection failed.'
 Assert-Equal (Resolve-DocsMediaPackageVersion $selected $null) $selected 'Media package did not follow _NuGets.'
+Assert-Equal (Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember $true $true $false) $true `
+    'Undocumented private explicit-interface member was not excluded.'
+Assert-Equal (Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember $true $true $true) $false `
+    'Documented private explicit-interface member was excluded.'
+Assert-Equal (Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember $false $false $false) $false `
+    'Public authored member was excluded.'
 try {
     [void](Resolve-DocsMediaPackageVersion $selected '0.0.0-branch.main.171')
     throw 'Mismatched _DocsMedia package version was accepted.'

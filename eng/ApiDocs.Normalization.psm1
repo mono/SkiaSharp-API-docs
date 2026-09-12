@@ -48,6 +48,94 @@ function Remove-CompilerXmlMarkdownIndentation([System.Xml.XmlElement] $Member) 
     }
 }
 
+function Get-MetadataTypeFullName(
+    [Reflection.Metadata.MetadataReader] $Metadata,
+    [Reflection.Metadata.TypeDefinitionHandle] $TypeHandle
+) {
+    $type = $Metadata.GetTypeDefinition($TypeHandle)
+    $name = $Metadata.GetString($type.Name)
+    $declaringType = $type.GetDeclaringType()
+    if ($declaringType.IsNil) {
+        $namespace = $Metadata.GetString($type.Namespace)
+        if ($namespace) {
+            return "$namespace.$name"
+        }
+        return $name
+    }
+
+    return "$(Get-MetadataTypeFullName $Metadata $declaringType).$name"
+}
+
+function Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember(
+    [bool] $IsPrivate,
+    [bool] $IsExplicitInterface,
+    [bool] $HasCompilerDocumentation
+) {
+    return $IsPrivate -and $IsExplicitInterface -and -not $HasCompilerDocumentation
+}
+
+# mdoc exposes some private explicit-interface methods as public ECMA members.
+# Retain them whenever compiler XML deliberately documents the API.
+function Remove-UndocumentedPrivateExplicitInterfaceMembers(
+    [string] $OutputRoot,
+    [string[]] $AssemblyPaths,
+    [string[]] $ImportedDocIds
+) {
+    $documented = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $ImportedDocIds | ForEach-Object { [void]$documented.Add($_) }
+    $excluded = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+
+    foreach ($assemblyPath in $AssemblyPaths) {
+        $stream = [IO.File]::OpenRead($assemblyPath)
+        try {
+            $peReader = [Reflection.PortableExecutable.PEReader]::new($stream)
+            try {
+                if (-not $peReader.HasMetadata) {
+                    continue
+                }
+                $metadata = [Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($peReader)
+                foreach ($typeHandle in $metadata.TypeDefinitions) {
+                    $type = $metadata.GetTypeDefinition($typeHandle)
+                    $typeName = Get-MetadataTypeFullName $metadata $typeHandle
+                    foreach ($methodHandle in $type.GetMethods()) {
+                        $method = $metadata.GetMethodDefinition($methodHandle)
+                        $methodName = $metadata.GetString($method.Name)
+                        $isPrivate = ($method.Attributes -band [Reflection.MethodAttributes]::MemberAccessMask) -eq [Reflection.MethodAttributes]::Private
+                        $isExplicitInterface = $methodName.Contains('.')
+                        $docId = "M:$typeName.$($methodName.Replace('.', '#'))"
+                        if (Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember $isPrivate $isExplicitInterface $documented.Contains($docId)) {
+                            [void]$excluded.Add($docId)
+                        }
+                    }
+                }
+            }
+            finally {
+                $peReader.Dispose()
+            }
+        }
+        finally {
+            $stream.Dispose()
+        }
+    }
+
+    $removed = @()
+    foreach ($file in Get-ChildItem -Path $OutputRoot -Filter '*.xml' -File -Recurse) {
+        [xml] $document = Get-Content -Raw -Path $file.FullName
+        if ($document.DocumentElement.LocalName -ne 'Type') {
+            continue
+        }
+        foreach ($member in @($document.SelectNodes('/Type/Members/Member'))) {
+            $signature = $member.SelectSingleNode('./MemberSignature[@Language="DocId"]')
+            if ($null -ne $signature -and $excluded.Contains($signature.GetAttribute('Value'))) {
+                [void]$member.ParentNode.RemoveChild($member)
+                $removed += $signature.GetAttribute('Value')
+            }
+        }
+        $document.Save($file.FullName)
+    }
+    return $removed
+}
+
 # Imports package compiler XML into clean mdoc ECMA output by exact DocId.
 # It has no fallback to repository XML and does not perform identity rewrites.
 function Import-CompilerXmlDocumentation([string] $OutputRoot, [string[]] $DocumentationPaths) {
@@ -169,5 +257,7 @@ function Remove-MdocObsoleteTypeCollision(
 Export-ModuleMember -Function `
     Get-MdocObsoleteTypeCanonicalizations, `
     Remove-CompilerXmlMarkdownIndentation, `
+    Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember, `
+    Remove-UndocumentedPrivateExplicitInterfaceMembers, `
     Import-CompilerXmlDocumentation, `
     Remove-MdocObsoleteTypeCollision
