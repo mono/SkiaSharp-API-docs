@@ -66,17 +66,20 @@ function Get-MetadataTypeFullName(
     return "$(Get-MetadataTypeFullName $Metadata $declaringType).$name"
 }
 
-function Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember(
+function Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember(
     [bool] $IsPrivate,
-    [bool] $IsExplicitInterface,
+    [string] $MethodName,
     [bool] $HasCompilerDocumentation
 ) {
-    return $IsPrivate -and $IsExplicitInterface -and -not $HasCompilerDocumentation
+    return $IsPrivate -and
+        $MethodName.StartsWith('Java.Interop.IJavaPeerable.', [StringComparison]::Ordinal) -and
+        -not $HasCompilerDocumentation
 }
 
-# mdoc exposes some private explicit-interface methods as public ECMA members.
-# Retain them whenever compiler XML deliberately documents the API.
-function Remove-UndocumentedPrivateExplicitInterfaceMembers(
+# mdoc exposes this Android infrastructure implementation as a public ECMA
+# member even though its PE method is private. Other interface implementations
+# are normal API-doc content and must remain in the generated tree.
+function Remove-UndocumentedJavaPeerInfrastructureMembers(
     [string] $OutputRoot,
     [string[]] $AssemblyPaths,
     [string[]] $ImportedDocIds
@@ -101,9 +104,8 @@ function Remove-UndocumentedPrivateExplicitInterfaceMembers(
                         $method = $metadata.GetMethodDefinition($methodHandle)
                         $methodName = $metadata.GetString($method.Name)
                         $isPrivate = ($method.Attributes -band [Reflection.MethodAttributes]::MemberAccessMask) -eq [Reflection.MethodAttributes]::Private
-                        $isExplicitInterface = $methodName.Contains('.')
                         $docId = "M:$typeName.$($methodName.Replace('.', '#'))"
-                        if (Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember $isPrivate $isExplicitInterface $documented.Contains($docId)) {
+                        if (Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember $isPrivate $methodName $documented.Contains($docId)) {
                             [void]$excluded.Add($docId)
                         }
                     }
@@ -257,7 +259,7 @@ function Remove-MdocObsoleteTypeCollision(
 Export-ModuleMember -Function `
     Get-MdocObsoleteTypeCanonicalizations, `
     Remove-CompilerXmlMarkdownIndentation, `
-    Test-ShouldExcludeUndocumentedPrivateExplicitInterfaceMember, `
-    Remove-UndocumentedPrivateExplicitInterfaceMembers, `
+    Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember, `
+    Remove-UndocumentedJavaPeerInfrastructureMembers, `
     Import-CompilerXmlDocumentation, `
     Remove-MdocObsoleteTypeCollision
