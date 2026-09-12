@@ -48,6 +48,18 @@ if (Test-Path -Path $source -PathType Container) {
     }
 }
 
+$selectedPackageVersion = if ($PackageVersion) {
+    Resolve-NuGetPackageVersion $PackageVersion
+} elseif ($localTransportPackages.Count -gt 0) {
+    Select-LatestMainTransportPackageVersion @($localTransportPackages.Values |
+        Where-Object { $_.Id -ieq '_NuGets' } |
+        ForEach-Object Version)
+} else {
+    Select-LatestMainTransportPackageVersion (Get-NuGetPackageVersions '_NuGets' $source)
+}
+$selectedDocsMediaPackageVersion = Resolve-DocsMediaPackageVersion $selectedPackageVersion $DocsMediaPackageVersion
+Write-Host "Selected main transport package version $selectedPackageVersion."
+
 # Copies a declared transport archive directly from a local pipeline artifact.
 # Production transport URLs continue through Download-NuGetPackage.
 function Get-TransportPackage([string] $PackageId, [string] $PackageVersion, [switch] $AllowMissing) {
@@ -138,7 +150,7 @@ $resolverPackageIds = @(
 )
 
 # Acquire the transport meta-package and its package-payload containers.
-[void](Get-TransportPackage '_NuGets' $PackageVersion)
+[void](Get-TransportPackage '_NuGets' $selectedPackageVersion)
 $metaPackage = Get-ChildItem -Path $PackageRoot -Filter '_nugets*.nupkg' -File -Recurse | Select-Object -First 1
 if (-not $metaPackage) {
     throw "No _NuGets package was downloaded to '$PackageRoot'."
@@ -170,7 +182,7 @@ while ($pendingDependencies.Count -gt 0) {
 }
 
 # Media is part of the generated documentation contract.
-[void](Get-TransportPackage '_DocsMedia' $DocsMediaPackageVersion)
+[void](Get-TransportPackage '_DocsMedia' $selectedDocsMediaPackageVersion)
 
 # Inspect embedded product packages and acquire only known mdoc resolver dependencies.
 Expand-NuGetPackageArchives @($PackageRoot) $metadataRoot | Out-Null

@@ -15,6 +15,62 @@ function Resolve-NuGetPackageVersion([string] $PackageVersion) {
     throw "Cannot resolve an exact version from NuGet range '$PackageVersion'."
 }
 
+# Gets all published versions for a package from a NuGet v3 feed's flat container.
+function Get-NuGetPackageVersions([string] $PackageId, [string] $Source) {
+    if ($Source -notmatch '^https://') {
+        throw "Package version discovery requires an HTTPS NuGet v3 feed; '$Source' is not a feed URL."
+    }
+
+    $serviceIndex = Invoke-RestMethod -Uri $Source
+    $packageBaseAddress = $serviceIndex.resources |
+        Where-Object { @($_.'@type') -match '^PackageBaseAddress/' } |
+        Select-Object -First 1 -ExpandProperty '@id'
+    if (-not $packageBaseAddress) {
+        throw "NuGet v3 feed '$Source' does not expose a PackageBaseAddress resource."
+    }
+
+    $packageIndexUrl = '{0}/{1}/index.json' -f $packageBaseAddress.TrimEnd('/'), $PackageId.ToLowerInvariant()
+    $packageIndex = Invoke-RestMethod -Uri $packageIndexUrl
+    if (-not $packageIndex.versions) {
+        throw "NuGet v3 package index '$packageIndexUrl' contains no versions for '$PackageId'."
+    }
+
+    return @($packageIndex.versions)
+}
+
+# Selects the highest build number from the production main-branch transport package family.
+function Select-LatestMainTransportPackageVersion([string[]] $Versions) {
+    $candidates = foreach ($version in $Versions) {
+        if ($version -match '^0\.0\.0-branch\.main\.(\d+)$') {
+            [PSCustomObject]@{
+                Version = $version
+                Build = [Int64]$Matches[1]
+            }
+        }
+    }
+    $latest = $candidates | Sort-Object Build, Version -Descending | Select-Object -First 1
+    if (-not $latest) {
+        throw 'No eligible _NuGets version matching 0.0.0-branch.main.<build> was found.'
+    }
+
+    return $latest.Version
+}
+
+# Couples the media package to the selected transport package version.
+function Resolve-DocsMediaPackageVersion([string] $PackageVersion, [string] $DocsMediaPackageVersion) {
+    $selectedPackageVersion = Resolve-NuGetPackageVersion $PackageVersion
+    $selectedDocsMediaPackageVersion = if ($DocsMediaPackageVersion) {
+        Resolve-NuGetPackageVersion $DocsMediaPackageVersion
+    } else {
+        $selectedPackageVersion
+    }
+    if ($selectedDocsMediaPackageVersion -ne $selectedPackageVersion) {
+        throw "_DocsMedia version '$selectedDocsMediaPackageVersion' must exactly match _NuGets version '$selectedPackageVersion'."
+    }
+
+    return $selectedDocsMediaPackageVersion
+}
+
 # Downloads one exact package into the requested cache root.
 # Reuses a versioned shared cache, then copies the package into the caller's workspace.
 function Download-NuGetPackage(
@@ -193,6 +249,9 @@ function Resolve-NuGetPackageSource([string] $Source) {
 
 Export-ModuleMember -Function `
     Resolve-NuGetPackageVersion, `
+    Get-NuGetPackageVersions, `
+    Select-LatestMainTransportPackageVersion, `
+    Resolve-DocsMediaPackageVersion, `
     Download-NuGetPackage, `
     Get-NuGetPackageDependencies, `
     Expand-NuGetPackageArchives, `
