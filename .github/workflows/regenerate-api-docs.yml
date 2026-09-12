@@ -1,0 +1,53 @@
+name: Regenerate API docs
+
+on:
+  pull_request:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Verify mdoc
+        shell: pwsh
+        run: ./eng/MDoc.ps1 --version
+
+      - name: Set up API documentation packages
+        shell: pwsh
+        run: ./eng/Setup-ApiDocs.ps1
+
+      - name: Generate clean ECMA XML and media
+        shell: pwsh
+        run: ./eng/Generate-ApiDocs.ps1
+
+      - name: Commit generated output
+        if: github.event_name != 'pull_request'
+        shell: pwsh
+        run: |
+          git add SkiaSharpAPI .openpublishing.publish.config.json
+          if (git diff --cached --quiet) {
+            Write-Host 'The generated API tree is already current.'
+            exit 0
+          }
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Regenerate API docs and media from packages'
+          git push origin HEAD:${{ github.ref_name }}

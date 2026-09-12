@@ -1,6 +1,10 @@
 # SkiaSharp and HarfBuzzSharp API Docs
 
-This repository contains the XML-based API documentation for [SkiaSharp and HarfBuzzSharp](https://github.com/mono/SkiaSharp).
+This repository is the generated staging input for Microsoft Learn/OpenPublishing API reference content for [SkiaSharp and HarfBuzzSharp](https://github.com/mono/SkiaSharp). The ECMA XML is regenerated from the published NuGet package set; it does not require a SkiaSharp checkout or submodule.
+
+Run `pwsh ./eng/Setup-ApiDocs.ps1` to acquire the latest `_NuGets` package and required `_DocsMedia` into `artifacts/api-docs/packages`. It uses `dotnet-libraries-transport` for those transport artifacts and `dotnet-public` for an explicit allowlist of third-party and platform reference packages; pass `-TransportPackageSource <local-NuGet-folder>` to replace the transport feed with a local CI-artifact folder. The platform reference packages replace SDK workload installation. Downloaded package versions are cached once in `artifacts/api-docs/downloads` and copied into the clean product and dependency workspaces on subsequent runs. Then run `pwsh ./eng/Generate-ApiDocs.ps1`. It invokes `eng/MDoc.ps1`, which downloads mdoc from `dotnet-public` only if its local tool cache is absent and forwards the mdoc command. The generator retains its conversion workspace for review, requires paired DLL/XML documentation input for every managed assembly it generates, uses mdoc `fx-bootstrap` to generate framework-scoped imports, regenerates framework moniker indexes, and promotes ECMA XML and media entirely from package content while retaining only OpenPublishing infrastructure (`docfx.json`, filters, and breadcrumbs).
+
+For a fresh local test, run `pwsh ./eng/Clean-ApiDocs.ps1` before setup. It clears generated documentation plus all disposable API-doc artifacts, but never clears `artifacts/api-docs/downloads`.
 
 The docs are available online for:
  - [SkiaSharp](https://docs.microsoft.com/dotnet/api/skiasharp)
