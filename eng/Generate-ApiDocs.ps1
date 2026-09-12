@@ -8,6 +8,7 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 Import-Module (Join-Path $PSScriptRoot 'ApiDocs.Common.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $PSScriptRoot 'ApiDocs.Normalization.psm1') -Force -DisableNameChecking
 
 # Maps related package IDs into the public OpenPublishing moniker layout.
 # Views MAUI remains distinct from the general SkiaSharp Views moniker.
@@ -134,6 +135,7 @@ $dependencyExtractionPath = Join-Path $conversionRoot 'dependencies'
 $mediaExtractionPath = Join-Path $conversionRoot 'media'
 $frameworksRoot = Join-Path $conversionRoot 'frameworks'
 $stagingPath = Join-Path $conversionRoot 'staging'
+$referencesRoot = Join-Path $workRoot 'references'
 
 Remove-Item -Recurse -Force $conversionRoot -ErrorAction Ignore
 New-Item -ItemType Directory -Force -Path $nuGetsExtractionPath, $dependencyExtractionPath, $mediaExtractionPath, $frameworksRoot, $stagingPath | Out-Null
@@ -202,6 +204,14 @@ if ($monikerDirectories.Count -eq 0) {
     throw 'The downloaded _NuGets package set contains no managed SkiaSharp or HarfBuzzSharp assemblies.'
 }
 
+# Package XML is an mdoc export in the current transport contract. Normalize
+# only its legacy DocId encodings before mdoc matches it to generated metadata.
+foreach ($documentation in Get-ChildItem -Path $frameworksRoot -Filter '*.xml' -File -Recurse) {
+    if ($documentation.Name -ne 'frameworks.xml') {
+        [void](Normalize-MdocImportDocumentation $documentation.FullName)
+    }
+}
+
 $stagingXmlPath = Join-Path $stagingPath 'xml'
 New-Item -ItemType Directory -Force -Path $stagingXmlPath | Out-Null
 Copy-Item -Force (Join-Path $OutputRoot 'xml/_filter.xml') $stagingXmlPath
@@ -234,6 +244,40 @@ try {
 finally {
     Pop-Location
 }
+
+$canonicalizations = @(Get-MdocObsoleteTypeCanonicalizations)
+foreach ($canonicalization in $canonicalizations) {
+    [void](Remove-MdocObsoleteTypeCollision `
+        -OutputRoot $stagingPath `
+        -LegacyType $canonicalization.LegacyType `
+        -CanonicalType $canonicalization.CanonicalType `
+        -RequiredObsoleteMessage $canonicalization.RequiredObsoleteMessage)
+    $frameworkPath = Join-Path $frameworksRoot $canonicalization.Framework
+    $assemblyPath = Join-Path $frameworkPath $canonicalization.Assembly
+    $importPath = [IO.Path]::ChangeExtension($assemblyPath, '.xml')
+    if (-not (Test-Path $assemblyPath) -or -not (Test-Path $importPath)) {
+        throw "Canonical type '$($canonicalization.CanonicalType)' does not have its required package DLL/XML input."
+    }
+
+    # mdoc conflates this explicitly obsolete type with its case-distinct
+    # replacement in framework mode. Generate the canonical metadata identity
+    # directly and import its exact package XML rather than reusing ECMA prose.
+    & (Join-Path $PSScriptRoot 'MDoc.ps1') update --delete --fno-assembly-versions --fignore-missing-types `
+        --lang DocId "--type=$($canonicalization.CanonicalType)" --import $importPath --out $stagingPath `
+        --lib $referencesRoot --lib $frameworkPath $assemblyPath
+    if ($LASTEXITCODE -ne 0) {
+        throw "mdoc canonical-type generation for '$($canonicalization.CanonicalType)' failed with exit code $LASTEXITCODE."
+    }
+}
+$canonicalizations | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'mdoc-canonicalizations.json')
+
+$stagedAssemblies = Get-ChildItem -Path $monikerDirectories -Filter '*.dll' -File -Recurse
+$filteredDocIds = @(
+    Get-NonPublicExplicitInterfaceMemberDocIds $stagedAssemblies.FullName
+    Get-GeneratedResourceDesignerConstructorDocIds $stagedAssemblies.FullName
+) | Select-Object -Unique
+$filteredDocIds = @(Remove-GeneratedMemberDocIds $stagingPath $filteredDocIds)
+$filteredDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'mdoc-filtered-members.json')
 
 Remove-WhitespaceOnlyLines $stagingPath
 
