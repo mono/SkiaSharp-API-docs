@@ -204,14 +204,6 @@ if ($monikerDirectories.Count -eq 0) {
     throw 'The downloaded _NuGets package set contains no managed SkiaSharp or HarfBuzzSharp assemblies.'
 }
 
-# Package XML is an mdoc export in the current transport contract. Normalize
-# only its legacy DocId encodings before mdoc matches it to generated metadata.
-foreach ($documentation in Get-ChildItem -Path $frameworksRoot -Filter '*.xml' -File -Recurse) {
-    if ($documentation.Name -ne 'frameworks.xml') {
-        [void](Normalize-MdocImportDocumentation $documentation.FullName)
-    }
-}
-
 $stagingXmlPath = Join-Path $stagingPath 'xml'
 New-Item -ItemType Directory -Force -Path $stagingXmlPath | Out-Null
 Copy-Item -Force (Join-Path $OutputRoot 'xml/_filter.xml') $stagingXmlPath
@@ -271,13 +263,17 @@ foreach ($canonicalization in $canonicalizations) {
 }
 $canonicalizations | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'mdoc-canonicalizations.json')
 
-$stagedAssemblies = Get-ChildItem -Path $monikerDirectories -Filter '*.dll' -File -Recurse
-$filteredDocIds = @(
-    Get-NonPublicExplicitInterfaceMemberDocIds $stagedAssemblies.FullName
-    Get-GeneratedResourceDesignerConstructorDocIds $stagedAssemblies.FullName
-) | Select-Object -Unique
-$filteredDocIds = @(Remove-GeneratedMemberDocIds $stagingPath $filteredDocIds)
-$filteredDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'mdoc-filtered-members.json')
+$compilerDocumentation = @(
+    foreach ($import in $frameworks.SelectNodes('/Frameworks/Framework/import')) {
+        Join-Path $frameworksRoot $import.InnerText
+    }
+)
+$missingCompilerDocumentation = @($compilerDocumentation | Where-Object { -not (Test-Path $_) })
+if ($missingCompilerDocumentation) {
+    throw "The mdoc framework configuration references missing compiler XML:`n$($missingCompilerDocumentation -join [Environment]::NewLine)"
+}
+$importedDocIds = @(Import-CompilerXmlDocumentation $stagingPath $compilerDocumentation)
+$importedDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'compiler-xml-imports.json')
 
 Remove-WhitespaceOnlyLines $stagingPath
 

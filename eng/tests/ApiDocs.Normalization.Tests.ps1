@@ -12,21 +12,85 @@ function Assert-Equal([object] $Actual, [object] $Expected, [string] $Message) {
     }
 }
 
-Assert-Equal (Convert-MdocImportDocId 'C:Example.Outer+Inner(System.String)') `
-    'M:Example.Outer.Inner.#ctor(System.String)' 'Constructor/nested DocId normalization failed.'
-Assert-Equal (Convert-MdocImportDocId 'M:Example.Outer+Inner.Use(Example.Outer+Inner)') `
-    'M:Example.Outer.Inner.Use(Example.Outer.Inner)' 'Nested parameter DocId normalization failed.'
-Assert-Equal (Convert-MdocImportDocId 'T:Example.Type') 'T:Example.Type' 'Standard DocId changed unexpectedly.'
-Assert-Equal (Test-ShouldExcludeExplicitInterfaceMember @($false, $false) $false) $true `
-    'Private explicit-interface members must be excluded.'
-Assert-Equal (Test-ShouldExcludeExplicitInterfaceMember @($false, $true) $false) $false `
-    'Public explicit-interface members must be retained.'
-Assert-Equal (Test-ShouldExcludeExplicitInterfaceMember @($false) $true) $false `
-    'Private forwarding accessors must not hide a genuine public interface API.'
-Assert-Equal (Test-ShouldExcludeGeneratedResourceConstructor '_Microsoft.Android.Resource.Designer.Resource') $true `
-    'Synthetic resource-designer constructors must be excluded.'
-Assert-Equal (Test-ShouldExcludeGeneratedResourceConstructor 'Example.Resource') $false `
-    'Non-resource-designer constructors must be retained.'
+$workspace = Join-Path ([IO.Path]::GetTempPath()) "api-docs-normalization-$([Guid]::NewGuid())"
+New-Item -ItemType Directory -Force -Path $workspace | Out-Null
+try {
+    $compilerPath = Join-Path $workspace 'Example.xml'
+    $laterCompilerPath = Join-Path $workspace 'Example.Later.xml'
+    $ecmaPath = Join-Path $workspace 'ExampleType.xml'
+    @'
+<doc><members>
+  <member name="M:Example.Outer.Inner.#ctor(System.String)"><summary><![CDATA[Constructor <b>prose</b>.]]></summary><param name="value">Parameter prose.</param><remarks><see cref="T:Example.Outer.Inner" /><format type="text/markdown"><![CDATA[
+    ## Example
+
+    ```csharp
+    if (ready) {
+        Run();
+    }
+    ```]]></format></remarks></member>
+  <member name="M:Example.Outer.Inner.Use(Example.Outer.Inner)"><summary>Nested type prose.</summary></member>
+  <member name="M:Example.Case"><summary>Upper-case identity.</summary></member>
+  <member name="M:Example.case"><summary>Lower-case identity.</summary></member>
+</members></doc>
+'@ | Set-Content -NoNewline -Path $compilerPath
+    @'
+<doc><members>
+  <member name="M:Example.Outer.Inner.Use(Example.Outer.Inner)"><summary>Later framework prose.</summary></member>
+</members></doc>
+'@ | Set-Content -NoNewline -Path $laterCompilerPath
+    @'
+<Type Name="ExampleType" FullName="Example.Type">
+  <TypeSignature Language="DocId" Value="T:Example.Type" />
+  <Docs><summary>To be added.</summary></Docs>
+  <Members>
+    <Member><MemberSignature Language="DocId" Value="M:Example.Outer.Inner.#ctor(System.String)" /><Docs><summary>To be added.</summary></Docs></Member>
+    <Member><MemberSignature Language="DocId" Value="M:Example.Outer.Inner.Use(Example.Outer.Inner)" /><Docs><summary>To be added.</summary></Docs></Member>
+    <Member><MemberSignature Language="DocId" Value="M:Example.Unmatched" /><Docs><summary>To be added.</summary></Docs></Member>
+    <Member><MemberSignature Language="DocId" Value="M:Example.Case" /><Docs><summary>To be added.</summary></Docs></Member>
+    <Member><MemberSignature Language="DocId" Value="M:Example.case" /><Docs><summary>To be added.</summary></Docs></Member>
+  </Members>
+</Type>
+'@ | Set-Content -NoNewline -Path $ecmaPath
+
+    $imported = @(Import-CompilerXmlDocumentation $workspace @($compilerPath, $laterCompilerPath))
+    Assert-Equal $imported.Count 4 'Exact DocId importer matched an unexpected number of APIs.'
+    [xml] $result = Get-Content -Raw -Path $ecmaPath
+    Assert-Equal $result.SelectSingleNode('/Type/Members/Member[1]/Docs/summary').InnerText 'Constructor <b>prose</b>.' `
+        'Constructor compiler XML was not imported.'
+    Assert-Equal $result.SelectSingleNode('/Type/Members/Member[1]/Docs').FirstChild.LocalName 'param' `
+        'Compiler XML was not emitted in the established ECMA documentation order.'
+    Assert-Equal $result.SelectSingleNode('/Type/Members/Member[1]/Docs/summary').FirstChild.NodeType ([System.Xml.XmlNodeType]::CDATA) `
+        'Compiler XML CDATA content was not preserved.'
+    Assert-Equal $result.SelectSingleNode('/Type/Members/Member[1]/Docs/remarks/see').GetAttribute('cref') 'T:Example.Outer.Inner' `
+        'Compiler XML cref content was not preserved.'
+    $markdown = $result.SelectSingleNode('/Type/Members/Member[1]/Docs/remarks/format').InnerText
+    $expectedMarkdown = @'
+## Example
+
+```csharp
+if (ready) {
+    Run();
+}
+```
+'@
+    Assert-Equal $markdown ("`n" + $expectedMarkdown) `
+        'Compiler XML markdown indentation was not normalized.'
+    [void](Import-CompilerXmlDocumentation $workspace @($compilerPath, $laterCompilerPath))
+    [xml] $secondResult = Get-Content -Raw -Path $ecmaPath
+    Assert-Equal $secondResult.SelectSingleNode('/Type/Members/Member[1]/Docs/remarks/format').InnerText $markdown `
+        'Compiler XML import was not idempotent.'
+    Assert-Equal $result.SelectSingleNode('/Type/Members/Member[2]/Docs/summary').InnerText 'Later framework prose.' `
+        'Later compiler XML must deterministically supersede an earlier exact DocId.'
+    Assert-Equal $result.SelectSingleNode('/Type/Members/Member[3]/Docs/summary').InnerText 'To be added.' `
+        'Unmatched DocId must not be imported by fuzzy matching.'
+    Assert-Equal $result.SelectSingleNode('/Type/Members/Member[4]/Docs/summary').InnerText 'Upper-case identity.' `
+        'Upper-case DocId was not matched ordinally.'
+    Assert-Equal $result.SelectSingleNode('/Type/Members/Member[5]/Docs/summary').InnerText 'Lower-case identity.' `
+        'Lower-case DocId was not matched ordinally.'
+}
+finally {
+    Remove-Item -Recurse -Force $workspace -ErrorAction Ignore
+}
 
 $selected = Select-LatestMainTransportPackageVersion @(
     '0.0.0-branch.release.999',

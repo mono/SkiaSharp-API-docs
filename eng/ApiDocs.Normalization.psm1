@@ -1,41 +1,5 @@
 Set-StrictMode -Version Latest
 
-# Converts the legacy constructor and nested-type forms emitted by mdoc exports
-# into the standard DocId identities used by compiler XML and OpenPublishing.
-function Convert-MdocImportDocId([string] $DocId) {
-    if ([string]::IsNullOrEmpty($DocId)) {
-        return $DocId
-    }
-
-    $normalized = $DocId -replace '^C:([^(]+)(\(.*\))?$', 'M:$1.#ctor$2'
-    return $normalized.Replace('+', '.')
-}
-
-# Normalizes DocId-valued XML attributes without changing prose or XML structure.
-function Normalize-MdocImportDocumentation([string] $DocumentationPath) {
-    [xml] $documentation = Get-Content -Raw -Path $DocumentationPath
-    $changed = $false
-    foreach ($element in $documentation.SelectNodes('//*[@name or @cref]')) {
-        foreach ($attributeName in @('name', 'cref')) {
-            $attribute = $element.Attributes[$attributeName]
-            if ($null -eq $attribute) {
-                continue
-            }
-
-            $normalized = Convert-MdocImportDocId $attribute.Value
-            if ($normalized -ne $attribute.Value) {
-                $attribute.Value = $normalized
-                $changed = $true
-            }
-        }
-    }
-    if ($changed) {
-        $documentation.Save($DocumentationPath)
-    }
-
-    return $changed
-}
-
 # A known mdoc case-insensitive collision. The legacy type is explicitly marked
 # obsolete in the package API and mdoc can emit only one of the two identities.
 function Get-MdocObsoleteTypeCanonicalizations {
@@ -50,171 +14,123 @@ function Get-MdocObsoleteTypeCanonicalizations {
     )
 }
 
-function Get-XmlDocIdValues([xml] $Document) {
-    return @(
-        $Document.SelectNodes('//*[@Value]') |
-        Where-Object { $_.GetAttribute('Language') -eq 'DocId' } |
-        ForEach-Object { $_.GetAttribute('Value') }
-    )
-}
+function Remove-CompilerXmlMarkdownIndentation([System.Xml.XmlElement] $Member) {
+    foreach ($format in $Member.SelectNodes('.//format[@type="text/markdown"]')) {
+        foreach ($textNode in @($format.ChildNodes | Where-Object {
+            $_.NodeType -in @([System.Xml.XmlNodeType]::Text, [System.Xml.XmlNodeType]::CDATA)
+        })) {
+            $indents = @(
+                [regex]::Matches($textNode.Value, '(?m)^(?<indent>[ \t]+)\S') |
+                ForEach-Object { $_.Groups['indent'].Value }
+            )
+            if ($indents.Count -eq 0) {
+                continue
+            }
 
-function Test-ShouldExcludeExplicitInterfaceMember(
-    [bool[]] $AccessorIsPublic,
-    [bool] $HasPublicImplementation
-) {
-    return $AccessorIsPublic.Count -gt 0 -and
-        -not ($AccessorIsPublic -contains $true) -and
-        -not $HasPublicImplementation
-}
-
-function Test-ShouldExcludeGeneratedResourceConstructor(
-    [string] $BaseTypeName
-) {
-    return $BaseTypeName -eq '_Microsoft.Android.Resource.Designer.Resource'
-}
-
-function Get-MetadataTypeFullName([Reflection.Metadata.MetadataReader] $Metadata, [Reflection.Metadata.TypeDefinitionHandle] $TypeHandle) {
-    $type = $Metadata.GetTypeDefinition($TypeHandle)
-    $name = $Metadata.GetString($type.Name)
-    $declaringType = $type.GetDeclaringType()
-    if ($declaringType.IsNil) {
-        $namespace = $Metadata.GetString($type.Namespace)
-        if ($namespace) {
-            return "$namespace.$name"
-        }
-        return $name
-    }
-
-    return "$(Get-MetadataTypeFullName $Metadata $declaringType).$name"
-}
-
-# Returns DocIds for explicit-interface members whose implementation methods
-# are all non-public in the shipped metadata.
-function Get-NonPublicExplicitInterfaceMemberDocIds([string[]] $AssemblyPaths) {
-    $accessorsByDocId = @{}
-    foreach ($assemblyPath in $AssemblyPaths) {
-        $stream = [IO.File]::OpenRead($assemblyPath)
-        try {
-            $peReader = [Reflection.PortableExecutable.PEReader]::new($stream)
-            try {
-                if (-not $peReader.HasMetadata) {
-                    continue
-                }
-                $metadata = [Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($peReader)
-                foreach ($typeHandle in $metadata.TypeDefinitions) {
-                    $type = $metadata.GetTypeDefinition($typeHandle)
-                    $typeName = Get-MetadataTypeFullName $metadata $typeHandle
-                    foreach ($methodHandle in $type.GetMethods()) {
-                        $method = $metadata.GetMethodDefinition($methodHandle)
-                        $methodName = $metadata.GetString($method.Name)
-                        $match = [regex]::Match($methodName, '^(?<interface>.+)\.(?<accessor>get_|set_|add_|remove_)(?<member>.+)$')
-                        if (-not $match.Success) {
-                            continue
-                        }
-
-                        $prefix = if ($match.Groups['accessor'].Value -in @('get_', 'set_')) { 'P' } else { 'E' }
-                        $interfaceName = $match.Groups['interface'].Value.Replace('.', '#')
-                        $docId = "${prefix}:$typeName.$interfaceName#$($match.Groups['member'].Value)"
-                        if (-not $accessorsByDocId.ContainsKey($docId)) {
-                            $accessorsByDocId[$docId] = @()
-                        }
-                        $accessorsByDocId[$docId] += $method.Attributes.HasFlag([Reflection.MethodAttributes]::Public)
-                        $publicImplementationName = "$($match.Groups['accessor'].Value)$($match.Groups['member'].Value)"
-                        $hasPublicImplementation = @(
-                            $type.GetMethods() |
-                            ForEach-Object { $metadata.GetMethodDefinition($_) } |
-                            Where-Object {
-                                $metadata.GetString($_.Name) -eq $publicImplementationName -and
-                                $_.Attributes.HasFlag([Reflection.MethodAttributes]::Public)
-                            }
-                        ).Count -gt 0
-                        if ($hasPublicImplementation) {
-                            # Preserve the public API even if metadata also has
-                            # a private explicit-interface forwarding accessor.
-                            $accessorsByDocId[$docId] += $true
-                        }
+            $commonIndent = $indents[0]
+            if ($indents.Count -gt 1) {
+                foreach ($indent in $indents[1..($indents.Count - 1)]) {
+                    $length = [Math]::Min($commonIndent.Length, $indent.Length)
+                    $index = 0
+                    while ($index -lt $length -and $commonIndent[$index] -eq $indent[$index]) {
+                        $index++
+                    }
+                    $commonIndent = $commonIndent.Substring(0, $index)
+                    if ($commonIndent.Length -eq 0) {
+                        break
                     }
                 }
             }
-            finally {
-                $peReader.Dispose()
+            if ($commonIndent.Length -gt 0) {
+                $textNode.Value = $textNode.Value -replace "(?m)^$([regex]::Escape($commonIndent))", ''
             }
-        }
-        finally {
-            $stream.Dispose()
         }
     }
-
-    return @(
-        $accessorsByDocId.GetEnumerator() |
-        Where-Object { Test-ShouldExcludeExplicitInterfaceMember $_.Value $false } |
-        ForEach-Object Key
-    )
 }
 
-# Returns synthetic constructors emitted by mdoc for resource-designer types
-# that have no public instance constructor in package metadata.
-function Get-GeneratedResourceDesignerConstructorDocIds([string[]] $AssemblyPaths) {
-    $docIds = @()
-    foreach ($assemblyPath in $AssemblyPaths) {
-        $stream = [IO.File]::OpenRead($assemblyPath)
-        try {
-            $peReader = [Reflection.PortableExecutable.PEReader]::new($stream)
-            try {
-                if (-not $peReader.HasMetadata) {
-                    continue
-                }
-                $metadata = [Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($peReader)
-                foreach ($typeHandle in $metadata.TypeDefinitions) {
-                    $type = $metadata.GetTypeDefinition($typeHandle)
-                    $baseType = $type.BaseType
-                    if ($baseType.Kind -ne [Reflection.Metadata.HandleKind]::TypeReference) {
-                        continue
-                    }
-                    $baseTypeReference = $metadata.GetTypeReference([Reflection.Metadata.TypeReferenceHandle]$baseType)
-                    $baseTypeName = "$($metadata.GetString($baseTypeReference.Namespace)).$($metadata.GetString($baseTypeReference.Name))"
-                    if (Test-ShouldExcludeGeneratedResourceConstructor $baseTypeName) {
-                        $docIds += "M:$(Get-MetadataTypeFullName $metadata $typeHandle).#ctor"
-                    }
-                }
-            }
-            finally {
-                $peReader.Dispose()
-            }
-        }
-        finally {
-            $stream.Dispose()
-        }
-    }
-    return $docIds
-}
-
-# Removes only metadata-proven implementation details from disposable mdoc
-# staging output. No existing documentation tree content is consulted.
-function Remove-GeneratedMemberDocIds([string] $OutputRoot, [string[]] $DocIds) {
-    $removed = @()
-    foreach ($file in Get-ChildItem -Path $OutputRoot -Filter '*.xml' -File -Recurse) {
-        [xml] $document = Get-Content -Raw -Path $file.FullName
-        if ($document.DocumentElement.LocalName -ne 'Type') {
+# Imports package compiler XML into clean mdoc ECMA output by exact DocId.
+# It has no fallback to repository XML and does not perform identity rewrites.
+function Import-CompilerXmlDocumentation([string] $OutputRoot, [string[]] $DocumentationPaths) {
+    $compilerDocs = [Collections.Generic.Dictionary[string, System.Xml.XmlElement]]::new([StringComparer]::Ordinal)
+    $compilerDocSources = [Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
+    foreach ($documentationPath in $DocumentationPaths) {
+        [xml] $compilerDocument = Get-Content -Raw -Path $documentationPath
+        if ($compilerDocument.DocumentElement.LocalName -ne 'doc') {
             continue
         }
-        foreach ($member in $document.SelectNodes('/Type/Members/Member')) {
-            $docId = $member.SelectSingleNode('./MemberSignature[@Language="DocId"]').GetAttribute('Value')
-            $shouldRemove = $false
-            foreach ($candidateDocId in $DocIds) {
-                if ([string]::Equals($candidateDocId, $docId, [StringComparison]::Ordinal)) {
-                    $shouldRemove = $true
-                    break
-                }
+        foreach ($member in $compilerDocument.SelectNodes('/doc/members/member')) {
+            $docId = $member.GetAttribute('name')
+            if ([string]::IsNullOrWhiteSpace($docId)) {
+                throw "Compiler XML '$documentationPath' contains a member without a DocId."
             }
-            if ($shouldRemove) {
-                [void]$member.ParentNode.RemoveChild($member)
-                $removed += $docId
+            Remove-CompilerXmlMarkdownIndentation $member
+            if ($compilerDocs.ContainsKey($docId) -and
+                $compilerDocSources[$docId] -eq $documentationPath -and
+                $compilerDocs[$docId].OuterXml -cne $member.OuterXml) {
+                throw "Compiler XML '$documentationPath' has conflicting content for exact DocId '$docId'."
             }
+            # mdoc framework imports are ordered; later framework-specific XML
+            # deliberately supersedes an earlier duplicate for the same API.
+            $compilerDocs[$docId] = $member
+            $compilerDocSources[$docId] = $documentationPath
         }
-        $document.Save($file.FullName)
     }
-    return $removed
+
+    $imported = @()
+    foreach ($file in Get-ChildItem -Path $OutputRoot -Filter '*.xml' -File -Recurse) {
+        [xml] $ecmaDocument = Get-Content -Raw -Path $file.FullName
+        if ($ecmaDocument.DocumentElement.LocalName -ne 'Type') {
+            continue
+        }
+        foreach ($api in @($ecmaDocument.DocumentElement) + @($ecmaDocument.SelectNodes('/Type/Members/Member'))) {
+            $signatureName = if ($api.LocalName -eq 'Type') { 'TypeSignature' } else { 'MemberSignature' }
+            $signature = $api.SelectSingleNode("./$signatureName[@Language=""DocId""]")
+            if ($null -eq $signature) {
+                continue
+            }
+            $docId = $signature.GetAttribute('Value')
+            if (-not $compilerDocs.ContainsKey($docId)) {
+                continue
+            }
+            $docs = $api.SelectSingleNode('./Docs')
+            if ($null -eq $docs) {
+                $docs = $ecmaDocument.CreateElement('Docs')
+                [void]$api.AppendChild($docs)
+            }
+            $docs.RemoveAll()
+            $documentationElementOrder = @{
+                'typeparam' = 0
+                'param' = 1
+                'summary' = 2
+                'value' = 3
+                'returns' = 4
+                'remarks' = 5
+                'exception' = 6
+                'seealso' = 7
+                'altmember' = 8
+            }
+            $nodes = @($compilerDocs[$docId].ChildNodes | Where-Object {
+                $_.NodeType -eq [System.Xml.XmlNodeType]::Element
+            })
+            for ($index = 0; $index -lt $nodes.Count; $index++) {
+                $nodes[$index] | Add-Member -NotePropertyName ImportOrder -NotePropertyValue $index
+            }
+            foreach ($node in $nodes | Sort-Object @{
+                Expression = {
+                    if ($documentationElementOrder.ContainsKey($_.LocalName)) {
+                        $documentationElementOrder[$_.LocalName]
+                    } else {
+                        [int]::MaxValue
+                    }
+                }
+            }, ImportOrder) {
+                [void]$docs.AppendChild($ecmaDocument.ImportNode($node, $true))
+            }
+            $imported += $docId
+        }
+        $ecmaDocument.Save($file.FullName)
+    }
+    return $imported
 }
 
 # Removes only an explicitly verified obsolete mdoc collision before the
@@ -251,13 +167,7 @@ function Remove-MdocObsoleteTypeCollision(
 }
 
 Export-ModuleMember -Function `
-    Convert-MdocImportDocId, `
-    Normalize-MdocImportDocumentation, `
     Get-MdocObsoleteTypeCanonicalizations, `
-    Get-XmlDocIdValues, `
-    Test-ShouldExcludeExplicitInterfaceMember, `
-    Test-ShouldExcludeGeneratedResourceConstructor, `
-    Get-NonPublicExplicitInterfaceMemberDocIds, `
-    Get-GeneratedResourceDesignerConstructorDocIds, `
-    Remove-GeneratedMemberDocIds, `
+    Remove-CompilerXmlMarkdownIndentation, `
+    Import-CompilerXmlDocumentation, `
     Remove-MdocObsoleteTypeCollision
