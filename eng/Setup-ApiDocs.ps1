@@ -311,6 +311,20 @@ foreach ($package in $managedPackages | Sort-Object Id, Path) {
         }
     }
 }
+$assetsByIdentity = @{}
+foreach ($selectedAsset in $selectedAssets) {
+    $identity = "$($selectedAsset.packageId)`n$($selectedAsset.asset)"
+    if ($assetsByIdentity.ContainsKey($identity)) {
+        $existing = $assetsByIdentity[$identity]
+        if ($existing.sha256 -cne $selectedAsset.sha256 -or
+            $existing.documentationSha256 -cne $selectedAsset.documentationSha256) {
+            throw "Transport package set contains conflicting copies of '$($selectedAsset.packageId):$($selectedAsset.asset)'."
+        }
+        continue
+    }
+    $assetsByIdentity[$identity] = $selectedAsset
+}
+$selectedAssets = @($assetsByIdentity.Values | Sort-Object packageId, asset)
 Remove-Item -Recurse -Force $productMetadataRoot
 Remove-Item -Recurse -Force $resolverRestoreRoot -ErrorAction Ignore
 
