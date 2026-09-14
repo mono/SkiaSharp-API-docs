@@ -1,7 +1,7 @@
-<Type Name="GrVkYcbcrConversionInfo" FullName="SkiaSharp.GrVkYcbcrConversionInfo">
-  <TypeSignature Language="C#" Value="public struct GrVkYcbcrConversionInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit GrVkYcbcrConversionInfo extends System.ValueType" />
-  <TypeSignature Language="DocId" Value="T:SkiaSharp.GrVkYcbcrConversionInfo" />
+<Type Name="GRVkYcbcrConversionInfo" FullName="SkiaSharp.GRVkYcbcrConversionInfo">
+  <TypeSignature Language="C#" Value="public struct GRVkYcbcrConversionInfo : IEquatable&lt;SkiaSharp.GRVkYcbcrConversionInfo&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit GRVkYcbcrConversionInfo extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.GRVkYcbcrConversionInfo&gt;" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.GRVkYcbcrConversionInfo" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>4.154.0.0</AssemblyVersion>
@@ -10,21 +10,43 @@
     <BaseTypeName>System.ValueType</BaseTypeName>
   </Base>
   <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.GRVkYcbcrConversionInfo&gt;</InterfaceName>
+    </Interface>
   </Interfaces>
-  <Attributes>
-    <Attribute>
-      <AttributeName Language="C#">[System.Obsolete("Use GRVkYcbcrConversionInfo instead.")]</AttributeName>
-    </Attribute>
-  </Attributes>
   <Docs>
-    <summary>Represents legacy Vulkan YCbCr conversion information.</summary>
-    <remarks />
+    <summary>Describes the parameters for Vulkan YCbCr sampler conversion.</summary>
+    <remarks><![CDATA[
+## Remarks
+
+`GRVkYcbcrConversionInfo` provides the Vulkan-specific parameters required to create a `VkSamplerYcbcrConversion` object. It is used when creating GPU-backed surfaces or images that use a YCbCr color model, such as Android hardware buffers with YUV formats.
+
+The properties map directly to fields in `VkSamplerYcbcrConversionCreateInfo`.
+
+## Examples
+
+Creating a basic YCbCr conversion info for a Vulkan YUV420 image:
+
+```csharp
+var conversionInfo = new GRVkYcbcrConversionInfo
+{
+    Format = 1000156003, // VK_FORMAT_G8_B8R8_2PLANE_420_UNORM
+    ExternalFormat = 0,
+    YcbcrModel = 1,      // VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709
+    YcbcrRange = 0,      // VK_SAMPLER_YCBCR_RANGE_ITU_FULL
+    ChromaFilter = 1,    // VK_FILTER_LINEAR
+    XChromaOffset = 0,
+    YChromaOffset = 0,
+    ForceExplicitReconstruction = 0,
+};
+```
+]]></remarks>
   </Docs>
   <Members>
     <Member MemberName="ChromaFilter">
       <MemberSignature Language="C#" Value="public uint ChromaFilter { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 ChromaFilter" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.ChromaFilter" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.ChromaFilter" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -39,15 +61,15 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the chroma filter.</summary>
-        <value>The chroma filter.</value>
-        <remarks />
+        <summary>Gets or sets the chroma filter used when reconstructing YCbCr chroma values.</summary>
+        <value>A raw <c>VkFilter</c> value specifying the filter applied when reconstructing chroma.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Components">
       <MemberSignature Language="C#" Value="public SkiaSharp.GRVkYcbcrComponents Components { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.GRVkYcbcrComponents Components" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.Components" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.Components" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -62,9 +84,9 @@
         <ReturnType>SkiaSharp.GRVkYcbcrComponents</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the YCbCr component mapping.</summary>
-        <value>The YCbcr component mapping.</value>
-        <remarks />
+        <summary>Gets or sets the component mapping for this YCbCr conversion.</summary>
+        <value>A <see cref="T:SkiaSharp.GRVkYcbcrComponents" /> describing the channel swizzle mapping for this conversion.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -75,6 +97,10 @@
       <Implements>
         <InterfaceMember>M:System.IEquatable`1.Equals(`0)</InterfaceMember>
       </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
@@ -91,7 +117,7 @@
         <summary>Indicates whether this conversion info is equal to another <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" />.</summary>
         <returns>
           <see langword="true" /> if both instances have identical conversion parameters; otherwise, <see langword="false" />.</returns>
-        <remarks />
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -99,6 +125,10 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.GRVkYcbcrConversionInfo.Equals(System.Object)" />
       <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
@@ -115,13 +145,13 @@
         <summary>Indicates whether this conversion info is equal to the specified object.</summary>
         <returns>
           <see langword="true" /> if <paramref name="obj" /> is a <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> with identical conversion parameters; otherwise, <see langword="false" />.</returns>
-        <remarks />
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ExternalFormat">
       <MemberSignature Language="C#" Value="public ulong ExternalFormat { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int64 ExternalFormat" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.ExternalFormat" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.ExternalFormat" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -136,15 +166,15 @@
         <ReturnType>System.UInt64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the external Vulkan format.</summary>
-        <value>The external Vulkan format.</value>
-        <remarks />
+        <summary>Gets or sets the Vulkan external format for this YCbCr conversion.</summary>
+        <value>The Vulkan external format identifier, or <c>0</c> if no external format is used.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ForceExplicitReconstruction">
       <MemberSignature Language="C#" Value="public uint ForceExplicitReconstruction { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 ForceExplicitReconstruction" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.ForceExplicitReconstruction" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.ForceExplicitReconstruction" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -159,15 +189,16 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the explicit reconstruction setting.</summary>
-        <value>The explicit reconstruction setting.</value>
-        <remarks />
+        <summary>Gets or sets whether explicit chroma reconstruction is required.</summary>
+        <value>
+          <c>1</c> to require explicit chroma reconstruction; <c>0</c> to allow implicit reconstruction.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Format">
       <MemberSignature Language="C#" Value="public uint Format { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 Format" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.Format" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.Format" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -182,34 +213,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the Vulkan format.</summary>
-        <value>The Vulkan format.</value>
-        <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="FormatFeatures">
-      <MemberSignature Language="C#" Value="public uint FormatFeatures { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 FormatFeatures" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.FormatFeatures" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>4.154.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName Language="C#">[System.Obsolete("FormatFeatures is no longer supported in the native API.")]</AttributeName>
-        </Attribute>
-        <Attribute>
-          <AttributeName Language="C#">[get: System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>System.UInt32</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>Gets or sets the legacy format features.</summary>
-        <value>The legacy format features.</value>
-        <remarks />
+        <summary>Gets or sets the Vulkan image format for this YCbCr conversion.</summary>
+        <value>A raw <c>VkFormat</c> value identifying the Vulkan image format used by this conversion.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -217,6 +223,10 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.GRVkYcbcrConversionInfo.GetHashCode" />
       <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
       <Attributes>
         <Attribute>
           <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
@@ -229,7 +239,7 @@
       <Docs>
         <summary>Returns a hash code for this conversion info.</summary>
         <returns>A hash code for this <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> instance.</returns>
-        <remarks />
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
@@ -237,6 +247,10 @@
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.GRVkYcbcrConversionInfo left, valuetype SkiaSharp.GRVkYcbcrConversionInfo right) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.GRVkYcbcrConversionInfo.op_Equality(SkiaSharp.GRVkYcbcrConversionInfo,SkiaSharp.GRVkYcbcrConversionInfo)" />
       <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -250,49 +264,7 @@
         <summary>Determines whether two <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> values are equal.</summary>
         <returns>
           <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
-        <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.GRVkYcbcrConversionInfo (SkiaSharp.GrVkYcbcrConversionInfo value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.GRVkYcbcrConversionInfo op_Implicit(valuetype SkiaSharp.GrVkYcbcrConversionInfo value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.GrVkYcbcrConversionInfo.op_Implicit(SkiaSharp.GrVkYcbcrConversionInfo)~SkiaSharp.GRVkYcbcrConversionInfo" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>4.154.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>SkiaSharp.GRVkYcbcrConversionInfo</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="value" Type="SkiaSharp.GrVkYcbcrConversionInfo" />
-      </Parameters>
-      <Docs>
-        <param name="value">The legacy conversion information.</param>
-        <summary>Converts legacy YCbCr conversion information to Vulkan YCbCr conversion information.</summary>
-        <returns>The converted conversion information.</returns>
-        <remarks />
-      </Docs>
-    </Member>
-    <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static implicit operator SkiaSharp.GrVkYcbcrConversionInfo (SkiaSharp.GRVkYcbcrConversionInfo value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname valuetype SkiaSharp.GrVkYcbcrConversionInfo op_Implicit(valuetype SkiaSharp.GRVkYcbcrConversionInfo value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.GrVkYcbcrConversionInfo.op_Implicit(SkiaSharp.GRVkYcbcrConversionInfo)~SkiaSharp.GrVkYcbcrConversionInfo" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyVersion>4.154.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>SkiaSharp.GrVkYcbcrConversionInfo</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="value" Type="SkiaSharp.GRVkYcbcrConversionInfo" />
-      </Parameters>
-      <Docs>
-        <param name="value">The conversion information.</param>
-        <summary>Converts Vulkan YCbCr conversion information to legacy YCbCr conversion information.</summary>
-        <returns>The converted legacy conversion information.</returns>
-        <remarks />
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
@@ -300,6 +272,10 @@
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.GRVkYcbcrConversionInfo left, valuetype SkiaSharp.GRVkYcbcrConversionInfo right) cil managed" />
       <MemberSignature Language="DocId" Value="M:SkiaSharp.GRVkYcbcrConversionInfo.op_Inequality(SkiaSharp.GRVkYcbcrConversionInfo,SkiaSharp.GRVkYcbcrConversionInfo)" />
       <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
@@ -313,13 +289,13 @@
         <summary>Determines whether two <see cref="T:SkiaSharp.GRVkYcbcrConversionInfo" /> values are not equal.</summary>
         <returns>
           <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, <see langword="false" />.</returns>
-        <remarks />
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SamplerFilterMustMatchChromaFilter">
       <MemberSignature Language="C#" Value="public bool SamplerFilterMustMatchChromaFilter { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool SamplerFilterMustMatchChromaFilter" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.SamplerFilterMustMatchChromaFilter" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.SamplerFilterMustMatchChromaFilter" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -334,16 +310,16 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating whether the sampler filter must match the chroma filter.</summary>
+        <summary>Gets or sets whether the sampler filter must match the chroma reconstruction filter.</summary>
         <value>
           <see langword="true" /> if the sampler filter must match the chroma filter; otherwise, <see langword="false" />.</value>
-        <remarks />
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SupportsLinearFilter">
       <MemberSignature Language="C#" Value="public bool SupportsLinearFilter { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool SupportsLinearFilter" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.SupportsLinearFilter" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.SupportsLinearFilter" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -358,16 +334,16 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets a value indicating whether linear filtering is supported.</summary>
+        <summary>Gets or sets whether linear filtering is supported for this YCbCr conversion.</summary>
         <value>
-          <see langword="true" /> if linear filtering is supported; otherwise, <see langword="false" />.</value>
-        <remarks />
+          <see langword="true" /> if linear filtering is supported for this YCbCr conversion; otherwise, <see langword="false" />.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="XChromaOffset">
       <MemberSignature Language="C#" Value="public uint XChromaOffset { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 XChromaOffset" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.XChromaOffset" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.XChromaOffset" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -382,15 +358,15 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the X chroma offset.</summary>
-        <value>The X chroma offset.</value>
-        <remarks />
+        <summary>Gets or sets the horizontal chroma sample location offset.</summary>
+        <value>A raw <c>VkChromaLocation</c> value for the horizontal chroma sample position.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="YcbcrModel">
       <MemberSignature Language="C#" Value="public uint YcbcrModel { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 YcbcrModel" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.YcbcrModel" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.YcbcrModel" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -405,15 +381,15 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the YCbCr model conversion.</summary>
-        <value>The YCbCr model conversion.</value>
-        <remarks />
+        <summary>Gets or sets the YCbCr color model conversion.</summary>
+        <value>A raw <c>VkSamplerYcbcrModelConversion</c> value identifying the YCbCr color model.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="YcbcrRange">
       <MemberSignature Language="C#" Value="public uint YcbcrRange { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 YcbcrRange" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.YcbcrRange" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.YcbcrRange" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -428,15 +404,15 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the YCbCr range.</summary>
-        <value>The YCbCr range.</value>
-        <remarks />
+        <summary>Gets or sets the quantization range of the encoded YCbCr values.</summary>
+        <value>A raw <c>VkSamplerYcbcrRange</c> value indicating whether the data uses full or narrow/ITU range.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="YChromaOffset">
       <MemberSignature Language="C#" Value="public uint YChromaOffset { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance unsigned int32 YChromaOffset" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GrVkYcbcrConversionInfo.YChromaOffset" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRVkYcbcrConversionInfo.YChromaOffset" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp</AssemblyName>
@@ -451,9 +427,9 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets or sets the Y chroma offset.</summary>
-        <value>The Y chroma offset.</value>
-        <remarks />
+        <summary>Gets or sets the vertical chroma sample location offset.</summary>
+        <value>A raw <c>VkChromaLocation</c> value for the vertical chroma sample position.</value>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

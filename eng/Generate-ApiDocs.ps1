@@ -46,6 +46,76 @@ function Get-Moniker([string] $packageId) {
     return $packageId.ToLowerInvariant().Replace('.', '-')
 }
 
+function Get-AndroidDesignerResourceTypes([string] $root) {
+    $types = [Collections.Generic.List[string]]::new()
+    foreach ($file in Get-ChildItem -LiteralPath $root -Filter '*.xml' -File -Recurse) {
+        if ($file.Directory.Name -eq 'FrameworksIndex') {
+            continue
+        }
+        $document = [Xml.XmlDocument]::new()
+        $document.Load($file.FullName)
+        $baseType = $document.SelectSingleNode('/Type/Base/BaseTypeName')
+        if ($null -eq $baseType -or $baseType.InnerText -ne '_Microsoft.Android.Resource.Designer.Resource') {
+            continue
+        }
+        [void]$types.Add($document.DocumentElement.GetAttribute('FullName'))
+    }
+    return @($types)
+}
+
+function Remove-GeneratedTypes([string] $root, [string[]] $typeNames) {
+    $typeNameSet = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($typeName in $typeNames) {
+        [void]$typeNameSet.Add($typeName)
+    }
+    $removedTypes = [Collections.Generic.List[string]]::new()
+    foreach ($file in Get-ChildItem -LiteralPath $root -Filter '*.xml' -File -Recurse) {
+        if ($file.Directory.Name -eq 'FrameworksIndex') {
+            continue
+        }
+        $document = [Xml.XmlDocument]::new()
+        $document.PreserveWhitespace = $true
+        $document.Load($file.FullName)
+        if ($document.DocumentElement.LocalName -eq 'Overview') {
+            $changed = $false
+            foreach ($typeName in $typeNameSet) {
+                $lastDot = $typeName.LastIndexOf('.')
+                $namespaceName = $typeName.Substring(0, $lastDot)
+                $shortName = $typeName.Substring($lastDot + 1)
+                foreach ($node in @($document.SelectNodes("/Overview/Types/Namespace[@Name='$namespaceName']/Type[@Name='$shortName']"))) {
+                    [void]$node.ParentNode.RemoveChild($node)
+                    $changed = $true
+                }
+            }
+            if ($changed) {
+                $document.Save($file.FullName)
+            }
+            continue
+        }
+        $typeName = $document.DocumentElement.GetAttribute('FullName')
+        if ($typeNameSet.Contains($typeName)) {
+            Remove-Item -LiteralPath $file.FullName -Force
+            [void]$removedTypes.Add($typeName)
+        }
+    }
+    foreach ($file in Get-ChildItem -LiteralPath (Join-Path $root 'FrameworksIndex') -Filter '*.xml' -File) {
+        $document = [Xml.XmlDocument]::new()
+        $document.PreserveWhitespace = $true
+        $document.Load($file.FullName)
+        $changed = $false
+        foreach ($typeName in $typeNameSet) {
+            foreach ($node in @($document.SelectNodes("//Type[@Id='T:$typeName']"))) {
+                [void]$node.ParentNode.RemoveChild($node)
+                $changed = $true
+            }
+        }
+        if ($changed) {
+            $document.Save($file.FullName)
+        }
+    }
+    return $removedTypes.ToArray()
+}
+
 # Find managed product assemblies and require the compiler XML beside every one.
 $assets = foreach ($assembly in @(Get-ChildItem -LiteralPath $ProductRoot -Filter '*.dll' -File -Recurse)) {
     $relativePath = $assembly.FullName.Substring($ProductRoot.Length).TrimStart([IO.Path]::DirectorySeparatorChar)
@@ -125,7 +195,11 @@ $libraryArguments = @('--lib', $DependencyRoot)
 foreach ($frameworkDirectory in Get-ChildItem -LiteralPath $frameworksRoot -Directory | Sort-Object Name) {
     $libraryArguments += @('--lib', $frameworkDirectory.FullName)
 }
-$arguments = @('update', '--delete', '--use-docid', '--out', $stagingRoot, '--frameworks', $frameworksPath) + $libraryArguments
+$compilerXmlArguments = foreach ($asset in $stagedAssets) {
+    @('--import', $asset.Documentation)
+}
+$arguments = @('update', '--delete', '--lang=DocId', '--out', $stagingRoot, '--frameworks', $frameworksPath) +
+    $libraryArguments + $compilerXmlArguments
 if ($MDocDebug) {
     $arguments += '--debug'
 }
@@ -137,11 +211,10 @@ finally {
     Pop-Location
 }
 
-# Import compiler XML prose for each selected assembly.
-foreach ($asset in $stagedAssets) {
-    $importArguments = @('update', '--use-docid', '--preserve', '--out', $stagingRoot) + $libraryArguments + @('--import', $asset.Documentation, $asset.StagedAssembly)
-    Invoke-MDoc -Arguments $importArguments
-}
+# Exclude generated resource scaffolding and the lowercase YCbCr compatibility type from published API output.
+$excludedTypes = @('SkiaSharp.GrVkYcbcrConversionInfo') + @(Get-AndroidDesignerResourceTypes $stagingRoot)
+$removedTypes = @(Remove-GeneratedTypes $stagingRoot ($excludedTypes | Sort-Object -Unique))
+Write-Host "Removed $($removedTypes.Count) excluded generated type(s)."
 
 # Replace generated API output while preserving only non-ECMA publishing infrastructure.
 $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
