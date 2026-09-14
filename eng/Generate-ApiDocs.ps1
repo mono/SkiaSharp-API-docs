@@ -139,7 +139,7 @@ finally {
 
 # Import compiler XML prose for each selected assembly.
 foreach ($asset in $stagedAssets) {
-    $importArguments = @('update', '--preserve', '--out', $stagingRoot) + $libraryArguments + @('--import', $asset.Documentation, $asset.StagedAssembly)
+    $importArguments = @('update', '--use-docid', '--preserve', '--out', $stagingRoot) + $libraryArguments + @('--import', $asset.Documentation, $asset.StagedAssembly)
     Invoke-MDoc -Arguments $importArguments
 }
 
