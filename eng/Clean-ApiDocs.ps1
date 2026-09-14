@@ -9,12 +9,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 # These files belong to the OpenPublishing docset rather than generated ECMA output.
-$preservedOutputItems = @(
-    'docfx.json',
-    '_filter.xml',
-    'SkiaSharpAPI-breadcrumb',
-    'xml'
-)
+$preservedOutputItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
 
 if (Test-Path -LiteralPath $OutputRoot -PathType Container) {
     Get-ChildItem -LiteralPath $OutputRoot -Force |
