@@ -95,8 +95,8 @@ foreach ($asset in $selectedAssets) {
     )
 }
 
-# Replace only generated API output and preserve docset infrastructure and deferred Uno pages.
-$preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml', 'SkiaSharp.Views.Windows')
+# Replace generated API output while preserving only non-ECMA publishing infrastructure.
+$preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
 Get-ChildItem -LiteralPath $OutputRoot -Force |
     Where-Object { $_.Name -notin $preservedItems } |
     Remove-Item -Recurse -Force
