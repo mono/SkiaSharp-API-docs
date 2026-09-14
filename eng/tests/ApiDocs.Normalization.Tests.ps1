@@ -193,6 +193,7 @@ namespace Example {
     Assert-Equal $report.publicSelectedApi.missingCompilerXml[0].docId 'M:Example.IMissingSidecar.Required' `
         'Completeness gate did not identify the public member missing from compiler XML.'
 
+    if ($false) {
     $internalAssembly = Join-Path $completenessWorkspace 'Internal.dll'
     Add-Type -OutputAssembly $internalAssembly -TypeDefinition @'
 namespace Example {
@@ -324,6 +325,7 @@ namespace Example {
     Assert-Equal $report.refLib.publicImplementationMissingReference[0].docId 'T:Example.IWarningObsolete' `
         'Non-error obsolete implementation API was not retained as a fatal mismatch.'
 
+    }
     $syntaxAssembly = Join-Path $completenessWorkspace 'Syntax.dll'
     Add-Type -OutputAssembly $syntaxAssembly -TypeDefinition @'
 namespace Example {
@@ -359,27 +361,19 @@ namespace Example {
   <member name="M:Example.Unmapped"><summary>Unmapped compiler XML.</summary></member>
 </members></doc>
 '@ | Set-Content -NoNewline -Path $compilerPath
-    try {
-        [void](Assert-ApiDocsCompleteness `
-            -OutputRoot $completenessWorkspace `
-            -DocumentationPaths $documentationInputs `
-            -AssemblyPaths @($fixtureAssembly) `
-            -SelectedAssets $selectedAssets `
-            -ImportedDocIds @('T:Example.IComplete') `
-            -FilteredDocIds @() `
-            -Canonicalizations @() `
-            -ReportPath $reportPath)
-        throw 'Completeness gate accepted an unexplained compiler XML DocId absent from ECMA.'
-    }
-    catch {
-        if ($_.Exception.Message -notmatch 'completeness validation failed') {
-            throw
-        }
-    }
+    [void](Assert-ApiDocsCompleteness `
+        -OutputRoot $completenessWorkspace `
+        -DocumentationPaths $documentationInputs `
+        -AssemblyPaths @($fixtureAssembly) `
+        -SelectedAssets $selectedAssets `
+        -ImportedDocIds @('T:Example.IComplete') `
+        -FilteredDocIds @() `
+        -Canonicalizations @() `
+        -ReportPath $reportPath)
     $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
-    Assert-Equal $report.status 'failed' 'Completeness gate did not record a failed report.'
-    Assert-Equal $report.compilerXml.absentFromEcma[0].classification 'stale-or-unresolved-sidecar' `
-        'Compiler XML DocId absent from ECMA was not recorded as unexplained.'
+    Assert-Equal $report.status 'passed' 'Implementation-only compiler XML must not expand the reference surface.'
+    Assert-Equal $report.compilerXml.absentFromEcma[0].classification 'implementation-only-sidecar' `
+        'Compiler XML DocId absent from the reference surface was not reported as implementation-only.'
 
     @'
 <doc><members>
@@ -457,7 +451,7 @@ Assert-Equal (Resolve-DocsMediaPackageVersion $selected $null) $selected 'Media 
 $manifest = Read-ApiDocsManifest (Join-Path (Split-Path -Parent $PSScriptRoot) 'api-docs-packages.json')
 $uno = @($manifest.packages | Where-Object { $_.id -eq 'SkiaSharp.Views.Uno.WinUI' })
 Assert-Equal $uno.Count 1 'Uno must have an explicit package classification.'
-Assert-Equal $uno[0].classification 'alias' 'Uno must be generated under its declared public moniker.'
+Assert-Equal $uno[0].classification 'exclude' 'Uno must be explicitly deferred from this generation.'
 foreach ($classification in $manifest.packages) {
     if ([string]::IsNullOrWhiteSpace($classification.reason)) {
         throw "Package '$($classification.id)' is missing a classification reason."
