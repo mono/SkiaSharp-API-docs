@@ -23,7 +23,6 @@ Set-StrictMode -Version Latest
 function Invoke-MDoc {
     param(
         [Parameter(Mandatory)][string[]] $Arguments,
-        [switch] $Download,
         [string] $Version = '5.9.3',
         [string] $ToolsRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/downloads/tools')
     )
@@ -32,10 +31,6 @@ function Invoke-MDoc {
     $toolRoot = Join-Path $ToolsRoot "mdoc/$Version"
     $mdoc = Join-Path $toolRoot 'tools/net6.0/mdoc.dll'
     if (-not (Test-Path -LiteralPath $mdoc -PathType Leaf)) {
-        if (-not $Download) {
-            throw "mdoc $Version is not installed. Run './eng/MDoc.ps1 --version' first."
-        }
-
         # Acquire the pinned mdoc package from the public engineering feed.
         New-Item -ItemType Directory -Force $ToolsRoot | Out-Null
         dotnet package download "mdoc@$Version" --source 'https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json' --output $ToolsRoot
@@ -61,5 +56,5 @@ else {
     @($MyInvocation.UnboundArguments)
 }
 if (@($forwardedArguments).Count -gt 0) {
-    Invoke-MDoc -Arguments $forwardedArguments -Download
+    Invoke-MDoc -Arguments $forwardedArguments
 }

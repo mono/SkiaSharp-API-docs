@@ -71,7 +71,7 @@ if ($selectedAssets.Count -eq 0) {
 }
 
 # Generate ECMA structure into a disposable staging directory.
-$stagingRoot = Join-Path (Split-Path -Parent $OutputRoot) '.SkiaSharpAPI.staging'
+$stagingRoot = Join-Path $WorkspaceRoot 'staging'
 Remove-Item -Recurse -Force $stagingRoot -ErrorAction Ignore
 New-Item -ItemType Directory -Force $stagingRoot | Out-Null
 

@@ -13,9 +13,7 @@ $preservedOutputItems = @(
     'docfx.json',
     '_filter.xml',
     'SkiaSharpAPI-breadcrumb',
-    'images',
-    'xml',
-    'SkiaSharp.Views.Windows'
+    'xml'
 )
 
 if (Test-Path -LiteralPath $OutputRoot -PathType Container) {
