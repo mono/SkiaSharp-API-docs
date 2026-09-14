@@ -83,20 +83,54 @@ function Get-CompilerXmlDocumentationEntries([object[]] $DocumentationPaths) {
     return @($entries)
 }
 
-function Get-SelectedAssemblyPublicDocIds([string[]] $AssemblyPaths) {
+function Get-SelectedAssemblyDocIds([string[]] $AssemblyPaths, [switch] $IncludeNonPublic) {
     Initialize-ApiDocsDocIdEnumerator
     $docIds = @{}
     foreach ($assemblyPath in $AssemblyPaths | Sort-Object -Unique) {
-        foreach ($entry in [SkiaSharp.ApiDocs.PublicApiDocIdEnumerator]::Enumerate($assemblyPath)) {
+        $entries = if ($IncludeNonPublic) {
+            [SkiaSharp.ApiDocs.PublicApiDocIdEnumerator]::EnumerateAll($assemblyPath)
+        } else {
+            [SkiaSharp.ApiDocs.PublicApiDocIdEnumerator]::Enumerate($assemblyPath)
+        }
+        foreach ($entry in $entries) {
             if (-not $docIds.ContainsKey($entry.DocId)) {
                 [void]($docIds[$entry.DocId] = [PSCustomObject]@{
                     docId = $entry.DocId; assembly = $entry.Assembly
                     metadataToken = $entry.MetadataToken; signature = $entry.Signature
                 })
             }
+
         }
     }
     return [PSCustomObject]@{ ByDocId = $docIds }
+}
+
+function Get-SelectedAssemblyPublicDocIds([string[]] $AssemblyPaths) {
+    return Get-SelectedAssemblyDocIds $AssemblyPaths
+}
+
+function Get-SelectedAssemblyReferencedTypes([string[]] $AssemblyPaths) {
+    Initialize-ApiDocsDocIdEnumerator
+    $types = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($assemblyPath in $AssemblyPaths | Sort-Object -Unique) {
+        foreach ($typeName in [SkiaSharp.ApiDocs.PublicApiDocIdEnumerator]::EnumerateReferencedTypes($assemblyPath)) {
+            [void]$types.Add($typeName)
+        }
+    }
+    return [PSCustomObject]@{ Types = $types }
+}
+
+function Get-DocIdDeclaringType([string] $DocId) {
+    $identity = $DocId.Substring(2)
+    if ($DocId.StartsWith('T:', [StringComparison]::Ordinal)) {
+        return $identity
+    }
+    $identity = $identity.Split(@('(', '~'), 2)[0]
+    $separator = $identity.LastIndexOf('.')
+    if ($separator -gt 0) {
+        return $identity.Substring(0, $separator)
+    }
+    return ''
 }
 
 function Test-CanonicalizedLegacyDocId([string] $DocId, [object[]] $Canonicalizations) {
@@ -131,6 +165,8 @@ function Assert-ApiDocsCompleteness(
     $ecmaEntries = @(Get-EcmaDocumentationEntries $OutputRoot)
     $compilerEntries = @(Get-CompilerXmlDocumentationEntries $DocumentationPaths)
     $metadataByDocId = (Get-SelectedAssemblyPublicDocIds $AssemblyPaths).ByDocId
+    $allMetadataByDocId = (Get-SelectedAssemblyDocIds $AssemblyPaths -IncludeNonPublic).ByDocId
+    $referencedTypes = (Get-SelectedAssemblyReferencedTypes $AssemblyPaths).Types
     $ecmaByDocId = @{}
     $invalidEcma = [Collections.Generic.List[object]]::new()
     foreach ($entry in $ecmaEntries) {
@@ -185,12 +221,14 @@ function Assert-ApiDocsCompleteness(
             'filtered-java-peer-infrastructure'
         } elseif (Test-CanonicalizedLegacyDocId $docId $Canonicalizations) {
             'mdoc-obsolete-type-collision'
-        } elseif ($null -eq $publicMetadata) {
-            'unexplained-sidecar-api'
+        } elseif ($null -ne $allMetadataByDocId[$docId]) {
+            'non-public-sidecar'
+        } elseif ($referencedTypes.Contains((Get-DocIdDeclaringType $docId))) {
+            'external-reference-sidecar'
         } elseif ($docId.StartsWith('N:', [StringComparison]::Ordinal)) {
             'non-ecma-documentation-kind'
         } else {
-            'unexplained'
+            'stale-or-unresolved-sidecar'
         }
         $absentCompilerDocs.Add([PSCustomObject]@{
             docId = $docId
@@ -198,7 +236,7 @@ function Assert-ApiDocsCompleteness(
             sources = @($compilerByDocId[$docId])
         })
     }
-    $unexplained = @($absentCompilerDocs | Where-Object classification -in @('unexplained', 'unexplained-sidecar-api'))
+    $unexplained = @($absentCompilerDocs | Where-Object classification -eq 'stale-or-unresolved-sidecar')
     $report = [ordered]@{
         schemaVersion = 1
         status = if ($invalidEcma.Count -eq 0 -and $unimportedCompilerDocs.Count -eq 0 -and
@@ -216,6 +254,9 @@ function Assert-ApiDocsCompleteness(
             uniqueDocIdCount = $compilerByDocId.Count
             unimportedDocIds = @($unimportedCompilerDocs | Sort-Object -Unique)
             absentFromEcma = @($absentCompilerDocs)
+            nonPublicSidecarCount = @($absentCompilerDocs | Where-Object classification -eq 'non-public-sidecar').Count
+            staleOrUnresolvedSidecarCount = @($absentCompilerDocs | Where-Object classification -eq 'stale-or-unresolved-sidecar').Count
+            externalReferenceSidecarCount = @($absentCompilerDocs | Where-Object classification -eq 'external-reference-sidecar').Count
         }
         publicSelectedApi = [ordered]@{
             count = $metadataByDocId.Count

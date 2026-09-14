@@ -10,11 +10,33 @@ public sealed class PublicApiDocId
     public string Assembly { get; init; } = "";
     public int MetadataToken { get; init; }
     public string Signature { get; init; } = "";
+    public bool IsPublic { get; init; }
 }
 
 public static class PublicApiDocIdEnumerator
 {
     public static IReadOnlyList<PublicApiDocId> Enumerate(string assemblyPath)
+        => Enumerate(assemblyPath, false);
+
+    public static IReadOnlyList<PublicApiDocId> EnumerateAll(string assemblyPath)
+        => Enumerate(assemblyPath, true);
+
+    public static IReadOnlyList<string> EnumerateReferencedTypes(string assemblyPath)
+    {
+        using var module = ModuleDefinition.ReadModule(assemblyPath, new ReaderParameters {
+            ReadingMode = ReadingMode.Deferred,
+            InMemory = true
+        });
+        var types = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var type in module.GetTypeReferences())
+            types.Add(TypeName(type));
+        var result = new List<string>();
+        foreach (var type in types)
+            result.Add(type);
+        return result;
+    }
+
+    private static IReadOnlyList<PublicApiDocId> Enumerate(string assemblyPath, bool includeNonPublic)
     {
         using var module = ModuleDefinition.ReadModule(assemblyPath, new ReaderParameters {
             ReadingMode = ReadingMode.Deferred,
@@ -22,37 +44,38 @@ public static class PublicApiDocIdEnumerator
         });
         var result = new List<PublicApiDocId>();
         foreach (var type in module.Types)
-            AddType(type, assemblyPath, result);
+            AddType(type, assemblyPath, result, includeNonPublic);
         return result;
     }
 
-    private static void AddType(TypeDefinition type, string assembly, List<PublicApiDocId> result)
+    private static void AddType(TypeDefinition type, string assembly, List<PublicApiDocId> result, bool includeNonPublic)
     {
-        if (!IsVisible(type))
+        var typeIsPublic = IsVisible(type);
+        if (!includeNonPublic && !typeIsPublic)
             return;
 
-        Add(result, "T:" + TypeName(type), assembly, type.MetadataToken.ToInt32(), type.FullName);
+        Add(result, "T:" + TypeName(type), assembly, type.MetadataToken.ToInt32(), type.FullName, typeIsPublic);
         // Delegate invocation members are emitted by the compiler and cannot have
         // source XML documentation; the delegate type itself is the public API.
         if (type.BaseType?.FullName == "System.MulticastDelegate")
             return;
         foreach (var field in type.Fields)
-            if (IsVisible(field) && !field.IsSpecialName)
-                Add(result, "F:" + TypeName(type) + "." + EscapeMemberName(field.Name), assembly, field.MetadataToken.ToInt32(), field.FullName);
+            if ((includeNonPublic || IsVisible(field)) && !field.IsSpecialName)
+                Add(result, "F:" + TypeName(type) + "." + EscapeMemberName(field.Name), assembly, field.MetadataToken.ToInt32(), field.FullName, typeIsPublic && IsVisible(field));
         foreach (var property in type.Properties)
-            if (IsVisible(property))
-                Add(result, "P:" + TypeName(type) + "." + EscapeMemberName(property.Name) + Parameters(property.Parameters), assembly, property.MetadataToken.ToInt32(), property.FullName);
+            if (includeNonPublic || IsVisible(property))
+                Add(result, "P:" + TypeName(type) + "." + EscapeMemberName(property.Name) + Parameters(property.Parameters), assembly, property.MetadataToken.ToInt32(), property.FullName, typeIsPublic && IsVisible(property));
         foreach (var @event in type.Events)
-            if (IsVisible(@event))
-                Add(result, "E:" + TypeName(type) + "." + EscapeMemberName(@event.Name), assembly, @event.MetadataToken.ToInt32(), @event.FullName);
+            if (includeNonPublic || IsVisible(@event))
+                Add(result, "E:" + TypeName(type) + "." + EscapeMemberName(@event.Name), assembly, @event.MetadataToken.ToInt32(), @event.FullName, typeIsPublic && IsVisible(@event));
         foreach (var method in type.Methods)
-            if (IsVisible(method) && IsDocumentableMethod(method))
-                Add(result, "M:" + TypeName(type) + "." + MethodName(method) + Parameters(method.Parameters) + Conversion(method), assembly, method.MetadataToken.ToInt32(), method.FullName);
+            if ((includeNonPublic || IsVisible(method)) && IsDocumentableMethod(method))
+                Add(result, "M:" + TypeName(type) + "." + MethodName(method) + Parameters(method.Parameters) + Conversion(method), assembly, method.MetadataToken.ToInt32(), method.FullName, typeIsPublic && IsVisible(method));
         foreach (var method in type.Methods)
-            if (IsVisible(method) && method.IsConstructor && !method.IsStatic)
-                Add(result, "M:" + TypeName(type) + ".#ctor" + Parameters(method.Parameters), assembly, method.MetadataToken.ToInt32(), method.FullName);
+            if ((includeNonPublic || IsVisible(method)) && method.IsConstructor && !method.IsStatic)
+                Add(result, "M:" + TypeName(type) + ".#ctor" + Parameters(method.Parameters), assembly, method.MetadataToken.ToInt32(), method.FullName, typeIsPublic && IsVisible(method));
         foreach (var nested in type.NestedTypes)
-            AddType(nested, assembly, result);
+            AddType(nested, assembly, result, includeNonPublic);
     }
 
     private static bool IsVisible(TypeDefinition type)
@@ -97,8 +120,8 @@ public static class PublicApiDocIdEnumerator
         return false;
     }
 
-    private static void Add(List<PublicApiDocId> result, string id, string assembly, int token, string signature) =>
-        result.Add(new PublicApiDocId { DocId = id, Assembly = assembly, MetadataToken = token, Signature = signature });
+    private static void Add(List<PublicApiDocId> result, string id, string assembly, int token, string signature, bool isPublic) =>
+        result.Add(new PublicApiDocId { DocId = id, Assembly = assembly, MetadataToken = token, Signature = signature, IsPublic = isPublic });
 
     private static string MethodName(MethodDefinition method) =>
         EscapeMemberName(method.Name) + (method.HasGenericParameters ? "``" + method.GenericParameters.Count : "");

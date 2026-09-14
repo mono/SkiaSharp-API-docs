@@ -193,6 +193,59 @@ namespace Example {
     Assert-Equal $report.publicSelectedApi.missingCompilerXml[0].docId 'M:Example.IMissingSidecar.Required' `
         'Completeness gate did not identify the public member missing from compiler XML.'
 
+    $internalAssembly = Join-Path $completenessWorkspace 'Internal.dll'
+    Add-Type -OutputAssembly $internalAssembly -TypeDefinition @'
+namespace Example {
+    internal class InternalImplementation {
+        internal void Hidden() { }
+    }
+}
+'@
+    $internalXml = Join-Path $completenessWorkspace 'Internal.xml'
+    @'
+<doc><members>
+  <member name="M:Example.InternalImplementation.Hidden"><summary>Internal implementation documentation.</summary></member>
+</members></doc>
+'@ | Set-Content -NoNewline -Path $internalXml
+    $internalInputs = @([PSCustomObject]@{ Path = $internalXml; PackageId = 'Example'; Asset = 'lib/net8.0/Internal.dll' })
+    $internalResult = Assert-ApiDocsCompleteness `
+        -OutputRoot $completenessWorkspace `
+        -DocumentationPaths $internalInputs `
+        -AssemblyPaths @($internalAssembly) `
+        -SelectedAssets $selectedAssets `
+        -ImportedDocIds @() `
+        -FilteredDocIds @() `
+        -Canonicalizations @() `
+        -ReportPath $reportPath
+    Assert-Equal $internalResult.compilerXml.nonPublicSidecarCount 1 `
+        'Exact internal metadata member was not classified as non-public.'
+
+    @'
+<doc><members>
+  <member name="M:System.Nonexistent.External"><summary>Fake external documentation.</summary></member>
+</members></doc>
+'@ | Set-Content -NoNewline -Path $internalXml
+    try {
+        [void](Assert-ApiDocsCompleteness `
+            -OutputRoot $completenessWorkspace `
+            -DocumentationPaths $internalInputs `
+            -AssemblyPaths @($internalAssembly) `
+            -SelectedAssets $selectedAssets `
+            -ImportedDocIds @() `
+            -FilteredDocIds @() `
+            -Canonicalizations @() `
+            -ReportPath $reportPath)
+        throw 'Completeness gate exempted a fake System namespace sidecar DocId.'
+    }
+    catch {
+        if ($_.Exception.Message -notmatch 'completeness validation failed') {
+            throw
+        }
+    }
+    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
+    Assert-Equal $report.compilerXml.staleOrUnresolvedSidecarCount 1 `
+        'Fake System namespace sidecar DocId was not retained as stale.'
+
     $syntaxAssembly = Join-Path $completenessWorkspace 'Syntax.dll'
     Add-Type -OutputAssembly $syntaxAssembly -TypeDefinition @'
 namespace Example {
@@ -247,7 +300,7 @@ namespace Example {
     }
     $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
     Assert-Equal $report.status 'failed' 'Completeness gate did not record a failed report.'
-    Assert-Equal $report.compilerXml.absentFromEcma[0].classification 'unexplained-sidecar-api' `
+    Assert-Equal $report.compilerXml.absentFromEcma[0].classification 'stale-or-unresolved-sidecar' `
         'Compiler XML DocId absent from ECMA was not recorded as unexplained.'
 
     @'
