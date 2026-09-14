@@ -77,6 +77,7 @@ function Get-CompilerXmlDocumentationEntries([object[]] $DocumentationPaths) {
                 packageId = $source.PackageId
                 asset = $source.Asset
                 path = $source.Path
+                substantiveDocs = -not [string]::IsNullOrWhiteSpace([regex]::Replace($member.InnerText, '\s+', ' ').Trim())
             })
         }
     }
@@ -97,7 +98,7 @@ function Get-SelectedAssemblyDocIds([string[]] $AssemblyPaths, [switch] $Include
                 [void]($docIds[$entry.DocId] = [PSCustomObject]@{
                     docId = $entry.DocId; assembly = $entry.Assembly
                     metadataToken = $entry.MetadataToken; signature = $entry.Signature
-                    isPublic = $entry.IsPublic
+                    isPublic = $entry.IsPublic; isErrorObsolete = $entry.IsErrorObsolete
                 })
             }
 
@@ -184,6 +185,7 @@ function Assert-ApiDocsCompleteness(
                     referenceAssemblyPath = $pair.referenceAssemblyPath
                     implementationAssemblyPath = $pair.implementationAssemblyPath
                     metadataToken = $entry.metadataToken; signature = $entry.signature
+                    isErrorObsolete = $entry.isErrorObsolete
                 })
             }
         }
@@ -234,6 +236,7 @@ function Assert-ApiDocsCompleteness(
     foreach ($docId in $compilerByDocId.Keys | Sort-Object) {
         $ecma = $ecmaByDocId[$docId]
         $publicMetadata = $metadataByDocId[$docId]
+        $hasSubstantiveCompilerDocs = @($compilerByDocId[$docId] | Where-Object substantiveDocs).Count -gt 0
         if ($null -ne $ecma -and -not $imported.Contains($docId)) {
             $unimportedCompilerDocs.Add($docId)
         }
@@ -247,6 +250,9 @@ function Assert-ApiDocsCompleteness(
             'mdoc-obsolete-type-collision'
         } elseif ($null -ne $allMetadataByDocId[$docId]) {
             'non-public-sidecar'
+        } elseif ($null -ne $implementationPublicByDocId[$docId] -and
+            $implementationPublicByDocId[$docId].isErrorObsolete -and $hasSubstantiveCompilerDocs) {
+            'error-obsolete-implementation-only'
         } elseif ($null -ne $implementationPublicByDocId[$docId]) {
             'public-implementation-missing-reference'
         } elseif ($null -ne $implementationAllByDocId[$docId]) {
@@ -264,12 +270,13 @@ function Assert-ApiDocsCompleteness(
             sources = @($compilerByDocId[$docId])
         })
     }
-    $unexplained = @($absentCompilerDocs | Where-Object classification -eq 'stale-or-unresolved-sidecar')
+    $unexplained = @($absentCompilerDocs | Where-Object classification -in @('stale-or-unresolved-sidecar', 'public-implementation-missing-reference'))
+    $fatalRefLibMismatches = @($publicImplementationMissingReference | Where-Object { -not $_.isErrorObsolete })
     $report = [ordered]@{
         schemaVersion = 1
         status = if ($invalidEcma.Count -eq 0 -and $unimportedCompilerDocs.Count -eq 0 -and
             $missingPublicApis.Count -eq 0 -and $missingCompilerDocs.Count -eq 0 -and
-            $publicImplementationMissingReference.Count -eq 0 -and
+            $fatalRefLibMismatches.Count -eq 0 -and
             $unexplained.Count -eq 0) { 'passed' } else { 'failed' }
         selectedAssets = @($SelectedAssets | ForEach-Object {
             [PSCustomObject]@{ packageId = $_.PackageId; asset = $_.Asset; moniker = $_.Moniker }
@@ -287,11 +294,13 @@ function Assert-ApiDocsCompleteness(
             staleOrUnresolvedSidecarCount = @($absentCompilerDocs | Where-Object classification -eq 'stale-or-unresolved-sidecar').Count
             externalReferenceSidecarCount = @($absentCompilerDocs | Where-Object classification -eq 'external-reference-sidecar').Count
             publicImplementationMissingReferenceCount = @($absentCompilerDocs | Where-Object classification -eq 'public-implementation-missing-reference').Count
+            errorObsoleteImplementationOnlyCount = @($absentCompilerDocs | Where-Object classification -eq 'error-obsolete-implementation-only').Count
             nonPublicImplementationSidecarCount = @($absentCompilerDocs | Where-Object classification -eq 'non-public-implementation-sidecar').Count
         }
         refLib = [ordered]@{
             pairedAssetCount = $PairedAssets.Count
-            publicImplementationMissingReference = @($publicImplementationMissingReference | Sort-Object docId, implementationAssemblyPath)
+            publicImplementationMissingReference = @($fatalRefLibMismatches | Sort-Object docId, implementationAssemblyPath)
+            errorObsoleteImplementationOnly = @($publicImplementationMissingReference | Where-Object isErrorObsolete | Sort-Object docId, implementationAssemblyPath)
         }
         publicSelectedApi = [ordered]@{
             count = $metadataByDocId.Count

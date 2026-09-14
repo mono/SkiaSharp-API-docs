@@ -282,6 +282,48 @@ namespace Example {
     Assert-Equal $report.refLib.publicImplementationMissingReference[0].docId 'T:Example.IImplementationOnlySurface' `
         'Completeness gate did not report the public implementation/reference mismatch.'
 
+    $obsoleteImplementationAssembly = Join-Path $completenessWorkspace 'ObsoleteImplementation.dll'
+    Add-Type -OutputAssembly $obsoleteImplementationAssembly -TypeDefinition @'
+namespace Example {
+    [System.Obsolete("Retired", true)]
+    public interface IErrorObsolete { }
+    [System.Obsolete("Retired", false)]
+    public interface IWarningObsolete { }
+}
+'@
+    $obsoleteXml = Join-Path $completenessWorkspace 'Obsolete.xml'
+    @'
+<doc><members>
+  <member name="T:Example.IErrorObsolete"><summary>Retired public API.</summary></member>
+</members></doc>
+'@ | Set-Content -NoNewline -Path $obsoleteXml
+    try {
+        [void](Assert-ApiDocsCompleteness `
+            -OutputRoot $completenessWorkspace `
+            -DocumentationPaths @([PSCustomObject]@{ Path = $obsoleteXml; PackageId = 'Example'; Asset = 'lib/net8.0/ObsoleteImplementation.dll' }) `
+            -AssemblyPaths @($referenceAssembly) `
+            -SelectedAssets $selectedAssets `
+            -PairedAssets @([PSCustomObject]@{
+                packageId = 'Example'; asset = 'ref/net8.0/Reference.dll'
+                referenceAssemblyPath = $referenceAssembly; implementationAssemblyPath = $obsoleteImplementationAssembly
+            }) `
+            -ImportedDocIds @() `
+            -FilteredDocIds @() `
+            -Canonicalizations @() `
+            -ReportPath $reportPath)
+        throw 'Completeness gate accepted a non-error obsolete implementation API absent from reference.'
+    }
+    catch {
+        if ($_.Exception.Message -notmatch 'completeness validation failed') {
+            throw
+        }
+    }
+    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
+    Assert-Equal $report.refLib.errorObsoleteImplementationOnly[0].docId 'T:Example.IErrorObsolete' `
+        'Error-obsolete implementation API was not recognized from decoded attribute metadata.'
+    Assert-Equal $report.refLib.publicImplementationMissingReference[0].docId 'T:Example.IWarningObsolete' `
+        'Non-error obsolete implementation API was not retained as a fatal mismatch.'
+
     $syntaxAssembly = Join-Path $completenessWorkspace 'Syntax.dll'
     Add-Type -OutputAssembly $syntaxAssembly -TypeDefinition @'
 namespace Example {

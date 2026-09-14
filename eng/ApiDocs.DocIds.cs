@@ -11,6 +11,7 @@ public sealed class PublicApiDocId
     public int MetadataToken { get; init; }
     public string Signature { get; init; } = "";
     public bool IsPublic { get; init; }
+    public bool IsErrorObsolete { get; init; }
 }
 
 public static class PublicApiDocIdEnumerator
@@ -54,26 +55,26 @@ public static class PublicApiDocIdEnumerator
         if (!includeNonPublic && !typeIsPublic)
             return;
 
-        Add(result, "T:" + TypeName(type), assembly, type.MetadataToken.ToInt32(), type.FullName, typeIsPublic);
+        Add(result, "T:" + TypeName(type), assembly, type.MetadataToken.ToInt32(), type.FullName, typeIsPublic, IsErrorObsolete(type));
         // Delegate invocation members are emitted by the compiler and cannot have
         // source XML documentation; the delegate type itself is the public API.
         if (type.BaseType?.FullName == "System.MulticastDelegate")
             return;
         foreach (var field in type.Fields)
             if ((includeNonPublic || IsVisible(field)) && !field.IsSpecialName)
-                Add(result, "F:" + TypeName(type) + "." + EscapeMemberName(field.Name), assembly, field.MetadataToken.ToInt32(), field.FullName, typeIsPublic && IsVisible(field));
+                Add(result, "F:" + TypeName(type) + "." + EscapeMemberName(field.Name), assembly, field.MetadataToken.ToInt32(), field.FullName, typeIsPublic && IsVisible(field), IsErrorObsolete(field));
         foreach (var property in type.Properties)
             if (includeNonPublic || IsVisible(property))
-                Add(result, "P:" + TypeName(type) + "." + EscapeMemberName(property.Name) + Parameters(property.Parameters), assembly, property.MetadataToken.ToInt32(), property.FullName, typeIsPublic && IsVisible(property));
+                Add(result, "P:" + TypeName(type) + "." + EscapeMemberName(property.Name) + Parameters(property.Parameters), assembly, property.MetadataToken.ToInt32(), property.FullName, typeIsPublic && IsVisible(property), IsErrorObsolete(property));
         foreach (var @event in type.Events)
             if (includeNonPublic || IsVisible(@event))
-                Add(result, "E:" + TypeName(type) + "." + EscapeMemberName(@event.Name), assembly, @event.MetadataToken.ToInt32(), @event.FullName, typeIsPublic && IsVisible(@event));
+                Add(result, "E:" + TypeName(type) + "." + EscapeMemberName(@event.Name), assembly, @event.MetadataToken.ToInt32(), @event.FullName, typeIsPublic && IsVisible(@event), IsErrorObsolete(@event));
         foreach (var method in type.Methods)
             if ((includeNonPublic || IsVisible(method)) && IsDocumentableMethod(method))
-                Add(result, "M:" + TypeName(type) + "." + MethodName(method) + Parameters(method.Parameters) + Conversion(method), assembly, method.MetadataToken.ToInt32(), method.FullName, typeIsPublic && IsVisible(method));
+                Add(result, "M:" + TypeName(type) + "." + MethodName(method) + Parameters(method.Parameters) + Conversion(method), assembly, method.MetadataToken.ToInt32(), method.FullName, typeIsPublic && IsVisible(method), IsErrorObsolete(method));
         foreach (var method in type.Methods)
             if ((includeNonPublic || IsVisible(method)) && method.IsConstructor && !method.IsStatic)
-                Add(result, "M:" + TypeName(type) + ".#ctor" + Parameters(method.Parameters), assembly, method.MetadataToken.ToInt32(), method.FullName, typeIsPublic && IsVisible(method));
+                Add(result, "M:" + TypeName(type) + ".#ctor" + Parameters(method.Parameters), assembly, method.MetadataToken.ToInt32(), method.FullName, typeIsPublic && IsVisible(method), IsErrorObsolete(method));
         foreach (var nested in type.NestedTypes)
             AddType(nested, assembly, result, includeNonPublic);
     }
@@ -120,8 +121,24 @@ public static class PublicApiDocIdEnumerator
         return false;
     }
 
-    private static void Add(List<PublicApiDocId> result, string id, string assembly, int token, string signature, bool isPublic) =>
-        result.Add(new PublicApiDocId { DocId = id, Assembly = assembly, MetadataToken = token, Signature = signature, IsPublic = isPublic });
+    private static void Add(List<PublicApiDocId> result, string id, string assembly, int token, string signature, bool isPublic, bool isErrorObsolete) =>
+        result.Add(new PublicApiDocId { DocId = id, Assembly = assembly, MetadataToken = token, Signature = signature, IsPublic = isPublic, IsErrorObsolete = isErrorObsolete });
+
+    private static bool IsErrorObsolete(ICustomAttributeProvider provider)
+    {
+        foreach (var attribute in provider.CustomAttributes)
+        {
+            if (attribute.AttributeType.FullName != "System.ObsoleteAttribute")
+                continue;
+            if (attribute.ConstructorArguments.Count >= 2 &&
+                attribute.ConstructorArguments[1].Value is bool isError && isError)
+                return true;
+            foreach (var property in attribute.Properties)
+                if (property.Name == "IsError" && property.Argument.Value is bool isErrorProperty && isErrorProperty)
+                    return true;
+        }
+        return false;
+    }
 
     private static string MethodName(MethodDefinition method) =>
         EscapeMemberName(method.Name) + (method.HasGenericParameters ? "``" + method.GenericParameters.Count : "");
