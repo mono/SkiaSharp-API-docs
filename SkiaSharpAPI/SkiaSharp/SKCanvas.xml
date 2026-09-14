@@ -1,7 +1,7 @@
 <Type Name="SKCanvas" FullName="SkiaSharp.SKCanvas">
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKCanvas" />
   <TypeSignature Language="C#" Value="public class SKCanvas : SkiaSharp.SKObject" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SKCanvas extends SkiaSharp.SKObject" />
-  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKCanvas" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>4.154.0.0</AssemblyVersion>
@@ -14,282 +14,281 @@
     <summary>Encapsulates all of the state about drawing into a device (bitmap or surface).</summary>
     <remarks>
       <format type="text/markdown"><![CDATA[
-## Remarks
-
-A canvas encapsulates all of the state about drawing into a device (bitmap or
-surface).
-
-This includes a reference to the device itself, and a stack of matrix/clip
-values. For any given draw call (e.g. DrawRect), the geometry of the object
-being drawn is transformed by the concatenation of all the matrices in the
-stack. The transformed geometry is clipped by the intersection of all of the
-clips in the stack.
-
-While the canvas holds the state of the drawing device, the state (style) of
-the object being drawn is held by the paint, which is provided as a parameter
-to each of the "Draw" methods. The paint holds attributes such as color,
-typeface, the text size, the stroke width, the shader (for example, gradients,
-patterns), etc.
-
-The canvas is returned when accessing the
-<xref:SkiaSharp.SKSurface.Canvas?displayProperty=nameWithType> property of a
-surface.
-
-### Construction
-
-SkiaSharp has multiple backends which receive <xref:SkiaSharp.SKCanvas>
-drawing commands, including:
-
- * Raster Surface
- * GPU Surface
- * PDF Document
- * XPS Document _(experimental)_
- * SVG Canvas _(experimental)_
- * Picture
- * Null Canvas _(for testing)_
-
-#### Constructing a Raster Surface
-
-The raster backend draws to a block of memory. This memory can be managed by
-SkiaSharp or by the client.
-
-The recommended way of creating a canvas for the Raster and Ganesh backends is
-to use a <xref:SkiaSharp.SKSurface>, which is an object that manages the
-memory into which the canvas commands are drawn.
-
-```csharp
-// define the surface properties
-var info = new SKImageInfo(256, 256);
-
-// construct a new surface
-var surface = SKSurface.Create(info);
-
-// get the canvas from the surface
-var canvas = surface.Canvas;
-
-// draw on the canvas ...
-```
-
-Alternatively, we could have specified the memory for the surface explicitly,
-instead of asking SkiaSharp to manage it.
-
-```csharp
-// define the surface properties
-var info = new SKImageInfo(256, 256);
-
-// allocate memory
-var memory = Marshal.AllocCoTaskMem(info.BytesSize);
-
-// construct a surface around the existing memory
-var surface = SKSurface.Create(info, memory, info.RowBytes);
-
-// get the canvas from the surface
-var canvas = surface.Canvas;
-
-// draw on the canvas ...
-```
-
-#### Constructing a GPU Surface
-
-GPU surfaces must have a <xref:SkiaSharp.GRContext> object which manages the
-GPU context, and related caches for textures and fonts.
-
-<xref:SkiaSharp.GRContext> objects are matched one to one with OpenGL contexts
-or Vulkan devices. That is, all <xref:SkiaSharp.SKSurface> instances that will
-be rendered to using the same OpenGL context or Vulkan device should share a
-<xref:SkiaSharp.GRContext>.
-
-SkiaSharp does not create an OpenGL context or a Vulkan device for you. In
-OpenGL mode it also assumes that the correct OpenGL context has been made
-current to the current thread when SkiaSharp calls are made.
-
-```csharp
-// an OpenGL context must be created and set as current
-
-// define the surface properties
-var info = new SKImageInfo(256, 256);
-
-// create the surface
-var context = GRContext.CreateGl();
-var surface = SKSurface.Create(context, false, info);
-
-// get the canvas from the surface
-var canvas = surface.Canvas;
-
-// draw on the canvas ...
-```
-
-#### Constructing a PDF Document
-
-The PDF backend uses <xref:SkiaSharp.SKDocument> instead of
-<xref:SkiaSharp.SKSurface>, since a document must include multiple pages.
-
-```csharp
-// create the document
-var stream = SKFileWStream.OpenStream("document.pdf");
-var document = SKDocument.CreatePdf(stream);
-
-// get the canvas from the page
-var canvas = document.BeginPage(256, 256);
-
-// draw on the canvas ...
-
-// end the page and document
-document.EndPage();
-document.Close();
-```
-
-#### Constructing a XPS Document _(experimental)_
-
-The XPS backend uses <xref:SkiaSharp.SKDocument> instead of
-<xref:SkiaSharp.SKSurface>, since a document must include multiple pages.
-
-```csharp
-// create the document
-var stream = SKFileWStream.OpenStream("document.xps");
-var document = SKDocument.CreateXps(stream);
-
-// get the canvas from the page
-var canvas = document.BeginPage(256, 256);
-
-// draw on the canvas ...
-
-// end the page and document
-document.EndPage();
-document.Close();
-```
-
-#### Constructing a SVG Canvas _(experimental)_
-
-The SVG backend uses <xref:SkiaSharp.SKSvgCanvas>.
-
-```csharp
-// create the canvas
-var stream = SKFileWStream.OpenStream("image.svg");
-var writer = new SKXmlStreamWriter(stream);
-var canvas = SKSvgCanvas.Create(SKRect.Create(256, 256), writer);
-
-// draw on the canvas ...
-```
-
-#### Constructing a Picture
-
-The XPS backend uses <xref:SkiaSharp.SKPictureRecorder> instead of
-<xref:SkiaSharp.SKSurface>.
-
-```csharp
-// create the picture recorder
-var recorder = new SKPictureRecorder();
-
-// get the canvas from the page
-var canvas = recorder.BeginRecording(SKRect.Create(256, 256));
-
-// draw on the canvas ...
-
-// finish recording
-var picture = recorder.EndRecording();
-```
-
-#### Constructing a Null Canvas _(for testing)_
-
-The null canvas is a canvas that ignores all drawing commands and does
-nothing.
-
-```csharp
-// create the dummy canvas
-var canvas = new SKNoDrawCanvas(256, 256);
-
-// draw on the canvas ...
-```
-
-### Transformations
-
-The canvas supports a number of 2D transformations. Unlike other 2D graphic
-systems like CoreGraphics or Cairo, SKCanvas extends the transformations to
-include perspectives.
-
-You can use the <xref:SkiaSharp.SKCanvas.Scale%2A>,
-<xref:SkiaSharp.SKCanvas.Skew%2A>, <xref:SkiaSharp.SKCanvas.Translate%2A>,
-<xref:SkiaSharp.SKCanvas.RotateDegrees%2A>,
-<xref:SkiaSharp.SKCanvas.RotateRadians%2A> to perform some of the most common
-2D transformations.
-
-For more control you can use the <xref:SkiaSharp.SKCanvas.SetMatrix%2A> to set
-an arbitrary transformation using the <xref:SkiaSharp.SKMatrix> and the
-<xref:SkiaSharp.SKCanvas.Concat%2A> to concatenate an <xref:SkiaSharp.SKMatrix>
-transformation to the current matrix in use.
-
-The <xref:SkiaSharp.SKCanvas.ResetMatrix%2A> can be used to reset the state of
-the matrix.
-
-### Drawing
-
-The drawing operations can take a <xref:SkiaSharp.SKPaint> parameter to affect
-their drawing. You use <xref:SkiaSharp.SKPaint> objects to cache the style and
-color information to draw geometries, texts and bitmaps.
-
-### Clipping and State
-
-It is possible to save the current transformations by calling the
-<xref:SkiaSharp.SKCanvas.Save%2A> method which preserves the current
-transformation matrix, you can then alter the matrix and restore the previous
-state by using the <xref:SkiaSharp.SKCanvas.Restore%2A> or
-<xref:SkiaSharp.SKCanvas.RestoreToCount%2A> methods.
-
-Additionally, it is possible to push a new state with
-<xref:SkiaSharp.SKCanvas.SaveLayer%2A> which will make an offscreen copy of a
-region, and once the drawing is completed, calling the
-<xref:SkiaSharp.SKCanvas.Restore> method which copies the offscreen bitmap
-into this canvas.
-
-## Examples
-
-```csharp
-var info = new SKImageInfo(640, 480);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // set up drawing tools
-    var paint = new SKPaint {
-        IsAntialias = true,
-        Color = new SKColor(0x2c, 0x3e, 0x50),
-        StrokeCap = SKStrokeCap.Round
-    };
-
-    // create the Xamagon path
-    var path = new SKPath();
-    path.MoveTo(71.4311121f, 56f);
-    path.CubicTo(68.6763107f, 56.0058575f, 65.9796704f, 57.5737917f, 64.5928855f, 59.965729f);
-    path.LineTo(43.0238921f, 97.5342563f);
-    path.CubicTo(41.6587026f, 99.9325978f, 41.6587026f, 103.067402f, 43.0238921f, 105.465744f);
-    path.LineTo(64.5928855f, 143.034271f);
-    path.CubicTo(65.9798162f, 145.426228f, 68.6763107f, 146.994582f, 71.4311121f, 147f);
-    path.LineTo(114.568946f, 147f);
-    path.CubicTo(117.323748f, 146.994143f, 120.020241f, 145.426228f, 121.407172f, 143.034271f);
-    path.LineTo(142.976161f, 105.465744f);
-    path.CubicTo(144.34135f, 103.067402f, 144.341209f, 99.9325978f, 142.976161f, 97.5342563f);
-    path.LineTo(121.407172f, 59.965729f);
-    path.CubicTo(120.020241f, 57.5737917f, 117.323748f, 56.0054182f, 114.568946f, 56f);
-    path.LineTo(71.4311121f, 56f);
-    path.Close();
-
-    // draw the Xamagon path
-    canvas.DrawPath(path, paint);
-}
-```
-]]></format>
+             ## Remarks
+            
+             A canvas encapsulates all of the state about drawing into a device (bitmap or
+             surface).
+            
+             This includes a reference to the device itself, and a stack of matrix/clip
+             values. For any given draw call (e.g. DrawRect), the geometry of the object
+             being drawn is transformed by the concatenation of all the matrices in the
+             stack. The transformed geometry is clipped by the intersection of all of the
+             clips in the stack.
+            
+             While the canvas holds the state of the drawing device, the state (style) of
+             the object being drawn is held by the paint, which is provided as a parameter
+             to each of the "Draw" methods. The paint holds attributes such as color,
+             typeface, the text size, the stroke width, the shader (for example, gradients,
+             patterns), etc.
+            
+             The canvas is returned when accessing the
+             <xref:SkiaSharp.SKSurface.Canvas?displayProperty=nameWithType> property of a
+             surface.
+            
+             ### Construction
+            
+             SkiaSharp has multiple backends which receive <xref:SkiaSharp.SKCanvas>
+             drawing commands, including:
+            
+              * Raster Surface
+              * GPU Surface
+              * PDF Document
+              * XPS Document _(experimental)_
+              * SVG Canvas _(experimental)_
+              * Picture
+              * Null Canvas _(for testing)_
+            
+             #### Constructing a Raster Surface
+            
+             The raster backend draws to a block of memory. This memory can be managed by
+             SkiaSharp or by the client.
+            
+             The recommended way of creating a canvas for the Raster and Ganesh backends is
+             to use a <xref:SkiaSharp.SKSurface>, which is an object that manages the
+             memory into which the canvas commands are drawn.
+            
+             ```csharp
+             // define the surface properties
+             var info = new SKImageInfo(256, 256);
+            
+             // construct a new surface
+             var surface = SKSurface.Create(info);
+            
+             // get the canvas from the surface
+             var canvas = surface.Canvas;
+            
+             // draw on the canvas ...
+             ```
+            
+             Alternatively, we could have specified the memory for the surface explicitly,
+             instead of asking SkiaSharp to manage it.
+            
+             ```csharp
+             // define the surface properties
+             var info = new SKImageInfo(256, 256);
+            
+             // allocate memory
+             var memory = Marshal.AllocCoTaskMem(info.BytesSize);
+            
+             // construct a surface around the existing memory
+             var surface = SKSurface.Create(info, memory, info.RowBytes);
+            
+             // get the canvas from the surface
+             var canvas = surface.Canvas;
+            
+             // draw on the canvas ...
+             ```
+            
+             #### Constructing a GPU Surface
+            
+             GPU surfaces must have a <xref:SkiaSharp.GRContext> object which manages the
+             GPU context, and related caches for textures and fonts.
+            
+             <xref:SkiaSharp.GRContext> objects are matched one to one with OpenGL contexts
+             or Vulkan devices. That is, all <xref:SkiaSharp.SKSurface> instances that will
+             be rendered to using the same OpenGL context or Vulkan device should share a
+             <xref:SkiaSharp.GRContext>.
+            
+             SkiaSharp does not create an OpenGL context or a Vulkan device for you. In
+             OpenGL mode it also assumes that the correct OpenGL context has been made
+             current to the current thread when SkiaSharp calls are made.
+            
+             ```csharp
+             // an OpenGL context must be created and set as current
+            
+             // define the surface properties
+             var info = new SKImageInfo(256, 256);
+            
+             // create the surface
+             var context = GRContext.CreateGl();
+             var surface = SKSurface.Create(context, false, info);
+            
+             // get the canvas from the surface
+             var canvas = surface.Canvas;
+            
+             // draw on the canvas ...
+             ```
+            
+             #### Constructing a PDF Document
+            
+             The PDF backend uses <xref:SkiaSharp.SKDocument> instead of
+             <xref:SkiaSharp.SKSurface>, since a document must include multiple pages.
+            
+             ```csharp
+             // create the document
+             var stream = SKFileWStream.OpenStream("document.pdf");
+             var document = SKDocument.CreatePdf(stream);
+            
+             // get the canvas from the page
+             var canvas = document.BeginPage(256, 256);
+            
+             // draw on the canvas ...
+            
+             // end the page and document
+             document.EndPage();
+             document.Close();
+             ```
+            
+             #### Constructing a XPS Document _(experimental)_
+            
+             The XPS backend uses <xref:SkiaSharp.SKDocument> instead of
+             <xref:SkiaSharp.SKSurface>, since a document must include multiple pages.
+            
+             ```csharp
+             // create the document
+             var stream = SKFileWStream.OpenStream("document.xps");
+             var document = SKDocument.CreateXps(stream);
+            
+             // get the canvas from the page
+             var canvas = document.BeginPage(256, 256);
+            
+             // draw on the canvas ...
+            
+             // end the page and document
+             document.EndPage();
+             document.Close();
+             ```
+            
+             #### Constructing a SVG Canvas _(experimental)_
+            
+             The SVG backend uses <xref:SkiaSharp.SKSvgCanvas>.
+            
+             ```csharp
+             // create the canvas
+             var stream = SKFileWStream.OpenStream("image.svg");
+             var writer = new SKXmlStreamWriter(stream);
+             var canvas = SKSvgCanvas.Create(SKRect.Create(256, 256), writer);
+            
+             // draw on the canvas ...
+             ```
+            
+             #### Constructing a Picture
+            
+             The XPS backend uses <xref:SkiaSharp.SKPictureRecorder> instead of
+             <xref:SkiaSharp.SKSurface>.
+            
+             ```csharp
+             // create the picture recorder
+             var recorder = new SKPictureRecorder();
+            
+             // get the canvas from the page
+             var canvas = recorder.BeginRecording(SKRect.Create(256, 256));
+            
+             // draw on the canvas ...
+            
+             // finish recording
+             var picture = recorder.EndRecording();
+             ```
+            
+             #### Constructing a Null Canvas _(for testing)_
+            
+             The null canvas is a canvas that ignores all drawing commands and does
+             nothing.
+            
+             ```csharp
+             // create the dummy canvas
+             var canvas = new SKNoDrawCanvas(256, 256);
+            
+             // draw on the canvas ...
+             ```
+            
+             ### Transformations
+            
+             The canvas supports a number of 2D transformations. Unlike other 2D graphic
+             systems like CoreGraphics or Cairo, SKCanvas extends the transformations to
+             include perspectives.
+            
+             You can use the <xref:SkiaSharp.SKCanvas.Scale%2A>,
+             <xref:SkiaSharp.SKCanvas.Skew%2A>, <xref:SkiaSharp.SKCanvas.Translate%2A>,
+             <xref:SkiaSharp.SKCanvas.RotateDegrees%2A>,
+             <xref:SkiaSharp.SKCanvas.RotateRadians%2A> to perform some of the most common
+             2D transformations.
+            
+             For more control you can use the <xref:SkiaSharp.SKCanvas.SetMatrix%2A> to set
+             an arbitrary transformation using the <xref:SkiaSharp.SKMatrix> and the
+             <xref:SkiaSharp.SKCanvas.Concat%2A> to concatenate an <xref:SkiaSharp.SKMatrix>
+             transformation to the current matrix in use.
+            
+             The <xref:SkiaSharp.SKCanvas.ResetMatrix%2A> can be used to reset the state of
+             the matrix.
+            
+             ### Drawing
+            
+             The drawing operations can take a <xref:SkiaSharp.SKPaint> parameter to affect
+             their drawing. You use <xref:SkiaSharp.SKPaint> objects to cache the style and
+             color information to draw geometries, texts and bitmaps.
+            
+             ### Clipping and State
+            
+             It is possible to save the current transformations by calling the
+             <xref:SkiaSharp.SKCanvas.Save%2A> method which preserves the current
+             transformation matrix, you can then alter the matrix and restore the previous
+             state by using the <xref:SkiaSharp.SKCanvas.Restore%2A> or
+             <xref:SkiaSharp.SKCanvas.RestoreToCount%2A> methods.
+            
+             Additionally, it is possible to push a new state with
+             <xref:SkiaSharp.SKCanvas.SaveLayer%2A> which will make an offscreen copy of a
+             region, and once the drawing is completed, calling the
+             <xref:SkiaSharp.SKCanvas.Restore> method which copies the offscreen bitmap
+             into this canvas.
+            
+             ## Examples
+            
+             ```csharp
+             var info = new SKImageInfo(640, 480);
+             using (var surface = SKSurface.Create(info)) {
+                 SKCanvas canvas = surface.Canvas;
+            
+                 canvas.Clear(SKColors.White);
+            
+                 // set up drawing tools
+                 var paint = new SKPaint {
+                     IsAntialias = true,
+                     Color = new SKColor(0x2c, 0x3e, 0x50),
+                     StrokeCap = SKStrokeCap.Round
+                 };
+            
+                 // create the Xamagon path
+                 var path = new SKPath();
+                 path.MoveTo(71.4311121f, 56f);
+                 path.CubicTo(68.6763107f, 56.0058575f, 65.9796704f, 57.5737917f, 64.5928855f, 59.965729f);
+                 path.LineTo(43.0238921f, 97.5342563f);
+                 path.CubicTo(41.6587026f, 99.9325978f, 41.6587026f, 103.067402f, 43.0238921f, 105.465744f);
+                 path.LineTo(64.5928855f, 143.034271f);
+                 path.CubicTo(65.9798162f, 145.426228f, 68.6763107f, 146.994582f, 71.4311121f, 147f);
+                 path.LineTo(114.568946f, 147f);
+                 path.CubicTo(117.323748f, 146.994143f, 120.020241f, 145.426228f, 121.407172f, 143.034271f);
+                 path.LineTo(142.976161f, 105.465744f);
+                 path.CubicTo(144.34135f, 103.067402f, 144.341209f, 99.9325978f, 142.976161f, 97.5342563f);
+                 path.LineTo(121.407172f, 59.965729f);
+                 path.CubicTo(120.020241f, 57.5737917f, 117.323748f, 56.0054182f, 114.568946f, 56f);
+                 path.LineTo(71.4311121f, 56f);
+                 path.Close();
+            
+                 // draw the Xamagon path
+                 canvas.DrawPath(path, paint);
+             }
+             ```
+             ]]></format>
     </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.#ctor(SkiaSharp.SKBitmap)" />
       <MemberSignature Language="C#" Value="public SKCanvas (SkiaSharp.SKBitmap bitmap);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class SkiaSharp.SKBitmap bitmap) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.#ctor(SkiaSharp.SKBitmap)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
@@ -302,12 +301,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="Clear">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Clear" />
       <MemberSignature Language="C#" Value="public void Clear ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Clear() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Clear" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -320,12 +318,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="Clear">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Clear(SkiaSharp.SKColor)" />
       <MemberSignature Language="C#" Value="public void Clear (SkiaSharp.SKColor color);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Clear(valuetype SkiaSharp.SKColor color) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Clear(SkiaSharp.SKColor)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -341,12 +338,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="Clear">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Clear(SkiaSharp.SKColorF)" />
       <MemberSignature Language="C#" Value="public void Clear (SkiaSharp.SKColorF color);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Clear(valuetype SkiaSharp.SKColorF color) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Clear(SkiaSharp.SKColorF)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -362,12 +358,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="ClipPath">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ClipPath(SkiaSharp.SKPath,SkiaSharp.SKClipOperation,System.Boolean)" />
       <MemberSignature Language="C#" Value="public void ClipPath (SkiaSharp.SKPath path, SkiaSharp.SKClipOperation operation = SkiaSharp.SKClipOperation.Intersect, bool antialias = false);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ClipPath(class SkiaSharp.SKPath path, valuetype SkiaSharp.SKClipOperation operation, bool antialias) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ClipPath(SkiaSharp.SKPath,SkiaSharp.SKClipOperation,System.Boolean)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -388,12 +383,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="ClipRect">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKClipOperation,System.Boolean)" />
       <MemberSignature Language="C#" Value="public void ClipRect (SkiaSharp.SKRect rect, SkiaSharp.SKClipOperation operation = SkiaSharp.SKClipOperation.Intersect, bool antialias = false);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ClipRect(valuetype SkiaSharp.SKRect rect, valuetype SkiaSharp.SKClipOperation operation, bool antialias) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKClipOperation,System.Boolean)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -414,12 +408,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="ClipRegion">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ClipRegion(SkiaSharp.SKRegion,SkiaSharp.SKClipOperation)" />
       <MemberSignature Language="C#" Value="public void ClipRegion (SkiaSharp.SKRegion region, SkiaSharp.SKClipOperation operation = SkiaSharp.SKClipOperation.Intersect);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ClipRegion(class SkiaSharp.SKRegion region, valuetype SkiaSharp.SKClipOperation operation) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ClipRegion(SkiaSharp.SKRegion,SkiaSharp.SKClipOperation)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -437,12 +430,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="ClipRoundRect">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ClipRoundRect(SkiaSharp.SKRoundRect,SkiaSharp.SKClipOperation,System.Boolean)" />
       <MemberSignature Language="C#" Value="public void ClipRoundRect (SkiaSharp.SKRoundRect rect, SkiaSharp.SKClipOperation operation = SkiaSharp.SKClipOperation.Intersect, bool antialias = false);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ClipRoundRect(class SkiaSharp.SKRoundRect rect, valuetype SkiaSharp.SKClipOperation operation, bool antialias) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ClipRoundRect(SkiaSharp.SKRoundRect,SkiaSharp.SKClipOperation,System.Boolean)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -463,12 +455,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="Concat">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix@)" />
       <MemberSignature Language="C#" Value="public void Concat (in SkiaSharp.SKMatrix m);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Concat([in]valuetype SkiaSharp.SKMatrix&amp; m) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -490,12 +481,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="Concat">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix44@)" />
       <MemberSignature Language="C#" Value="public void Concat (in SkiaSharp.SKMatrix44 m);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Concat([in]valuetype SkiaSharp.SKMatrix44&amp; m) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix44@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -517,12 +507,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="Context">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.Context" />
       <MemberSignature Language="C#" Value="public SkiaSharp.GRRecordingContext? Context { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.GRRecordingContext Context" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.Context" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -543,12 +532,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DeviceClipBounds">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.DeviceClipBounds" />
       <MemberSignature Language="C#" Value="public SkiaSharp.SKRectI DeviceClipBounds { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKRectI DeviceClipBounds" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.DeviceClipBounds" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -561,12 +549,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="Discard">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Discard" />
       <MemberSignature Language="C#" Value="public void Discard ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Discard() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Discard" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -577,26 +564,25 @@ using (var surface = SKSurface.Create(info)) {
         <summary>Makes the canvas contents undefined.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-Subsequent calls that read the canvas pixels, such as drawing with <xref:SkiaSharp.SKBlendMode>, return undefined
-results. Calling this method does not change clip or matrix and may do nothing, depending on the implementation
-of the underlying <xref:SkiaSharp.SKSurface>.
-
-<xref:SkiaSharp.SKCanvas.Discard> allows optimized performance on subsequent draws by removing cached data associated
-with the underlying <xref:SkiaSharp.SKSurface>. It is not necessary to call <xref:SkiaSharp.SKCanvas.Discard> once
-done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning <xref:SkiaSharp.SKSurface> is deleted.
-]]></format>
+             ## Remarks
+            
+             Subsequent calls that read the canvas pixels, such as drawing with <xref:SkiaSharp.SKBlendMode>, return undefined
+             results. Calling this method does not change clip or matrix and may do nothing, depending on the implementation
+             of the underlying <xref:SkiaSharp.SKSurface>.
+            
+             <xref:SkiaSharp.SKCanvas.Discard> allows optimized performance on subsequent draws by removing cached data associated
+             with the underlying <xref:SkiaSharp.SKSurface>. It is not necessary to call <xref:SkiaSharp.SKCanvas.Discard> once
+             done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning <xref:SkiaSharp.SKSurface> is deleted.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Dispose(System.Boolean)" />
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Dispose(System.Boolean)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -613,12 +599,11 @@ done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning 
       </Docs>
     </Member>
     <Member MemberName="DisposeNative">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DisposeNative" />
       <MemberSignature Language="C#" Value="protected override void DisposeNative ();" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DisposeNative() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DisposeNative" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -631,12 +616,11 @@ done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning 
       </Docs>
     </Member>
     <Member MemberName="DrawAnnotation">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAnnotation(SkiaSharp.SKRect,System.String,SkiaSharp.SKData)" />
       <MemberSignature Language="C#" Value="public void DrawAnnotation (SkiaSharp.SKRect rect, string key, SkiaSharp.SKData value);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawAnnotation(valuetype SkiaSharp.SKRect rect, string key, class SkiaSharp.SKData value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAnnotation(SkiaSharp.SKRect,System.String,SkiaSharp.SKData)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -654,24 +638,23 @@ done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning 
         <summary>Send an key/value pair "annotation" to the canvas.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller still retains its ownership of the data (if any).
-
-Note: on may canvas types, this information is ignored, but some
-canvases (e.g. recording a picture or drawing to a PDF document) will pass on
-this information.
-]]></format>
+             ## Remarks
+            
+             The caller still retains its ownership of the data (if any).
+            
+             Note: on may canvas types, this information is ignored, but some
+             canvases (e.g. recording a picture or drawing to a PDF document) will pass on
+             this information.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawArc">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawArc(SkiaSharp.SKRect,System.Single,System.Single,System.Boolean,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawArc (SkiaSharp.SKRect oval, float startAngle, float sweepAngle, bool useCenter, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawArc(valuetype SkiaSharp.SKRect oval, float32 startAngle, float32 sweepAngle, bool useCenter, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawArc(SkiaSharp.SKRect,System.Single,System.Single,System.Boolean,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -695,12 +678,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawAtlas (SkiaSharp.SKImage atlas, SkiaSharp.SKRect[] sprites, SkiaSharp.SKRotationScaleMatrix[] transforms, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawAtlas(class SkiaSharp.SKImage atlas, valuetype SkiaSharp.SKRect[] sprites, valuetype SkiaSharp.SKRotationScaleMatrix[] transforms, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -727,12 +709,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawAtlas (SkiaSharp.SKImage atlas, SkiaSharp.SKRect[] sprites, SkiaSharp.SKRotationScaleMatrix[] transforms, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawAtlas(class SkiaSharp.SKImage atlas, valuetype SkiaSharp.SKRect[] sprites, valuetype SkiaSharp.SKRotationScaleMatrix[] transforms, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -756,12 +737,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawAtlas (SkiaSharp.SKImage atlas, SkiaSharp.SKRect[] sprites, SkiaSharp.SKRotationScaleMatrix[] transforms, SkiaSharp.SKColor[] colors, SkiaSharp.SKBlendMode mode, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawAtlas(class SkiaSharp.SKImage atlas, valuetype SkiaSharp.SKRect[] sprites, valuetype SkiaSharp.SKRotationScaleMatrix[] transforms, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKBlendMode mode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -792,12 +772,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawAtlas (SkiaSharp.SKImage atlas, SkiaSharp.SKRect[] sprites, SkiaSharp.SKRotationScaleMatrix[] transforms, SkiaSharp.SKColor[] colors, SkiaSharp.SKBlendMode mode, SkiaSharp.SKRect cullRect, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawAtlas(class SkiaSharp.SKImage atlas, valuetype SkiaSharp.SKRect[] sprites, valuetype SkiaSharp.SKRotationScaleMatrix[] transforms, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKBlendMode mode, valuetype SkiaSharp.SKRect cullRect, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -830,12 +809,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawAtlas (SkiaSharp.SKImage atlas, SkiaSharp.SKRect[] sprites, SkiaSharp.SKRotationScaleMatrix[] transforms, SkiaSharp.SKColor[] colors, SkiaSharp.SKBlendMode mode, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawAtlas(class SkiaSharp.SKImage atlas, valuetype SkiaSharp.SKRect[] sprites, valuetype SkiaSharp.SKRotationScaleMatrix[] transforms, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKBlendMode mode, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -863,12 +841,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawAtlas">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,SkiaSharp.SKSamplingOptions,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawAtlas (SkiaSharp.SKImage atlas, SkiaSharp.SKRect[] sprites, SkiaSharp.SKRotationScaleMatrix[] transforms, SkiaSharp.SKColor[] colors, SkiaSharp.SKBlendMode mode, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKRect cullRect, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawAtlas(class SkiaSharp.SKImage atlas, valuetype SkiaSharp.SKRect[] sprites, valuetype SkiaSharp.SKRotationScaleMatrix[] transforms, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKBlendMode mode, valuetype SkiaSharp.SKSamplingOptions sampling, valuetype SkiaSharp.SKRect cullRect, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawAtlas(SkiaSharp.SKImage,SkiaSharp.SKRect[],SkiaSharp.SKRotationScaleMatrix[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,SkiaSharp.SKSamplingOptions,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -898,12 +875,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKPoint p, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -928,12 +904,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKRect dest, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKRect dest, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -958,12 +933,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKPoint,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKPoint p, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKPoint p, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKPoint,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -981,16 +955,15 @@ this information.
         <param name="sampling">The sampling options to apply when scaling or filtering the bitmap.</param>
         <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" /> for default rendering.</param>
         <summary>Draws a bitmap at the specified location using the given sampling options and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKRect,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKRect source, SkiaSharp.SKRect dest, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKRect source, valuetype SkiaSharp.SKRect dest, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKRect,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -1017,12 +990,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKRect,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKRect dest, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKRect dest, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKRect,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1040,16 +1012,15 @@ this information.
         <param name="sampling">The sampling options to use when scaling the bitmap.</param>
         <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws the specified bitmap into the destination rectangle using the given sampling options.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, float x, float y, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -1076,12 +1047,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKRect,SkiaSharp.SKRect,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKRect source, SkiaSharp.SKRect dest, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKRect source, valuetype SkiaSharp.SKRect dest, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,SkiaSharp.SKRect,SkiaSharp.SKRect,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1101,16 +1071,15 @@ this information.
         <param name="sampling">The sampling options to use when scaling the bitmap.</param>
         <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws a portion of the specified bitmap into the destination rectangle using the given sampling options.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,System.Single,System.Single,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmap (SkiaSharp.SKBitmap bitmap, float x, float y, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmap(class SkiaSharp.SKBitmap bitmap, float32 x, float32 y, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmap(SkiaSharp.SKBitmap,System.Single,System.Single,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1130,16 +1099,15 @@ this information.
         <param name="sampling">The sampling options to apply when scaling or filtering the bitmap.</param>
         <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" /> for default rendering.</param>
         <summary>Draws a bitmap at the specified coordinates using the given sampling options and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapLattice">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapLattice(SkiaSharp.SKBitmap,SkiaSharp.SKLattice,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmapLattice (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKLattice lattice, SkiaSharp.SKRect dst, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmapLattice(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKLattice lattice, valuetype SkiaSharp.SKRect dst, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapLattice(SkiaSharp.SKBitmap,SkiaSharp.SKLattice,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1161,12 +1129,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapLattice">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapLattice(SkiaSharp.SKBitmap,SkiaSharp.SKLattice,SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmapLattice (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKLattice lattice, SkiaSharp.SKRect dst, SkiaSharp.SKFilterMode filterMode, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmapLattice(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKLattice lattice, valuetype SkiaSharp.SKRect dst, valuetype SkiaSharp.SKFilterMode filterMode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapLattice(SkiaSharp.SKBitmap,SkiaSharp.SKLattice,SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1190,12 +1157,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapLattice">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapLattice(SkiaSharp.SKBitmap,System.Int32[],System.Int32[],SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmapLattice (SkiaSharp.SKBitmap bitmap, int[] xDivs, int[] yDivs, SkiaSharp.SKRect dst, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmapLattice(class SkiaSharp.SKBitmap bitmap, int32[] xDivs, int32[] yDivs, valuetype SkiaSharp.SKRect dst, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapLattice(SkiaSharp.SKBitmap,System.Int32[],System.Int32[],SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1219,12 +1185,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapLattice">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapLattice(SkiaSharp.SKBitmap,System.Int32[],System.Int32[],SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmapLattice (SkiaSharp.SKBitmap bitmap, int[] xDivs, int[] yDivs, SkiaSharp.SKRect dst, SkiaSharp.SKFilterMode filterMode, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmapLattice(class SkiaSharp.SKBitmap bitmap, int32[] xDivs, int32[] yDivs, valuetype SkiaSharp.SKRect dst, valuetype SkiaSharp.SKFilterMode filterMode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapLattice(SkiaSharp.SKBitmap,System.Int32[],System.Int32[],SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1250,12 +1215,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapNinePatch">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapNinePatch(SkiaSharp.SKBitmap,SkiaSharp.SKRectI,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmapNinePatch (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKRectI center, SkiaSharp.SKRect dst, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmapNinePatch(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKRectI center, valuetype SkiaSharp.SKRect dst, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapNinePatch(SkiaSharp.SKBitmap,SkiaSharp.SKRectI,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1277,12 +1241,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapNinePatch">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapNinePatch(SkiaSharp.SKBitmap,SkiaSharp.SKRectI,SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawBitmapNinePatch (SkiaSharp.SKBitmap bitmap, SkiaSharp.SKRectI center, SkiaSharp.SKRect dst, SkiaSharp.SKFilterMode filterMode, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawBitmapNinePatch(class SkiaSharp.SKBitmap bitmap, valuetype SkiaSharp.SKRectI center, valuetype SkiaSharp.SKRect dst, valuetype SkiaSharp.SKFilterMode filterMode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawBitmapNinePatch(SkiaSharp.SKBitmap,SkiaSharp.SKRectI,SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1306,12 +1269,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawCircle">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawCircle(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawCircle (SkiaSharp.SKPoint c, float radius, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawCircle(valuetype SkiaSharp.SKPoint c, float32 radius, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawCircle(SkiaSharp.SKPoint,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1331,12 +1293,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawCircle">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawCircle(System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawCircle (float cx, float cy, float radius, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawCircle(float32 cx, float32 cy, float32 radius, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawCircle(System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1358,12 +1319,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawColor">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawColor(SkiaSharp.SKColor,SkiaSharp.SKBlendMode)" />
       <MemberSignature Language="C#" Value="public void DrawColor (SkiaSharp.SKColor color, SkiaSharp.SKBlendMode mode = SkiaSharp.SKBlendMode.Src);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawColor(valuetype SkiaSharp.SKColor color, valuetype SkiaSharp.SKBlendMode mode) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawColor(SkiaSharp.SKColor,SkiaSharp.SKBlendMode)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1381,12 +1341,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawColor">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawColor(SkiaSharp.SKColorF,SkiaSharp.SKBlendMode)" />
       <MemberSignature Language="C#" Value="public void DrawColor (SkiaSharp.SKColorF color, SkiaSharp.SKBlendMode mode = SkiaSharp.SKBlendMode.Src);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawColor(valuetype SkiaSharp.SKColorF color, valuetype SkiaSharp.SKBlendMode mode) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawColor(SkiaSharp.SKColorF,SkiaSharp.SKBlendMode)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1404,12 +1363,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawDrawable">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawDrawable(SkiaSharp.SKDrawable,SkiaSharp.SKMatrix@)" />
       <MemberSignature Language="C#" Value="public void DrawDrawable (SkiaSharp.SKDrawable drawable, in SkiaSharp.SKMatrix matrix);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawDrawable(class SkiaSharp.SKDrawable drawable, [in]valuetype SkiaSharp.SKMatrix&amp; matrix) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawDrawable(SkiaSharp.SKDrawable,SkiaSharp.SKMatrix@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1433,12 +1391,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawDrawable">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawDrawable(SkiaSharp.SKDrawable,SkiaSharp.SKPoint)" />
       <MemberSignature Language="C#" Value="public void DrawDrawable (SkiaSharp.SKDrawable drawable, SkiaSharp.SKPoint p);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawDrawable(class SkiaSharp.SKDrawable drawable, valuetype SkiaSharp.SKPoint p) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawDrawable(SkiaSharp.SKDrawable,SkiaSharp.SKPoint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1456,12 +1413,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawDrawable">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawDrawable(SkiaSharp.SKDrawable,System.Single,System.Single)" />
       <MemberSignature Language="C#" Value="public void DrawDrawable (SkiaSharp.SKDrawable drawable, float x, float y);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawDrawable(class SkiaSharp.SKDrawable drawable, float32 x, float32 y) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawDrawable(SkiaSharp.SKDrawable,System.Single,System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1481,12 +1437,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImage (SkiaSharp.SKImage image, SkiaSharp.SKPoint p, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImage(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -1511,12 +1466,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImage (SkiaSharp.SKImage image, SkiaSharp.SKRect dest, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImage(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKRect dest, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -1541,12 +1495,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKPoint,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImage (SkiaSharp.SKImage image, SkiaSharp.SKPoint p, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImage(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKPoint p, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKPoint,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1568,12 +1521,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKRect,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImage (SkiaSharp.SKImage image, SkiaSharp.SKRect source, SkiaSharp.SKRect dest, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImage(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKRect source, valuetype SkiaSharp.SKRect dest, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKRect,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -1600,12 +1552,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKRect,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImage (SkiaSharp.SKImage image, SkiaSharp.SKRect dest, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImage(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKRect dest, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKRect,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1627,12 +1578,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImage (SkiaSharp.SKImage image, float x, float y, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImage(class SkiaSharp.SKImage image, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -1659,12 +1609,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKRect,SkiaSharp.SKRect,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImage (SkiaSharp.SKImage image, SkiaSharp.SKRect source, SkiaSharp.SKRect dest, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImage(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKRect source, valuetype SkiaSharp.SKRect dest, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,SkiaSharp.SKRect,SkiaSharp.SKRect,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1688,12 +1637,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImage">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,System.Single,System.Single,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImage (SkiaSharp.SKImage image, float x, float y, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImage(class SkiaSharp.SKImage image, float32 x, float32 y, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImage(SkiaSharp.SKImage,System.Single,System.Single,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1717,12 +1665,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImageLattice">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageLattice(SkiaSharp.SKImage,SkiaSharp.SKLattice,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImageLattice (SkiaSharp.SKImage image, SkiaSharp.SKLattice lattice, SkiaSharp.SKRect dst, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImageLattice(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKLattice lattice, valuetype SkiaSharp.SKRect dst, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageLattice(SkiaSharp.SKImage,SkiaSharp.SKLattice,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1744,12 +1691,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImageLattice">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageLattice(SkiaSharp.SKImage,SkiaSharp.SKLattice,SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImageLattice (SkiaSharp.SKImage image, SkiaSharp.SKLattice lattice, SkiaSharp.SKRect dst, SkiaSharp.SKFilterMode filterMode, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImageLattice(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKLattice lattice, valuetype SkiaSharp.SKRect dst, valuetype SkiaSharp.SKFilterMode filterMode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageLattice(SkiaSharp.SKImage,SkiaSharp.SKLattice,SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1773,12 +1719,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImageLattice">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageLattice(SkiaSharp.SKImage,System.Int32[],System.Int32[],SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImageLattice (SkiaSharp.SKImage image, int[] xDivs, int[] yDivs, SkiaSharp.SKRect dst, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImageLattice(class SkiaSharp.SKImage image, int32[] xDivs, int32[] yDivs, valuetype SkiaSharp.SKRect dst, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageLattice(SkiaSharp.SKImage,System.Int32[],System.Int32[],SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1802,12 +1747,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImageLattice">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageLattice(SkiaSharp.SKImage,System.Int32[],System.Int32[],SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImageLattice (SkiaSharp.SKImage image, int[] xDivs, int[] yDivs, SkiaSharp.SKRect dst, SkiaSharp.SKFilterMode filterMode, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImageLattice(class SkiaSharp.SKImage image, int32[] xDivs, int32[] yDivs, valuetype SkiaSharp.SKRect dst, valuetype SkiaSharp.SKFilterMode filterMode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageLattice(SkiaSharp.SKImage,System.Int32[],System.Int32[],SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1833,12 +1777,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImageNinePatch">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageNinePatch(SkiaSharp.SKImage,SkiaSharp.SKRectI,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImageNinePatch (SkiaSharp.SKImage image, SkiaSharp.SKRectI center, SkiaSharp.SKRect dst, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImageNinePatch(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKRectI center, valuetype SkiaSharp.SKRect dst, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageNinePatch(SkiaSharp.SKImage,SkiaSharp.SKRectI,SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1860,12 +1803,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawImageNinePatch">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageNinePatch(SkiaSharp.SKImage,SkiaSharp.SKRectI,SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawImageNinePatch (SkiaSharp.SKImage image, SkiaSharp.SKRectI center, SkiaSharp.SKRect dst, SkiaSharp.SKFilterMode filterMode = SkiaSharp.SKFilterMode.Nearest, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawImageNinePatch(class SkiaSharp.SKImage image, valuetype SkiaSharp.SKRectI center, valuetype SkiaSharp.SKRect dst, valuetype SkiaSharp.SKFilterMode filterMode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawImageNinePatch(SkiaSharp.SKImage,SkiaSharp.SKRectI,SkiaSharp.SKRect,SkiaSharp.SKFilterMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1889,12 +1831,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawLine">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawLine(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawLine (SkiaSharp.SKPoint p0, SkiaSharp.SKPoint p1, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawLine(valuetype SkiaSharp.SKPoint p0, valuetype SkiaSharp.SKPoint p1, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawLine(SkiaSharp.SKPoint,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1914,12 +1855,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawLine">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawLine(System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawLine (float x0, float y0, float x1, float y1, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawLine(float32 x0, float32 y0, float32 x1, float32 y1, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawLine(System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1943,12 +1883,11 @@ this information.
       </Docs>
     </Member>
     <Member MemberName="DrawLinkDestinationAnnotation">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawLinkDestinationAnnotation(SkiaSharp.SKRect,SkiaSharp.SKData)" />
       <MemberSignature Language="C#" Value="public void DrawLinkDestinationAnnotation (SkiaSharp.SKRect rect, SkiaSharp.SKData value);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawLinkDestinationAnnotation(valuetype SkiaSharp.SKRect rect, class SkiaSharp.SKData value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawLinkDestinationAnnotation(SkiaSharp.SKRect,SkiaSharp.SKData)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1964,23 +1903,22 @@ this information.
         <summary>Annotates the canvas by making the specified rectangle link to a named destination (see <see cref="M:SkiaSharp.SKCanvas.DrawNamedDestinationAnnotation(SkiaSharp.SKPoint,SkiaSharp.SKData)" />).</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller is responsible for managing its ownership of the data.
-
-If the backend of this canvas does not support annotations, this call is
-safely ignored.
-]]></format>
+             ## Remarks
+            
+             The caller is responsible for managing its ownership of the data.
+            
+             If the backend of this canvas does not support annotations, this call is
+             safely ignored.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawLinkDestinationAnnotation">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawLinkDestinationAnnotation(SkiaSharp.SKRect,System.String)" />
       <MemberSignature Language="C#" Value="public SkiaSharp.SKData DrawLinkDestinationAnnotation (SkiaSharp.SKRect rect, string value);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKData DrawLinkDestinationAnnotation(valuetype SkiaSharp.SKRect rect, string value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawLinkDestinationAnnotation(SkiaSharp.SKRect,System.String)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -1999,12 +1937,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawNamedDestinationAnnotation">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawNamedDestinationAnnotation(SkiaSharp.SKPoint,SkiaSharp.SKData)" />
       <MemberSignature Language="C#" Value="public void DrawNamedDestinationAnnotation (SkiaSharp.SKPoint point, SkiaSharp.SKData value);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawNamedDestinationAnnotation(valuetype SkiaSharp.SKPoint point, class SkiaSharp.SKData value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawNamedDestinationAnnotation(SkiaSharp.SKPoint,SkiaSharp.SKData)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2020,23 +1957,22 @@ safely ignored.
         <summary>Annotates the canvas by associating a name with the specified point (see <see cref="M:SkiaSharp.SKCanvas.DrawLinkDestinationAnnotation(SkiaSharp.SKRect,SkiaSharp.SKData)" />).</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller is responsible for managing its ownership of the data.
-
-If the backend of this canvas does not support annotations, this call is
-safely ignored.
-]]></format>
+             ## Remarks
+            
+             The caller is responsible for managing its ownership of the data.
+            
+             If the backend of this canvas does not support annotations, this call is
+             safely ignored.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawNamedDestinationAnnotation">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawNamedDestinationAnnotation(SkiaSharp.SKPoint,System.String)" />
       <MemberSignature Language="C#" Value="public SkiaSharp.SKData DrawNamedDestinationAnnotation (SkiaSharp.SKPoint point, string value);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKData DrawNamedDestinationAnnotation(valuetype SkiaSharp.SKPoint point, string value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawNamedDestinationAnnotation(SkiaSharp.SKPoint,System.String)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2055,12 +1991,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawOval">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawOval(SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawOval (SkiaSharp.SKRect rect, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawOval(valuetype SkiaSharp.SKRect rect, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawOval(SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2078,12 +2013,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawOval">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawOval(SkiaSharp.SKPoint,SkiaSharp.SKSize,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawOval (SkiaSharp.SKPoint c, SkiaSharp.SKSize r, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawOval(valuetype SkiaSharp.SKPoint c, valuetype SkiaSharp.SKSize r, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawOval(SkiaSharp.SKPoint,SkiaSharp.SKSize,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2103,12 +2037,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawOval">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawOval(System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawOval (float cx, float cy, float rx, float ry, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawOval(float32 cx, float32 cy, float32 rx, float32 ry, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawOval(System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2132,12 +2065,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawPaint">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPaint(SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPaint (SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPaint(class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPaint(SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2153,12 +2085,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawPatch">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPatch(SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKPoint[],SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPatch (SkiaSharp.SKPoint[] cubics, SkiaSharp.SKColor[] colors, SkiaSharp.SKPoint[] texCoords, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPatch(valuetype SkiaSharp.SKPoint[] cubics, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKPoint[] texCoords, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPatch(SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKPoint[],SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2180,12 +2111,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawPatch">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPatch(SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKPoint[],SkiaSharp.SKBlendMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPatch (SkiaSharp.SKPoint[] cubics, SkiaSharp.SKColor[] colors, SkiaSharp.SKPoint[] texCoords, SkiaSharp.SKBlendMode mode, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPatch(valuetype SkiaSharp.SKPoint[] cubics, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKPoint[] texCoords, valuetype SkiaSharp.SKBlendMode mode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPatch(SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKPoint[],SkiaSharp.SKBlendMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2209,12 +2139,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawPath">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPath(SkiaSharp.SKPath,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPath (SkiaSharp.SKPath path, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPath(class SkiaSharp.SKPath path, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPath(SkiaSharp.SKPath,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2232,12 +2161,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawPicture">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPicture (SkiaSharp.SKPicture picture, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPicture(class SkiaSharp.SKPicture picture, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2255,12 +2183,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawPicture">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKMatrix@,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPicture (SkiaSharp.SKPicture picture, in SkiaSharp.SKMatrix matrix, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPicture(class SkiaSharp.SKPicture picture, [in]valuetype SkiaSharp.SKMatrix&amp; matrix, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKMatrix@,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2284,27 +2211,26 @@ safely ignored.
         <summary>Draws a picture on the canvas.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-This is equivalent to calling <xref:SkiaSharp.SKCanvas.Save>, followed by
-<xref:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix@)> with the specified `matrix`,
-<xref:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKPaint)>
-and then <xref:SkiaSharp.SKCanvas.Restore>.
-
-If paint is non-null, the picture is drawn into a temporary buffer, and then
-the paint's alpha, color filter, image filter, blend mode are applied to that
-buffer as it is drawn to the canvas.
-]]></format>
+             ## Remarks
+            
+             This is equivalent to calling <xref:SkiaSharp.SKCanvas.Save>, followed by
+             <xref:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix@)> with the specified `matrix`,
+             <xref:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKPaint)>
+             and then <xref:SkiaSharp.SKCanvas.Restore>.
+            
+             If paint is non-null, the picture is drawn into a temporary buffer, and then
+             the paint's alpha, color filter, image filter, blend mode are applied to that
+             buffer as it is drawn to the canvas.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawPicture">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPicture (SkiaSharp.SKPicture picture, SkiaSharp.SKPoint p, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPicture(class SkiaSharp.SKPicture picture, valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2324,12 +2250,11 @@ buffer as it is drawn to the canvas.
       </Docs>
     </Member>
     <Member MemberName="DrawPicture">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPicture (SkiaSharp.SKPicture picture, float x, float y, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPicture(class SkiaSharp.SKPicture picture, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2351,12 +2276,11 @@ buffer as it is drawn to the canvas.
       </Docs>
     </Member>
     <Member MemberName="DrawPoint">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoint(SkiaSharp.SKPoint,SkiaSharp.SKColor)" />
       <MemberSignature Language="C#" Value="public void DrawPoint (SkiaSharp.SKPoint p, SkiaSharp.SKColor color);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPoint(valuetype SkiaSharp.SKPoint p, valuetype SkiaSharp.SKColor color) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoint(SkiaSharp.SKPoint,SkiaSharp.SKColor)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2374,12 +2298,11 @@ buffer as it is drawn to the canvas.
       </Docs>
     </Member>
     <Member MemberName="DrawPoint">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoint(SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPoint (SkiaSharp.SKPoint p, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPoint(valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoint(SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2397,12 +2320,11 @@ buffer as it is drawn to the canvas.
       </Docs>
     </Member>
     <Member MemberName="DrawPoint">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoint(System.Single,System.Single,SkiaSharp.SKColor)" />
       <MemberSignature Language="C#" Value="public void DrawPoint (float x, float y, SkiaSharp.SKColor color);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPoint(float32 x, float32 y, valuetype SkiaSharp.SKColor color) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoint(System.Single,System.Single,SkiaSharp.SKColor)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2422,12 +2344,11 @@ buffer as it is drawn to the canvas.
       </Docs>
     </Member>
     <Member MemberName="DrawPoint">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoint(System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPoint (float x, float y, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPoint(float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoint(System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2447,12 +2368,11 @@ buffer as it is drawn to the canvas.
       </Docs>
     </Member>
     <Member MemberName="DrawPoints">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoints(SkiaSharp.SKPointMode,SkiaSharp.SKPoint[],SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawPoints (SkiaSharp.SKPointMode mode, SkiaSharp.SKPoint[] points, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawPoints(valuetype SkiaSharp.SKPointMode mode, valuetype SkiaSharp.SKPoint[] points, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawPoints(SkiaSharp.SKPointMode,SkiaSharp.SKPoint[],SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2470,34 +2390,33 @@ buffer as it is drawn to the canvas.
         <summary>Draws an array of points, lines or a polygon in the canvas, one at a time.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-For <xref:SkiaSharp.SKPointMode.Points>, each point is drawn centered at its
-coordinate, and its size is specified by the paint's stroke-width. It draws as
-a square, unless the paint's <xref:SkiaSharp.SKPaint.StrokeCap> is
-<xref:SkiaSharp.SKStrokeCap.Round>, in which the points are drawn as circles.
-
-For <xref:SkiaSharp.SKPointMode.Lines>, each pair of points is drawn as a line
-segment, respecting the paint's settings for cap, join and width.
-
-For <xref:SkiaSharp.SKPointMode.Polygon>, the entire array is drawn as a
-series of connected line segments.
-
-Note that, while similar, the line and polygon modes draw slightly differently
-than the equivalent path built with a series of move to, line to calls, in
-that the path will draw all of its contours at once, with no interactions if
-contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
-]]></format>
+             ## Remarks
+            
+             For <xref:SkiaSharp.SKPointMode.Points>, each point is drawn centered at its
+             coordinate, and its size is specified by the paint's stroke-width. It draws as
+             a square, unless the paint's <xref:SkiaSharp.SKPaint.StrokeCap> is
+             <xref:SkiaSharp.SKStrokeCap.Round>, in which the points are drawn as circles.
+            
+             For <xref:SkiaSharp.SKPointMode.Lines>, each pair of points is drawn as a line
+             segment, respecting the paint's settings for cap, join and width.
+            
+             For <xref:SkiaSharp.SKPointMode.Polygon>, the entire array is drawn as a
+             series of connected line segments.
+            
+             Note that, while similar, the line and polygon modes draw slightly differently
+             than the equivalent path built with a series of move to, line to calls, in
+             that the path will draw all of its contours at once, with no interactions if
+             contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawRect">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRect(SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawRect (SkiaSharp.SKRect rect, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawRect(valuetype SkiaSharp.SKRect rect, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRect(SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2515,12 +2434,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawRect">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRect(System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawRect (float x, float y, float w, float h, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawRect(float32 x, float32 y, float32 w, float32 h, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRect(System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2544,12 +2462,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawRegion">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRegion(SkiaSharp.SKRegion,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawRegion (SkiaSharp.SKRegion region, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawRegion(class SkiaSharp.SKRegion region, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRegion(SkiaSharp.SKRegion,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2567,12 +2484,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawRoundRect">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRect(SkiaSharp.SKRoundRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawRoundRect (SkiaSharp.SKRoundRect rect, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawRoundRect(class SkiaSharp.SKRoundRect rect, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRect(SkiaSharp.SKRoundRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2590,12 +2506,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawRoundRect">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRect(SkiaSharp.SKRect,SkiaSharp.SKSize,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawRoundRect (SkiaSharp.SKRect rect, SkiaSharp.SKSize r, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawRoundRect(valuetype SkiaSharp.SKRect rect, valuetype SkiaSharp.SKSize r, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRect(SkiaSharp.SKRect,SkiaSharp.SKSize,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2615,12 +2530,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawRoundRect">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRect(SkiaSharp.SKRect,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawRoundRect (SkiaSharp.SKRect rect, float rx, float ry, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawRoundRect(valuetype SkiaSharp.SKRect rect, float32 rx, float32 ry, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRect(SkiaSharp.SKRect,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2642,12 +2556,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawRoundRect">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRect(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawRoundRect (float x, float y, float w, float h, float rx, float ry, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawRoundRect(float32 x, float32 y, float32 w, float32 h, float32 rx, float32 ry, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRect(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2675,12 +2588,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawRoundRectDifference">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRectDifference(SkiaSharp.SKRoundRect,SkiaSharp.SKRoundRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawRoundRectDifference (SkiaSharp.SKRoundRect outer, SkiaSharp.SKRoundRect inner, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawRoundRectDifference(class SkiaSharp.SKRoundRect outer, class SkiaSharp.SKRoundRect inner, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawRoundRectDifference(SkiaSharp.SKRoundRect,SkiaSharp.SKRoundRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2700,12 +2612,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawSurface(SkiaSharp.SKSurface,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawSurface (SkiaSharp.SKSurface surface, SkiaSharp.SKPoint p, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawSurface(class SkiaSharp.SKSurface surface, valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawSurface(SkiaSharp.SKSurface,SkiaSharp.SKPoint,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2725,12 +2636,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawSurface(SkiaSharp.SKSurface,SkiaSharp.SKPoint,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawSurface (SkiaSharp.SKSurface surface, SkiaSharp.SKPoint p, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawSurface(class SkiaSharp.SKSurface surface, valuetype SkiaSharp.SKPoint p, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawSurface(SkiaSharp.SKSurface,SkiaSharp.SKPoint,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2748,16 +2658,15 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <param name="sampling">The sampling options to use when drawing the surface.</param>
         <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws the specified surface onto the canvas at the given point using the given sampling options.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawSurface(SkiaSharp.SKSurface,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawSurface (SkiaSharp.SKSurface surface, float x, float y, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawSurface(class SkiaSharp.SKSurface surface, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawSurface(SkiaSharp.SKSurface,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2779,12 +2688,11 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawSurface(SkiaSharp.SKSurface,System.Single,System.Single,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawSurface (SkiaSharp.SKSurface surface, float x, float y, SkiaSharp.SKSamplingOptions sampling, SkiaSharp.SKPaint paint = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawSurface(class SkiaSharp.SKSurface surface, float32 x, float32 y, valuetype SkiaSharp.SKSamplingOptions sampling, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawSurface(SkiaSharp.SKSurface,System.Single,System.Single,SkiaSharp.SKSamplingOptions,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2804,69 +2712,15 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <param name="sampling">The sampling options to use when drawing the surface.</param>
         <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws the specified surface onto the canvas at the given position using the given sampling options.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
-    <MemberGroup MemberName="DrawText">
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-      </AssemblyInfo>
-      <Docs>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Examples
-
-```csharp
-var info = new SKImageInfo(512, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // draw left-aligned text, solid
-    using (var font = new SKFont { Size = 64.0f })
-    using (var paint = new SKPaint()) {
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x42, 0x81, 0xA4);
-        paint.IsStroke = false;
-
-        canvas.DrawText("Skia", info.Width / 2f, 64.0f, SKTextAlign.Left, font, paint);
-    }
-
-    // draw centered text, stroked
-    using (var font = new SKFont { Size = 64.0f })
-    using (var paint = new SKPaint()) {
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
-        paint.IsStroke = true;
-        paint.StrokeWidth = 3;
-
-        canvas.DrawText("Skia", info.Width / 2f, 144.0f, SKTextAlign.Center, font, paint);
-    }
-
-    // draw right-aligned text, scaled
-    using (var font = new SKFont { Size = 64.0f, ScaleX = 1.5f })
-    using (var paint = new SKPaint()) {
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
-
-        canvas.DrawText("Skia", info.Width / 2f, 224.0f, SKTextAlign.Right, font, paint);
-    }
-}
-```
-
-
-]]></format>
-        </remarks>
-      </Docs>
-    </MemberGroup>
     <Member MemberName="DrawText">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(SkiaSharp.SKTextBlob,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawText (SkiaSharp.SKTextBlob text, float x, float y, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(class SkiaSharp.SKTextBlob text, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(SkiaSharp.SKTextBlob,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2888,12 +2742,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawText">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,SkiaSharp.SKPoint,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawText (string text, SkiaSharp.SKPoint p, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(string text, valuetype SkiaSharp.SKPoint p, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,SkiaSharp.SKPoint,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -2916,16 +2769,15 @@ using (var surface = SKSurface.Create(info)) {
         <param name="font">The font to use for rendering the text.</param>
         <param name="paint">The paint to apply when drawing.</param>
         <summary>Draws the specified text at the given point using the font and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawText">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,SkiaSharp.SKPoint,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawText (string text, SkiaSharp.SKPoint p, SkiaSharp.SKTextAlign textAlign, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(string text, valuetype SkiaSharp.SKPoint p, valuetype SkiaSharp.SKTextAlign textAlign, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,SkiaSharp.SKPoint,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -2949,12 +2801,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawText">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,System.Single,System.Single,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawText (string text, float x, float y, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(string text, float32 x, float32 y, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,System.Single,System.Single,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -2979,16 +2830,15 @@ using (var surface = SKSurface.Create(info)) {
         <param name="font">The font to use for rendering the text.</param>
         <param name="paint">The paint to apply when drawing.</param>
         <summary>Draws the specified text at the given coordinates using the font and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawText">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,System.Single,System.Single,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawText (string text, float x, float y, SkiaSharp.SKTextAlign textAlign, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(string text, float32 x, float32 y, valuetype SkiaSharp.SKTextAlign textAlign, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawText(System.String,System.Single,System.Single,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3014,12 +2864,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, SkiaSharp.SKPoint offset, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKPoint offset, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -3048,12 +2897,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, SkiaSharp.SKPoint offset, SkiaSharp.SKTextAlign textAlign, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKPoint offset, valuetype SkiaSharp.SKTextAlign textAlign, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3079,12 +2927,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,System.Boolean,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, SkiaSharp.SKPoint offset, bool warpGlyphs, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKPoint offset, bool warpGlyphs, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,System.Boolean,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -3115,12 +2962,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, float hOffset, float vOffset, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, float32 hOffset, float32 vOffset, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -3151,12 +2997,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,System.Boolean,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, SkiaSharp.SKPoint offset, bool warpGlyphs, SkiaSharp.SKTextAlign textAlign, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, valuetype SkiaSharp.SKPoint offset, bool warpGlyphs, valuetype SkiaSharp.SKTextAlign textAlign, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,SkiaSharp.SKPoint,System.Boolean,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3184,12 +3029,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawTextOnPath">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawTextOnPath (string text, SkiaSharp.SKPath path, float hOffset, float vOffset, SkiaSharp.SKTextAlign textAlign, SkiaSharp.SKFont font, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawTextOnPath(string text, class SkiaSharp.SKPath path, float32 hOffset, float32 vOffset, valuetype SkiaSharp.SKTextAlign textAlign, class SkiaSharp.SKFont font, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.String,SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKTextAlign,SkiaSharp.SKFont,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3217,12 +3061,11 @@ using (var surface = SKSurface.Create(info)) {
       </Docs>
     </Member>
     <Member MemberName="DrawUrlAnnotation">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawUrlAnnotation(SkiaSharp.SKRect,SkiaSharp.SKData)" />
       <MemberSignature Language="C#" Value="public void DrawUrlAnnotation (SkiaSharp.SKRect rect, SkiaSharp.SKData value);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawUrlAnnotation(valuetype SkiaSharp.SKRect rect, class SkiaSharp.SKData value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawUrlAnnotation(SkiaSharp.SKRect,SkiaSharp.SKData)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3238,23 +3081,22 @@ using (var surface = SKSurface.Create(info)) {
         <summary>Annotates the canvas by associating the specified URL with the specified rectangle (in local coordinates).</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller is responsible for managing its ownership of the data.
-
-If the backend of this canvas does not support annotations, this call is
-safely ignored.
-]]></format>
+             ## Remarks
+            
+             The caller is responsible for managing its ownership of the data.
+            
+             If the backend of this canvas does not support annotations, this call is
+             safely ignored.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="DrawUrlAnnotation">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawUrlAnnotation(SkiaSharp.SKRect,System.String)" />
       <MemberSignature Language="C#" Value="public SkiaSharp.SKData DrawUrlAnnotation (SkiaSharp.SKRect rect, string value);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class SkiaSharp.SKData DrawUrlAnnotation(valuetype SkiaSharp.SKRect rect, string value) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawUrlAnnotation(SkiaSharp.SKRect,System.String)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3273,12 +3115,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertices,SkiaSharp.SKBlendMode,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawVertices (SkiaSharp.SKVertices vertices, SkiaSharp.SKBlendMode mode, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawVertices(class SkiaSharp.SKVertices vertices, valuetype SkiaSharp.SKBlendMode mode, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertices,SkiaSharp.SKBlendMode,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3298,12 +3139,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertexMode,SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawVertices (SkiaSharp.SKVertexMode vmode, SkiaSharp.SKPoint[] vertices, SkiaSharp.SKColor[] colors, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawVertices(valuetype SkiaSharp.SKVertexMode vmode, valuetype SkiaSharp.SKPoint[] vertices, valuetype SkiaSharp.SKColor[] colors, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertexMode,SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3325,12 +3165,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertexMode,SkiaSharp.SKPoint[],SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawVertices (SkiaSharp.SKVertexMode vmode, SkiaSharp.SKPoint[] vertices, SkiaSharp.SKPoint[] texs, SkiaSharp.SKColor[] colors, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawVertices(valuetype SkiaSharp.SKVertexMode vmode, valuetype SkiaSharp.SKPoint[] vertices, valuetype SkiaSharp.SKPoint[] texs, valuetype SkiaSharp.SKColor[] colors, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertexMode,SkiaSharp.SKPoint[],SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3354,12 +3193,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertexMode,SkiaSharp.SKPoint[],SkiaSharp.SKPoint[],SkiaSharp.SKColor[],System.UInt16[],SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawVertices (SkiaSharp.SKVertexMode vmode, SkiaSharp.SKPoint[] vertices, SkiaSharp.SKPoint[] texs, SkiaSharp.SKColor[] colors, ushort[] indices, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawVertices(valuetype SkiaSharp.SKVertexMode vmode, valuetype SkiaSharp.SKPoint[] vertices, valuetype SkiaSharp.SKPoint[] texs, valuetype SkiaSharp.SKColor[] colors, unsigned int16[] indices, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertexMode,SkiaSharp.SKPoint[],SkiaSharp.SKPoint[],SkiaSharp.SKColor[],System.UInt16[],SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3385,12 +3223,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="DrawVertices">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertexMode,SkiaSharp.SKPoint[],SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,System.UInt16[],SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public void DrawVertices (SkiaSharp.SKVertexMode vmode, SkiaSharp.SKPoint[] vertices, SkiaSharp.SKPoint[] texs, SkiaSharp.SKColor[] colors, SkiaSharp.SKBlendMode mode, ushort[] indices, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawVertices(valuetype SkiaSharp.SKVertexMode vmode, valuetype SkiaSharp.SKPoint[] vertices, valuetype SkiaSharp.SKPoint[] texs, valuetype SkiaSharp.SKColor[] colors, valuetype SkiaSharp.SKBlendMode mode, unsigned int16[] indices, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.DrawVertices(SkiaSharp.SKVertexMode,SkiaSharp.SKPoint[],SkiaSharp.SKPoint[],SkiaSharp.SKColor[],SkiaSharp.SKBlendMode,System.UInt16[],SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3418,12 +3255,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="Flush">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Flush" />
       <MemberSignature Language="C#" Value="public void Flush ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Flush() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Flush" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3436,12 +3272,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="GetDeviceClipBounds">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.GetDeviceClipBounds(SkiaSharp.SKRectI@)" />
       <MemberSignature Language="C#" Value="public bool GetDeviceClipBounds (out SkiaSharp.SKRectI bounds);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetDeviceClipBounds([out] valuetype SkiaSharp.SKRectI&amp; bounds) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.GetDeviceClipBounds(SkiaSharp.SKRectI@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3459,12 +3294,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="GetLocalClipBounds">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.GetLocalClipBounds(SkiaSharp.SKRect@)" />
       <MemberSignature Language="C#" Value="public bool GetLocalClipBounds (out SkiaSharp.SKRect bounds);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool GetLocalClipBounds([out] valuetype SkiaSharp.SKRect&amp; bounds) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.GetLocalClipBounds(SkiaSharp.SKRect@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3482,12 +3316,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="IsClipEmpty">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.IsClipEmpty" />
       <MemberSignature Language="C#" Value="public bool IsClipEmpty { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool IsClipEmpty" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.IsClipEmpty" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3501,12 +3334,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="IsClipRect">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.IsClipRect" />
       <MemberSignature Language="C#" Value="public bool IsClipRect { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool IsClipRect" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.IsClipRect" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3520,12 +3352,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="LocalClipBounds">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.LocalClipBounds" />
       <MemberSignature Language="C#" Value="public SkiaSharp.SKRect LocalClipBounds { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKRect LocalClipBounds" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.LocalClipBounds" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3538,12 +3369,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="QuickReject">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.QuickReject(SkiaSharp.SKPath)" />
       <MemberSignature Language="C#" Value="public bool QuickReject (SkiaSharp.SKPath path);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool QuickReject(class SkiaSharp.SKPath path) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.QuickReject(SkiaSharp.SKPath)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3561,12 +3391,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="QuickReject">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.QuickReject(SkiaSharp.SKRect)" />
       <MemberSignature Language="C#" Value="public bool QuickReject (SkiaSharp.SKRect rect);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool QuickReject(valuetype SkiaSharp.SKRect rect) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.QuickReject(SkiaSharp.SKRect)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3584,12 +3413,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="ResetMatrix">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ResetMatrix" />
       <MemberSignature Language="C#" Value="public void ResetMatrix ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ResetMatrix() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.ResetMatrix" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3602,12 +3430,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="Restore">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Restore" />
       <MemberSignature Language="C#" Value="public void Restore ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Restore() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Restore" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3620,12 +3447,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="RestoreToCount">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" />
       <MemberSignature Language="C#" Value="public void RestoreToCount (int count);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RestoreToCount(int32 count) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3641,12 +3467,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="RotateDegrees">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RotateDegrees(System.Single)" />
       <MemberSignature Language="C#" Value="public void RotateDegrees (float degrees);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RotateDegrees(float32 degrees) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RotateDegrees(System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3662,12 +3487,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="RotateDegrees">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RotateDegrees(System.Single,System.Single,System.Single)" />
       <MemberSignature Language="C#" Value="public void RotateDegrees (float degrees, float px, float py);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RotateDegrees(float32 degrees, float32 px, float32 py) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RotateDegrees(System.Single,System.Single,System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3687,12 +3511,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="RotateRadians">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RotateRadians(System.Single)" />
       <MemberSignature Language="C#" Value="public void RotateRadians (float radians);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RotateRadians(float32 radians) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RotateRadians(System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3708,12 +3531,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="RotateRadians">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RotateRadians(System.Single,System.Single,System.Single)" />
       <MemberSignature Language="C#" Value="public void RotateRadians (float radians, float px, float py);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RotateRadians(float32 radians, float32 px, float32 py) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.RotateRadians(System.Single,System.Single,System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3733,12 +3555,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="Save">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Save" />
       <MemberSignature Language="C#" Value="public int Save ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 Save() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Save" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3752,12 +3573,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="SaveCount">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.SaveCount" />
       <MemberSignature Language="C#" Value="public int SaveCount { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance int32 SaveCount" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.SaveCount" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3770,12 +3590,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SaveLayer" />
       <MemberSignature Language="C#" Value="public int SaveLayer ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 SaveLayer() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SaveLayer" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3789,12 +3608,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SaveLayer(SkiaSharp.SKCanvasSaveLayerRec@)" />
       <MemberSignature Language="C#" Value="public int SaveLayer (in SkiaSharp.SKCanvasSaveLayerRec rec);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 SaveLayer([in]valuetype SkiaSharp.SKCanvasSaveLayerRec&amp; rec) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SaveLayer(SkiaSharp.SKCanvasSaveLayerRec@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3817,12 +3635,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SaveLayer(SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public int SaveLayer (SkiaSharp.SKPaint? paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 SaveLayer(class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SaveLayer(SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -3844,12 +3661,11 @@ safely ignored.
       </Docs>
     </Member>
     <Member MemberName="SaveLayer">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SaveLayer(SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberSignature Language="C#" Value="public int SaveLayer (SkiaSharp.SKRect limit, SkiaSharp.SKPaint? paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 SaveLayer(valuetype SkiaSharp.SKRect limit, class SkiaSharp.SKPaint paint) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SaveLayer(SkiaSharp.SKRect,SkiaSharp.SKPaint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -3871,28 +3687,27 @@ safely ignored.
         <returns>The value to pass to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to balance this save.</returns>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-This behaves the same as <xref:SkiaSharp.SKCanvas.Save> but in addition it
-allocates an offscreen bitmap. All drawing calls are directed there, and only
-when the balancing call to <xref:SkiaSharp.SKCanvas.Restore> is made is that
-offscreen transfered to the canvas (or the previous layer).
-
-The limit rectangle, is used as a hint to limit the size of the offscreen
-bitmap, and thus drawing may be clipped to it, though that clipping is not
-guaranteed to happen. If exact clipping is desired, use
-<xref:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKClipOperation,System.Boolean)>.
-]]></format>
+             ## Remarks
+            
+             This behaves the same as <xref:SkiaSharp.SKCanvas.Save> but in addition it
+             allocates an offscreen bitmap. All drawing calls are directed there, and only
+             when the balancing call to <xref:SkiaSharp.SKCanvas.Restore> is made is that
+             offscreen transfered to the canvas (or the previous layer).
+            
+             The limit rectangle, is used as a hint to limit the size of the offscreen
+             bitmap, and thus drawing may be clipped to it, though that clipping is not
+             guaranteed to happen. If exact clipping is desired, use
+             <xref:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKClipOperation,System.Boolean)>.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="Scale">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Scale(SkiaSharp.SKPoint)" />
       <MemberSignature Language="C#" Value="public void Scale (SkiaSharp.SKPoint size);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Scale(valuetype SkiaSharp.SKPoint size) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Scale(SkiaSharp.SKPoint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3908,12 +3723,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="Scale">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Scale(System.Single)" />
       <MemberSignature Language="C#" Value="public void Scale (float s);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Scale(float32 s) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Scale(System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3929,12 +3743,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="Scale">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Scale(System.Single,System.Single)" />
       <MemberSignature Language="C#" Value="public void Scale (float sx, float sy);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Scale(float32 sx, float32 sy) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Scale(System.Single,System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3952,12 +3765,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="Scale">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Scale(System.Single,System.Single,System.Single,System.Single)" />
       <MemberSignature Language="C#" Value="public void Scale (float sx, float sy, float px, float py);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Scale(float32 sx, float32 sy, float32 px, float32 py) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Scale(System.Single,System.Single,System.Single,System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -3979,12 +3791,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="SetMatrix">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix@)" />
       <MemberSignature Language="C#" Value="public void SetMatrix (in SkiaSharp.SKMatrix matrix);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix([in]valuetype SkiaSharp.SKMatrix&amp; matrix) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -4006,12 +3817,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="SetMatrix">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix44@)" />
       <MemberSignature Language="C#" Value="public void SetMatrix (in SkiaSharp.SKMatrix44 matrix);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetMatrix([in]valuetype SkiaSharp.SKMatrix44&amp; matrix) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.SetMatrix(SkiaSharp.SKMatrix44@)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -4033,12 +3843,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="Skew">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Skew(SkiaSharp.SKPoint)" />
       <MemberSignature Language="C#" Value="public void Skew (SkiaSharp.SKPoint skew);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Skew(valuetype SkiaSharp.SKPoint skew) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Skew(SkiaSharp.SKPoint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -4054,12 +3863,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="Skew">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Skew(System.Single,System.Single)" />
       <MemberSignature Language="C#" Value="public void Skew (float sx, float sy);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Skew(float32 sx, float32 sy) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Skew(System.Single,System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -4077,12 +3885,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="Surface">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.Surface" />
       <MemberSignature Language="C#" Value="public SkiaSharp.SKSurface? Surface { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.SKSurface Surface" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.Surface" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -4103,12 +3910,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="TotalMatrix">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.TotalMatrix" />
       <MemberSignature Language="C#" Value="public SkiaSharp.SKMatrix TotalMatrix { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKMatrix TotalMatrix" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.TotalMatrix" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -4121,12 +3927,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="TotalMatrix44">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.TotalMatrix44" />
       <MemberSignature Language="C#" Value="public SkiaSharp.SKMatrix44 TotalMatrix44 { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype SkiaSharp.SKMatrix44 TotalMatrix44" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKCanvas.TotalMatrix44" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -4139,12 +3944,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="Translate">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Translate(SkiaSharp.SKPoint)" />
       <MemberSignature Language="C#" Value="public void Translate (SkiaSharp.SKPoint point);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Translate(valuetype SkiaSharp.SKPoint point) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Translate(SkiaSharp.SKPoint)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -4160,12 +3964,11 @@ guaranteed to happen. If exact clipping is desired, use
       </Docs>
     </Member>
     <Member MemberName="Translate">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Translate(System.Single,System.Single)" />
       <MemberSignature Language="C#" Value="public void Translate (float dx, float dy);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Translate(float32 dx, float32 dy) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.SKCanvas.Translate(System.Single,System.Single)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>

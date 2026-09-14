@@ -1,7 +1,7 @@
 <Type Name="SKFontArguments" FullName="SkiaSharp.SKFontArguments">
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKFontArguments" />
   <TypeSignature Language="C#" Value="public ref struct SKFontArguments" />
   <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKFontArguments extends System.ValueType" />
-  <TypeSignature Language="DocId" Value="T:SkiaSharp.SKFontArguments" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp</AssemblyName>
     <AssemblyVersion>4.154.0.0</AssemblyVersion>
@@ -21,39 +21,38 @@
   <Docs>
     <summary>Specifies arguments for customizing a typeface clone, including the collection index, color palette, palette overrides, and variation design position.</summary>
     <remarks><![CDATA[
-## Remarks
-
-`SKFontArguments` is a `ref struct` that groups the parameters passed to <xref:SkiaSharp.SKTypeface.Clone*> when creating a customized typeface instance. Because it is a `ref struct`, it cannot be stored on the heap or used across async boundaries.
-
-Typically you create an instance, set its properties, and pass it directly to `Clone`.
-
-## Examples
-
-Cloning a variable font at a specific weight:
-
-```csharp
-using var typeface = SKTypeface.FromFile("variable-font.ttf");
-
-var wghtTag = SKFourByteTag.Parse("wght");
-var args = new SKFontArguments
-{
-    VariationDesignPosition = new[]
-    {
-        new SKFontVariationPositionCoordinate { Axis = wghtTag, Value = 700 },
-    },
-};
-using var bold = typeface.Clone(args);
-```
-]]></remarks>
+             ## Remarks
+            
+             `SKFontArguments` is a `ref struct` that groups the parameters passed to <xref:SkiaSharp.SKTypeface.Clone*> when creating a customized typeface instance. Because it is a `ref struct`, it cannot be stored on the heap or used across async boundaries.
+            
+             Typically you create an instance, set its properties, and pass it directly to `Clone`.
+            
+             ## Examples
+            
+             Cloning a variable font at a specific weight:
+            
+             ```csharp
+             using var typeface = SKTypeface.FromFile("variable-font.ttf");
+            
+             var wghtTag = SKFourByteTag.Parse("wght");
+             var args = new SKFontArguments
+             {
+                 VariationDesignPosition = new[]
+                 {
+                     new SKFontVariationPositionCoordinate { Axis = wghtTag, Value = 700 },
+                 },
+             };
+             using var bold = typeface.Clone(args);
+             ```
+             ]]></remarks>
   </Docs>
   <Members>
     <Member MemberName="CollectionIndex">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKFontArguments.CollectionIndex" />
       <MemberSignature Language="C#" Value="public int CollectionIndex { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance int32 CollectionIndex" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKFontArguments.CollectionIndex" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -67,16 +66,15 @@ using var bold = typeface.Clone(args);
       <Docs>
         <summary>Gets or sets the index of the desired typeface within a font collection.</summary>
         <value>The zero-based index of the typeface within a TTC (TrueType Collection) font file.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="PaletteIndex">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKFontArguments.PaletteIndex" />
       <MemberSignature Language="C#" Value="public int PaletteIndex { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance int32 PaletteIndex" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKFontArguments.PaletteIndex" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -90,16 +88,15 @@ using var bold = typeface.Clone(args);
       <Docs>
         <summary>Gets or sets the color palette index to use when cloning the typeface.</summary>
         <value>The zero-based index of the color palette from the font's CPAL table to use.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="PaletteOverrides">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKFontArguments.PaletteOverrides" />
       <MemberSignature Language="C#" Value="public ReadOnlySpan&lt;SkiaSharp.SKFontPaletteOverride&gt; PaletteOverrides { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKFontPaletteOverride&gt; PaletteOverrides" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKFontArguments.PaletteOverrides" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -113,16 +110,15 @@ using var bold = typeface.Clone(args);
       <Docs>
         <summary>Gets or sets the per-entry color overrides to apply to the palette.</summary>
         <value>A read-only span of <see cref="T:SkiaSharp.SKFontPaletteOverride" /> values that override specific color entries in the chosen palette.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="VariationDesignPosition">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKFontArguments.VariationDesignPosition" />
       <MemberSignature Language="C#" Value="public ReadOnlySpan&lt;SkiaSharp.SKFontVariationPositionCoordinate&gt; VariationDesignPosition { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ReadOnlySpan`1&lt;valuetype SkiaSharp.SKFontVariationPositionCoordinate&gt; VariationDesignPosition" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.SKFontArguments.VariationDesignPosition" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
@@ -136,7 +132,7 @@ using var bold = typeface.Clone(args);
       <Docs>
         <summary>Gets or sets the variation design position to apply to the cloned typeface.</summary>
         <value>A read-only span of <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values specifying a design-space value for each variation axis.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
   </Members>
