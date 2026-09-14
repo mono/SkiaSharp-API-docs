@@ -193,6 +193,30 @@ namespace Example {
     Assert-Equal $report.publicSelectedApi.missingCompilerXml[0].docId 'M:Example.IMissingSidecar.Required' `
         'Completeness gate did not identify the public member missing from compiler XML.'
 
+    $syntaxAssembly = Join-Path $completenessWorkspace 'Syntax.dll'
+    Add-Type -OutputAssembly $syntaxAssembly -TypeDefinition @'
+namespace Example {
+    public class Outer<T> {
+        public class Inner { }
+        protected void Protected<TMethod>(ref int value, string[] names) { }
+        public static Outer<T> operator +(Outer<T> left, Outer<T> right) => left;
+        public static implicit operator string(Outer<T> value) => "";
+    }
+}
+'@
+    $syntaxDocIds = (Get-SelectedAssemblyPublicDocIds @($syntaxAssembly)).ByDocId
+    foreach ($docId in @(
+        'T:Example.Outer`1',
+        'T:Example.Outer`1.Inner',
+        'M:Example.Outer`1.Protected``1(System.Int32@,System.String[])',
+        'M:Example.Outer`1.op_Addition(Example.Outer`1{`0},Example.Outer`1{`0})',
+        'M:Example.Outer`1.op_Implicit(Example.Outer`1{`0})~System.String'
+    )) {
+        if (-not $syntaxDocIds.ContainsKey($docId)) {
+            throw "Exact metadata DocId formatter did not emit '$docId'."
+        }
+    }
+
     @'
 <doc><members>
   <member name="T:Example.IComplete"><summary>A completely documented public interface.</summary></member>

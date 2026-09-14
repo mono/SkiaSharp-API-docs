@@ -238,4 +238,5 @@ Export-ModuleMember -Function `
     Test-SubstantiveEcmaDocs, `
     Get-EcmaDocumentationEntries, `
     Get-CompilerXmlDocumentationEntries, `
+    Get-SelectedAssemblyPublicDocIds, `
     Assert-ApiDocsCompleteness

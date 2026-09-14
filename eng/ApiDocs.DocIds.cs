@@ -42,7 +42,7 @@ public static class PublicApiDocIdEnumerator
             if (IsVisible(@event))
                 Add(result, "E:" + TypeName(type) + "." + EscapeMemberName(@event.Name), assembly, @event.MetadataToken.ToInt32(), @event.FullName);
         foreach (var method in type.Methods)
-            if (IsVisible(method) && !method.IsSpecialName && !method.IsRuntimeSpecialName)
+            if (IsVisible(method) && IsDocumentableMethod(method))
                 Add(result, "M:" + TypeName(type) + "." + MethodName(method) + Parameters(method.Parameters) + Conversion(method), assembly, method.MetadataToken.ToInt32(), method.FullName);
         foreach (var method in type.Methods)
             if (IsVisible(method) && method.IsConstructor && !method.IsStatic)
@@ -74,6 +74,16 @@ public static class PublicApiDocIdEnumerator
         @event.RemoveMethod != null && IsVisible(@event.RemoveMethod) ||
         @event.InvokeMethod != null && IsVisible(@event.InvokeMethod) ||
         HasVisible(@event.OtherMethods);
+
+    private static bool IsDocumentableMethod(MethodDefinition method) =>
+        !method.IsConstructor &&
+        !method.IsRuntimeSpecialName &&
+        !(method.IsSpecialName && (
+            method.Name.StartsWith("get_", StringComparison.Ordinal) ||
+            method.Name.StartsWith("set_", StringComparison.Ordinal) ||
+            method.Name.StartsWith("add_", StringComparison.Ordinal) ||
+            method.Name.StartsWith("remove_", StringComparison.Ordinal) ||
+            method.Name.StartsWith("raise_", StringComparison.Ordinal)));
 
     private static bool HasVisible(IEnumerable<MethodDefinition> methods)
     {
