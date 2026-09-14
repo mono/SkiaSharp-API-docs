@@ -139,7 +139,7 @@ function Assert-ApiDocsCompleteness(
         } elseif ($ecmaByDocId.ContainsKey($entry.docId)) {
             $invalidEcma.Add([PSCustomObject]@{ docId = $entry.docId; path = $entry.path; kind = $entry.kind; reason = 'duplicate-doc-id' })
         } else {
-            $ecmaByDocId[$entry.docId] = $entry
+            [void]($ecmaByDocId[$entry.docId] = $entry)
         }
         if (-not $entry.substantiveDocs) {
             $invalidEcma.Add([PSCustomObject]@{ docId = $entry.docId; path = $entry.path; kind = $entry.kind; reason = 'missing-or-placeholder-docs' })
@@ -153,7 +153,7 @@ function Assert-ApiDocsCompleteness(
     $compilerByDocId = @{}
     foreach ($entry in $compilerEntries) {
         if (-not $compilerByDocId.ContainsKey($entry.docId)) {
-            $compilerByDocId[$entry.docId] = [Collections.Generic.List[object]]::new()
+            [void]($compilerByDocId[$entry.docId] = [Collections.Generic.List[object]]::new())
         }
         $compilerByDocId[$entry.docId].Add($entry)
     }

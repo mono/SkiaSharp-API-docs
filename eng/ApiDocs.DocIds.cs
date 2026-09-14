@@ -32,6 +32,10 @@ public static class PublicApiDocIdEnumerator
             return;
 
         Add(result, "T:" + TypeName(type), assembly, type.MetadataToken.ToInt32(), type.FullName);
+        // Delegate invocation members are emitted by the compiler and cannot have
+        // source XML documentation; the delegate type itself is the public API.
+        if (type.BaseType?.FullName == "System.MulticastDelegate")
+            return;
         foreach (var field in type.Fields)
             if (IsVisible(field) && !field.IsSpecialName)
                 Add(result, "F:" + TypeName(type) + "." + EscapeMemberName(field.Name), assembly, field.MetadataToken.ToInt32(), field.FullName);
@@ -129,9 +133,25 @@ public static class PublicApiDocIdEnumerator
         {
             var arguments = new List<string>();
             foreach (var argument in instance.GenericArguments) arguments.Add(TypeName(argument));
-            return TypeName(instance.ElementType) + "{" + string.Join(",", arguments) + "}";
+            return RemoveGenericArity(TypeName(instance.ElementType)) + "{" + string.Join(",", arguments) + "}";
         }
         var prefix = type.DeclaringType == null ? type.Namespace : TypeName(type.DeclaringType);
         return string.IsNullOrEmpty(prefix) ? type.Name : prefix + "." + type.Name;
+    }
+
+    private static string RemoveGenericArity(string typeName)
+    {
+        var result = new System.Text.StringBuilder(typeName.Length);
+        for (var index = 0; index < typeName.Length; index++)
+        {
+            if (typeName[index] == '`')
+            {
+                while (index + 1 < typeName.Length && char.IsDigit(typeName[index + 1]))
+                    index++;
+                continue;
+            }
+            result.Append(typeName[index]);
+        }
+        return result.ToString();
     }
 }

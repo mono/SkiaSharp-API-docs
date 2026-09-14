@@ -196,6 +196,7 @@ namespace Example {
     $syntaxAssembly = Join-Path $completenessWorkspace 'Syntax.dll'
     Add-Type -OutputAssembly $syntaxAssembly -TypeDefinition @'
 namespace Example {
+    public delegate int Callback(string value);
     public class Outer<T> {
         public class Inner { }
         protected void Protected<TMethod>(ref int value, string[] names) { }
@@ -206,15 +207,19 @@ namespace Example {
 '@
     $syntaxDocIds = (Get-SelectedAssemblyPublicDocIds @($syntaxAssembly)).ByDocId
     foreach ($docId in @(
+        'T:Example.Callback',
         'T:Example.Outer`1',
         'T:Example.Outer`1.Inner',
         'M:Example.Outer`1.Protected``1(System.Int32@,System.String[])',
-        'M:Example.Outer`1.op_Addition(Example.Outer`1{`0},Example.Outer`1{`0})',
-        'M:Example.Outer`1.op_Implicit(Example.Outer`1{`0})~System.String'
+        'M:Example.Outer`1.op_Addition(Example.Outer{`0},Example.Outer{`0})',
+        'M:Example.Outer`1.op_Implicit(Example.Outer{`0})~System.String'
     )) {
         if (-not $syntaxDocIds.ContainsKey($docId)) {
             throw "Exact metadata DocId formatter did not emit '$docId'."
         }
+    }
+    if (@($syntaxDocIds.Keys | Where-Object { $_ -like 'M:Example.Callback.*' }).Count -ne 0) {
+        throw 'Compiler-generated delegate invocation members must not require compiler XML documentation.'
     }
 
     @'
