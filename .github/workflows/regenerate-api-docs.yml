@@ -8,13 +8,14 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  generate:
+  validate:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -26,9 +27,20 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - name: Prepare documentation update branch
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          git fetch origin main
+          git switch -C automation/write-api-docs origin/main
+
       - name: Verify mdoc
         shell: pwsh
         run: ./eng/MDoc.ps1 --version
+
+      - name: Test API documentation tooling
+        shell: pwsh
+        run: ./eng/tests/ApiDocs.Normalization.Tests.ps1
 
       - name: Set up API documentation packages
         shell: pwsh
@@ -38,16 +50,28 @@ jobs:
         shell: pwsh
         run: ./eng/Generate-ApiDocs.ps1
 
-      - name: Commit generated output
+      - name: Upload package provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs-provenance
+          path: artifacts/api-docs/provenance.json
+
+      - name: Create documentation update pull request
         if: github.event_name != 'pull_request'
-        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
-          git add SkiaSharpAPI .openpublishing.publish.config.json
-          if (git diff --cached --quiet) {
-            Write-Host 'The generated API tree is already current.'
-            exit 0
-          }
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add SkiaSharpAPI eng/api-docs-packages.json
+          if git diff --cached --quiet; then
+            echo 'The generated API tree is already current.'
+            exit 0
+          fi
           git commit -m 'Regenerate API docs and media from packages'
-          git push origin HEAD:${{ github.ref_name }}
+          git push --force-with-lease origin HEAD:automation/write-api-docs
+          gh pr create --base main --head automation/write-api-docs \
+            --title 'Regenerate API docs and media from packages' \
+            --body 'Automated package-based API documentation update.' || \
+            gh pr list --base main --head automation/write-api-docs --state open

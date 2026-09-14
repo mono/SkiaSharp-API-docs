@@ -12,7 +12,7 @@ function Assert-Equal([object] $Actual, [object] $Expected, [string] $Message) {
     }
 }
 
-$workspace = Join-Path ([IO.Path]::GetTempPath()) "api-docs-normalization-$([Guid]::NewGuid())"
+$workspace = Join-Path $PSScriptRoot ".api-docs-normalization-$([Guid]::NewGuid())"
 New-Item -ItemType Directory -Force -Path $workspace | Out-Null
 try {
     $compilerPath = Join-Path $workspace 'Example.xml'
@@ -52,7 +52,31 @@ try {
 </Type>
 '@ | Set-Content -NoNewline -Path $ecmaPath
 
-    $imported = @(Import-CompilerXmlDocumentation $workspace @($compilerPath, $laterCompilerPath))
+    try {
+        [void](Import-CompilerXmlDocumentation $workspace @($compilerPath, $laterCompilerPath))
+        throw 'Conflicting exact DocId documentation was accepted without manifest precedence.'
+    }
+    catch {
+        if ($_.Exception.Message -notmatch 'conflicting content') {
+            throw
+        }
+    }
+    $documentationInputs = @(
+        [PSCustomObject]@{ Order = 0; Path = $compilerPath; PackageId = 'Example'; Asset = 'lib/net10.0/Example.dll' }
+        [PSCustomObject]@{ Order = 1; Path = $laterCompilerPath; PackageId = 'Example.Later'; Asset = 'lib/net10.0/Example.dll' }
+    )
+    $precedence = @([PSCustomObject]@{
+        docId = 'M:Example.Outer.Inner.Use(Example.Outer.Inner)'
+        packageId = 'Example.Later'
+        asset = 'lib/net10.0/Example.dll'
+    })
+    $sidecarPrecedence = @(Get-CompilerXmlSidecarPrecedence $documentationInputs @())
+    Assert-Equal $sidecarPrecedence.Count 1 'Compiler XML sidecar did not record the conflicting exact DocId.'
+    Assert-Equal $sidecarPrecedence[0].docId 'M:Example.Outer.Inner.Use(Example.Outer.Inner)' `
+        'Compiler XML sidecar selected an unexpected conflicting DocId.'
+    Assert-Equal $sidecarPrecedence[0].packageId 'Example' `
+        'Compiler XML sidecar did not preserve the first ordered exact source.'
+    $imported = @(Import-CompilerXmlDocumentation $workspace $documentationInputs $precedence)
     Assert-Equal $imported.Count 4 'Exact DocId importer matched an unexpected number of APIs.'
     [xml] $result = Get-Content -Raw -Path $ecmaPath
     Assert-Equal $result.SelectSingleNode('/Type/Members/Member[1]/Docs/summary').InnerText 'Constructor <b>prose</b>.' `
@@ -75,12 +99,12 @@ if (ready) {
 '@
     Assert-Equal $markdown ("`n" + $expectedMarkdown) `
         'Compiler XML markdown indentation was not normalized.'
-    [void](Import-CompilerXmlDocumentation $workspace @($compilerPath, $laterCompilerPath))
+    [void](Import-CompilerXmlDocumentation $workspace $documentationInputs $precedence)
     [xml] $secondResult = Get-Content -Raw -Path $ecmaPath
     Assert-Equal $secondResult.SelectSingleNode('/Type/Members/Member[1]/Docs/remarks/format').InnerText $markdown `
         'Compiler XML import was not idempotent.'
     Assert-Equal $result.SelectSingleNode('/Type/Members/Member[2]/Docs/summary').InnerText 'Later framework prose.' `
-        'Later compiler XML must deterministically supersede an earlier exact DocId.'
+        'Manifest precedence did not select the declared compiler XML source.'
     Assert-Equal $result.SelectSingleNode('/Type/Members/Member[3]/Docs/summary').InnerText 'To be added.' `
         'Unmatched DocId must not be imported by fuzzy matching.'
     Assert-Equal $result.SelectSingleNode('/Type/Members/Member[4]/Docs/summary').InnerText 'Upper-case identity.' `
@@ -92,6 +116,36 @@ finally {
     Remove-Item -Recurse -Force $workspace -ErrorAction Ignore
 }
 
+$frameworkName = Get-ApiDocsFrameworkName 'skiasharp-views' 'SkiaSharp.Views.Uno.WinUI' 'lib/net10.0-android36.0/SkiaSharp.Views.Windows.dll'
+Assert-Equal $frameworkName 'skiasharp-views-skiasharp-views-uno-winui-lib-net10-0-android36-0' `
+    'Uno framework name was not derived from its public moniker, package, and asset kind/TFM.'
+$gtkFrameworkName = Get-ApiDocsFrameworkName 'skiasharp-views' 'SkiaSharp.Views.Gtk3' 'lib/net10.0/SkiaSharp.Views.Gtk3.dll'
+Assert-Equal $gtkFrameworkName 'skiasharp-views-skiasharp-views-gtk3-lib-net10-0' `
+    'GTK framework name was not derived from its public moniker, package, and asset kind/TFM.'
+if ($frameworkName -eq $gtkFrameworkName) {
+    throw 'Same-named Uno and GTK assets must stage in distinct mdoc framework sources.'
+}
+
+$frameworkWorkspace = Join-Path $PSScriptRoot ".api-docs-frameworks-$([Guid]::NewGuid())"
+New-Item -ItemType Directory -Force -Path $frameworkWorkspace | Out-Null
+try {
+    $frameworkAssets = @(
+        [PSCustomObject]@{ FrameworkName = $frameworkName; FrameworkSource = $frameworkName }
+        [PSCustomObject]@{ FrameworkName = $gtkFrameworkName; FrameworkSource = $gtkFrameworkName }
+    )
+    $frameworkConfiguration = Write-MdocFrameworkConfiguration $frameworkWorkspace $frameworkAssets
+    [xml] $frameworks = Get-Content -Raw -LiteralPath $frameworkConfiguration
+    Assert-Equal $frameworks.SelectNodes('/Frameworks/Framework').Count 2 'Framework configuration omitted a selected asset.'
+    Assert-Equal $frameworks.SelectNodes('/Frameworks/Framework/import').Count 0 'Structure-only mdoc configuration must not import prose.'
+    foreach ($framework in $frameworks.SelectNodes('/Frameworks/Framework')) {
+        Assert-Equal ([IO.Path]::GetFileName($framework.GetAttribute('Source'))) $framework.GetAttribute('Source') `
+            'Framework source is not relative to an immediate directory.'
+    }
+}
+finally {
+    Remove-Item -Recurse -Force $frameworkWorkspace -ErrorAction Ignore
+}
+
 $selected = Select-LatestMainTransportPackageVersion @(
     '0.0.0-branch.release.999',
     '0.0.0-branch.main.9',
@@ -101,6 +155,18 @@ $selected = Select-LatestMainTransportPackageVersion @(
 )
 Assert-Equal $selected '0.0.0-branch.main.172' 'Main package version selection failed.'
 Assert-Equal (Resolve-DocsMediaPackageVersion $selected $null) $selected 'Media package did not follow _NuGets.'
+$manifest = Read-ApiDocsManifest (Join-Path (Split-Path -Parent $PSScriptRoot) 'api-docs-packages.json')
+$uno = @($manifest.packages | Where-Object { $_.id -eq 'SkiaSharp.Views.Uno.WinUI' })
+Assert-Equal $uno.Count 1 'Uno must have an explicit package classification.'
+Assert-Equal $uno[0].classification 'alias' 'Uno must be generated under its declared public moniker.'
+foreach ($classification in $manifest.packages) {
+    if ([string]::IsNullOrWhiteSpace($classification.reason)) {
+        throw "Package '$($classification.id)' is missing a classification reason."
+    }
+    if ($classification.classification -ne 'exclude' -and @($classification.assetRoots).Count -eq 0) {
+        throw "Package '$($classification.id)' must declare asset roots."
+    }
+}
 Assert-Equal (Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember $true 'Java.Interop.IJavaPeerable.UnregisterFromRuntime' $false) $true `
     'Undocumented Java peer infrastructure member was not excluded.'
 Assert-Equal (Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember $true 'Java.Interop.IJavaPeerable.UnregisterFromRuntime' $true) $false `

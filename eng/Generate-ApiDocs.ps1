@@ -2,7 +2,9 @@
 param(
     [string] $PackageRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/packages'),
     [string] $DependencyRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/dependencies'),
-    [string] $OutputRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'SkiaSharpAPI')
+    [string] $OutputRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'SkiaSharpAPI'),
+    [string] $ManifestPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'eng/api-docs-packages.json'),
+    [string] $ProvenancePath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/provenance.json')
 )
 
 $ErrorActionPreference = 'Stop'
@@ -10,96 +12,238 @@ Set-StrictMode -Version Latest
 Import-Module (Join-Path $PSScriptRoot 'ApiDocs.Common.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot 'ApiDocs.Normalization.psm1') -Force -DisableNameChecking
 
-# Maps related package IDs into the public OpenPublishing moniker layout.
-# Views MAUI remains distinct from the general SkiaSharp Views moniker.
-function Get-Moniker([string] $packageId) {
-    if ($packageId.StartsWith('SkiaSharp.Views.Maui', [StringComparison]::OrdinalIgnoreCase)) {
-        return 'skiasharp-views-maui'
-    }
-    if ($packageId.StartsWith('SkiaSharp.Views', [StringComparison]::OrdinalIgnoreCase)) {
-        return 'skiasharp-views'
-    }
-    if ($packageId.StartsWith('SkiaSharp.Direct3D', [StringComparison]::OrdinalIgnoreCase)) {
-        return 'skiasharp-direct3d'
-    }
-    if ($packageId.StartsWith('SkiaSharp.Vulkan', [StringComparison]::OrdinalIgnoreCase)) {
-        return 'skiasharp-vulkan'
-    }
-
-    return $packageId.ToLowerInvariant().Replace('.', '-')
-}
-
-# Counts metadata type definitions without loading the target assembly.
-# This retains the richest TFM variant when packages contain colliding assembly names.
-function Get-AssemblyTypeCount([string] $assemblyPath) {
-    $stream = [IO.File]::OpenRead($assemblyPath)
-    try {
-        $reader = [Reflection.PortableExecutable.PEReader]::new($stream)
-        try {
-            if (-not $reader.HasMetadata) {
-                return 0
-            }
-            return [Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($reader).TypeDefinitions.Count
-        }
-        finally {
-            $reader.Dispose()
-        }
-    }
-    finally {
-        $stream.Dispose()
-    }
-}
-
-# Finds compiler XML alongside an implementation assembly when a package's ref/ assets omit it.
-function Get-AssemblyDocumentationPath([string] $packagePath, [IO.FileInfo] $assembly) {
-    $documentationName = [IO.Path]::ChangeExtension($assembly.Name, '.xml')
-    $adjacentDocumentationPath = Join-Path $assembly.DirectoryName $documentationName
-    if (Test-Path $adjacentDocumentationPath) {
-        return $adjacentDocumentationPath
-    }
-
-    $referenceRoot = Join-Path $packagePath 'ref'
-    if ($assembly.FullName.StartsWith($referenceRoot, [StringComparison]::OrdinalIgnoreCase)) {
-        $relativeDirectory = [IO.Path]::GetRelativePath($referenceRoot, $assembly.DirectoryName)
-        $implementationDocumentationPath = Join-Path (Join-Path $packagePath 'lib') (Join-Path $relativeDirectory $documentationName)
-        if (Test-Path $implementationDocumentationPath) {
-            return $implementationDocumentationPath
-        }
-    }
-
-    return Get-ChildItem -Path (Join-Path $packagePath 'lib') -Filter $documentationName -File -Recurse -ErrorAction Ignore |
-        Sort-Object FullName |
-        Select-Object -First 1 -ExpandProperty FullName
-}
-
-# Ensures every managed assembly selected for ECMA generation has package-authored XML.
-function Assert-AssemblyDocumentation([string] $packagePath, [IO.FileInfo[]] $assemblies) {
-    $missingDocumentation = @(
-        foreach ($assembly in $assemblies) {
-            if (-not (Get-AssemblyDocumentationPath $packagePath $assembly)) {
-                $assembly.FullName
-            }
-        }
-    )
-    if ($missingDocumentation) {
-        throw "Managed assemblies without matching XML documentation:`n$($missingDocumentation -join [Environment]::NewLine)"
-    }
-}
-
 # Collects only downloaded product and resolver assemblies for mdoc resolution.
 function Get-ReferencePaths([string[]] $packageExtractionPaths) {
     $referencesRoot = Join-Path $workRoot 'references'
     New-Item -ItemType Directory -Force -Path $referencesRoot | Out-Null
-    Get-ChildItem -Path $packageExtractionPaths -Filter '*.dll' -File -Recurse |
-        Sort-Object FullName |
-        ForEach-Object {
-            $destination = Join-Path $referencesRoot $_.Name
-            if (-not (Test-Path $destination)) {
-                Copy-Item -Force $_.FullName $destination
+    $referencePaths = @()
+    foreach ($assembly in @(Get-ChildItem -Path $packageExtractionPaths -Filter '*.dll' -File -Recurse |
+        Sort-Object FullName)) {
+        $referencePath = Join-Path $referencesRoot (Get-FileSha256 $assembly.FullName)
+        New-Item -ItemType Directory -Force -Path $referencePath | Out-Null
+        $destination = Join-Path $referencePath $assembly.Name
+        if (-not (Test-Path $destination)) {
+            Copy-Item -Force $assembly.FullName $destination
+        }
+        $referencePaths += $referencePath
+    }
+
+    return @($referencePaths | Sort-Object -Unique)
+}
+
+function Assert-SelectedAssetInputs([object[]] $SelectedAssets) {
+    $destinations = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $sources = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($selectedAsset in $SelectedAssets) {
+        if (-not (Test-Path -LiteralPath $selectedAsset.AssemblyPath -PathType Leaf) -or
+            -not (Test-Path -LiteralPath $selectedAsset.DocumentationPath -PathType Leaf)) {
+            throw "Selected package input '$($selectedAsset.PackageId):$($selectedAsset.Asset)' is incomplete."
+        }
+        if (-not $destinations.Add($selectedAsset.StagedAssemblyPath)) {
+            throw "Selected package assets collide at '$($selectedAsset.StagedAssemblyPath)'."
+        }
+        if (-not $sources.Add($selectedAsset.FrameworkSource)) {
+            throw "Selected package assets collide in mdoc framework source '$($selectedAsset.FrameworkSource)'."
+        }
+        if ((Split-Path -Parent $selectedAsset.StagedAssemblyPath) -ne
+            (Join-Path $frameworksRoot $selectedAsset.FrameworkSource)) {
+            throw "Selected package asset '$($selectedAsset.PackageId):$($selectedAsset.Asset)' is not staged directly beneath the frameworks root."
+        }
+    }
+}
+
+function Assert-DeterministicAssetOrder([object[]] $SelectedAssets) {
+    $actual = @($SelectedAssets | ForEach-Object { "$($_.PackageId)`n$($_.Asset)" })
+    $expected = @($actual | Sort-Object)
+    if (($actual -join "`0") -cne ($expected -join "`0")) {
+        throw 'Selected package assets must be processed in deterministic package and asset order.'
+    }
+}
+
+function Assert-FrameworkStaging([object[]] $SelectedAssets) {
+    foreach ($selectedAsset in $SelectedAssets) {
+        $sourceDirectory = Join-Path $frameworksRoot $selectedAsset.FrameworkSource
+        if ((Split-Path -Parent $sourceDirectory) -ne $frameworksRoot) {
+            throw "Framework source '$sourceDirectory' is not an immediate child of '$frameworksRoot'."
+        }
+        $sourceAssemblies = @(Get-ChildItem -LiteralPath $sourceDirectory -Filter '*.dll' -File)
+        if ($sourceAssemblies.Count -ne 1 -or $sourceAssemblies[0].FullName -ne $selectedAsset.StagedAssemblyPath) {
+            throw "Framework source '$sourceDirectory' must contain exactly its selected DLL."
+        }
+        if (-not (Test-Path -LiteralPath $selectedAsset.StagedDocumentationPath -PathType Leaf)) {
+            throw "Framework source '$sourceDirectory' is missing its selected adjacent compiler XML."
+        }
+    }
+
+    $unoAssets = @($SelectedAssets | Where-Object { $_.PackageId -eq 'SkiaSharp.Views.Uno.WinUI' })
+    if ($unoAssets.Count -lt 2 -or @($unoAssets.FrameworkSource | Sort-Object -Unique).Count -ne $unoAssets.Count) {
+        throw 'Same-named Uno assets were not staged in distinct immediate mdoc framework sources.'
+    }
+    $gtkAssets = @($SelectedAssets | Where-Object { $_.PackageId -in @('SkiaSharp.Views.Gtk3', 'SkiaSharp.Views.Gtk4') })
+    if ($gtkAssets.Count -eq 0 -or @($gtkAssets.FrameworkSource | Where-Object { $_ -notmatch 'gtk' }).Count -ne 0) {
+        throw 'GTK assets were not staged in their own stable mdoc framework sources.'
+    }
+}
+
+function Convert-MdocFrameworkAvailabilityToPublicMonikers([string] $StagingPath, [object[]] $SelectedAssets) {
+    $monikersByFramework = @{}
+    $publicMonikers = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($selectedAsset in $SelectedAssets) {
+        $monikersByFramework[$selectedAsset.FrameworkName] = $selectedAsset.Moniker
+        [void]$publicMonikers.Add($selectedAsset.Moniker)
+    }
+
+    foreach ($file in Get-ChildItem -Path $StagingPath -Filter '*.xml' -File -Recurse | Sort-Object FullName) {
+        [xml] $document = Get-Content -Raw -LiteralPath $file.FullName
+        foreach ($attribute in @($document.SelectNodes('//@FrameworkAlternate'))) {
+            $publicValues = [Collections.Generic.List[string]]::new()
+            foreach ($frameworkName in $attribute.Value.Split(';', [StringSplitOptions]::RemoveEmptyEntries)) {
+                if (-not $monikersByFramework.ContainsKey($frameworkName)) {
+                    throw "mdoc emitted unknown internal framework '$frameworkName' in '$($file.FullName)'."
+                }
+                $moniker = $monikersByFramework[$frameworkName]
+                if (-not $publicValues.Contains($moniker)) {
+                    $publicValues.Add($moniker)
+                }
+            }
+            if ($publicValues.Count -eq $publicMonikers.Count) {
+                [void]$attribute.OwnerElement.RemoveAttributeNode($attribute)
+            }
+            else {
+                $attribute.Value = $publicValues -join ';'
             }
         }
+        $document.Save($file.FullName)
+    }
+}
 
-    return $referencesRoot
+function Merge-MdocFrameworkIndexes([string] $StagingPath, [object[]] $SelectedAssets) {
+    $indexPath = Join-Path $StagingPath 'FrameworksIndex'
+    if (-not (Test-Path -LiteralPath $indexPath -PathType Container)) {
+        throw 'mdoc did not emit framework availability indexes.'
+    }
+
+    $assetsByMoniker = @{}
+    $indexesByFramework = @{}
+    foreach ($selectedAsset in $SelectedAssets | Sort-Object FrameworkName) {
+        $internalIndexPath = Join-Path $indexPath "$($selectedAsset.FrameworkName).xml"
+        if (-not (Test-Path -LiteralPath $internalIndexPath -PathType Leaf)) {
+            throw "mdoc did not emit an index for framework '$($selectedAsset.FrameworkName)'."
+        }
+        [xml] $indexesByFramework[$selectedAsset.FrameworkName] = Get-Content -Raw -LiteralPath $internalIndexPath
+        if (-not $assetsByMoniker.ContainsKey($selectedAsset.Moniker)) {
+            $assetsByMoniker[$selectedAsset.Moniker] = [Collections.Generic.List[object]]::new()
+        }
+        $assetsByMoniker[$selectedAsset.Moniker].Add($selectedAsset)
+    }
+
+    Get-ChildItem -LiteralPath $indexPath -Filter '*.xml' -File | Remove-Item -Force
+    foreach ($moniker in @($assetsByMoniker.Keys | Sort-Object)) {
+        $publicIndex = [Xml.XmlDocument]::new()
+        [void]$publicIndex.AppendChild($publicIndex.CreateXmlDeclaration('1.0', 'utf-8', $null))
+        $framework = $publicIndex.CreateElement('Framework')
+        $framework.SetAttribute('Name', $moniker)
+        [void]$publicIndex.AppendChild($framework)
+        $assemblies = $publicIndex.CreateElement('Assemblies')
+        [void]$framework.AppendChild($assemblies)
+        $assemblyKeys = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+        $typesByKey = @{}
+
+        foreach ($selectedAsset in $assetsByMoniker[$moniker] | Sort-Object FrameworkName) {
+            $internalIndex = $indexesByFramework[$selectedAsset.FrameworkName]
+            foreach ($assembly in @($internalIndex.SelectNodes('/Framework/Assemblies/Assembly'))) {
+                $key = "$($assembly.GetAttribute('Name'))`n$($assembly.GetAttribute('Version'))"
+                if ($assemblyKeys.Add($key)) {
+                    [void]$assemblies.AppendChild($publicIndex.ImportNode($assembly, $true))
+                }
+            }
+            foreach ($sourceNamespace in @($internalIndex.SelectNodes('/Framework/Namespace'))) {
+                $namespaceName = $sourceNamespace.GetAttribute('Name')
+                # XmlDocument does not offer a safe parameterized XPath API; compare attributes directly.
+                $targetNamespace = @($framework.SelectNodes('Namespace') | Where-Object {
+                    $_.GetAttribute('Name') -eq $namespaceName
+                }) | Select-Object -First 1
+                if ($null -eq $targetNamespace) {
+                    $targetNamespace = $publicIndex.CreateElement('Namespace')
+                    $targetNamespace.SetAttribute('Name', $namespaceName)
+                    [void]$framework.AppendChild($targetNamespace)
+                }
+                foreach ($sourceType in @($sourceNamespace.SelectNodes('Type'))) {
+                    $typeKey = "$namespaceName`n$($sourceType.GetAttribute('Id'))"
+                    $targetType = $typesByKey[$typeKey]
+                    if ($null -eq $targetType) {
+                        $targetType = $publicIndex.CreateElement('Type')
+                        foreach ($attribute in $sourceType.Attributes) {
+                            $targetType.SetAttribute($attribute.Name, $attribute.Value)
+                        }
+                        [void]$targetNamespace.AppendChild($targetType)
+                        $typesByKey[$typeKey] = $targetType
+                    }
+                    $memberIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+                    foreach ($member in @($targetType.SelectNodes('Member'))) {
+                        [void]$memberIds.Add($member.GetAttribute('Id'))
+                    }
+                    foreach ($member in @($sourceType.SelectNodes('Member'))) {
+                        if ($memberIds.Add($member.GetAttribute('Id'))) {
+                            [void]$targetType.AppendChild($publicIndex.ImportNode($member, $true))
+                        }
+                    }
+                }
+            }
+        }
+        if ($assemblies.ChildNodes.Count -eq 0) {
+            [void]$framework.RemoveChild($assemblies)
+        }
+        $publicIndex.Save((Join-Path $indexPath "$moniker.xml"))
+    }
+}
+
+function Assert-GeneratedDocumentation([string] $StagingPath, [object[]] $SelectedAssets) {
+    if ($SelectedAssets.Count -eq 0) {
+        throw 'No selected package assets were available for generation.'
+    }
+    $typeFiles = @(Get-ChildItem -Path $StagingPath -Filter '*.xml' -File -Recurse |
+        Where-Object {
+            [xml] $document = Get-Content -Raw -LiteralPath $_.FullName
+            $document.DocumentElement.LocalName -eq 'Type'
+        })
+    if ($typeFiles.Count -eq 0) {
+        throw 'mdoc did not generate any ECMA type documentation from the selected assets.'
+    }
+}
+
+function Promote-GeneratedApiDocs([string] $OutputRoot, [string] $StagingPath) {
+    $parent = Split-Path -Parent $OutputRoot
+    $leaf = Split-Path -Leaf $OutputRoot
+    $candidate = Join-Path $parent ".$leaf.next"
+    $backup = Join-Path $parent ".$leaf.previous"
+    Remove-Item -Recurse -Force $candidate, $backup -ErrorAction Ignore
+    try {
+        Copy-Item -Recurse -Force $OutputRoot $candidate
+        $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
+        Get-ChildItem -Path $candidate -Force | Where-Object { $_.Name -notin $preservedItems } | Remove-Item -Recurse -Force
+        Get-ChildItem -Path $StagingPath -Force | Where-Object { $_.Name -ne 'xml' } |
+            Copy-Item -Destination $candidate -Recurse -Force
+        if (-not (Get-ChildItem -Path $candidate -Filter '*.xml' -File -Recurse)) {
+            throw 'Generated candidate contains no ECMA XML files.'
+        }
+        Rename-Item -LiteralPath $OutputRoot -NewName (Split-Path -Leaf $backup)
+        try {
+            Rename-Item -LiteralPath $candidate -NewName $leaf
+        }
+        catch {
+            Rename-Item -LiteralPath $backup -NewName $leaf
+            throw
+        }
+        Remove-Item -Recurse -Force $backup
+    }
+    catch {
+        Remove-Item -Recurse -Force $candidate -ErrorAction Ignore
+        if (-not (Test-Path -LiteralPath $OutputRoot) -and (Test-Path -LiteralPath $backup)) {
+            Rename-Item -LiteralPath $backup -NewName $leaf
+        }
+        throw
+    }
 }
 
 # Removes indentation from otherwise blank generated lines without changing documentation text.
@@ -128,6 +272,15 @@ if (-not (Test-Path $DependencyRoot)) {
 
 # Create a clean conversion workspace without altering publishing infrastructure.
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
+$manifest = Read-ApiDocsManifest $ManifestPath
+if (-not (Test-Path -LiteralPath $ProvenancePath -PathType Leaf)) {
+    throw "Package provenance '$ProvenancePath' does not exist. Run eng/Setup-ApiDocs.ps1 first."
+}
+$provenance = Get-Content -Raw -LiteralPath $ProvenancePath | ConvertFrom-Json -Depth 32
+if ($provenance.schemaVersion -ne 1 -or
+    $provenance.classificationManifestSha256 -cne (Get-FileSha256 $ManifestPath)) {
+    throw 'Package provenance does not match the committed classification manifest. Run setup again.'
+}
 $workRoot = Join-Path $repositoryRoot 'artifacts/api-docs'
 $conversionRoot = Join-Path $workRoot 'conversion'
 $nuGetsExtractionPath = Join-Path $conversionRoot 'nugets'
@@ -158,70 +311,83 @@ if (-not $mediaArchives) {
     throw "Prepared package root '$PackageRoot' does not contain _DocsMedia."
 }
 $mediaPackages = Expand-NuGetPackageArchives $mediaArchives.FullName $mediaExtractionPath
-$monikerDirectories = @()
+$selectedAssets = @()
+$frameworkDirectories = @()
 
-# Stage the richest assembly variant and its paired compiler XML under each public moniker.
-foreach ($packagePath in $nuGetsPackages) {
-    $packageId = Get-NuGetPackageId $packagePath
-    if ($null -eq $packageId -or
-        $packageId -notmatch '^(HarfBuzzSharp|SkiaSharp)(\.|$)' -or
-        $packageId -match '^SkiaSharp\.Views\.Uno' -or
-        $packageId -match 'NativeAssets') {
+# The manifest, not a TFM heuristic, is the complete selection authority.
+foreach ($classification in $manifest.packages | Sort-Object id) {
+    if ($classification.classification -eq 'exclude') {
         continue
     }
-
-    $referenceAssemblies = Get-ChildItem -Path (Join-Path $packagePath 'ref') -Filter '*.dll' -Recurse -ErrorAction Ignore
-    $assemblies = if ($referenceAssemblies) { $referenceAssemblies } else {
-        Get-ChildItem -Path (Join-Path $packagePath 'lib') -Filter '*.dll' -Recurse -ErrorAction Ignore
+    $packagePaths = @($nuGetsPackages | Where-Object { (Get-NuGetPackageId $_) -ieq $classification.id })
+    if ($packagePaths.Count -ne 1) {
+        throw "Manifest package '$($classification.id)' must occur exactly once in the transport archives; found $($packagePaths.Count)."
     }
-    if (-not $assemblies) {
-        continue
+    $packagePath = $packagePaths[0]
+    $assets = @(
+        foreach ($assetRoot in $classification.assetRoots) {
+            Get-ChildItem -Path (Join-Path $packagePath $assetRoot) -Filter '*.dll' -File -Recurse -ErrorAction Ignore
+        }
+    )
+    if ($assets.Count -eq 0) {
+        throw "Package '$($classification.id)' has no managed assets in its declared asset roots."
     }
-    Assert-AssemblyDocumentation $packagePath $assemblies
-
-    $moniker = Get-Moniker $packageId
-    $monikerPath = Join-Path $frameworksRoot $moniker
-    if ($monikerDirectories -notcontains $monikerPath) {
-        New-Item -ItemType Directory -Force -Path $monikerPath | Out-Null
-        $monikerDirectories += $monikerPath
-    }
-    foreach ($assembly in $assemblies | Sort-Object FullName) {
-        $destination = Join-Path $monikerPath $assembly.Name
-        if (-not (Test-Path $destination) -or
-            (Get-AssemblyTypeCount $assembly.FullName) -gt (Get-AssemblyTypeCount $destination)) {
-            Copy-Item -Force $assembly.FullName $destination
-            $documentationPath = Get-AssemblyDocumentationPath $packagePath $assembly
-            $documentationDestination = [IO.Path]::ChangeExtension($destination, '.xml')
-            if ($documentationPath -and (Test-Path $documentationPath)) {
-                Copy-Item -Force $documentationPath $documentationDestination
-            } else {
-                Remove-Item -Force $documentationDestination -ErrorAction Ignore
-            }
+    foreach ($assetFile in $assets | Sort-Object FullName) {
+        $asset = [IO.Path]::GetRelativePath($packagePath, $assetFile.FullName).Replace([IO.Path]::DirectorySeparatorChar, '/')
+        $assemblyPath = $assetFile.FullName
+        $documentationPath = [IO.Path]::ChangeExtension($assemblyPath, '.xml')
+        $frameworkName = Get-ApiDocsFrameworkName $classification.moniker $classification.id $asset
+        $frameworkDirectory = Join-Path $frameworksRoot $frameworkName
+        $stagedAssemblyPath = Join-Path $frameworkDirectory ([IO.Path]::GetFileName($asset))
+        $selectedAssets += [PSCustomObject]@{
+            PackageId = $classification.id
+            Moniker = $classification.moniker
+            Asset = $asset
+            AssemblyPath = $assemblyPath
+            DocumentationPath = $documentationPath
+            FrameworkName = $frameworkName
+            FrameworkSource = $frameworkName
+            StagedAssemblyPath = $stagedAssemblyPath
+            StagedDocumentationPath = [IO.Path]::ChangeExtension($stagedAssemblyPath, '.xml')
+        }
+        if ($frameworkDirectories -notcontains $frameworkDirectory) {
+            $frameworkDirectories += $frameworkDirectory
         }
     }
 }
-if ($monikerDirectories.Count -eq 0) {
+Assert-SelectedAssetInputs $selectedAssets
+if ($selectedAssets.Count -eq 0) {
     throw 'The downloaded _NuGets package set contains no managed SkiaSharp or HarfBuzzSharp assemblies.'
 }
+$selectedAssets = @($selectedAssets | Sort-Object PackageId, Asset)
+Assert-DeterministicAssetOrder $selectedAssets
+foreach ($selectedAsset in $selectedAssets) {
+    $record = @($provenance.selectedAssets | Where-Object {
+        $_.packageId -ieq $selectedAsset.PackageId -and $_.asset -ceq $selectedAsset.Asset
+    })
+    if ($record.Count -ne 1 -or
+        $record[0].sha256 -cne (Get-FileSha256 $selectedAsset.AssemblyPath) -or
+        $record[0].documentationSha256 -cne (Get-FileSha256 $selectedAsset.DocumentationPath)) {
+        throw "Package provenance does not match selected asset '$($selectedAsset.PackageId):$($selectedAsset.Asset)'."
+    }
+}
+foreach ($selectedAsset in $selectedAssets | Sort-Object PackageId, Asset) {
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $selectedAsset.StagedAssemblyPath) | Out-Null
+    Copy-Item -Force $selectedAsset.AssemblyPath $selectedAsset.StagedAssemblyPath
+    Copy-Item -Force $selectedAsset.DocumentationPath $selectedAsset.StagedDocumentationPath
+}
+Assert-FrameworkStaging $selectedAssets
 
 $stagingXmlPath = Join-Path $stagingPath 'xml'
 New-Item -ItemType Directory -Force -Path $stagingXmlPath | Out-Null
 Copy-Item -Force (Join-Path $OutputRoot 'xml/_filter.xml') $stagingXmlPath
 Copy-Item -Force (Join-Path $OutputRoot '_filter.xml') $stagingPath
 
-# Let mdoc derive framework-scoped compiler XML imports from the staged DLL/XML pairs.
-$frameworksPath = Join-Path $frameworksRoot 'frameworks.xml'
-& (Join-Path $PSScriptRoot 'MDoc.ps1') fx-bootstrap --frameworks $frameworksRoot --importContent true
-if ($LASTEXITCODE -ne 0) {
-    throw "mdoc fx-bootstrap failed with exit code $LASTEXITCODE."
-}
-[xml] $frameworks = Get-Content -Raw -Path $frameworksPath
-foreach ($import in $frameworks.SelectNodes('/Frameworks/Framework/import')) {
-    $import.InnerText = $import.InnerText -replace '[\\/]', [IO.Path]::DirectorySeparatorChar
-}
-$frameworks.Save($frameworksPath)
+# mdoc discovers only DLLs immediately under each Framework Source directory.
+# Generate that configuration directly from the declared assets.
+$frameworksPath = Write-MdocFrameworkConfiguration $frameworksRoot $selectedAssets
 $libraryArguments = @()
-foreach ($path in @(Get-ReferencePaths @($nuGetsExtractionPath, $dependencyExtractionPath)) + $monikerDirectories | Select-Object -Unique) {
+foreach ($path in @($frameworkDirectories | Sort-Object -Unique) + @(Get-ReferencePaths @($dependencyExtractionPath)) | Select-Object -Unique) {
     $libraryArguments += @('--lib', $path)
 }
 
@@ -244,41 +410,60 @@ foreach ($canonicalization in $canonicalizations) {
         -LegacyType $canonicalization.LegacyType `
         -CanonicalType $canonicalization.CanonicalType `
         -RequiredObsoleteMessage $canonicalization.RequiredObsoleteMessage)
-    $frameworkPath = Join-Path $frameworksRoot $canonicalization.Framework
-    $assemblyPath = Join-Path $frameworkPath $canonicalization.Assembly
-    $importPath = [IO.Path]::ChangeExtension($assemblyPath, '.xml')
-    if (-not (Test-Path $assemblyPath) -or -not (Test-Path $importPath)) {
+    $canonicalAsset = @($selectedAssets | Where-Object {
+        $_.PackageId -eq $canonicalization.PackageId -and $_.Asset -eq $canonicalization.Asset
+    })
+    if ($canonicalAsset.Count -ne 1) {
         throw "Canonical type '$($canonicalization.CanonicalType)' does not have its required package DLL/XML input."
     }
 
     # mdoc conflates this explicitly obsolete type with its case-distinct
-    # replacement in framework mode. Generate the canonical metadata identity
-    # directly and import its exact package XML rather than reusing ECMA prose.
+    # replacement in framework mode. Regenerate only its structure in the
+    # complete framework set; compiler XML is imported by the exact sidecar below.
     & (Join-Path $PSScriptRoot 'MDoc.ps1') update --delete --fno-assembly-versions --fignore-missing-types `
-        --lang DocId "--type=$($canonicalization.CanonicalType)" --import $importPath --out $stagingPath `
-        --lib $referencesRoot --lib $frameworkPath $assemblyPath
+        --lang DocId "--type=$($canonicalization.CanonicalType)" --frameworks $frameworksPath --out $stagingPath @libraryArguments
     if ($LASTEXITCODE -ne 0) {
         throw "mdoc canonical-type generation for '$($canonicalization.CanonicalType)' failed with exit code $LASTEXITCODE."
     }
 }
 $canonicalizations | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'mdoc-canonicalizations.json')
 
+# The exact compiler XML importer owns an explicit, deterministic sidecar.
+# Do not source prose imports from mdoc's framework configuration.
 $compilerDocumentation = @(
-    foreach ($import in $frameworks.SelectNodes('/Frameworks/Framework/import')) {
-        Join-Path $frameworksRoot $import.InnerText
+    for ($index = 0; $index -lt $selectedAssets.Count; $index++) {
+        $source = $selectedAssets[$index]
+        [PSCustomObject]@{
+            Order = $index
+            Path = $source.StagedDocumentationPath
+            PackageId = $source.PackageId
+            Asset = $source.Asset
+        }
     }
 )
-$missingCompilerDocumentation = @($compilerDocumentation | Where-Object { -not (Test-Path $_) })
+$compilerDocumentationPath = Join-Path $conversionRoot 'compiler-xml-inputs.json'
+$compilerXmlSidecar = [ordered]@{
+    schemaVersion = 1
+    inputs = $compilerDocumentation
+    precedence = @(Get-CompilerXmlSidecarPrecedence $compilerDocumentation $manifest.documentationPrecedence)
+}
+$compilerXmlSidecar | ConvertTo-Json -Depth 32 | Set-Content -NoNewline -Path $compilerDocumentationPath
+$compilerXmlSidecar = Get-Content -Raw -LiteralPath $compilerDocumentationPath | ConvertFrom-Json -Depth 32
+$compilerDocumentation = @($compilerXmlSidecar.inputs)
+$missingCompilerDocumentation = @($compilerDocumentation | Where-Object { -not (Test-Path $_.Path) })
 if ($missingCompilerDocumentation) {
     throw "The mdoc framework configuration references missing compiler XML:`n$($missingCompilerDocumentation -join [Environment]::NewLine)"
 }
-$importedDocIds = @(Import-CompilerXmlDocumentation $stagingPath $compilerDocumentation)
+$importedDocIds = @(Import-CompilerXmlDocumentation $stagingPath $compilerDocumentation @($compilerXmlSidecar.precedence))
 $importedDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'compiler-xml-imports.json')
-$stagedAssemblies = Get-ChildItem -Path $monikerDirectories -Filter '*.dll' -File -Recurse
+$stagedAssemblies = Get-ChildItem -Path $frameworkDirectories -Filter '*.dll' -File -Recurse
 $filteredDocIds = @(Remove-UndocumentedJavaPeerInfrastructureMembers $stagingPath $stagedAssemblies.FullName $importedDocIds)
 $filteredDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'filtered-java-peer-infrastructure-members.json')
+Convert-MdocFrameworkAvailabilityToPublicMonikers $stagingPath $selectedAssets
+Merge-MdocFrameworkIndexes $stagingPath $selectedAssets
 
 Remove-WhitespaceOnlyLines $stagingPath
+Assert-GeneratedDocumentation $stagingPath $selectedAssets
 
 # Copy required package media before promoting the complete generated tree.
 $mediaFiles = $mediaPackages |
@@ -305,9 +490,6 @@ if (-not (Get-ChildItem -Path $stagingMediaPath -File -Recurse | Where-Object Le
     throw 'The downloaded _DocsMedia package did not produce usable media.'
 }
 
-# Atomically replace generated content while retaining DocFX, filters, and breadcrumbs.
-$preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
-Get-ChildItem -Path $OutputRoot -Force | Where-Object { $_.Name -notin $preservedItems } | Remove-Item -Recurse -Force
-Get-ChildItem -Path $stagingPath -Force | Where-Object { $_.Name -ne 'xml' } | Copy-Item -Destination $OutputRoot -Recurse -Force
+Promote-GeneratedApiDocs $OutputRoot $stagingPath
 
-Write-Host "Replaced generated ECMA XML and media in $OutputRoot from blank staging."
+Write-Host "Atomically replaced generated ECMA XML and media in $OutputRoot from declared package assets."

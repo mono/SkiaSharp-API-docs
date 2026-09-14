@@ -8,8 +8,8 @@ function Get-MdocObsoleteTypeCanonicalizations {
             LegacyType = 'SkiaSharp.GrVkYcbcrConversionInfo'
             CanonicalType = 'SkiaSharp.GRVkYcbcrConversionInfo'
             RequiredObsoleteMessage = 'Use GRVkYcbcrConversionInfo instead.'
-            Framework = 'skiasharp'
-            Assembly = 'SkiaSharp.dll'
+            PackageId = 'SkiaSharp'
+            Asset = 'ref/net10.0/SkiaSharp.dll'
         }
     )
 }
@@ -46,6 +46,83 @@ function Remove-CompilerXmlMarkdownIndentation([System.Xml.XmlElement] $Member) 
             }
         }
     }
+}
+
+function ConvertTo-CompilerXmlSemanticValue([System.Xml.XmlNode] $Node) {
+    if ($Node.NodeType -in @([System.Xml.XmlNodeType]::Whitespace, [System.Xml.XmlNodeType]::SignificantWhitespace)) {
+        return ''
+    }
+    if ($Node.NodeType -in @([System.Xml.XmlNodeType]::Text, [System.Xml.XmlNodeType]::CDATA)) {
+        return "text:$($Node.Value)"
+    }
+    if ($Node.NodeType -ne [System.Xml.XmlNodeType]::Element) {
+        return ''
+    }
+
+    $attributeValues = [Collections.Generic.List[string]]::new()
+    foreach ($attribute in $Node.Attributes) {
+        $attributeValues.Add(" $($attribute.NamespaceURI):$($attribute.LocalName)=$($attribute.Value)")
+    }
+    $attributeValues.Sort([StringComparer]::Ordinal)
+    $childValues = [Collections.Generic.List[string]]::new()
+    foreach ($child in $Node.ChildNodes) {
+        $childValues.Add((ConvertTo-CompilerXmlSemanticValue $child))
+    }
+    $attributes = $attributeValues -join ''
+    $children = $childValues -join ''
+    return "<$($Node.NamespaceURI):$($Node.LocalName)$attributes>$children</$($Node.NamespaceURI):$($Node.LocalName)>"
+}
+
+function Get-CompilerXmlSidecarPrecedence(
+    [object[]] $DocumentationPaths,
+    [object[]] $ManifestPrecedence = @()
+) {
+    $precedenceByDocId = @{}
+    foreach ($precedence in $ManifestPrecedence) {
+        if ([string]::IsNullOrWhiteSpace($precedence.docId) -or
+            [string]::IsNullOrWhiteSpace($precedence.packageId) -or
+            [string]::IsNullOrWhiteSpace($precedence.asset) -or
+            $precedenceByDocId.ContainsKey($precedence.docId)) {
+            throw 'Documentation precedence entries must have one unique docId, packageId, and asset.'
+        }
+        $precedenceByDocId[$precedence.docId] = [PSCustomObject]@{
+            docId = $precedence.docId
+            packageId = $precedence.packageId
+            asset = $precedence.asset
+        }
+    }
+
+    $documentsByDocId = [Collections.Generic.Dictionary[string, System.Xml.XmlElement]]::new([StringComparer]::Ordinal)
+    $sourcesByDocId = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::Ordinal)
+    foreach ($documentationSource in @($DocumentationPaths | Sort-Object Order)) {
+        [xml] $compilerDocument = Get-Content -Raw -LiteralPath $documentationSource.Path
+        if ($compilerDocument.DocumentElement.LocalName -ne 'doc') {
+            continue
+        }
+        foreach ($member in $compilerDocument.SelectNodes('/doc/members/member')) {
+            $docId = $member.GetAttribute('name')
+            if ([string]::IsNullOrWhiteSpace($docId)) {
+                throw "Compiler XML '$($documentationSource.Path)' contains a member without a DocId."
+            }
+            Remove-CompilerXmlMarkdownIndentation $member
+            if (-not $documentsByDocId.ContainsKey($docId)) {
+                $documentsByDocId[$docId] = $member
+                $sourcesByDocId[$docId] = $documentationSource
+                continue
+            }
+            if ((ConvertTo-CompilerXmlSemanticValue $documentsByDocId[$docId]) -cne
+                (ConvertTo-CompilerXmlSemanticValue $member) -and
+                -not $precedenceByDocId.ContainsKey($docId)) {
+                $source = $sourcesByDocId[$docId]
+                $precedenceByDocId[$docId] = [PSCustomObject]@{
+                    docId = $docId
+                    packageId = $source.PackageId
+                    asset = $source.Asset
+                }
+            }
+        }
+    }
+    return @($precedenceByDocId.Values | Sort-Object docId)
 }
 
 function Get-MetadataTypeFullName(
@@ -140,10 +217,52 @@ function Remove-UndocumentedJavaPeerInfrastructureMembers(
 
 # Imports package compiler XML into clean mdoc ECMA output by exact DocId.
 # It has no fallback to repository XML and does not perform identity rewrites.
-function Import-CompilerXmlDocumentation([string] $OutputRoot, [string[]] $DocumentationPaths) {
+function Import-CompilerXmlDocumentation(
+    [string] $OutputRoot,
+    [object[]] $DocumentationPaths,
+    [object[]] $DocumentationPrecedence = @()
+) {
+    $orderedDocumentationPaths = @($DocumentationPaths)
+    $hasExplicitOrder = @($orderedDocumentationPaths | Where-Object {
+        $null -ne $_ -and $_ -isnot [string] -and
+        $null -ne $_.PSObject.Properties['Order']
+    }).Count -gt 0
+    if ($hasExplicitOrder) {
+        if (@($orderedDocumentationPaths | Where-Object {
+            $_ -is [string] -or $null -eq $_.PSObject.Properties['Order']
+        }).Count -gt 0) {
+            throw 'Compiler XML sidecar metadata must specify an order for every input.'
+        }
+        $orderedDocumentationPaths = @($orderedDocumentationPaths | Sort-Object Order)
+        for ($index = 0; $index -lt $orderedDocumentationPaths.Count; $index++) {
+            if ([Int64]$orderedDocumentationPaths[$index].Order -ne $index) {
+                throw 'Compiler XML sidecar metadata must use consecutive zero-based order values.'
+            }
+        }
+    }
+
     $compilerDocs = [Collections.Generic.Dictionary[string, System.Xml.XmlElement]]::new([StringComparer]::Ordinal)
-    $compilerDocSources = [Collections.Generic.Dictionary[string, string]]::new([StringComparer]::Ordinal)
-    foreach ($documentationPath in $DocumentationPaths) {
+    $compilerDocSources = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::Ordinal)
+    $precedenceByDocId = @{}
+    foreach ($precedence in $DocumentationPrecedence) {
+        if ([string]::IsNullOrWhiteSpace($precedence.docId) -or
+            [string]::IsNullOrWhiteSpace($precedence.packageId) -or
+            [string]::IsNullOrWhiteSpace($precedence.asset) -or
+            $precedenceByDocId.ContainsKey($precedence.docId)) {
+            throw 'Documentation precedence entries must have one unique docId, packageId, and asset.'
+        }
+        $precedenceByDocId[$precedence.docId] = $precedence
+    }
+    foreach ($documentationInput in $orderedDocumentationPaths) {
+        $documentationSource = if ($documentationInput -is [string]) {
+            [PSCustomObject]@{ Path = $documentationInput; PackageId = ''; Asset = '' }
+        } else {
+            $documentationInput
+        }
+        $documentationPath = $documentationSource.Path
+        if ([string]::IsNullOrWhiteSpace($documentationPath)) {
+            throw 'Compiler XML input has no path.'
+        }
         [xml] $compilerDocument = Get-Content -Raw -Path $documentationPath
         if ($compilerDocument.DocumentElement.LocalName -ne 'doc') {
             continue
@@ -154,15 +273,31 @@ function Import-CompilerXmlDocumentation([string] $OutputRoot, [string[]] $Docum
                 throw "Compiler XML '$documentationPath' contains a member without a DocId."
             }
             Remove-CompilerXmlMarkdownIndentation $member
-            if ($compilerDocs.ContainsKey($docId) -and
-                $compilerDocSources[$docId] -eq $documentationPath -and
-                $compilerDocs[$docId].OuterXml -cne $member.OuterXml) {
-                throw "Compiler XML '$documentationPath' has conflicting content for exact DocId '$docId'."
+            if ($compilerDocs.ContainsKey($docId)) {
+                $sameDocumentation = (ConvertTo-CompilerXmlSemanticValue $compilerDocs[$docId]) -ceq
+                    (ConvertTo-CompilerXmlSemanticValue $member)
+                if (-not $sameDocumentation) {
+                    if (-not $precedenceByDocId.ContainsKey($docId)) {
+                        throw "Compiler XML inputs have conflicting content for exact DocId '$docId'. Add explicit manifest precedence."
+                    }
+                    $precedence = $precedenceByDocId[$docId]
+                    $isPreferred = $documentationSource.PackageId -ieq $precedence.packageId -and
+                        $documentationSource.Asset -ceq $precedence.asset
+                    $existingSource = $compilerDocSources[$docId]
+                    $existingIsPreferred = $existingSource.PackageId -ieq $precedence.packageId -and
+                        $existingSource.Asset -ceq $precedence.asset
+                    if (-not $isPreferred -and -not $existingIsPreferred) {
+                        throw "Documentation precedence for '$docId' does not identify either conflicting selected asset."
+                    }
+                    if ($isPreferred) {
+                        $compilerDocs[$docId] = $member
+                        $compilerDocSources[$docId] = $documentationSource
+                    }
+                }
+                continue
             }
-            # mdoc framework imports are ordered; later framework-specific XML
-            # deliberately supersedes an earlier duplicate for the same API.
             $compilerDocs[$docId] = $member
-            $compilerDocSources[$docId] = $documentationPath
+            $compilerDocSources[$docId] = $documentationSource
         }
     }
 
@@ -220,7 +355,11 @@ function Import-CompilerXmlDocumentation([string] $OutputRoot, [string[]] $Docum
         }
         $ecmaDocument.Save($file.FullName)
     }
-    return $imported
+    $uniqueImported = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $imported | ForEach-Object { [void]$uniqueImported.Add($_) }
+    $result = @($uniqueImported)
+    [Array]::Sort($result, [StringComparer]::Ordinal)
+    return $result
 }
 
 # Removes only an explicitly verified obsolete mdoc collision before the
@@ -259,6 +398,8 @@ function Remove-MdocObsoleteTypeCollision(
 Export-ModuleMember -Function `
     Get-MdocObsoleteTypeCanonicalizations, `
     Remove-CompilerXmlMarkdownIndentation, `
+    ConvertTo-CompilerXmlSemanticValue, `
+    Get-CompilerXmlSidecarPrecedence, `
     Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember, `
     Remove-UndocumentedJavaPeerInfrastructureMembers, `
     Import-CompilerXmlDocumentation, `

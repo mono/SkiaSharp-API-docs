@@ -1,18 +1,162 @@
 Set-StrictMode -Version Latest
 
-# Converts an exact NuGet version or range into a concrete package version.
-# Resolver packages use the lower bound, which is compatible with the declared range.
+# Validates an exact NuGet version. Resolver ranges are resolved through
+# Restore-NuGetResolverPackage so NuGet records its decision.
 function Resolve-NuGetPackageVersion([string] $PackageVersion) {
-    if ($PackageVersion -notmatch '^[\[(]') {
-        return $PackageVersion
+    if ([string]::IsNullOrWhiteSpace($PackageVersion) -or
+        $PackageVersion -match '[\[\]\(\),*]') {
+        throw "An exact NuGet package version is required; got '$PackageVersion'."
     }
-    if ($PackageVersion -match '^[\[(]\s*([^,\]\)]+)') {
-        return $Matches[1].Trim()
+    return $PackageVersion
+}
+
+function Get-FileSha256([string] $Path) {
+    return (Get-FileHash -Algorithm SHA256 -LiteralPath $Path).Hash.ToLowerInvariant()
+}
+
+# Resolves ordinary packages with NuGet's dependency solver and a lock file.
+# DotnetPlatform packages are intentionally PackageDownload items: NuGet forbids
+# them as PackageReference items (NU1213), but PackageDownload supports their
+# exact, pre-pinned version without adding them to compilation.
+function Restore-NuGetResolverPackage(
+    [string] $PackageId,
+    [string] $VersionRange,
+    [string] $Source,
+    [string] $ConfigFile,
+    [string] $RestoreRoot,
+    [switch] $PackageDownload
+) {
+    if ($PackageDownload -and (
+        [string]::IsNullOrWhiteSpace($VersionRange) -or
+        $VersionRange -match '[\[\]\(\),*]')) {
+        throw "PackageDownload resolver package '$PackageId' requires an exact pinned version."
     }
-    if ($PackageVersion -match ',\s*([^\]\)]+)\s*[\]\)]$') {
-        return $Matches[1].Trim()
+
+    $requestedVersion = if ($PackageDownload) {
+        "[$VersionRange]"
+    } elseif ([string]::IsNullOrWhiteSpace($VersionRange)) {
+        '*'
+    } else {
+        $VersionRange
     }
-    throw "Cannot resolve an exact version from NuGet range '$PackageVersion'."
+    $projectDirectory = Join-Path $RestoreRoot (($PackageId -replace '[^A-Za-z0-9._-]', '_').ToLowerInvariant())
+    New-Item -ItemType Directory -Force -Path $projectDirectory | Out-Null
+    $projectPath = Join-Path $projectDirectory 'resolver.csproj'
+    $lockPath = Join-Path $projectDirectory 'packages.lock.json'
+    $itemName = if ($PackageDownload) { 'PackageDownload' } else { 'PackageReference' }
+    $privateAssets = if ($PackageDownload) { '' } else { ' PrivateAssets="all"' }
+    @"
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <$itemName Include="$PackageId" Version="$requestedVersion"$privateAssets />
+  </ItemGroup>
+</Project>
+"@ | Set-Content -NoNewline -LiteralPath $projectPath
+
+    & dotnet restore $projectPath --configfile $ConfigFile --source $Source | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+        throw "NuGet restore failed for resolver package '$PackageId'."
+    }
+
+    if ($PackageDownload) {
+        # PackageDownload accepts only an exact version and records it in the
+        # restore spec, providing the same repeatability for a leaf download.
+        return $VersionRange
+    }
+
+    & dotnet restore $projectPath --configfile $ConfigFile --source $Source --locked-mode --lock-file-path $lockPath | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+        throw "NuGet locked restore failed for resolver package '$PackageId'."
+    }
+
+    $lock = Get-Content -Raw -LiteralPath $lockPath | ConvertFrom-Json -Depth 32
+    $resolvedVersion = $null
+    foreach ($target in $lock.dependencies.PSObject.Properties.Value) {
+        $package = $target.PSObject.Properties |
+            Where-Object { $_.Name -ieq $PackageId } |
+            Select-Object -First 1 -ExpandProperty Value
+        if ($null -ne $package) {
+            if ($resolvedVersion -and $resolvedVersion -ne $package.resolved) {
+                throw "NuGet lock file resolved '$PackageId' to inconsistent versions."
+            }
+            $resolvedVersion = $package.resolved
+        }
+    }
+    if ([string]::IsNullOrWhiteSpace($resolvedVersion)) {
+        throw "NuGet lock file did not resolve '$PackageId'."
+    }
+    return $resolvedVersion
+}
+
+    function Read-ApiDocsManifest([string] $ManifestPath) {
+        if (-not (Test-Path -LiteralPath $ManifestPath -PathType Leaf)) {
+            throw "API documentation classification manifest '$ManifestPath' does not exist."
+        }
+
+        $manifest = Get-Content -Raw -LiteralPath $ManifestPath | ConvertFrom-Json -Depth 32
+        if ($manifest.schemaVersion -ne 1 -or $null -eq $manifest.packages) {
+            throw "API documentation classification manifest '$ManifestPath' has an unsupported format."
+        }
+
+        $ids = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        foreach ($package in $manifest.packages) {
+            if ([string]::IsNullOrWhiteSpace($package.id) -or -not $ids.Add($package.id)) {
+                throw "API documentation classification manifest '$ManifestPath' contains a missing or duplicate package id."
+            }
+            if ($package.classification -notin @('generate', 'alias', 'exclude')) {
+                throw "Package '$($package.id)' must be classified as generate, alias, or exclude."
+            }
+            if ([string]::IsNullOrWhiteSpace($package.reason)) {
+                throw "Package '$($package.id)' must record a classification reason."
+            }
+            if ($package.classification -in @('generate', 'alias')) {
+                if ([string]::IsNullOrWhiteSpace($package.moniker) -or @($package.assetRoots).Count -eq 0) {
+                    throw "Generated package '$($package.id)' must declare a moniker and one or more asset roots."
+                }
+                $assetRoots = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+                foreach ($assetRoot in $package.assetRoots) {
+                    if ($assetRoot -notin @('ref', 'lib') -or -not $assetRoots.Add($assetRoot)) {
+                        throw "Package '$($package.id)' has an invalid or duplicate asset root '$assetRoot'."
+                    }
+                }
+            }
+        }
+        return $manifest
+    }
+
+    function Write-ApiDocsProvenance(
+        [string] $ProvenancePath,
+        [string] $TransportVersion,
+        [string] $DocsMediaVersion,
+        [string] $ManifestPath,
+        [string[]] $ProductArchives,
+        [string[]] $DependencyArchives,
+        [object[]] $SelectedAssets
+    ) {
+        $archives = @(
+            foreach ($archive in @($ProductArchives) + @($DependencyArchives) | Sort-Object) {
+                $info = Get-NuGetPackageArchiveInfo (Get-Item -LiteralPath $archive)
+                [PSCustomObject]@{
+                    id = $info.Id
+                    version = $info.Version
+                    sha256 = Get-FileSha256 $archive
+                    kind = if ($ProductArchives -contains $archive) { 'product' } else { 'resolver' }
+                }
+            }
+        )
+        $provenance = [ordered]@{
+            schemaVersion = 1
+            transportVersion = $TransportVersion
+            docsMediaVersion = $DocsMediaVersion
+            classificationManifestSha256 = Get-FileSha256 $ManifestPath
+            archives = @($archives | Sort-Object id, version, kind)
+            selectedAssets = @($SelectedAssets | Sort-Object packageId, asset)
+        }
+        $provenance | ConvertTo-Json -Depth 32 | Set-Content -NoNewline -LiteralPath $ProvenancePath
 }
 
 # Gets all published versions for a package from a NuGet v3 feed's flat container.
@@ -247,8 +391,67 @@ function Resolve-NuGetPackageSource([string] $Source) {
     return $Source
 }
 
+function Get-ApiDocsFrameworkName(
+    [string] $Moniker,
+    [string] $PackageId,
+    [string] $Asset
+) {
+    $segments = @($Asset -split '[\\/]')
+    if ($segments.Count -lt 3 -or $segments[0] -notin @('lib', 'ref') -or
+        [string]::IsNullOrWhiteSpace($segments[1])) {
+        throw "Selected asset '$Asset' must begin with lib/<TFM>/ or ref/<TFM>/."
+    }
+
+    $name = "$Moniker--$PackageId--$($segments[0])-$($segments[1])".ToLowerInvariant()
+    $name = $name -replace '[^a-z0-9]+', '-'
+    return $name.Trim('-')
+}
+
+function Write-MdocFrameworkConfiguration(
+    [string] $FrameworksRoot,
+    [object[]] $SelectedAssets
+) {
+    $names = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($selectedAsset in $SelectedAssets) {
+        if ([string]::IsNullOrWhiteSpace($selectedAsset.FrameworkName) -or
+            -not $names.Add($selectedAsset.FrameworkName)) {
+            throw "Each selected asset must have one unique mdoc framework name; '$($selectedAsset.FrameworkName)' is not unique."
+        }
+        if ([IO.Path]::GetFileName($selectedAsset.FrameworkSource) -ne $selectedAsset.FrameworkSource) {
+            throw "Framework source '$($selectedAsset.FrameworkSource)' must be an immediate directory under the frameworks root."
+        }
+    }
+
+    $configurationPath = Join-Path $FrameworksRoot 'frameworks.xml'
+    $settings = [Xml.XmlWriterSettings]::new()
+    $settings.Encoding = [Text.UTF8Encoding]::new($false)
+    $settings.Indent = $true
+    $writer = [Xml.XmlWriter]::Create($configurationPath, $settings)
+    try {
+        $writer.WriteStartDocument()
+        $writer.WriteStartElement('Frameworks')
+        foreach ($selectedAsset in $SelectedAssets | Sort-Object FrameworkName) {
+            $writer.WriteStartElement('Framework')
+            $writer.WriteAttributeString('Name', $selectedAsset.FrameworkName)
+            $writer.WriteAttributeString('Source', $selectedAsset.FrameworkSource)
+            $writer.WriteEndElement()
+        }
+        $writer.WriteEndElement()
+        $writer.WriteEndDocument()
+    }
+    finally {
+        $writer.Dispose()
+    }
+
+    return $configurationPath
+}
+
 Export-ModuleMember -Function `
     Resolve-NuGetPackageVersion, `
+    Get-FileSha256, `
+    Restore-NuGetResolverPackage, `
+    Read-ApiDocsManifest, `
+    Write-ApiDocsProvenance, `
     Get-NuGetPackageVersions, `
     Select-LatestMainTransportPackageVersion, `
     Resolve-DocsMediaPackageVersion, `
@@ -258,4 +461,6 @@ Export-ModuleMember -Function `
     Get-NuGetPackageId, `
     Get-NuGetPackageArchiveInfo, `
     Get-NuGetPackageArchiveId, `
-    Resolve-NuGetPackageSource
+    Resolve-NuGetPackageSource, `
+    Get-ApiDocsFrameworkName, `
+    Write-MdocFrameworkConfiguration
