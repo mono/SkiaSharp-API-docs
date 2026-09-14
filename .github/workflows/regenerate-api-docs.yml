@@ -51,10 +51,13 @@ jobs:
         run: ./eng/Generate-ApiDocs.ps1
 
       - name: Upload package provenance
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: api-docs-provenance
-          path: artifacts/api-docs/provenance.json
+          path: |
+            artifacts/api-docs/provenance.json
+            artifacts/api-docs/completeness.json
 
       - name: Create documentation update pull request
         if: github.event_name != 'pull_request'

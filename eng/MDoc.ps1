@@ -22,6 +22,10 @@ if (-not $MdocArguments) {
 
 # Find the cached tool or acquire mdoc from the allowed dotnet-public feed.
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
+$manifest = Read-ApiDocsManifest (Join-Path $PSScriptRoot 'api-docs-packages.json')
+if ([string]::IsNullOrWhiteSpace($PackageVersion)) {
+    $PackageVersion = $manifest.mdocVersion
+}
 $mdocPath = Get-ChildItem -Path $ToolsPath -Filter mdoc.dll -Recurse -ErrorAction Ignore |
     Where-Object { $_.FullName -match '[\\/]tools[\\/]net6\.0[\\/]' } |
     Select-Object -First 1 -ExpandProperty FullName

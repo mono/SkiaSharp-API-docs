@@ -98,7 +98,8 @@ function Restore-NuGetResolverPackage(
         }
 
         $manifest = Get-Content -Raw -LiteralPath $ManifestPath | ConvertFrom-Json -Depth 32
-        if ($manifest.schemaVersion -ne 1 -or $null -eq $manifest.packages) {
+        if ($manifest.schemaVersion -ne 1 -or $null -eq $manifest.packages -or
+            [string]::IsNullOrWhiteSpace($manifest.mdocVersion)) {
             throw "API documentation classification manifest '$ManifestPath' has an unsupported format."
         }
 

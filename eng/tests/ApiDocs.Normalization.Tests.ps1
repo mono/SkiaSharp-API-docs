@@ -5,6 +5,7 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 Import-Module (Join-Path (Split-Path -Parent $PSScriptRoot) 'ApiDocs.Common.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path (Split-Path -Parent $PSScriptRoot) 'ApiDocs.Normalization.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path (Split-Path -Parent $PSScriptRoot) 'ApiDocs.Completeness.psm1') -Force -DisableNameChecking
 
 function Assert-Equal([object] $Actual, [object] $Expected, [string] $Message) {
     if ($Actual -cne $Expected) {
@@ -116,6 +117,109 @@ finally {
     Remove-Item -Recurse -Force $workspace -ErrorAction Ignore
 }
 
+$completenessWorkspace = Join-Path $PSScriptRoot ".api-docs-completeness-$([Guid]::NewGuid())"
+New-Item -ItemType Directory -Force -Path $completenessWorkspace | Out-Null
+try {
+    $compilerPath = Join-Path $completenessWorkspace 'Example.xml'
+    $ecmaPath = Join-Path $completenessWorkspace 'ExampleType.xml'
+    $reportPath = Join-Path $completenessWorkspace 'completeness.json'
+    @'
+<doc><members>
+  <member name="T:System.Object"><summary>Represents an object.</summary></member>
+</members></doc>
+'@ | Set-Content -NoNewline -Path $compilerPath
+    @'
+<Type Name="Object" FullName="System.Object">
+  <TypeSignature Language="DocId" Value="T:System.Object" />
+  <Docs><summary>Represents an object.</summary></Docs>
+  <Members />
+</Type>
+'@ | Set-Content -NoNewline -Path $ecmaPath
+    $documentationInputs = @([PSCustomObject]@{
+        Path = $compilerPath
+        PackageId = 'Example'
+        Asset = 'ref/net10.0/Example.dll'
+    })
+    $selectedAssets = @([PSCustomObject]@{
+        PackageId = 'Example'
+        Asset = 'ref/net10.0/Example.dll'
+        Moniker = 'example'
+    })
+    $completenessResult = Assert-ApiDocsCompleteness `
+        -OutputRoot $completenessWorkspace `
+        -DocumentationPaths $documentationInputs `
+        -AssemblyPaths @([object].Assembly.Location) `
+        -SelectedAssets $selectedAssets `
+        -ImportedDocIds @('T:System.Object') `
+        -FilteredDocIds @() `
+        -Canonicalizations @() `
+        -ReportPath $reportPath
+    Assert-Equal $completenessResult.status 'passed' 'Completeness gate rejected an exactly mapped public API.'
+    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
+    Assert-Equal $report.status 'passed' 'Completeness gate did not write its passing JSON report.'
+
+    @'
+<doc><members>
+  <member name="T:System.Object"><summary>Represents an object.</summary></member>
+  <member name="M:Example.Unmapped"><summary>Unmapped compiler XML.</summary></member>
+</members></doc>
+'@ | Set-Content -NoNewline -Path $compilerPath
+    try {
+        [void](Assert-ApiDocsCompleteness `
+            -OutputRoot $completenessWorkspace `
+            -DocumentationPaths $documentationInputs `
+            -AssemblyPaths @([object].Assembly.Location) `
+            -SelectedAssets $selectedAssets `
+            -ImportedDocIds @('T:System.Object') `
+            -FilteredDocIds @() `
+            -Canonicalizations @() `
+            -ReportPath $reportPath)
+        throw 'Completeness gate accepted an unexplained compiler XML DocId absent from ECMA.'
+    }
+    catch {
+        if ($_.Exception.Message -notmatch 'completeness validation failed') {
+            throw
+        }
+    }
+    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
+    Assert-Equal $report.status 'failed' 'Completeness gate did not record a failed report.'
+    Assert-Equal $report.compilerXml.absentFromEcma[0].classification 'unexplained' `
+        'Compiler XML DocId absent from ECMA was not recorded as unexplained.'
+
+    @'
+<doc><members>
+  <member name="T:System.Object"><summary>Represents an object.</summary></member>
+</members></doc>
+'@ | Set-Content -NoNewline -Path $compilerPath
+    @'
+<Type Name="Object" FullName="System.Object">
+  <TypeSignature Language="DocId" Value="T:System.Object" />
+  <Docs><summary>To be added.</summary></Docs>
+  <Members />
+</Type>
+'@ | Set-Content -NoNewline -Path $ecmaPath
+    try {
+        [void](Assert-ApiDocsCompleteness `
+            -OutputRoot $completenessWorkspace `
+            -DocumentationPaths $documentationInputs `
+            -AssemblyPaths @([object].Assembly.Location) `
+            -SelectedAssets $selectedAssets `
+            -ImportedDocIds @('T:System.Object') `
+            -FilteredDocIds @() `
+            -Canonicalizations @() `
+            -ReportPath $reportPath)
+        throw 'Completeness gate accepted placeholder ECMA documentation.'
+    }
+    catch {
+        if ($_.Exception.Message -notmatch 'completeness validation failed') {
+            throw
+        }
+    }
+}
+finally {
+    Remove-Item -Recurse -Force $completenessWorkspace -ErrorAction Ignore
+}
+
 $frameworkName = Get-ApiDocsFrameworkName 'skiasharp-views' 'SkiaSharp.Views.Uno.WinUI' 'lib/net10.0-android36.0/SkiaSharp.Views.Windows.dll'
 Assert-Equal $frameworkName 'skiasharp-views-skiasharp-views-uno-winui-lib-net10-0-android36-0' `
     'Uno framework name was not derived from its public moniker, package, and asset kind/TFM.'
@@ -175,6 +279,53 @@ Assert-Equal (Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember $true '
     'Ordinary private explicit-interface member was excluded.'
 Assert-Equal (Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember $false 'Java.Interop.IJavaPeerable.UnregisterFromRuntime' $false) $false `
     'Public authored member was excluded.'
+$javaFilterWorkspace = Join-Path $PSScriptRoot ".api-docs-java-filter-$([Guid]::NewGuid())"
+New-Item -ItemType Directory -Force -Path $javaFilterWorkspace | Out-Null
+try {
+    $javaAssemblyPath = Join-Path $javaFilterWorkspace 'JavaPeerHost.dll'
+    Add-Type -OutputAssembly $javaAssemblyPath -TypeDefinition @'
+namespace Java.Interop {
+    public interface IJavaPeerable {
+        void UnregisterFromRuntime(string value);
+    }
+}
+public class JavaPeerHost : Java.Interop.IJavaPeerable {
+    void Java.Interop.IJavaPeerable.UnregisterFromRuntime(string value) { }
+}
+'@
+    $javaEcmaPath = Join-Path $javaFilterWorkspace 'JavaPeerHost.xml'
+    $javaDocId = 'M:JavaPeerHost.Java#Interop#IJavaPeerable#UnregisterFromRuntime(System.String)'
+    @"
+<Type Name="JavaPeerHost" FullName="JavaPeerHost">
+  <TypeSignature Language="DocId" Value="T:JavaPeerHost" />
+  <Docs><summary>Host.</summary></Docs>
+  <Members>
+    <Member><MemberSignature Language="DocId" Value="$javaDocId" /><Docs><summary>To be added.</summary></Docs></Member>
+    <Member><MemberSignature Language="DocId" Value="M:JavaPeerHost.Other" /><Docs><summary>Other.</summary></Docs></Member>
+  </Members>
+</Type>
+"@ | Set-Content -NoNewline -Path $javaEcmaPath
+    $removed = @(Remove-UndocumentedJavaPeerInfrastructureMembers $javaFilterWorkspace @($javaAssemblyPath) @())
+    Assert-Equal $removed.Count 1 'Java peer filter did not remove the one exact private infrastructure member.'
+    Assert-Equal $removed[0] $javaDocId 'Java peer filter removed an unexpected DocId.'
+    [xml] $javaResult = Get-Content -Raw -LiteralPath $javaEcmaPath
+    Assert-Equal $javaResult.SelectNodes('/Type/Members/Member').Count 1 'Java peer filter removed more than its exact target.'
+
+    @"
+<Type Name="JavaPeerHost" FullName="JavaPeerHost">
+  <TypeSignature Language="DocId" Value="T:JavaPeerHost" />
+  <Docs><summary>Host.</summary></Docs>
+  <Members>
+    <Member><MemberSignature Language="DocId" Value="$javaDocId" /><Docs><summary>Documented infrastructure member.</summary></Docs></Member>
+  </Members>
+</Type>
+"@ | Set-Content -NoNewline -Path $javaEcmaPath
+    $removed = @(Remove-UndocumentedJavaPeerInfrastructureMembers $javaFilterWorkspace @($javaAssemblyPath) @($javaDocId))
+    Assert-Equal $removed.Count 0 'Java peer filter removed an exactly documented member.'
+}
+finally {
+    Remove-Item -Recurse -Force $javaFilterWorkspace -ErrorAction Ignore
+}
 try {
     [void](Resolve-DocsMediaPackageVersion $selected '0.0.0-branch.main.171')
     throw 'Mismatched _DocsMedia package version was accepted.'

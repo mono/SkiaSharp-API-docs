@@ -4,13 +4,15 @@ param(
     [string] $DependencyRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/dependencies'),
     [string] $OutputRoot = (Join-Path (Split-Path -Parent $PSScriptRoot) 'SkiaSharpAPI'),
     [string] $ManifestPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'eng/api-docs-packages.json'),
-    [string] $ProvenancePath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/provenance.json')
+    [string] $ProvenancePath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/provenance.json'),
+    [string] $CompletenessReportPath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'artifacts/api-docs/completeness.json')
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 Import-Module (Join-Path $PSScriptRoot 'ApiDocs.Common.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot 'ApiDocs.Normalization.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $PSScriptRoot 'ApiDocs.Completeness.psm1') -Force -DisableNameChecking
 
 # Collects only downloaded product and resolver assemblies for mdoc resolution.
 function Get-ReferencePaths([string[]] $packageExtractionPaths) {
@@ -281,6 +283,7 @@ if ($provenance.schemaVersion -ne 1 -or
     $provenance.classificationManifestSha256 -cne (Get-FileSha256 $ManifestPath)) {
     throw 'Package provenance does not match the committed classification manifest. Run setup again.'
 }
+Remove-Item -Force $CompletenessReportPath -ErrorAction Ignore
 $workRoot = Join-Path $repositoryRoot 'artifacts/api-docs'
 $conversionRoot = Join-Path $workRoot 'conversion'
 $nuGetsExtractionPath = Join-Path $conversionRoot 'nugets'
@@ -464,6 +467,15 @@ Merge-MdocFrameworkIndexes $stagingPath $selectedAssets
 
 Remove-WhitespaceOnlyLines $stagingPath
 Assert-GeneratedDocumentation $stagingPath $selectedAssets
+[void](Assert-ApiDocsCompleteness `
+    -OutputRoot $stagingPath `
+    -DocumentationPaths $compilerDocumentation `
+    -AssemblyPaths $stagedAssemblies.FullName `
+    -SelectedAssets $selectedAssets `
+    -ImportedDocIds $importedDocIds `
+    -FilteredDocIds $filteredDocIds `
+    -Canonicalizations $canonicalizations `
+    -ReportPath $CompletenessReportPath)
 
 # Copy required package media before promoting the complete generated tree.
 $mediaFiles = $mediaPackages |

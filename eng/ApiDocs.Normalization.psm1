@@ -163,7 +163,7 @@ function Remove-UndocumentedJavaPeerInfrastructureMembers(
 ) {
     $documented = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     $ImportedDocIds | ForEach-Object { [void]$documented.Add($_) }
-    $excluded = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $privateJavaPeerMethods = [Collections.Generic.List[object]]::new()
 
     foreach ($assemblyPath in $AssemblyPaths) {
         $stream = [IO.File]::OpenRead($assemblyPath)
@@ -181,9 +181,11 @@ function Remove-UndocumentedJavaPeerInfrastructureMembers(
                         $method = $metadata.GetMethodDefinition($methodHandle)
                         $methodName = $metadata.GetString($method.Name)
                         $isPrivate = ($method.Attributes -band [Reflection.MethodAttributes]::MemberAccessMask) -eq [Reflection.MethodAttributes]::Private
-                        $docId = "M:$typeName.$($methodName.Replace('.', '#'))"
-                        if (Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember $isPrivate $methodName $documented.Contains($docId)) {
-                            [void]$excluded.Add($docId)
+                        if ($isPrivate -and $methodName.StartsWith('Java.Interop.IJavaPeerable.', [StringComparison]::Ordinal)) {
+                            $privateJavaPeerMethods.Add([PSCustomObject]@{
+                                Prefix = "M:$typeName.$($methodName.Replace('.', '#'))"
+                                MethodName = $methodName
+                            })
                         }
                     }
                 }
@@ -205,9 +207,23 @@ function Remove-UndocumentedJavaPeerInfrastructureMembers(
         }
         foreach ($member in @($document.SelectNodes('/Type/Members/Member'))) {
             $signature = $member.SelectSingleNode('./MemberSignature[@Language="DocId"]')
-            if ($null -ne $signature -and $excluded.Contains($signature.GetAttribute('Value'))) {
-                [void]$member.ParentNode.RemoveChild($member)
-                $removed += $signature.GetAttribute('Value')
+            if ($null -eq $signature) {
+                continue
+            }
+            $docId = $signature.GetAttribute('Value')
+            foreach ($candidate in $privateJavaPeerMethods) {
+                if (-not $docId.StartsWith($candidate.Prefix, [StringComparison]::Ordinal)) {
+                    continue
+                }
+                if ($docId.Length -gt $candidate.Prefix.Length -and
+                    $docId[$candidate.Prefix.Length] -notin @('(', '`', '~')) {
+                    continue
+                }
+                if (Test-ShouldExcludeUndocumentedJavaPeerInfrastructureMember $true $candidate.MethodName $documented.Contains($docId)) {
+                    [void]$member.ParentNode.RemoveChild($member)
+                    $removed += $docId
+                }
+                break
             }
         }
         $document.Save($file.FullName)
