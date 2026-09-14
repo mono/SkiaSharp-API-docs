@@ -5,8 +5,8 @@ Generates ECMA API XML from the prepared package workspace.
 .DESCRIPTION
 Selects one reference-first assembly asset for each product package, runs mdoc
 with its adjacent compiler XML, and replaces generated output while preserving
-OpenPublishing infrastructure and deferred Uno output. Run MDoc.ps1 first to
-install the pinned tool; this script does not mutate artifacts/downloads.
+OpenPublishing infrastructure. mdoc restores itself to artifacts/downloads
+when needed.
 
 .EXAMPLE
 ./eng/Generate-ApiDocs.ps1
@@ -125,8 +125,7 @@ $libraryArguments = @('--lib', $DependencyRoot)
 foreach ($frameworkDirectory in Get-ChildItem -LiteralPath $frameworksRoot -Directory | Sort-Object Name) {
     $libraryArguments += @('--lib', $frameworkDirectory.FullName)
 }
-$arguments = @('update', '--delete', '--use-docid', '--out', $stagingRoot, '--frameworks', $frameworksPath) +
-    $libraryArguments
+$arguments = @('update', '--delete', '--use-docid', '--out', $stagingRoot, '--frameworks', $frameworksPath) + $libraryArguments
 if ($MDocDebug) {
     $arguments += '--debug'
 }
@@ -140,25 +139,14 @@ finally {
 
 # Import compiler XML prose for each selected assembly.
 foreach ($asset in $stagedAssets) {
-    $importArguments = @(
-        'update',
-        '--preserve',
-        '--out', $stagingRoot
-    ) + $libraryArguments + @(
-        '--import', $asset.Documentation,
-        $asset.StagedAssembly
-    )
+    $importArguments = @('update', '--preserve', '--out', $stagingRoot) + $libraryArguments + @('--import', $asset.Documentation, $asset.StagedAssembly)
     Invoke-MDoc -Arguments $importArguments
 }
 
 # Replace generated API output while preserving only non-ECMA publishing infrastructure.
 $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
-Get-ChildItem -LiteralPath $OutputRoot -Force |
-    Where-Object { $_.Name -notin $preservedItems } |
-    Remove-Item -Recurse -Force
-Get-ChildItem -LiteralPath $stagingRoot -Force |
-    Where-Object { $_.Name -notin $preservedItems } |
-    Copy-Item -Destination $OutputRoot -Recurse -Force
+Get-ChildItem -LiteralPath $OutputRoot -Force | Where-Object { $_.Name -notin $preservedItems } | Remove-Item -Recurse -Force
+Get-ChildItem -LiteralPath $stagingRoot -Force | Where-Object { $_.Name -notin $preservedItems } | Copy-Item -Destination $OutputRoot -Recurse -Force
 
 # Replace the published image set from Fetch's clean media directory.
 if (@(Get-ChildItem -LiteralPath $MediaRoot -File).Count -gt 0) {
@@ -166,9 +154,5 @@ if (@(Get-ChildItem -LiteralPath $MediaRoot -File).Count -gt 0) {
     Remove-Item -Recurse -Force $outputImages -ErrorAction Ignore
     Copy-Item -LiteralPath $MediaRoot -Destination $outputImages -Recurse -Force
 }
-
-# Remove the staging tree after its generated contents have been promoted.
-Remove-Item -Recurse -Force $stagingRoot
-Remove-Item -Recurse -Force $frameworksRoot
 
 Write-Host "Generated API documentation from $($stagedAssets.Count) selected assemblies."

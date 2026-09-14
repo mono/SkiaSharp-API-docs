@@ -38,10 +38,7 @@ New-Item -ItemType Directory -Force $productRoot, $dependencyRoot, $DependencyCa
 
 # Select the managed SkiaSharp and HarfBuzzSharp packages to document.
 $transportPackages = @(Get-ChildItem -LiteralPath $transportPackageRoot -Filter '*.nupkg' -File)
-$deferredProductPackageIds = @(
-    'SkiaSharp.Views.Gtk3',
-    'SkiaSharp.Views.Uno.WinUI'
-)
+$deferredProductPackageIds = @('SkiaSharp.Views.Gtk3', 'SkiaSharp.Views.Uno.WinUI')
 $productPackages = @($transportPackages | Where-Object {
     $identity = Get-NuGetPackageIdentity $_
     $identity.Id -match '^(SkiaSharp|HarfBuzzSharp)(\.|$)' -and
