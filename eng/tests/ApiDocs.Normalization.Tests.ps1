@@ -246,6 +246,42 @@ namespace Example {
     Assert-Equal $report.compilerXml.staleOrUnresolvedSidecarCount 1 `
         'Fake System namespace sidecar DocId was not retained as stale.'
 
+    $referenceAssembly = Join-Path $completenessWorkspace 'Reference.dll'
+    $implementationAssembly = Join-Path $completenessWorkspace 'Implementation.dll'
+    Add-Type -OutputAssembly $referenceAssembly -TypeDefinition @'
+namespace Example { public interface IReferenceSurface { } }
+'@
+    Add-Type -OutputAssembly $implementationAssembly -TypeDefinition @'
+namespace Example {
+    public interface IReferenceSurface { }
+    public interface IImplementationOnlySurface { }
+}
+'@
+    try {
+        [void](Assert-ApiDocsCompleteness `
+            -OutputRoot $completenessWorkspace `
+            -DocumentationPaths @() `
+            -AssemblyPaths @($referenceAssembly) `
+            -SelectedAssets $selectedAssets `
+            -PairedAssets @([PSCustomObject]@{
+                packageId = 'Example'; asset = 'ref/net8.0/Reference.dll'
+                referenceAssemblyPath = $referenceAssembly; implementationAssemblyPath = $implementationAssembly
+            }) `
+            -ImportedDocIds @() `
+            -FilteredDocIds @() `
+            -Canonicalizations @() `
+            -ReportPath $reportPath)
+        throw 'Completeness gate accepted a public implementation API absent from its paired reference assembly.'
+    }
+    catch {
+        if ($_.Exception.Message -notmatch 'completeness validation failed') {
+            throw
+        }
+    }
+    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
+    Assert-Equal $report.refLib.publicImplementationMissingReference[0].docId 'T:Example.IImplementationOnlySurface' `
+        'Completeness gate did not report the public implementation/reference mismatch.'
+
     $syntaxAssembly = Join-Path $completenessWorkspace 'Syntax.dll'
     Add-Type -OutputAssembly $syntaxAssembly -TypeDefinition @'
 namespace Example {

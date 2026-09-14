@@ -460,6 +460,24 @@ if ($missingCompilerDocumentation) {
 $importedDocIds = @(Import-CompilerXmlDocumentation $stagingPath $compilerDocumentation @($compilerXmlSidecar.precedence))
 $importedDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'compiler-xml-imports.json')
 $stagedAssemblies = Get-ChildItem -Path $frameworkDirectories -Filter '*.dll' -File -Recurse
+$pairedAssets = @(
+    foreach ($selectedAsset in $selectedAssets) {
+        if ($selectedAsset.Asset -notlike 'ref/*') {
+            continue
+        }
+        $implementationAsset = $selectedAsset.Asset -replace '^ref/', 'lib/'
+        $packageAssetRoot = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $selectedAsset.AssemblyPath))
+        $implementationPath = Join-Path $packageAssetRoot $implementationAsset
+        if (Test-Path -LiteralPath $implementationPath -PathType Leaf) {
+            [PSCustomObject]@{
+                packageId = $selectedAsset.PackageId
+                asset = $selectedAsset.Asset
+                referenceAssemblyPath = $selectedAsset.AssemblyPath
+                implementationAssemblyPath = $implementationPath
+            }
+        }
+    }
+)
 $filteredDocIds = @(Remove-UndocumentedJavaPeerInfrastructureMembers $stagingPath $stagedAssemblies.FullName $importedDocIds)
 $filteredDocIds | ConvertTo-Json | Set-Content -NoNewline -Path (Join-Path $conversionRoot 'filtered-java-peer-infrastructure-members.json')
 Convert-MdocFrameworkAvailabilityToPublicMonikers $stagingPath $selectedAssets
@@ -472,6 +490,7 @@ Assert-GeneratedDocumentation $stagingPath $selectedAssets
     -DocumentationPaths $compilerDocumentation `
     -AssemblyPaths $stagedAssemblies.FullName `
     -SelectedAssets $selectedAssets `
+    -PairedAssets $pairedAssets `
     -ImportedDocIds $importedDocIds `
     -FilteredDocIds $filteredDocIds `
     -Canonicalizations $canonicalizations `
