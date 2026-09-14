@@ -38,6 +38,14 @@ function Get-FrameworkRank([string] $framework) {
     return 10
 }
 
+function Get-Moniker([string] $packageId) {
+    if ($packageId -like 'SkiaSharp.Views.Maui*') { return 'skiasharp-views-maui' }
+    if ($packageId -like 'SkiaSharp.Views*') { return 'skiasharp-views' }
+    if ($packageId -like 'SkiaSharp.Direct3D*') { return 'skiasharp-direct3d' }
+    if ($packageId -like 'SkiaSharp.Vulkan*') { return 'skiasharp-vulkan' }
+    return $packageId.ToLowerInvariant().Replace('.', '-')
+}
+
 # Find managed product assemblies and require the compiler XML beside every one.
 $assets = foreach ($assembly in @(Get-ChildItem -LiteralPath $ProductRoot -Filter '*.dll' -File -Recurse)) {
     $relativePath = $assembly.FullName.Substring($ProductRoot.Length).TrimStart([IO.Path]::DirectorySeparatorChar)
@@ -70,29 +78,77 @@ if ($selectedAssets.Count -eq 0) {
     throw "No documentable product assets were found under '$ProductRoot'."
 }
 
+# Stage each assembly under its public Learn moniker for mdoc framework mode.
+$frameworksRoot = Join-Path $WorkspaceRoot 'frameworks'
+Remove-Item -Recurse -Force $frameworksRoot -ErrorAction Ignore
+New-Item -ItemType Directory -Force $frameworksRoot | Out-Null
+$stagedAssets = foreach ($asset in $selectedAssets) {
+    $moniker = Get-Moniker $asset.PackageId
+    $frameworkDirectory = Join-Path $frameworksRoot $moniker
+    New-Item -ItemType Directory -Force $frameworkDirectory | Out-Null
+    $stagedAssembly = Join-Path $frameworkDirectory $asset.Assembly.Name
+    if (Test-Path -LiteralPath $stagedAssembly) {
+        throw "Multiple selected assets map to '$stagedAssembly'."
+    }
+    $stagedDocumentation = Join-Path $frameworkDirectory ([IO.Path]::GetFileName($asset.Documentation))
+    Copy-Item -LiteralPath $asset.Assembly.FullName -Destination $stagedAssembly
+    Copy-Item -LiteralPath $asset.Documentation -Destination $stagedDocumentation
+    [PSCustomObject]@{
+        PackageId = $asset.PackageId
+        Moniker = $moniker
+        Assembly = $asset.Assembly
+        Documentation = $stagedDocumentation
+        StagedAssembly = $stagedAssembly
+    }
+}
+
+# Describe the staged public monikers so mdoc emits FrameworksIndex metadata.
+$frameworksPath = Join-Path $frameworksRoot 'frameworks.xml'
+$frameworksDocument = [Xml.XmlDocument]::new()
+[void]$frameworksDocument.AppendChild($frameworksDocument.CreateXmlDeclaration('1.0', 'utf-8', $null))
+$frameworksElement = $frameworksDocument.CreateElement('Frameworks')
+[void]$frameworksDocument.AppendChild($frameworksElement)
+foreach ($moniker in $stagedAssets.Moniker | Sort-Object -Unique) {
+    $frameworkElement = $frameworksDocument.CreateElement('Framework')
+    $frameworkElement.SetAttribute('Name', $moniker)
+    $frameworkElement.SetAttribute('Source', $moniker)
+    [void]$frameworksElement.AppendChild($frameworkElement)
+}
+$frameworksDocument.Save($frameworksPath)
+
 # Generate ECMA structure into a disposable staging directory.
 $stagingRoot = Join-Path $WorkspaceRoot 'staging'
 Remove-Item -Recurse -Force $stagingRoot -ErrorAction Ignore
 New-Item -ItemType Directory -Force $stagingRoot | Out-Null
 
-$arguments = @('update', '--delete', '--use-docid', '--out', $stagingRoot, '--lib', $DependencyRoot) +
-    @($selectedAssets | ForEach-Object { $_.Assembly.FullName })
+$libraryArguments = @('--lib', $DependencyRoot)
+foreach ($frameworkDirectory in Get-ChildItem -LiteralPath $frameworksRoot -Directory | Sort-Object Name) {
+    $libraryArguments += @('--lib', $frameworkDirectory.FullName)
+}
+$arguments = @('update', '--delete', '--use-docid', '--out', $stagingRoot, '--frameworks', $frameworksPath) +
+    $libraryArguments
 if ($MDocDebug) {
     $arguments += '--debug'
 }
-Invoke-MDoc -Arguments $arguments
+Push-Location $frameworksRoot
+try {
+    Invoke-MDoc -Arguments $arguments
+}
+finally {
+    Pop-Location
+}
 
 # Import compiler XML prose for each selected assembly.
-foreach ($asset in $selectedAssets) {
-    Invoke-MDoc -Arguments @(
+foreach ($asset in $stagedAssets) {
+    $importArguments = @(
         'update',
         '--preserve',
-        '--out', $stagingRoot,
-        '--lib', $DependencyRoot,
-        '--lib', $ProductRoot,
+        '--out', $stagingRoot
+    ) + $libraryArguments + @(
         '--import', $asset.Documentation,
-        $asset.Assembly.FullName
+        $asset.StagedAssembly
     )
+    Invoke-MDoc -Arguments $importArguments
 }
 
 # Replace generated API output while preserving only non-ECMA publishing infrastructure.
@@ -113,5 +169,6 @@ if (@(Get-ChildItem -LiteralPath $MediaRoot -File).Count -gt 0) {
 
 # Remove the staging tree after its generated contents have been promoted.
 Remove-Item -Recurse -Force $stagingRoot
+Remove-Item -Recurse -Force $frameworksRoot
 
-Write-Host "Generated API documentation from $($selectedAssets.Count) selected assemblies."
+Write-Host "Generated API documentation from $($stagedAssets.Count) selected assemblies."
