@@ -78,7 +78,8 @@ function Assert-FrameworkStaging([object[]] $SelectedAssets) {
     }
 
     $unoAssets = @($SelectedAssets | Where-Object { $_.PackageId -eq 'SkiaSharp.Views.Uno.WinUI' })
-    if ($unoAssets.Count -lt 2 -or @($unoAssets.FrameworkSource | Sort-Object -Unique).Count -ne $unoAssets.Count) {
+    if ($unoAssets.Count -gt 0 -and
+        ($unoAssets.Count -lt 2 -or @($unoAssets.FrameworkSource | Sort-Object -Unique).Count -ne $unoAssets.Count)) {
         throw 'Same-named Uno assets were not staged in distinct immediate mdoc framework sources.'
     }
     $gtkAssets = @($SelectedAssets | Where-Object { $_.PackageId -in @('SkiaSharp.Views.Gtk3', 'SkiaSharp.Views.Gtk4') })
@@ -214,7 +215,7 @@ function Assert-GeneratedDocumentation([string] $StagingPath, [object[]] $Select
     }
 }
 
-function Promote-GeneratedApiDocs([string] $OutputRoot, [string] $StagingPath) {
+function Promote-GeneratedApiDocs([string] $OutputRoot, [string] $StagingPath, [string[]] $DeferredOutputPaths) {
     $parent = Split-Path -Parent $OutputRoot
     $leaf = Split-Path -Leaf $OutputRoot
     $candidate = Join-Path $parent ".$leaf.next"
@@ -222,9 +223,9 @@ function Promote-GeneratedApiDocs([string] $OutputRoot, [string] $StagingPath) {
     Remove-Item -Recurse -Force $candidate, $backup -ErrorAction Ignore
     try {
         Copy-Item -Recurse -Force $OutputRoot $candidate
-        $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
+        $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml') + $DeferredOutputPaths
         Get-ChildItem -Path $candidate -Force | Where-Object { $_.Name -notin $preservedItems } | Remove-Item -Recurse -Force
-        Get-ChildItem -Path $StagingPath -Force | Where-Object { $_.Name -ne 'xml' } |
+        Get-ChildItem -Path $StagingPath -Force | Where-Object { $_.Name -ne 'xml' -and $_.Name -notin $DeferredOutputPaths } |
             Copy-Item -Destination $candidate -Recurse -Force
         if (-not (Get-ChildItem -Path $candidate -Filter '*.xml' -File -Recurse)) {
             throw 'Generated candidate contains no ECMA XML files.'
@@ -502,6 +503,10 @@ if (-not (Get-ChildItem -Path $stagingMediaPath -File -Recurse | Where-Object Le
     throw 'The downloaded _DocsMedia package did not produce usable media.'
 }
 
-Promote-GeneratedApiDocs $OutputRoot $stagingPath
+$deferredOutputPaths = @($manifest.packages |
+    Where-Object { $_.classification -eq 'exclude' } |
+    ForEach-Object { @($_.preserveOutputPaths) } |
+    Sort-Object -Unique)
+Promote-GeneratedApiDocs $OutputRoot $stagingPath $deferredOutputPaths
 
 Write-Host "Atomically replaced generated ECMA XML and media in $OutputRoot from declared package assets."

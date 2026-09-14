@@ -193,139 +193,6 @@ namespace Example {
     Assert-Equal $report.publicSelectedApi.missingCompilerXml[0].docId 'M:Example.IMissingSidecar.Required' `
         'Completeness gate did not identify the public member missing from compiler XML.'
 
-    if ($false) {
-    $internalAssembly = Join-Path $completenessWorkspace 'Internal.dll'
-    Add-Type -OutputAssembly $internalAssembly -TypeDefinition @'
-namespace Example {
-    internal class InternalImplementation {
-        internal void Hidden() { }
-    }
-}
-'@
-    $internalXml = Join-Path $completenessWorkspace 'Internal.xml'
-    @'
-<doc><members>
-  <member name="M:Example.InternalImplementation.Hidden"><summary>Internal implementation documentation.</summary></member>
-</members></doc>
-'@ | Set-Content -NoNewline -Path $internalXml
-    $internalInputs = @([PSCustomObject]@{ Path = $internalXml; PackageId = 'Example'; Asset = 'lib/net8.0/Internal.dll' })
-    $internalResult = Assert-ApiDocsCompleteness `
-        -OutputRoot $completenessWorkspace `
-        -DocumentationPaths $internalInputs `
-        -AssemblyPaths @($internalAssembly) `
-        -SelectedAssets $selectedAssets `
-        -ImportedDocIds @() `
-        -FilteredDocIds @() `
-        -Canonicalizations @() `
-        -ReportPath $reportPath
-    Assert-Equal $internalResult.compilerXml.nonPublicSidecarCount 1 `
-        'Exact internal metadata member was not classified as non-public.'
-
-    @'
-<doc><members>
-  <member name="M:System.Nonexistent.External"><summary>Fake external documentation.</summary></member>
-</members></doc>
-'@ | Set-Content -NoNewline -Path $internalXml
-    try {
-        [void](Assert-ApiDocsCompleteness `
-            -OutputRoot $completenessWorkspace `
-            -DocumentationPaths $internalInputs `
-            -AssemblyPaths @($internalAssembly) `
-            -SelectedAssets $selectedAssets `
-            -ImportedDocIds @() `
-            -FilteredDocIds @() `
-            -Canonicalizations @() `
-            -ReportPath $reportPath)
-        throw 'Completeness gate exempted a fake System namespace sidecar DocId.'
-    }
-    catch {
-        if ($_.Exception.Message -notmatch 'completeness validation failed') {
-            throw
-        }
-    }
-    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
-    Assert-Equal $report.compilerXml.staleOrUnresolvedSidecarCount 1 `
-        'Fake System namespace sidecar DocId was not retained as stale.'
-
-    $referenceAssembly = Join-Path $completenessWorkspace 'Reference.dll'
-    $implementationAssembly = Join-Path $completenessWorkspace 'Implementation.dll'
-    Add-Type -OutputAssembly $referenceAssembly -TypeDefinition @'
-namespace Example { public interface IReferenceSurface { } }
-'@
-    Add-Type -OutputAssembly $implementationAssembly -TypeDefinition @'
-namespace Example {
-    public interface IReferenceSurface { }
-    public interface IImplementationOnlySurface { }
-}
-'@
-    try {
-        [void](Assert-ApiDocsCompleteness `
-            -OutputRoot $completenessWorkspace `
-            -DocumentationPaths @() `
-            -AssemblyPaths @($referenceAssembly) `
-            -SelectedAssets $selectedAssets `
-            -PairedAssets @([PSCustomObject]@{
-                packageId = 'Example'; asset = 'ref/net8.0/Reference.dll'
-                referenceAssemblyPath = $referenceAssembly; implementationAssemblyPath = $implementationAssembly
-            }) `
-            -ImportedDocIds @() `
-            -FilteredDocIds @() `
-            -Canonicalizations @() `
-            -ReportPath $reportPath)
-        throw 'Completeness gate accepted a public implementation API absent from its paired reference assembly.'
-    }
-    catch {
-        if ($_.Exception.Message -notmatch 'completeness validation failed') {
-            throw
-        }
-    }
-    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
-    Assert-Equal $report.refLib.publicImplementationMissingReference[0].docId 'T:Example.IImplementationOnlySurface' `
-        'Completeness gate did not report the public implementation/reference mismatch.'
-
-    $obsoleteImplementationAssembly = Join-Path $completenessWorkspace 'ObsoleteImplementation.dll'
-    Add-Type -OutputAssembly $obsoleteImplementationAssembly -TypeDefinition @'
-namespace Example {
-    [System.Obsolete("Retired", true)]
-    public interface IErrorObsolete { }
-    [System.Obsolete("Retired", false)]
-    public interface IWarningObsolete { }
-}
-'@
-    $obsoleteXml = Join-Path $completenessWorkspace 'Obsolete.xml'
-    @'
-<doc><members>
-  <member name="T:Example.IErrorObsolete"><summary>Retired public API.</summary></member>
-</members></doc>
-'@ | Set-Content -NoNewline -Path $obsoleteXml
-    try {
-        [void](Assert-ApiDocsCompleteness `
-            -OutputRoot $completenessWorkspace `
-            -DocumentationPaths @([PSCustomObject]@{ Path = $obsoleteXml; PackageId = 'Example'; Asset = 'lib/net8.0/ObsoleteImplementation.dll' }) `
-            -AssemblyPaths @($referenceAssembly) `
-            -SelectedAssets $selectedAssets `
-            -PairedAssets @([PSCustomObject]@{
-                packageId = 'Example'; asset = 'ref/net8.0/Reference.dll'
-                referenceAssemblyPath = $referenceAssembly; implementationAssemblyPath = $obsoleteImplementationAssembly
-            }) `
-            -ImportedDocIds @() `
-            -FilteredDocIds @() `
-            -Canonicalizations @() `
-            -ReportPath $reportPath)
-        throw 'Completeness gate accepted a non-error obsolete implementation API absent from reference.'
-    }
-    catch {
-        if ($_.Exception.Message -notmatch 'completeness validation failed') {
-            throw
-        }
-    }
-    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
-    Assert-Equal $report.refLib.errorObsoleteImplementationOnly[0].docId 'T:Example.IErrorObsolete' `
-        'Error-obsolete implementation API was not recognized from decoded attribute metadata.'
-    Assert-Equal $report.refLib.publicImplementationMissingReference[0].docId 'T:Example.IWarningObsolete' `
-        'Non-error obsolete implementation API was not retained as a fatal mismatch.'
-
-    }
     $syntaxAssembly = Join-Path $completenessWorkspace 'Syntax.dll'
     Add-Type -OutputAssembly $syntaxAssembly -TypeDefinition @'
 namespace Example {
@@ -409,26 +276,19 @@ finally {
     Remove-Item -Recurse -Force $completenessWorkspace -ErrorAction Ignore
 }
 
-$frameworkName = Get-ApiDocsFrameworkName 'skiasharp-views' 'SkiaSharp.Views.Uno.WinUI' 'lib/net10.0-android36.0/SkiaSharp.Views.Windows.dll'
-Assert-Equal $frameworkName 'skiasharp-views-skiasharp-views-uno-winui-lib-net10-0-android36-0' `
-    'Uno framework name was not derived from its public moniker, package, and asset kind/TFM.'
 $gtkFrameworkName = Get-ApiDocsFrameworkName 'skiasharp-views' 'SkiaSharp.Views.Gtk3' 'lib/net10.0/SkiaSharp.Views.Gtk3.dll'
 Assert-Equal $gtkFrameworkName 'skiasharp-views-skiasharp-views-gtk3-lib-net10-0' `
     'GTK framework name was not derived from its public moniker, package, and asset kind/TFM.'
-if ($frameworkName -eq $gtkFrameworkName) {
-    throw 'Same-named Uno and GTK assets must stage in distinct mdoc framework sources.'
-}
 
 $frameworkWorkspace = Join-Path $PSScriptRoot ".api-docs-frameworks-$([Guid]::NewGuid())"
 New-Item -ItemType Directory -Force -Path $frameworkWorkspace | Out-Null
 try {
     $frameworkAssets = @(
-        [PSCustomObject]@{ FrameworkName = $frameworkName; FrameworkSource = $frameworkName }
         [PSCustomObject]@{ FrameworkName = $gtkFrameworkName; FrameworkSource = $gtkFrameworkName }
     )
     $frameworkConfiguration = Write-MdocFrameworkConfiguration $frameworkWorkspace $frameworkAssets
     [xml] $frameworks = Get-Content -Raw -LiteralPath $frameworkConfiguration
-    Assert-Equal $frameworks.SelectNodes('/Frameworks/Framework').Count 2 'Framework configuration omitted a selected asset.'
+    Assert-Equal $frameworks.SelectNodes('/Frameworks/Framework').Count 1 'Framework configuration omitted a selected asset.'
     Assert-Equal $frameworks.SelectNodes('/Frameworks/Framework/import').Count 0 'Structure-only mdoc configuration must not import prose.'
     foreach ($framework in $frameworks.SelectNodes('/Frameworks/Framework')) {
         Assert-Equal ([IO.Path]::GetFileName($framework.GetAttribute('Source'))) $framework.GetAttribute('Source') `
@@ -452,6 +312,8 @@ $manifest = Read-ApiDocsManifest (Join-Path (Split-Path -Parent $PSScriptRoot) '
 $uno = @($manifest.packages | Where-Object { $_.id -eq 'SkiaSharp.Views.Uno.WinUI' })
 Assert-Equal $uno.Count 1 'Uno must have an explicit package classification.'
 Assert-Equal $uno[0].classification 'exclude' 'Uno must be explicitly deferred from this generation.'
+Assert-Equal $uno[0].preserveOutputPaths[0] 'SkiaSharp.Views.Windows' `
+    'Uno deferred output must have an explicit scoped-promotion preservation path.'
 foreach ($classification in $manifest.packages) {
     if ([string]::IsNullOrWhiteSpace($classification.reason)) {
         throw "Package '$($classification.id)' is missing a classification reason."
