@@ -1,7 +1,7 @@
 <Type Name="GRSilkNetBackendContext" FullName="SkiaSharp.GRSilkNetBackendContext">
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.GRSilkNetBackendContext" />
   <TypeSignature Language="C#" Value="public class GRSilkNetBackendContext : SkiaSharp.GRVkBackendContext" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GRSilkNetBackendContext extends SkiaSharp.GRVkBackendContext" />
-  <TypeSignature Language="DocId" Value="T:SkiaSharp.GRSilkNetBackendContext" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
     <AssemblyVersion>4.154.0.0</AssemblyVersion>
@@ -14,52 +14,51 @@
     <summary>A Vulkan backend context that uses Silk.NET types for Vulkan interoperability.</summary>
     <remarks>
       <format type="text/markdown"><![CDATA[
-## Remarks
-
-Use this type to pass Vulkan objects created with Silk.NET to <xref:SkiaSharp.GRContext.CreateVulkan(SkiaSharp.GRVkBackendContext)>. The typed properties update the corresponding native handles on the base Vulkan backend context. The context does not own the Vulkan instance, physical device, logical device, or queue.
-
-## Examples
-
-```csharp
-static GRContext CreateContext(
-    Silk.NET.Vulkan.Instance instance,
-    Silk.NET.Vulkan.PhysicalDevice physicalDevice,
-    Silk.NET.Vulkan.Device device,
-    Silk.NET.Vulkan.Queue queue,
-    uint graphicsQueueIndex,
-    Silk.NET.Vulkan.PhysicalDeviceFeatures features,
-    GRSilkNetGetProcedureAddressDelegate getProc)
-{
-    using var extensions = new GRVkExtensions();
-    extensions.Initialize(getProc, instance, physicalDevice);
-
-    using var backendContext = new GRSilkNetBackendContext
-    {
-        VkInstance = instance,
-        VkPhysicalDevice = physicalDevice,
-        VkDevice = device,
-        VkQueue = queue,
-        GraphicsQueueIndex = graphicsQueueIndex,
-        Extensions = extensions,
-        GetProcedureAddress = getProc,
-        VkPhysicalDeviceFeatures = features,
-    };
-
-    return GRContext.CreateVulkan(backendContext)
-        ?? throw new System.InvalidOperationException("Unable to create the Vulkan context.");
-}
-```
-]]></format>
+             ## Remarks
+            
+             Use this type to pass Vulkan objects created with Silk.NET to <xref:SkiaSharp.GRContext.CreateVulkan(SkiaSharp.GRVkBackendContext)>. The typed properties update the corresponding native handles on the base Vulkan backend context. The context does not own the Vulkan instance, physical device, logical device, or queue.
+            
+             ## Examples
+            
+             ```csharp
+             static GRContext CreateContext(
+                 Silk.NET.Vulkan.Instance instance,
+                 Silk.NET.Vulkan.PhysicalDevice physicalDevice,
+                 Silk.NET.Vulkan.Device device,
+                 Silk.NET.Vulkan.Queue queue,
+                 uint graphicsQueueIndex,
+                 Silk.NET.Vulkan.PhysicalDeviceFeatures features,
+                 GRSilkNetGetProcedureAddressDelegate getProc)
+             {
+                 using var extensions = new GRVkExtensions();
+                 extensions.Initialize(getProc, instance, physicalDevice);
+            
+                 using var backendContext = new GRSilkNetBackendContext
+                 {
+                     VkInstance = instance,
+                     VkPhysicalDevice = physicalDevice,
+                     VkDevice = device,
+                     VkQueue = queue,
+                     GraphicsQueueIndex = graphicsQueueIndex,
+                     Extensions = extensions,
+                     GetProcedureAddress = getProc,
+                     VkPhysicalDeviceFeatures = features,
+                 };
+            
+                 return GRContext.CreateVulkan(backendContext)
+                     ?? throw new System.InvalidOperationException("Unable to create the Vulkan context.");
+             }
+             ```
+             ]]></format>
     </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRSilkNetBackendContext.#ctor" />
       <MemberSignature Language="C#" Value="public GRSilkNetBackendContext ();" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRSilkNetBackendContext.#ctor" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
@@ -69,12 +68,11 @@ static GRContext CreateContext(
       </Docs>
     </Member>
     <Member MemberName="Dispose">
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRSilkNetBackendContext.Dispose(System.Boolean)" />
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
-      <MemberSignature Language="DocId" Value="M:SkiaSharp.GRSilkNetBackendContext.Dispose(System.Boolean)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -91,12 +89,11 @@ static GRContext CreateContext(
       </Docs>
     </Member>
     <Member MemberName="GetProcedureAddress">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.GetProcedureAddress" />
       <MemberSignature Language="C#" Value="public SkiaSharp.GRSilkNetGetProcedureAddressDelegate GetProcedureAddress { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.GRSilkNetGetProcedureAddressDelegate GetProcedureAddress" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.GetProcedureAddress" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -109,12 +106,11 @@ static GRContext CreateContext(
       </Docs>
     </Member>
     <Member MemberName="VkDevice">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkDevice" />
       <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.Device VkDevice { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype Silk.NET.Vulkan.Device VkDevice" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkDevice" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -127,12 +123,11 @@ static GRContext CreateContext(
       </Docs>
     </Member>
     <Member MemberName="VkInstance">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkInstance" />
       <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.Instance VkInstance { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype Silk.NET.Vulkan.Instance VkInstance" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkInstance" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -145,12 +140,11 @@ static GRContext CreateContext(
       </Docs>
     </Member>
     <Member MemberName="VkPhysicalDevice">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkPhysicalDevice" />
       <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.PhysicalDevice VkPhysicalDevice { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype Silk.NET.Vulkan.PhysicalDevice VkPhysicalDevice" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkPhysicalDevice" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -163,12 +157,11 @@ static GRContext CreateContext(
       </Docs>
     </Member>
     <Member MemberName="VkPhysicalDeviceFeatures">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkPhysicalDeviceFeatures" />
       <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.PhysicalDeviceFeatures? VkPhysicalDeviceFeatures { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype Silk.NET.Vulkan.PhysicalDeviceFeatures&gt; VkPhysicalDeviceFeatures" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkPhysicalDeviceFeatures" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
@@ -181,12 +174,11 @@ static GRContext CreateContext(
       </Docs>
     </Member>
     <Member MemberName="VkQueue">
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkQueue" />
       <MemberSignature Language="C#" Value="public Silk.NET.Vulkan.Queue VkQueue { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance valuetype Silk.NET.Vulkan.Queue VkQueue" />
-      <MemberSignature Language="DocId" Value="P:SkiaSharp.GRSilkNetBackendContext.VkQueue" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
-        <AssemblyName>SkiaSharp.Vulkan.Silk.NET</AssemblyName>
         <AssemblyVersion>4.154.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
