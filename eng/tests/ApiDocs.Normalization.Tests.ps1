@@ -123,15 +123,21 @@ try {
     $compilerPath = Join-Path $completenessWorkspace 'Example.xml'
     $ecmaPath = Join-Path $completenessWorkspace 'ExampleType.xml'
     $reportPath = Join-Path $completenessWorkspace 'completeness.json'
+        $fixtureAssembly = Join-Path $completenessWorkspace 'Fixture.dll'
+        Add-Type -OutputAssembly $fixtureAssembly -TypeDefinition @'
+namespace Example {
+    public interface IComplete { }
+}
+'@
     @'
 <doc><members>
-  <member name="T:System.Object"><summary>Represents an object.</summary></member>
+  <member name="T:Example.IComplete"><summary>A completely documented public interface.</summary></member>
 </members></doc>
 '@ | Set-Content -NoNewline -Path $compilerPath
     @'
-<Type Name="Object" FullName="System.Object">
-  <TypeSignature Language="DocId" Value="T:System.Object" />
-  <Docs><summary>Represents an object.</summary></Docs>
+    <Type Name="IComplete" FullName="Example.IComplete">
+      <TypeSignature Language="DocId" Value="T:Example.IComplete" />
+      <Docs><summary>A completely documented public interface.</summary></Docs>
   <Members />
 </Type>
 '@ | Set-Content -NoNewline -Path $ecmaPath
@@ -148,9 +154,9 @@ try {
     $completenessResult = Assert-ApiDocsCompleteness `
         -OutputRoot $completenessWorkspace `
         -DocumentationPaths $documentationInputs `
-        -AssemblyPaths @([object].Assembly.Location) `
+        -AssemblyPaths @($fixtureAssembly) `
         -SelectedAssets $selectedAssets `
-        -ImportedDocIds @('T:System.Object') `
+        -ImportedDocIds @('T:Example.IComplete') `
         -FilteredDocIds @() `
         -Canonicalizations @() `
         -ReportPath $reportPath
@@ -158,9 +164,38 @@ try {
     $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
     Assert-Equal $report.status 'passed' 'Completeness gate did not write its passing JSON report.'
 
+    $missingSidecarAssembly = Join-Path $completenessWorkspace 'MissingSidecar.dll'
+    Add-Type -OutputAssembly $missingSidecarAssembly -TypeDefinition @'
+namespace Example {
+    public interface IMissingSidecar {
+        void Required();
+    }
+}
+'@
+    try {
+        [void](Assert-ApiDocsCompleteness `
+            -OutputRoot $completenessWorkspace `
+            -DocumentationPaths $documentationInputs `
+            -AssemblyPaths @($fixtureAssembly, $missingSidecarAssembly) `
+            -SelectedAssets $selectedAssets `
+            -ImportedDocIds @('T:Example.IComplete') `
+            -FilteredDocIds @() `
+            -Canonicalizations @() `
+            -ReportPath $reportPath)
+        throw 'Completeness gate accepted a public metadata API missing from compiler XML.'
+    }
+    catch {
+        if ($_.Exception.Message -notmatch 'completeness validation failed') {
+            throw
+        }
+    }
+    $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
+    Assert-Equal $report.publicSelectedApi.missingCompilerXml[0].docId 'M:Example.IMissingSidecar.Required' `
+        'Completeness gate did not identify the public member missing from compiler XML.'
+
     @'
 <doc><members>
-  <member name="T:System.Object"><summary>Represents an object.</summary></member>
+  <member name="T:Example.IComplete"><summary>A completely documented public interface.</summary></member>
   <member name="M:Example.Unmapped"><summary>Unmapped compiler XML.</summary></member>
 </members></doc>
 '@ | Set-Content -NoNewline -Path $compilerPath
@@ -168,9 +203,9 @@ try {
         [void](Assert-ApiDocsCompleteness `
             -OutputRoot $completenessWorkspace `
             -DocumentationPaths $documentationInputs `
-            -AssemblyPaths @([object].Assembly.Location) `
+            -AssemblyPaths @($fixtureAssembly) `
             -SelectedAssets $selectedAssets `
-            -ImportedDocIds @('T:System.Object') `
+            -ImportedDocIds @('T:Example.IComplete') `
             -FilteredDocIds @() `
             -Canonicalizations @() `
             -ReportPath $reportPath)
@@ -183,17 +218,17 @@ try {
     }
     $report = Get-Content -Raw -LiteralPath $reportPath | ConvertFrom-Json -Depth 32
     Assert-Equal $report.status 'failed' 'Completeness gate did not record a failed report.'
-    Assert-Equal $report.compilerXml.absentFromEcma[0].classification 'unexplained' `
+    Assert-Equal $report.compilerXml.absentFromEcma[0].classification 'unexplained-sidecar-api' `
         'Compiler XML DocId absent from ECMA was not recorded as unexplained.'
 
     @'
 <doc><members>
-  <member name="T:System.Object"><summary>Represents an object.</summary></member>
+  <member name="T:Example.IComplete"><summary>A completely documented public interface.</summary></member>
 </members></doc>
 '@ | Set-Content -NoNewline -Path $compilerPath
     @'
-<Type Name="Object" FullName="System.Object">
-  <TypeSignature Language="DocId" Value="T:System.Object" />
+<Type Name="IComplete" FullName="Example.IComplete">
+  <TypeSignature Language="DocId" Value="T:Example.IComplete" />
   <Docs><summary>To be added.</summary></Docs>
   <Members />
 </Type>
@@ -202,9 +237,9 @@ try {
         [void](Assert-ApiDocsCompleteness `
             -OutputRoot $completenessWorkspace `
             -DocumentationPaths $documentationInputs `
-            -AssemblyPaths @([object].Assembly.Location) `
+            -AssemblyPaths @($fixtureAssembly) `
             -SelectedAssets $selectedAssets `
-            -ImportedDocIds @('T:System.Object') `
+            -ImportedDocIds @('T:Example.IComplete') `
             -FilteredDocIds @() `
             -Canonicalizations @() `
             -ReportPath $reportPath)

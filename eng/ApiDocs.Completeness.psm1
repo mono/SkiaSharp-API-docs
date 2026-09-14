@@ -1,20 +1,24 @@
 Set-StrictMode -Version Latest
 
-function Get-CompletenessMetadataTypeFullName(
-    [Reflection.Metadata.MetadataReader] $Metadata,
-    [Reflection.Metadata.TypeDefinitionHandle] $TypeHandle
-) {
-    $type = $Metadata.GetTypeDefinition($TypeHandle)
-    $name = $Metadata.GetString($type.Name)
-    $declaringType = $type.GetDeclaringType()
-    if ($declaringType.IsNil) {
-        $namespace = $Metadata.GetString($type.Namespace)
-        if ($namespace) {
-            return "$namespace.$name"
-        }
-        return $name
+function Initialize-ApiDocsDocIdEnumerator {
+    if ('SkiaSharp.ApiDocs.PublicApiDocIdEnumerator' -as [type]) {
+        return
     }
-    return "$(Get-CompletenessMetadataTypeFullName $Metadata $declaringType).$name"
+    $root = Split-Path -Parent $PSScriptRoot
+    $cecil = Join-Path $root 'artifacts/api-docs/tools/mdoc/5.9.3/tools/net6.0/Mono.Cecil.dll'
+    if (-not (Test-Path -LiteralPath $cecil)) {
+        throw "Pinned Mono.Cecil dependency '$cecil' is unavailable. Run eng/MDoc.ps1 first."
+    }
+    $project = Join-Path $PSScriptRoot 'ApiDocs.DocIds.csproj'
+    $output = Join-Path $root 'artifacts/api-docs/tools/docids'
+    $assembly = Join-Path $output 'ApiDocs.DocIds.dll'
+    if (-not (Test-Path -LiteralPath $assembly)) {
+        $null = & dotnet build $project --nologo --configuration Release --output $output
+        if ($LASTEXITCODE -ne 0) {
+            throw 'Failed to build the pinned API documentation identity helper.'
+        }
+    }
+    $null = Add-Type -Path $assembly
 }
 
 function Test-SubstantiveEcmaDocs([System.Xml.XmlElement] $Docs) {
@@ -79,141 +83,20 @@ function Get-CompilerXmlDocumentationEntries([object[]] $DocumentationPaths) {
     return @($entries)
 }
 
-function Test-ExternallyVisibleType(
-    [Reflection.Metadata.MetadataReader] $Metadata,
-    [Reflection.Metadata.TypeDefinitionHandle] $TypeHandle
-) {
-    $type = $Metadata.GetTypeDefinition($TypeHandle)
-    $visibility = $type.Attributes -band [Reflection.TypeAttributes]::VisibilityMask
-    $visible = $visibility -in @(
-        [Reflection.TypeAttributes]::Public,
-        [Reflection.TypeAttributes]::NestedPublic,
-        [Reflection.TypeAttributes]::NestedFamily,
-        [Reflection.TypeAttributes]::NestedFamORAssem
-    )
-    if (-not $visible) {
-        return $false
-    }
-
-    $declaringType = $type.GetDeclaringType()
-    return $declaringType.IsNil -or (Test-ExternallyVisibleType $Metadata $declaringType)
-}
-
-function Test-ExternallyVisibleMethod(
-    [Reflection.Metadata.MetadataReader] $Metadata,
-    [Reflection.Metadata.MethodDefinitionHandle] $MethodHandle
-) {
-    if ($MethodHandle.IsNil) {
-        return $false
-    }
-    $access = ($Metadata.GetMethodDefinition($MethodHandle).Attributes -band [Reflection.MethodAttributes]::MemberAccessMask)
-    return $access -in @(
-        [Reflection.MethodAttributes]::Public,
-        [Reflection.MethodAttributes]::Family,
-        [Reflection.MethodAttributes]::FamORAssem
-    )
-}
-
-function Get-SelectedAssemblyDocIdCandidates([string[]] $AssemblyPaths) {
-    $candidates = [Collections.Generic.List[object]]::new()
+function Get-SelectedAssemblyPublicDocIds([string[]] $AssemblyPaths) {
+    Initialize-ApiDocsDocIdEnumerator
+    $docIds = @{}
     foreach ($assemblyPath in $AssemblyPaths | Sort-Object -Unique) {
-        $stream = [IO.File]::OpenRead($assemblyPath)
-        try {
-            $peReader = [Reflection.PortableExecutable.PEReader]::new($stream)
-            try {
-                if (-not $peReader.HasMetadata) {
-                    continue
-                }
-                $metadata = [Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($peReader)
-                foreach ($typeHandle in $metadata.TypeDefinitions) {
-                    $type = $metadata.GetTypeDefinition($typeHandle)
-                    $typeName = Get-CompletenessMetadataTypeFullName $metadata $typeHandle
-                    $typeIsPublic = Test-ExternallyVisibleType $metadata $typeHandle
-                    $candidates.Add([PSCustomObject]@{
-                        prefix = "T:$typeName"
-                        acceptsSuffix = $false
-                        isPublic = $typeIsPublic
-                        assembly = $assemblyPath
-                    })
-
-                    foreach ($methodHandle in $type.GetMethods()) {
-                        $method = $metadata.GetMethodDefinition($methodHandle)
-                        $methodName = $metadata.GetString($method.Name).Replace('.', '#')
-                        $candidates.Add([PSCustomObject]@{
-                            prefix = "M:$typeName.$methodName"
-                            acceptsSuffix = $true
-                            isPublic = $typeIsPublic -and (Test-ExternallyVisibleMethod $metadata $methodHandle)
-                            assembly = $assemblyPath
-                        })
-                    }
-                    foreach ($fieldHandle in $type.GetFields()) {
-                        $field = $metadata.GetFieldDefinition($fieldHandle)
-                        $access = $field.Attributes -band [Reflection.FieldAttributes]::FieldAccessMask
-                        $candidates.Add([PSCustomObject]@{
-                            prefix = "F:$typeName.$($metadata.GetString($field.Name).Replace('.', '#'))"
-                            acceptsSuffix = $false
-                            isPublic = $typeIsPublic -and $access -in @(
-                                [Reflection.FieldAttributes]::Public,
-                                [Reflection.FieldAttributes]::Family,
-                                [Reflection.FieldAttributes]::FamORAssem
-                            )
-                            assembly = $assemblyPath
-                        })
-                    }
-                    foreach ($propertyHandle in $type.GetProperties()) {
-                        $property = $metadata.GetPropertyDefinition($propertyHandle)
-                        $accessors = $property.GetAccessors()
-                        $isPublic = @(
-                            @($accessors.Getter, $accessors.Setter) + @($accessors.Others) |
-                            Where-Object { Test-ExternallyVisibleMethod $metadata $_ }
-                        ).Count -gt 0
-                        $candidates.Add([PSCustomObject]@{
-                            prefix = "P:$typeName.$($metadata.GetString($property.Name).Replace('.', '#'))"
-                            acceptsSuffix = $true
-                            isPublic = $typeIsPublic -and $isPublic
-                            assembly = $assemblyPath
-                        })
-                    }
-                    foreach ($eventHandle in $type.GetEvents()) {
-                        $event = $metadata.GetEventDefinition($eventHandle)
-                        $accessors = $event.GetAccessors()
-                        $isPublic = @(
-                            @($accessors.Adder, $accessors.Remover, $accessors.Raiser) + @($accessors.Others) |
-                            Where-Object { Test-ExternallyVisibleMethod $metadata $_ }
-                        ).Count -gt 0
-                        $candidates.Add([PSCustomObject]@{
-                            prefix = "E:$typeName.$($metadata.GetString($event.Name).Replace('.', '#'))"
-                            acceptsSuffix = $false
-                            isPublic = $typeIsPublic -and $isPublic
-                            assembly = $assemblyPath
-                        })
-                    }
-                }
+        foreach ($entry in [SkiaSharp.ApiDocs.PublicApiDocIdEnumerator]::Enumerate($assemblyPath)) {
+            if (-not $docIds.ContainsKey($entry.DocId)) {
+                [void]($docIds[$entry.DocId] = [PSCustomObject]@{
+                    docId = $entry.DocId; assembly = $entry.Assembly
+                    metadataToken = $entry.MetadataToken; signature = $entry.Signature
+                })
             }
-            finally {
-                $peReader.Dispose()
-            }
-        }
-        finally {
-            $stream.Dispose()
         }
     }
-    return @($candidates)
-}
-
-function Get-DocIdMetadataCandidates([string] $DocId, [object[]] $Candidates) {
-    return @($Candidates | Where-Object {
-        if (-not $DocId.StartsWith($_.prefix, [StringComparison]::Ordinal)) {
-            return $false
-        }
-        if (-not $_.acceptsSuffix) {
-            return $DocId.Length -eq $_.prefix.Length
-        }
-        if ($DocId.Length -eq $_.prefix.Length) {
-            return $true
-        }
-        return $DocId[$_.prefix.Length] -in @('(', '`', '~')
-    })
+    return [PSCustomObject]@{ ByDocId = $docIds }
 }
 
 function Test-CanonicalizedLegacyDocId([string] $DocId, [object[]] $Canonicalizations) {
@@ -247,7 +130,7 @@ function Assert-ApiDocsCompleteness(
 ) {
     $ecmaEntries = @(Get-EcmaDocumentationEntries $OutputRoot)
     $compilerEntries = @(Get-CompilerXmlDocumentationEntries $DocumentationPaths)
-    $metadataCandidates = @(Get-SelectedAssemblyDocIdCandidates $AssemblyPaths)
+    $metadataByDocId = (Get-SelectedAssemblyPublicDocIds $AssemblyPaths).ByDocId
     $ecmaByDocId = @{}
     $invalidEcma = [Collections.Generic.List[object]]::new()
     foreach ($entry in $ecmaEntries) {
@@ -277,16 +160,22 @@ function Assert-ApiDocsCompleteness(
 
     $absentCompilerDocs = [Collections.Generic.List[object]]::new()
     $unimportedCompilerDocs = [Collections.Generic.List[string]]::new()
-    $missingPublicApis = [Collections.Generic.List[string]]::new()
+    $missingPublicApis = [Collections.Generic.List[object]]::new()
+    $missingCompilerDocs = [Collections.Generic.List[object]]::new()
+    foreach ($metadataDocId in $metadataByDocId.Keys | Sort-Object) {
+        if (-not $compilerByDocId.ContainsKey($metadataDocId)) {
+            $missingCompilerDocs.Add($metadataByDocId[$metadataDocId])
+        }
+        $ecma = $ecmaByDocId[$metadataDocId]
+        if ($null -eq $ecma -or -not $ecma.substantiveDocs) {
+            $missingPublicApis.Add($metadataByDocId[$metadataDocId])
+        }
+    }
     foreach ($docId in $compilerByDocId.Keys | Sort-Object) {
         $ecma = $ecmaByDocId[$docId]
-        $matches = @(Get-DocIdMetadataCandidates $docId $metadataCandidates)
-        $hasPublicMatch = @($matches | Where-Object isPublic).Count -gt 0
+        $publicMetadata = $metadataByDocId[$docId]
         if ($null -ne $ecma -and -not $imported.Contains($docId)) {
             $unimportedCompilerDocs.Add($docId)
-        }
-        if ($hasPublicMatch -and ($null -eq $ecma -or -not $ecma.substantiveDocs)) {
-            $missingPublicApis.Add($docId)
         }
         if ($null -ne $ecma) {
             continue
@@ -296,8 +185,8 @@ function Assert-ApiDocsCompleteness(
             'filtered-java-peer-infrastructure'
         } elseif (Test-CanonicalizedLegacyDocId $docId $Canonicalizations) {
             'mdoc-obsolete-type-collision'
-        } elseif ($matches.Count -gt 0 -and -not $hasPublicMatch) {
-            'non-public-selected-api'
+        } elseif ($null -eq $publicMetadata) {
+            'unexplained-sidecar-api'
         } elseif ($docId.StartsWith('N:', [StringComparison]::Ordinal)) {
             'non-ecma-documentation-kind'
         } else {
@@ -309,11 +198,12 @@ function Assert-ApiDocsCompleteness(
             sources = @($compilerByDocId[$docId])
         })
     }
-    $unexplained = @($absentCompilerDocs | Where-Object classification -eq 'unexplained')
+    $unexplained = @($absentCompilerDocs | Where-Object classification -in @('unexplained', 'unexplained-sidecar-api'))
     $report = [ordered]@{
         schemaVersion = 1
         status = if ($invalidEcma.Count -eq 0 -and $unimportedCompilerDocs.Count -eq 0 -and
-            $missingPublicApis.Count -eq 0 -and $unexplained.Count -eq 0) { 'passed' } else { 'failed' }
+            $missingPublicApis.Count -eq 0 -and $missingCompilerDocs.Count -eq 0 -and
+            $unexplained.Count -eq 0) { 'passed' } else { 'failed' }
         selectedAssets = @($SelectedAssets | ForEach-Object {
             [PSCustomObject]@{ packageId = $_.PackageId; asset = $_.Asset; moniker = $_.Moniker }
         })
@@ -328,10 +218,10 @@ function Assert-ApiDocsCompleteness(
             absentFromEcma = @($absentCompilerDocs)
         }
         publicSelectedApi = [ordered]@{
-            exactDocIdCandidates = @($compilerByDocId.Keys | Where-Object {
-                @((Get-DocIdMetadataCandidates $_ $metadataCandidates) | Where-Object isPublic).Count -gt 0
-            } | Sort-Object)
-            missingEcmaOrDocs = @($missingPublicApis | Sort-Object -Unique)
+            count = $metadataByDocId.Count
+            docIds = @($metadataByDocId.Keys | Sort-Object)
+            missingCompilerXml = @($missingCompilerDocs | Sort-Object docId)
+            missingEcmaOrDocs = @($missingPublicApis | Sort-Object docId)
         }
         filters = [ordered]@{
             javaPeerInfrastructureRemovedDocIds = @($FilteredDocIds | Sort-Object -Unique)
