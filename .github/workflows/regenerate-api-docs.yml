@@ -13,6 +13,11 @@ on:
         description: Optional _NuGets package version to generate.
         required: false
         type: string
+      base-branch:
+        description: Branch for the generated documentation pull request.
+        default: main
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -96,7 +101,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ inputs.base-branch || 'main' }}
 
       - name: Remove previous generated documentation
         shell: bash
@@ -111,15 +116,17 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+          BASE_BRANCH: ${{ inputs.base-branch || 'main' }}
           PACKAGE_VERSION: ${{ needs.generate.outputs.package-version }}
         run: |
-          git switch -C automation/regenerate-api-docs
+          automation_branch="automation/regenerate-api-docs-${BASE_BRANCH//\//-}"
+          git switch -C "$automation_branch"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add SkiaSharpAPI
           git commit -m "Regenerate API docs from $PACKAGE_VERSION"
-          git push --force-with-lease origin HEAD:automation/regenerate-api-docs
-          gh pr create --base main --head automation/regenerate-api-docs \
+          git push --force-with-lease origin "HEAD:$automation_branch"
+          gh pr create --base "$BASE_BRANCH" --head "$automation_branch" \
             --title 'Regenerate API docs from published packages' \
             --body "Automated update generated from \`_NuGets $PACKAGE_VERSION\`." ||
-            gh pr list --base main --head automation/regenerate-api-docs --state open
+            gh pr list --base "$BASE_BRANCH" --head "$automation_branch" --state open
