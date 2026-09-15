@@ -273,16 +273,16 @@ Push-Location $frameworksRoot
 try { Invoke-MDoc -Arguments $arguments }
 finally { Pop-Location }
 
+$excludedTypes = @('SkiaSharp.GrVkYcbcrConversionInfo') + @(Get-AndroidDesignerResourceTypes $stagingRoot)
+$removedTypes = @(Remove-GeneratedTypes $stagingRoot ($excludedTypes | Sort-Object -Unique))
+Write-Host "Removed $($removedTypes.Count) excluded generated type(s)."
+
 $donorsRoot = Join-Path $WorkspaceRoot 'variant-donors'
 Remove-Item -Recurse -Force $donorsRoot -ErrorAction Ignore
 foreach ($variant in $variants) {
     $variant | Add-Member DonorRoot (Invoke-VariantDonor $variant $donorsRoot)
 }
 & (Join-Path $PSScriptRoot 'Merge-ApiDocVariants.ps1') -StagingRoot $stagingRoot -Variants $variants
-
-$excludedTypes = @('SkiaSharp.GrVkYcbcrConversionInfo') + @(Get-AndroidDesignerResourceTypes $stagingRoot)
-$removedTypes = @(Remove-GeneratedTypes $stagingRoot ($excludedTypes | Sort-Object -Unique))
-Write-Host "Removed $($removedTypes.Count) excluded generated type(s)."
 
 $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
 New-Item -ItemType Directory -Force $OutputRoot | Out-Null
