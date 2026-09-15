@@ -19,10 +19,10 @@
     <remarks />
   </Docs>
   <Members>
-    <Member MemberName="Defined">
-      <MemberSignature Language="C#" Value="Defined" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype HarfBuzzSharp.GlyphFlags Defined = int32(1)" />
-      <MemberSignature Language="DocId" Value="F:HarfBuzzSharp.GlyphFlags.Defined" />
+    <Member MemberName="SafeToInsertTatweel">
+      <MemberSignature Language="C#" Value="SafeToInsertTatweel" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype HarfBuzzSharp.GlyphFlags SafeToInsertTatweel = int32(4)" />
+      <MemberSignature Language="DocId" Value="F:HarfBuzzSharp.GlyphFlags.SafeToInsertTatweel" />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyName>HarfBuzzSharp</AssemblyName>
@@ -31,9 +31,9 @@
       <ReturnValue>
         <ReturnType>HarfBuzzSharp.GlyphFlags</ReturnType>
       </ReturnValue>
-      <MemberValue>1</MemberValue>
+      <MemberValue>4</MemberValue>
       <Docs>
-        <summary>All the currently defined flags.</summary>
+        <summary>Indicates that a tatweel can be inserted before this glyph without reshaping.</summary>
       </Docs>
     </Member>
     <Member MemberName="UnsafeToBreak">
@@ -51,6 +51,23 @@
       <MemberValue>1</MemberValue>
       <Docs>
         <summary>If input text is broken at the beginning of the cluster this glyph is part of, then both sides need to be re-shaped, as the result might be different.</summary>
+      </Docs>
+    </Member>
+    <Member MemberName="UnsafeToConcat">
+      <MemberSignature Language="C#" Value="UnsafeToConcat" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype HarfBuzzSharp.GlyphFlags UnsafeToConcat = int32(2)" />
+      <MemberSignature Language="DocId" Value="F:HarfBuzzSharp.GlyphFlags.UnsafeToConcat" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>HarfBuzzSharp</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>HarfBuzzSharp.GlyphFlags</ReturnType>
+      </ReturnValue>
+      <MemberValue>2</MemberValue>
+      <Docs>
+        <summary>Indicates that concatenating text at this glyph may require reshaping both sides.</summary>
       </Docs>
     </Member>
   </Members>

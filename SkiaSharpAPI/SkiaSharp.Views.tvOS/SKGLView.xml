@@ -79,7 +79,7 @@
         <Parameter Name="frame" Type="CoreGraphics.CGRect" />
       </Parameters>
       <Docs>
-        <param name="frame">The frame used by the view, expressed in tvOS points.</param>
+        <param name="frame">The frame used by the view, expressed in points.</param>
         <summary>Initializes the <see cref="T:SkiaSharp.Views.tvOS.SKGLView" /> with the specified frame.</summary>
         <remarks />
       </Docs>
@@ -99,7 +99,7 @@
       <Docs>
         <param name="p">The pointer (handle) to the unmanaged object.</param>
         <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.tvOS.SKGLView" /> class from a native handle.</summary>
-        <remarks>This constructor is used by the Xamarin.tvOS runtime when creating managed representations of unmanaged objects. It is not intended to be called directly from user code.</remarks>
+        <remarks>This constructor is used by the platform runtime when creating managed representations of unmanaged objects. It is not intended to be called directly from user code.</remarks>
       </Docs>
     </Member>
     <Member MemberName="AwakeFromNib">
@@ -220,38 +220,36 @@
         <summary>Implement this to draw on the canvas.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-There are two ways to draw on this surface: by overriding the
-<xref:SkiaSharp.Views.tvOS.SKGLView.OnPaintSurface(SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs)>
-method, or by attaching a handler to the
-<xref:SkiaSharp.Views.tvOS.SKGLView.PaintSurface>
-event.
-
-> [!IMPORTANT]
-> If this method is overridden, then the base must be called, otherwise the
-> event will not be fired.
-
-## Examples
-
-```csharp
-protected override void OnPaintSurface (SKPaintGLSurfaceEventArgs e)
-{
-    // call the base method
-    base.OnPaintSurface (e);
-
-    var surface = e.Surface;
-    var surfaceWidth = e.BackendRenderTarget.Width;
-    var surfaceHeight = e.BackendRenderTarget.Height;
-
-    var canvas = surface.Canvas;
-
-    // draw on the canvas
-
-    canvas.Flush ();
-}
-```
-]]></format>
+             ## Remarks
+            
+             There are two ways to draw on this surface: by overriding the
+             `OnPaintSurface` method, or by attaching a handler to the
+             `PaintSurface` event.
+            
+             > [!IMPORTANT]
+             > If this method is overridden, then the base must be called, otherwise the
+             > event will not be fired.
+            
+             ## Examples
+            
+             ```csharp
+             protected override void OnPaintSurface (SKPaintGLSurfaceEventArgs e)
+             {
+                 // call the base method
+                 base.OnPaintSurface (e);
+            
+                 var surface = e.Surface;
+                 var surfaceWidth = e.BackendRenderTarget.Width;
+                 var surfaceHeight = e.BackendRenderTarget.Height;
+            
+                 var canvas = surface.Canvas;
+            
+                 // draw on the canvas
+            
+                 canvas.Flush ();
+             }
+             ```
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -271,31 +269,70 @@ protected override void OnPaintSurface (SKPaintGLSurfaceEventArgs e)
         <summary>Occurs when the surface needs to be redrawn.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-There are two ways to draw on this surface: by overriding the
-<xref:SkiaSharp.Views.tvOS.SKGLView.OnPaintSurface(SkiaSharp.Views.tvOS.SKPaintGLSurfaceEventArgs)>
-method, or by attaching a handler to the
-<xref:SkiaSharp.Views.tvOS.SKGLView.PaintSurface>
-event.
-
-## Examples
-
-```csharp
-myView.PaintSurface += (sender, e) => {
-    var surface = e.Surface;
-    var surfaceWidth = e.BackendRenderTarget.Width;
-    var surfaceHeight = e.BackendRenderTarget.Height;
-
-    var canvas = surface.Canvas;
-
-    // draw on the canvas
-
-    canvas.Flush ();
-};
-```
-]]></format>
+             ## Remarks
+            
+             There are two ways to draw on this surface: by overriding the
+             `OnPaintSurface` method, or by attaching a handler to the
+             `PaintSurface` event.
+            
+             ## Examples
+            
+             ```csharp
+             myView.PaintSurface += (sender, e) => {
+                 var surface = e.Surface;
+                 var surfaceWidth = e.BackendRenderTarget.Width;
+                 var surfaceHeight = e.BackendRenderTarget.Height;
+            
+                 var canvas = surface.Canvas;
+            
+                 // draw on the canvas
+            
+                 canvas.Flush ();
+             };
+             ```
+             ]]></format>
         </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.ComponentModel.IComponent.Disposed">
+      <MemberSignature Language="C#" Value="event EventHandler System.ComponentModel.IComponent.Disposed;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler System.ComponentModel.IComponent.Disposed" />
+      <MemberSignature Language="DocId" Value="E:SkiaSharp.Views.tvOS.SKGLView.System#ComponentModel#IComponent#Disposed" />
+      <MemberType>Event</MemberType>
+      <Implements>
+        <InterfaceMember>E:System.ComponentModel.IComponent.Disposed</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.tvOS</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.ComponentModel.IComponent.Site">
+      <MemberSignature Language="C#" Value="System.ComponentModel.ISite System.ComponentModel.IComponent.Site { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.ComponentModel.ISite System.ComponentModel.IComponent.Site" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.tvOS.SKGLView.System#ComponentModel#IComponent#Site" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:System.ComponentModel.IComponent.Site</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.tvOS</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.ISite</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the site that provides design-time services for this component.</summary>
+        <value>The site for this component, or <see langword="null" /> if the component is not sited.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>

@@ -14,17 +14,17 @@
     <summary>Represents a specific typeface and intrinsic style of a font.</summary>
     <remarks>
       <format type="text/markdown"><![CDATA[
-## Remarks
-
-This is used in the font, along with optionally algorithmic settings like
-<xref:SkiaSharp.SKFont.Size?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKFont.SkewX?displayProperty=nameWithType>,
-<xref:SkiaSharp.SKFont.ScaleX?displayProperty=nameWithType>, and 
-<xref:SkiaSharp.SKFont.Embolden?displayProperty=nameWithType>
-to specify how text appears when drawn (and measured).
-
-Typeface objects are immutable, and so they can be shared between threads.
-]]></format>
+             ## Remarks
+            
+             This is used in the font, along with optionally algorithmic settings like
+             <xref:SkiaSharp.SKFont.Size?displayProperty=nameWithType>,
+             <xref:SkiaSharp.SKFont.SkewX?displayProperty=nameWithType>,
+             <xref:SkiaSharp.SKFont.ScaleX?displayProperty=nameWithType>, and
+             <xref:SkiaSharp.SKFont.Embolden?displayProperty=nameWithType>
+             to specify how text appears when drawn (and measured).
+            
+             Typeface objects are immutable, and so they can be shared between threads.
+             ]]></format>
     </remarks>
   </Docs>
   <Members>
@@ -47,7 +47,7 @@ Typeface objects are immutable, and so they can be shared between threads.
         <param name="args">The font arguments specifying palette, variation settings, and other parameters to apply to the clone.</param>
         <summary>Creates a new typeface derived from this typeface with the specified font arguments.</summary>
         <returns>A new <see cref="T:SkiaSharp.SKTypeface" /> based on this typeface with the specified font arguments applied.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -69,7 +69,7 @@ Typeface objects are immutable, and so they can be shared between threads.
         <param name="paletteIndex">The zero-based index of the color palette to use in the cloned typeface.</param>
         <summary>Creates a new typeface derived from this typeface using the specified color palette index.</summary>
         <returns>A new <see cref="T:SkiaSharp.SKTypeface" /> based on this typeface with the specified color palette.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Clone">
@@ -91,7 +91,7 @@ Typeface objects are immutable, and so they can be shared between threads.
         <param name="position">A read-only span of axis-tag/value pairs defining the variation design position.</param>
         <summary>Creates a new typeface derived from this typeface with the specified variation design position.</summary>
         <returns>A new <see cref="T:SkiaSharp.SKTypeface" /> based on this typeface with the specified variation design position applied.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="ContainsGlyph">
@@ -479,7 +479,7 @@ Typeface objects are immutable, and so they can be shared between threads.
       <Docs>
         <summary>Gets a shared empty <see cref="T:SkiaSharp.SKTypeface" /> instance.</summary>
         <value>A shared <see cref="T:SkiaSharp.SKTypeface" /> instance that represents an empty typeface.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="FamilyName">
@@ -698,39 +698,6 @@ Typeface objects are immutable, and so they can be shared between threads.
         <remarks />
       </Docs>
     </Member>
-    <MemberGroup MemberName="FromFile">
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-      </AssemblyInfo>
-      <Docs>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Examples
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // load the typeface
-    using var tf = SKTypeface.FromFile("myfont.ttf");
-
-    // create a font from the typeface
-    using var font = new SKFont(tf, size: 50);
-
-    // create the paint
-    using var paint = new SKPaint { IsAntialias = true };
-
-    // draw text using the font
-    canvas.DrawText("SkiaSharp", 50, 100, SKTextAlign.Left, font, paint);
-}
-```
-]]></format>
-        </remarks>
-      </Docs>
-    </MemberGroup>
     <Member MemberName="FromFile">
       <MemberSignature Language="C#" Value="public static SkiaSharp.SKTypeface FromFile (string path, int index = 0);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKTypeface FromFile(string path, int32 index) cil managed" />
@@ -1079,7 +1046,7 @@ using (var surface = SKSurface.Create(info)) {
         <param name="axes">A span to receive the <see cref="T:SkiaSharp.SKFontVariationAxis" /> values.</param>
         <summary>Fills a span with the variation design parameters (axes) defined in this typeface.</summary>
         <returns>The number of variation axis parameters written to <paramref name="axes" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GetVariationDesignPosition">
@@ -1101,7 +1068,7 @@ using (var surface = SKSurface.Create(info)) {
         <param name="coordinates">A span to receive the <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> values.</param>
         <summary>Fills a span with the current variation design position of this typeface.</summary>
         <returns>The number of axis coordinates written to <paramref name="coordinates" />.</returns>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="GlyphCount">
@@ -1158,11 +1125,11 @@ using (var surface = SKSurface.Create(info)) {
           <see langword="true" /> if the typeface is bold; otherwise, <see langword="false" />.</value>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-A typeface is understood to be bold when the weight is greater than or equal to
-600 or <xref:SkiaSharp.SKFontStyleWeight.SemiBold>.
-]]></format>
+             ## Remarks
+            
+             A typeface is understood to be bold when the weight is greater than or equal to
+             600 or <xref:SkiaSharp.SKFontStyleWeight.SemiBold>.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -1182,7 +1149,7 @@ A typeface is understood to be bold when the weight is greater than or equal to
         <summary>Gets a value indicating whether this typeface is the empty typeface.</summary>
         <value>
           <see langword="true" /> if this typeface is the empty typeface; otherwise, <see langword="false" />.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="IsFixedPitch">
@@ -1203,11 +1170,11 @@ A typeface is understood to be bold when the weight is greater than or equal to
           <see langword="true" /> if the typeface is fixed-pitch; otherwise, <see langword="false" />.</value>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-This does not guarentee that the advance widths will not vary as this is a
-style bit on the typeface.
-]]></format>
+             ## Remarks
+            
+             This does not guarentee that the advance widths will not vary as this is a
+             style bit on the typeface.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -1229,12 +1196,12 @@ style bit on the typeface.
           <see langword="true" /> if the typeface is italic or oblique; otherwise, <see langword="false" />.</value>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-A typeface is understood to be italic when it has a slant of either
-<xref:SkiaSharp.SKFontStyleSlant.Italic> or
-<xref:SkiaSharp.SKFontStyleSlant.Oblique>.
-]]></format>
+             ## Remarks
+            
+             A typeface is understood to be italic when it has a slant of either
+             <xref:SkiaSharp.SKFontStyleSlant.Italic> or
+             <xref:SkiaSharp.SKFontStyleSlant.Oblique>.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -1470,7 +1437,7 @@ A typeface is understood to be italic when it has a slant of either
       <Docs>
         <summary>Gets the number of variation design parameters (axes) in this typeface.</summary>
         <value>The number of variation axes defined in this typeface's fvar table.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="VariationDesignParameters">
@@ -1488,7 +1455,7 @@ A typeface is understood to be italic when it has a slant of either
       <Docs>
         <summary>Gets all variation design parameters (axes) defined in this typeface.</summary>
         <value>An array of <see cref="T:SkiaSharp.SKFontVariationAxis" /> describing each variation axis, or an empty array if this typeface has no variation axes.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="VariationDesignPosition">
@@ -1506,7 +1473,7 @@ A typeface is understood to be italic when it has a slant of either
       <Docs>
         <summary>Gets the current variation design position of this typeface.</summary>
         <value>An array of <see cref="T:SkiaSharp.SKFontVariationPositionCoordinate" /> representing the current design-space position for each variation axis.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="VariationDesignPositionCount">
@@ -1524,7 +1491,7 @@ A typeface is understood to be italic when it has a slant of either
       <Docs>
         <summary>Gets the number of axes in the current variation design position of this typeface.</summary>
         <value>The number of variation axes for which the typeface has a current design-space position.</value>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
   </Members>

@@ -130,38 +130,36 @@
         <summary>Implement this to draw on the canvas.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-There are two ways to draw on this surface: by overriding the
-<xref:SkiaSharp.Views.iOS.SKCanvasLayer.OnPaintSurface(SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs)>
-method, or by attaching a handler to the
-<xref:SkiaSharp.Views.iOS.SKCanvasLayer.PaintSurface>
-event.
-
-> [!IMPORTANT]
-> If this method is overridden, then the base must be called, otherwise the
-> event will not be fired.
-
-## Examples
-
-```csharp
-protected override void OnPaintSurface (SKPaintSurfaceEventArgs e)
-{
-    // call the base method
-    base.OnPaintSurface (e);
-
-    var surface = e.Surface;
-    var surfaceWidth = e.Info.Width;
-    var surfaceHeight = e.Info.Height;
-
-    var canvas = surface.Canvas;
-
-    // draw on the canvas
-
-    canvas.Flush ();
-}
-```
-]]></format>
+             ## Remarks
+            
+             There are two ways to draw on this surface: by overriding the
+             `OnPaintSurface` method, or by attaching a handler to the
+             `PaintSurface` event.
+            
+             > [!IMPORTANT]
+             > If this method is overridden, then the base must be called, otherwise the
+             > event will not be fired.
+            
+             ## Examples
+            
+             ```csharp
+             protected override void OnPaintSurface (SKPaintSurfaceEventArgs e)
+             {
+                 // call the base method
+                 base.OnPaintSurface (e);
+            
+                 var surface = e.Surface;
+                 var surfaceWidth = e.Info.Width;
+                 var surfaceHeight = e.Info.Height;
+            
+                 var canvas = surface.Canvas;
+            
+                 // draw on the canvas
+            
+                 canvas.Flush ();
+             }
+             ```
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -181,30 +179,28 @@ protected override void OnPaintSurface (SKPaintSurfaceEventArgs e)
         <summary>Occurs when the canvas needs to be redrawn.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-There are two ways to draw on this surface: by overriding the
-<xref:SkiaSharp.Views.iOS.SKCanvasLayer.OnPaintSurface(SkiaSharp.Views.iOS.SKPaintSurfaceEventArgs)>
-method, or by attaching a handler to the
-<xref:SkiaSharp.Views.iOS.SKCanvasLayer.PaintSurface>
-event.
-
-## Examples
-
-```csharp
-myLayer.PaintSurface += (sender, e) => {
-    var surface = e.Surface;
-    var surfaceWidth = e.Info.Width;
-    var surfaceHeight = e.Info.Height;
-
-    var canvas = surface.Canvas;
-
-    // draw on the canvas
-
-    canvas.Flush ();
-};
-```
-]]></format>
+             ## Remarks
+            
+             There are two ways to draw on this surface: by overriding the
+             `OnPaintSurface` method, or by attaching a handler to the
+             `PaintSurface` event.
+            
+             ## Examples
+            
+             ```csharp
+             myLayer.PaintSurface += (sender, e) => {
+                 var surface = e.Surface;
+                 var surfaceWidth = e.Info.Width;
+                 var surfaceHeight = e.Info.Height;
+            
+                 var canvas = surface.Canvas;
+            
+                 // draw on the canvas
+            
+                 canvas.Flush ();
+             };
+             ```
+             ]]></format>
         </remarks>
       </Docs>
     </Member>

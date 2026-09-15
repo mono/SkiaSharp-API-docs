@@ -85,15 +85,7 @@ jobs:
           printf '\n[Workflow run](%s)\n\n<!-- learn-warning-check -->\n' "$RUN_URL" \
             >> "$REPORT_PATH"
 
-          comment_id=$(gh api "repos/$REPOSITORY/issues/$PR_NUMBER/comments?per_page=100" \
-            --jq 'map(select(.body | contains("<!-- learn-warning-check -->"))) | last | .id // empty')
-
-          if [ -n "$comment_id" ]; then
-            gh api --method PATCH "repos/$REPOSITORY/issues/comments/$comment_id" \
-              --raw-field body="$(cat "$REPORT_PATH")" > /dev/null
-          else
-            gh pr comment "$PR_NUMBER" --repo "$REPOSITORY" --body-file "$REPORT_PATH"
-          fi
+          gh pr comment "$PR_NUMBER" --repo "$REPOSITORY" --body-file "$REPORT_PATH"
 
       - name: Publish Learn warning status
         if: always() && steps.pr.outputs.found == 'true'

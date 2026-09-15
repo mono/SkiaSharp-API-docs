@@ -14,272 +14,272 @@
     <summary>Encapsulates all of the state about drawing into a device (bitmap or surface).</summary>
     <remarks>
       <format type="text/markdown"><![CDATA[
-## Remarks
-
-A canvas encapsulates all of the state about drawing into a device (bitmap or
-surface).
-
-This includes a reference to the device itself, and a stack of matrix/clip
-values. For any given draw call (e.g. DrawRect), the geometry of the object
-being drawn is transformed by the concatenation of all the matrices in the
-stack. The transformed geometry is clipped by the intersection of all of the
-clips in the stack.
-
-While the canvas holds the state of the drawing device, the state (style) of
-the object being drawn is held by the paint, which is provided as a parameter
-to each of the "Draw" methods. The paint holds attributes such as color,
-typeface, the text size, the stroke width, the shader (for example, gradients,
-patterns), etc.
-
-The canvas is returned when accessing the
-<xref:SkiaSharp.SKSurface.Canvas?displayProperty=nameWithType> property of a
-surface.
-
-### Construction
-
-SkiaSharp has multiple backends which receive <xref:SkiaSharp.SKCanvas>
-drawing commands, including:
-
- * Raster Surface
- * GPU Surface
- * PDF Document
- * XPS Document _(experimental)_
- * SVG Canvas _(experimental)_
- * Picture
- * Null Canvas _(for testing)_
-
-#### Constructing a Raster Surface
-
-The raster backend draws to a block of memory. This memory can be managed by
-SkiaSharp or by the client.
-
-The recommended way of creating a canvas for the Raster and Ganesh backends is
-to use a <xref:SkiaSharp.SKSurface>, which is an object that manages the
-memory into which the canvas commands are drawn.
-
-```csharp
-// define the surface properties
-var info = new SKImageInfo(256, 256);
-
-// construct a new surface
-var surface = SKSurface.Create(info);
-
-// get the canvas from the surface
-var canvas = surface.Canvas;
-
-// draw on the canvas ...
-```
-
-Alternatively, we could have specified the memory for the surface explicitly,
-instead of asking SkiaSharp to manage it.
-
-```csharp
-// define the surface properties
-var info = new SKImageInfo(256, 256);
-
-// allocate memory
-var memory = Marshal.AllocCoTaskMem(info.BytesSize);
-
-// construct a surface around the existing memory
-var surface = SKSurface.Create(info, memory, info.RowBytes);
-
-// get the canvas from the surface
-var canvas = surface.Canvas;
-
-// draw on the canvas ...
-```
-
-#### Constructing a GPU Surface
-
-GPU surfaces must have a <xref:SkiaSharp.GRContext> object which manages the
-GPU context, and related caches for textures and fonts.
-
-<xref:SkiaSharp.GRContext> objects are matched one to one with OpenGL contexts
-or Vulkan devices. That is, all <xref:SkiaSharp.SKSurface> instances that will
-be rendered to using the same OpenGL context or Vulkan device should share a
-<xref:SkiaSharp.GRContext>.
-
-SkiaSharp does not create an OpenGL context or a Vulkan device for you. In
-OpenGL mode it also assumes that the correct OpenGL context has been made
-current to the current thread when SkiaSharp calls are made.
-
-```csharp
-// an OpenGL context must be created and set as current
-
-// define the surface properties
-var info = new SKImageInfo(256, 256);
-
-// create the surface
-var context = GRContext.CreateGl();
-var surface = SKSurface.Create(context, false, info);
-
-// get the canvas from the surface
-var canvas = surface.Canvas;
-
-// draw on the canvas ...
-```
-
-#### Constructing a PDF Document
-
-The PDF backend uses <xref:SkiaSharp.SKDocument> instead of
-<xref:SkiaSharp.SKSurface>, since a document must include multiple pages.
-
-```csharp
-// create the document
-var stream = SKFileWStream.OpenStream("document.pdf");
-var document = SKDocument.CreatePdf(stream);
-
-// get the canvas from the page
-var canvas = document.BeginPage(256, 256);
-
-// draw on the canvas ...
-
-// end the page and document
-document.EndPage();
-document.Close();
-```
-
-#### Constructing a XPS Document _(experimental)_
-
-The XPS backend uses <xref:SkiaSharp.SKDocument> instead of
-<xref:SkiaSharp.SKSurface>, since a document must include multiple pages.
-
-```csharp
-// create the document
-var stream = SKFileWStream.OpenStream("document.xps");
-var document = SKDocument.CreateXps(stream);
-
-// get the canvas from the page
-var canvas = document.BeginPage(256, 256);
-
-// draw on the canvas ...
-
-// end the page and document
-document.EndPage();
-document.Close();
-```
-
-#### Constructing a SVG Canvas _(experimental)_
-
-The SVG backend uses <xref:SkiaSharp.SKSvgCanvas>.
-
-```csharp
-// create the canvas
-var stream = SKFileWStream.OpenStream("image.svg");
-var writer = new SKXmlStreamWriter(stream);
-var canvas = SKSvgCanvas.Create(SKRect.Create(256, 256), writer);
-
-// draw on the canvas ...
-```
-
-#### Constructing a Picture
-
-The XPS backend uses <xref:SkiaSharp.SKPictureRecorder> instead of
-<xref:SkiaSharp.SKSurface>.
-
-```csharp
-// create the picture recorder
-var recorder = new SKPictureRecorder();
-
-// get the canvas from the page
-var canvas = recorder.BeginRecording(SKRect.Create(256, 256));
-
-// draw on the canvas ...
-
-// finish recording
-var picture = recorder.EndRecording();
-```
-
-#### Constructing a Null Canvas _(for testing)_
-
-The null canvas is a canvas that ignores all drawing commands and does
-nothing.
-
-```csharp
-// create the dummy canvas
-var canvas = new SKNoDrawCanvas(256, 256);
-
-// draw on the canvas ...
-```
-
-### Transformations
-
-The canvas supports a number of 2D transformations. Unlike other 2D graphic
-systems like CoreGraphics or Cairo, SKCanvas extends the transformations to
-include perspectives.
-
-You can use the <xref:SkiaSharp.SKCanvas.Scale%2A>,
-<xref:SkiaSharp.SKCanvas.Skew%2A>, <xref:SkiaSharp.SKCanvas.Translate%2A>,
-<xref:SkiaSharp.SKCanvas.RotateDegrees%2A>,
-<xref:SkiaSharp.SKCanvas.RotateRadians%2A> to perform some of the most common
-2D transformations.
-
-For more control you can use the <xref:SkiaSharp.SKCanvas.SetMatrix%2A> to set
-an arbitrary transformation using the <xref:SkiaSharp.SKMatrix> and the
-<xref:SkiaSharp.SKCanvas.Concat%2A> to concatenate an <xref:SkiaSharp.SKMatrix>
-transformation to the current matrix in use.
-
-The <xref:SkiaSharp.SKCanvas.ResetMatrix%2A> can be used to reset the state of
-the matrix.
-
-### Drawing
-
-The drawing operations can take a <xref:SkiaSharp.SKPaint> parameter to affect
-their drawing. You use <xref:SkiaSharp.SKPaint> objects to cache the style and
-color information to draw geometries, texts and bitmaps.
-
-### Clipping and State
-
-It is possible to save the current transformations by calling the
-<xref:SkiaSharp.SKCanvas.Save%2A> method which preserves the current
-transformation matrix, you can then alter the matrix and restore the previous
-state by using the <xref:SkiaSharp.SKCanvas.Restore%2A> or
-<xref:SkiaSharp.SKCanvas.RestoreToCount%2A> methods.
-
-Additionally, it is possible to push a new state with
-<xref:SkiaSharp.SKCanvas.SaveLayer%2A> which will make an offscreen copy of a
-region, and once the drawing is completed, calling the
-<xref:SkiaSharp.SKCanvas.Restore> method which copies the offscreen bitmap
-into this canvas.
-
-## Examples
-
-```csharp
-var info = new SKImageInfo(640, 480);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // set up drawing tools
-    var paint = new SKPaint {
-        IsAntialias = true,
-        Color = new SKColor(0x2c, 0x3e, 0x50),
-        StrokeCap = SKStrokeCap.Round
-    };
-
-    // create the Xamagon path
-    var path = new SKPath();
-    path.MoveTo(71.4311121f, 56f);
-    path.CubicTo(68.6763107f, 56.0058575f, 65.9796704f, 57.5737917f, 64.5928855f, 59.965729f);
-    path.LineTo(43.0238921f, 97.5342563f);
-    path.CubicTo(41.6587026f, 99.9325978f, 41.6587026f, 103.067402f, 43.0238921f, 105.465744f);
-    path.LineTo(64.5928855f, 143.034271f);
-    path.CubicTo(65.9798162f, 145.426228f, 68.6763107f, 146.994582f, 71.4311121f, 147f);
-    path.LineTo(114.568946f, 147f);
-    path.CubicTo(117.323748f, 146.994143f, 120.020241f, 145.426228f, 121.407172f, 143.034271f);
-    path.LineTo(142.976161f, 105.465744f);
-    path.CubicTo(144.34135f, 103.067402f, 144.341209f, 99.9325978f, 142.976161f, 97.5342563f);
-    path.LineTo(121.407172f, 59.965729f);
-    path.CubicTo(120.020241f, 57.5737917f, 117.323748f, 56.0054182f, 114.568946f, 56f);
-    path.LineTo(71.4311121f, 56f);
-    path.Close();
-
-    // draw the Xamagon path
-    canvas.DrawPath(path, paint);
-}
-```
-]]></format>
+             ## Remarks
+            
+             A canvas encapsulates all of the state about drawing into a device (bitmap or
+             surface).
+            
+             This includes a reference to the device itself, and a stack of matrix/clip
+             values. For any given draw call (e.g. DrawRect), the geometry of the object
+             being drawn is transformed by the concatenation of all the matrices in the
+             stack. The transformed geometry is clipped by the intersection of all of the
+             clips in the stack.
+            
+             While the canvas holds the state of the drawing device, the state (style) of
+             the object being drawn is held by the paint, which is provided as a parameter
+             to each of the "Draw" methods. The paint holds attributes such as color,
+             typeface, the text size, the stroke width, the shader (for example, gradients,
+             patterns), etc.
+            
+             The canvas is returned when accessing the
+             <xref:SkiaSharp.SKSurface.Canvas?displayProperty=nameWithType> property of a
+             surface.
+            
+             ### Construction
+            
+             SkiaSharp has multiple backends which receive <xref:SkiaSharp.SKCanvas>
+             drawing commands, including:
+            
+              * Raster Surface
+              * GPU Surface
+              * PDF Document
+              * XPS Document _(experimental)_
+              * SVG Canvas _(experimental)_
+              * Picture
+              * Null Canvas _(for testing)_
+            
+             #### Constructing a Raster Surface
+            
+             The raster backend draws to a block of memory. This memory can be managed by
+             SkiaSharp or by the client.
+            
+             The recommended way of creating a canvas for the Raster and Ganesh backends is
+             to use a <xref:SkiaSharp.SKSurface>, which is an object that manages the
+             memory into which the canvas commands are drawn.
+            
+             ```csharp
+             // define the surface properties
+             var info = new SKImageInfo(256, 256);
+            
+             // construct a new surface
+             var surface = SKSurface.Create(info);
+            
+             // get the canvas from the surface
+             var canvas = surface.Canvas;
+            
+             // draw on the canvas ...
+             ```
+            
+             Alternatively, we could have specified the memory for the surface explicitly,
+             instead of asking SkiaSharp to manage it.
+            
+             ```csharp
+             // define the surface properties
+             var info = new SKImageInfo(256, 256);
+            
+             // allocate memory
+             var memory = Marshal.AllocCoTaskMem(info.BytesSize);
+            
+             // construct a surface around the existing memory
+             var surface = SKSurface.Create(info, memory, info.RowBytes);
+            
+             // get the canvas from the surface
+             var canvas = surface.Canvas;
+            
+             // draw on the canvas ...
+             ```
+            
+             #### Constructing a GPU Surface
+            
+             GPU surfaces must have a <xref:SkiaSharp.GRContext> object which manages the
+             GPU context, and related caches for textures and fonts.
+            
+             <xref:SkiaSharp.GRContext> objects are matched one to one with OpenGL contexts
+             or Vulkan devices. That is, all <xref:SkiaSharp.SKSurface> instances that will
+             be rendered to using the same OpenGL context or Vulkan device should share a
+             <xref:SkiaSharp.GRContext>.
+            
+             SkiaSharp does not create an OpenGL context or a Vulkan device for you. In
+             OpenGL mode it also assumes that the correct OpenGL context has been made
+             current to the current thread when SkiaSharp calls are made.
+            
+             ```csharp
+             // an OpenGL context must be created and set as current
+            
+             // define the surface properties
+             var info = new SKImageInfo(256, 256);
+            
+             // create the surface
+             var context = GRContext.CreateGl();
+             var surface = SKSurface.Create(context, false, info);
+            
+             // get the canvas from the surface
+             var canvas = surface.Canvas;
+            
+             // draw on the canvas ...
+             ```
+            
+             #### Constructing a PDF Document
+            
+             The PDF backend uses <xref:SkiaSharp.SKDocument> instead of
+             <xref:SkiaSharp.SKSurface>, since a document must include multiple pages.
+            
+             ```csharp
+             // create the document
+             var stream = SKFileWStream.OpenStream("document.pdf");
+             var document = SKDocument.CreatePdf(stream);
+            
+             // get the canvas from the page
+             var canvas = document.BeginPage(256, 256);
+            
+             // draw on the canvas ...
+            
+             // end the page and document
+             document.EndPage();
+             document.Close();
+             ```
+            
+             #### Constructing a XPS Document _(experimental)_
+            
+             The XPS backend uses <xref:SkiaSharp.SKDocument> instead of
+             <xref:SkiaSharp.SKSurface>, since a document must include multiple pages.
+            
+             ```csharp
+             // create the document
+             var stream = SKFileWStream.OpenStream("document.xps");
+             var document = SKDocument.CreateXps(stream);
+            
+             // get the canvas from the page
+             var canvas = document.BeginPage(256, 256);
+            
+             // draw on the canvas ...
+            
+             // end the page and document
+             document.EndPage();
+             document.Close();
+             ```
+            
+             #### Constructing a SVG Canvas _(experimental)_
+            
+             The SVG backend uses <xref:SkiaSharp.SKSvgCanvas>.
+            
+             ```csharp
+             // create the canvas
+             var stream = SKFileWStream.OpenStream("image.svg");
+             var writer = new SKXmlStreamWriter(stream);
+             var canvas = SKSvgCanvas.Create(SKRect.Create(256, 256), writer);
+            
+             // draw on the canvas ...
+             ```
+            
+             #### Constructing a Picture
+            
+             The XPS backend uses <xref:SkiaSharp.SKPictureRecorder> instead of
+             <xref:SkiaSharp.SKSurface>.
+            
+             ```csharp
+             // create the picture recorder
+             var recorder = new SKPictureRecorder();
+            
+             // get the canvas from the page
+             var canvas = recorder.BeginRecording(SKRect.Create(256, 256));
+            
+             // draw on the canvas ...
+            
+             // finish recording
+             var picture = recorder.EndRecording();
+             ```
+            
+             #### Constructing a Null Canvas _(for testing)_
+            
+             The null canvas is a canvas that ignores all drawing commands and does
+             nothing.
+            
+             ```csharp
+             // create the dummy canvas
+             var canvas = new SKNoDrawCanvas(256, 256);
+            
+             // draw on the canvas ...
+             ```
+            
+             ### Transformations
+            
+             The canvas supports a number of 2D transformations. Unlike other 2D graphic
+             systems like CoreGraphics or Cairo, SKCanvas extends the transformations to
+             include perspectives.
+            
+             You can use the <xref:SkiaSharp.SKCanvas.Scale%2A>,
+             <xref:SkiaSharp.SKCanvas.Skew%2A>, <xref:SkiaSharp.SKCanvas.Translate%2A>,
+             <xref:SkiaSharp.SKCanvas.RotateDegrees%2A>,
+             <xref:SkiaSharp.SKCanvas.RotateRadians%2A> to perform some of the most common
+             2D transformations.
+            
+             For more control you can use the <xref:SkiaSharp.SKCanvas.SetMatrix%2A> to set
+             an arbitrary transformation using the <xref:SkiaSharp.SKMatrix> and the
+             <xref:SkiaSharp.SKCanvas.Concat%2A> to concatenate an <xref:SkiaSharp.SKMatrix>
+             transformation to the current matrix in use.
+            
+             The <xref:SkiaSharp.SKCanvas.ResetMatrix%2A> can be used to reset the state of
+             the matrix.
+            
+             ### Drawing
+            
+             The drawing operations can take a <xref:SkiaSharp.SKPaint> parameter to affect
+             their drawing. You use <xref:SkiaSharp.SKPaint> objects to cache the style and
+             color information to draw geometries, texts and bitmaps.
+            
+             ### Clipping and State
+            
+             It is possible to save the current transformations by calling the
+             <xref:SkiaSharp.SKCanvas.Save%2A> method which preserves the current
+             transformation matrix, you can then alter the matrix and restore the previous
+             state by using the <xref:SkiaSharp.SKCanvas.Restore%2A> or
+             <xref:SkiaSharp.SKCanvas.RestoreToCount%2A> methods.
+            
+             Additionally, it is possible to push a new state with
+             <xref:SkiaSharp.SKCanvas.SaveLayer%2A> which will make an offscreen copy of a
+             region, and once the drawing is completed, calling the
+             <xref:SkiaSharp.SKCanvas.Restore> method which copies the offscreen bitmap
+             into this canvas.
+            
+             ## Examples
+            
+             ```csharp
+             var info = new SKImageInfo(640, 480);
+             using (var surface = SKSurface.Create(info)) {
+                 SKCanvas canvas = surface.Canvas;
+            
+                 canvas.Clear(SKColors.White);
+            
+                 // set up drawing tools
+                 var paint = new SKPaint {
+                     IsAntialias = true,
+                     Color = new SKColor(0x2c, 0x3e, 0x50),
+                     StrokeCap = SKStrokeCap.Round
+                 };
+            
+                 // create the Xamagon path
+                 var path = new SKPath();
+                 path.MoveTo(71.4311121f, 56f);
+                 path.CubicTo(68.6763107f, 56.0058575f, 65.9796704f, 57.5737917f, 64.5928855f, 59.965729f);
+                 path.LineTo(43.0238921f, 97.5342563f);
+                 path.CubicTo(41.6587026f, 99.9325978f, 41.6587026f, 103.067402f, 43.0238921f, 105.465744f);
+                 path.LineTo(64.5928855f, 143.034271f);
+                 path.CubicTo(65.9798162f, 145.426228f, 68.6763107f, 146.994582f, 71.4311121f, 147f);
+                 path.LineTo(114.568946f, 147f);
+                 path.CubicTo(117.323748f, 146.994143f, 120.020241f, 145.426228f, 121.407172f, 143.034271f);
+                 path.LineTo(142.976161f, 105.465744f);
+                 path.CubicTo(144.34135f, 103.067402f, 144.341209f, 99.9325978f, 142.976161f, 97.5342563f);
+                 path.LineTo(121.407172f, 59.965729f);
+                 path.CubicTo(120.020241f, 57.5737917f, 117.323748f, 56.0054182f, 114.568946f, 56f);
+                 path.LineTo(71.4311121f, 56f);
+                 path.Close();
+            
+                 // draw the Xamagon path
+                 canvas.DrawPath(path, paint);
+             }
+             ```
+             ]]></format>
     </remarks>
   </Docs>
   <Members>
@@ -577,16 +577,16 @@ using (var surface = SKSurface.Create(info)) {
         <summary>Makes the canvas contents undefined.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-Subsequent calls that read the canvas pixels, such as drawing with <xref:SkiaSharp.SKBlendMode>, return undefined
-results. Calling this method does not change clip or matrix and may do nothing, depending on the implementation
-of the underlying <xref:SkiaSharp.SKSurface>.
-
-<xref:SkiaSharp.SKCanvas.Discard> allows optimized performance on subsequent draws by removing cached data associated
-with the underlying <xref:SkiaSharp.SKSurface>. It is not necessary to call <xref:SkiaSharp.SKCanvas.Discard> once
-done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning <xref:SkiaSharp.SKSurface> is deleted.
-]]></format>
+             ## Remarks
+            
+             Subsequent calls that read the canvas pixels, such as drawing with <xref:SkiaSharp.SKBlendMode>, return undefined
+             results. Calling this method does not change clip or matrix and may do nothing, depending on the implementation
+             of the underlying <xref:SkiaSharp.SKSurface>.
+            
+             <xref:SkiaSharp.SKCanvas.Discard> allows optimized performance on subsequent draws by removing cached data associated
+             with the underlying <xref:SkiaSharp.SKSurface>. It is not necessary to call <xref:SkiaSharp.SKCanvas.Discard> once
+             done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning <xref:SkiaSharp.SKSurface> is deleted.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -654,14 +654,14 @@ done with <xref:SkiaSharp.SKCanvas>; any cached data is deleted when the owning 
         <summary>Send an key/value pair "annotation" to the canvas.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller still retains its ownership of the data (if any).
-
-Note: on may canvas types, this information is ignored, but some
-canvases (e.g. recording a picture or drawing to a PDF document) will pass on
-this information.
-]]></format>
+             ## Remarks
+            
+             The caller still retains its ownership of the data (if any).
+            
+             Note: on may canvas types, this information is ignored, but some
+             canvases (e.g. recording a picture or drawing to a PDF document) will pass on
+             this information.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -981,7 +981,7 @@ this information.
         <param name="sampling">The sampling options to apply when scaling or filtering the bitmap.</param>
         <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" /> for default rendering.</param>
         <summary>Draws a bitmap at the specified location using the given sampling options and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1040,7 +1040,7 @@ this information.
         <param name="sampling">The sampling options to use when scaling the bitmap.</param>
         <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws the specified bitmap into the destination rectangle using the given sampling options.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1101,7 +1101,7 @@ this information.
         <param name="sampling">The sampling options to use when scaling the bitmap.</param>
         <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws a portion of the specified bitmap into the destination rectangle using the given sampling options.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmap">
@@ -1130,7 +1130,7 @@ this information.
         <param name="sampling">The sampling options to apply when scaling or filtering the bitmap.</param>
         <param name="paint">The paint to use when drawing the bitmap, or <see langword="null" /> for default rendering.</param>
         <summary>Draws a bitmap at the specified coordinates using the given sampling options and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawBitmapLattice">
@@ -1964,13 +1964,13 @@ this information.
         <summary>Annotates the canvas by making the specified rectangle link to a named destination (see <see cref="M:SkiaSharp.SKCanvas.DrawNamedDestinationAnnotation(SkiaSharp.SKPoint,SkiaSharp.SKData)" />).</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller is responsible for managing its ownership of the data.
-
-If the backend of this canvas does not support annotations, this call is
-safely ignored.
-]]></format>
+             ## Remarks
+            
+             The caller is responsible for managing its ownership of the data.
+            
+             If the backend of this canvas does not support annotations, this call is
+             safely ignored.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -2020,13 +2020,13 @@ safely ignored.
         <summary>Annotates the canvas by associating a name with the specified point (see <see cref="M:SkiaSharp.SKCanvas.DrawLinkDestinationAnnotation(SkiaSharp.SKRect,SkiaSharp.SKData)" />).</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller is responsible for managing its ownership of the data.
-
-If the backend of this canvas does not support annotations, this call is
-safely ignored.
-]]></format>
+             ## Remarks
+            
+             The caller is responsible for managing its ownership of the data.
+            
+             If the backend of this canvas does not support annotations, this call is
+             safely ignored.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -2284,17 +2284,17 @@ safely ignored.
         <summary>Draws a picture on the canvas.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-This is equivalent to calling <xref:SkiaSharp.SKCanvas.Save>, followed by
-<xref:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix@)> with the specified `matrix`,
-<xref:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKPaint)>
-and then <xref:SkiaSharp.SKCanvas.Restore>.
-
-If paint is non-null, the picture is drawn into a temporary buffer, and then
-the paint's alpha, color filter, image filter, blend mode are applied to that
-buffer as it is drawn to the canvas.
-]]></format>
+             ## Remarks
+            
+             This is equivalent to calling <xref:SkiaSharp.SKCanvas.Save>, followed by
+             <xref:SkiaSharp.SKCanvas.Concat(SkiaSharp.SKMatrix@)> with the specified `matrix`,
+             <xref:SkiaSharp.SKCanvas.DrawPicture(SkiaSharp.SKPicture,SkiaSharp.SKPaint)>
+             and then <xref:SkiaSharp.SKCanvas.Restore>.
+            
+             If paint is non-null, the picture is drawn into a temporary buffer, and then
+             the paint's alpha, color filter, image filter, blend mode are applied to that
+             buffer as it is drawn to the canvas.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -2470,24 +2470,24 @@ buffer as it is drawn to the canvas.
         <summary>Draws an array of points, lines or a polygon in the canvas, one at a time.</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-For <xref:SkiaSharp.SKPointMode.Points>, each point is drawn centered at its
-coordinate, and its size is specified by the paint's stroke-width. It draws as
-a square, unless the paint's <xref:SkiaSharp.SKPaint.StrokeCap> is
-<xref:SkiaSharp.SKStrokeCap.Round>, in which the points are drawn as circles.
-
-For <xref:SkiaSharp.SKPointMode.Lines>, each pair of points is drawn as a line
-segment, respecting the paint's settings for cap, join and width.
-
-For <xref:SkiaSharp.SKPointMode.Polygon>, the entire array is drawn as a
-series of connected line segments.
-
-Note that, while similar, the line and polygon modes draw slightly differently
-than the equivalent path built with a series of move to, line to calls, in
-that the path will draw all of its contours at once, with no interactions if
-contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
-]]></format>
+             ## Remarks
+            
+             For <xref:SkiaSharp.SKPointMode.Points>, each point is drawn centered at its
+             coordinate, and its size is specified by the paint's stroke-width. It draws as
+             a square, unless the paint's <xref:SkiaSharp.SKPaint.StrokeCap> is
+             <xref:SkiaSharp.SKStrokeCap.Round>, in which the points are drawn as circles.
+            
+             For <xref:SkiaSharp.SKPointMode.Lines>, each pair of points is drawn as a line
+             segment, respecting the paint's settings for cap, join and width.
+            
+             For <xref:SkiaSharp.SKPointMode.Polygon>, the entire array is drawn as a
+             series of connected line segments.
+            
+             Note that, while similar, the line and polygon modes draw slightly differently
+             than the equivalent path built with a series of move to, line to calls, in
+             that the path will draw all of its contours at once, with no interactions if
+             contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -2748,7 +2748,7 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <param name="sampling">The sampling options to use when drawing the surface.</param>
         <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws the specified surface onto the canvas at the given point using the given sampling options.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawSurface">
@@ -2804,62 +2804,9 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
         <param name="sampling">The sampling options to use when drawing the surface.</param>
         <param name="paint">The paint to apply, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws the specified surface onto the canvas at the given position using the given sampling options.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
-    <MemberGroup MemberName="DrawText">
-      <AssemblyInfo>
-        <AssemblyName>SkiaSharp</AssemblyName>
-      </AssemblyInfo>
-      <Docs>
-        <remarks>
-          <format type="text/markdown"><![CDATA[
-## Examples
-
-```csharp
-var info = new SKImageInfo(512, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // draw left-aligned text, solid
-    using (var font = new SKFont { Size = 64.0f })
-    using (var paint = new SKPaint()) {
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x42, 0x81, 0xA4);
-        paint.IsStroke = false;
-
-        canvas.DrawText("Skia", info.Width / 2f, 64.0f, SKTextAlign.Left, font, paint);
-    }
-
-    // draw centered text, stroked
-    using (var font = new SKFont { Size = 64.0f })
-    using (var paint = new SKPaint()) {
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0x9C, 0xAF, 0xB7);
-        paint.IsStroke = true;
-        paint.StrokeWidth = 3;
-
-        canvas.DrawText("Skia", info.Width / 2f, 144.0f, SKTextAlign.Center, font, paint);
-    }
-
-    // draw right-aligned text, scaled
-    using (var font = new SKFont { Size = 64.0f, ScaleX = 1.5f })
-    using (var paint = new SKPaint()) {
-        paint.IsAntialias = true;
-        paint.Color = new SKColor(0xE6, 0xB8, 0x9C);
-
-        canvas.DrawText("Skia", info.Width / 2f, 224.0f, SKTextAlign.Right, font, paint);
-    }
-}
-```
-
-
-]]></format>
-        </remarks>
-      </Docs>
-    </MemberGroup>
     <Member MemberName="DrawText">
       <MemberSignature Language="C#" Value="public void DrawText (SkiaSharp.SKTextBlob text, float x, float y, SkiaSharp.SKPaint paint);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DrawText(class SkiaSharp.SKTextBlob text, float32 x, float32 y, class SkiaSharp.SKPaint paint) cil managed" />
@@ -2916,7 +2863,7 @@ using (var surface = SKSurface.Create(info)) {
         <param name="font">The font to use for rendering the text.</param>
         <param name="paint">The paint to apply when drawing.</param>
         <summary>Draws the specified text at the given point using the font and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -2979,7 +2926,7 @@ using (var surface = SKSurface.Create(info)) {
         <param name="font">The font to use for rendering the text.</param>
         <param name="paint">The paint to apply when drawing.</param>
         <summary>Draws the specified text at the given coordinates using the font and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="DrawText">
@@ -3238,13 +3185,13 @@ using (var surface = SKSurface.Create(info)) {
         <summary>Annotates the canvas by associating the specified URL with the specified rectangle (in local coordinates).</summary>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-The caller is responsible for managing its ownership of the data.
-
-If the backend of this canvas does not support annotations, this call is
-safely ignored.
-]]></format>
+             ## Remarks
+            
+             The caller is responsible for managing its ownership of the data.
+            
+             If the backend of this canvas does not support annotations, this call is
+             safely ignored.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
@@ -3871,18 +3818,18 @@ safely ignored.
         <returns>The value to pass to <see cref="M:SkiaSharp.SKCanvas.RestoreToCount(System.Int32)" /> to balance this save.</returns>
         <remarks>
           <format type="text/markdown"><![CDATA[
-## Remarks
-
-This behaves the same as <xref:SkiaSharp.SKCanvas.Save> but in addition it
-allocates an offscreen bitmap. All drawing calls are directed there, and only
-when the balancing call to <xref:SkiaSharp.SKCanvas.Restore> is made is that
-offscreen transfered to the canvas (or the previous layer).
-
-The limit rectangle, is used as a hint to limit the size of the offscreen
-bitmap, and thus drawing may be clipped to it, though that clipping is not
-guaranteed to happen. If exact clipping is desired, use
-<xref:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKClipOperation,System.Boolean)>.
-]]></format>
+             ## Remarks
+            
+             This behaves the same as <xref:SkiaSharp.SKCanvas.Save> but in addition it
+             allocates an offscreen bitmap. All drawing calls are directed there, and only
+             when the balancing call to <xref:SkiaSharp.SKCanvas.Restore> is made is that
+             offscreen transfered to the canvas (or the previous layer).
+            
+             The limit rectangle, is used as a hint to limit the size of the offscreen
+             bitmap, and thus drawing may be clipped to it, though that clipping is not
+             guaranteed to happen. If exact clipping is desired, use
+             <xref:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKClipOperation,System.Boolean)>.
+             ]]></format>
         </remarks>
       </Docs>
     </Member>
