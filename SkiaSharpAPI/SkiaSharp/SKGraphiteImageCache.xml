@@ -18,12 +18,12 @@
     <summary>Provides a bounded, least-recently-used cache of Graphite-backed textures keyed by source image, for reuse across recordings.</summary>
     <remarks>
       <format type="text/markdown"><![CDATA[
-## Remarks
-
-Use this cache as the callback body for <xref:SkiaSharp.SKGraphiteContext.CreateRecorder(System.Int64,SkiaSharp.SKGraphiteFindOrCreateImageDelegate,System.Action)> so that repeatedly drawn images are uploaded to the GPU only once. The cache holds a reference to each cached texture until the entry is evicted or the cache is disposed.
-
-This type implements `IDisposable`. Dispose it while its owning recorder is still alive so the cached textures can be released safely.
-]]></format>
+             ## Remarks
+            
+             Use this cache as the callback body for <xref:SkiaSharp.SKGraphiteContext.CreateRecorder(System.Int64,SkiaSharp.SKGraphiteFindOrCreateImageDelegate,System.Action)> so that repeatedly drawn images are uploaded to the GPU only once. The cache holds a reference to each cached texture until the entry is evicted or the cache is disposed.
+            
+             This type implements `IDisposable`. Dispose it while its owning recorder is still alive so the cached textures can be released safely.
+             ]]></format>
     </remarks>
   </Docs>
   <Members>

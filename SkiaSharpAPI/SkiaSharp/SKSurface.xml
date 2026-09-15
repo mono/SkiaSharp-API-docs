@@ -14,53 +14,53 @@
     <summary>Represents the backend/results of drawing to a canvas.</summary>
     <remarks>
       <format type="text/markdown"><![CDATA[
-## Remarks
-
-The surface represents the backend/results of drawing to a canvas. For raster
-drawing, the surface will be pixels, but (for example) when drawing into a
-PDF or <xref:SkiaSharp.SKPicture> canvas, the surface stores the recorded
-commands.
-
-The surface always has non-zero dimensions. If there is a request for a new
-surface, and either of the requested dimensions are zero, then <see langword="null" /> will
-be returned.
-
-Once you create a surface with one of its <xref:SkiaSharp.SKSurface.Create%2A>
-methods, you can draw into the canvas returned by the
-<xref:SkiaSharp.SKSurface.Canvas> property. Once the drawing is complete, you
-can retrieve an <xref:SkiaSharp.SKImage> by calling the
-<xref:SkiaSharp.SKSurface.Snapshot%2A> method.
-
-## Examples
-
-```csharp
-var info = new SKImageInfo(256, 256);
-using (var surface = SKSurface.Create(info)) {
-    SKCanvas canvas = surface.Canvas;
-
-    canvas.Clear(SKColors.White);
-
-    // configure our brush
-    var redBrush = new SKPaint {
-        Color = new SKColor(0xff, 0, 0),
-        IsStroke = true
-    };
-    var blueBrush = new SKPaint {
-        Color = new SKColor(0, 0, 0xff),
-        IsStroke = true
-    };
-
-    for (int i = 0; i < 64; i += 8) {
-        var rect = new SKRect(i, i, 256 - i - 1, 256 - i - 1);
-        canvas.DrawRect(rect, (i % 16 == 0) ? redBrush : blueBrush);
-    }
-}
-```
-
-The example above produces the following:
-
-![SKSurface](~/images/surface-rects.png "SKSurface")
-]]></format>
+             ## Remarks
+            
+             The surface represents the backend/results of drawing to a canvas. For raster
+             drawing, the surface will be pixels, but (for example) when drawing into a
+             PDF or <xref:SkiaSharp.SKPicture> canvas, the surface stores the recorded
+             commands.
+            
+             The surface always has non-zero dimensions. If there is a request for a new
+             surface, and either of the requested dimensions are zero, then <see langword="null" /> will
+             be returned.
+            
+             Once you create a surface with one of its <xref:SkiaSharp.SKSurface.Create%2A>
+             methods, you can draw into the canvas returned by the
+             <xref:SkiaSharp.SKSurface.Canvas> property. Once the drawing is complete, you
+             can retrieve an <xref:SkiaSharp.SKImage> by calling the
+             <xref:SkiaSharp.SKSurface.Snapshot%2A> method.
+            
+             ## Examples
+            
+             ```csharp
+             var info = new SKImageInfo(256, 256);
+             using (var surface = SKSurface.Create(info)) {
+                 SKCanvas canvas = surface.Canvas;
+            
+                 canvas.Clear(SKColors.White);
+            
+                 // configure our brush
+                 var redBrush = new SKPaint {
+                     Color = new SKColor(0xff, 0, 0),
+                     IsStroke = true
+                 };
+                 var blueBrush = new SKPaint {
+                     Color = new SKColor(0, 0, 0xff),
+                     IsStroke = true
+                 };
+            
+                 for (int i = 0; i < 64; i += 8) {
+                     var rect = new SKRect(i, i, 256 - i - 1, 256 - i - 1);
+                     canvas.DrawRect(rect, (i % 16 == 0) ? redBrush : blueBrush);
+                 }
+             }
+             ```
+            
+             The example above produces the following:
+            
+             ![SKSurface](~/images/surface-rects.png "SKSurface")
+             ]]></format>
     </remarks>
   </Docs>
   <Members>
@@ -189,7 +189,7 @@ The example above produces the following:
         <param name="props">The surface property configuration.</param>
         <summary>Creates a new surface from the specified image parameters and surface properties.</summary>
         <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer with the parameters specified in <paramref name="info&amp;nbsp;" />and the properties specified in <paramref name="props" />.</remarks>
+        <remarks>This will create a buffer with the parameters specified in <paramref name="info" />and the properties specified in <paramref name="props" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -213,7 +213,7 @@ The example above produces the following:
         <param name="rowBytes">The number of bytes per row in the pixel buffer.</param>
         <summary>Creates a new surface from the specified image parameters.</summary>
         <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
-        <remarks>This will create a buffer with the parameters specified in <paramref name="info&amp;nbsp;" />.</remarks>
+        <remarks>This will create a buffer with the parameters specified in <paramref name="info" />.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -1898,7 +1898,7 @@ The example above produces the following:
         <param name="sampling">The sampling options to apply when scaling or filtering the surface.</param>
         <param name="paint">The paint to use when drawing the surface, or <see langword="null" /> for default rendering.</param>
         <summary>Draws the surface onto the specified canvas at the given location using the specified sampling options and paint.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Draw">
@@ -1954,7 +1954,7 @@ The example above produces the following:
         <param name="sampling">The sampling options to use when drawing.</param>
         <param name="paint">The paint to apply when drawing, or <see langword="null" /> to use default paint settings.</param>
         <summary>Draws this surface onto the specified canvas at the given position.</summary>
-        <remarks></remarks>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="Flush">
@@ -2089,7 +2089,7 @@ The example above produces the following:
       <Docs>
         <param name="info">The image info describing the desired size and format of the result.</param>
         <param name="srcRect">The rectangle of the surface to read, in pixels.</param>
-        <param name="callback">The callback invoked with the read result, which is valid only for the duration of the call.</param>
+        <param name="callback">The callback invoked with the read result, or <see langword="null" /> if the read fails; the result is valid only for the duration of the call.</param>
         <summary>Asynchronously reads pixels from the surface into a result delivered to a callback, using nearest sampling.</summary>
         <remarks />
       </Docs>
@@ -2118,7 +2118,7 @@ The example above produces the following:
         <param name="srcRect">The rectangle of the surface to read, in pixels.</param>
         <param name="rescaleGamma">One of the enumeration values that specifies the gamma space used for rescaling.</param>
         <param name="rescaleMode">One of the enumeration values that specifies the sampling algorithm used for rescaling.</param>
-        <param name="callback">The callback invoked with the read result, which is valid only for the duration of the call.</param>
+        <param name="callback">The callback invoked with the read result, or <see langword="null" /> if the read fails; the result is valid only for the duration of the call.</param>
         <summary>Asynchronously reads and rescales pixels from the surface into a result delivered to a callback.</summary>
         <remarks />
       </Docs>

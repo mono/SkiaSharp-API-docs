@@ -14,9 +14,9 @@
     <summary>An abstraction for drawing a rectangle of pixels.</summary>
     <remarks>
       <para>An image is an abstraction of pixels, though the particular type of image could be actually storing its data on the GPU, or as drawing commands (picture or PDF or otherwise), ready to be played back into another canvas.</para>
-      <para></para>
+      <para />
       <para>The content of an image is always immutable, though the actual storage may change, if for example that image can be recreated via encoded data or other means.</para>
-      <para></para>
+      <para />
       <para>An image always has a non-zero dimensions. If there is a request to create a new image, either directly or via a surface, and either of the requested dimensions are zero, then <see langword="null" /> will be returned.</para>
     </remarks>
   </Docs>
@@ -2110,7 +2110,7 @@
       <Docs>
         <param name="info">The image info describing the desired size and format of the result.</param>
         <param name="srcRect">The rectangle of the image to read, in pixels.</param>
-        <param name="callback">The callback invoked with the read result, which is valid only for the duration of the call.</param>
+        <param name="callback">The callback invoked with the read result, or <see langword="null" /> if the read fails; the result is valid only for the duration of the call.</param>
         <summary>Asynchronously reads pixels from the image into a result delivered to a callback, using nearest sampling.</summary>
         <remarks />
       </Docs>
@@ -2139,7 +2139,7 @@
         <param name="srcRect">The rectangle of the image to read, in pixels.</param>
         <param name="rescaleGamma">One of the enumeration values that specifies the gamma space used for rescaling.</param>
         <param name="rescaleMode">One of the enumeration values that specifies the sampling algorithm used for rescaling.</param>
-        <param name="callback">The callback invoked with the read result, which is valid only for the duration of the call.</param>
+        <param name="callback">The callback invoked with the read result, or <see langword="null" /> if the read fails; the result is valid only for the duration of the call.</param>
         <summary>Asynchronously reads and rescales pixels from the image into a result delivered to a callback.</summary>
         <remarks />
       </Docs>

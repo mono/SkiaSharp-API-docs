@@ -32,10 +32,8 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>A hardware-accelerated view that uses Metal to render SkiaSharp drawings.</summary>
-    <remarks>
-      <para>This view uses the Metal graphics API to provide GPU-accelerated rendering of SkiaSharp content on macOS.</para>
-    </remarks>
+    <summary>A hardware-accelerated view that uses Metal to render SkiaSharp drawing commands.</summary>
+    <remarks>This view provides the best performance on devices that support Metal. For devices that do not support Metal, use <see cref="T:SkiaSharp.Views.Mac.SKCanvasView" /> instead.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -49,7 +47,7 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Mac.SKMetalView" /> class with a zero-sized frame.</summary>
+        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Mac.SKMetalView" /> class.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -66,8 +64,8 @@
         <Parameter Name="frame" Type="CoreGraphics.CGRect" />
       </Parameters>
       <Docs>
-        <param name="frame">The frame rectangle for the view.</param>
-        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Mac.SKMetalView" /> class with the specified frame.</summary>
+        <param name="frame">The frame used by the view, expressed in points.</param>
+        <summary>Initializes the <see cref="T:SkiaSharp.Views.Mac.SKMetalView" /> with the specified frame.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -84,9 +82,9 @@
         <Parameter Name="p" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="p">The native pointer to the unmanaged object.</param>
+        <param name="p">The pointer (handle) to the unmanaged object.</param>
         <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Mac.SKMetalView" /> class from a native handle.</summary>
-        <remarks>This constructor is used by the Xamarin.Mac runtime when creating managed representations of unmanaged objects, such as when the view is created from a storyboard or XIB file. It is not intended to be called directly from user code.</remarks>
+        <remarks>This constructor is used by the platform runtime when creating managed representations of unmanaged objects. It is not intended to be called directly from user code.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -103,9 +101,9 @@
         <Parameter Name="device" Type="Metal.IMTLDevice" />
       </Parameters>
       <Docs>
-        <param name="frame">The frame rectangle for the view.</param>
+        <param name="frame">The frame used by the view, expressed in points.</param>
         <param name="device">The Metal device to use for rendering.</param>
-        <summary>Initializes a new instance of the <see cref="T:SkiaSharp.Views.Mac.SKMetalView" /> class with the specified frame and Metal device.</summary>
+        <summary>Initializes the <see cref="T:SkiaSharp.Views.Mac.SKMetalView" /> with the specified frame and Metal device.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -123,7 +121,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Called when the view has been loaded from a storyboard or XIB file.</summary>
+        <summary>Called after the object has been loaded from the nib file. Overriders must call the base method.</summary>
         <remarks />
       </Docs>
     </Member>
@@ -140,9 +138,9 @@
         <ReturnType>SkiaSharp.SKSize</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the current canvas size in pixels.</summary>
-        <value>The size of the canvas in pixels.</value>
-        <remarks />
+        <summary>Gets the current canvas size.</summary>
+        <value>The current canvas size in pixels.</value>
+        <remarks>The canvas size may be different to the view size as a result of the current device's pixel density.</remarks>
       </Docs>
     </Member>
     <Member MemberName="GRContext">
@@ -158,8 +156,8 @@
         <ReturnType>SkiaSharp.GRContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the GPU context used for drawing operations.</summary>
-        <value>The <see cref="T:SkiaSharp.GRContext" /> used for GPU-accelerated rendering.</value>
+        <summary>Gets the current GPU context.</summary>
+        <value>The GPU context used by the Metal backend.</value>
         <remarks />
       </Docs>
     </Member>
@@ -182,9 +180,9 @@
         <Parameter Name="view" Type="MetalKit.MTKView" />
       </Parameters>
       <Docs>
-        <param name="view">The view that needs to be drawn.</param>
-        <summary>Called when the view needs to render its content.</summary>
-        <remarks>This method is part of the IMTKViewDelegate interface implementation.</remarks>
+        <param name="view">The view that triggered the draw request.</param>
+        <summary>Implements the IMTKViewDelegate.Draw method to render the SkiaSharp content.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="MetalKit.IMTKViewDelegate.DrawableSizeWillChange">
@@ -207,10 +205,10 @@
         <Parameter Name="size" Type="CoreGraphics.CGSize" />
       </Parameters>
       <Docs>
-        <param name="view">The view whose drawable size is changing.</param>
+        <param name="view">The view whose drawable size changed.</param>
         <param name="size">The new drawable size.</param>
-        <summary>Called when the drawable size of the view is about to change.</summary>
-        <remarks>This method is part of the IMTKViewDelegate interface implementation.</remarks>
+        <summary>Implements the IMTKViewDelegate.DrawableSizeWillChange method to handle size changes.</summary>
+        <remarks />
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -229,9 +227,9 @@
         <Parameter Name="e" Type="SkiaSharp.Views.Mac.SKPaintMetalSurfaceEventArgs" />
       </Parameters>
       <Docs>
-        <param name="e">The event arguments containing the surface and render target information.</param>
-        <summary>Raises the <see cref="E:SkiaSharp.Views.Mac.SKMetalView.PaintSurface" /> event.</summary>
-        <remarks>Override this method to perform custom drawing without subscribing to the event.</remarks>
+        <param name="e">The event arguments that contain the drawing surface and information.</param>
+        <summary>Implement this to draw on the canvas.</summary>
+        <remarks>There are two ways to draw on this surface: by overriding <see cref="M:SkiaSharp.Views.Mac.SKMetalView.OnPaintSurface(SkiaSharp.Views.Mac.SKPaintMetalSurfaceEventArgs)" /> or by attaching a handler to <see cref="E:SkiaSharp.Views.Mac.SKMetalView.PaintSurface" />. If this method is overridden, then the base must be called, otherwise the event will not be fired.</remarks>
       </Docs>
     </Member>
     <Member MemberName="PaintSurface">
@@ -247,8 +245,49 @@
         <ReturnType>System.EventHandler&lt;SkiaSharp.Views.Mac.SKPaintMetalSurfaceEventArgs&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Occurs when the view needs to be painted.</summary>
-        <remarks>Handle this event to draw on the Metal surface using the provided <see cref="T:SkiaSharp.SKCanvas" />.</remarks>
+        <summary>Occurs when the surface needs to be redrawn.</summary>
+        <remarks>There are two ways to draw on this surface: by overriding <see cref="M:SkiaSharp.Views.Mac.SKMetalView.OnPaintSurface(SkiaSharp.Views.Mac.SKPaintMetalSurfaceEventArgs)" /> or by attaching a handler to <see cref="E:SkiaSharp.Views.Mac.SKMetalView.PaintSurface" />.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.ComponentModel.IComponent.Disposed">
+      <MemberSignature Language="C#" Value="event EventHandler System.ComponentModel.IComponent.Disposed;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler System.ComponentModel.IComponent.Disposed" />
+      <MemberSignature Language="DocId" Value="E:SkiaSharp.Views.Mac.SKMetalView.System#ComponentModel#IComponent#Disposed" />
+      <MemberType>Event</MemberType>
+      <Implements>
+        <InterfaceMember>E:System.ComponentModel.IComponent.Disposed</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.EventHandler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.ComponentModel.IComponent.Site">
+      <MemberSignature Language="C#" Value="System.ComponentModel.ISite System.ComponentModel.IComponent.Site { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.ComponentModel.ISite System.ComponentModel.IComponent.Site" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Mac.SKMetalView.System#ComponentModel#IComponent#Site" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:System.ComponentModel.IComponent.Site</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Mac</AssemblyName>
+        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ComponentModel.ISite</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets the site that provides design-time services for this component.</summary>
+        <value>The site for this component, or <see langword="null" /> if the component is not sited.</value>
+        <remarks />
       </Docs>
     </Member>
   </Members>
