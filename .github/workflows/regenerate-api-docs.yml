@@ -79,7 +79,6 @@ jobs:
           fi
 
       - name: Upload generated documentation
-        if: github.event_name != 'pull_request' && steps.changes.outputs.changed == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: generated-api-docs
