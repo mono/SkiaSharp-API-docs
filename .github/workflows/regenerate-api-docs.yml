@@ -1,0 +1,126 @@
+name: Regenerate API docs
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/regenerate-api-docs.yml'
+      - 'eng/**'
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      package-version:
+        description: Optional _NuGets package version to generate.
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: regenerate-api-docs-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.changes.outputs.changed }}
+      package-version: ${{ steps.package.outputs.version }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Resolve transport package version
+        id: package
+        shell: bash
+        env:
+          INPUT_VERSION: ${{ inputs.package-version }}
+          TRANSPORT_SOURCE: https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-libraries-transport/nuget/v3/index.json
+        run: |
+          if [ -n "$INPUT_VERSION" ]; then
+            version="$INPUT_VERSION"
+          else
+            version=$(dotnet package search _NuGets --exact-match --prerelease --source "$TRANSPORT_SOURCE" --format json |
+              jq -r '[.searchResult[].packages[] | select(.id == "_NuGets" and (.version | test("^0\\.0\\.0-branch\\.main\\.[0-9]+$"))) |
+                .version] | max_by(split(".")[-1] | tonumber)')
+          fi
+
+          if [ -z "$version" ] || [ "$version" = "null" ]; then
+            echo "No main-branch _NuGets package was found."
+            exit 1
+          fi
+
+          echo "Generating from _NuGets $version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Generate API documentation
+        shell: pwsh
+        env:
+          PACKAGE_VERSION: ${{ steps.package.outputs.version }}
+        run: |
+          ./eng/Clean-ApiDocs.ps1 -ClearCache
+          ./eng/Fetch-ApiDocs.ps1 -PackageVersion $env:PACKAGE_VERSION
+          ./eng/Prepare-ApiDocs.ps1
+          ./eng/Generate-ApiDocs.ps1
+
+      - name: Detect generated changes
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet -- SkiaSharpAPI; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload generated documentation
+        if: github.event_name != 'pull_request' && steps.changes.outputs.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-api-docs
+          path: SkiaSharpAPI
+          retention-days: 1
+
+  create-pull-request:
+    if: github.event_name != 'pull_request' && needs.generate.outputs.changed == 'true'
+    needs: generate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Remove previous generated documentation
+        shell: bash
+        run: rm -rf SkiaSharpAPI
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: generated-api-docs
+          path: SkiaSharpAPI
+
+      - name: Create or update documentation pull request
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE_VERSION: ${{ needs.generate.outputs.package-version }}
+        run: |
+          git switch -C automation/regenerate-api-docs
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add SkiaSharpAPI
+          git commit -m "Regenerate API docs from $PACKAGE_VERSION"
+          git push --force-with-lease origin HEAD:automation/regenerate-api-docs
+          gh pr create --base main --head automation/regenerate-api-docs \
+            --title 'Regenerate API docs from published packages' \
+            --body "Automated update generated from \`_NuGets $PACKAGE_VERSION\`." ||
+            gh pr list --base main --head automation/regenerate-api-docs --state open
