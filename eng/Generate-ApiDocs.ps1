@@ -163,38 +163,12 @@ function New-FrameworksFile([string] $Path, [object[]] $Sources) {
     $document.Save($Path)
 }
 
-function Invoke-VariantDonor([object] $Variant, [string] $DonorsRoot) {
-    $root = Join-Path $DonorsRoot $Variant.Key
-    $sourceRoot = Join-Path $root 'sources'
-    $source = Join-Path $sourceRoot $Variant.Key
-    New-Item -ItemType Directory -Force $source | Out-Null
-    $assembly = Join-Path $source $Variant.Asset.Assembly.Name
-    $documentation = Join-Path $source ([IO.Path]::GetFileName($Variant.Documentation))
-    Copy-Item -LiteralPath $Variant.Asset.Assembly.FullName -Destination $assembly
-    Copy-Item -LiteralPath $Variant.Documentation -Destination $documentation
-    $frameworksPath = Join-Path $sourceRoot 'frameworks.xml'
-    New-FrameworksFile -Path $frameworksPath -Sources @([PSCustomObject]@{
-        SourceKey = $Variant.Key; SearchPaths = @($DependencyRoot, $source); Imports = @($documentation)
-    })
-    $output = Join-Path $root 'output'
-    $libraryArguments = @('--lib', $DependencyRoot)
-    foreach ($directory in @(Get-ChildItem -LiteralPath $frameworksRoot -Directory | Sort-Object Name)) {
-        $libraryArguments += @('--lib', $directory.FullName)
-    }
-    $arguments = @('update', '--delete', '--lang=DocId', '--out', $output, '--frameworks', $frameworksPath) + $libraryArguments
-    if ($MDocDebug) { $arguments += '--debug' }
-    Push-Location $sourceRoot
-    try { Invoke-MDoc -Arguments $arguments | Out-Host }
-    finally { Pop-Location }
-    return $output
-}
-
 # This table is the only place where public API variants are selected.
 $variantSpecs = @(
-    [PSCustomObject]@{ Group = 'gtk'; Key = 'views-gtk3'; PublicMoniker = 'skiasharp-views'; Label = 'SkiaSharp.Views.Gtk3 package'; ShortLabel = 'GTK 3'; PackageId = 'SkiaSharp.Views.Gtk3'; AssemblyName = 'SkiaSharp.Views.Gtk3.dll'; FrameworkPattern = '.*'; Canonical = $false }
-    [PSCustomObject]@{ Group = 'gtk'; Key = 'views-gtk4'; PublicMoniker = 'skiasharp-views'; Label = 'SkiaSharp.Views.Gtk4 package'; ShortLabel = 'GTK 4'; PackageId = 'SkiaSharp.Views.Gtk4'; AssemblyName = 'SkiaSharp.Views.Gtk4.dll'; FrameworkPattern = '.*'; Canonical = $true }
-    [PSCustomObject]@{ Group = 'apple'; Key = 'views-ios'; PublicMoniker = 'skiasharp-views'; Label = 'iOS target-framework assembly'; ShortLabel = 'iOS'; PackageId = 'SkiaSharp.Views'; AssemblyName = 'SkiaSharp.Views.iOS.dll'; FrameworkPattern = '.*-ios.*'; Canonical = $true }
-    [PSCustomObject]@{ Group = 'apple'; Key = 'views-maccatalyst'; PublicMoniker = 'skiasharp-views'; Label = 'Mac Catalyst target-framework assembly'; ShortLabel = 'Mac Catalyst'; PackageId = 'SkiaSharp.Views'; AssemblyName = 'SkiaSharp.Views.iOS.dll'; FrameworkPattern = '.*-maccatalyst.*'; Canonical = $false }
+    [PSCustomObject]@{ Group = 'gtk'; Key = 'views-gtk3'; Label = 'SkiaSharp.Views.Gtk3 package'; ShortLabel = 'GTK 3'; PackageId = 'SkiaSharp.Views.Gtk3'; AssemblyName = 'SkiaSharp.Views.Gtk3.dll'; FrameworkPattern = '.*'; Canonical = $false }
+    [PSCustomObject]@{ Group = 'gtk'; Key = 'views-gtk4'; Label = 'SkiaSharp.Views.Gtk4 package'; ShortLabel = 'GTK 4'; PackageId = 'SkiaSharp.Views.Gtk4'; AssemblyName = 'SkiaSharp.Views.Gtk4.dll'; FrameworkPattern = '.*'; Canonical = $true }
+    [PSCustomObject]@{ Group = 'apple'; Key = 'views-ios'; Label = 'iOS target-framework assembly'; ShortLabel = 'iOS'; PackageId = 'SkiaSharp.Views'; AssemblyName = 'SkiaSharp.Views.iOS.dll'; FrameworkPattern = '.*-ios.*'; Canonical = $true }
+    [PSCustomObject]@{ Group = 'apple'; Key = 'views-maccatalyst'; Label = 'Mac Catalyst target-framework assembly'; ShortLabel = 'Mac Catalyst'; PackageId = 'SkiaSharp.Views'; AssemblyName = 'SkiaSharp.Views.iOS.dll'; FrameworkPattern = '.*-maccatalyst.*'; Canonical = $false }
 )
 
 $assets = foreach ($assembly in @(Get-ChildItem -LiteralPath $ProductRoot -Filter '*.dll' -File -Recurse)) {
@@ -246,8 +220,6 @@ foreach ($variant in $variants) {
     $stagedDocumentation = Join-Path $directory ([IO.Path]::GetFileName($variant.Asset.Documentation))
     Copy-Item $variant.Asset.Assembly.FullName $stagedAssembly
     Copy-Item $variant.Asset.Documentation $stagedDocumentation
-    $variant | Add-Member StagedAssembly $stagedAssembly
-    $variant | Add-Member Documentation $stagedDocumentation
     $sources.Add([PSCustomObject]@{ SourceKey = $variant.Key; SearchPaths = @($DependencyRoot, $directory); Imports = @($stagedDocumentation) })
 }
 
@@ -277,11 +249,6 @@ $excludedTypes = @('SkiaSharp.GrVkYcbcrConversionInfo') + @(Get-AndroidDesignerR
 $removedTypes = @(Remove-GeneratedTypes $stagingRoot ($excludedTypes | Sort-Object -Unique))
 Write-Host "Removed $($removedTypes.Count) excluded generated type(s)."
 
-$donorsRoot = Join-Path $WorkspaceRoot 'variant-donors'
-Remove-Item -Recurse -Force $donorsRoot -ErrorAction Ignore
-foreach ($variant in $variants) {
-    $variant | Add-Member DonorRoot (Invoke-VariantDonor $variant $donorsRoot)
-}
 & (Join-Path $PSScriptRoot 'Merge-ApiDocVariants.ps1') -StagingRoot $stagingRoot -Variants $variants
 
 $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')

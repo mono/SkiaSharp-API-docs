@@ -1,11 +1,11 @@
 <#
 .SYNOPSIS
-Folds internal mdoc platform framework sources into one public Views moniker.
+Publishes the mdoc union of internal Views platform frameworks.
 
 .DESCRIPTION
-mdoc creates the structural union. This script uses isolated single-variant
-donors to select canonical metadata and remove mdoc's internal framework
-metadata before publishing the existing skiasharp-views moniker.
+mdoc already produces the structural, documentation, and provider union. This
+script uses its FrameworksIndex presence data only to choose the published
+variant metadata and to add platform notes.
 #>
 [CmdletBinding()]
 param(
@@ -17,512 +17,308 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 function Get-DocId([Xml.XmlElement] $Node, [bool] $Member) {
-    $path = if ($Member) { "MemberSignature[@Language='DocId']" } else { "TypeSignature[@Language='DocId']" }
-    $signature = $Node.SelectSingleNode($path)
+    $name = if ($Member) { 'MemberSignature' } else { 'TypeSignature' }
+    $signature = $Node.SelectSingleNode("$name[@Language='DocId']")
     if ($null -eq $signature -or [string]::IsNullOrWhiteSpace($signature.GetAttribute('Value'))) {
         throw "A $($Node.Name) node is missing its DocId signature."
     }
-    return $signature.GetAttribute('Value')
+    $signature.GetAttribute('Value')
 }
 
 function Get-TypeDocuments([string] $Root) {
-    $documents = @{}
+    $result = @{}
     foreach ($file in Get-ChildItem -LiteralPath $Root -Filter '*.xml' -File -Recurse) {
         if ($file.Directory.Name -eq 'FrameworksIndex') { continue }
-        $document = [Xml.XmlDocument]::new()
-        $document.PreserveWhitespace = $true
-        $document.Load($file.FullName)
+        $document = [Xml.XmlDocument]::new(); $document.PreserveWhitespace = $true; $document.Load($file.FullName)
         if ($null -eq $document.DocumentElement.SelectSingleNode("TypeSignature[@Language='DocId']")) { continue }
         $id = Get-DocId $document.DocumentElement $false
-        if ($documents.ContainsKey($id)) { throw "Duplicate type DocId '$id' in '$Root'." }
-        $documents[$id] = [PSCustomObject]@{ File = $file.FullName; Document = $document; Type = $document.DocumentElement }
+        if ($result.ContainsKey($id)) { throw "Duplicate type DocId '$id'." }
+        $result[$id] = [PSCustomObject]@{ File = $file.FullName; Document = $document; Node = $document.DocumentElement; Changed = $false }
     }
-    return $documents
+    $result
 }
 
-function Get-Presence([string] $IndexPath) {
-    if (-not (Test-Path -LiteralPath $IndexPath)) { throw "Missing donor FrameworksIndex '$IndexPath'." }
-    $document = [Xml.XmlDocument]::new()
-    $document.PreserveWhitespace = $true
-    $document.Load($IndexPath)
-    $types = @{}
-    $members = @{}
+function Get-Presence([string] $Path) {
+    if (-not (Test-Path -LiteralPath $Path)) { throw "Missing FrameworksIndex '$Path'." }
+    $document = [Xml.XmlDocument]::new(); $document.PreserveWhitespace = $true; $document.Load($Path)
+    $types = @{}; $members = @{}
     foreach ($type in @($document.SelectNodes('/Framework/Namespace/Type'))) {
         $typeId = $type.GetAttribute('Id')
-        if ([string]::IsNullOrWhiteSpace($typeId) -or $types.ContainsKey($typeId)) {
-            throw "Ambiguous type identity in '$IndexPath'."
-        }
-        $types[$typeId] = $true
+        if ([string]::IsNullOrWhiteSpace($typeId) -or $types.ContainsKey($typeId)) { throw "Ambiguous type identity in '$Path'." }
+        $memberSet = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
         foreach ($member in @($type.SelectNodes('Member'))) {
-            $memberId = $member.GetAttribute('Id')
-            if ([string]::IsNullOrWhiteSpace($memberId) -or $members.ContainsKey($memberId)) {
-                throw "Ambiguous member identity in '$IndexPath'."
-            }
-            $members[$memberId] = $true
+            $id = $member.GetAttribute('Id')
+            if ([string]::IsNullOrWhiteSpace($id) -or -not $memberSet.Add($id) -or $members.ContainsKey($id)) { throw "Ambiguous member identity '$id' in '$Path'." }
+            $members[$id] = $true
         }
+        $types[$typeId] = $memberSet
     }
-    return [PSCustomObject]@{ Document = $document; Types = $types; Members = $members }
+    [PSCustomObject]@{ Document = $document; Types = $types; Members = $members }
 }
 
-function Get-ExtensionMethods([string] $IndexPath) {
-    $document = [Xml.XmlDocument]::new()
-    $document.PreserveWhitespace = $true
-    $document.Load($IndexPath)
-    $methods = @{}
-    foreach ($extension in @($document.SelectNodes('/Overview/ExtensionMethods/ExtensionMethod'))) {
-        $member = $extension.SelectSingleNode('Member')
-        if ($null -eq $member) { throw "Extension method without a member in '$IndexPath'." }
-        $id = Get-DocId $member $true
-        if ($methods.ContainsKey($id)) { throw "Duplicate donor extension DocId '$id' in '$IndexPath'." }
-        $methods[$id] = $extension
-    }
-    return $methods
+function Get-Owners([object[]] $Group, [string] $Id, [bool] $Member) {
+    @($Group | Where-Object { if ($Member) { $_.Presence.Members.ContainsKey($Id) } else { $_.Presence.Types.ContainsKey($Id) } })
 }
 
-function Get-AssemblyOverview([string] $IndexPath, [string] $AssemblyName) {
-    $document = [Xml.XmlDocument]::new()
-    $document.PreserveWhitespace = $true
-    $document.Load($IndexPath)
-    $matches = @($document.SelectNodes("/Overview/Assemblies/Assembly[@Name='$AssemblyName']"))
-    if ($matches.Count -ne 1) {
-        throw "Expected exactly one '$AssemblyName' assembly overview in '$IndexPath'."
-    }
-    return $matches[0]
-}
-
-function Get-DonorMember([object] $Variant, [string] $TypeId, [string] $MemberId) {
-    if (-not $Variant.TypeDocuments.ContainsKey($TypeId)) { return $null }
-    $matches = @($Variant.TypeDocuments[$TypeId].Type.SelectNodes('Members/Member') | Where-Object { (Get-DocId $_ $true) -eq $MemberId })
-    if ($matches.Count -gt 1) { throw "Ambiguous donor member '$MemberId' in '$($Variant.Key)'." }
-    if ($matches.Count -eq 1) { return $matches[0] }
-    return $null
-}
-
-function Select-Donor([object[]] $Group, [string] $Id, [bool] $Member) {
-    $present = @($Group | Where-Object { if ($Member) { $_.Presence.Members.ContainsKey($Id) } else { $_.Presence.Types.ContainsKey($Id) } })
-    if ($present.Count -eq 0) { throw "No donor owns '$Id'." }
-    $canonical = @($present | Where-Object Canonical)
-    if ($canonical.Count -gt 1) { throw "Multiple canonical donors own '$Id'." }
-    if ($canonical.Count -eq 1) { return $canonical[0] }
-    if ($present.Count -eq 1) { return $present[0] }
-    throw "Multiple non-canonical donors own '$Id'."
-}
-
-function Replace-Children([Xml.XmlElement] $Target, [Xml.XmlElement] $Source, [string[]] $Preserve) {
-    $preserved = @{}
-    foreach ($name in $Preserve) {
-        $preserved[$name] = @($Target.SelectNodes($name))
-    }
-    $depth = 0
-    $parent = $Target.ParentNode
-    while ($parent -is [Xml.XmlElement]) {
-        $depth++
-        $parent = $parent.ParentNode
-    }
-    $childWhitespace = "`n" + ('  ' * ($depth + 1))
-    $closingWhitespace = "`n" + ('  ' * $depth)
-    foreach ($child in @($Target.ChildNodes)) {
-        [void]$Target.RemoveChild($child)
-    }
-    foreach ($child in @($Source.ChildNodes)) {
-        if ($child.NodeType -ne [Xml.XmlNodeType]::Element) { continue }
-        if ($child.Name -in $Preserve) {
-            foreach ($preservedNode in $preserved[$child.Name]) {
-                [void]$Target.AppendChild($Target.OwnerDocument.CreateWhitespace($childWhitespace))
-                [void]$Target.AppendChild($preservedNode)
-            }
-        }
-        else {
-            [void]$Target.AppendChild($Target.OwnerDocument.CreateWhitespace($childWhitespace))
-            [void]$Target.AppendChild($Target.OwnerDocument.ImportNode($child, $true))
-        }
-    }
-    [void]$Target.AppendChild($Target.OwnerDocument.CreateWhitespace($closingWhitespace))
-}
-
-function Get-NonEmptyDocs([Xml.XmlElement] $Node) {
-    $docs = $Node.SelectSingleNode('Docs')
-    return $null -ne $docs -and -not [string]::IsNullOrWhiteSpace(($docs.InnerText -replace '\s+', ' ').Trim())
-}
-
-function Select-DocumentationDonor([object[]] $Group, [string] $Id, [bool] $Member, [string] $TypeId, [object] $Selected) {
-    $selectedNode = if ($Member) { Get-DonorMember $Selected $TypeId $Id } else { $Selected.TypeDocuments[$Id].Type }
-    if (Get-NonEmptyDocs $selectedNode) { return $selectedNode }
-    foreach ($variant in $Group) {
-        $present = if ($Member) { $variant.Presence.Members.ContainsKey($Id) } else { $variant.Presence.Types.ContainsKey($Id) }
-        if (-not $present) { continue }
-        $candidate = if ($Member) { Get-DonorMember $variant $TypeId $Id } else { $variant.TypeDocuments[$Id].Type }
-        if (Get-NonEmptyDocs $candidate) { return $candidate }
-    }
-    return $selectedNode
-}
-
-function Copy-Docs([Xml.XmlElement] $Target, [Xml.XmlElement] $Source) {
-    $existing = $Target.SelectSingleNode('Docs')
-    $docs = $Source.SelectSingleNode('Docs')
-    if ($null -ne $existing -and $null -ne $docs) {
-        [void]$Target.ReplaceChild($Target.OwnerDocument.ImportNode($docs, $true), $existing)
-    }
-    elseif ($null -ne $existing) {
-        [void]$Target.RemoveChild($existing)
-    }
-    elseif ($null -ne $docs) {
-        [void]$Target.AppendChild($Target.OwnerDocument.ImportNode($docs, $true))
-    }
-}
-
-function Assert-AssemblyProviders([Xml.XmlElement] $Target, [Xml.XmlElement] $Donor, [string] $Id) {
-    foreach ($provider in @($Donor.SelectNodes('AssemblyInfo'))) {
-        $name = $provider.SelectSingleNode('AssemblyName').InnerText
-        $version = $provider.SelectSingleNode('AssemblyVersion').InnerText
-        $found = @($Target.SelectNodes('AssemblyInfo') | Where-Object {
-            $_.SelectSingleNode('AssemblyName').InnerText -eq $name -and $_.SelectSingleNode('AssemblyVersion').InnerText -eq $version
-        })
-        if ($found.Count -ne 1) { throw "mdoc did not retain exactly one real AssemblyInfo provider '$name $version' for '$Id'." }
-    }
+function Get-CanonicalOwner([object[]] $Owners, [string] $Id) {
+    if ($Owners.Count -eq 0) { throw "No variant owns '$Id'." }
+    if ($Owners.Count -eq 1) { return $Owners[0] }
+    $canonical = @($Owners | Where-Object Canonical)
+    if ($canonical.Count -ne 1) { throw "Ambiguous canonical variant for '$Id'." }
+    $canonical[0]
 }
 
 function Add-Note([Xml.XmlElement] $Node, [string] $Text) {
     $docs = $Node.SelectSingleNode('Docs')
-    if ($null -eq $docs) {
-        $docs = $Node.OwnerDocument.CreateElement('Docs')
-        [void]$Node.AppendChild($docs)
-    }
+    if ($null -eq $docs) { $docs = $Node.OwnerDocument.CreateElement('Docs'); [void]$Node.AppendChild($docs) }
     $remarks = $docs.SelectSingleNode('remarks')
-    if ($null -eq $remarks) {
-        $remarks = $Node.OwnerDocument.CreateElement('remarks')
-        [void]$docs.AppendChild($remarks)
+    if ($null -eq $remarks) { $remarks = $Node.OwnerDocument.CreateElement('remarks'); [void]$docs.AppendChild($remarks) }
+    if (@($remarks.SelectNodes('para') | Where-Object { $_.InnerText -eq $Text }).Count -eq 0) {
+        $paragraph = $Node.OwnerDocument.CreateElement('para'); $paragraph.InnerText = $Text; [void]$remarks.AppendChild($paragraph)
     }
-    foreach ($paragraph in @($remarks.SelectNodes('para'))) {
-        if ($paragraph.InnerText -eq $Text) { return }
-    }
-    $paragraph = $Node.OwnerDocument.CreateElement('para')
-    $paragraph.InnerText = $Text
-    [void]$remarks.AppendChild($paragraph)
 }
 
-function Get-StructuralFingerprint([Xml.XmlElement] $Node, [bool] $Member) {
-    $copy = [Xml.XmlDocument]::new()
-    $element = $copy.ImportNode($Node, $true)
-    [void]$copy.AppendChild($element)
-    foreach ($child in @($element.ChildNodes)) {
-        if ($child.NodeType -eq [Xml.XmlNodeType]::Element -and ($child.Name -in @('AssemblyInfo', 'Docs') -or (-not $Member -and $child.Name -eq 'Members'))) {
-            [void]$element.RemoveChild($child)
-        }
-    }
-    Remove-FormattingWhitespace $element
-    return ($element.OuterXml -replace '\s+', '')
+function Get-ScopedElements([Xml.XmlElement] $Node, [bool] $Member, [string] $Name) {
+    if ($Member) { return @($Node.SelectNodes("$Name")) }
+    @($Node.SelectNodes(".//$Name[not(ancestor::Members)]"))
 }
 
-function Remove-FormattingWhitespace([Xml.XmlNode] $Node) {
+function Get-CSharpSignature([Xml.XmlElement] $Node, [bool] $Member, [object] $Owner) {
+    $name = if ($Member) { 'MemberSignature' } else { 'TypeSignature' }
+    $signatures = @(Get-ScopedElements $Node $Member "$name[@Language='C#']")
+    $marked = @($signatures | Where-Object { $_.GetAttribute('FrameworkAlternate') -eq $Owner.Key })
+    if ($marked.Count -eq 1) { return $marked[0].GetAttribute('Value') }
+    $unmarked = @($signatures | Where-Object { -not $_.HasAttribute('FrameworkAlternate') })
+    if ($unmarked.Count -eq 1 -and $Owner.Canonical) { return $unmarked[0].GetAttribute('Value') }
+    if ($signatures.Count -eq 1) { return $signatures[0].GetAttribute('Value') }
+    throw "Could not identify the $($Owner.Key) C# signature for '$((Get-DocId $Node $Member))'."
+}
+
+function Remove-Alternates([Xml.XmlElement] $Node, [bool] $Member, [string] $CanonicalKey) {
     foreach ($child in @($Node.ChildNodes)) {
-        if ($child.NodeType -eq [Xml.XmlNodeType]::Whitespace -or
-            ($child.NodeType -eq [Xml.XmlNodeType]::Text -and [string]::IsNullOrWhiteSpace($child.Value))) {
+        if ($child.NodeType -ne [Xml.XmlNodeType]::Element) { continue }
+        if (-not $Member -and $child.Name -eq 'Members') { continue }
+        if ($child.GetAttribute('FrameworkAlternate') -and $child.GetAttribute('FrameworkAlternate') -ne $CanonicalKey) {
             [void]$Node.RemoveChild($child)
+            continue
         }
-        elseif ($child.NodeType -eq [Xml.XmlNodeType]::Element) {
-            Remove-FormattingWhitespace $child
-        }
+        Remove-Alternates $child $true $CanonicalKey
     }
 }
 
-function Add-VariantNotes([Xml.XmlElement] $Target, [object[]] $Group, [string] $Id, [bool] $Member, [object] $Selected) {
-    $present = @($Group | Where-Object { if ($Member) { $_.Presence.Members.ContainsKey($Id) } else { $_.Presence.Types.ContainsKey($Id) } })
-    if ($present.Count -ne $Group.Count) {
-        if ($Group[0].Group -eq 'apple' -and $Group.Count -eq 2) {
-            $other = @($Group | Where-Object { $_.Key -ne $present[0].Key })[0]
-            Add-Note $Target "This API is available in the $($present[0].Label) but not in the $($other.Label)."
+function Remove-InternalMetadata([Xml.XmlNode] $Node, [bool] $SkipMembers = $false) {
+    $changed = $false
+    if ($Node -is [Xml.XmlElement]) {
+        foreach ($name in @('FrameworkAlternate', 'FrameworkOnly', 'Index')) {
+            if ($Node.HasAttribute($name)) { [void]$Node.RemoveAttribute($name); $changed = $true }
         }
-        else {
-            Add-Note $Target "This API is available only in the $($present[0].Label)."
+    }
+    foreach ($child in @($Node.ChildNodes)) {
+        if ($child.NodeType -ne [Xml.XmlNodeType]::Element) { continue }
+        if ($SkipMembers -and $child.Name -eq 'Members') { continue }
+        if ($child.Name -in @('FrameworkAlternate', 'FrameworkOnly')) { [void]$Node.RemoveChild($child); $changed = $true }
+        elseif (Remove-InternalMetadata $child $false) { $changed = $true }
+    }
+    $changed
+}
+
+function Sort-Signatures([Xml.XmlElement] $Node, [bool] $Member) {
+    $name = if ($Member) { 'MemberSignature' } else { 'TypeSignature' }
+    $signatures = @($Node.SelectNodes($name))
+    if ($signatures.Count -lt 2) { return }
+    $anchor = @($Node.ChildNodes | Where-Object NodeType -eq ([Xml.XmlNodeType]::Element) | Where-Object Name -ne $name)[0]
+    foreach ($signature in $signatures) {
+        [void]$Node.RemoveChild($signature)
+    }
+    foreach ($signature in @($signatures | Sort-Object {
+        switch ($_.GetAttribute('Language')) {
+            'C#' { 0 }
+            'ILAsm' { 1 }
+            'DocId' { 2 }
+            default { 3 }
         }
+    })) {
+        [void]$Node.InsertBefore($signature, $anchor)
+    }
+}
+
+function Format-ElementChildren([Xml.XmlElement] $Node) {
+    foreach ($child in @($Node.ChildNodes | Where-Object NodeType -eq ([Xml.XmlNodeType]::Element))) {
+        if ($child.Name -ne 'Docs') {
+            Format-ElementChildren $child
+        }
+    }
+    if (@($Node.ChildNodes | Where-Object {
+        $_.NodeType -eq [Xml.XmlNodeType]::CData -or
+        ($_.NodeType -eq [Xml.XmlNodeType]::Text -and -not [string]::IsNullOrWhiteSpace($_.Value))
+    }).Count -gt 0) {
         return
     }
-    $nodes = foreach ($variant in $present) {
-        $node = if ($Member) { Get-DonorMember $variant ($Target.GetAttribute('__typeDocId')) $Id } else { $variant.TypeDocuments[$Id].Type }
-        if ($null -eq $node) { throw "Donor '$($variant.Key)' has no node for '$Id'." }
-        [PSCustomObject]@{ Variant = $variant; Node = $node }
+    $children = @($Node.ChildNodes | Where-Object NodeType -eq ([Xml.XmlNodeType]::Element))
+    if ($children.Count -eq 0) { return }
+    foreach ($whitespace in @($Node.ChildNodes | Where-Object {
+        $_.NodeType -eq [Xml.XmlNodeType]::Whitespace -or
+        ($_.NodeType -eq [Xml.XmlNodeType]::Text -and [string]::IsNullOrWhiteSpace($_.Value))
+    })) {
+        [void]$Node.RemoveChild($whitespace)
     }
-    $signaturePath = if ($Member) { "MemberSignature[@Language='C#']" } else { "TypeSignature[@Language='C#']" }
-    $csharp = @($nodes | ForEach-Object { $_.Node.SelectSingleNode($signaturePath) } | ForEach-Object { $_.GetAttribute('Value') })
-    if (@($csharp | Sort-Object -Unique).Count -gt 1) {
-        $parts = foreach ($entry in $nodes) {
-            $signature = $entry.Node.SelectSingleNode($signaturePath)
-            "$($entry.Variant.ShortLabel): $($signature.GetAttribute('Value'))"
-        }
-        Add-Note $Target "Platform signature: $($parts -join '; ') Displayed signature: $($Selected.ShortLabel)."
+    $depth = 0
+    for ($parent = $Node.ParentNode; $parent -is [Xml.XmlElement]; $parent = $parent.ParentNode) {
+        $depth++
     }
-    elseif (@($nodes | ForEach-Object { Get-StructuralFingerprint $_.Node $Member } | Sort-Object -Unique).Count -gt 1) {
-        Add-Note $Target "Platform metadata differs between variants. Displayed metadata: $($Selected.ShortLabel)."
+    foreach ($child in $children) {
+        [void]$Node.InsertBefore($Node.OwnerDocument.CreateWhitespace("`n" + ('  ' * ($depth + 1))), $child)
     }
+    [void]$Node.AppendChild($Node.OwnerDocument.CreateWhitespace("`n" + ('  ' * $depth)))
 }
 
-function Add-SortedChild(
-    [Xml.XmlElement] $Parent,
-    [Xml.XmlElement] $Child,
-    [string] $ExistingPath,
-    [scriptblock] $GetSortKey,
-    [int] $Indent
-) {
+function Process-Node([Xml.XmlElement] $Node, [object[]] $Group, [string] $Id, [bool] $Member) {
+    $owners = Get-Owners $Group $Id $Member
+    $canonical = Get-CanonicalOwner $owners $Id
+    if ($owners.Count -eq 1) {
+        if ($Group[0].Group -eq 'apple' -and $Group.Count -eq 2) {
+            $other = @($Group | Where-Object { $_.Key -ne $canonical.Key })[0]
+            Add-Note $Node "This API is available in the $($canonical.Label) but not in the $($other.Label)."
+        } else { Add-Note $Node "This API is available only in the $($canonical.Label)." }
+        [void](Remove-InternalMetadata $Node (-not $Member))
+        Sort-Signatures $Node $Member
+        return
+    }
+    $signatures = @($owners | ForEach-Object { [PSCustomObject]@{ Owner = $_; Value = Get-CSharpSignature $Node $Member $_ } })
+    if (@($signatures.Value | Sort-Object -Unique).Count -gt 1) {
+        $parts = @($signatures | ForEach-Object { "$($_.Owner.ShortLabel): $($_.Value)" })
+        Add-Note $Node "Platform signature: $($parts -join '; ') Displayed signature: $($canonical.ShortLabel)."
+    } elseif (@(Get-ScopedElements $Node $Member "*[@FrameworkAlternate]").Count -gt 0) {
+        Add-Note $Node "Platform metadata differs between variants. Displayed metadata: $($canonical.ShortLabel)."
+    }
+    Remove-Alternates $Node $Member $canonical.Key
+    [void](Remove-InternalMetadata $Node (-not $Member))
+    Sort-Signatures $Node $Member
+}
+
+function Add-SortedChild([Xml.XmlElement] $Parent, [Xml.XmlElement] $Child, [string] $Path, [scriptblock] $Key) {
     $document = $Parent.OwnerDocument
-    $imported = $document.ImportNode($Child, $true)
-    $sortKey = & $GetSortKey $Child
-    foreach ($existing in @($Parent.SelectNodes($ExistingPath))) {
-        if ([StringComparer]::OrdinalIgnoreCase.Compare($sortKey, (& $GetSortKey $existing)) -lt 0) {
-            [void]$Parent.InsertBefore($imported, $existing)
-            [void]$Parent.InsertBefore($document.CreateWhitespace("`n" + (' ' * $Indent)), $existing)
+    $copy = $document.ImportNode($Child, $true)
+    $value = & $Key $Child
+    $depth = 0
+    for ($node = $Parent.ParentNode; $node -is [Xml.XmlElement]; $node = $node.ParentNode) {
+        $depth++
+    }
+    $whitespace = $document.CreateWhitespace("`n" + ('  ' * ($depth + 1)))
+    foreach ($existing in @($Parent.SelectNodes($Path))) {
+        if ([StringComparer]::OrdinalIgnoreCase.Compare($value, (& $Key $existing)) -lt 0) {
+            [void]$Parent.InsertBefore($copy, $existing)
+            [void]$Parent.InsertBefore($whitespace, $existing)
             return
         }
     }
-    $closingWhitespace = if ($Parent.LastChild.NodeType -eq [Xml.XmlNodeType]::Whitespace) { $Parent.LastChild } else { $null }
-    if ($null -ne $closingWhitespace) {
-        [void]$Parent.InsertBefore($document.CreateWhitespace("`n" + (' ' * $Indent)), $closingWhitespace)
-        [void]$Parent.InsertBefore($imported, $closingWhitespace)
-    }
-    else {
-        [void]$Parent.AppendChild($document.CreateWhitespace("`n" + (' ' * $Indent)))
-        [void]$Parent.AppendChild($imported)
-    }
-}
-
-function Move-VariantAssemblyOverviews([Xml.XmlDocument] $Index, [object[]] $Variants) {
-    $assemblies = $Index.SelectSingleNode('/Overview/Assemblies')
-    $nodes = @{}
-    foreach ($assemblyGroup in @($Variants | Group-Object { [IO.Path]::GetFileNameWithoutExtension($_.Asset.Assembly.Name) })) {
-        $name = $assemblyGroup.Name
-        $matches = @($assemblies.SelectNodes("Assembly[@Name='$name']"))
-        if ($matches.Count -ne 1) {
-            throw "Expected exactly one assembly overview for variant assembly '$name'."
-        }
-        $selected = @($assemblyGroup.Group | Where-Object Canonical)
-        if ($selected.Count -gt 1) {
-            throw "Multiple canonical donors provide assembly overview '$name'."
-        }
-        if ($selected.Count -eq 0) {
-            if ($assemblyGroup.Count -ne 1) {
-                throw "Multiple non-canonical donors provide assembly overview '$name'."
-            }
-            $selected = @($assemblyGroup.Group)
-        }
-        $nodes[$name] = $selected[0].AssemblyOverview
-    }
-    foreach ($name in $nodes.Keys) {
-        $node = $assemblies.SelectSingleNode("Assembly[@Name='$name']")
-        $whitespace = $node.PreviousSibling
-        [void]$assemblies.RemoveChild($node)
-        if ($null -ne $whitespace -and $whitespace.NodeType -eq [Xml.XmlNodeType]::Whitespace) {
-            [void]$assemblies.RemoveChild($whitespace)
-        }
-    }
-    foreach ($name in @($nodes.Keys | Sort-Object)) {
-        Add-SortedChild $assemblies $nodes[$name] "Assembly[starts-with(@Name, 'SkiaSharp.Views.') and not(starts-with(@Name, 'SkiaSharp.Views.Maui'))]" {
-            param($node)
-            $node.GetAttribute('Name')
-        } 4
+    if ($Parent.LastChild -is [Xml.XmlWhitespace]) {
+        [void]$Parent.InsertBefore($whitespace, $Parent.LastChild)
+        [void]$Parent.InsertBefore($copy, $Parent.LastChild)
+    } else {
+        [void]$Parent.AppendChild($whitespace)
+        [void]$Parent.AppendChild($copy)
     }
 }
 
 function Merge-FrameworkIndex([Xml.XmlDocument] $Public, [Xml.XmlDocument] $Internal) {
-    $publicFramework = $Public.DocumentElement
+    $framework = $Public.DocumentElement
     foreach ($assembly in @($Internal.SelectNodes('/Framework/Assemblies/Assembly'))) {
-        $name = $assembly.GetAttribute('Name')
-        $version = $assembly.GetAttribute('Version')
-        if (@($publicFramework.SelectNodes("Assemblies/Assembly[@Name='$name' and @Version='$version']")).Count -eq 0) {
-            Add-SortedChild ($publicFramework.SelectSingleNode('Assemblies')) $assembly 'Assembly' {
-                param($node)
-                "$($node.GetAttribute('Name'))|$($node.GetAttribute('Version'))"
-            } 4
-        }
+        $name = $assembly.GetAttribute('Name'); $version = $assembly.GetAttribute('Version')
+        if (@($framework.SelectNodes("Assemblies/Assembly[@Name='$name' and @Version='$version']")).Count -eq 0) { Add-SortedChild ($framework.SelectSingleNode('Assemblies')) $assembly 'Assembly' { param($n) "$($n.GetAttribute('Name'))|$($n.GetAttribute('Version'))" } }
     }
     foreach ($sourceNamespace in @($Internal.SelectNodes('/Framework/Namespace'))) {
-        $name = $sourceNamespace.GetAttribute('Name')
-        $targetNamespace = $publicFramework.SelectSingleNode("Namespace[@Name='$name']")
-        if ($null -eq $targetNamespace) {
-            Add-SortedChild $publicFramework $sourceNamespace 'Namespace' {
-                param($node)
-                $node.GetAttribute('Name')
-            } 2
-            continue
-        }
+        $targetNamespace = $framework.SelectSingleNode("Namespace[@Name='$($sourceNamespace.GetAttribute('Name'))']")
+        if ($null -eq $targetNamespace) { Add-SortedChild $framework $sourceNamespace 'Namespace' { param($n) $n.GetAttribute('Name') }; continue }
         foreach ($sourceType in @($sourceNamespace.SelectNodes('Type'))) {
-            $id = $sourceType.GetAttribute('Id')
-            $targetType = $targetNamespace.SelectSingleNode("Type[@Id='$id']")
-            if ($null -eq $targetType) {
-                Add-SortedChild $targetNamespace $sourceType 'Type' {
-                    param($node)
-                    $node.GetAttribute('Id')
-                } 4
-                continue
-            }
-            foreach ($sourceMember in @($sourceType.SelectNodes('Member'))) {
-                $memberId = $sourceMember.GetAttribute('Id')
-                if (@($targetType.SelectNodes("Member[@Id='$memberId']")).Count -eq 0) {
-                    Add-SortedChild $targetType $sourceMember 'Member' {
-                        param($node)
-                        $node.GetAttribute('Id')
-                    } 6
-                }
-            }
+            $targetType = $targetNamespace.SelectSingleNode("Type[@Id='$($sourceType.GetAttribute('Id'))']")
+            if ($null -eq $targetType) { Add-SortedChild $targetNamespace $sourceType 'Type' { param($n) $n.GetAttribute('Id') }; continue }
+            foreach ($member in @($sourceType.SelectNodes('Member'))) { if (@($targetType.SelectNodes("Member[@Id='$($member.GetAttribute('Id'))']")).Count -eq 0) { Add-SortedChild $targetType $member 'Member' { param($n) $n.GetAttribute('Id') } } }
         }
     }
 }
 
-function Remove-InternalMetadata([Xml.XmlNode] $Node) {
-    if ($Node -is [Xml.XmlElement]) {
-        foreach ($name in @('FrameworkAlternate', 'FrameworkOnly', 'Index')) {
-            [void]$Node.RemoveAttribute($name)
-        }
+function Assert-FrameworkIndexUnion([Xml.XmlDocument] $Public, [object[]] $Variants) {
+    $types = @{}
+    foreach ($type in @($Public.SelectNodes('/Framework/Namespace/Type'))) {
+        $members = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+        foreach ($member in @($type.SelectNodes('Member'))) { [void]$members.Add($member.GetAttribute('Id')) }
+        $types[$type.GetAttribute('Id')] = $members
     }
-    foreach ($child in @($Node.ChildNodes)) {
-        if ($null -eq $child) { continue }
-        if ($child.NodeType -eq [Xml.XmlNodeType]::Element -and $child.Name -in @('FrameworkAlternate', 'FrameworkOnly')) {
-            [void]$Node.RemoveChild($child)
-        }
-        elseif ($child.NodeType -eq [Xml.XmlNodeType]::Element) { Remove-InternalMetadata $child }
-    }
-}
-
-foreach ($variant in $Variants) {
-    $variant | Add-Member -NotePropertyName Presence -NotePropertyValue (Get-Presence (Join-Path $variant.DonorRoot "FrameworksIndex/$($variant.Key).xml"))
-    $variant | Add-Member -NotePropertyName TypeDocuments -NotePropertyValue (Get-TypeDocuments $variant.DonorRoot)
-    $variant | Add-Member -NotePropertyName ExtensionMethods -NotePropertyValue (Get-ExtensionMethods (Join-Path $variant.DonorRoot 'index.xml'))
-    $assemblyName = [IO.Path]::GetFileNameWithoutExtension($variant.Asset.Assembly.Name)
-    $variant | Add-Member -NotePropertyName AssemblyOverview -NotePropertyValue (Get-AssemblyOverview (Join-Path $variant.DonorRoot 'index.xml') $assemblyName)
-}
-
-$publicTypes = Get-TypeDocuments $StagingRoot
-foreach ($group in @($Variants | Group-Object Group)) {
-    $variantsInGroup = @($group.Group)
-    foreach ($variant in $variantsInGroup) {
+    foreach ($variant in $Variants) {
         foreach ($typeId in $variant.Presence.Types.Keys) {
-            if (-not $variant.TypeDocuments.ContainsKey($typeId)) { throw "Donor '$($variant.Key)' index references missing type '$typeId'." }
-        }
-    }
-    $typeIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
-    foreach ($variant in $variantsInGroup) {
-        foreach ($id in $variant.Presence.Types.Keys) { [void]$typeIds.Add($id) }
-    }
-    foreach ($typeId in @($typeIds | Sort-Object)) {
-        if (-not $publicTypes.ContainsKey($typeId)) { throw "mdoc structural union omitted type '$typeId'." }
-        $targetType = $publicTypes[$typeId].Type
-        $selected = Select-Donor $variantsInGroup $typeId $false
-        $sourceType = $selected.TypeDocuments[$typeId].Type
-        Replace-Children $targetType $sourceType @('AssemblyInfo', 'Members')
-        foreach ($providerVariant in @($variantsInGroup | Where-Object { $_.Presence.Types.ContainsKey($typeId) })) {
-            Assert-AssemblyProviders $targetType $providerVariant.TypeDocuments[$typeId].Type $typeId
-        }
-        Copy-Docs $targetType (Select-DocumentationDonor $variantsInGroup $typeId $false $null $selected)
-        $targetType.SetAttribute('__typeDocId', $typeId)
-        Add-VariantNotes $targetType $variantsInGroup $typeId $false $selected
-        $publicMembers = @{}
-        foreach ($member in @($targetType.SelectNodes('Members/Member'))) {
-            $memberId = Get-DocId $member $true
-            if ($publicMembers.ContainsKey($memberId)) { throw "Ambiguous public member '$memberId'." }
-            $publicMembers[$memberId] = $member
-        }
-        $memberPrefix = "$($typeId.Substring(2))."
-        $memberIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
-        foreach ($variant in $variantsInGroup) {
-            foreach ($id in $variant.Presence.Members.Keys) {
-                if ($id.Length -gt 2 -and $id.Substring(2).StartsWith($memberPrefix, [StringComparison]::Ordinal)) { [void]$memberIds.Add($id) }
+            if (-not $types.ContainsKey($typeId)) { throw "Public FrameworksIndex omitted type '$typeId' from '$($variant.Key)'." }
+            foreach ($memberId in $variant.Presence.Types[$typeId]) {
+                if (-not $types[$typeId].Contains($memberId)) { throw "Public FrameworksIndex omitted member '$memberId' from '$($variant.Key)'." }
             }
-        }
-        foreach ($memberId in @($memberIds | Sort-Object)) {
-            if (-not $publicMembers.ContainsKey($memberId)) { throw "mdoc structural union omitted member '$memberId'." }
-            $selectedMember = Select-Donor $variantsInGroup $memberId $true
-            $sourceMember = Get-DonorMember $selectedMember $typeId $memberId
-            if ($null -eq $sourceMember) { throw "Donor '$($selectedMember.Key)' index does not match member '$memberId'." }
-            $targetMember = $publicMembers[$memberId]
-            Replace-Children $targetMember $sourceMember @('AssemblyInfo')
-            foreach ($providerVariant in @($variantsInGroup | Where-Object { $_.Presence.Members.ContainsKey($memberId) })) {
-                Assert-AssemblyProviders $targetMember (Get-DonorMember $providerVariant $typeId $memberId) $memberId
-            }
-            Copy-Docs $targetMember (Select-DocumentationDonor $variantsInGroup $memberId $true $typeId $selectedMember)
-            $targetMember.SetAttribute('__typeDocId', $typeId)
-            Add-VariantNotes $targetMember $variantsInGroup $memberId $true $selectedMember
-            $targetMember.RemoveAttribute('__typeDocId')
-            $targetFingerprint = Get-StructuralFingerprint $targetMember $true
-            $sourceFingerprint = Get-StructuralFingerprint $sourceMember $true
-            if ($targetFingerprint -ne $sourceFingerprint) { throw "Canonical structural comparison failed for member '$memberId'." }
-        }
-        $targetType.RemoveAttribute('__typeDocId')
-        if ((Get-StructuralFingerprint $targetType $false) -ne (Get-StructuralFingerprint $sourceType $false)) {
-            throw "Canonical structural comparison failed for type '$typeId'."
         }
     }
 }
 
-$publicTypes.Values | ForEach-Object { $_.Document.Save($_.File) }
+foreach ($variant in $Variants) { $variant | Add-Member -NotePropertyName Presence -NotePropertyValue (Get-Presence (Join-Path $StagingRoot "FrameworksIndex/$($variant.Key).xml")) }
+$types = Get-TypeDocuments $StagingRoot
+foreach ($group in @($Variants | Group-Object Group)) {
+    $variantsInGroup = @($group.Group); $ids = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($variant in $variantsInGroup) { foreach ($id in $variant.Presence.Types.Keys) { [void]$ids.Add($id) } }
+    foreach ($typeId in @($ids | Sort-Object)) {
+        if (-not $types.ContainsKey($typeId)) { throw "mdoc structural union omitted type '$typeId'." }
+        $type = $types[$typeId].Node; Process-Node $type $variantsInGroup $typeId $false; $types[$typeId].Changed = $true
+        $members = @{}
+        foreach ($member in @($type.SelectNodes('Members/Member'))) { $id = Get-DocId $member $true; if ($members.ContainsKey($id)) { throw "Ambiguous public member '$id'." }; $members[$id] = $member }
+        $memberIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+        foreach ($variant in $variantsInGroup) { if ($variant.Presence.Types.ContainsKey($typeId)) { foreach ($id in $variant.Presence.Types[$typeId]) { [void]$memberIds.Add($id) } } }
+        foreach ($id in @($memberIds | Sort-Object)) { if (-not $members.ContainsKey($id)) { throw "mdoc structural union omitted member '$id'." }; Process-Node $members[$id] $variantsInGroup $id $true }
+    }
+}
+foreach ($entry in $types.Values) {
+    if ((Remove-InternalMetadata $entry.Document) -or $entry.Changed) {
+        Format-ElementChildren $entry.Node
+        $entry.Document.Save($entry.File)
+    }
+}
 
 $publicIndexPath = Join-Path $StagingRoot 'FrameworksIndex/skiasharp-views.xml'
-if (-not (Test-Path -LiteralPath $publicIndexPath)) { throw "The public skiasharp-views FrameworksIndex was not generated." }
-$publicIndex = [Xml.XmlDocument]::new()
-$publicIndex.PreserveWhitespace = $true
-$publicIndex.Load($publicIndexPath)
-foreach ($variant in $Variants) {
-    Merge-FrameworkIndex $publicIndex $variant.Presence.Document
-    Remove-Item -LiteralPath (Join-Path $StagingRoot "FrameworksIndex/$($variant.Key).xml") -Force -ErrorAction Stop
-}
-Remove-InternalMetadata $publicIndex
+$publicIndex = [Xml.XmlDocument]::new(); $publicIndex.PreserveWhitespace = $true; $publicIndex.Load($publicIndexPath)
+foreach ($variant in $Variants) { Merge-FrameworkIndex $publicIndex $variant.Presence.Document; Remove-Item -LiteralPath (Join-Path $StagingRoot "FrameworksIndex/$($variant.Key).xml") -Force }
+Assert-FrameworkIndexUnion $publicIndex $Variants
+[void](Remove-InternalMetadata $publicIndex)
 $publicIndex.Save($publicIndexPath)
 
-$indexPath = Join-Path $StagingRoot 'index.xml'
-$index = [Xml.XmlDocument]::new()
-$index.PreserveWhitespace = $true
-$index.Load($indexPath)
-Move-VariantAssemblyOverviews $index $Variants
-$extensionGroups = @{}
-foreach ($extension in @($index.SelectNodes('/Overview/ExtensionMethods/ExtensionMethod'))) {
-    $member = $extension.SelectSingleNode('Member')
-    if ($null -eq $member) { throw 'Public extension method has no member.' }
-    $id = Get-DocId $member $true
-    if (-not $extensionGroups.ContainsKey($id)) { $extensionGroups[$id] = [Collections.Generic.List[Xml.XmlElement]]::new() }
-    $extensionGroups[$id].Add($extension)
+$indexPath = Join-Path $StagingRoot 'index.xml'; $index = [Xml.XmlDocument]::new(); $index.PreserveWhitespace = $true; $index.Load($indexPath)
+$assemblies = $index.SelectSingleNode('/Overview/Assemblies')
+foreach ($name in @('SkiaSharp.Views.Gtk3', 'SkiaSharp.Views.Gtk4', 'SkiaSharp.Views.iOS')) {
+    $node = $assemblies.SelectSingleNode("Assembly[@Name='$name']"); if ($null -eq $node) { throw "Missing assembly overview '$name'." }
+    $whitespace = $node.PreviousSibling
+    [void]$assemblies.RemoveChild($node)
+    if ($whitespace -is [Xml.XmlWhitespace]) { [void]$assemblies.RemoveChild($whitespace) }
+    Add-SortedChild $assemblies $node "Assembly[starts-with(@Name, 'SkiaSharp.Views.')]" { param($n) $n.GetAttribute('Name') }
 }
-foreach ($id in $extensionGroups.Keys) {
-    $extensions = $extensionGroups[$id]
-    if ($extensions.Count -le 1) { continue }
-    $owners = @($Variants | Where-Object { $_.Presence.Members.ContainsKey($id) })
-    if ($owners.Count -eq 0) {
-        throw "Duplicate non-variant extension DocId '$id'."
-    }
-    $owner = Select-Donor $owners $id $true
-    if (-not $owner.ExtensionMethods.ContainsKey($id)) {
-        throw "Donor '$($owner.Key)' has no extension index entry for '$id'."
-    }
-    $replacement = $index.ImportNode($owner.ExtensionMethods[$id], $true)
-    [void]$extensions[0].ParentNode.ReplaceChild($replacement, $extensions[0])
-    foreach ($duplicate in @($extensions | Select-Object -Skip 1)) { [void]$duplicate.ParentNode.RemoveChild($duplicate) }
+$ios = $assemblies.SelectSingleNode("Assembly[@Name='SkiaSharp.Views.iOS']")
+foreach ($attribute in @($ios.SelectNodes('Attributes/Attribute') | Where-Object { $_.InnerText -match 'System\.Runtime\.Versioning\.(SupportedOSPlatform|TargetPlatform)\("MacCatalyst' })) {
+    $whitespace = $attribute.PreviousSibling
+    [void]$attribute.ParentNode.RemoveChild($attribute)
+    if ($whitespace -is [Xml.XmlWhitespace]) { [void]$whitespace.ParentNode.RemoveChild($whitespace) }
 }
-Remove-InternalMetadata $index
-$publicExtensionIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
-foreach ($extension in @($index.SelectNodes('/Overview/ExtensionMethods/ExtensionMethod'))) {
-    $member = $extension.SelectSingleNode('Member')
-    $id = Get-DocId $member $true
-    if (-not $publicExtensionIds.Add($id)) {
-        throw "Duplicate public extension DocId '$id' after variant reconciliation."
-    }
+$attributes = $ios.SelectSingleNode('Attributes')
+$publicKey = $ios.SelectSingleNode('Attributes/following-sibling::AssemblyPublicKey[1]')
+if ($null -ne $publicKey) {
+    $whitespace = $publicKey.PreviousSibling
+    [void]$ios.RemoveChild($publicKey)
+    if ($whitespace -is [Xml.XmlWhitespace]) { [void]$ios.RemoveChild($whitespace) }
+    [void]$ios.InsertBefore($publicKey, $attributes)
+    [void]$ios.InsertBefore($index.CreateWhitespace("`n      "), $attributes)
 }
-foreach ($variant in $Variants) {
-    foreach ($id in $variant.ExtensionMethods.Keys) {
-        if (-not $publicExtensionIds.Contains($id)) {
-            throw "Public extension index omitted donor method '$id' from '$($variant.Key)'."
-        }
-    }
-}
+[void](Remove-InternalMetadata $index)
+$extensions = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+foreach ($extension in @($index.SelectNodes('/Overview/ExtensionMethods/ExtensionMethod'))) { $member = $extension.SelectSingleNode('Member'); if ($null -eq $member -or -not $extensions.Add((Get-DocId $member $true))) { throw 'Duplicate public extension DocId.' } }
 $index.Save($indexPath)
 
 foreach ($file in Get-ChildItem -LiteralPath $StagingRoot -Filter '*.xml' -File -Recurse) {
-    $document = [Xml.XmlDocument]::new()
-    $document.PreserveWhitespace = $true
-    $document.Load($file.FullName)
-    Remove-InternalMetadata $document
-    foreach ($returnValue in @($document.SelectNodes('//ReturnValue'))) {
-        if ($null -eq $returnValue.SelectSingleNode('*')) { throw "Empty ReturnValue in '$($file.FullName)'." }
+    $document = [Xml.XmlDocument]::new(); $document.PreserveWhitespace = $true; $document.Load($file.FullName)
+    if (Remove-InternalMetadata $document) {
+        $document.Save($file.FullName)
     }
-    $document.Save($file.FullName)
-    $xml = Get-Content -LiteralPath $file.FullName -Raw
-    foreach ($variant in $Variants) {
-        if ($xml.Contains($variant.Key)) { throw "Internal framework key '$($variant.Key)' leaked into '$($file.FullName)'." }
-    }
+    foreach ($returnValue in @($document.SelectNodes('//ReturnValue'))) { if ($null -eq $returnValue.SelectSingleNode('*')) { throw "Empty ReturnValue in '$($file.FullName)'." } }
+    $text = Get-Content -LiteralPath $file.FullName -Raw
+    foreach ($variant in $Variants) { if ($text.Contains($variant.Key)) { throw "Internal framework key '$($variant.Key)' leaked into '$($file.FullName)'." } }
 }
