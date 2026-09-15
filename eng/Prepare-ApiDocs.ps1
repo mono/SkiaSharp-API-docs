@@ -38,7 +38,7 @@ New-Item -ItemType Directory -Force $productRoot, $dependencyRoot, $DependencyCa
 
 # Select the managed SkiaSharp and HarfBuzzSharp packages to document.
 $transportPackages = @(Get-ChildItem -LiteralPath $transportPackageRoot -Filter '*.nupkg' -File)
-$deferredProductPackageIds = @('SkiaSharp.Views.Gtk3', 'SkiaSharp.Views.Uno.WinUI')
+$deferredProductPackageIds = @('SkiaSharp.Views.Uno.WinUI')
 $productPackages = @($transportPackages | Where-Object {
     $identity = Get-NuGetPackageIdentity $_
     $identity.Id -match '^(SkiaSharp|HarfBuzzSharp)(\.|$)' -and
@@ -60,6 +60,13 @@ $dependencyPackageIds = @(
     'GirCore.Gdk-4.0',
     'GirCore.Gsk-4.0',
     'GirCore.Graphene-1.0',
+    'GtkSharp',
+    'AtkSharp',
+    'CairoSharp',
+    'GdkSharp',
+    'GioSharp',
+    'GLibSharp',
+    'PangoSharp',
     'Microsoft.AspNetCore.Components',
     'Microsoft.AspNetCore.Components.Web',
     'Microsoft.Maui.Controls',
@@ -83,6 +90,7 @@ $dependencyPackageIds = @(
 $platformReferencePackages = @(
     [PSCustomObject]@{ Id = 'Microsoft.Android.Ref.36'; Version = '36.1.99-preview.2.154' }
     [PSCustomObject]@{ Id = 'Microsoft.iOS.Ref.net10.0_26.0'; Version = '26.0.11017' }
+    [PSCustomObject]@{ Id = 'Microsoft.MacCatalyst.Ref.net10.0_26.0'; Version = '26.0.11017' }
     [PSCustomObject]@{ Id = 'Microsoft.macOS.Ref.net10.0_26.0'; Version = '26.0.11017' }
     [PSCustomObject]@{ Id = 'Samsung.Tizen.Ref'; Version = '10.0.122' }
     [PSCustomObject]@{ Id = 'Microsoft.tvOS.Ref.net10.0_26.0'; Version = '26.0.11017' }
