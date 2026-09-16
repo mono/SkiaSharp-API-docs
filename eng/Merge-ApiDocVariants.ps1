@@ -73,8 +73,24 @@ function Add-Note([Xml.XmlElement] $Node, [string] $Text) {
     if ($null -eq $docs) { $docs = $Node.OwnerDocument.CreateElement('Docs'); [void]$Node.AppendChild($docs) }
     $remarks = $docs.SelectSingleNode('remarks')
     if ($null -eq $remarks) { $remarks = $Node.OwnerDocument.CreateElement('remarks'); [void]$docs.AppendChild($remarks) }
-    if (@($remarks.SelectNodes('para') | Where-Object { $_.InnerText -eq $Text }).Count -eq 0) {
-        $paragraph = $Node.OwnerDocument.CreateElement('para'); $paragraph.InnerText = $Text; [void]$remarks.AppendChild($paragraph)
+
+    foreach ($paragraph in @($remarks.SelectNodes('para') | Where-Object { $_.InnerText -eq $Text })) {
+        [void]$remarks.RemoveChild($paragraph)
+    }
+
+    $markdownText = $Text.Replace('&', '&amp;').Replace('<', '&lt;').Replace('>', '&gt;')
+    $markdown = "> [!NOTE]`n> $markdownText"
+    foreach ($format in @($remarks.SelectNodes("format[@type='text/markdown']") | Where-Object { $_.InnerText.Trim() -eq $markdown })) {
+        [void]$remarks.RemoveChild($format)
+    }
+
+    $format = $Node.OwnerDocument.CreateElement('format')
+    $format.SetAttribute('type', 'text/markdown')
+    [void]$format.AppendChild($Node.OwnerDocument.CreateCDataSection("`n$markdown`n"))
+    $first = $remarks.FirstChild
+    [void]$remarks.InsertBefore($format, $first)
+    if ($null -ne $first -and $first.NodeType -ne [Xml.XmlNodeType]::Whitespace) {
+        [void]$remarks.InsertBefore($Node.OwnerDocument.CreateWhitespace("`n"), $first)
     }
 }
 
