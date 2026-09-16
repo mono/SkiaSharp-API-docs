@@ -74,7 +74,7 @@ function Add-Note([Xml.XmlElement] $Node, [string] $Text) {
     $remarks = $docs.SelectSingleNode('remarks')
     if ($null -eq $remarks) { $remarks = $Node.OwnerDocument.CreateElement('remarks'); [void]$docs.AppendChild($remarks) }
 
-    foreach ($paragraph in @($remarks.SelectNodes('para') | Where-Object { $_.InnerText -eq $Text })) {
+    foreach ($paragraph in @($remarks.SelectNodes('para') | Where-Object { $_.InnerText -in @($Text, "Note: $Text") })) {
         [void]$remarks.RemoveChild($paragraph)
     }
 
@@ -84,13 +84,26 @@ function Add-Note([Xml.XmlElement] $Node, [string] $Text) {
         [void]$remarks.RemoveChild($format)
     }
 
-    $format = $Node.OwnerDocument.CreateElement('format')
-    $format.SetAttribute('type', 'text/markdown')
-    [void]$format.AppendChild($Node.OwnerDocument.CreateCDataSection("`n$markdown`n"))
-    $first = $remarks.FirstChild
-    [void]$remarks.InsertBefore($format, $first)
-    if ($null -ne $first -and $first.NodeType -ne [Xml.XmlNodeType]::Whitespace) {
-        [void]$remarks.InsertBefore($Node.OwnerDocument.CreateWhitespace("`n"), $first)
+    $content = @($remarks.ChildNodes | Where-Object {
+        $_.NodeType -eq [Xml.XmlNodeType]::Element -or
+        ($_.NodeType -eq [Xml.XmlNodeType]::Text -and -not [string]::IsNullOrWhiteSpace($_.Value))
+    })
+    if ($content.Count -eq 1 -and $content[0].Name -eq 'format' -and $content[0].GetAttribute('type') -eq 'text/markdown') {
+        $existing = $content[0].InnerText.TrimStart([char[]]"`r`n")
+        while ($content[0].HasChildNodes) { [void]$content[0].RemoveChild($content[0].FirstChild) }
+        [void]$content[0].AppendChild($Node.OwnerDocument.CreateCDataSection("`n$markdown`n`n$existing"))
+    } elseif ($content.Count -eq 0) {
+        $format = $Node.OwnerDocument.CreateElement('format')
+        $format.SetAttribute('type', 'text/markdown')
+        [void]$format.AppendChild($Node.OwnerDocument.CreateCDataSection("`n$markdown`n"))
+        [void]$remarks.InsertBefore($format, $remarks.FirstChild)
+    } else {
+        $paragraph = $Node.OwnerDocument.CreateElement('para')
+        $label = $Node.OwnerDocument.CreateElement('b')
+        $label.InnerText = 'Note:'
+        [void]$paragraph.AppendChild($label)
+        [void]$paragraph.AppendChild($Node.OwnerDocument.CreateTextNode(" $Text"))
+        [void]$remarks.InsertBefore($paragraph, $remarks.FirstChild)
     }
 }
 

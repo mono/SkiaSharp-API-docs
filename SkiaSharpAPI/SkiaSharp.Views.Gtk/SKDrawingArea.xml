@@ -136,11 +136,7 @@
         <param name="cr">The <see cref="T:Cairo.Context" /> to be used to paint the widget.</param>
         <summary>Default handler for the Gtk.Widget.Drawn event.</summary>
         <returns>Returns <see langword="true" /> to stop other handlers from being invoked for the event, or <see langword="false" /> to continue the event propagation.</returns>
-        <remarks><format type="text/markdown"><![CDATA[
-> [!NOTE]
-> This API is available only in the SkiaSharp.Views.Gtk3 package.
-]]></format>
-Override this method in a subclass to provide a default handler for the Gtk.Widget.Drawn event. The <see cref="T:Cairo.Context" /> will be disposed after this method returns, so you should not keep a reference to it outside of the scope of this method.</remarks>
+        <remarks><para><b>Note:</b> This API is available only in the SkiaSharp.Views.Gtk3 package.</para>Override this method in a subclass to provide a default handler for the Gtk.Widget.Drawn event. The <see cref="T:Cairo.Context" /> will be disposed after this method returns, so you should not keep a reference to it outside of the scope of this method.</remarks>
       </Docs>
     </Member>
     <Member MemberName="OnPaintSurface">
@@ -228,11 +224,11 @@ Override this method in a subclass to provide a default handler for the Gtk.Widg
       </ReturnValue>
       <Docs>
         <summary>Occurs when the canvas needs to be redrawn.</summary>
-        <remarks><format type="text/markdown"><![CDATA[
+        <remarks>
+          <format type="text/markdown"><![CDATA[
 > [!NOTE]
 > Platform signature: GTK 3: public event EventHandler&lt;SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs&gt; PaintSurface;; GTK 4: public event EventHandler&lt;SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs&gt;? PaintSurface; Displayed signature: GTK 4.
-]]></format>
-          <format type="text/markdown"><![CDATA[
+
              ## Remarks
             
              There are two ways to draw on this surface: by overriding the
