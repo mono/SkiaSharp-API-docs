@@ -217,8 +217,6 @@ function Process-Node([Xml.XmlElement] $Node, [object[]] $Group, [string] $Id, [
     if (@($signatures.Value | Sort-Object -Unique).Count -gt 1) {
         $parts = @($signatures | ForEach-Object { "$($_.Owner.ShortLabel): $($_.Value)" })
         Add-Note $Node "Platform signature: $($parts -join '; ') Displayed signature: $($canonical.ShortLabel)."
-    } elseif (@(Get-ScopedElements $Node $Member "*[@FrameworkAlternate]").Count -gt 0) {
-        Add-Note $Node "Platform metadata differs between variants. Displayed metadata: $($canonical.ShortLabel)."
     }
     Remove-Alternates $Node $Member $canonical.Key
     [void](Remove-InternalMetadata $Node (-not $Member))
