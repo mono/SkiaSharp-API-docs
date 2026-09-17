@@ -116,13 +116,14 @@ function Remove-GeneratedTypes([string] $root, [string[]] $typeNames) {
     return $removedTypes.ToArray()
 }
 
-function Normalize-AssemblyInformationalVersions([string] $root) {
+function Set-AssemblyInformationalVersions([string] $root) {
     foreach ($file in Get-ChildItem -LiteralPath $root -Filter '*.xml' -File -Recurse) {
         $document = [Xml.XmlDocument]::new()
         $document.PreserveWhitespace = $true
         $document.Load($file.FullName)
         $changed = $false
         foreach ($node in @($document.SelectNodes('//AttributeName'))) {
+            # SourceLink's branch and commit build metadata changes on every build.
             $normalized = $node.InnerText -replace '^(System\.Reflection\.AssemblyInformationalVersion\(")([^"+]+)\+[^"]+("\))$', '$1$2$3'
             if ($normalized -ne $node.InnerText) {
                 $node.InnerText = $normalized
@@ -234,7 +235,7 @@ finally {
 $excludedTypes = @('SkiaSharp.GrVkYcbcrConversionInfo') + @(Get-AndroidDesignerResourceTypes $stagingRoot)
 $removedTypes = @(Remove-GeneratedTypes $stagingRoot ($excludedTypes | Sort-Object -Unique))
 Write-Host "Removed $($removedTypes.Count) excluded generated type(s)."
-Normalize-AssemblyInformationalVersions $stagingRoot
+Set-AssemblyInformationalVersions $stagingRoot
 
 # Replace generated API output while preserving only non-ECMA publishing infrastructure.
 $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
