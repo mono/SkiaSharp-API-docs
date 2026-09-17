@@ -6,7 +6,6 @@ on:
     types: [completed]
 
 env:
-  AUTOMATION_BRANCH: automation/regenerate-api-docs-main
   DRY_RUN: false
 
 permissions:
@@ -25,11 +24,11 @@ jobs:
        github.event.state == 'success' &&
        (github.event.context == 'PoliCheck Scan' ||
         github.event.context == 'Learn warnings') &&
-       contains(github.event.branches.*.name, env.AUTOMATION_BRANCH)) ||
+       contains(github.event.branches.*.name, 'automation/regenerate-api-docs-main')) ||
       (github.event_name == 'check_run' &&
        github.event.check_run.conclusion == 'success' &&
        github.event.check_run.name != 'Auto-merge docs' &&
-       github.event.check_run.check_suite.head_branch == env.AUTOMATION_BRANCH)
+       github.event.check_run.check_suite.head_branch == 'automation/regenerate-api-docs-main')
 
     # Only one run at a time per PR commit.
     concurrency:
@@ -52,13 +51,13 @@ jobs:
             event_sha="$CHECK_SHA"
           else
             branch=$(printf '%s' "$STATUS_BRANCHES_JSON" |
-              jq -r '.[] | select(. == env.AUTOMATION_BRANCH)' |
+              jq -r --arg branch 'automation/regenerate-api-docs-main' '.[] | select(. == $branch)' |
               head -1)
             event_sha="$STATUS_SHA"
           fi
 
           if [ -z "$branch" ]; then
-            echo "$AUTOMATION_BRANCH branch not found in event"
+            echo "automation/regenerate-api-docs-main branch not found in event"
             echo "found=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
