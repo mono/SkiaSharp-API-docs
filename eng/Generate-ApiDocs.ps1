@@ -117,13 +117,13 @@ function Remove-GeneratedTypes([string] $root, [string[]] $typeNames) {
 }
 
 function Set-AssemblyInformationalVersions([string] $root) {
+    # Strip volatile SourceLink build metadata from generated AttributeName nodes below $root.
     foreach ($file in Get-ChildItem -LiteralPath $root -Filter '*.xml' -File -Recurse) {
         $document = [Xml.XmlDocument]::new()
         $document.PreserveWhitespace = $true
         $document.Load($file.FullName)
         $changed = $false
         foreach ($node in @($document.SelectNodes('//AttributeName'))) {
-            # SourceLink's branch and commit build metadata changes on every build.
             $normalized = $node.InnerText -replace '^(System\.Reflection\.AssemblyInformationalVersion\(")([^"+]+)\+[^"]+("\))$', '$1$2$3'
             if ($normalized -ne $node.InnerText) {
                 $node.InnerText = $normalized
