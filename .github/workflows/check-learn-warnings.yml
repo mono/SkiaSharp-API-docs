@@ -13,7 +13,8 @@ jobs:
     name: Learn warnings
     if: |
       github.event.state == 'success' &&
-      github.event.context == 'OpenPublishing.Build'
+      github.event.context == 'OpenPublishing.Build' &&
+      contains(github.event.branches.*.name, 'automation/regenerate-api-docs-main')
 
     concurrency:
       group: learn-warnings-${{ github.event.sha }}

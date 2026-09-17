@@ -116,6 +116,29 @@ function Remove-GeneratedTypes([string] $root, [string[]] $typeNames) {
     return $removedTypes.ToArray()
 }
 
+function Remove-AssemblyInformationalVersionMetadata([string] $root) {
+    # Strip volatile SourceLink build metadata from generated AttributeName nodes below $root.
+    foreach ($file in Get-ChildItem -LiteralPath $root -Filter '*.xml' -File -Recurse) {
+        if (-not (Select-String -LiteralPath $file.FullName -SimpleMatch -Quiet 'AssemblyInformationalVersion')) {
+            continue
+        }
+        $document = [Xml.XmlDocument]::new()
+        $document.PreserveWhitespace = $true
+        $document.Load($file.FullName)
+        $changed = $false
+        foreach ($node in @($document.SelectNodes('//AttributeName'))) {
+            $normalized = $node.InnerText -replace '^(System\.Reflection\.AssemblyInformationalVersion\(")([^"+]+)\+[^"]+("\))$', '$1$2$3'
+            if ($normalized -ne $node.InnerText) {
+                $node.InnerText = $normalized
+                $changed = $true
+            }
+        }
+        if ($changed) {
+            $document.Save($file.FullName)
+        }
+    }
+}
+
 # Find managed product assemblies and require the compiler XML beside every one.
 $assets = foreach ($assembly in @(Get-ChildItem -LiteralPath $ProductRoot -Filter '*.dll' -File -Recurse)) {
     $relativePath = $assembly.FullName.Substring($ProductRoot.Length).TrimStart([IO.Path]::DirectorySeparatorChar)
@@ -215,6 +238,7 @@ finally {
 $excludedTypes = @('SkiaSharp.GrVkYcbcrConversionInfo') + @(Get-AndroidDesignerResourceTypes $stagingRoot)
 $removedTypes = @(Remove-GeneratedTypes $stagingRoot ($excludedTypes | Sort-Object -Unique))
 Write-Host "Removed $($removedTypes.Count) excluded generated type(s)."
+Remove-AssemblyInformationalVersionMetadata $stagingRoot
 
 # Replace generated API output while preserving only non-ECMA publishing infrastructure.
 $preservedItems = @('docfx.json', '_filter.xml', 'SkiaSharpAPI-breadcrumb', 'xml')
