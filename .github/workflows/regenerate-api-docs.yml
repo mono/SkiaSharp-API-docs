@@ -125,7 +125,11 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add SkiaSharpAPI
           git commit -m "Regenerate API docs from $PACKAGE_VERSION"
-          git push --force-with-lease origin "HEAD:$automation_branch"
+          remote_sha="$(git ls-remote --heads origin \
+            "refs/heads/$automation_branch" | cut -f1)"
+          git push \
+            --force-with-lease="refs/heads/$automation_branch:$remote_sha" \
+            origin "HEAD:$automation_branch"
           gh pr create --base "$BASE_BRANCH" --head "$automation_branch" \
             --title 'Regenerate API docs from published packages' \
             --body "Automated update generated from \`_NuGets $PACKAGE_VERSION\`." ||
