@@ -4,7 +4,7 @@
   <TypeSignature Language="DocId" Value="T:SkiaSharp.Views.Gtk.SKDrawingArea" />
   <AssemblyInfo>
     <AssemblyName>SkiaSharp.Views.Gtk4</AssemblyName>
-    <AssemblyVersion>4.154.0.0</AssemblyVersion>
+    <AssemblyVersion>4.156.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Gtk.DrawingArea</BaseTypeName>
@@ -30,7 +30,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Gtk4</AssemblyName>
-        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+        <AssemblyVersion>4.156.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -45,7 +45,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Gtk4</AssemblyName>
-        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+        <AssemblyVersion>4.156.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>SkiaSharp.SKSize</ReturnType>
@@ -53,7 +53,7 @@
       <Docs>
         <summary>Gets the current canvas size.</summary>
         <value>The current canvas size in pixels.</value>
-        <remarks>The canvas size may be different to the view size as a result of the current device's pixel density.</remarks>
+        <remarks>The canvas size uses backing-surface pixels unless <see cref="P:SkiaSharp.Views.Gtk.SKDrawingArea.IgnorePixelScaling" /> is enabled.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -63,7 +63,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Gtk4</AssemblyName>
-        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+        <AssemblyVersion>4.156.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -74,6 +74,24 @@
         <remarks />
       </Docs>
     </Member>
+    <Member MemberName="IgnorePixelScaling">
+      <MemberSignature Language="C#" Value="public bool IgnorePixelScaling { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IgnorePixelScaling" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Views.Gtk.SKDrawingArea.IgnorePixelScaling" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Views.Gtk4</AssemblyName>
+        <AssemblyVersion>4.156.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets or sets whether paint coordinates use logical pixels instead of backing-surface pixels.</summary>
+        <value>To be added.</value>
+        <remarks>By default, paint coordinates use physical pixels. When enabled, paint events expose logical <c>Info</c> and physical <c>RawInfo</c>; the canvas is scaled to match logical coordinates.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="OnPaintSurface">
       <MemberSignature Language="C#" Value="protected virtual void OnPaintSurface (SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e);" />
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnPaintSurface(class SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e) cil managed" />
@@ -81,7 +99,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Gtk4</AssemblyName>
-        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+        <AssemblyVersion>4.156.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -136,7 +154,7 @@
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyName>SkiaSharp.Views.Gtk4</AssemblyName>
-        <AssemblyVersion>4.154.0.0</AssemblyVersion>
+        <AssemblyVersion>4.156.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
         <Attribute>
