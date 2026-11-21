@@ -1,0 +1,225 @@
+<Type Name="SKComparisonResult" FullName="SkiaSharp.Testing.SKComparisonResult">
+  <TypeSignature Language="C#" Value="public sealed class SKComparisonResult" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SKComparisonResult extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.Testing.SKComparisonResult" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.Testing</AssemblyName>
+    <AssemblyVersion>4.159.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(0)]</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Immutable comparison outcome and raw and tolerance-filtered selected-channel statistics.</summary>
+    <remarks>Contains no references to the compared inputs, options, or borrowed masks.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="ChannelCount">
+      <MemberSignature Language="C#" Value="public int ChannelCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 ChannelCount" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.ChannelCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets enabled channels per pixel, from one to four; both metric groups use this count.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ComparedPixelCount">
+      <MemberSignature Language="C#" Value="public int ComparedPixelCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 ComparedPixelCount" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.ComparedPixelCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets nonignored pixels, including exact matches and tolerated differences; both metric groups and fraction budgets use this count.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IgnoredPixelCount">
+      <MemberSignature Language="C#" Value="public int IgnoredPixelCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 IgnoredPixelCount" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.IgnoredPixelCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets pixels excluded by IgnoreMask, equal to TotalPixels minus ComparedPixelCount.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsMatch">
+      <MemberSignature Language="C#" Value="public bool IsMatch { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool IsMatch" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.IsMatch" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Whether all configured mismatched-pixel, raw RMS, and raw MAE gates pass, or (without any gate) no compared pixel is mismatched.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxChannelDifference">
+      <MemberSignature Language="C#" Value="public int MaxChannelDifference { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxChannelDifference" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.MaxChannelDifference" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Largest raw absolute difference on any enabled channel of nonignored pixels, including tolerated differences.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MismatchBounds">
+      <MemberSignature Language="C#" Value="public SkiaSharp.SKRectI? MismatchBounds { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype SkiaSharp.SKRectI&gt; MismatchBounds" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.MismatchBounds" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;SkiaSharp.SKRectI&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Bounding rectangle of nonignored mismatched pixels in image coordinates, or null when none are mismatched.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MismatchedPixelCount">
+      <MemberSignature Language="C#" Value="public int MismatchedPixelCount { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MismatchedPixelCount" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.MismatchedPixelCount" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Number of nonignored pixels whose difference exceeds at least one enabled channel allowance.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MismatchedPixelFraction">
+      <MemberSignature Language="C#" Value="public double MismatchedPixelFraction { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance float64 MismatchedPixelFraction" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.MismatchedPixelFraction" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Double</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets mismatched pixels divided by nonignored compared pixels as a fraction from zero to one; returns zero when the compared count is zero.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RawMetrics">
+      <MemberSignature Language="C#" Value="public SkiaSharp.Testing.SKComparisonMetrics RawMetrics { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.Testing.SKComparisonMetrics RawMetrics" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.RawMetrics" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKComparisonMetrics</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets nonignored enabled-channel error statistics before tolerance or tolerance-mask filtering.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ThresholdedMetrics">
+      <MemberSignature Language="C#" Value="public SkiaSharp.Testing.SKComparisonMetrics ThresholdedMetrics { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class SkiaSharp.Testing.SKComparisonMetrics ThresholdedMetrics" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.ThresholdedMetrics" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKComparisonMetrics</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets nonignored enabled-channel error statistics exceeding their allowances; tolerated differences are zero and the denominator matches RawMetrics.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalPixels">
+      <MemberSignature Language="C#" Value="public int TotalPixels { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 TotalPixels" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKComparisonResult.TotalPixels" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the full image area in pixels, including ignored coverage.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

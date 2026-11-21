@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Framework Name="skiasharp">
   <Assemblies>
-    <Assembly Name="SkiaSharp" Version="4.154.0.0" />
+    <Assembly Name="SkiaSharp" Version="4.159.0.0" />
   </Assemblies>
   <Namespace Name="SkiaSharp">
     <Type Name="SkiaSharp.GRBackend" Id="T:SkiaSharp.GRBackend">
@@ -531,6 +531,8 @@
       <Member Id="M:SkiaSharp.SKCanvas.DrawLine(System.Single,System.Single,System.Single,System.Single,SkiaSharp.SKPaint)" />
       <Member Id="M:SkiaSharp.SKCanvas.DrawLinkDestinationAnnotation(SkiaSharp.SKRect,SkiaSharp.SKData)" />
       <Member Id="M:SkiaSharp.SKCanvas.DrawLinkDestinationAnnotation(SkiaSharp.SKRect,System.String)" />
+      <Member Id="M:SkiaSharp.SKCanvas.DrawMesh(SkiaSharp.SKMesh,SkiaSharp.SKBlender,SkiaSharp.SKPaint)" />
+      <Member Id="M:SkiaSharp.SKCanvas.DrawMesh(SkiaSharp.SKMesh,SkiaSharp.SKPaint)" />
       <Member Id="M:SkiaSharp.SKCanvas.DrawNamedDestinationAnnotation(SkiaSharp.SKPoint,SkiaSharp.SKData)" />
       <Member Id="M:SkiaSharp.SKCanvas.DrawNamedDestinationAnnotation(SkiaSharp.SKPoint,System.String)" />
       <Member Id="M:SkiaSharp.SKCanvas.DrawOval(SkiaSharp.SKPoint,SkiaSharp.SKSize,SkiaSharp.SKPaint)" />
@@ -2114,6 +2116,17 @@
       <Member Id="F:SkiaSharp.SKImageRescaleMode.RepeatedLinear" />
     </Type>
     <Type Name="SkiaSharp.SKImageTextureReleaseDelegate" Id="T:SkiaSharp.SKImageTextureReleaseDelegate" />
+    <Type Name="SkiaSharp.SKIndexedMeshBuilder" Id="T:SkiaSharp.SKIndexedMeshBuilder">
+      <Member Id="M:SkiaSharp.SKIndexedMeshBuilder.#ctor(SkiaSharp.SKMeshSpecification)" />
+      <Member Id="M:SkiaSharp.SKIndexedMeshBuilder.Build" />
+      <Member Id="M:SkiaSharp.SKIndexedMeshBuilder.Build(System.String@)" />
+      <Member Id="M:SkiaSharp.SKIndexedMeshBuilder.SetIndexBuffer(SkiaSharp.SKMeshIndexBuffer,System.Int32,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKIndexedMeshBuilder.SetIndexBuffer(SkiaSharp.SKMeshIndexBuffer,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKIndexedMeshBuilder.SetIndexBuffer(SkiaSharp.SKMeshIndexBuffer)" />
+      <Member Id="P:SkiaSharp.SKIndexedMeshBuilder.IndexBuffer" />
+      <Member Id="P:SkiaSharp.SKIndexedMeshBuilder.IndexCount" />
+      <Member Id="P:SkiaSharp.SKIndexedMeshBuilder.IndexOffset" />
+    </Type>
     <Type Name="SkiaSharp.SKJpegEncoderAlphaOption" Id="T:SkiaSharp.SKJpegEncoderAlphaOption">
       <Member Id="F:SkiaSharp.SKJpegEncoderAlphaOption.BlendOnBlack" />
       <Member Id="F:SkiaSharp.SKJpegEncoderAlphaOption.Ignore" />
@@ -2324,6 +2337,132 @@
       <Member Id="M:SkiaSharp.SKMemoryStream.Dispose(System.Boolean)" />
       <Member Id="M:SkiaSharp.SKMemoryStream.DisposeNative" />
       <Member Id="M:SkiaSharp.SKMemoryStream.SetMemory(System.Byte[])" />
+    </Type>
+    <Type Name="SkiaSharp.SKMesh" Id="T:SkiaSharp.SKMesh">
+      <Member Id="M:SkiaSharp.SKMesh.CreateBuilder(SkiaSharp.SKMeshSpecification)" />
+      <Member Id="M:SkiaSharp.SKMesh.CreateIndexedBuilder(SkiaSharp.SKMeshSpecification)" />
+      <Member Id="M:SkiaSharp.SKMesh.DisposeNative" />
+      <Member Id="P:SkiaSharp.SKMesh.Bounds" />
+      <Member Id="P:SkiaSharp.SKMesh.IndexCount" />
+      <Member Id="P:SkiaSharp.SKMesh.IndexOffset" />
+      <Member Id="P:SkiaSharp.SKMesh.IsValid" />
+      <Member Id="P:SkiaSharp.SKMesh.Mode" />
+      <Member Id="P:SkiaSharp.SKMesh.VertexCount" />
+      <Member Id="P:SkiaSharp.SKMesh.VertexOffset" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshBuilder" Id="T:SkiaSharp.SKMeshBuilder">
+      <Member Id="M:SkiaSharp.SKMeshBuilder.#ctor(SkiaSharp.SKMeshSpecification)" />
+      <Member Id="M:SkiaSharp.SKMeshBuilder.Build" />
+      <Member Id="M:SkiaSharp.SKMeshBuilder.Build(System.String@)" />
+      <Member Id="M:SkiaSharp.SKMeshBuilder.Dispose" />
+      <Member Id="M:SkiaSharp.SKMeshBuilder.SetVertexBuffer(SkiaSharp.SKMeshVertexBuffer,System.Int32,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshBuilder.SetVertexBuffer(SkiaSharp.SKMeshVertexBuffer,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshBuilder.SetVertexBuffer(SkiaSharp.SKMeshVertexBuffer)" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.Bounds" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.Children" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.Mode" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.Specification" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.Uniforms" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.VertexBuffer" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.VertexCount" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.VertexOffset" />
+      <Member Id="P:SkiaSharp.SKMeshBuilder.VertexStride" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshIndexBuffer" Id="T:SkiaSharp.SKMeshIndexBuffer">
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Copy" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Copy(SkiaSharp.GRContext)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Create(SkiaSharp.GRContext,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Create(SkiaSharp.GRContext,System.IntPtr,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Create(SkiaSharp.GRContext,System.ReadOnlySpan{System.Byte})" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Create(System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Create(System.IntPtr,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Create(System.ReadOnlySpan{System.Byte})" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Dispose(System.Boolean)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Update(SkiaSharp.GRContext,System.IntPtr,System.Int32,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Update(SkiaSharp.GRContext,System.ReadOnlySpan{System.Byte},System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Update(System.IntPtr,System.Int32,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshIndexBuffer.Update(System.ReadOnlySpan{System.Byte},System.Int32)" />
+      <Member Id="P:SkiaSharp.SKMeshIndexBuffer.Size" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshMode" Id="T:SkiaSharp.SKMeshMode">
+      <Member Id="F:SkiaSharp.SKMeshMode.Triangles" />
+      <Member Id="F:SkiaSharp.SKMeshMode.TriangleStrip" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshSpecification" Id="T:SkiaSharp.SKMeshSpecification">
+      <Member Id="F:SkiaSharp.SKMeshSpecification.MaxAttributes" />
+      <Member Id="F:SkiaSharp.SKMeshSpecification.MaxStride" />
+      <Member Id="F:SkiaSharp.SKMeshSpecification.MaxVaryings" />
+      <Member Id="F:SkiaSharp.SKMeshSpecification.OffsetAlignment" />
+      <Member Id="F:SkiaSharp.SKMeshSpecification.StrideAlignment" />
+      <Member Id="M:SkiaSharp.SKMeshSpecification.Create(System.ReadOnlySpan{SkiaSharp.SKMeshSpecificationAttribute},System.Int32,System.ReadOnlySpan{SkiaSharp.SKMeshSpecificationVarying},System.String,System.String,SkiaSharp.SKColorSpace,SkiaSharp.SKAlphaType,System.String@)" />
+      <Member Id="M:SkiaSharp.SKMeshSpecification.CreateBuilder(System.String,System.String)" />
+      <Member Id="M:SkiaSharp.SKMeshSpecification.CreateIndexedMeshBuilder" />
+      <Member Id="M:SkiaSharp.SKMeshSpecification.CreateMeshBuilder" />
+      <Member Id="M:SkiaSharp.SKMeshSpecification.Dispose(System.Boolean)" />
+      <Member Id="M:SkiaSharp.SKMeshSpecification.ToMesh(SkiaSharp.SKMeshMode,SkiaSharp.SKMeshVertexBuffer,System.Int32,System.Int32,SkiaSharp.SKRuntimeEffectUniforms,SkiaSharp.SKRuntimeEffectChildren,SkiaSharp.SKRect,System.String@)" />
+      <Member Id="M:SkiaSharp.SKMeshSpecification.ToMeshIndexed(SkiaSharp.SKMeshMode,SkiaSharp.SKMeshVertexBuffer,System.Int32,System.Int32,SkiaSharp.SKMeshIndexBuffer,System.Int32,System.Int32,SkiaSharp.SKRuntimeEffectUniforms,SkiaSharp.SKRuntimeEffectChildren,SkiaSharp.SKRect,System.String@)" />
+      <Member Id="P:SkiaSharp.SKMeshSpecification.Children" />
+      <Member Id="P:SkiaSharp.SKMeshSpecification.ColorSpace" />
+      <Member Id="P:SkiaSharp.SKMeshSpecification.Uniforms" />
+      <Member Id="P:SkiaSharp.SKMeshSpecification.UniformSize" />
+      <Member Id="P:SkiaSharp.SKMeshSpecification.VertexStride" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshSpecificationAttribute" Id="T:SkiaSharp.SKMeshSpecificationAttribute">
+      <Member Id="M:SkiaSharp.SKMeshSpecificationAttribute.#ctor(SkiaSharp.SKMeshSpecificationAttributeType,System.Int32,System.String)" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationAttribute.Name" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationAttribute.Offset" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationAttribute.Type" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshSpecificationAttributeType" Id="T:SkiaSharp.SKMeshSpecificationAttributeType">
+      <Member Id="F:SkiaSharp.SKMeshSpecificationAttributeType.Float" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationAttributeType.Float2" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationAttributeType.Float3" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationAttributeType.Float4" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationAttributeType.Ubyte4Unorm" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshSpecificationBuilder" Id="T:SkiaSharp.SKMeshSpecificationBuilder">
+      <Member Id="M:SkiaSharp.SKMeshSpecificationBuilder.#ctor(System.String,System.String)" />
+      <Member Id="M:SkiaSharp.SKMeshSpecificationBuilder.AddAttribute(System.String,SkiaSharp.SKMeshSpecificationAttributeType,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshSpecificationBuilder.AddAttribute(System.String,SkiaSharp.SKMeshSpecificationAttributeType)" />
+      <Member Id="M:SkiaSharp.SKMeshSpecificationBuilder.AddVarying(System.String,SkiaSharp.SKMeshSpecificationVaryingType)" />
+      <Member Id="M:SkiaSharp.SKMeshSpecificationBuilder.Build" />
+      <Member Id="M:SkiaSharp.SKMeshSpecificationBuilder.Build(System.String@)" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationBuilder.AlphaType" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationBuilder.Attributes" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationBuilder.ColorSpace" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationBuilder.Varyings" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationBuilder.VertexStride" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshSpecificationVarying" Id="T:SkiaSharp.SKMeshSpecificationVarying">
+      <Member Id="M:SkiaSharp.SKMeshSpecificationVarying.#ctor(SkiaSharp.SKMeshSpecificationVaryingType,System.String)" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationVarying.Name" />
+      <Member Id="P:SkiaSharp.SKMeshSpecificationVarying.Type" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshSpecificationVaryingType" Id="T:SkiaSharp.SKMeshSpecificationVaryingType">
+      <Member Id="F:SkiaSharp.SKMeshSpecificationVaryingType.Float" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationVaryingType.Float2" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationVaryingType.Float3" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationVaryingType.Float4" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationVaryingType.Half" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationVaryingType.Half2" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationVaryingType.Half3" />
+      <Member Id="F:SkiaSharp.SKMeshSpecificationVaryingType.Half4" />
+    </Type>
+    <Type Name="SkiaSharp.SKMeshVertexBuffer" Id="T:SkiaSharp.SKMeshVertexBuffer">
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Copy" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Copy(SkiaSharp.GRContext)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Create(SkiaSharp.GRContext,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Create(SkiaSharp.GRContext,System.IntPtr,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Create(SkiaSharp.GRContext,System.ReadOnlySpan{System.Byte})" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Create(System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Create(System.IntPtr,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Create(System.ReadOnlySpan{System.Byte})" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Dispose(System.Boolean)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Update(SkiaSharp.GRContext,System.IntPtr,System.Int32,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Update(SkiaSharp.GRContext,System.ReadOnlySpan{System.Byte},System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Update(System.IntPtr,System.Int32,System.Int32)" />
+      <Member Id="M:SkiaSharp.SKMeshVertexBuffer.Update(System.ReadOnlySpan{System.Byte},System.Int32)" />
+      <Member Id="P:SkiaSharp.SKMeshVertexBuffer.Size" />
     </Type>
     <Type Name="SkiaSharp.SKMipmapMode" Id="T:SkiaSharp.SKMipmapMode">
       <Member Id="F:SkiaSharp.SKMipmapMode.Linear" />
@@ -3214,6 +3353,7 @@
       <Member Id="P:SkiaSharp.SKRuntimeEffectChild.Value" />
     </Type>
     <Type Name="SkiaSharp.SKRuntimeEffectChildren" Id="T:SkiaSharp.SKRuntimeEffectChildren">
+      <Member Id="M:SkiaSharp.SKRuntimeEffectChildren.#ctor(SkiaSharp.SKMeshSpecification)" />
       <Member Id="M:SkiaSharp.SKRuntimeEffectChildren.#ctor(SkiaSharp.SKRuntimeEffect)" />
       <Member Id="M:SkiaSharp.SKRuntimeEffectChildren.Add(System.String,System.Nullable{SkiaSharp.SKRuntimeEffectChild})" />
       <Member Id="M:SkiaSharp.SKRuntimeEffectChildren.Contains(System.String)" />
@@ -3250,6 +3390,7 @@
       <Member Id="P:SkiaSharp.SKRuntimeEffectUniform.Size" />
     </Type>
     <Type Name="SkiaSharp.SKRuntimeEffectUniforms" Id="T:SkiaSharp.SKRuntimeEffectUniforms">
+      <Member Id="M:SkiaSharp.SKRuntimeEffectUniforms.#ctor(SkiaSharp.SKMeshSpecification)" />
       <Member Id="M:SkiaSharp.SKRuntimeEffectUniforms.#ctor(SkiaSharp.SKRuntimeEffect)" />
       <Member Id="M:SkiaSharp.SKRuntimeEffectUniforms.Add(System.String,SkiaSharp.SKRuntimeEffectUniform)" />
       <Member Id="M:SkiaSharp.SKRuntimeEffectUniforms.Contains(System.String)" />
