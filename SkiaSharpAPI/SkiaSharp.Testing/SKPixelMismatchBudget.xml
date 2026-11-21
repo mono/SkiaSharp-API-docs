@@ -1,0 +1,297 @@
+<Type Name="SKPixelMismatchBudget" FullName="SkiaSharp.Testing.SKPixelMismatchBudget">
+  <TypeSignature Language="C#" Value="public readonly struct SKPixelMismatchBudget : IEquatable&lt;SkiaSharp.Testing.SKPixelMismatchBudget&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit SKPixelMismatchBudget extends System.ValueType implements class System.IEquatable`1&lt;valuetype SkiaSharp.Testing.SKPixelMismatchBudget&gt;" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.Testing.SKPixelMismatchBudget" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.Testing</AssemblyName>
+    <AssemblyVersion>4.159.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.ValueType</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IEquatable&lt;SkiaSharp.Testing.SKPixelMismatchBudget&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>An inclusive mismatched-pixel allowance, limited by a count, percentage, or both.</summary>
+    <remarks>The default value is <see cref="P:SkiaSharp.Testing.SKPixelMismatchBudget.Exact" />. Percentages are percentage points of the compared pixel count, not fractions. Their inclusive pixel limits are floored from the invariant round-trip decimal representation of the percentage to avoid binary rounding at decimal boundaries.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Allows">
+      <MemberSignature Language="C#" Value="public bool Allows (long mismatchedPixels, long comparedPixels);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Allows(int64 mismatchedPixels, int64 comparedPixels) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.Allows(System.Int64,System.Int64)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="mismatchedPixels" Type="System.Int64" />
+        <Parameter Name="comparedPixels" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="mismatchedPixels">To be added.</param>
+        <param name="comparedPixels">To be added.</param>
+        <summary>Tests whether the mismatched pixel count satisfies every configured inclusive limit.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">The compared count is not positive, or the mismatched count is outside zero through the compared count.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Both">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.Testing.SKPixelMismatchBudget Both (long pixels, double percent);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.Testing.SKPixelMismatchBudget Both(int64 pixels, float64 percent) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.Both(System.Int64,System.Double)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKPixelMismatchBudget</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="pixels" Type="System.Int64" />
+        <Parameter Name="percent" Type="System.Double" />
+      </Parameters>
+      <Docs>
+        <param name="pixels">To be added.</param>
+        <param name="percent">To be added.</param>
+        <summary>Allows mismatched pixels only when both the count and percentage-point limits pass.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">The count is negative or the percentage is non-finite or outside 0 through 100.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public bool Equals (SkiaSharp.Testing.SKPixelMismatchBudget other);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype SkiaSharp.Testing.SKPixelMismatchBudget other) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.Equals(SkiaSharp.Testing.SKPixelMismatchBudget)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IEquatable`1.Equals(`0)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="other" Type="SkiaSharp.Testing.SKPixelMismatchBudget" />
+      </Parameters>
+      <Docs>
+        <param name="other">To be added.</param>
+        <summary>Determines whether both budgets have the same limits.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object? obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.Equals(System.Object)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(2)]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>Determines whether an object is an equal pixel mismatch budget.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Exact">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.Testing.SKPixelMismatchBudget Exact { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property valuetype SkiaSharp.Testing.SKPixelMismatchBudget Exact" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKPixelMismatchBudget.Exact" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKPixelMismatchBudget</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Allows no mismatched pixels.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.GetHashCode" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>Returns a hash code for the count and percentage-point limits.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxPercent">
+      <MemberSignature Language="C#" Value="public double? MaxPercent { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;float64&gt; MaxPercent" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKPixelMismatchBudget.MaxPercent" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Double&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the percentage-point limit (0 through 100), or null if no percentage limit was specified.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxPixels">
+      <MemberSignature Language="C#" Value="public long? MaxPixels { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; MaxPixels" />
+      <MemberSignature Language="DocId" Value="P:SkiaSharp.Testing.SKPixelMismatchBudget.MaxPixels" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>Gets the inclusive mismatched-pixel count limit, or null if no count limit was specified.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Equality">
+      <MemberSignature Language="C#" Value="public static bool operator == (SkiaSharp.Testing.SKPixelMismatchBudget left, SkiaSharp.Testing.SKPixelMismatchBudget right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype SkiaSharp.Testing.SKPixelMismatchBudget left, valuetype SkiaSharp.Testing.SKPixelMismatchBudget right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.op_Equality(SkiaSharp.Testing.SKPixelMismatchBudget,SkiaSharp.Testing.SKPixelMismatchBudget)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.Testing.SKPixelMismatchBudget" />
+        <Parameter Name="right" Type="SkiaSharp.Testing.SKPixelMismatchBudget" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>Tests two pixel mismatch budgets for equality.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="op_Inequality">
+      <MemberSignature Language="C#" Value="public static bool operator != (SkiaSharp.Testing.SKPixelMismatchBudget left, SkiaSharp.Testing.SKPixelMismatchBudget right);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype SkiaSharp.Testing.SKPixelMismatchBudget left, valuetype SkiaSharp.Testing.SKPixelMismatchBudget right) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.op_Inequality(SkiaSharp.Testing.SKPixelMismatchBudget,SkiaSharp.Testing.SKPixelMismatchBudget)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="left" Type="SkiaSharp.Testing.SKPixelMismatchBudget" />
+        <Parameter Name="right" Type="SkiaSharp.Testing.SKPixelMismatchBudget" />
+      </Parameters>
+      <Docs>
+        <param name="left">To be added.</param>
+        <param name="right">To be added.</param>
+        <summary>Tests two pixel mismatch budgets for inequality.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Percent">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.Testing.SKPixelMismatchBudget Percent (double maximum);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.Testing.SKPixelMismatchBudget Percent(float64 maximum) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.Percent(System.Double)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKPixelMismatchBudget</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maximum" Type="System.Double" />
+      </Parameters>
+      <Docs>
+        <param name="maximum">To be added.</param>
+        <summary>Allows at most <paramref name="maximum" /> percentage points of compared pixels to be mismatched.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">The maximum is non-finite or outside 0 through 100.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Pixels">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.Testing.SKPixelMismatchBudget Pixels (long maximum);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig valuetype SkiaSharp.Testing.SKPixelMismatchBudget Pixels(int64 maximum) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKPixelMismatchBudget.Pixels(System.Int64)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKPixelMismatchBudget</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maximum" Type="System.Int64" />
+      </Parameters>
+      <Docs>
+        <param name="maximum">To be added.</param>
+        <summary>Allows at most <paramref name="maximum" /> mismatched pixels.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentOutOfRangeException">The maximum is negative.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
