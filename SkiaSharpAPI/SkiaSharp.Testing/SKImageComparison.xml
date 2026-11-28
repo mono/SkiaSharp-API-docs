@@ -1,0 +1,249 @@
+<Type Name="SKImageComparison" FullName="SkiaSharp.Testing.SKImageComparison">
+  <TypeSignature Language="C#" Value="public static class SKImageComparison" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit SKImageComparison extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:SkiaSharp.Testing.SKImageComparison" />
+  <AssemblyInfo>
+    <AssemblyName>SkiaSharp.Testing</AssemblyName>
+    <AssemblyVersion>4.159.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(0)]</AttributeName>
+    </Attribute>
+    <Attribute>
+      <AttributeName Language="C#">[System.Runtime.CompilerServices.NullableContext(1)]</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>Compares two decoded images, bitmaps, or pixmaps after normalization to tightly packed BGRA8888.</summary>
+    <remarks>Inputs and optional tolerance and ignore masks are borrowed for a synchronous call; do not mutate or dispose them concurrently. Results retain no native inputs. Difference images are independent, caller-owned, and must be disposed.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Compare">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.Testing.SKComparisonResult Compare (SkiaSharp.SKBitmap first, SkiaSharp.SKBitmap second, SkiaSharp.Testing.SKComparisonOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.Testing.SKComparisonResult Compare(class SkiaSharp.SKBitmap first, class SkiaSharp.SKBitmap second, class SkiaSharp.Testing.SKComparisonOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKImageComparison.Compare(SkiaSharp.SKBitmap,SkiaSharp.SKBitmap,SkiaSharp.Testing.SKComparisonOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKComparisonResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="first" Type="SkiaSharp.SKBitmap" />
+        <Parameter Name="second" Type="SkiaSharp.SKBitmap" />
+        <Parameter Name="options" Type="SkiaSharp.Testing.SKComparisonOptions">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="first">To be added.</param>
+        <param name="second">To be added.</param>
+        <param name="options">To be added.</param>
+        <summary>Compares two bitmaps with snapshotted per-channel tolerances, optional tolerance and ignore masks, and match gates over nonignored coverage.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">An input is null.</exception>
+        <exception cref="T:System.ArgumentException">An input or mask is empty or disposed, all channels are disabled, or IgnoreMask excludes every pixel (parameter IgnoreMask).</exception>
+        <exception cref="T:System.InvalidOperationException">The dimensions differ or pixel readback fails.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">A configured alpha type or budget is invalid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Compare">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.Testing.SKComparisonResult Compare (SkiaSharp.SKImage first, SkiaSharp.SKImage second, SkiaSharp.Testing.SKComparisonOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.Testing.SKComparisonResult Compare(class SkiaSharp.SKImage first, class SkiaSharp.SKImage second, class SkiaSharp.Testing.SKComparisonOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKImageComparison.Compare(SkiaSharp.SKImage,SkiaSharp.SKImage,SkiaSharp.Testing.SKComparisonOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKComparisonResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="first" Type="SkiaSharp.SKImage" />
+        <Parameter Name="second" Type="SkiaSharp.SKImage" />
+        <Parameter Name="options" Type="SkiaSharp.Testing.SKComparisonOptions">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="first">To be added.</param>
+        <param name="second">To be added.</param>
+        <param name="options">To be added.</param>
+        <summary>Compares two images with snapshotted per-channel tolerances, optional tolerance and ignore masks, and match gates over nonignored coverage.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">An input is null.</exception>
+        <exception cref="T:System.ArgumentException">An input or mask is empty or disposed, all channels are disabled, or IgnoreMask excludes every pixel (parameter IgnoreMask).</exception>
+        <exception cref="T:System.InvalidOperationException">The dimensions differ or pixel readback fails.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">A configured alpha type or budget is invalid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Compare">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.Testing.SKComparisonResult Compare (SkiaSharp.SKPixmap first, SkiaSharp.SKPixmap second, SkiaSharp.Testing.SKComparisonOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.Testing.SKComparisonResult Compare(class SkiaSharp.SKPixmap first, class SkiaSharp.SKPixmap second, class SkiaSharp.Testing.SKComparisonOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKImageComparison.Compare(SkiaSharp.SKPixmap,SkiaSharp.SKPixmap,SkiaSharp.Testing.SKComparisonOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.Testing.SKComparisonResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="first" Type="SkiaSharp.SKPixmap" />
+        <Parameter Name="second" Type="SkiaSharp.SKPixmap" />
+        <Parameter Name="options" Type="SkiaSharp.Testing.SKComparisonOptions">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="first">To be added.</param>
+        <param name="second">To be added.</param>
+        <param name="options">To be added.</param>
+        <summary>Compares two pixmaps with snapshotted per-channel tolerances, optional tolerance and ignore masks, and match gates over nonignored coverage.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">An input is null.</exception>
+        <exception cref="T:System.ArgumentException">An input or mask is empty or disposed, all channels are disabled, or IgnoreMask excludes every pixel (parameter IgnoreMask).</exception>
+        <exception cref="T:System.InvalidOperationException">The dimensions differ or pixel readback fails.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">A configured alpha type or budget is invalid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GenerateDifferenceImage">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKImage GenerateDifferenceImage (SkiaSharp.SKBitmap first, SkiaSharp.SKBitmap second, SkiaSharp.Testing.SKDifferenceStyle style = SkiaSharp.Testing.SKDifferenceStyle.ThresholdOverlay, SkiaSharp.Testing.SKComparisonOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImage GenerateDifferenceImage(class SkiaSharp.SKBitmap first, class SkiaSharp.SKBitmap second, valuetype SkiaSharp.Testing.SKDifferenceStyle style, class SkiaSharp.Testing.SKComparisonOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKImageComparison.GenerateDifferenceImage(SkiaSharp.SKBitmap,SkiaSharp.SKBitmap,SkiaSharp.Testing.SKDifferenceStyle,SkiaSharp.Testing.SKComparisonOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="first" Type="SkiaSharp.SKBitmap" />
+        <Parameter Name="second" Type="SkiaSharp.SKBitmap" />
+        <Parameter Name="style" Type="SkiaSharp.Testing.SKDifferenceStyle" />
+        <Parameter Name="options" Type="SkiaSharp.Testing.SKComparisonOptions">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="first">To be added.</param>
+        <param name="second">To be added.</param>
+        <param name="style">To be added.</param>
+        <param name="options">To be added.</param>
+        <summary>Creates a caller-owned opaque difference image in the selected style, using snapshotted options and optional borrowed tolerance and ignore masks.</summary>
+        <returns>To be added.</returns>
+        <remarks>The default ThresholdOverlay flattens the second (actual) input onto white, then blends red mismatch, amber (255,200,0) tolerated selected-channel difference, or gray (128,128,128) ignored highlights at 50%, rounding half-channel values upward. Exact selected-channel matches retain the flattened actual RGB, including disabled channels. ThresholdMap instead uses opaque red, amber, dimmed actual RGB, and gray classifications. Ignored pixels are black in BinaryMask and ChannelDifference. All styles output BGRA8888 with alpha 255.</remarks>
+        <exception cref="T:System.ArgumentNullException">An input is null.</exception>
+        <exception cref="T:System.ArgumentException">An input or mask is empty or disposed, all channels are disabled, or IgnoreMask excludes every pixel (parameter IgnoreMask).</exception>
+        <exception cref="T:System.InvalidOperationException">The dimensions differ or pixel readback fails.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">The style, alpha type, or budget is invalid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GenerateDifferenceImage">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKImage GenerateDifferenceImage (SkiaSharp.SKImage first, SkiaSharp.SKImage second, SkiaSharp.Testing.SKDifferenceStyle style = SkiaSharp.Testing.SKDifferenceStyle.ThresholdOverlay, SkiaSharp.Testing.SKComparisonOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImage GenerateDifferenceImage(class SkiaSharp.SKImage first, class SkiaSharp.SKImage second, valuetype SkiaSharp.Testing.SKDifferenceStyle style, class SkiaSharp.Testing.SKComparisonOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKImageComparison.GenerateDifferenceImage(SkiaSharp.SKImage,SkiaSharp.SKImage,SkiaSharp.Testing.SKDifferenceStyle,SkiaSharp.Testing.SKComparisonOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="first" Type="SkiaSharp.SKImage" />
+        <Parameter Name="second" Type="SkiaSharp.SKImage" />
+        <Parameter Name="style" Type="SkiaSharp.Testing.SKDifferenceStyle" />
+        <Parameter Name="options" Type="SkiaSharp.Testing.SKComparisonOptions">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="first">To be added.</param>
+        <param name="second">To be added.</param>
+        <param name="style">To be added.</param>
+        <param name="options">To be added.</param>
+        <summary>Creates a caller-owned opaque difference image in the selected style, using snapshotted options and optional borrowed tolerance and ignore masks.</summary>
+        <returns>To be added.</returns>
+        <remarks>The default ThresholdOverlay flattens the second (actual) input onto white, then blends red mismatch, amber (255,200,0) tolerated selected-channel difference, or gray (128,128,128) ignored highlights at 50%, rounding half-channel values upward. Exact selected-channel matches retain the flattened actual RGB, including disabled channels. ThresholdMap instead uses opaque red, amber, dimmed actual RGB, and gray classifications. Ignored pixels are black in BinaryMask and ChannelDifference. All styles output BGRA8888 with alpha 255.</remarks>
+        <exception cref="T:System.ArgumentNullException">An input is null.</exception>
+        <exception cref="T:System.ArgumentException">An input or mask is empty or disposed, all channels are disabled, or IgnoreMask excludes every pixel (parameter IgnoreMask).</exception>
+        <exception cref="T:System.InvalidOperationException">The dimensions differ or pixel readback fails.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">The style, alpha type, or budget is invalid.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GenerateDifferenceImage">
+      <MemberSignature Language="C#" Value="public static SkiaSharp.SKImage GenerateDifferenceImage (SkiaSharp.SKPixmap first, SkiaSharp.SKPixmap second, SkiaSharp.Testing.SKDifferenceStyle style = SkiaSharp.Testing.SKDifferenceStyle.ThresholdOverlay, SkiaSharp.Testing.SKComparisonOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class SkiaSharp.SKImage GenerateDifferenceImage(class SkiaSharp.SKPixmap first, class SkiaSharp.SKPixmap second, valuetype SkiaSharp.Testing.SKDifferenceStyle style, class SkiaSharp.Testing.SKComparisonOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:SkiaSharp.Testing.SKImageComparison.GenerateDifferenceImage(SkiaSharp.SKPixmap,SkiaSharp.SKPixmap,SkiaSharp.Testing.SKDifferenceStyle,SkiaSharp.Testing.SKComparisonOptions)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>SkiaSharp.Testing</AssemblyName>
+        <AssemblyVersion>4.159.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>SkiaSharp.SKImage</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="first" Type="SkiaSharp.SKPixmap" />
+        <Parameter Name="second" Type="SkiaSharp.SKPixmap" />
+        <Parameter Name="style" Type="SkiaSharp.Testing.SKDifferenceStyle" />
+        <Parameter Name="options" Type="SkiaSharp.Testing.SKComparisonOptions">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="first">To be added.</param>
+        <param name="second">To be added.</param>
+        <param name="style">To be added.</param>
+        <param name="options">To be added.</param>
+        <summary>Creates a caller-owned opaque difference image in the selected style, using snapshotted options and optional borrowed tolerance and ignore masks.</summary>
+        <returns>To be added.</returns>
+        <remarks>The default ThresholdOverlay flattens the second (actual) input onto white, then blends red mismatch, amber (255,200,0) tolerated selected-channel difference, or gray (128,128,128) ignored highlights at 50%, rounding half-channel values upward. Exact selected-channel matches retain the flattened actual RGB, including disabled channels. ThresholdMap instead uses opaque red, amber, dimmed actual RGB, and gray classifications. Ignored pixels are black in BinaryMask and ChannelDifference. All styles output BGRA8888 with alpha 255.</remarks>
+        <exception cref="T:System.ArgumentNullException">An input is null.</exception>
+        <exception cref="T:System.ArgumentException">An input or mask is empty or disposed, all channels are disabled, or IgnoreMask excludes every pixel (parameter IgnoreMask).</exception>
+        <exception cref="T:System.InvalidOperationException">The dimensions differ or pixel readback fails.</exception>
+        <exception cref="T:System.ArgumentOutOfRangeException">The style, alpha type, or budget is invalid.</exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
